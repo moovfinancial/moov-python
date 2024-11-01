@@ -1,0 +1,11 @@
+# AsynchronousRefundResponse
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `refund_id`                                                          | *str*                                                                | :heavy_check_mark:                                                   | UUID v4                                                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                 |
+| `created_on`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |                                                                      |
+| `amount`                                                             | [models.Amount](../models/amount.md)                                 | :heavy_check_mark:                                                   | An integer value representing money in a specific currency.          |                                                                      |
+| `__pydantic_extra__`                                                 | Dict[str, *Any*]                                                     | :heavy_minus_sign:                                                   | N/A                                                                  |                                                                      |

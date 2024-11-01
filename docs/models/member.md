@@ -1,0 +1,16 @@
+# Member
+
+A user connected to an account
+
+
+## Fields
+
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `connected_to`                                                      | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | ID of account.                                                      |                                                                     |
+| `user_id`                                                           | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | ID of a user.                                                       |                                                                     |
+| `email`                                                             | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Email address.                                                      | amanda@classbooker.dev                                              |
+| `given_name`                                                        | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Name this person was given. This is usually the same as first name. | Amanda                                                              |
+| `family_name`                                                       | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Family name of this person. This is usually the same as last name.  | Yang                                                                |
+| `photo_url`                                                         | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | N/A                                                                 | https://placekitten.com/408/287                                     |
+| `roles`                                                             | List[[models.MemberRole](../models/memberrole.md)]                  | :heavy_minus_sign:                                                  | N/A                                                                 |                                                                     |

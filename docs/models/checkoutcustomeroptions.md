@@ -1,0 +1,10 @@
+# CheckoutCustomerOptions
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `require_address`                                                                             | *Optional[bool]*                                                                              | :heavy_minus_sign:                                                                            | If true, billing address is collected when paying by card.<br/>                               |
+| `require_phone`                                                                               | *Optional[bool]*                                                                              | :heavy_minus_sign:                                                                            | If true, phone number is collected.<br/>                                                      |
+| `metadata`                                                                                    | Dict[str, *str*]                                                                              | :heavy_minus_sign:                                                                            | Free-form key-value pair list. Useful for storing information that is not captured elsewhere. |

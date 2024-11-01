@@ -1,0 +1,16 @@
+# CreateCheckoutRequest
+
+Request to create a checkout.
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `partner_account_id`                                                             | *str*                                                                            | :heavy_check_mark:                                                               | Moov account ID of the merchant's partner.<br/>                                  |
+| `display`                                                                        | [models.CheckoutDisplayOptions](../models/checkoutdisplayoptions.md)             | :heavy_check_mark:                                                               | N/A                                                                              |
+| `transfer`                                                                       | [models.CheckoutTransferOptions](../models/checkouttransferoptions.md)           | :heavy_check_mark:                                                               | N/A                                                                              |
+| `max_uses`                                                                       | *Optional[int]*                                                                  | :heavy_minus_sign:                                                               | Maximum number of uses of the checkout. Set to 0 for no limit.<br/>              |
+| `expires_on`                                                                     | [date](https://docs.python.org/3/library/datetime.html#date-objects)             | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `customer`                                                                       | [Optional[models.CheckoutCustomerOptions]](../models/checkoutcustomeroptions.md) | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `payment`                                                                        | [Optional[models.CheckoutPaymentOptions]](../models/checkoutpaymentoptions.md)   | :heavy_minus_sign:                                                               | N/A                                                                              |

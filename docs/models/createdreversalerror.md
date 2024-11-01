@@ -1,0 +1,11 @@
+# CreatedReversalError
+
+Returns the cancellation or refund response, depending on whether the transfer was cancelled or refunded.
+
+
+## Fields
+
+| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `cancellation`                                                                                                             | [OptionalNullable[models.CreatedCancellation]](../models/createdcancellation.md)                                           | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |
+| `refund`                                                                                                                   | [OptionalNullable[models.CreatedReversalSynchronousRefundResponse]](../models/createdreversalsynchronousrefundresponse.md) | :heavy_minus_sign:                                                                                                         | N/A                                                                                                                        |

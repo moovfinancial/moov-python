@@ -1,0 +1,12 @@
+# CreateApplication
+
+Fields required to create an application
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    | Example                                                                                        |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `name`                                                                                         | *Optional[str]*                                                                                | :heavy_minus_sign:                                                                             | Descriptive name allowing spaces.                                                              | Amanda Yang                                                                                    |
+| `description`                                                                                  | *Optional[str]*                                                                                | :heavy_minus_sign:                                                                             | A description for the item.                                                                    | Here lies a description of the item                                                            |
+| `allowed_scopes`                                                                               | List[[models.ApplicationScope](../models/applicationscope.md)]                                 | :heavy_minus_sign:                                                                             | List of allowed scopes that can be requested on another account per their agreement with Moov. |                                                                                                |

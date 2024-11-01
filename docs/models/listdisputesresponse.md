@@ -1,0 +1,9 @@
+# ListDisputesResponse
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `headers`                                                                    | Dict[str, List[*str*]]                                                       | :heavy_check_mark:                                                           | N/A                                                                          |
+| `result`                                                                     | [models.ListDisputesResponseResult](../models/listdisputesresponseresult.md) | :heavy_check_mark:                                                           | N/A                                                                          |

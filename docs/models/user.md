@@ -1,0 +1,15 @@
+# User
+
+Properties for a User
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `user_id`                                                            | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | UUID v4                                                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                 |
+| `email`                                                              | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Email address.                                                       | amanda@classbooker.dev                                               |
+| `last_login_on`                                                      | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |                                                                      |
+| `given_name`                                                         | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Name this person was given. This is usually the same as first name.  | Amanda                                                               |
+| `family_name`                                                        | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Family name of this person. This is usually the same as last name.   | Yang                                                                 |
+| `photo_url`                                                          | *OptionalNullable[str]*                                              | :heavy_minus_sign:                                                   | N/A                                                                  | https://placekitten.com/408/287                                      |

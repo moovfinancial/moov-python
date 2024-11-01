@@ -1,0 +1,9 @@
+# GetTransferForAccountResponse
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `headers`                                                                                      | Dict[str, List[*str*]]                                                                         | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `result`                                                                                       | [models.GetTransferForAccountResponseResult](../models/gettransferforaccountresponseresult.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |

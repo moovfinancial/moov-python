@@ -1,0 +1,9 @@
+# UpdateApplePayMerchantDomains
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `add_domains`                                                                               | List[*str*]                                                                                 | :heavy_minus_sign:                                                                          | A list of fully qualified top-level or sub-domain names to be added. Items must be unique.<br/> | [<br/>"pay.classbooker.dev"<br/>]                                                           |
+| `remove_domains`                                                                            | List[*str*]                                                                                 | :heavy_minus_sign:                                                                          | A list of previously added fully qualified top-level or sub-domain names to be removed.<br/> | [<br/>"checkout.classbooker.dev"<br/>]                                                      |

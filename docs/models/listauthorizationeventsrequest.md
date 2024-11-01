@@ -1,0 +1,11 @@
+# ListAuthorizationEventsRequest
+
+
+## Fields
+
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              | Example                                                                  |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `account_id`                                                             | *str*                                                                    | :heavy_check_mark:                                                       | ID of the account.                                                       |                                                                          |
+| `authorization_id`                                                       | *str*                                                                    | :heavy_check_mark:                                                       | ID of the authorization.                                                 | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                     |
+| `count`                                                                  | *Optional[int]*                                                          | :heavy_minus_sign:                                                       | Optional parameter to limit the number of results in the query.          | 10                                                                       |
+| `skip`                                                                   | *Optional[int]*                                                          | :heavy_minus_sign:                                                       | The number of items to offset before starting to collect the result set. | 10                                                                       |

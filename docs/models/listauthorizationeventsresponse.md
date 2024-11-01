@@ -1,0 +1,9 @@
+# ListAuthorizationEventsResponse
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `headers`                                                                                          | Dict[str, List[*str*]]                                                                             | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `result`                                                                                           | [models.ListAuthorizationEventsResponseResult](../models/listauthorizationeventsresponseresult.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

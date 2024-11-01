@@ -1,0 +1,20 @@
+# Schedule
+
+Describes a schedule of transfers to refund.
+Requires at least 1 occurrence or recurTransfer to be specified.
+
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `mode`                                                                               | [Optional[models.ScheduleMode]](../models/schedulemode.md)                           | :heavy_minus_sign:                                                                   | sandbox or production status of this schedule.                                       |
+| `schedule_id`                                                                        | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | specific ID for this schedule                                                        |
+| `source_account_id`                                                                  | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | AccountID tied to the source of the transfers, this cannot change once created.      |
+| `destination_account_id`                                                             | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | AccountID tied to the destination of the transfers, this cannot change once created. |
+| `partner_account_id`                                                                 | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | AccountID tied to the partner of the transfers, this cannot change once created.     |
+| `owner_account_id`                                                                   | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | AccountID of the creator of the schedule and the only one able to modify it.         |
+| `description`                                                                        | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | Simple description of what the schedule is.                                          |
+| `recur`                                                                              | [OptionalNullable[models.Recur]](../models/recur.md)                                 | :heavy_minus_sign:                                                                   | Defines configuration for recurring transfers                                        |
+| `occurrences`                                                                        | List[[models.Occurrence](../models/occurrence.md)]                                   | :heavy_minus_sign:                                                                   | Occurrences that have already been created                                           |

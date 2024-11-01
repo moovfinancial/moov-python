@@ -1,0 +1,10 @@
+# CreateTransferOptions
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `source`                                                                                 | [models.CreateTransferOptionsSource](../models/createtransferoptionssource.md)           | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `destination`                                                                            | [models.CreateTransferOptionsDestination](../models/createtransferoptionsdestination.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `amount`                                                                                 | [models.Amount](../models/amount.md)                                                     | :heavy_check_mark:                                                                       | An integer value representing money in a specific currency.                              |

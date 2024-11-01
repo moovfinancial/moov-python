@@ -1,0 +1,12 @@
+# PaymentMethodWalletPaymentMethodWallet
+
+A method of moving money that is a Moov wallet
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  | Example                                                                                      |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `payment_method_id`                                                                          | *Optional[str]*                                                                              | :heavy_minus_sign:                                                                           | UUID v4                                                                                      | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                         |
+| `payment_method_type`                                                                        | [Optional[models.PaymentMethodType]](../models/paymentmethodtype.md)                         | :heavy_minus_sign:                                                                           | The payment method type that represents a payment rail and directionality                    | card-payment                                                                                 |
+| `wallet`                                                                                     | [OptionalNullable[models.PaymentMethodWalletWallet]](../models/paymentmethodwalletwallet.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |                                                                                              |

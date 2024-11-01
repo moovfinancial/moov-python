@@ -1,0 +1,9 @@
+# CompleteMicroDepositsResponse1
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `headers`                                                                                      | Dict[str, List[*str*]]                                                                         | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `result`                                                                                       | [models.CompleteMicroDepositsResponseResult](../models/completemicrodepositsresponseresult.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |

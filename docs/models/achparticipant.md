@@ -1,0 +1,20 @@
+# AchParticipant
+
+Financial institution information regarding an ACH participant
+
+
+## Fields
+
+| Field                                                    | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `routing_number`                                         | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | 123456789                                                |
+| `office_code`                                            | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | 0                                                        |
+| `servicing_frb_number`                                   | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | 123456789                                                |
+| `record_type_code`                                       | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | 1                                                        |
+| `revised`                                                | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | 041921                                                   |
+| `new_routing_number`                                     | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | 987654321                                                |
+| `customer_name`                                          | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | Main Street Bank                                         |
+| `phone_number`                                           | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | 123-456-7789                                             |
+| `status_code`                                            | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | 1                                                        |
+| `view_code`                                              | *Optional[str]*                                          | :heavy_minus_sign:                                       | N/A                                                      | 1                                                        |
+| `ach_location`                                           | [Optional[models.AchLocation]](../models/achlocation.md) | :heavy_minus_sign:                                       | N/A                                                      |                                                          |

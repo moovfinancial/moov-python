@@ -1,0 +1,13 @@
+# PaymentMethodApplePaySourceOptionsApplePay
+
+A method of moving money using an Apple Pay token.
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `payment_method_id`                                                                  | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | UUID v4                                                                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                                 |
+| `payment_method_type`                                                                | [Optional[models.PaymentMethodType]](../models/paymentmethodtype.md)                 | :heavy_minus_sign:                                                                   | The payment method type that represents a payment rail and directionality            | card-payment                                                                         |
+| `apple_pay`                                                                          | [OptionalNullable[models.SourceOptionsApplePay]](../models/sourceoptionsapplepay.md) | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
+| `__pydantic_extra__`                                                                 | Dict[str, *Any*]                                                                     | :heavy_minus_sign:                                                                   | N/A                                                                                  | {<br/>"paymentMethodID": "2b42ad2a-7586-4e55-a268-10d585186c27"<br/>}                |

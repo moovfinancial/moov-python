@@ -1,0 +1,13 @@
+# TransferSourceAccountName
+
+The results of submitting cardholder name to a card network for verification.
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        | Example                                                                            |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `first_name`                                                                       | [Optional[models.TransferSourceFirstName]](../models/transfersourcefirstname.md)   | :heavy_minus_sign:                                                                 | N/A                                                                                | match                                                                              |
+| `last_name`                                                                        | [Optional[models.TransferSourceLastName]](../models/transfersourcelastname.md)     | :heavy_minus_sign:                                                                 | N/A                                                                                | match                                                                              |
+| `middle_name`                                                                      | [Optional[models.TransferSourceMiddleName]](../models/transfersourcemiddlename.md) | :heavy_minus_sign:                                                                 | N/A                                                                                | match                                                                              |
+| `full_name`                                                                        | [Optional[models.TransferSourceFullName]](../models/transfersourcefullname.md)     | :heavy_minus_sign:                                                                 | N/A                                                                                | match                                                                              |

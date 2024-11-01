@@ -1,0 +1,9 @@
+# UpdateCheckoutRequestTransfer
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `destination`                                                                                      | [Optional[models.UpdateCheckoutRequestDestination]](../models/updatecheckoutrequestdestination.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `amount`                                                                                           | [Optional[models.Amount]](../models/amount.md)                                                     | :heavy_minus_sign:                                                                                 | An integer value representing money in a specific currency.                                        |

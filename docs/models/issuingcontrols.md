@@ -1,0 +1,9 @@
+# IssuingControls
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  | Example                                                                                      |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `single_use`                                                                                 | *Optional[bool]*                                                                             | :heavy_minus_sign:                                                                           | Indicates if the card is single-use. If true, the card closes after the first authorization. |                                                                                              |
+| `velocity_limits`                                                                            | List[[models.IssuingVelocityLimit](../models/issuingvelocitylimit.md)]                       | :heavy_minus_sign:                                                                           | Sets the spending limit per time interval. Only one limit per interval is supported.         | [<br/>{<br/>"amount": 10000,<br/>"interval": "per-transaction"<br/>}<br/>]                   |

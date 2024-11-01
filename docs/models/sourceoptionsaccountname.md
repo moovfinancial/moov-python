@@ -1,0 +1,13 @@
+# SourceOptionsAccountName
+
+The results of submitting cardholder name to a card network for verification.
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `first_name`                                                                     | [Optional[models.SourceOptionsFirstName]](../models/sourceoptionsfirstname.md)   | :heavy_minus_sign:                                                               | N/A                                                                              | match                                                                            |
+| `last_name`                                                                      | [Optional[models.SourceOptionsLastName]](../models/sourceoptionslastname.md)     | :heavy_minus_sign:                                                               | N/A                                                                              | match                                                                            |
+| `middle_name`                                                                    | [Optional[models.SourceOptionsMiddleName]](../models/sourceoptionsmiddlename.md) | :heavy_minus_sign:                                                               | N/A                                                                              | match                                                                            |
+| `full_name`                                                                      | [Optional[models.SourceOptionsFullName]](../models/sourceoptionsfullname.md)     | :heavy_minus_sign:                                                               | N/A                                                                              | match                                                                            |

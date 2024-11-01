@@ -1,0 +1,14 @@
+# SpecificTransfer
+
+Return a specific transfer result for the time frame between two timestamps
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `start`                                                              | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |                                                                      |
+| `stop`                                                               | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |                                                                      |
+| `transfer_id`                                                        | *str*                                                                | :heavy_check_mark:                                                   | UUID v4                                                              | ec7e1848-dc80-4ab0-8827-dd7fc0737b43                                 |
+| `created_on`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |                                                                      |
+| `amount`                                                             | *int*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |                                                                      |

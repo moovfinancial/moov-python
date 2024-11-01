@@ -1,0 +1,16 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Moov-OAS:
+        inputs:
+            - location: openapi_fixed.json
+        registry:
+            location: registry.speakeasyapi.dev/moov/moov/moov-oas
+targets:
+    moov:
+        target: python
+        source: Moov-OAS
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/moov/moov/moov-oas-code-samples
+            blocking: false

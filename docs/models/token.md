@@ -1,0 +1,10 @@
+# Token
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `payment_data`                                                             | [models.PaymentData](../models/paymentdata.md)                             | :heavy_check_mark:                                                         | N/A                                                                        |                                                                            |
+| `payment_method`                                                           | [models.LinkApplePayPaymentMethod](../models/linkapplepaypaymentmethod.md) | :heavy_check_mark:                                                         | N/A                                                                        |                                                                            |
+| `transaction_identifier`                                                   | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        | 32b...4f3                                                                  |
