@@ -27,9 +27,9 @@ class SDKConfiguration:
     server_idx: Optional[int] = 0
     language: str = "python"
     openapi_doc_version: str = "v1.0.0"
-    sdk_version: str = "0.0.1"
+    sdk_version: str = "0.0.3"
     gen_version: str = "2.445.1"
-    user_agent: str = "speakeasy-sdk/python 0.0.1 2.445.1 v1.0.0 moov"
+    user_agent: str = "speakeasy-sdk/python 0.0.3 2.445.1 v1.0.0 moov"
     retry_config: OptionalNullable[RetryConfig] = Field(default_factory=lambda: UNSET)
     timeout_ms: Optional[int] = None
 

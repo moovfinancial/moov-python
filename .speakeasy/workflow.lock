@@ -2,25 +2,25 @@ speakeasyVersion: 1.424.0
 sources:
     Moov-OAS:
         sourceNamespace: moov-oas
-        sourceRevisionDigest: sha256:d446bc7afca0d7573002c834cc87db340ed5d9c6fa2e8216dcf17807ed62b8eb
-        sourceBlobDigest: sha256:c49f7ecc9f612f0206609d2d5bda99e0d720d1b0ea4d1130b0a8518090b48a1e
+        sourceRevisionDigest: sha256:d4f18cf1a3238cab46f0c1d65f32195381057f418d12370ea72b6f81857bb399
+        sourceBlobDigest: sha256:e1683288943120dbc87083724a5a331cad93527cd7ecd3f06f7f4a69cf6d9972
         tags:
             - latest
 targets:
     moov:
         source: Moov-OAS
         sourceNamespace: moov-oas
-        sourceRevisionDigest: sha256:d446bc7afca0d7573002c834cc87db340ed5d9c6fa2e8216dcf17807ed62b8eb
-        sourceBlobDigest: sha256:c49f7ecc9f612f0206609d2d5bda99e0d720d1b0ea4d1130b0a8518090b48a1e
+        sourceRevisionDigest: sha256:d4f18cf1a3238cab46f0c1d65f32195381057f418d12370ea72b6f81857bb399
+        sourceBlobDigest: sha256:e1683288943120dbc87083724a5a331cad93527cd7ecd3f06f7f4a69cf6d9972
         codeSamplesNamespace: moov-oas-code-samples
-        codeSamplesRevisionDigest: sha256:4072692809e98d05b5aeda1479d1821ffe3270fdd371dbb265f90a25de849879
+        codeSamplesRevisionDigest: sha256:85e0072dcd4bd905ca7053bfd182486f48ad557df30cb664dc79993ae3a827ad
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         Moov-OAS:
             inputs:
-                - location: openapi_fixed.json
+                - location: openapi.json
             registry:
                 location: registry.speakeasyapi.dev/moov/moov/moov-oas
     targets:

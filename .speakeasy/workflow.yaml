@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     Moov-OAS:
         inputs:
-            - location: openapi_fixed.json
+            - location: openapi.json
         registry:
             location: registry.speakeasyapi.dev/moov/moov/moov-oas
 targets:

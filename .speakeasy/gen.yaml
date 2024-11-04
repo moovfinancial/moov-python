@@ -2,7 +2,7 @@ configVersion: 2.0.0
 generation:
   devContainers:
     enabled: true
-    schemaPath: openapi_fixed.json
+    schemaPath: openapi.json
   sdkClassName: Moov
   maintainOpenAPIOrder: true
   usageSnippets:
@@ -15,7 +15,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
 python:
-  version: 0.0.1
+  version: 0.0.3
   additionalDependencies:
     dev: {}
     main: {}

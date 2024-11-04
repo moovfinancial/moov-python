@@ -11,4 +11,4 @@ python -m pip install --upgrade pip
 pip install -e .
 
 # Generate starter usage sample with speakeasy
-speakeasy generate usage -s openapi_fixed.json -l python -o samples/root.py
+speakeasy generate usage -s openapi.json -l python -o samples/root.py
