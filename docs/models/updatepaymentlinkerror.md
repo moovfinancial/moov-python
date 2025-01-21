@@ -1,0 +1,12 @@
+# UpdatePaymentLinkError
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `amount`                                                                     | [Optional[models.AmountValidationError]](../models/amountvalidationerror.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `expires_on`                                                                 | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `display`                                                                    | [Optional[models.DisplayOptionsError]](../models/displayoptionserror.md)     | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `payment`                                                                    | [Optional[models.PaymentDetailsError]](../models/paymentdetailserror.md)     | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `payout`                                                                     | [Optional[models.PayoutDetailsError]](../models/payoutdetailserror.md)       | :heavy_minus_sign:                                                           | N/A                                                                          |

@@ -1,0 +1,16 @@
+# DisputeEvidenceMetadata
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `evidence_id`                                                        | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `dispute_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `mime_type`                                                          | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `filename`                                                           | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `size`                                                               | *int*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `evidence_type`                                                      | [models.EvidenceType](../models/evidencetype.md)                     | :heavy_check_mark:                                                   | N/A                                                                  |
+| `text`                                                               | *str*                                                                | :heavy_check_mark:                                                   | The text submited as evidence.                                       |
+| `created_on`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `updated_on`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |

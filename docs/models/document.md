@@ -1,0 +1,12 @@
+# Document
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `document_id`                                                        | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  | e07e83e8-9429-4e99-ac99-c941f719eb39                                 |
+| `type`                                                               | [models.DocumentType](../models/documenttype.md)                     | :heavy_check_mark:                                                   | Types of documents that can be uploaded.                             | bankStatement                                                        |
+| `content_type`                                                       | *str*                                                                | :heavy_check_mark:                                                   | The document's MIME type.                                            | application/pdf                                                      |
+| `uploaded_at`                                                        | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  | 2024-05-06 12:20:38.184 +0000 UTC                                    |
+| `parse_errors`                                                       | List[*str*]                                                          | :heavy_minus_sign:                                                   | Optional array of errors encountered during automated parsing.       |                                                                      |

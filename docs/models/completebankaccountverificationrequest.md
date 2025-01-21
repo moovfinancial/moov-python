@@ -1,0 +1,11 @@
+# CompleteBankAccountVerificationRequest
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `account_id`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `bank_account_id`                                                                      | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `complete_bank_account_verification`                                                   | [models.CompleteBankAccountVerification](../models/completebankaccountverification.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `x_moov_version`                                                                       | [Optional[models.Versions]](../models/versions.md)                                     | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |
