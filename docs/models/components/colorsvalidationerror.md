@@ -1,0 +1,9 @@
+# ColorsValidationError
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `light`                                                                                                | [Optional[components.BrandColorValidationError]](../../models/components/brandcolorvalidationerror.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `dark`                                                                                                 | [Optional[components.BrandColorValidationError]](../../models/components/brandcolorvalidationerror.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

@@ -2,17 +2,17 @@
 ```python
 # Synchronous Example
 import dateutil.parser
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.accounts.create_account(security=moov.CreateAccountSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.accounts.create_account(security=operations.CreateAccountSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), account_type=moov.AccountType.BUSINESS, profile=moov.CreateProfile(
+    ), account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
         business={
             "legal_business_name": "Classbooker, LLC",
         },
@@ -56,18 +56,18 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 async def main():
     async with Moov() as moov:
 
-        res = await moov.accounts.create_account_async(security=moov.CreateAccountSecurity(
-            basic_auth=moov.SchemeBasicAuth(
+        res = await moov.accounts.create_account_async(security=operations.CreateAccountSecurity(
+            basic_auth=components.SchemeBasicAuth(
                 username="",
                 password="",
             ),
-        ), account_type=moov.AccountType.BUSINESS, profile=moov.CreateProfile(
+        ), account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
             business={
                 "legal_business_name": "Classbooker, LLC",
             },

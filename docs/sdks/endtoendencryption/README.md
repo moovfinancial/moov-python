@@ -21,13 +21,13 @@ to specify the `/ping.read` scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    moov.end_to_end_encryption.test_end_to_end_token(security=moov.TestEndToEndTokenSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    moov.end_to_end_encryption.test_end_to_end_token(security=operations.TestEndToEndTokenSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -41,17 +41,17 @@ with Moov() as moov:
 
 | Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                  | [models.TestEndToEndTokenSecurity](../../models/testendtoendtokensecurity.md)                               | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
+| `security`                                                                                                  | [operations.TestEndToEndTokenSecurity](../../models/operations/testendtoendtokensecurity.md)                | :heavy_check_mark:                                                                                          | N/A                                                                                                         |
 | `token`                                                                                                     | *str*                                                                                                       | :heavy_check_mark:                                                                                          | An [RFC](https://datatracker.ietf.org/doc/html/rfc7516) compact-serialized JSON Web Encryption (JWE) token. |
-| `x_moov_version`                                                                                            | [Optional[models.Versions]](../../models/versions.md)                                                       | :heavy_minus_sign:                                                                                          | Specify an API version.                                                                                     |
+| `x_moov_version`                                                                                            | [Optional[components.Versions]](../../models/components/versions.md)                                        | :heavy_minus_sign:                                                                                          | Specify an API version.                                                                                     |
 | `retries`                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                            | :heavy_minus_sign:                                                                                          | Configuration to override the default retry behavior of the client.                                         |
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400                 | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400                 | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## generate_end_to_end_key
 
@@ -60,11 +60,11 @@ Generates a public key used to create a JWE token for passing secure authenticat
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components
 
 with Moov(
-    security=moov.Security(
+    security=components.Security(
         username="",
         password="",
     ),
@@ -79,17 +79,17 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `x_moov_version`                                                     | [Optional[components.Versions]](../../models/components/versions.md) | :heavy_minus_sign:                                                   | Specify an API version.                                              |
+| `retries`                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)     | :heavy_minus_sign:                                                   | Configuration to override the default retry behavior of the client.  |
 
 ### Response
 
-**[models.JSONWebKey](../../models/jsonwebkey.md)**
+**[components.JSONWebKey](../../models/components/jsonwebkey.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

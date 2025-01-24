@@ -18,13 +18,13 @@
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.institutions.list_institutions(security=moov.ListInstitutionsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.institutions.list_institutions(security=operations.ListInstitutionsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -37,23 +37,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `security`                                                                                | [models.ListInstitutionsSecurity](../../models/listinstitutionssecurity.md)               | :heavy_check_mark:                                                                        | N/A                                                                                       |
-| `x_moov_version`                                                                          | [Optional[models.Versions]](../../models/versions.md)                                     | :heavy_minus_sign:                                                                        | Specify an API version.                                                                   |
-| `name`                                                                                    | *Optional[str]*                                                                           | :heavy_minus_sign:                                                                        | Name of the financial institution. Either `name` or `routingNumber` is required.          |
-| `routing_number`                                                                          | *Optional[str]*                                                                           | :heavy_minus_sign:                                                                        | Routing number for a financial institution. Either `routingNumber` or `name` is required. |
-| `state`                                                                                   | *Optional[str]*                                                                           | :heavy_minus_sign:                                                                        | The state where a financial institution is based.                                         |
-| `limit`                                                                                   | *Optional[int]*                                                                           | :heavy_minus_sign:                                                                        | Maximum results returned by a search.                                                     |
-| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `security`                                                                                 | [operations.ListInstitutionsSecurity](../../models/operations/listinstitutionssecurity.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `x_moov_version`                                                                           | [Optional[components.Versions]](../../models/components/versions.md)                       | :heavy_minus_sign:                                                                         | Specify an API version.                                                                    |
+| `name`                                                                                     | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | Name of the financial institution. Either `name` or `routingNumber` is required.           |
+| `routing_number`                                                                           | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | Routing number for a financial institution. Either `routingNumber` or `name` is required.  |
+| `state`                                                                                    | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | The state where a financial institution is based.                                          |
+| `limit`                                                                                    | *Optional[int]*                                                                            | :heavy_minus_sign:                                                                         | Maximum results returned by a search.                                                      |
+| `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
 
 ### Response
 
-**[List[models.FinancialInstitutions]](../../models/.md)**
+**[List[components.FinancialInstitutions]](../../models/.md)**
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400                 | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400                 | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |

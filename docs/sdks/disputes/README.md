@@ -87,13 +87,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.disputes.list_disputes(security=moov.ListDisputesSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.disputes.list_disputes(security=operations.ListDisputesSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -108,16 +108,16 @@ with Moov() as moov:
 
 | Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
 | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `security`                                                                                            | [models.ListDisputesSecurity](../../models/listdisputessecurity.md)                                   | :heavy_check_mark:                                                                                    | N/A                                                                                                   |                                                                                                       |
+| `security`                                                                                            | [operations.ListDisputesSecurity](../../models/operations/listdisputessecurity.md)                    | :heavy_check_mark:                                                                                    | N/A                                                                                                   |                                                                                                       |
 | `account_id`                                                                                          | *str*                                                                                                 | :heavy_check_mark:                                                                                    | N/A                                                                                                   |                                                                                                       |
-| `x_moov_version`                                                                                      | [Optional[models.Versions]](../../models/versions.md)                                                 | :heavy_minus_sign:                                                                                    | Specify an API version.                                                                               |                                                                                                       |
+| `x_moov_version`                                                                                      | [Optional[components.Versions]](../../models/components/versions.md)                                  | :heavy_minus_sign:                                                                                    | Specify an API version.                                                                               |                                                                                                       |
 | `skip`                                                                                                | *Optional[int]*                                                                                       | :heavy_minus_sign:                                                                                    | N/A                                                                                                   | 60                                                                                                    |
 | `count`                                                                                               | *Optional[int]*                                                                                       | :heavy_minus_sign:                                                                                    | N/A                                                                                                   | 20                                                                                                    |
 | `start_date_time`                                                                                     | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                  | :heavy_minus_sign:                                                                                    | Optional date-time parameter to filter all disputes created on and after the provided date and time.  |                                                                                                       |
 | `end_date_time`                                                                                       | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                  | :heavy_minus_sign:                                                                                    | Optional date-time parameter to filter all disputes created on and before the provided date and time. |                                                                                                       |
 | `respond_start_date_time`                                                                             | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                  | :heavy_minus_sign:                                                                                    | Optional date-time which exclusively filters all disputes with respond by before this date-time.      |                                                                                                       |
 | `respond_end_date_time`                                                                               | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                  | :heavy_minus_sign:                                                                                    | Optional date-time which exclusively filters all disputes with respond by before this date-time.      |                                                                                                       |
-| `status`                                                                                              | [Optional[models.DisputeStatus]](../../models/disputestatus.md)                                       | :heavy_minus_sign:                                                                                    | Optional dispute status by which to filter the disputes.                                              |                                                                                                       |
+| `status`                                                                                              | [Optional[components.DisputeStatus]](../../models/components/disputestatus.md)                        | :heavy_minus_sign:                                                                                    | Optional dispute status by which to filter the disputes.                                              |                                                                                                       |
 | `merchant_account_id`                                                                                 | *Optional[str]*                                                                                       | :heavy_minus_sign:                                                                                    | Optional parameter to filter by merchant account ID.                                                  |                                                                                                       |
 | `cardholder_account_id`                                                                               | *Optional[str]*                                                                                       | :heavy_minus_sign:                                                                                    | Optional parameter to filter by cardholder account ID.                                                |                                                                                                       |
 | `dispute_i_ds`                                                                                        | List[*str*]                                                                                           | :heavy_minus_sign:                                                                                    | Optional parameter to filter by a comma separated list of dispute IDs.                                |                                                                                                       |
@@ -127,13 +127,13 @@ with Moov() as moov:
 
 ### Response
 
-**[List[models.Dispute]](../../models/.md)**
+**[List[components.Dispute]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_dispute
 
@@ -147,13 +147,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.disputes.get_dispute(security=moov.GetDisputeSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.disputes.get_dispute(security=operations.GetDisputeSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -166,23 +166,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `security`                                                          | [models.GetDisputeSecurity](../../models/getdisputesecurity.md)     | :heavy_check_mark:                                                  | N/A                                                                 |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `dispute_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `security`                                                                     | [operations.GetDisputeSecurity](../../models/operations/getdisputesecurity.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `account_id`                                                                   | *str*                                                                          | :heavy_check_mark:                                                             | N/A                                                                            |
+| `dispute_id`                                                                   | *str*                                                                          | :heavy_check_mark:                                                             | N/A                                                                            |
+| `x_moov_version`                                                               | [Optional[components.Versions]](../../models/components/versions.md)           | :heavy_minus_sign:                                                             | Specify an API version.                                                        |
+| `retries`                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)               | :heavy_minus_sign:                                                             | Configuration to override the default retry behavior of the client.            |
 
 ### Response
 
-**[models.Dispute](../../models/dispute.md)**
+**[components.Dispute](../../models/components/dispute.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## accept_dispute
 
@@ -196,13 +196,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.disputes.accept_dispute(security=moov.AcceptDisputeSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.disputes.accept_dispute(security=operations.AcceptDisputeSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -215,24 +215,24 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `security`                                                            | [models.AcceptDisputeSecurity](../../models/acceptdisputesecurity.md) | :heavy_check_mark:                                                    | N/A                                                                   |
-| `account_id`                                                          | *str*                                                                 | :heavy_check_mark:                                                    | N/A                                                                   |
-| `dispute_id`                                                          | *str*                                                                 | :heavy_check_mark:                                                    | N/A                                                                   |
-| `x_moov_version`                                                      | [Optional[models.Versions]](../../models/versions.md)                 | :heavy_minus_sign:                                                    | Specify an API version.                                               |
-| `retries`                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)      | :heavy_minus_sign:                                                    | Configuration to override the default retry behavior of the client.   |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `security`                                                                           | [operations.AcceptDisputeSecurity](../../models/operations/acceptdisputesecurity.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `account_id`                                                                         | *str*                                                                                | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `dispute_id`                                                                         | *str*                                                                                | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `x_moov_version`                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                 | :heavy_minus_sign:                                                                   | Specify an API version.                                                              |
+| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
 
 ### Response
 
-**[models.Dispute](../../models/dispute.md)**
+**[components.Dispute](../../models/components/dispute.md)**
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409            | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409            | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## list_dispute_evidence
 
@@ -246,13 +246,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.disputes.list_dispute_evidence(security=moov.ListDisputeEvidenceSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.disputes.list_dispute_evidence(security=operations.ListDisputeEvidenceSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -265,23 +265,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `security`                                                                        | [models.ListDisputeEvidenceSecurity](../../models/listdisputeevidencesecurity.md) | :heavy_check_mark:                                                                | N/A                                                                               |
-| `account_id`                                                                      | *str*                                                                             | :heavy_check_mark:                                                                | N/A                                                                               |
-| `dispute_id`                                                                      | *str*                                                                             | :heavy_check_mark:                                                                | N/A                                                                               |
-| `x_moov_version`                                                                  | [Optional[models.Versions]](../../models/versions.md)                             | :heavy_minus_sign:                                                                | Specify an API version.                                                           |
-| `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `security`                                                                                       | [operations.ListDisputeEvidenceSecurity](../../models/operations/listdisputeevidencesecurity.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `account_id`                                                                                     | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `dispute_id`                                                                                     | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `x_moov_version`                                                                                 | [Optional[components.Versions]](../../models/components/versions.md)                             | :heavy_minus_sign:                                                                               | Specify an API version.                                                                          |
+| `retries`                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                 | :heavy_minus_sign:                                                                               | Configuration to override the default retry behavior of the client.                              |
 
 ### Response
 
-**[List[models.DisputeEvidenceMetadata]](../../models/.md)**
+**[List[components.DisputeEvidenceMetadata]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## upload_dispute_evidence_file
 
@@ -295,20 +295,20 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    moov.disputes.upload_dispute_evidence_file(security=moov.UploadDisputeEvidenceFileSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    moov.disputes.upload_dispute_evidence_file(security=operations.UploadDisputeEvidenceFileSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
     ), account_id="ac81921c-4c1a-4e7a-8a8f-dfc0d0027ac5", dispute_id="49c04fa3-f5c3-4ddd-aece-4b5fb6e8a071", file={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
-    }, evidence_type=moov.EvidenceType.CUSTOMER_COMMUNICATION)
+    }, evidence_type=components.EvidenceType.CUSTOMER_COMMUNICATION)
 
     # Use the SDK ...
 
@@ -318,20 +318,20 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                                                              | Type                                                                                                                                                                                                   | Required                                                                                                                                                                                               | Description                                                                                                                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                                             | [models.UploadDisputeEvidenceFileSecurity](../../models/uploaddisputeevidencefilesecurity.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                                                     | N/A                                                                                                                                                                                                    |
+| `security`                                                                                                                                                                                             | [operations.UploadDisputeEvidenceFileSecurity](../../models/operations/uploaddisputeevidencefilesecurity.md)                                                                                           | :heavy_check_mark:                                                                                                                                                                                     | N/A                                                                                                                                                                                                    |
 | `account_id`                                                                                                                                                                                           | *str*                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                     | N/A                                                                                                                                                                                                    |
 | `dispute_id`                                                                                                                                                                                           | *str*                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                     | N/A                                                                                                                                                                                                    |
-| `file`                                                                                                                                                                                                 | [models.File](../../models/file.md)                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                     | The file to upload as evidence. Valid types are [jpeg, tiff, pdf].<br/><br/>The `Content-Type` header for this form part must be one of the following:<br/>  - `image/jpeg`<br/>  - `image/tiff`<br/>  - `application/pdf` |
-| `evidence_type`                                                                                                                                                                                        | [models.EvidenceType](../../models/evidencetype.md)                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                     | N/A                                                                                                                                                                                                    |
-| `x_moov_version`                                                                                                                                                                                       | [Optional[models.Versions]](../../models/versions.md)                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                     | Specify an API version.                                                                                                                                                                                |
+| `file`                                                                                                                                                                                                 | [components.File](../../models/components/file.md)                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                     | The file to upload as evidence. Valid types are [jpeg, tiff, pdf].<br/><br/>The `Content-Type` header for this form part must be one of the following:<br/>  - `image/jpeg`<br/>  - `image/tiff`<br/>  - `application/pdf` |
+| `evidence_type`                                                                                                                                                                                        | [components.EvidenceType](../../models/components/evidencetype.md)                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                     | N/A                                                                                                                                                                                                    |
+| `x_moov_version`                                                                                                                                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                     | Specify an API version.                                                                                                                                                                                |
 | `retries`                                                                                                                                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                     | Configuration to override the default retry behavior of the client.                                                                                                                                    |
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409            | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409            | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## upload_dispute_evidence_text
 
@@ -345,17 +345,17 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.disputes.upload_dispute_evidence_text(security=moov.UploadDisputeEvidenceTextSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.disputes.upload_dispute_evidence_text(security=operations.UploadDisputeEvidenceTextSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), account_id="d542736f-c9c3-491c-86c3-7303a97965ea", dispute_id="9487cd25-501d-4a76-8c24-54328af8a4b6", text="<value>", evidence_type=moov.EvidenceType.COVER_LETTER)
+    ), account_id="d542736f-c9c3-491c-86c3-7303a97965ea", dispute_id="9487cd25-501d-4a76-8c24-54328af8a4b6", text="<value>", evidence_type=components.EvidenceType.COVER_LETTER)
 
     # Handle response
     print(res)
@@ -364,26 +364,26 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `security`                                                                                    | [models.UploadDisputeEvidenceTextSecurity](../../models/uploaddisputeevidencetextsecurity.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `account_id`                                                                                  | *str*                                                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `dispute_id`                                                                                  | *str*                                                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `text`                                                                                        | *str*                                                                                         | :heavy_check_mark:                                                                            | The text to associate with the dispute as evidence.                                           |
-| `evidence_type`                                                                               | [models.EvidenceType](../../models/evidencetype.md)                                           | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `x_moov_version`                                                                              | [Optional[models.Versions]](../../models/versions.md)                                         | :heavy_minus_sign:                                                                            | Specify an API version.                                                                       |
-| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                   | [operations.UploadDisputeEvidenceTextSecurity](../../models/operations/uploaddisputeevidencetextsecurity.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `account_id`                                                                                                 | *str*                                                                                                        | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `dispute_id`                                                                                                 | *str*                                                                                                        | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `text`                                                                                                       | *str*                                                                                                        | :heavy_check_mark:                                                                                           | The text to associate with the dispute as evidence.                                                          |
+| `evidence_type`                                                                                              | [components.EvidenceType](../../models/components/evidencetype.md)                                           | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `x_moov_version`                                                                                             | [Optional[components.Versions]](../../models/components/versions.md)                                         | :heavy_minus_sign:                                                                                           | Specify an API version.                                                                                      |
+| `retries`                                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                             | :heavy_minus_sign:                                                                                           | Configuration to override the default retry behavior of the client.                                          |
 
 ### Response
 
-**[models.EvidenceText](../../models/evidencetext.md)**
+**[components.EvidenceText](../../models/components/evidencetext.md)**
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409            | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409            | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## submit_dispute_evidence
 
@@ -400,13 +400,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.disputes.submit_dispute_evidence(security=moov.SubmitDisputeEvidenceSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.disputes.submit_dispute_evidence(security=operations.SubmitDisputeEvidenceSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -419,24 +419,24 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `security`                                                                            | [models.SubmitDisputeEvidenceSecurity](../../models/submitdisputeevidencesecurity.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `account_id`                                                                          | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `dispute_id`                                                                          | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `x_moov_version`                                                                      | [Optional[models.Versions]](../../models/versions.md)                                 | :heavy_minus_sign:                                                                    | Specify an API version.                                                               |
-| `retries`                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                      | :heavy_minus_sign:                                                                    | Configuration to override the default retry behavior of the client.                   |
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `security`                                                                                           | [operations.SubmitDisputeEvidenceSecurity](../../models/operations/submitdisputeevidencesecurity.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `account_id`                                                                                         | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `dispute_id`                                                                                         | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `x_moov_version`                                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                                 | :heavy_minus_sign:                                                                                   | Specify an API version.                                                                              |
+| `retries`                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                     | :heavy_minus_sign:                                                                                   | Configuration to override the default retry behavior of the client.                                  |
 
 ### Response
 
-**[models.Dispute](../../models/dispute.md)**
+**[components.Dispute](../../models/components/dispute.md)**
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409            | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409            | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## get_dispute_evidence
 
@@ -450,13 +450,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.disputes.get_dispute_evidence(security=moov.GetDisputeEvidenceSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.disputes.get_dispute_evidence(security=operations.GetDisputeEvidenceSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -469,24 +469,24 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `security`                                                                      | [models.GetDisputeEvidenceSecurity](../../models/getdisputeevidencesecurity.md) | :heavy_check_mark:                                                              | N/A                                                                             |
-| `account_id`                                                                    | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
-| `dispute_id`                                                                    | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
-| `evidence_id`                                                                   | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
-| `x_moov_version`                                                                | [Optional[models.Versions]](../../models/versions.md)                           | :heavy_minus_sign:                                                              | Specify an API version.                                                         |
-| `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `security`                                                                                     | [operations.GetDisputeEvidenceSecurity](../../models/operations/getdisputeevidencesecurity.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `account_id`                                                                                   | *str*                                                                                          | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `dispute_id`                                                                                   | *str*                                                                                          | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `evidence_id`                                                                                  | *str*                                                                                          | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `x_moov_version`                                                                               | [Optional[components.Versions]](../../models/components/versions.md)                           | :heavy_minus_sign:                                                                             | Specify an API version.                                                                        |
+| `retries`                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                               | :heavy_minus_sign:                                                                             | Configuration to override the default retry behavior of the client.                            |
 
 ### Response
 
-**[models.DisputeEvidenceMetadata](../../models/disputeevidencemetadata.md)**
+**[components.DisputeEvidenceMetadata](../../models/components/disputeevidencemetadata.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## update_dispute_evidence
 
@@ -500,13 +500,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.disputes.update_dispute_evidence(security=moov.UpdateDisputeEvidenceSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.disputes.update_dispute_evidence(security=operations.UpdateDisputeEvidenceSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -519,27 +519,27 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `security`                                                                            | [models.UpdateDisputeEvidenceSecurity](../../models/updatedisputeevidencesecurity.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `account_id`                                                                          | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `dispute_id`                                                                          | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `evidence_id`                                                                         | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `x_moov_version`                                                                      | [Optional[models.Versions]](../../models/versions.md)                                 | :heavy_minus_sign:                                                                    | Specify an API version.                                                               |
-| `text`                                                                                | *Optional[str]*                                                                       | :heavy_minus_sign:                                                                    | The text to associate with the dispute as evidence.                                   |
-| `evidence_type`                                                                       | [Optional[models.EvidenceType]](../../models/evidencetype.md)                         | :heavy_minus_sign:                                                                    | N/A                                                                                   |
-| `retries`                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                      | :heavy_minus_sign:                                                                    | Configuration to override the default retry behavior of the client.                   |
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `security`                                                                                           | [operations.UpdateDisputeEvidenceSecurity](../../models/operations/updatedisputeevidencesecurity.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `account_id`                                                                                         | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `dispute_id`                                                                                         | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `evidence_id`                                                                                        | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `x_moov_version`                                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                                 | :heavy_minus_sign:                                                                                   | Specify an API version.                                                                              |
+| `text`                                                                                               | *Optional[str]*                                                                                      | :heavy_minus_sign:                                                                                   | The text to associate with the dispute as evidence.                                                  |
+| `evidence_type`                                                                                      | [Optional[components.EvidenceType]](../../models/components/evidencetype.md)                         | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `retries`                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                     | :heavy_minus_sign:                                                                                   | Configuration to override the default retry behavior of the client.                                  |
 
 ### Response
 
-**[models.DisputeEvidenceMetadata](../../models/disputeevidencemetadata.md)**
+**[components.DisputeEvidenceMetadata](../../models/components/disputeevidencemetadata.md)**
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400                 | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400                 | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## delete_dispute_evidence_file
 
@@ -553,13 +553,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    moov.disputes.delete_dispute_evidence_file(security=moov.DeleteDisputeEvidenceFileSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    moov.disputes.delete_dispute_evidence_file(security=operations.DeleteDisputeEvidenceFileSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -571,21 +571,21 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `security`                                                                                    | [models.DeleteDisputeEvidenceFileSecurity](../../models/deletedisputeevidencefilesecurity.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `account_id`                                                                                  | *str*                                                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `dispute_id`                                                                                  | *str*                                                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `evidence_id`                                                                                 | *str*                                                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `x_moov_version`                                                                              | [Optional[models.Versions]](../../models/versions.md)                                         | :heavy_minus_sign:                                                                            | Specify an API version.                                                                       |
-| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                   | [operations.DeleteDisputeEvidenceFileSecurity](../../models/operations/deletedisputeevidencefilesecurity.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `account_id`                                                                                                 | *str*                                                                                                        | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `dispute_id`                                                                                                 | *str*                                                                                                        | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `evidence_id`                                                                                                | *str*                                                                                                        | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `x_moov_version`                                                                                             | [Optional[components.Versions]](../../models/components/versions.md)                                         | :heavy_minus_sign:                                                                                           | Specify an API version.                                                                                      |
+| `retries`                                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                             | :heavy_minus_sign:                                                                                           | Configuration to override the default retry behavior of the client.                                          |
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 409                 | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 409                 | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## get_dispute_evidence_data
 
@@ -599,13 +599,13 @@ a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.disputes.get_dispute_evidence_data(security=moov.GetDisputeEvidenceDataSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.disputes.get_dispute_evidence_data(security=operations.GetDisputeEvidenceDataSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -618,21 +618,21 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `security`                                                                              | [models.GetDisputeEvidenceDataSecurity](../../models/getdisputeevidencedatasecurity.md) | :heavy_check_mark:                                                                      | N/A                                                                                     |
-| `account_id`                                                                            | *str*                                                                                   | :heavy_check_mark:                                                                      | N/A                                                                                     |
-| `dispute_id`                                                                            | *str*                                                                                   | :heavy_check_mark:                                                                      | N/A                                                                                     |
-| `evidence_id`                                                                           | *str*                                                                                   | :heavy_check_mark:                                                                      | N/A                                                                                     |
-| `x_moov_version`                                                                        | [Optional[models.Versions]](../../models/versions.md)                                   | :heavy_minus_sign:                                                                      | Specify an API version.                                                                 |
-| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                             | [operations.GetDisputeEvidenceDataSecurity](../../models/operations/getdisputeevidencedatasecurity.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `account_id`                                                                                           | *str*                                                                                                  | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `dispute_id`                                                                                           | *str*                                                                                                  | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `evidence_id`                                                                                          | *str*                                                                                                  | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `x_moov_version`                                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                                   | :heavy_minus_sign:                                                                                     | Specify an API version.                                                                                |
+| `retries`                                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                       | :heavy_minus_sign:                                                                                     | Configuration to override the default retry behavior of the client.                                    |
 
 ### Response
 
-**[models.GetDisputeEvidenceDataResponse](../../models/getdisputeevidencedataresponse.md)**
+**[operations.GetDisputeEvidenceDataResponse](../../models/operations/getdisputeevidencedataresponse.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

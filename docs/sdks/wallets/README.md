@@ -21,13 +21,13 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.wallets.list_wallets(security=moov.ListWalletsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.wallets.list_wallets(security=operations.ListWalletsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -40,22 +40,22 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `security`                                                          | [models.ListWalletsSecurity](../../models/listwalletssecurity.md)   | :heavy_check_mark:                                                  | N/A                                                                 |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `security`                                                                       | [operations.ListWalletsSecurity](../../models/operations/listwalletssecurity.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `account_id`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | N/A                                                                              |
+| `x_moov_version`                                                                 | [Optional[components.Versions]](../../models/components/versions.md)             | :heavy_minus_sign:                                                               | Specify an API version.                                                          |
+| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |
 
 ### Response
 
-**[List[models.Wallet]](../../models/.md)**
+**[List[components.Wallet]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_wallet
 
@@ -66,13 +66,13 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.wallets.get_wallet(security=moov.GetWalletSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.wallets.get_wallet(security=operations.GetWalletSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -85,20 +85,20 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `security`                                                          | [models.GetWalletSecurity](../../models/getwalletsecurity.md)       | :heavy_check_mark:                                                  | N/A                                                                 |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `wallet_id`                                                         | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `security`                                                                   | [operations.GetWalletSecurity](../../models/operations/getwalletsecurity.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `account_id`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `wallet_id`                                                                  | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `x_moov_version`                                                             | [Optional[components.Versions]](../../models/components/versions.md)         | :heavy_minus_sign:                                                           | Specify an API version.                                                      |
+| `retries`                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)             | :heavy_minus_sign:                                                           | Configuration to override the default retry behavior of the client.          |
 
 ### Response
 
-**[models.Wallet](../../models/wallet.md)**
+**[components.Wallet](../../models/components/wallet.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

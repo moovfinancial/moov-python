@@ -1,0 +1,11 @@
+# CustomerSupportError
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `phone`                                                                              | [Optional[components.PhoneNumberError]](../../models/components/phonenumbererror.md) | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `email`                                                                              | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `address`                                                                            | [Optional[components.AddressError]](../../models/components/addresserror.md)         | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `website`                                                                            | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | N/A                                                                                  |

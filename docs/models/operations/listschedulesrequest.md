@@ -1,0 +1,11 @@
+# ListSchedulesRequest
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `account_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |                                                                      |
+| `x_moov_version`                                                     | [Optional[components.Versions]](../../models/components/versions.md) | :heavy_minus_sign:                                                   | Specify an API version.                                              |                                                                      |
+| `skip`                                                               | *Optional[int]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  | 60                                                                   |
+| `count`                                                              | *Optional[int]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  | 20                                                                   |

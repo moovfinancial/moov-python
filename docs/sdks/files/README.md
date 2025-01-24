@@ -34,20 +34,20 @@ To access this endpoint using a [token](https://docs.moov.io/api/authentication/
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.files.upload_file(security=moov.UploadFileSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.files.upload_file(security=operations.UploadFileSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
     ), account_id="997f59d4-6b68-4f95-a825-1ae3f3faf278", file={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
-    }, file_purpose=moov.FilePurpose.REPRESENTATIVE_VERIFICATION, metadata="{\"requirement_id\": \"document.individual.verification\"}")
+    }, file_purpose=components.FilePurpose.REPRESENTATIVE_VERIFICATION, metadata="{\"requirement_id\": \"document.individual.verification\"}")
 
     # Handle response
     print(res)
@@ -58,25 +58,25 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                   | Type                                                                                                                                                        | Required                                                                                                                                                    | Description                                                                                                                                                 | Example                                                                                                                                                     |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                  | [models.UploadFileSecurity](../../models/uploadfilesecurity.md)                                                                                             | :heavy_check_mark:                                                                                                                                          | N/A                                                                                                                                                         |                                                                                                                                                             |
+| `security`                                                                                                                                                  | [operations.UploadFileSecurity](../../models/operations/uploadfilesecurity.md)                                                                              | :heavy_check_mark:                                                                                                                                          | N/A                                                                                                                                                         |                                                                                                                                                             |
 | `account_id`                                                                                                                                                | *str*                                                                                                                                                       | :heavy_check_mark:                                                                                                                                          | N/A                                                                                                                                                         |                                                                                                                                                             |
-| `file`                                                                                                                                                      | [models.FileUploadRequestMultiPartFile](../../models/fileuploadrequestmultipartfile.md)                                                                     | :heavy_check_mark:                                                                                                                                          | The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.                                                                                          |                                                                                                                                                             |
-| `file_purpose`                                                                                                                                              | [models.FilePurpose](../../models/filepurpose.md)                                                                                                           | :heavy_check_mark:                                                                                                                                          | The file's purpose.                                                                                                                                         | representative_verification                                                                                                                                 |
-| `x_moov_version`                                                                                                                                            | [Optional[models.Versions]](../../models/versions.md)                                                                                                       | :heavy_minus_sign:                                                                                                                                          | Specify an API version.                                                                                                                                     |                                                                                                                                                             |
+| `file`                                                                                                                                                      | [components.FileUploadRequestMultiPartFile](../../models/components/fileuploadrequestmultipartfile.md)                                                      | :heavy_check_mark:                                                                                                                                          | The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.                                                                                          |                                                                                                                                                             |
+| `file_purpose`                                                                                                                                              | [components.FilePurpose](../../models/components/filepurpose.md)                                                                                            | :heavy_check_mark:                                                                                                                                          | The file's purpose.                                                                                                                                         | representative_verification                                                                                                                                 |
+| `x_moov_version`                                                                                                                                            | [Optional[components.Versions]](../../models/components/versions.md)                                                                                        | :heavy_minus_sign:                                                                                                                                          | Specify an API version.                                                                                                                                     |                                                                                                                                                             |
 | `metadata`                                                                                                                                                  | *Optional[str]*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                          | Additional metadata to be stored with the file, formatted as a JSON string.<br/><br/>Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`. | {"requirement_id": "document.individual.verification"}                                                                                                      |
 | `retries`                                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                            | :heavy_minus_sign:                                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                                         |                                                                                                                                                             |
 
 ### Response
 
-**[models.FileDetails](../../models/filedetails.md)**
+**[components.FileDetails](../../models/components/filedetails.md)**
 
 ### Errors
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.GenericError        | 400, 409                   | application/json           |
-| models.FileValidationError | 422                        | application/json           |
-| models.APIError            | 4XX, 5XX                   | \*/\*                      |
+| errors.GenericError        | 400, 409                   | application/json           |
+| errors.FileValidationError | 422                        | application/json           |
+| errors.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## list_files
 
@@ -88,13 +88,13 @@ To access this endpoint using a [token](https://docs.moov.io/api/authentication/
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.files.list_files(security=moov.ListFilesSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.files.list_files(security=operations.ListFilesSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -107,22 +107,22 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `security`                                                          | [models.ListFilesSecurity](../../models/listfilessecurity.md)       | :heavy_check_mark:                                                  | N/A                                                                 |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `security`                                                                   | [operations.ListFilesSecurity](../../models/operations/listfilessecurity.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `account_id`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `x_moov_version`                                                             | [Optional[components.Versions]](../../models/components/versions.md)         | :heavy_minus_sign:                                                           | Specify an API version.                                                      |
+| `retries`                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)             | :heavy_minus_sign:                                                           | Configuration to override the default retry behavior of the client.          |
 
 ### Response
 
-**[List[models.FileDetails]](../../models/.md)**
+**[List[components.FileDetails]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_file_details
 
@@ -134,13 +134,13 @@ To access this endpoint using a [token](https://docs.moov.io/api/authentication/
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.files.get_file_details(security=moov.GetFileDetailsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.files.get_file_details(security=operations.GetFileDetailsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -153,20 +153,20 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `security`                                                              | [models.GetFileDetailsSecurity](../../models/getfiledetailssecurity.md) | :heavy_check_mark:                                                      | N/A                                                                     |
-| `account_id`                                                            | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
-| `file_id`                                                               | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
-| `x_moov_version`                                                        | [Optional[models.Versions]](../../models/versions.md)                   | :heavy_minus_sign:                                                      | Specify an API version.                                                 |
-| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `security`                                                                             | [operations.GetFileDetailsSecurity](../../models/operations/getfiledetailssecurity.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `account_id`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `file_id`                                                                              | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `x_moov_version`                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                   | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |
+| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
 
 ### Response
 
-**[models.FileDetails](../../models/filedetails.md)**
+**[components.FileDetails](../../models/components/filedetails.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

@@ -1,0 +1,9 @@
+# CreateProfile
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `individual`                                                                                       | [Optional[components.CreateIndividualProfile]](../../models/components/createindividualprofile.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `business`                                                                                         | [Optional[components.CreateBusinessProfile]](../../models/components/createbusinessprofile.md)     | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

@@ -77,13 +77,13 @@ scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.transfers.create_transfer(security=moov.CreateTransferSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.transfers.create_transfer(security=operations.CreateTransferSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -113,31 +113,31 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                                                                                                               | Type                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                             | Example                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                              | [models.CreateTransferSecurity](../../models/createtransfersecurity.md)                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                         |
+| `security`                                                                                                                                                                                                                                              | [operations.CreateTransferSecurity](../../models/operations/createtransfersecurity.md)                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                         |
 | `x_idempotency_key`                                                                                                                                                                                                                                     | *str*                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                      | Prevents duplicate transfers from being created.                                                                                                                                                                                                        |                                                                                                                                                                                                                                                         |
 | `account_id`                                                                                                                                                                                                                                            | *str*                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                      | The merchant's Moov account ID.                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                         |
-| `source`                                                                                                                                                                                                                                                | [models.CreateTransferSource](../../models/createtransfersource.md)                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                      | Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.                                                                                                                                    |                                                                                                                                                                                                                                                         |
-| `destination`                                                                                                                                                                                                                                           | [models.CreateTransferDestination](../../models/createtransferdestination.md)                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                      | The final stage of a transfer and the ultimate recipient of the funds.                                                                                                                                                                                  |                                                                                                                                                                                                                                                         |
-| `amount`                                                                                                                                                                                                                                                | [models.Amount](../../models/amount.md)                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                         |
-| `x_moov_version`                                                                                                                                                                                                                                        | [Optional[models.Versions]](../../models/versions.md)                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                      | Specify an API version.                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                         |
-| `x_wait_for`                                                                                                                                                                                                                                            | [Optional[models.TransferWaitFor]](../../models/transferwaitfor.md)                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                      | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                         |
-| `facilitator_fee`                                                                                                                                                                                                                                       | [Optional[models.FacilitatorFee]](../../models/facilitatorfee.md)                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                      | Total or markup fee.                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                         |
+| `source`                                                                                                                                                                                                                                                | [components.CreateTransferSource](../../models/components/createtransfersource.md)                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                      | Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.                                                                                                                                    |                                                                                                                                                                                                                                                         |
+| `destination`                                                                                                                                                                                                                                           | [components.CreateTransferDestination](../../models/components/createtransferdestination.md)                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                                      | The final stage of a transfer and the ultimate recipient of the funds.                                                                                                                                                                                  |                                                                                                                                                                                                                                                         |
+| `amount`                                                                                                                                                                                                                                                | [components.Amount](../../models/components/amount.md)                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                         |
+| `x_moov_version`                                                                                                                                                                                                                                        | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                      | Specify an API version.                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                         |
+| `x_wait_for`                                                                                                                                                                                                                                            | [Optional[components.TransferWaitFor]](../../models/components/transferwaitfor.md)                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                      | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                         |
+| `facilitator_fee`                                                                                                                                                                                                                                       | [Optional[components.FacilitatorFee]](../../models/components/facilitatorfee.md)                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                      | Total or markup fee.                                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                         |
 | `description`                                                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                      | An optional description of the transfer for your own internal use.                                                                                                                                                                                      | Pay Instructor for May 15 Class                                                                                                                                                                                                                         |
 | `metadata`                                                                                                                                                                                                                                              | Dict[str, *str*]                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                      | Free-form key-value pair list. Useful for storing information that is not captured elsewhere.                                                                                                                                                           | {<br/>"optional": "metadata"<br/>}                                                                                                                                                                                                                      |
 | `retries`                                                                                                                                                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                      | Configuration to override the default retry behavior of the client.                                                                                                                                                                                     |                                                                                                                                                                                                                                                         |
 
 ### Response
 
-**[models.CreateTransferResponse](../../models/createtransferresponse.md)**
+**[operations.CreateTransferResponse](../../models/operations/createtransferresponse.md)**
 
 ### Errors
 
 | Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
-| models.GenericError            | 400                            | application/json               |
-| models.TransferError           | 409                            | application/json               |
-| models.TransferValidationError | 422                            | application/json               |
-| models.APIError                | 4XX, 5XX                       | \*/\*                          |
+| errors.GenericError            | 400                            | application/json               |
+| errors.Transfer                | 409                            | application/json               |
+| errors.TransferValidationError | 422                            | application/json               |
+| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
 ## list_transfers
 
@@ -156,13 +156,13 @@ scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.transfers.list_transfers(security=moov.ListTransfersSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.transfers.list_transfers(security=operations.ListTransfersSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -177,11 +177,11 @@ with Moov() as moov:
 
 | Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           | Example                                                                                                                               |
 | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                            | [models.ListTransfersSecurity](../../models/listtransferssecurity.md)                                                                 | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |                                                                                                                                       |
+| `security`                                                                                                                            | [operations.ListTransfersSecurity](../../models/operations/listtransferssecurity.md)                                                  | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |                                                                                                                                       |
 | `account_id`                                                                                                                          | *str*                                                                                                                                 | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |                                                                                                                                       |
-| `x_moov_version`                                                                                                                      | [Optional[models.Versions]](../../models/versions.md)                                                                                 | :heavy_minus_sign:                                                                                                                    | Specify an API version.                                                                                                               |                                                                                                                                       |
+| `x_moov_version`                                                                                                                      | [Optional[components.Versions]](../../models/components/versions.md)                                                                  | :heavy_minus_sign:                                                                                                                    | Specify an API version.                                                                                                               |                                                                                                                                       |
 | `account_i_ds`                                                                                                                        | List[*str*]                                                                                                                           | :heavy_minus_sign:                                                                                                                    | Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination. |                                                                                                                                       |
-| `status`                                                                                                                              | [Optional[models.TransferStatus]](../../models/transferstatus.md)                                                                     | :heavy_minus_sign:                                                                                                                    | Optional parameter for filtering transfers by status.                                                                                 |                                                                                                                                       |
+| `status`                                                                                                                              | [Optional[components.TransferStatus]](../../models/components/transferstatus.md)                                                      | :heavy_minus_sign:                                                                                                                    | Optional parameter for filtering transfers by status.                                                                                 |                                                                                                                                       |
 | `start_date_time`                                                                                                                     | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                                                  | :heavy_minus_sign:                                                                                                                    | Optional date-time which inclusively filters all transfers created after this date-time.                                              |                                                                                                                                       |
 | `end_date_time`                                                                                                                       | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                                                  | :heavy_minus_sign:                                                                                                                    | Optional date-time which exclusively filters all transfers created before this date-time.                                             |                                                                                                                                       |
 | `group_id`                                                                                                                            | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Optional ID to filter for transfers in the same group.                                                                                |                                                                                                                                       |
@@ -193,13 +193,13 @@ with Moov() as moov:
 
 ### Response
 
-**[List[models.Transfer]](../../models/.md)**
+**[List[components.Transfer]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_transfer
 
@@ -214,13 +214,13 @@ scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.transfers.get_transfer(security=moov.GetTransferSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.transfers.get_transfer(security=operations.GetTransferSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -233,23 +233,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `security`                                                          | [models.GetTransferSecurity](../../models/gettransfersecurity.md)   | :heavy_check_mark:                                                  | N/A                                                                 |
-| `transfer_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Identifier for the transfer.                                        |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `security`                                                                       | [operations.GetTransferSecurity](../../models/operations/gettransfersecurity.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `transfer_id`                                                                    | *str*                                                                            | :heavy_check_mark:                                                               | Identifier for the transfer.                                                     |
+| `account_id`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | N/A                                                                              |
+| `x_moov_version`                                                                 | [Optional[components.Versions]](../../models/components/versions.md)             | :heavy_minus_sign:                                                               | Specify an API version.                                                          |
+| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |
 
 ### Response
 
-**[models.Transfer](../../models/transfer.md)**
+**[components.Transfer](../../models/components/transfer.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## patch_transfer
 
@@ -263,13 +263,13 @@ scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.transfers.patch_transfer(security=moov.PatchTransferSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.transfers.patch_transfer(security=operations.PatchTransferSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -282,23 +282,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `security`                                                            | [models.PatchTransferSecurity](../../models/patchtransfersecurity.md) | :heavy_check_mark:                                                    | N/A                                                                   |
-| `transfer_id`                                                         | *str*                                                                 | :heavy_check_mark:                                                    | Identifier for the transfer.                                          |
-| `account_id`                                                          | *str*                                                                 | :heavy_check_mark:                                                    | N/A                                                                   |
-| `x_moov_version`                                                      | [Optional[models.Versions]](../../models/versions.md)                 | :heavy_minus_sign:                                                    | Specify an API version.                                               |
-| `retries`                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)      | :heavy_minus_sign:                                                    | Configuration to override the default retry behavior of the client.   |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `security`                                                                           | [operations.PatchTransferSecurity](../../models/operations/patchtransfersecurity.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `transfer_id`                                                                        | *str*                                                                                | :heavy_check_mark:                                                                   | Identifier for the transfer.                                                         |
+| `account_id`                                                                         | *str*                                                                                | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `x_moov_version`                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                 | :heavy_minus_sign:                                                                   | Specify an API version.                                                              |
+| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
 
 ### Response
 
-**[models.Transfer](../../models/transfer.md)**
+**[components.Transfer](../../models/components/transfer.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## refund_transfer
 
@@ -313,13 +313,13 @@ scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.transfers.refund_transfer(security=moov.RefundTransferSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.transfers.refund_transfer(security=operations.RefundTransferSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -334,27 +334,27 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                                                                                                               | Type                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                             | Example                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                              | [models.RefundTransferSecurity](../../models/refundtransfersecurity.md)                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                         |
+| `security`                                                                                                                                                                                                                                              | [operations.RefundTransferSecurity](../../models/operations/refundtransfersecurity.md)                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                         |
 | `x_idempotency_key`                                                                                                                                                                                                                                     | *str*                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                      | Prevents duplicate refunds from being created.                                                                                                                                                                                                          |                                                                                                                                                                                                                                                         |
 | `account_id`                                                                                                                                                                                                                                            | *str*                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                      | The merchant's Moov account ID.                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                         |
 | `transfer_id`                                                                                                                                                                                                                                           | *str*                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                      | Identifier for the transfer.                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                         |
-| `x_moov_version`                                                                                                                                                                                                                                        | [Optional[models.Versions]](../../models/versions.md)                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                      | Specify an API version.                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                         |
-| `x_wait_for`                                                                                                                                                                                                                                            | [Optional[models.TransferWaitFor]](../../models/transferwaitfor.md)                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                      | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                         |
+| `x_moov_version`                                                                                                                                                                                                                                        | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                      | Specify an API version.                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                         |
+| `x_wait_for`                                                                                                                                                                                                                                            | [Optional[components.TransferWaitFor]](../../models/components/transferwaitfor.md)                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                      | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). |                                                                                                                                                                                                                                                         |
 | `amount`                                                                                                                                                                                                                                                | *Optional[int]*                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                      | Amount to refund in cents. If null, the original transfer's full amount will be refunded.                                                                                                                                                               | 1000                                                                                                                                                                                                                                                    |
 | `retries`                                                                                                                                                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                      | Configuration to override the default retry behavior of the client.                                                                                                                                                                                     |                                                                                                                                                                                                                                                         |
 
 ### Response
 
-**[models.RefundTransferResponse](../../models/refundtransferresponse.md)**
+**[operations.RefundTransferResponse](../../models/operations/refundtransferresponse.md)**
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.GenericError             | 400                             | application/json                |
-| models.CardAcquiringRefundError | 409                             | application/json                |
-| models.RefundValidationError    | 422                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.GenericError          | 400                          | application/json             |
+| errors.CardAcquiringRefund   | 409                          | application/json             |
+| errors.RefundValidationError | 422                          | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
 ## list_refunds
 
@@ -366,13 +366,13 @@ scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.transfers.list_refunds(security=moov.ListRefundsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.transfers.list_refunds(security=operations.ListRefundsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -385,23 +385,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `security`                                                          | [models.ListRefundsSecurity](../../models/listrefundssecurity.md)   | :heavy_check_mark:                                                  | N/A                                                                 |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `transfer_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Identifier for the transfer.                                        |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `security`                                                                       | [operations.ListRefundsSecurity](../../models/operations/listrefundssecurity.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `account_id`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | N/A                                                                              |
+| `transfer_id`                                                                    | *str*                                                                            | :heavy_check_mark:                                                               | Identifier for the transfer.                                                     |
+| `x_moov_version`                                                                 | [Optional[components.Versions]](../../models/components/versions.md)             | :heavy_minus_sign:                                                               | Specify an API version.                                                          |
+| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |
 
 ### Response
 
-**[List[models.CardAcquiringRefund]](../../models/.md)**
+**[List[components.CardAcquiringRefund]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_refund
 
@@ -413,13 +413,13 @@ scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.transfers.get_refund(security=moov.GetRefundSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.transfers.get_refund(security=operations.GetRefundSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -432,24 +432,24 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `security`                                                          | [models.GetRefundSecurity](../../models/getrefundsecurity.md)       | :heavy_check_mark:                                                  | N/A                                                                 |
-| `transfer_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Identifier for the transfer.                                        |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `refund_id`                                                         | *str*                                                               | :heavy_check_mark:                                                  | Identifier for the refund.                                          |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `security`                                                                   | [operations.GetRefundSecurity](../../models/operations/getrefundsecurity.md) | :heavy_check_mark:                                                           | N/A                                                                          |
+| `transfer_id`                                                                | *str*                                                                        | :heavy_check_mark:                                                           | Identifier for the transfer.                                                 |
+| `account_id`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `refund_id`                                                                  | *str*                                                                        | :heavy_check_mark:                                                           | Identifier for the refund.                                                   |
+| `x_moov_version`                                                             | [Optional[components.Versions]](../../models/components/versions.md)         | :heavy_minus_sign:                                                           | Specify an API version.                                                      |
+| `retries`                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)             | :heavy_minus_sign:                                                           | Configuration to override the default retry behavior of the client.          |
 
 ### Response
 
-**[models.CardAcquiringRefund](../../models/cardacquiringrefund.md)**
+**[components.CardAcquiringRefund](../../models/components/cardacquiringrefund.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## reverse_transfer
 
@@ -463,13 +463,13 @@ to specify the `/accounts/{accountID}/transfers.write` scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.transfers.reverse_transfer(security=moov.ReverseTransferSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.transfers.reverse_transfer(security=operations.ReverseTransferSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -484,25 +484,25 @@ with Moov() as moov:
 
 | Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                | Example                                                                                                    |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                 | [models.ReverseTransferSecurity](../../models/reversetransfersecurity.md)                                  | :heavy_check_mark:                                                                                         | N/A                                                                                                        |                                                                                                            |
+| `security`                                                                                                 | [operations.ReverseTransferSecurity](../../models/operations/reversetransfersecurity.md)                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |                                                                                                            |
 | `x_idempotency_key`                                                                                        | *str*                                                                                                      | :heavy_check_mark:                                                                                         | Prevents duplicate reversals from being created.                                                           |                                                                                                            |
 | `account_id`                                                                                               | *str*                                                                                                      | :heavy_check_mark:                                                                                         | The Moov account ID.                                                                                       |                                                                                                            |
 | `transfer_id`                                                                                              | *str*                                                                                                      | :heavy_check_mark:                                                                                         | The transfer ID to reverse.                                                                                |                                                                                                            |
 | `amount`                                                                                                   | *int*                                                                                                      | :heavy_check_mark:                                                                                         | Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation. | 1000                                                                                                       |
-| `x_moov_version`                                                                                           | [Optional[models.Versions]](../../models/versions.md)                                                      | :heavy_minus_sign:                                                                                         | Specify an API version.                                                                                    |                                                                                                            |
+| `x_moov_version`                                                                                           | [Optional[components.Versions]](../../models/components/versions.md)                                       | :heavy_minus_sign:                                                                                         | Specify an API version.                                                                                    |                                                                                                            |
 | `retries`                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                           | :heavy_minus_sign:                                                                                         | Configuration to override the default retry behavior of the client.                                        |                                                                                                            |
 
 ### Response
 
-**[models.Reversal](../../models/reversal.md)**
+**[components.Reversal](../../models/components/reversal.md)**
 
 ### Errors
 
 | Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
-| models.GenericError            | 400, 409                       | application/json               |
-| models.ReversalValidationError | 422                            | application/json               |
-| models.APIError                | 4XX, 5XX                       | \*/\*                          |
+| errors.GenericError            | 400, 409                       | application/json               |
+| errors.ReversalValidationError | 422                            | application/json               |
+| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
 ## create_transfer_options
 
@@ -518,13 +518,13 @@ accountID on the [Business details](https://dashboard.moov.io/settings/business)
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.transfers.create_transfer_options(security=moov.CreateTransferOptionsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.transfers.create_transfer_options(security=operations.CreateTransferOptionsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -537,20 +537,20 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `security`                                                                            | [models.CreateTransferOptionsSecurity](../../models/createtransferoptionssecurity.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `x_moov_version`                                                                      | [Optional[models.Versions]](../../models/versions.md)                                 | :heavy_minus_sign:                                                                    | Specify an API version.                                                               |
-| `retries`                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                      | :heavy_minus_sign:                                                                    | Configuration to override the default retry behavior of the client.                   |
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `security`                                                                                           | [operations.CreateTransferOptionsSecurity](../../models/operations/createtransferoptionssecurity.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `x_moov_version`                                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                                 | :heavy_minus_sign:                                                                                   | Specify an API version.                                                                              |
+| `retries`                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                     | :heavy_minus_sign:                                                                                   | Configuration to override the default retry behavior of the client.                                  |
 
 ### Response
 
-**[models.TransferOptions](../../models/transferoptions.md)**
+**[components.TransferOptions](../../models/components/transferoptions.md)**
 
 ### Errors
 
 | Error Type                            | Status Code                           | Content Type                          |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| models.GenericError                   | 400                                   | application/json                      |
-| models.TransferOptionsValidationError | 422                                   | application/json                      |
-| models.APIError                       | 4XX, 5XX                              | \*/\*                                 |
+| errors.GenericError                   | 400                                   | application/json                      |
+| errors.TransferOptionsValidationError | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |

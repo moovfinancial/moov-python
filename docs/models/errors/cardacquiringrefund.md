@@ -1,0 +1,15 @@
+# CardAcquiringRefund
+
+Details of a card refund.
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `refund_id`                                                                            | *str*                                                                                  | :heavy_check_mark:                                                                     | Identifier for the refund.                                                             |
+| `created_on`                                                                           | [date](https://docs.python.org/3/library/datetime.html#date-objects)                   | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `updated_on`                                                                           | [date](https://docs.python.org/3/library/datetime.html#date-objects)                   | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `status`                                                                               | [components.RefundStatus](../../models/components/refundstatus.md)                     | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `amount`                                                                               | [components.Amount](../../models/components/amount.md)                                 | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `card_details`                                                                         | [Optional[components.RefundCardDetails]](../../models/components/refundcarddetails.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |

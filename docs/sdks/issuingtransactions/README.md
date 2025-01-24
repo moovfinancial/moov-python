@@ -36,13 +36,13 @@ the `/accounts/{accountID}/issued-cards.read` scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.issuing_transactions.list_issued_card_authorizations(security=moov.ListIssuedCardAuthorizationsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.issuing_transactions.list_issued_card_authorizations(security=operations.ListIssuedCardAuthorizationsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -55,28 +55,28 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         | Example                                                                                             |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `security`                                                                                          | [models.ListIssuedCardAuthorizationsSecurity](../../models/listissuedcardauthorizationssecurity.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |                                                                                                     |
-| `account_id`                                                                                        | *str*                                                                                               | :heavy_check_mark:                                                                                  | The Moov business account for which cards have been issued.                                         |                                                                                                     |
-| `x_moov_version`                                                                                    | [Optional[models.Versions]](../../models/versions.md)                                               | :heavy_minus_sign:                                                                                  | Specify an API version.                                                                             |                                                                                                     |
-| `skip`                                                                                              | *Optional[int]*                                                                                     | :heavy_minus_sign:                                                                                  | N/A                                                                                                 | 60                                                                                                  |
-| `count`                                                                                             | *Optional[int]*                                                                                     | :heavy_minus_sign:                                                                                  | N/A                                                                                                 | 20                                                                                                  |
-| `issued_card_id`                                                                                    | *Optional[str]*                                                                                     | :heavy_minus_sign:                                                                                  | Optional ID of the issued card to filter results.                                                   |                                                                                                     |
-| `start_date_time`                                                                                   | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                | :heavy_minus_sign:                                                                                  | Optional date-time which inclusively filters all authorizations created after this date-time.       |                                                                                                     |
-| `end_date_time`                                                                                     | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                | :heavy_minus_sign:                                                                                  | Optional date-time which exclusively filters all authorizations created before this date-time.      |                                                                                                     |
-| `statuses`                                                                                          | List[[models.IssuingAuthorizationStatus](../../models/issuingauthorizationstatus.md)]               | :heavy_minus_sign:                                                                                  | Optional, comma-separated statuses of the authorization to filter results.                          |                                                                                                     |
-| `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |                                                                                                     |
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        | Example                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                         | [operations.ListIssuedCardAuthorizationsSecurity](../../models/operations/listissuedcardauthorizationssecurity.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |                                                                                                                    |
+| `account_id`                                                                                                       | *str*                                                                                                              | :heavy_check_mark:                                                                                                 | The Moov business account for which cards have been issued.                                                        |                                                                                                                    |
+| `x_moov_version`                                                                                                   | [Optional[components.Versions]](../../models/components/versions.md)                                               | :heavy_minus_sign:                                                                                                 | Specify an API version.                                                                                            |                                                                                                                    |
+| `skip`                                                                                                             | *Optional[int]*                                                                                                    | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                | 60                                                                                                                 |
+| `count`                                                                                                            | *Optional[int]*                                                                                                    | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                | 20                                                                                                                 |
+| `issued_card_id`                                                                                                   | *Optional[str]*                                                                                                    | :heavy_minus_sign:                                                                                                 | Optional ID of the issued card to filter results.                                                                  |                                                                                                                    |
+| `start_date_time`                                                                                                  | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                               | :heavy_minus_sign:                                                                                                 | Optional date-time which inclusively filters all authorizations created after this date-time.                      |                                                                                                                    |
+| `end_date_time`                                                                                                    | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                               | :heavy_minus_sign:                                                                                                 | Optional date-time which exclusively filters all authorizations created before this date-time.                     |                                                                                                                    |
+| `statuses`                                                                                                         | List[[components.IssuingAuthorizationStatus](../../models/components/issuingauthorizationstatus.md)]               | :heavy_minus_sign:                                                                                                 | Optional, comma-separated statuses of the authorization to filter results.                                         |                                                                                                                    |
+| `retries`                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                   | :heavy_minus_sign:                                                                                                 | Configuration to override the default retry behavior of the client.                                                |                                                                                                                    |
 
 ### Response
 
-**[List[models.IssuedCardAuthorization]](../../models/.md)**
+**[List[components.IssuedCardAuthorization]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_issued_card_authorization
 
@@ -88,13 +88,13 @@ the `/accounts/{accountID}/issued-cards.read` scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.issuing_transactions.get_issued_card_authorization(security=moov.GetIssuedCardAuthorizationSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.issuing_transactions.get_issued_card_authorization(security=operations.GetIssuedCardAuthorizationSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -107,23 +107,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `security`                                                                                      | [models.GetIssuedCardAuthorizationSecurity](../../models/getissuedcardauthorizationsecurity.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |
-| `account_id`                                                                                    | *str*                                                                                           | :heavy_check_mark:                                                                              | The Moov business account for which cards have been issued.                                     |
-| `authorization_id`                                                                              | *str*                                                                                           | :heavy_check_mark:                                                                              | N/A                                                                                             |
-| `x_moov_version`                                                                                | [Optional[models.Versions]](../../models/versions.md)                                           | :heavy_minus_sign:                                                                              | Specify an API version.                                                                         |
-| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                     | [operations.GetIssuedCardAuthorizationSecurity](../../models/operations/getissuedcardauthorizationsecurity.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `account_id`                                                                                                   | *str*                                                                                                          | :heavy_check_mark:                                                                                             | The Moov business account for which cards have been issued.                                                    |
+| `authorization_id`                                                                                             | *str*                                                                                                          | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `x_moov_version`                                                                                               | [Optional[components.Versions]](../../models/components/versions.md)                                           | :heavy_minus_sign:                                                                                             | Specify an API version.                                                                                        |
+| `retries`                                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                               | :heavy_minus_sign:                                                                                             | Configuration to override the default retry behavior of the client.                                            |
 
 ### Response
 
-**[models.IssuedCardAuthorization](../../models/issuedcardauthorization.md)**
+**[components.IssuedCardAuthorization](../../models/components/issuedcardauthorization.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list_issued_card_authorization_events
 
@@ -135,13 +135,13 @@ the `/accounts/{accountID}/issued-cards.read` scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.issuing_transactions.list_issued_card_authorization_events(security=moov.ListIssuedCardAuthorizationEventsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.issuing_transactions.list_issued_card_authorization_events(security=operations.ListIssuedCardAuthorizationEventsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -154,25 +154,25 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   | Example                                                                                                       |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                    | [models.ListIssuedCardAuthorizationEventsSecurity](../../models/listissuedcardauthorizationeventssecurity.md) | :heavy_check_mark:                                                                                            | N/A                                                                                                           |                                                                                                               |
-| `account_id`                                                                                                  | *str*                                                                                                         | :heavy_check_mark:                                                                                            | The Moov business account for which cards have been issued.                                                   |                                                                                                               |
-| `authorization_id`                                                                                            | *str*                                                                                                         | :heavy_check_mark:                                                                                            | N/A                                                                                                           |                                                                                                               |
-| `x_moov_version`                                                                                              | [Optional[models.Versions]](../../models/versions.md)                                                         | :heavy_minus_sign:                                                                                            | Specify an API version.                                                                                       |                                                                                                               |
-| `skip`                                                                                                        | *Optional[int]*                                                                                               | :heavy_minus_sign:                                                                                            | N/A                                                                                                           | 60                                                                                                            |
-| `count`                                                                                                       | *Optional[int]*                                                                                               | :heavy_minus_sign:                                                                                            | N/A                                                                                                           | 20                                                                                                            |
-| `retries`                                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                              | :heavy_minus_sign:                                                                                            | Configuration to override the default retry behavior of the client.                                           |                                                                                                               |
+| Parameter                                                                                                                    | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  | Example                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                                   | [operations.ListIssuedCardAuthorizationEventsSecurity](../../models/operations/listissuedcardauthorizationeventssecurity.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |                                                                                                                              |
+| `account_id`                                                                                                                 | *str*                                                                                                                        | :heavy_check_mark:                                                                                                           | The Moov business account for which cards have been issued.                                                                  |                                                                                                                              |
+| `authorization_id`                                                                                                           | *str*                                                                                                                        | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |                                                                                                                              |
+| `x_moov_version`                                                                                                             | [Optional[components.Versions]](../../models/components/versions.md)                                                         | :heavy_minus_sign:                                                                                                           | Specify an API version.                                                                                                      |                                                                                                                              |
+| `skip`                                                                                                                       | *Optional[int]*                                                                                                              | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          | 60                                                                                                                           |
+| `count`                                                                                                                      | *Optional[int]*                                                                                                              | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          | 20                                                                                                                           |
+| `retries`                                                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                             | :heavy_minus_sign:                                                                                                           | Configuration to override the default retry behavior of the client.                                                          |                                                                                                                              |
 
 ### Response
 
-**[List[models.IssuedCardAuthorizationEvent]](../../models/.md)**
+**[List[components.IssuedCardAuthorizationEvent]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list_issued_card_transactions
 
@@ -184,13 +184,13 @@ the `/accounts/{accountID}/issued-cards.read` scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.issuing_transactions.list_issued_card_transactions(security=moov.ListIssuedCardTransactionsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.issuing_transactions.list_issued_card_transactions(security=operations.ListIssuedCardTransactionsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -203,27 +203,27 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [models.ListIssuedCardTransactionsSecurity](../../models/listissuedcardtransactionssecurity.md)   | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
-| `account_id`                                                                                      | *str*                                                                                             | :heavy_check_mark:                                                                                | The Moov business account for which cards have been issued.                                       |                                                                                                   |
-| `x_moov_version`                                                                                  | [Optional[models.Versions]](../../models/versions.md)                                             | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |                                                                                                   |
-| `skip`                                                                                            | *Optional[int]*                                                                                   | :heavy_minus_sign:                                                                                | N/A                                                                                               | 60                                                                                                |
-| `count`                                                                                           | *Optional[int]*                                                                                   | :heavy_minus_sign:                                                                                | N/A                                                                                               | 20                                                                                                |
-| `issued_card_id`                                                                                  | *Optional[str]*                                                                                   | :heavy_minus_sign:                                                                                | Optional ID of the issued card to filter results.                                                 |                                                                                                   |
-| `start_date_time`                                                                                 | [date](https://docs.python.org/3/library/datetime.html#date-objects)                              | :heavy_minus_sign:                                                                                | Optional date-time which inclusively filters all card transactions created after this date-time.  |                                                                                                   |
-| `end_date_time`                                                                                   | [date](https://docs.python.org/3/library/datetime.html#date-objects)                              | :heavy_minus_sign:                                                                                | Optional date-time which exclusively filters all card transactions created before this date-time. |                                                                                                   |
-| `retries`                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                  | :heavy_minus_sign:                                                                                | Configuration to override the default retry behavior of the client.                               |                                                                                                   |
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    | Example                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                     | [operations.ListIssuedCardTransactionsSecurity](../../models/operations/listissuedcardtransactionssecurity.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |                                                                                                                |
+| `account_id`                                                                                                   | *str*                                                                                                          | :heavy_check_mark:                                                                                             | The Moov business account for which cards have been issued.                                                    |                                                                                                                |
+| `x_moov_version`                                                                                               | [Optional[components.Versions]](../../models/components/versions.md)                                           | :heavy_minus_sign:                                                                                             | Specify an API version.                                                                                        |                                                                                                                |
+| `skip`                                                                                                         | *Optional[int]*                                                                                                | :heavy_minus_sign:                                                                                             | N/A                                                                                                            | 60                                                                                                             |
+| `count`                                                                                                        | *Optional[int]*                                                                                                | :heavy_minus_sign:                                                                                             | N/A                                                                                                            | 20                                                                                                             |
+| `issued_card_id`                                                                                               | *Optional[str]*                                                                                                | :heavy_minus_sign:                                                                                             | Optional ID of the issued card to filter results.                                                              |                                                                                                                |
+| `start_date_time`                                                                                              | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                           | :heavy_minus_sign:                                                                                             | Optional date-time which inclusively filters all card transactions created after this date-time.               |                                                                                                                |
+| `end_date_time`                                                                                                | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                           | :heavy_minus_sign:                                                                                             | Optional date-time which exclusively filters all card transactions created before this date-time.              |                                                                                                                |
+| `retries`                                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                               | :heavy_minus_sign:                                                                                             | Configuration to override the default retry behavior of the client.                                            |                                                                                                                |
 
 ### Response
 
-**[List[models.IssuedCardTransaction]](../../models/.md)**
+**[List[components.IssuedCardTransaction]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_issued_card_transaction
 
@@ -235,13 +235,13 @@ the `/accounts/{accountID}/issued-cards.read` scope.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.issuing_transactions.get_issued_card_transaction(security=moov.GetIssuedCardTransactionSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.issuing_transactions.get_issued_card_transaction(security=operations.GetIssuedCardTransactionSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -254,20 +254,20 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `security`                                                                                  | [models.GetIssuedCardTransactionSecurity](../../models/getissuedcardtransactionsecurity.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |
-| `account_id`                                                                                | *str*                                                                                       | :heavy_check_mark:                                                                          | The Moov business account for which cards have been issued.                                 |
-| `card_transaction_id`                                                                       | *str*                                                                                       | :heavy_check_mark:                                                                          | N/A                                                                                         |
-| `x_moov_version`                                                                            | [Optional[models.Versions]](../../models/versions.md)                                       | :heavy_minus_sign:                                                                          | Specify an API version.                                                                     |
-| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                 | [operations.GetIssuedCardTransactionSecurity](../../models/operations/getissuedcardtransactionsecurity.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `account_id`                                                                                               | *str*                                                                                                      | :heavy_check_mark:                                                                                         | The Moov business account for which cards have been issued.                                                |
+| `card_transaction_id`                                                                                      | *str*                                                                                                      | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `x_moov_version`                                                                                           | [Optional[components.Versions]](../../models/components/versions.md)                                       | :heavy_minus_sign:                                                                                         | Specify an API version.                                                                                    |
+| `retries`                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                           | :heavy_minus_sign:                                                                                         | Configuration to override the default retry behavior of the client.                                        |
 
 ### Response
 
-**[models.IssuedCardTransaction](../../models/issuedcardtransaction.md)**
+**[components.IssuedCardTransaction](../../models/components/issuedcardtransaction.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

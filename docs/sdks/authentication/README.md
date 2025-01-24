@@ -19,11 +19,11 @@ Allows clients to notify the authorization server that a previously obtained ref
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components
 
 with Moov(
-    security=moov.Security(
+    security=components.Security(
         username="",
         password="",
     ),
@@ -40,8 +40,8 @@ with Moov(
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `token`                                                                                | *str*                                                                                  | :heavy_check_mark:                                                                     | The access or refresh token to revoke.                                                 |                                                                                        |
-| `x_moov_version`                                                                       | [Optional[models.Versions]](../../models/versions.md)                                  | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |                                                                                        |
-| `token_type_hint`                                                                      | [Optional[models.TokenTypeHint]](../../models/tokentypehint.md)                        | :heavy_minus_sign:                                                                     | The type of token being revoked.                                                       |                                                                                        |
+| `x_moov_version`                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                   | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |                                                                                        |
+| `token_type_hint`                                                                      | [Optional[components.TokenTypeHint]](../../models/components/tokentypehint.md)         | :heavy_minus_sign:                                                                     | The type of token being revoked.                                                       |                                                                                        |
 | `client_id`                                                                            | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.     | 5clTR_MdVrrkgxw2                                                                       |
 | `client_secret`                                                                        | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | Client secret can be provided here in the body, or as the Password in HTTP Basic Auth. | dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-                                                       |
 | `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |                                                                                        |
@@ -50,9 +50,9 @@ with Moov(
 
 | Error Type                     | Status Code                    | Content Type                   |
 | ------------------------------ | ------------------------------ | ------------------------------ |
-| models.GenericError            | 400                            | application/json               |
-| models.RevokeTokenRequestError | 422                            | application/json               |
-| models.APIError                | 4XX, 5XX                       | \*/\*                          |
+| errors.GenericError            | 400                            | application/json               |
+| errors.RevokeTokenRequestError | 422                            | application/json               |
+| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
 ## create_auth_token
 
@@ -61,17 +61,17 @@ Create or refresh an access token.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components
 
 with Moov(
-    security=moov.Security(
+    security=components.Security(
         username="",
         password="",
     ),
 ) as moov:
 
-    res = moov.authentication.create_auth_token(grant_type=moov.GrantType.REFRESH_TOKEN, client_id="5clTR_MdVrrkgxw2", client_secret="dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-", scope="/accounts.read /accounts.write", refresh_token="eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a...")
+    res = moov.authentication.create_auth_token(grant_type=components.GrantType.REFRESH_TOKEN, client_id="5clTR_MdVrrkgxw2", client_secret="dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-", scope="/accounts.read /accounts.write", refresh_token="eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a...")
 
     # Handle response
     print(res)
@@ -82,8 +82,8 @@ with Moov(
 
 | Parameter                                                                                                                                                                                                                 | Type                                                                                                                                                                                                                      | Required                                                                                                                                                                                                                  | Description                                                                                                                                                                                                               | Example                                                                                                                                                                                                                   |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `grant_type`                                                                                                                                                                                                              | [models.GrantType](../../models/granttype.md)                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                        | The type of grant being requested.<br/><br/>  - `client_credentials`: A grant type used by clients to obtain an access token<br/>  - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token |                                                                                                                                                                                                                           |
-| `x_moov_version`                                                                                                                                                                                                          | [Optional[models.Versions]](../../models/versions.md)                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                        | Specify an API version.                                                                                                                                                                                                   |                                                                                                                                                                                                                           |
+| `grant_type`                                                                                                                                                                                                              | [components.GrantType](../../models/components/granttype.md)                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                        | The type of grant being requested.<br/><br/>  - `client_credentials`: A grant type used by clients to obtain an access token<br/>  - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token |                                                                                                                                                                                                                           |
+| `x_moov_version`                                                                                                                                                                                                          | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                        | Specify an API version.                                                                                                                                                                                                   |                                                                                                                                                                                                                           |
 | `client_id`                                                                                                                                                                                                               | *Optional[str]*                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                        | Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.                                                                                                                                        | 5clTR_MdVrrkgxw2                                                                                                                                                                                                          |
 | `client_secret`                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                        | Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.                                                                                                                                    | dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-                                                                                                                                                                                          |
 | `scope`                                                                                                                                                                                                                   | *Optional[str]*                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                        | A space delimited list of scopes. Required when `grant_type` is `client_credentials`.                                                                                                                                     | /accounts.read /accounts.write                                                                                                                                                                                            |
@@ -92,12 +92,12 @@ with Moov(
 
 ### Response
 
-**[models.AuthToken](../../models/authtoken.md)**
+**[components.AuthToken](../../models/components/authtoken.md)**
 
 ### Errors
 
 | Error Type                   | Status Code                  | Content Type                 |
 | ---------------------------- | ---------------------------- | ---------------------------- |
-| models.GenericError          | 400                          | application/json             |
-| models.AuthTokenRequestError | 422                          | application/json             |
-| models.APIError              | 4XX, 5XX                     | \*/\*                        |
+| errors.GenericError          | 400                          | application/json             |
+| errors.AuthTokenRequestError | 422                          | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |

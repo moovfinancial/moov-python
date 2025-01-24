@@ -1,0 +1,9 @@
+# CreateIndividualErrorGovernmentID
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `ssn`                                                                                                  | [Optional[components.CreateIndividualErrorSsn]](../../models/components/createindividualerrorssn.md)   | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `itin`                                                                                                 | [Optional[components.CreateIndividualErrorItin]](../../models/components/createindividualerroritin.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

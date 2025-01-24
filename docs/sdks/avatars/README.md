@@ -18,13 +18,13 @@ To use this endpoint from the browser, you'll need to specify the `/profile-enri
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.avatars.get_avatar(security=moov.GetAvatarSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.avatars.get_avatar(security=operations.GetAvatarSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -39,17 +39,17 @@ with Moov() as moov:
 
 | Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
 | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                               | [models.GetAvatarSecurity](../../models/getavatarsecurity.md)                                            | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+| `security`                                                                                               | [operations.GetAvatarSecurity](../../models/operations/getavatarsecurity.md)                             | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `unique_id`                                                                                              | *str*                                                                                                    | :heavy_check_mark:                                                                                       | Any unique ID associated with an account such as accountID, representativeID, routing number, or userID. |
-| `x_moov_version`                                                                                         | [Optional[models.Versions]](../../models/versions.md)                                                    | :heavy_minus_sign:                                                                                       | Specify an API version.                                                                                  |
+| `x_moov_version`                                                                                         | [Optional[components.Versions]](../../models/components/versions.md)                                     | :heavy_minus_sign:                                                                                       | Specify an API version.                                                                                  |
 | `retries`                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                         | :heavy_minus_sign:                                                                                       | Configuration to override the default retry behavior of the client.                                      |
 
 ### Response
 
-**[models.GetAvatarResponse](../../models/getavatarresponse.md)**
+**[operations.GetAvatarResponse](../../models/operations/getavatarresponse.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

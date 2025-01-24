@@ -1,0 +1,10 @@
+# PaymentDetailsError
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `allowed_methods`                                                                                  | *Optional[str]*                                                                                    | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `card_details`                                                                                     | [Optional[components.CardPaymentDetailsError]](../../models/components/cardpaymentdetailserror.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `ach_details`                                                                                      | [Optional[components.ACHPaymentDetailsError]](../../models/components/achpaymentdetailserror.md)   | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

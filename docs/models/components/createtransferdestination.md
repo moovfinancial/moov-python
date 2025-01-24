@@ -1,0 +1,12 @@
+# CreateTransferDestination
+
+The final stage of a transfer and the ultimate recipient of the funds.
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `payment_method_id`                                                                                            | *str*                                                                                                          | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `card_details`                                                                                                 | [Optional[components.CreateTransferDestinationCard]](../../models/components/createtransferdestinationcard.md) | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `ach_details`                                                                                                  | [Optional[components.CreateTransferDestinationACH]](../../models/components/createtransferdestinationach.md)   | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |

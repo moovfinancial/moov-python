@@ -1,0 +1,9 @@
+# GetAvatarRequest
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `unique_id`                                                                                              | *str*                                                                                                    | :heavy_check_mark:                                                                                       | Any unique ID associated with an account such as accountID, representativeID, routing number, or userID. |
+| `x_moov_version`                                                                                         | [Optional[components.Versions]](../../models/components/versions.md)                                     | :heavy_minus_sign:                                                                                       | Specify an API version.                                                                                  |

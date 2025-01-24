@@ -1,9 +1,9 @@
-# moov
+# moovio_sdk
 
-Developer-friendly & type-safe Python SDK specifically catered to leverage *moov* API.
+Developer-friendly & type-safe Python SDK specifically catered to leverage *moovio_sdk* API.
 
 <div align="left">
-    <a href="https://www.speakeasy.com/?utm_source=moov&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
+    <a href="https://www.speakeasy.com/?utm_source=moovio-sdk&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
     <a href="https://opensource.org/licenses/MIT">
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
@@ -26,7 +26,7 @@ works at a high level, read our [concepts](https://docs.moov.io/guides/get-start
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [moov](#moov)
+* [moovio_sdk](#mooviosdk)
   * [SDK Installation](#sdk-installation)
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
@@ -37,6 +37,7 @@ works at a high level, read our [concepts](https://docs.moov.io/guides/get-start
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
+  * [Resource Management](#resource-management)
   * [Debugging](#debugging)
 * [Development](#development)
   * [Maturity](#maturity)
@@ -50,6 +51,11 @@ works at a high level, read our [concepts](https://docs.moov.io/guides/get-start
 > [!TIP]
 > To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
 
+
+> [!NOTE]
+> **Python version upgrade policy**
+>
+> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
 The SDK can be installed with either *pip* or *poetry* package managers.
 
@@ -88,17 +94,17 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 ```python
 # Synchronous Example
 import dateutil.parser
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.accounts.create_account(security=moov.CreateAccountSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.accounts.create_account(security=operations.CreateAccountSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), account_type=moov.AccountType.BUSINESS, profile=moov.CreateProfile(
+    ), account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
         business={
             "legal_business_name": "Classbooker, LLC",
         },
@@ -142,18 +148,18 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 async def main():
     async with Moov() as moov:
 
-        res = await moov.accounts.create_account_async(security=moov.CreateAccountSecurity(
-            basic_auth=moov.SchemeBasicAuth(
+        res = await moov.accounts.create_account_async(security=operations.CreateAccountSecurity(
+            basic_auth=components.SchemeBasicAuth(
                 username="",
                 password="",
             ),
-        ), account_type=moov.AccountType.BUSINESS, profile=moov.CreateProfile(
+        ), account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
             business={
                 "legal_business_name": "Classbooker, LLC",
             },
@@ -198,17 +204,17 @@ asyncio.run(main())
 
 This SDK supports the following security scheme globally:
 
-| Name                      | Type | Scheme     |
-| ------------------------- | ---- | ---------- |
-| `username`<br/>`password` | http | HTTP Basic |
+| Name                      | Type | Scheme     | Environment Variable                |
+| ------------------------- | ---- | ---------- | ----------------------------------- |
+| `username`<br/>`password` | http | HTTP Basic | `MOOV_USERNAME`<br/>`MOOV_PASSWORD` |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. For example:
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components
 
 with Moov(
-    security=moov.Security(
+    security=components.Security(
         username="",
         password="",
     ),
@@ -226,17 +232,17 @@ with Moov(
 Some operations in this SDK require the security scheme to be specified at the request level. For example:
 ```python
 import dateutil.parser
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.accounts.create_account(security=moov.CreateAccountSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.accounts.create_account(security=operations.CreateAccountSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), account_type=moov.AccountType.BUSINESS, profile=moov.CreateProfile(
+    ), account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
         business={
             "legal_business_name": "Classbooker, LLC",
         },
@@ -923,15 +929,15 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{yo
 [token](https://docs.moov.io/api/authentication/access-tokens/). The accountID included must be your accountID. You can find your 
 accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
 
-### [underwriting](docs/sdks/underwritingsdk/README.md)
+### [underwriting](docs/sdks/underwriting/README.md)
 
-* [get_underwriting](docs/sdks/underwritingsdk/README.md#get_underwriting) - Retrieve underwriting associated with a given Moov account. 
+* [get_underwriting](docs/sdks/underwriting/README.md#get_underwriting) - Retrieve underwriting associated with a given Moov account. 
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more. 
 
 To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
 to specify the `/accounts/{accountID}/profile.read` scope.
-* [update_underwriting](docs/sdks/underwritingsdk/README.md#update_underwriting) - Update the account's underwriting by passing new values for one or more of the fields. 
+* [update_underwriting](docs/sdks/underwriting/README.md#update_underwriting) - Update the account's underwriting by passing new values for one or more of the fields. 
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
 
@@ -970,20 +976,20 @@ Certain SDK methods accept file objects as part of a request body or multi-part 
 >
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    moov.disputes.upload_dispute_evidence_file(security=moov.UploadDisputeEvidenceFileSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    moov.disputes.upload_dispute_evidence_file(security=operations.UploadDisputeEvidenceFileSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
     ), account_id="ac81921c-4c1a-4e7a-8a8f-dfc0d0027ac5", dispute_id="49c04fa3-f5c3-4ddd-aece-4b5fb6e8a071", file={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
-    }, evidence_type=moov.EvidenceType.CUSTOMER_COMMUNICATION)
+    }, evidence_type=components.EvidenceType.CUSTOMER_COMMUNICATION)
 
     # Use the SDK ...
 
@@ -998,18 +1004,18 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
 import dateutil.parser
-import moov
-from moov import Moov
-from moov.utils import BackoffStrategy, RetryConfig
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
+from moovio_sdk.utils import BackoffStrategy, RetryConfig
 
 with Moov() as moov:
 
-    res = moov.accounts.create_account(security=moov.CreateAccountSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.accounts.create_account(security=operations.CreateAccountSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), account_type=moov.AccountType.BUSINESS, profile=moov.CreateProfile(
+    ), account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
         business={
             "legal_business_name": "Classbooker, LLC",
         },
@@ -1052,20 +1058,20 @@ with Moov() as moov:
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
 import dateutil.parser
-import moov
-from moov import Moov
-from moov.utils import BackoffStrategy, RetryConfig
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
+from moovio_sdk.utils import BackoffStrategy, RetryConfig
 
 with Moov(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
 ) as moov:
 
-    res = moov.accounts.create_account(security=moov.CreateAccountSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.accounts.create_account(security=operations.CreateAccountSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), account_type=moov.AccountType.BUSINESS, profile=moov.CreateProfile(
+    ), account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
         business={
             "legal_business_name": "Classbooker, LLC",
         },
@@ -1110,7 +1116,7 @@ with Moov(
 
 Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
 
-By default, an API error will raise a models.APIError exception, which has the following properties:
+By default, an API error will raise a errors.APIError exception, which has the following properties:
 
 | Property        | Type             | Description           |
 |-----------------|------------------|-----------------------|
@@ -1123,27 +1129,27 @@ When custom error responses are specified for an operation, the SDK may also rai
 
 | Error Type                       | Status Code | Content Type     |
 | -------------------------------- | ----------- | ---------------- |
-| models.GenericError              | 400, 409    | application/json |
-| models.CreateAccountResponseBody | 422         | application/json |
-| models.APIError                  | 4XX, 5XX    | \*/\*            |
+| errors.GenericError              | 400, 409    | application/json |
+| errors.CreateAccountResponseBody | 422         | application/json |
+| errors.APIError                  | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
 ```python
 import dateutil.parser
-import moov
-from moov import Moov, models
+from moovio_sdk import Moov
+from moovio_sdk.models import components, errors, operations
 
 with Moov() as moov:
     res = None
     try:
 
-        res = moov.accounts.create_account(security=moov.CreateAccountSecurity(
-            basic_auth=moov.SchemeBasicAuth(
+        res = moov.accounts.create_account(security=operations.CreateAccountSecurity(
+            basic_auth=components.SchemeBasicAuth(
                 username="",
                 password="",
             ),
-        ), account_type=moov.AccountType.BUSINESS, profile=moov.CreateProfile(
+        ), account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
             business={
                 "legal_business_name": "Classbooker, LLC",
             },
@@ -1180,13 +1186,13 @@ with Moov() as moov:
         # Handle response
         print(res)
 
-    except models.GenericError as e:
-        # handle e.data: models.GenericErrorData
+    except errors.GenericError as e:
+        # handle e.data: errors.GenericErrorData
         raise(e)
-    except models.CreateAccountResponseBody as e:
-        # handle e.data: models.CreateAccountResponseBodyData
+    except errors.CreateAccountResponseBody as e:
+        # handle e.data: errors.CreateAccountResponseBodyData
         raise(e)
-    except models.APIError as e:
+    except errors.APIError as e:
         # handle exception
         raise(e)
 ```
@@ -1200,19 +1206,19 @@ with Moov() as moov:
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 import dateutil.parser
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov(
     server_url="https://api.moov.io",
 ) as moov:
 
-    res = moov.accounts.create_account(security=moov.CreateAccountSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.accounts.create_account(security=operations.CreateAccountSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), account_type=moov.AccountType.BUSINESS, profile=moov.CreateProfile(
+    ), account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
         business={
             "legal_business_name": "Classbooker, LLC",
         },
@@ -1261,7 +1267,7 @@ This allows you to wrap the client with your own custom logic, such as adding cu
 
 For example, you could specify a header for every request that this sdk makes as follows:
 ```python
-from moov import Moov
+from moovio_sdk import Moov
 import httpx
 
 http_client = httpx.Client(headers={"x-custom-header": "someValue"})
@@ -1270,8 +1276,8 @@ s = Moov(client=http_client)
 
 or you could wrap the client with your own custom logic:
 ```python
-from moov import Moov
-from moov.httpclient import AsyncHttpClient
+from moovio_sdk import Moov
+from moovio_sdk.httpclient import AsyncHttpClient
 import httpx
 
 class CustomClient(AsyncHttpClient):
@@ -1333,6 +1339,27 @@ s = Moov(async_client=CustomClient(httpx.AsyncClient()))
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
+<!-- Start Resource Management [resource-management] -->
+## Resource Management
+
+The `Moov` class implements the context manager protocol and registers a finalizer function to close the underlying sync and async HTTPX clients it uses under the hood. This will close HTTP connections, release memory and free up other resources held by the SDK. In short-lived Python programs and notebooks that make a few SDK method calls, resource management may not be a concern. However, in longer-lived programs, it is beneficial to create a single SDK instance via a [context manager][context-manager] and reuse it across the application.
+
+[context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
+
+```python
+from moovio_sdk import Moov
+def main():
+    with Moov() as moov:
+        # Rest of application here...
+
+
+# Or when using async:
+async def amain():
+    async with Moov() as moov:
+        # Rest of application here...
+```
+<!-- End Resource Management [resource-management] -->
+
 <!-- Start Debugging [debug] -->
 ## Debugging
 
@@ -1340,12 +1367,14 @@ You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
 ```python
-from moov import Moov
+from moovio_sdk import Moov
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-s = Moov(debug_logger=logging.getLogger("moov"))
+s = Moov(debug_logger=logging.getLogger("moovio_sdk"))
 ```
+
+You can also enable a default debug logger by setting an environment variable `MOOV_DEBUG` to true.
 <!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
@@ -1363,4 +1392,4 @@ looking for the latest version.
 While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
 We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
 
-### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=moov&utm_campaign=python)
+### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=moovio-sdk&utm_campaign=python)

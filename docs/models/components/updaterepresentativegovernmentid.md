@@ -1,0 +1,9 @@
+# UpdateRepresentativeGovernmentID
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ssn`                                                                                                | [Optional[components.UpdateRepresentativeSsn]](../../models/components/updaterepresentativessn.md)   | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `itin`                                                                                               | [Optional[components.UpdateRepresentativeItin]](../../models/components/updaterepresentativeitin.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

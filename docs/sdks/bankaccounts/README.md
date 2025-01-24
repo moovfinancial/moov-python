@@ -98,13 +98,13 @@ endpoint to wait for the new payment methods to be available for use.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.bank_accounts.link_bank_account(security=moov.LinkBankAccountSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.bank_accounts.link_bank_account(security=operations.LinkBankAccountSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -123,24 +123,24 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                   | Type                                                                                                                                                                                                                                                                                                                                                                        | Required                                                                                                                                                                                                                                                                                                                                                                    | Description                                                                                                                                                                                                                                                                                                                                                                 |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                                                                                                                                                  | [models.LinkBankAccountSecurity](../../models/linkbankaccountsecurity.md)                                                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                                                                         |
+| `security`                                                                                                                                                                                                                                                                                                                                                                  | [operations.LinkBankAccountSecurity](../../models/operations/linkbankaccountsecurity.md)                                                                                                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                                                                         |
 | `account_id`                                                                                                                                                                                                                                                                                                                                                                | *str*                                                                                                                                                                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                                                                         |
-| `link_bank_account`                                                                                                                                                                                                                                                                                                                                                         | [models.LinkBankAccount](../../models/linkbankaccount.md)                                                                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                                                                         |
-| `x_moov_version`                                                                                                                                                                                                                                                                                                                                                            | [Optional[models.Versions]](../../models/versions.md)                                                                                                                                                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                          | Specify an API version.                                                                                                                                                                                                                                                                                                                                                     |
-| `x_wait_for`                                                                                                                                                                                                                                                                                                                                                                | [Optional[models.BankAccountWaitFor]](../../models/bankaccountwaitfor.md)                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                          | Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.<br/><br/>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly<br/>linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response. |
+| `link_bank_account`                                                                                                                                                                                                                                                                                                                                                         | [components.LinkBankAccount](../../models/components/linkbankaccount.md)                                                                                                                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                                                                                                                                         |
+| `x_moov_version`                                                                                                                                                                                                                                                                                                                                                            | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                          | Specify an API version.                                                                                                                                                                                                                                                                                                                                                     |
+| `x_wait_for`                                                                                                                                                                                                                                                                                                                                                                | [Optional[components.BankAccountWaitFor]](../../models/components/bankaccountwaitfor.md)                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                          | Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.<br/><br/>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly<br/>linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response. |
 | `retries`                                                                                                                                                                                                                                                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                                                                                         |
 
 ### Response
 
-**[models.BankAccount](../../models/bankaccount.md)**
+**[components.BankAccount](../../models/components/bankaccount.md)**
 
 ### Errors
 
 | Error Type                        | Status Code                       | Content Type                      |
 | --------------------------------- | --------------------------------- | --------------------------------- |
-| models.GenericError               | 400, 409                          | application/json                  |
-| models.BankAccountValidationError | 422                               | application/json                  |
-| models.APIError                   | 4XX, 5XX                          | \*/\*                             |
+| errors.GenericError               | 400, 409                          | application/json                  |
+| errors.BankAccountValidationError | 422                               | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## list_bank_accounts
 
@@ -153,13 +153,13 @@ from the browser, you'll need to specify the `/accounts/{accountID}/bank-account
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.bank_accounts.list_bank_accounts(security=moov.ListBankAccountsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.bank_accounts.list_bank_accounts(security=operations.ListBankAccountsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -172,22 +172,22 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `security`                                                                  | [models.ListBankAccountsSecurity](../../models/listbankaccountssecurity.md) | :heavy_check_mark:                                                          | N/A                                                                         |
-| `account_id`                                                                | *str*                                                                       | :heavy_check_mark:                                                          | N/A                                                                         |
-| `x_moov_version`                                                            | [Optional[models.Versions]](../../models/versions.md)                       | :heavy_minus_sign:                                                          | Specify an API version.                                                     |
-| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `security`                                                                                 | [operations.ListBankAccountsSecurity](../../models/operations/listbankaccountssecurity.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `account_id`                                                                               | *str*                                                                                      | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `x_moov_version`                                                                           | [Optional[components.Versions]](../../models/components/versions.md)                       | :heavy_minus_sign:                                                                         | Specify an API version.                                                                    |
+| `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
 
 ### Response
 
-**[List[models.BankAccount]](../../models/.md)**
+**[List[components.BankAccount]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_bank_account
 
@@ -200,13 +200,13 @@ generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.bank_accounts.get_bank_account(security=moov.GetBankAccountSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.bank_accounts.get_bank_account(security=operations.GetBankAccountSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -219,23 +219,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `security`                                                              | [models.GetBankAccountSecurity](../../models/getbankaccountsecurity.md) | :heavy_check_mark:                                                      | N/A                                                                     |
-| `account_id`                                                            | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
-| `bank_account_id`                                                       | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
-| `x_moov_version`                                                        | [Optional[models.Versions]](../../models/versions.md)                   | :heavy_minus_sign:                                                      | Specify an API version.                                                 |
-| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `security`                                                                             | [operations.GetBankAccountSecurity](../../models/operations/getbankaccountsecurity.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `account_id`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `bank_account_id`                                                                      | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `x_moov_version`                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                   | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |
+| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
 
 ### Response
 
-**[models.BankAccount](../../models/bankaccount.md)**
+**[components.BankAccount](../../models/components/bankaccount.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## disable_bank_account
 
@@ -247,13 +247,13 @@ when generating a [token](https://docs.moov.io/api/authentication/access-tokens/
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    moov.bank_accounts.disable_bank_account(security=moov.DisableBankAccountSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    moov.bank_accounts.disable_bank_account(security=operations.DisableBankAccountSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -265,20 +265,20 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `security`                                                                      | [models.DisableBankAccountSecurity](../../models/disablebankaccountsecurity.md) | :heavy_check_mark:                                                              | N/A                                                                             |
-| `account_id`                                                                    | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
-| `bank_account_id`                                                               | *str*                                                                           | :heavy_check_mark:                                                              | N/A                                                                             |
-| `x_moov_version`                                                                | [Optional[models.Versions]](../../models/versions.md)                           | :heavy_minus_sign:                                                              | Specify an API version.                                                         |
-| `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `security`                                                                                     | [operations.DisableBankAccountSecurity](../../models/operations/disablebankaccountsecurity.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `account_id`                                                                                   | *str*                                                                                          | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `bank_account_id`                                                                              | *str*                                                                                          | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `x_moov_version`                                                                               | [Optional[components.Versions]](../../models/components/versions.md)                           | :heavy_minus_sign:                                                                             | Specify an API version.                                                                        |
+| `retries`                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                               | :heavy_minus_sign:                                                                             | Configuration to override the default retry behavior of the client.                            |
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409            | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409            | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## initiate_micro_deposits
 
@@ -295,13 +295,13 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    moov.bank_accounts.initiate_micro_deposits(security=moov.InitiateMicroDepositsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    moov.bank_accounts.initiate_micro_deposits(security=operations.InitiateMicroDepositsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -313,20 +313,20 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `security`                                                                            | [models.InitiateMicroDepositsSecurity](../../models/initiatemicrodepositssecurity.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `account_id`                                                                          | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `bank_account_id`                                                                     | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
-| `x_moov_version`                                                                      | [Optional[models.Versions]](../../models/versions.md)                                 | :heavy_minus_sign:                                                                    | Specify an API version.                                                               |
-| `retries`                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                      | :heavy_minus_sign:                                                                    | Configuration to override the default retry behavior of the client.                   |
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `security`                                                                                           | [operations.InitiateMicroDepositsSecurity](../../models/operations/initiatemicrodepositssecurity.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `account_id`                                                                                         | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `bank_account_id`                                                                                    | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `x_moov_version`                                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                                 | :heavy_minus_sign:                                                                                   | Specify an API version.                                                                              |
+| `retries`                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                     | :heavy_minus_sign:                                                                                   | Configuration to override the default retry behavior of the client.                                  |
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409            | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409            | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## complete_micro_deposits
 
@@ -338,13 +338,13 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.bank_accounts.complete_micro_deposits(security=moov.CompleteMicroDepositsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.bank_accounts.complete_micro_deposits(security=operations.CompleteMicroDepositsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -362,24 +362,24 @@ with Moov() as moov:
 
 | Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          | Example                                                                                              |
 | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `security`                                                                                           | [models.CompleteMicroDepositsSecurity](../../models/completemicrodepositssecurity.md)                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |                                                                                                      |
+| `security`                                                                                           | [operations.CompleteMicroDepositsSecurity](../../models/operations/completemicrodepositssecurity.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |                                                                                                      |
 | `account_id`                                                                                         | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |                                                                                                      |
 | `bank_account_id`                                                                                    | *str*                                                                                                | :heavy_check_mark:                                                                                   | N/A                                                                                                  |                                                                                                      |
 | `amounts`                                                                                            | List[*int*]                                                                                          | :heavy_check_mark:                                                                                   | Two positive integers, in cents, equal to the values of the micro-deposits sent to the bank account. | [<br/>18,<br/>21<br/>]                                                                               |
-| `x_moov_version`                                                                                     | [Optional[models.Versions]](../../models/versions.md)                                                | :heavy_minus_sign:                                                                                   | Specify an API version.                                                                              |                                                                                                      |
+| `x_moov_version`                                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                                 | :heavy_minus_sign:                                                                                   | Specify an API version.                                                                              |                                                                                                      |
 | `retries`                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                     | :heavy_minus_sign:                                                                                   | Configuration to override the default retry behavior of the client.                                  |                                                                                                      |
 
 ### Response
 
-**[models.CompletedMicroDeposits](../../models/completedmicrodeposits.md)**
+**[components.CompletedMicroDeposits](../../models/components/completedmicrodeposits.md)**
 
 ### Errors
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| models.GenericError                | 400, 409                           | application/json                   |
-| models.MicroDepositValidationError | 422                                | application/json                   |
-| models.APIError                    | 4XX, 5XX                           | \*/\*                              |
+| errors.GenericError                | 400, 409                           | application/json                   |
+| errors.MicroDepositValidationError | 422                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
 ## get_bank_account_verification
 
@@ -400,13 +400,13 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.bank_accounts.get_bank_account_verification(security=moov.GetBankAccountVerificationSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.bank_accounts.get_bank_account_verification(security=operations.GetBankAccountVerificationSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -419,23 +419,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `security`                                                                                      | [models.GetBankAccountVerificationSecurity](../../models/getbankaccountverificationsecurity.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |
-| `account_id`                                                                                    | *str*                                                                                           | :heavy_check_mark:                                                                              | N/A                                                                                             |
-| `bank_account_id`                                                                               | *str*                                                                                           | :heavy_check_mark:                                                                              | N/A                                                                                             |
-| `x_moov_version`                                                                                | [Optional[models.Versions]](../../models/versions.md)                                           | :heavy_minus_sign:                                                                              | Specify an API version.                                                                         |
-| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                     | [operations.GetBankAccountVerificationSecurity](../../models/operations/getbankaccountverificationsecurity.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `account_id`                                                                                                   | *str*                                                                                                          | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `bank_account_id`                                                                                              | *str*                                                                                                          | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `x_moov_version`                                                                                               | [Optional[components.Versions]](../../models/components/versions.md)                                           | :heavy_minus_sign:                                                                                             | Specify an API version.                                                                                        |
+| `retries`                                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                               | :heavy_minus_sign:                                                                                             | Configuration to override the default retry behavior of the client.                                            |
 
 ### Response
 
-**[models.BankAccountVerification](../../models/bankaccountverification.md)**
+**[components.BankAccountVerification](../../models/components/bankaccountverification.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## initiate_bank_account_verification
 
@@ -462,17 +462,17 @@ To use this endpoint from the browser, you'll need to specify the `/accounts/{ac
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.bank_accounts.initiate_bank_account_verification(security=moov.InitiateBankAccountVerificationSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.bank_accounts.initiate_bank_account_verification(security=operations.InitiateBankAccountVerificationSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), x_wait_for=moov.BankAccountWaitFor.PAYMENT_METHOD, account_id="c2b4967e-86a5-474e-a78e-f013315f7dcc", bank_account_id="d648f8f3-7641-4e40-8a99-c08de14889c8")
+    ), x_wait_for=components.BankAccountWaitFor.PAYMENT_METHOD, account_id="c2b4967e-86a5-474e-a78e-f013315f7dcc", bank_account_id="d648f8f3-7641-4e40-8a99-c08de14889c8")
 
     # Handle response
     print(res)
@@ -483,23 +483,23 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                                                                                                  | Type                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                                                                                 | [models.InitiateBankAccountVerificationSecurity](../../models/initiatebankaccountverificationsecurity.md)                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                                        |
-| `x_wait_for`                                                                                                                                                                                                                               | [models.BankAccountWaitFor](../../models/bankaccountwaitfor.md)                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                         | Optional header to wait for certain events, such as the rail response, to occur before returning a response.<br/><br/>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail. |
+| `security`                                                                                                                                                                                                                                 | [operations.InitiateBankAccountVerificationSecurity](../../models/operations/initiatebankaccountverificationsecurity.md)                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                                        |
+| `x_wait_for`                                                                                                                                                                                                                               | [components.BankAccountWaitFor](../../models/components/bankaccountwaitfor.md)                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                         | Optional header to wait for certain events, such as the rail response, to occur before returning a response.<br/><br/>When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail. |
 | `account_id`                                                                                                                                                                                                                               | *str*                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                                        |
 | `bank_account_id`                                                                                                                                                                                                                          | *str*                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                                        |
-| `x_moov_version`                                                                                                                                                                                                                           | [Optional[models.Versions]](../../models/versions.md)                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                         | Specify an API version.                                                                                                                                                                                                                    |
+| `x_moov_version`                                                                                                                                                                                                                           | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                         | Specify an API version.                                                                                                                                                                                                                    |
 | `retries`                                                                                                                                                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                         | Configuration to override the default retry behavior of the client.                                                                                                                                                                        |
 
 ### Response
 
-**[models.BankAccountVerificationCreated](../../models/bankaccountverificationcreated.md)**
+**[components.BankAccountVerificationCreated](../../models/components/bankaccountverificationcreated.md)**
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409            | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409            | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## complete_bank_account_verification
 
@@ -518,13 +518,13 @@ generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.bank_accounts.complete_bank_account_verification(security=moov.CompleteBankAccountVerificationSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.bank_accounts.complete_bank_account_verification(security=operations.CompleteBankAccountVerificationSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -537,22 +537,22 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               | Example                                                                                                   |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                | [models.CompleteBankAccountVerificationSecurity](../../models/completebankaccountverificationsecurity.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |                                                                                                           |
-| `account_id`                                                                                              | *str*                                                                                                     | :heavy_check_mark:                                                                                        | N/A                                                                                                       |                                                                                                           |
-| `bank_account_id`                                                                                         | *str*                                                                                                     | :heavy_check_mark:                                                                                        | N/A                                                                                                       |                                                                                                           |
-| `code`                                                                                                    | *str*                                                                                                     | :heavy_check_mark:                                                                                        | Code provided by user from their bank account transactions                                                | MV1234                                                                                                    |
-| `x_moov_version`                                                                                          | [Optional[models.Versions]](../../models/versions.md)                                                     | :heavy_minus_sign:                                                                                        | Specify an API version.                                                                                   |                                                                                                           |
-| `retries`                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                          | :heavy_minus_sign:                                                                                        | Configuration to override the default retry behavior of the client.                                       |                                                                                                           |
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                               | [operations.CompleteBankAccountVerificationSecurity](../../models/operations/completebankaccountverificationsecurity.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |                                                                                                                          |
+| `account_id`                                                                                                             | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |                                                                                                                          |
+| `bank_account_id`                                                                                                        | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |                                                                                                                          |
+| `code`                                                                                                                   | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Code provided by user from their bank account transactions                                                               | MV1234                                                                                                                   |
+| `x_moov_version`                                                                                                         | [Optional[components.Versions]](../../models/components/versions.md)                                                     | :heavy_minus_sign:                                                                                                       | Specify an API version.                                                                                                  |                                                                                                                          |
+| `retries`                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                         | :heavy_minus_sign:                                                                                                       | Configuration to override the default retry behavior of the client.                                                      |                                                                                                                          |
 
 ### Response
 
-**[models.BankAccountVerification](../../models/bankaccountverification.md)**
+**[components.BankAccountVerification](../../models/components/bankaccountverification.md)**
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409, 422       | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409, 422       | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |

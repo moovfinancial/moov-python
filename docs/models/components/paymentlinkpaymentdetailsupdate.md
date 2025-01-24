@@ -1,0 +1,12 @@
+# PaymentLinkPaymentDetailsUpdate
+
+Options for payment links used to collect payment.
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `allowed_methods`                                                                                      | List[[components.CollectionPaymentMethodType](../../models/components/collectionpaymentmethodtype.md)] | :heavy_minus_sign:                                                                                     | A list of payment methods that should be supported for this payment link.                              |
+| `card_details`                                                                                         | [Optional[components.CardPaymentDetails]](../../models/components/cardpaymentdetails.md)               | :heavy_minus_sign:                                                                                     | Options for payment links used to collect a card payment.                                              |
+| `ach_details`                                                                                          | [Optional[components.ACHPaymentDetails]](../../models/components/achpaymentdetails.md)                 | :heavy_minus_sign:                                                                                     | Options for payment links used to collect an ACH payment.                                              |

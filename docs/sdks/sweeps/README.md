@@ -19,17 +19,17 @@ Create a sweep config for a wallet.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.sweeps.create_sweep_config(security=moov.CreateSweepConfigSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.sweeps.create_sweep_config(security=operations.CreateSweepConfigSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), account_id="3a373e85-2777-40fe-aacd-52d6fc641d76", wallet_id="01234567-89ab-cdef-0123-456789abcdef", status=moov.SweepConfigStatus.ENABLED, push_payment_method_id="01234567-89ab-cdef-0123-456789abcdef", pull_payment_method_id="01234567-89ab-cdef-0123-456789abcdef")
+    ), account_id="3a373e85-2777-40fe-aacd-52d6fc641d76", wallet_id="01234567-89ab-cdef-0123-456789abcdef", status=components.SweepConfigStatus.ENABLED, push_payment_method_id="01234567-89ab-cdef-0123-456789abcdef", pull_payment_method_id="01234567-89ab-cdef-0123-456789abcdef")
 
     # Handle response
     print(res)
@@ -40,28 +40,28 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                       | Type                                                                                                                                                            | Required                                                                                                                                                        | Description                                                                                                                                                     |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                      | [models.CreateSweepConfigSecurity](../../models/createsweepconfigsecurity.md)                                                                                   | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
+| `security`                                                                                                                                                      | [operations.CreateSweepConfigSecurity](../../models/operations/createsweepconfigsecurity.md)                                                                    | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
 | `account_id`                                                                                                                                                    | *str*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
 | `wallet_id`                                                                                                                                                     | *str*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
-| `status`                                                                                                                                                        | [models.SweepConfigStatus](../../models/sweepconfigstatus.md)                                                                                                   | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
+| `status`                                                                                                                                                        | [components.SweepConfigStatus](../../models/components/sweepconfigstatus.md)                                                                                    | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
 | `push_payment_method_id`                                                                                                                                        | *str*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                              | ID of the payment method.                                                                                                                                       |
 | `pull_payment_method_id`                                                                                                                                        | *str*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                              | ID of the payment method.                                                                                                                                       |
-| `x_moov_version`                                                                                                                                                | [Optional[models.Versions]](../../models/versions.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                              | Specify an API version.                                                                                                                                         |
+| `x_moov_version`                                                                                                                                                | [Optional[components.Versions]](../../models/components/versions.md)                                                                                            | :heavy_minus_sign:                                                                                                                                              | Specify an API version.                                                                                                                                         |
 | `statement_descriptor`                                                                                                                                          | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor. |
 | `minimum_balance`                                                                                                                                               | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | N/A                                                                                                                                                             |
 | `retries`                                                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                | :heavy_minus_sign:                                                                                                                                              | Configuration to override the default retry behavior of the client.                                                                                             |
 
 ### Response
 
-**[models.SweepConfig](../../models/sweepconfig.md)**
+**[components.SweepConfig](../../models/components/sweepconfig.md)**
 
 ### Errors
 
 | Error Type                    | Status Code                   | Content Type                  |
 | ----------------------------- | ----------------------------- | ----------------------------- |
-| models.GenericError           | 400, 409                      | application/json              |
-| models.CreateSweepConfigError | 422                           | application/json              |
-| models.APIError               | 4XX, 5XX                      | \*/\*                         |
+| errors.GenericError           | 400, 409                      | application/json              |
+| errors.CreateSweepConfigError | 422                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
 
 ## list_sweep_configs
 
@@ -70,13 +70,13 @@ List sweep configs associated with an account.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.sweeps.list_sweep_configs(security=moov.ListSweepConfigsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.sweeps.list_sweep_configs(security=operations.ListSweepConfigsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -89,22 +89,22 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `security`                                                                  | [models.ListSweepConfigsSecurity](../../models/listsweepconfigssecurity.md) | :heavy_check_mark:                                                          | N/A                                                                         |
-| `account_id`                                                                | *str*                                                                       | :heavy_check_mark:                                                          | N/A                                                                         |
-| `x_moov_version`                                                            | [Optional[models.Versions]](../../models/versions.md)                       | :heavy_minus_sign:                                                          | Specify an API version.                                                     |
-| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `security`                                                                                 | [operations.ListSweepConfigsSecurity](../../models/operations/listsweepconfigssecurity.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `account_id`                                                                               | *str*                                                                                      | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `x_moov_version`                                                                           | [Optional[components.Versions]](../../models/components/versions.md)                       | :heavy_minus_sign:                                                                         | Specify an API version.                                                                    |
+| `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
 
 ### Response
 
-**[List[models.SweepConfig]](../../models/.md)**
+**[List[components.SweepConfig]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_sweep_config
 
@@ -113,13 +113,13 @@ Get a sweep config associated with a wallet.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.sweeps.get_sweep_config(security=moov.GetSweepConfigSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.sweeps.get_sweep_config(security=operations.GetSweepConfigSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -132,23 +132,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `security`                                                              | [models.GetSweepConfigSecurity](../../models/getsweepconfigsecurity.md) | :heavy_check_mark:                                                      | N/A                                                                     |
-| `account_id`                                                            | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
-| `sweep_config_id`                                                       | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
-| `x_moov_version`                                                        | [Optional[models.Versions]](../../models/versions.md)                   | :heavy_minus_sign:                                                      | Specify an API version.                                                 |
-| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `security`                                                                             | [operations.GetSweepConfigSecurity](../../models/operations/getsweepconfigsecurity.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `account_id`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `sweep_config_id`                                                                      | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `x_moov_version`                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                   | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |
+| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
 
 ### Response
 
-**[models.SweepConfig](../../models/sweepconfig.md)**
+**[components.SweepConfig](../../models/components/sweepconfig.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## patch_sweep_config
 
@@ -157,17 +157,17 @@ Update settings on a sweep config.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.sweeps.patch_sweep_config(security=moov.PatchSweepConfigSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.sweeps.patch_sweep_config(security=operations.PatchSweepConfigSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
-    ), account_id="c0ee091a-5b72-49c9-9c8b-7cb99d7f9309", sweep_config_id="c1f1c60c-cb13-4bc6-891c-f34d96682f06", status=moov.SweepConfigStatus.DISABLED)
+    ), account_id="c0ee091a-5b72-49c9-9c8b-7cb99d7f9309", sweep_config_id="c1f1c60c-cb13-4bc6-891c-f34d96682f06", status=components.SweepConfigStatus.DISABLED)
 
     # Handle response
     print(res)
@@ -178,11 +178,11 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                       | Type                                                                                                                                                            | Required                                                                                                                                                        | Description                                                                                                                                                     |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                      | [models.PatchSweepConfigSecurity](../../models/patchsweepconfigsecurity.md)                                                                                     | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
+| `security`                                                                                                                                                      | [operations.PatchSweepConfigSecurity](../../models/operations/patchsweepconfigsecurity.md)                                                                      | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
 | `account_id`                                                                                                                                                    | *str*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
 | `sweep_config_id`                                                                                                                                               | *str*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
-| `x_moov_version`                                                                                                                                                | [Optional[models.Versions]](../../models/versions.md)                                                                                                           | :heavy_minus_sign:                                                                                                                                              | Specify an API version.                                                                                                                                         |
-| `status`                                                                                                                                                        | [Optional[models.SweepConfigStatus]](../../models/sweepconfigstatus.md)                                                                                         | :heavy_minus_sign:                                                                                                                                              | N/A                                                                                                                                                             |
+| `x_moov_version`                                                                                                                                                | [Optional[components.Versions]](../../models/components/versions.md)                                                                                            | :heavy_minus_sign:                                                                                                                                              | Specify an API version.                                                                                                                                         |
+| `status`                                                                                                                                                        | [Optional[components.SweepConfigStatus]](../../models/components/sweepconfigstatus.md)                                                                          | :heavy_minus_sign:                                                                                                                                              | N/A                                                                                                                                                             |
 | `push_payment_method_id`                                                                                                                                        | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | ID of the payment method.                                                                                                                                       |
 | `pull_payment_method_id`                                                                                                                                        | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | ID of the payment method.                                                                                                                                       |
 | `statement_descriptor`                                                                                                                                          | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor. |
@@ -191,15 +191,15 @@ with Moov() as moov:
 
 ### Response
 
-**[models.SweepConfig](../../models/sweepconfig.md)**
+**[components.SweepConfig](../../models/components/sweepconfig.md)**
 
 ### Errors
 
 | Error Type                   | Status Code                  | Content Type                 |
 | ---------------------------- | ---------------------------- | ---------------------------- |
-| models.GenericError          | 400, 409                     | application/json             |
-| models.PatchSweepConfigError | 422                          | application/json             |
-| models.APIError              | 4XX, 5XX                     | \*/\*                        |
+| errors.GenericError          | 400, 409                     | application/json             |
+| errors.PatchSweepConfigError | 422                          | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
 ## list_sweeps
 
@@ -208,13 +208,13 @@ List sweeps associated with a wallet.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.sweeps.list_sweeps(security=moov.ListSweepsSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.sweeps.list_sweeps(security=operations.ListSweepsSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -227,27 +227,27 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `security`                                                          | [models.ListSweepsSecurity](../../models/listsweepssecurity.md)     | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
-| `wallet_id`                                                         | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |                                                                     |
-| `skip`                                                              | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 | 60                                                                  |
-| `count`                                                             | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 | 20                                                                  |
-| `status`                                                            | [Optional[models.SweepStatus]](../../models/sweepstatus.md)         | :heavy_minus_sign:                                                  | Optional parameter to filter by sweep status.                       |                                                                     |
-| `statement_descriptor`                                              | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Optional string to filter by statement descriptor.                  |                                                                     |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    | Example                                                                        |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `security`                                                                     | [operations.ListSweepsSecurity](../../models/operations/listsweepssecurity.md) | :heavy_check_mark:                                                             | N/A                                                                            |                                                                                |
+| `account_id`                                                                   | *str*                                                                          | :heavy_check_mark:                                                             | N/A                                                                            |                                                                                |
+| `wallet_id`                                                                    | *str*                                                                          | :heavy_check_mark:                                                             | N/A                                                                            |                                                                                |
+| `x_moov_version`                                                               | [Optional[components.Versions]](../../models/components/versions.md)           | :heavy_minus_sign:                                                             | Specify an API version.                                                        |                                                                                |
+| `skip`                                                                         | *Optional[int]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            | 60                                                                             |
+| `count`                                                                        | *Optional[int]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            | 20                                                                             |
+| `status`                                                                       | [Optional[components.SweepStatus]](../../models/components/sweepstatus.md)     | :heavy_minus_sign:                                                             | Optional parameter to filter by sweep status.                                  |                                                                                |
+| `statement_descriptor`                                                         | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | Optional string to filter by statement descriptor.                             |                                                                                |
+| `retries`                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)               | :heavy_minus_sign:                                                             | Configuration to override the default retry behavior of the client.            |                                                                                |
 
 ### Response
 
-**[List[models.Sweep]](../../models/.md)**
+**[List[components.Sweep]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_sweep
 
@@ -256,13 +256,13 @@ Get details on a specific sweep.
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.sweeps.get_sweep(security=moov.GetSweepSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.sweeps.get_sweep(security=operations.GetSweepSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -275,21 +275,21 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `security`                                                          | [models.GetSweepSecurity](../../models/getsweepsecurity.md)         | :heavy_check_mark:                                                  | N/A                                                                 |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `wallet_id`                                                         | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `sweep_id`                                                          | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `x_moov_version`                                                    | [Optional[models.Versions]](../../models/versions.md)               | :heavy_minus_sign:                                                  | Specify an API version.                                             |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `security`                                                                 | [operations.GetSweepSecurity](../../models/operations/getsweepsecurity.md) | :heavy_check_mark:                                                         | N/A                                                                        |
+| `account_id`                                                               | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `wallet_id`                                                                | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `sweep_id`                                                                 | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
+| `x_moov_version`                                                           | [Optional[components.Versions]](../../models/components/versions.md)       | :heavy_minus_sign:                                                         | Specify an API version.                                                    |
+| `retries`                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)           | :heavy_minus_sign:                                                         | Configuration to override the default retry behavior of the client.        |
 
 ### Response
 
-**[models.Sweep](../../models/sweep.md)**
+**[components.Sweep](../../models/components/sweep.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

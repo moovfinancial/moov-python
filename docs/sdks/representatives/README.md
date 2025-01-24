@@ -50,13 +50,13 @@ To use this endpoint from the browser, you’ll need to specify the `/accounts/{
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.representatives.create_representative(security=moov.CreateRepresentativeSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.representatives.create_representative(security=operations.CreateRepresentativeSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -91,31 +91,31 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       | Example                                                                                           |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `security`                                                                                        | [models.CreateRepresentativeSecurity](../../models/createrepresentativesecurity.md)               | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
-| `account_id`                                                                                      | *str*                                                                                             | :heavy_check_mark:                                                                                | ID of the account.                                                                                |                                                                                                   |
-| `name`                                                                                            | [models.IndividualName](../../models/individualname.md)                                           | :heavy_check_mark:                                                                                | N/A                                                                                               |                                                                                                   |
-| `x_moov_version`                                                                                  | [Optional[models.Versions]](../../models/versions.md)                                             | :heavy_minus_sign:                                                                                | Specify an API version.                                                                           |                                                                                                   |
-| `phone`                                                                                           | [Optional[models.PhoneNumber]](../../models/phonenumber.md)                                       | :heavy_minus_sign:                                                                                | N/A                                                                                               |                                                                                                   |
-| `email`                                                                                           | *Optional[str]*                                                                                   | :heavy_minus_sign:                                                                                | N/A                                                                                               | jordan.lee@classbooker.dev                                                                        |
-| `address`                                                                                         | [Optional[models.Address]](../../models/address.md)                                               | :heavy_minus_sign:                                                                                | N/A                                                                                               |                                                                                                   |
-| `birth_date`                                                                                      | [Optional[models.BirthDate]](../../models/birthdate.md)                                           | :heavy_minus_sign:                                                                                | N/A                                                                                               |                                                                                                   |
-| `government_id`                                                                                   | [Optional[models.GovernmentID]](../../models/governmentid.md)                                     | :heavy_minus_sign:                                                                                | N/A                                                                                               |                                                                                                   |
-| `responsibilities`                                                                                | [Optional[models.RepresentativeResponsibilities]](../../models/representativeresponsibilities.md) | :heavy_minus_sign:                                                                                | Describes the job responsibilities of a business representative.                                  |                                                                                                   |
-| `retries`                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                  | :heavy_minus_sign:                                                                                | Configuration to override the default retry behavior of the client.                               |                                                                                                   |
+| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      | Example                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                       | [operations.CreateRepresentativeSecurity](../../models/operations/createrepresentativesecurity.md)               | :heavy_check_mark:                                                                                               | N/A                                                                                                              |                                                                                                                  |
+| `account_id`                                                                                                     | *str*                                                                                                            | :heavy_check_mark:                                                                                               | ID of the account.                                                                                               |                                                                                                                  |
+| `name`                                                                                                           | [components.IndividualName](../../models/components/individualname.md)                                           | :heavy_check_mark:                                                                                               | N/A                                                                                                              |                                                                                                                  |
+| `x_moov_version`                                                                                                 | [Optional[components.Versions]](../../models/components/versions.md)                                             | :heavy_minus_sign:                                                                                               | Specify an API version.                                                                                          |                                                                                                                  |
+| `phone`                                                                                                          | [Optional[components.PhoneNumber]](../../models/components/phonenumber.md)                                       | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |                                                                                                                  |
+| `email`                                                                                                          | *Optional[str]*                                                                                                  | :heavy_minus_sign:                                                                                               | N/A                                                                                                              | jordan.lee@classbooker.dev                                                                                       |
+| `address`                                                                                                        | [Optional[components.Address]](../../models/components/address.md)                                               | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |                                                                                                                  |
+| `birth_date`                                                                                                     | [Optional[components.BirthDate]](../../models/components/birthdate.md)                                           | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |                                                                                                                  |
+| `government_id`                                                                                                  | [Optional[components.GovernmentID]](../../models/components/governmentid.md)                                     | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |                                                                                                                  |
+| `responsibilities`                                                                                               | [Optional[components.RepresentativeResponsibilities]](../../models/components/representativeresponsibilities.md) | :heavy_minus_sign:                                                                                               | Describes the job responsibilities of a business representative.                                                 |                                                                                                                  |
+| `retries`                                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                 | :heavy_minus_sign:                                                                                               | Configuration to override the default retry behavior of the client.                                              |                                                                                                                  |
 
 ### Response
 
-**[models.Representative](../../models/representative.md)**
+**[components.Representative](../../models/components/representative.md)**
 
 ### Errors
 
 | Error Type                           | Status Code                          | Content Type                         |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| models.GenericError                  | 400, 409                             | application/json                     |
-| models.RepresentativeValidationError | 422                                  | application/json                     |
-| models.APIError                      | 4XX, 5XX                             | \*/\*                                |
+| errors.GenericError                  | 400, 409                             | application/json                     |
+| errors.RepresentativeValidationError | 422                                  | application/json                     |
+| errors.APIError                      | 4XX, 5XX                             | \*/\*                                |
 
 ## list_representatives
 
@@ -129,13 +129,13 @@ To use this endpoint from the browser, you’ll need to specify the `/accounts/{
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.representatives.list_representatives(security=moov.ListRepresentativesSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.representatives.list_representatives(security=operations.ListRepresentativesSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -148,22 +148,22 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `security`                                                                        | [models.ListRepresentativesSecurity](../../models/listrepresentativessecurity.md) | :heavy_check_mark:                                                                | N/A                                                                               |
-| `account_id`                                                                      | *str*                                                                             | :heavy_check_mark:                                                                | ID of the account.                                                                |
-| `x_moov_version`                                                                  | [Optional[models.Versions]](../../models/versions.md)                             | :heavy_minus_sign:                                                                | Specify an API version.                                                           |
-| `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `security`                                                                                       | [operations.ListRepresentativesSecurity](../../models/operations/listrepresentativessecurity.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `account_id`                                                                                     | *str*                                                                                            | :heavy_check_mark:                                                                               | ID of the account.                                                                               |
+| `x_moov_version`                                                                                 | [Optional[components.Versions]](../../models/components/versions.md)                             | :heavy_minus_sign:                                                                               | Specify an API version.                                                                          |
+| `retries`                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                 | :heavy_minus_sign:                                                                               | Configuration to override the default retry behavior of the client.                              |
 
 ### Response
 
-**[List[models.Representative]](../../models/.md)**
+**[List[components.Representative]](../../models/.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete_representative
 
@@ -174,13 +174,13 @@ To use this endpoint from the browser, you’ll need to specify the `/accounts/{
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    moov.representatives.delete_representative(security=moov.DeleteRepresentativeSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    moov.representatives.delete_representative(security=operations.DeleteRepresentativeSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -192,20 +192,20 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `security`                                                                          | [models.DeleteRepresentativeSecurity](../../models/deleterepresentativesecurity.md) | :heavy_check_mark:                                                                  | N/A                                                                                 |
-| `account_id`                                                                        | *str*                                                                               | :heavy_check_mark:                                                                  | ID of the account.                                                                  |
-| `representative_id`                                                                 | *str*                                                                               | :heavy_check_mark:                                                                  | ID of the representative.                                                           |
-| `x_moov_version`                                                                    | [Optional[models.Versions]](../../models/versions.md)                               | :heavy_minus_sign:                                                                  | Specify an API version.                                                             |
-| `retries`                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                    | :heavy_minus_sign:                                                                  | Configuration to override the default retry behavior of the client.                 |
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `security`                                                                                         | [operations.DeleteRepresentativeSecurity](../../models/operations/deleterepresentativesecurity.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `account_id`                                                                                       | *str*                                                                                              | :heavy_check_mark:                                                                                 | ID of the account.                                                                                 |
+| `representative_id`                                                                                | *str*                                                                                              | :heavy_check_mark:                                                                                 | ID of the representative.                                                                          |
+| `x_moov_version`                                                                                   | [Optional[components.Versions]](../../models/components/versions.md)                               | :heavy_minus_sign:                                                                                 | Specify an API version.                                                                            |
+| `retries`                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                   | :heavy_minus_sign:                                                                                 | Configuration to override the default retry behavior of the client.                                |
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409            | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409            | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
 
 ## get_representative
 
@@ -216,13 +216,13 @@ To use this endpoint from the browser, you’ll need to specify the `/accounts/{
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.representatives.get_representative(security=moov.GetRepresentativeSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.representatives.get_representative(security=operations.GetRepresentativeSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -235,23 +235,23 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `security`                                                                    | [models.GetRepresentativeSecurity](../../models/getrepresentativesecurity.md) | :heavy_check_mark:                                                            | N/A                                                                           |
-| `account_id`                                                                  | *str*                                                                         | :heavy_check_mark:                                                            | ID of the account.                                                            |
-| `representative_id`                                                           | *str*                                                                         | :heavy_check_mark:                                                            | ID of the representative.                                                     |
-| `x_moov_version`                                                              | [Optional[models.Versions]](../../models/versions.md)                         | :heavy_minus_sign:                                                            | Specify an API version.                                                       |
-| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `security`                                                                                   | [operations.GetRepresentativeSecurity](../../models/operations/getrepresentativesecurity.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `account_id`                                                                                 | *str*                                                                                        | :heavy_check_mark:                                                                           | ID of the account.                                                                           |
+| `representative_id`                                                                          | *str*                                                                                        | :heavy_check_mark:                                                                           | ID of the representative.                                                                    |
+| `x_moov_version`                                                                             | [Optional[components.Versions]](../../models/components/versions.md)                         | :heavy_minus_sign:                                                                           | Specify an API version.                                                                      |
+| `retries`                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                             | :heavy_minus_sign:                                                                           | Configuration to override the default retry behavior of the client.                          |
 
 ### Response
 
-**[models.Representative](../../models/representative.md)**
+**[components.Representative](../../models/components/representative.md)**
 
 ### Errors
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## update_representative
 
@@ -275,13 +275,13 @@ If you need to update information in a locked state, please contact Moov support
 ### Example Usage
 
 ```python
-import moov
-from moov import Moov
+from moovio_sdk import Moov
+from moovio_sdk.models import components, operations
 
 with Moov() as moov:
 
-    res = moov.representatives.update_representative(security=moov.UpdateRepresentativeSecurity(
-        basic_auth=moov.SchemeBasicAuth(
+    res = moov.representatives.update_representative(security=operations.UpdateRepresentativeSecurity(
+        basic_auth=components.SchemeBasicAuth(
             username="",
             password="",
         ),
@@ -316,28 +316,28 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                    | [models.UpdateRepresentativeSecurity](../../models/updaterepresentativesecurity.md)                           | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
-| `account_id`                                                                                                  | *str*                                                                                                         | :heavy_check_mark:                                                                                            | ID of the account.                                                                                            |
-| `representative_id`                                                                                           | *str*                                                                                                         | :heavy_check_mark:                                                                                            | ID of the representative.                                                                                     |
-| `x_moov_version`                                                                                              | [Optional[models.Versions]](../../models/versions.md)                                                         | :heavy_minus_sign:                                                                                            | Specify an API version.                                                                                       |
-| `name`                                                                                                        | [Optional[models.IndividualNameUpdate]](../../models/individualnameupdate.md)                                 | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `phone`                                                                                                       | [OptionalNullable[models.Phone]](../../models/phone.md)                                                       | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `email`                                                                                                       | [OptionalNullable[models.Email]](../../models/email.md)                                                       | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `address`                                                                                                     | [OptionalNullable[models.UpdateRepresentativeAddress]](../../models/updaterepresentativeaddress.md)           | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `birth_date`                                                                                                  | [OptionalNullable[models.UpdateRepresentativeBirthDate]](../../models/updaterepresentativebirthdate.md)       | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `government_id`                                                                                               | [OptionalNullable[models.UpdateRepresentativeGovernmentID]](../../models/updaterepresentativegovernmentid.md) | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `responsibilities`                                                                                            | [OptionalNullable[models.Responsibilities]](../../models/responsibilities.md)                                 | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `retries`                                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                              | :heavy_minus_sign:                                                                                            | Configuration to override the default retry behavior of the client.                                           |
+| Parameter                                                                                                                    | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                                   | [operations.UpdateRepresentativeSecurity](../../models/operations/updaterepresentativesecurity.md)                           | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+| `account_id`                                                                                                                 | *str*                                                                                                                        | :heavy_check_mark:                                                                                                           | ID of the account.                                                                                                           |
+| `representative_id`                                                                                                          | *str*                                                                                                                        | :heavy_check_mark:                                                                                                           | ID of the representative.                                                                                                    |
+| `x_moov_version`                                                                                                             | [Optional[components.Versions]](../../models/components/versions.md)                                                         | :heavy_minus_sign:                                                                                                           | Specify an API version.                                                                                                      |
+| `name`                                                                                                                       | [Optional[components.IndividualNameUpdate]](../../models/components/individualnameupdate.md)                                 | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `phone`                                                                                                                      | [OptionalNullable[components.Phone]](../../models/components/phone.md)                                                       | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `email`                                                                                                                      | [OptionalNullable[components.Email]](../../models/components/email.md)                                                       | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `address`                                                                                                                    | [OptionalNullable[components.UpdateRepresentativeAddress]](../../models/components/updaterepresentativeaddress.md)           | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `birth_date`                                                                                                                 | [OptionalNullable[components.UpdateRepresentativeBirthDate]](../../models/components/updaterepresentativebirthdate.md)       | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `government_id`                                                                                                              | [OptionalNullable[components.UpdateRepresentativeGovernmentID]](../../models/components/updaterepresentativegovernmentid.md) | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `responsibilities`                                                                                                           | [OptionalNullable[components.Responsibilities]](../../models/components/responsibilities.md)                                 | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
+| `retries`                                                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                             | :heavy_minus_sign:                                                                                                           | Configuration to override the default retry behavior of the client.                                                          |
 
 ### Response
 
-**[models.Representative](../../models/representative.md)**
+**[components.Representative](../../models/components/representative.md)**
 
 ### Errors
 
 | Error Type          | Status Code         | Content Type        |
 | ------------------- | ------------------- | ------------------- |
-| models.GenericError | 400, 409            | application/json    |
-| models.APIError     | 4XX, 5XX            | \*/\*               |
+| errors.GenericError | 400, 409            | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
