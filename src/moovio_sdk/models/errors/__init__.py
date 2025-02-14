@@ -14,6 +14,12 @@ from .createaccount import CreateAccountResponseBody, CreateAccountResponseBodyD
 from .createpaymentlinkerror import CreatePaymentLinkError, CreatePaymentLinkErrorData
 from .createsweepconfigerror import CreateSweepConfigError, CreateSweepConfigErrorData
 from .feeplanagreementerror import FeePlanAgreementError, FeePlanAgreementErrorData
+from .fileuploadvalidationerror import (
+    File,
+    FileTypedDict,
+    FileUploadValidationError,
+    FileUploadValidationErrorData,
+)
 from .filevalidationerror import FileValidationError, FileValidationErrorData
 from .genericerror import GenericError, GenericErrorData
 from .linkapplepayerror import LinkApplePayError, LinkApplePayErrorData
@@ -23,7 +29,6 @@ from .microdepositvalidationerror import (
     MicroDepositValidationErrorData,
 )
 from .onboardinginviteerror import OnboardingInviteError, OnboardingInviteErrorData
-from .patchaccount import PatchAccountResponseBody, PatchAccountResponseBodyData
 from .patchsweepconfigerror import PatchSweepConfigError, PatchSweepConfigErrorData
 from .refundvalidationerror import RefundValidationError, RefundValidationErrorData
 from .representativevalidationerror import (
@@ -54,6 +59,7 @@ from .transfervalidationerror import (
     TransferValidationError,
     TransferValidationErrorData,
 )
+from .updateaccount import UpdateAccountResponseBody, UpdateAccountResponseBodyData
 from .updatecarderror import UpdateCardError, UpdateCardErrorData
 from .updateissuedcarderror import UpdateIssuedCardError, UpdateIssuedCardErrorData
 from .updatepaymentlinkerror import UpdatePaymentLinkError, UpdatePaymentLinkErrorData
@@ -89,6 +95,10 @@ __all__ = [
     "ErrorTypedDict",
     "FeePlanAgreementError",
     "FeePlanAgreementErrorData",
+    "File",
+    "FileTypedDict",
+    "FileUploadValidationError",
+    "FileUploadValidationErrorData",
     "FileValidationError",
     "FileValidationErrorData",
     "GenericError",
@@ -101,8 +111,6 @@ __all__ = [
     "MicroDepositValidationErrorData",
     "OnboardingInviteError",
     "OnboardingInviteErrorData",
-    "PatchAccountResponseBody",
-    "PatchAccountResponseBodyData",
     "PatchSweepConfigError",
     "PatchSweepConfigErrorData",
     "RefundValidationError",
@@ -123,6 +131,8 @@ __all__ = [
     "TransferOptionsValidationErrorData",
     "TransferValidationError",
     "TransferValidationErrorData",
+    "UpdateAccountResponseBody",
+    "UpdateAccountResponseBodyData",
     "UpdateCardError",
     "UpdateCardErrorData",
     "UpdateIssuedCardError",

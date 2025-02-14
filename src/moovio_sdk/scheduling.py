@@ -10,15 +10,10 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Scheduling(BaseSDK):
-    def create_schedule(
+    def create(
         self,
         *,
-        security: Union[
-            operations.CreateScheduleSecurity,
-            operations.CreateScheduleSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         description: Optional[str] = None,
         occurrences: Optional[
             Union[List[components.Occurrence], List[components.OccurrenceTypedDict]]
@@ -28,12 +23,13 @@ class Scheduling(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ScheduleResponse:
+    ) -> operations.CreateScheduleResponse:
         r"""Describes the schedule to create or modify.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param description: Simple description of what the schedule is.
         :param occurrences:
         :param recur: Defines configuration for recurring transfers.
@@ -51,7 +47,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.CreateScheduleRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             upsert_schedule=components.UpsertSchedule(
                 description=description,
@@ -74,9 +69,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateScheduleSecurity
+            _globals=operations.CreateScheduleGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.upsert_schedule, False, False, "json", components.UpsertSchedule
             ),
@@ -93,9 +89,12 @@ class Scheduling(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createSchedule",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -114,23 +113,36 @@ class Scheduling(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.ScheduleResponse)
+            return operations.CreateScheduleResponse(
+                result=utils.unmarshal_json(http_res.text, components.ScheduleResponse),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.ScheduleValidationErrorData
+            )
+            raise errors.ScheduleValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.ScheduleValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.ScheduleValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -145,15 +157,10 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    async def create_schedule_async(
+    async def create_async(
         self,
         *,
-        security: Union[
-            operations.CreateScheduleSecurity,
-            operations.CreateScheduleSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         description: Optional[str] = None,
         occurrences: Optional[
             Union[List[components.Occurrence], List[components.OccurrenceTypedDict]]
@@ -163,12 +170,13 @@ class Scheduling(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ScheduleResponse:
+    ) -> operations.CreateScheduleResponse:
         r"""Describes the schedule to create or modify.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param description: Simple description of what the schedule is.
         :param occurrences:
         :param recur: Defines configuration for recurring transfers.
@@ -186,7 +194,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.CreateScheduleRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             upsert_schedule=components.UpsertSchedule(
                 description=description,
@@ -209,9 +216,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateScheduleSecurity
+            _globals=operations.CreateScheduleGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.upsert_schedule, False, False, "json", components.UpsertSchedule
             ),
@@ -228,9 +236,12 @@ class Scheduling(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createSchedule",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -249,23 +260,36 @@ class Scheduling(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.ScheduleResponse)
+            return operations.CreateScheduleResponse(
+                result=utils.unmarshal_json(http_res.text, components.ScheduleResponse),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.ScheduleValidationErrorData
+            )
+            raise errors.ScheduleValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.ScheduleValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.ScheduleValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -280,26 +304,23 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    def list_schedules(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListSchedulesSecurity, operations.ListSchedulesSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.ScheduleResponse]:
+    ) -> operations.ListSchedulesResponse:
         r"""Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -316,7 +337,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.ListSchedulesRequest(
-            x_moov_version=x_moov_version,
             skip=skip,
             count=count,
             account_id=account_id,
@@ -334,9 +354,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListSchedulesSecurity
+            _globals=operations.ListSchedulesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -350,9 +371,12 @@ class Scheduling(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listSchedules",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -360,15 +384,28 @@ class Scheduling(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.ScheduleResponse]
+            return operations.ListSchedulesResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.ScheduleResponse]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -383,26 +420,23 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    async def list_schedules_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListSchedulesSecurity, operations.ListSchedulesSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.ScheduleResponse]:
+    ) -> operations.ListSchedulesResponse:
         r"""Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -419,7 +453,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.ListSchedulesRequest(
-            x_moov_version=x_moov_version,
             skip=skip,
             count=count,
             account_id=account_id,
@@ -437,9 +470,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListSchedulesSecurity
+            _globals=operations.ListSchedulesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -453,9 +487,12 @@ class Scheduling(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listSchedules",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -463,15 +500,28 @@ class Scheduling(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.ScheduleResponse]
+            return operations.ListSchedulesResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.ScheduleResponse]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -486,16 +536,11 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    def update_schedule(
+    def update(
         self,
         *,
-        security: Union[
-            operations.UpdateScheduleSecurity,
-            operations.UpdateScheduleSecurityTypedDict,
-        ],
         account_id: str,
         schedule_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         description: Optional[str] = None,
         occurrences: Optional[
             Union[List[components.Occurrence], List[components.OccurrenceTypedDict]]
@@ -505,13 +550,14 @@ class Scheduling(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ScheduleResponse:
+    ) -> operations.UpdateScheduleResponse:
         r"""Describes the schedule to modify.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
         :param account_id:
         :param schedule_id:
-        :param x_moov_version: Specify an API version.
         :param description: Simple description of what the schedule is.
         :param occurrences:
         :param recur: Defines configuration for recurring transfers.
@@ -529,7 +575,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateScheduleRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             schedule_id=schedule_id,
             upsert_schedule=components.UpsertSchedule(
@@ -553,9 +598,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateScheduleSecurity
+            _globals=operations.UpdateScheduleGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.upsert_schedule, False, False, "json", components.UpsertSchedule
             ),
@@ -572,9 +618,12 @@ class Scheduling(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateSchedule",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -593,23 +642,36 @@ class Scheduling(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.ScheduleResponse)
+            return operations.UpdateScheduleResponse(
+                result=utils.unmarshal_json(http_res.text, components.ScheduleResponse),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.ScheduleValidationErrorData
+            )
+            raise errors.ScheduleValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.ScheduleValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.ScheduleValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -624,16 +686,11 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    async def update_schedule_async(
+    async def update_async(
         self,
         *,
-        security: Union[
-            operations.UpdateScheduleSecurity,
-            operations.UpdateScheduleSecurityTypedDict,
-        ],
         account_id: str,
         schedule_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         description: Optional[str] = None,
         occurrences: Optional[
             Union[List[components.Occurrence], List[components.OccurrenceTypedDict]]
@@ -643,13 +700,14 @@ class Scheduling(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ScheduleResponse:
+    ) -> operations.UpdateScheduleResponse:
         r"""Describes the schedule to modify.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
         :param account_id:
         :param schedule_id:
-        :param x_moov_version: Specify an API version.
         :param description: Simple description of what the schedule is.
         :param occurrences:
         :param recur: Defines configuration for recurring transfers.
@@ -667,7 +725,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateScheduleRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             schedule_id=schedule_id,
             upsert_schedule=components.UpsertSchedule(
@@ -691,9 +748,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateScheduleSecurity
+            _globals=operations.UpdateScheduleGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.upsert_schedule, False, False, "json", components.UpsertSchedule
             ),
@@ -710,9 +768,12 @@ class Scheduling(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateSchedule",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -731,23 +792,36 @@ class Scheduling(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.ScheduleResponse)
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
+            return operations.UpdateScheduleResponse(
+                result=utils.unmarshal_json(http_res.text, components.ScheduleResponse),
+                headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
+            response_data = utils.unmarshal_json(
                 http_res.text, errors.ScheduleValidationErrorData
             )
-            raise errors.ScheduleValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            raise errors.ScheduleValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -762,26 +836,23 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    def get_schedules(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetSchedulesSecurity, operations.GetSchedulesSecurityTypedDict
-        ],
         account_id: str,
         schedule_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ScheduleResponse:
+    ) -> operations.GetSchedulesResponse:
         r"""Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
         :param account_id:
         :param schedule_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -796,7 +867,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.GetSchedulesRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             schedule_id=schedule_id,
         )
@@ -813,9 +883,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetSchedulesSecurity
+            _globals=operations.GetSchedulesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -829,9 +900,12 @@ class Scheduling(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getSchedules",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -839,13 +913,26 @@ class Scheduling(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.ScheduleResponse)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetSchedulesResponse(
+                result=utils.unmarshal_json(http_res.text, components.ScheduleResponse),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -860,26 +947,23 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    async def get_schedules_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetSchedulesSecurity, operations.GetSchedulesSecurityTypedDict
-        ],
         account_id: str,
         schedule_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ScheduleResponse:
+    ) -> operations.GetSchedulesResponse:
         r"""Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
         :param account_id:
         :param schedule_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -894,7 +978,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.GetSchedulesRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             schedule_id=schedule_id,
         )
@@ -911,9 +994,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetSchedulesSecurity
+            _globals=operations.GetSchedulesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -927,9 +1011,12 @@ class Scheduling(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getSchedules",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -937,13 +1024,26 @@ class Scheduling(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.ScheduleResponse)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetSchedulesResponse(
+                result=utils.unmarshal_json(http_res.text, components.ScheduleResponse),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -958,27 +1058,23 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    def cancel_schedule(
+    def cancel(
         self,
         *,
-        security: Union[
-            operations.CancelScheduleSecurity,
-            operations.CancelScheduleSecurityTypedDict,
-        ],
         account_id: str,
         schedule_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.CancelScheduleResponse:
         r"""Describes the schedule to cancel.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
         :param account_id:
         :param schedule_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -993,7 +1089,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.CancelScheduleRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             schedule_id=schedule_id,
         )
@@ -1010,9 +1105,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CancelScheduleSecurity
+            _globals=operations.CancelScheduleGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1026,9 +1122,12 @@ class Scheduling(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="cancelSchedule",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1046,18 +1145,30 @@ class Scheduling(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.CancelScheduleResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1072,27 +1183,23 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    async def cancel_schedule_async(
+    async def cancel_async(
         self,
         *,
-        security: Union[
-            operations.CancelScheduleSecurity,
-            operations.CancelScheduleSecurityTypedDict,
-        ],
         account_id: str,
         schedule_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.CancelScheduleResponse:
         r"""Describes the schedule to cancel.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
         :param account_id:
         :param schedule_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1107,7 +1214,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.CancelScheduleRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             schedule_id=schedule_id,
         )
@@ -1124,9 +1230,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CancelScheduleSecurity
+            _globals=operations.CancelScheduleGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1140,9 +1247,12 @@ class Scheduling(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="cancelSchedule",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1160,18 +1270,30 @@ class Scheduling(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.CancelScheduleResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1186,29 +1308,25 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    def get_scheduled_occurrence(
+    def get_occurrance(
         self,
         *,
-        security: Union[
-            operations.GetScheduledOccurrenceSecurity,
-            operations.GetScheduledOccurrenceSecurityTypedDict,
-        ],
         account_id: str,
         schedule_id: str,
         occurrence_filter: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ScheduleResponse:
-        r"""Defines an occurrence for when to run a transfer.
+    ) -> operations.GetScheduledOccurrenceResponse:
+        r"""Gets a specific occurrence.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
         :param account_id:
         :param schedule_id:
         :param occurrence_filter: Allows the specification of additional filters beyond the UUID.  Specifying a UUID string returns the exact occurrence. Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp. Specifying `latest` returns the latest occurrence at or before now.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1223,7 +1341,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.GetScheduledOccurrenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             schedule_id=schedule_id,
             occurrence_filter=occurrence_filter,
@@ -1241,9 +1358,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetScheduledOccurrenceSecurity
+            _globals=operations.GetScheduledOccurrenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1257,9 +1375,12 @@ class Scheduling(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getScheduledOccurrence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1267,13 +1388,28 @@ class Scheduling(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.ScheduleResponse)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetScheduledOccurrenceResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.OccurrencesResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1288,29 +1424,25 @@ class Scheduling(BaseSDK):
             http_res,
         )
 
-    async def get_scheduled_occurrence_async(
+    async def get_occurrance_async(
         self,
         *,
-        security: Union[
-            operations.GetScheduledOccurrenceSecurity,
-            operations.GetScheduledOccurrenceSecurityTypedDict,
-        ],
         account_id: str,
         schedule_id: str,
         occurrence_filter: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ScheduleResponse:
-        r"""Defines an occurrence for when to run a transfer.
+    ) -> operations.GetScheduledOccurrenceResponse:
+        r"""Gets a specific occurrence.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
         :param account_id:
         :param schedule_id:
         :param occurrence_filter: Allows the specification of additional filters beyond the UUID.  Specifying a UUID string returns the exact occurrence. Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp. Specifying `latest` returns the latest occurrence at or before now.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1325,7 +1457,6 @@ class Scheduling(BaseSDK):
             base_url = server_url
 
         request = operations.GetScheduledOccurrenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             schedule_id=schedule_id,
             occurrence_filter=occurrence_filter,
@@ -1343,9 +1474,10 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetScheduledOccurrenceSecurity
+            _globals=operations.GetScheduledOccurrenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1359,9 +1491,12 @@ class Scheduling(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getScheduledOccurrence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1369,13 +1504,28 @@ class Scheduling(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.ScheduleResponse)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetScheduledOccurrenceResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.OccurrencesResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

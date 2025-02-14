@@ -2,49 +2,50 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import (
-    schemebasicauth as components_schemebasicauth,
-    versions as components_versions,
+    enrichedaddressresponse as components_enrichedaddressresponse,
 )
 from moovio_sdk.types import BaseModel
-from moovio_sdk.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    QueryParamMetadata,
-    SecurityMetadata,
-)
+from moovio_sdk.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
-from typing import Optional
+from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class GetEnrichmentAddressSecurityTypedDict(TypedDict):
-    basic_auth: NotRequired[components_schemebasicauth.SchemeBasicAuthTypedDict]
-    o_auth2_auth: NotRequired[str]
+class GetEnrichmentAddressGlobalsTypedDict(TypedDict):
+    x_moov_version: NotRequired[str]
+    r"""Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where
+    - `YYYY` is the year
+    - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+    - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
+    - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    """
 
 
-class GetEnrichmentAddressSecurity(BaseModel):
-    basic_auth: Annotated[
-        Optional[components_schemebasicauth.SchemeBasicAuth],
-        FieldMetadata(
-            security=SecurityMetadata(scheme=True, scheme_type="http", sub_type="basic")
-        ),
-    ] = None
-
-    o_auth2_auth: Annotated[
+class GetEnrichmentAddressGlobals(BaseModel):
+    x_moov_version: Annotated[
         Optional[str],
-        FieldMetadata(
-            security=SecurityMetadata(
-                scheme=True, scheme_type="oauth2", field_name="Authorization"
-            )
-        ),
-    ] = None
+        pydantic.Field(alias="x-moov-version"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = "v2024.01.00"
+    r"""Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where
+    - `YYYY` is the year
+    - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+    - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
+    - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    """
 
 
 class GetEnrichmentAddressRequestTypedDict(TypedDict):
     search: str
     r"""Partial or complete address to search."""
-    x_moov_version: NotRequired[components_versions.Versions]
-    r"""Specify an API version."""
     max_results: NotRequired[int]
     r"""Maximum number of results to return."""
     include_cities: NotRequired[str]
@@ -64,7 +65,7 @@ class GetEnrichmentAddressRequestTypedDict(TypedDict):
     prefer_ratio: NotRequired[int]
     r"""Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results."""
     prefer_geolocation: NotRequired[str]
-    r"""If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state
+    r"""If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state
     to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is
     not set to `none`, you may see addresses from areas you do not wish to see.
     """
@@ -79,13 +80,6 @@ class GetEnrichmentAddressRequest(BaseModel):
         str, FieldMetadata(query=QueryParamMetadata(style="form", explode=False))
     ]
     r"""Partial or complete address to search."""
-
-    x_moov_version: Annotated[
-        Optional[components_versions.Versions],
-        pydantic.Field(alias="x-moov-version"),
-        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = None
-    r"""Specify an API version."""
 
     max_results: Annotated[
         Optional[int],
@@ -155,7 +149,7 @@ class GetEnrichmentAddressRequest(BaseModel):
         pydantic.Field(alias="preferGeolocation"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
-    r"""If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state
+    r"""If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state
     to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is
     not set to `none`, you may see addresses from areas you do not wish to see.
     """
@@ -171,3 +165,14 @@ class GetEnrichmentAddressRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only)."""
+
+
+class GetEnrichmentAddressResponseTypedDict(TypedDict):
+    headers: Dict[str, List[str]]
+    result: components_enrichedaddressresponse.EnrichedAddressResponseTypedDict
+
+
+class GetEnrichmentAddressResponse(BaseModel):
+    headers: Dict[str, List[str]]
+
+    result: components_enrichedaddressresponse.EnrichedAddressResponse

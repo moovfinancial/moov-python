@@ -5,41 +5,7 @@
 
 ### Available Operations
 
-* [register_apple_pay_merchant_domains](#register_apple_pay_merchant_domains) - Add domains to be registered with Apple Pay.
-
-Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
-with Apple.
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a 
-[token](https://docs.moov.io/api/authentication/access-tokens/).
-* [update_apple_pay_merchant_domains](#update_apple_pay_merchant_domains) -   Add or remove domains to be registered with Apple Pay. 
-
-  Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
-  with Apple.
-  
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a 
-  [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [get_apple_pay_merchant_domains](#get_apple_pay_merchant_domains) -   Get domains registered with Apple Pay. 
-  
-  Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-  
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope when generating a 
-  [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [create_apple_pay_session](#create_apple_pay_session) - Create a session with Apple Pay to facilitate a payment. 
-
-Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-A successful response from this endpoint should be passed through to Apple Pay unchanged. 
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [link_apple_pay_token](#link_apple_pay_token) - Connect an Apple Pay token to the specified account. 
-
-Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [link_card](#link_card) - Link a card to an existing Moov account. 
+* [link](#link) - Link a card to an existing Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
 
@@ -55,21 +21,21 @@ card is intended to be used right away. If this header is not included, the call
 Methods](https://docs.moov.io/api/sources/payment-methods/list/)
 endpoint to wait for the new payment methods to be available for use.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope
-when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [list_cards](#list_cards) - List all the active cards associated with a Moov account. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+* [list](#list) - List all the active cards associated with a Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [get_card](#get_card) - Fetch a specific card associated with a Moov account. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+* [get](#get) - Fetch a specific card associated with a Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [update_card](#update_card) - Update a linked card and/or resubmit it for verification. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.read` scope.
+* [update](#update) - Update a linked card and/or resubmit it for verification. 
 
 If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration 
 date or 
@@ -80,297 +46,14 @@ more.
 
 Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [disable_card](#disable_card) - Disables a card associated with a Moov account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
+* [disable](#disable) - Disables a card associated with a Moov account.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
-## register_apple_pay_merchant_domains
-
-Add domains to be registered with Apple Pay.
-
-Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
-with Apple.
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a 
-[token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```python
-from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
-
-with Moov() as moov:
-
-    res = moov.cards.register_apple_pay_merchant_domains(security=operations.RegisterApplePayMerchantDomainsSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="133fed79-519d-4b63-99ec-26b95076a45b", domains=[
-        "checkout.classbooker.dev",
-    ])
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                               | [operations.RegisterApplePayMerchantDomainsSecurity](../../models/operations/registerapplepaymerchantdomainssecurity.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |                                                                                                                          |
-| `account_id`                                                                                                             | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | ID of the Moov account representing the merchant.                                                                        |                                                                                                                          |
-| `x_moov_version`                                                                                                         | [Optional[components.Versions]](../../models/components/versions.md)                                                     | :heavy_minus_sign:                                                                                                       | Specify an API version.                                                                                                  |                                                                                                                          |
-| `display_name`                                                                                                           | *Optional[str]*                                                                                                          | :heavy_minus_sign:                                                                                                       | A UTF-8 string to display in the Buy button.                                                                             |                                                                                                                          |
-| `domains`                                                                                                                | List[*str*]                                                                                                              | :heavy_minus_sign:                                                                                                       | A unique list of fully-qualified, top-level or sub-domain names where you will accept Apple Pay.                         | [<br/>"checkout.classbooker.dev"<br/>]                                                                                   |
-| `retries`                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                         | :heavy_minus_sign:                                                                                                       | Configuration to override the default retry behavior of the client.                                                      |                                                                                                                          |
-
-### Response
-
-**[components.ApplePayMerchantDomains](../../models/components/applepaymerchantdomains.md)**
-
-### Errors
-
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| errors.GenericError | 400                 | application/json    |
-| errors.APIError     | 4XX, 5XX            | \*/\*               |
-
-## update_apple_pay_merchant_domains
-
-  Add or remove domains to be registered with Apple Pay. 
-
-  Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) 
-  with Apple.
-  
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a 
-  [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```python
-from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
-
-with Moov() as moov:
-
-    moov.cards.update_apple_pay_merchant_domains(security=operations.UpdateApplePayMerchantDomainsSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="b7d68fce-1dbc-4562-93aa-d9ad030c78e6", add_domains=[
-        "pay.classbooker.dev",
-    ], remove_domains=[
-        "checkout.classbooker.dev",
-    ])
-
-    # Use the SDK ...
-
-```
-
-### Parameters
-
-| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          | Example                                                                                                              |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                           | [operations.UpdateApplePayMerchantDomainsSecurity](../../models/operations/updateapplepaymerchantdomainssecurity.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |                                                                                                                      |
-| `account_id`                                                                                                         | *str*                                                                                                                | :heavy_check_mark:                                                                                                   | ID of the Moov account representing the merchant.                                                                    |                                                                                                                      |
-| `x_moov_version`                                                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                                                 | :heavy_minus_sign:                                                                                                   | Specify an API version.                                                                                              |                                                                                                                      |
-| `add_domains`                                                                                                        | List[*str*]                                                                                                          | :heavy_minus_sign:                                                                                                   | A unique list of fully-qualified, top-level or sub-domain names to add.                                              | [<br/>"pay.classbooker.dev"<br/>]                                                                                    |
-| `remove_domains`                                                                                                     | List[*str*]                                                                                                          | :heavy_minus_sign:                                                                                                   | A unique list of fully-qualified, top-level or sub-domain names to remove.                                           | [<br/>"checkout.classbooker.dev"<br/>]                                                                               |
-| `retries`                                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                     | :heavy_minus_sign:                                                                                                   | Configuration to override the default retry behavior of the client.                                                  |                                                                                                                      |
-
-### Errors
-
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| errors.GenericError | 400                 | application/json    |
-| errors.APIError     | 4XX, 5XX            | \*/\*               |
-
-## get_apple_pay_merchant_domains
-
-  Get domains registered with Apple Pay. 
-  
-  Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-  
-  To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope when generating a 
-  [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```python
-from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
-
-with Moov() as moov:
-
-    res = moov.cards.get_apple_pay_merchant_domains(security=operations.GetApplePayMerchantDomainsSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="cd0931b0-e02f-47b3-87fc-0789a05479e9")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                     | [operations.GetApplePayMerchantDomainsSecurity](../../models/operations/getapplepaymerchantdomainssecurity.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
-| `account_id`                                                                                                   | *str*                                                                                                          | :heavy_check_mark:                                                                                             | ID of the Moov account representing the merchant.                                                              |
-| `x_moov_version`                                                                                               | [Optional[components.Versions]](../../models/components/versions.md)                                           | :heavy_minus_sign:                                                                                             | Specify an API version.                                                                                        |
-| `retries`                                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                               | :heavy_minus_sign:                                                                                             | Configuration to override the default retry behavior of the client.                                            |
-
-### Response
-
-**[components.ApplePayMerchantDomains](../../models/components/applepaymerchantdomains.md)**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## create_apple_pay_session
-
-Create a session with Apple Pay to facilitate a payment. 
-
-Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-A successful response from this endpoint should be passed through to Apple Pay unchanged. 
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```python
-from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
-
-with Moov() as moov:
-
-    res = moov.cards.create_apple_pay_session(security=operations.CreateApplePaySessionSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="1d911f27-36e5-4497-8e9e-c3ecff1a8ae0", domain="checkout.classbooker.dev", display_name="Lillie.Abbott74")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 | Example                                                                                                     |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                  | [operations.CreateApplePaySessionSecurity](../../models/operations/createapplepaysessionsecurity.md)        | :heavy_check_mark:                                                                                          | N/A                                                                                                         |                                                                                                             |
-| `account_id`                                                                                                | *str*                                                                                                       | :heavy_check_mark:                                                                                          | ID of the Moov account representing the merchant.                                                           |                                                                                                             |
-| `domain`                                                                                                    | *str*                                                                                                       | :heavy_check_mark:                                                                                          | A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include "https". | checkout.classbooker.dev                                                                                    |
-| `display_name`                                                                                              | *str*                                                                                                       | :heavy_check_mark:                                                                                          | A UTF-8 string to display in the Buy button.                                                                |                                                                                                             |
-| `x_moov_version`                                                                                            | [Optional[components.Versions]](../../models/components/versions.md)                                        | :heavy_minus_sign:                                                                                          | Specify an API version.                                                                                     |                                                                                                             |
-| `retries`                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                            | :heavy_minus_sign:                                                                                          | Configuration to override the default retry behavior of the client.                                         |                                                                                                             |
-
-### Response
-
-**[str](../../models/.md)**
-
-### Errors
-
-| Error Type          | Status Code         | Content Type        |
-| ------------------- | ------------------- | ------------------- |
-| errors.GenericError | 400, 409, 422       | application/json    |
-| errors.APIError     | 4XX, 5XX            | \*/\*               |
-
-## link_apple_pay_token
-
-Connect an Apple Pay token to the specified account. 
-
-Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more. 
-The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
-
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-### Example Usage
-
-```python
-from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
-
-with Moov() as moov:
-
-    res = moov.cards.link_apple_pay_token(security=operations.LinkApplePayTokenSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="f4d3b593-6370-42f3-acf5-eab4393e2a01", token={
-        "payment_data": {
-            "version": "EC_v1",
-            "data": "3+f4oOTwPa6f1UZ6tG...CE=",
-            "signature": "MIAGCSqGSIb3DQ.AAAA==",
-            "header": {
-                "public_key_hash": "l0CnXdMv...D1I=",
-                "transaction_id": "32b...4f3",
-                "ephemeral_public_key": "MFkwEK...Md==",
-            },
-        },
-        "payment_method": {
-            "display_name": "Visa 1234",
-            "network": "Visa",
-            "type": "debit",
-        },
-        "transaction_identifier": "32b...4f3",
-    }, billing_contact={
-        "address_lines": [
-            "123 Sesame Street",
-        ],
-        "locality": "Phoenix",
-        "postal_code": "30345",
-        "administrative_area": "AZ",
-        "country_code": "US",
-    })
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                                               | Type                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                | Description                                                                                                                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                              | [operations.LinkApplePayTokenSecurity](../../models/operations/linkapplepaytokensecurity.md)                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                     |
-| `account_id`                                                                                                                                                                                                            | *str*                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                      | ID of the Moov account representing the cardholder.                                                                                                                                                                     |
-| `token`                                                                                                                                                                                                                 | [components.LinkApplePayToken](../../models/components/linkapplepaytoken.md)                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                      |   Contains the user's payment information as returned from Apple Pay.<br/><br/>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken) <br/>  for more information. |
-| `x_moov_version`                                                                                                                                                                                                        | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                      | Specify an API version.                                                                                                                                                                                                 |
-| `billing_contact`                                                                                                                                                                                                       | [Optional[components.AppleBillingContact]](../../models/components/applebillingcontact.md)                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                      |   Billing contact information as returned from Apple Pay.<br/>  <br/>  Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact) <br/>  for more information. |
-| `retries`                                                                                                                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                      | Configuration to override the default retry behavior of the client.                                                                                                                                                     |
-
-### Response
-
-**[components.LinkedApplePayPaymentMethod](../../models/components/linkedapplepaypaymentmethod.md)**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.GenericError      | 400, 409                 | application/json         |
-| errors.LinkApplePayError | 422                      | application/json         |
-| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
-
-## link_card
+## link
 
 Link a card to an existing Moov account. 
 
@@ -388,23 +71,23 @@ card is intended to be used right away. If this header is not included, the call
 Methods](https://docs.moov.io/api/sources/payment-methods/list/)
 endpoint to wait for the new payment methods to be available for use.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope
-when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.cards.link_card(security=operations.LinkCardSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="500c4473-7f7b-4a70-8a8c-d5cb2e08e0e4", card_number="4111111111111111", card_cvv="123", expiration={
+    res = moov.cards.link(account_id="500c4473-7f7b-4a70-8a8c-d5cb2e08e0e4", card_number="4111111111111111", card_cvv="123", expiration={
         "month": "01",
         "year": "21",
     }, billing_address={
@@ -427,13 +110,11 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | [operations.LinkCardSecurity](../../models/operations/linkcardsecurity.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `account_id`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `card_number`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `card_cvv`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `expiration`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | [components.CardExpiration](../../models/components/cardexpiration.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | The expiration date of the card or token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | {<br/>"month": "01",<br/>"year": "21"<br/>}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `billing_address`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | [components.CardAddress](../../models/components/cardaddress.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | {<br/>"addressLine1": "123 Main Street",<br/>"addressLine2": "Apt 302",<br/>"city": "Boulder",<br/>"stateOrProvince": "CO",<br/>"postalCode": "80301",<br/>"country": "US"<br/>}                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `x_moov_version`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Specify an API version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `x_wait_for`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | [Optional[components.LinkCardWaitFor]](../../models/components/linkcardwaitfor.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.<br/><br/>When this header is set to `payment-method`, the response will include any payment methods that were created for the newly <br/>linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.                                                                                                                                                                                                                                | payment-method                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `e2ee`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | [Optional[components.E2EEToken]](../../models/components/e2eetoken.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. <br/>This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our <br/>[GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).                                                                                                                                                                                                                 | {<br/>"token": "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTUyMSIsIngiOiJBS0NYVDM1WVdvTm8wbzExNy1SU0dqUGg3alN1NjFmLUhnYkx1dW0xVG1ueTRlcW5yX2hyU0hpY0w1d3gwODRCWDBRZjVTdEtkRUoydzY2ZUJqWHprRV9OIiwieSI6IkFIMEJfT2RaYTQtbG43dGJ4M3VBdlc1NDNQRE9HUXBCTDloRFFNWjlTQXNfOW05UWN3dnhRd1hrb1VrM3VzT1FnVV9ySVFrNFRoZ1NTUzV4UlhKcm5ZaTkifSwia2lkIjoiYmRvV3pLekpKUGw0TVFIaENDa05WYTZlZ1dmYi02V1haSjZKTFZqQ0hWMD0ifQ.HalyoHsfufBJEODd2lD9ThQvvVWw3b2kgWDLHGxmHhMv8rODyLL_Ug.rpQP178t8Ed_pUU2.Sn9UFeVoegAxiMUv11q7l3M0y9YHSLYi2n_JB7n7Pc777_47-icfaxstJemT0IC81w.akkq1EBxzWkBr4vEomSpWA"<br/>} |
 | `holder_name`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -444,7 +125,7 @@ with Moov() as moov:
 
 ### Response
 
-**[components.Card](../../models/components/card.md)**
+**[operations.LinkCardResponse](../../models/operations/linkcardresponse.md)**
 
 ### Errors
 
@@ -454,29 +135,29 @@ with Moov() as moov:
 | errors.LinkCardError | 422                  | application/json     |
 | errors.APIError      | 4XX, 5XX             | \*/\*                |
 
-## list_cards
+## list
 
 List all the active cards associated with a Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.cards.list_cards(security=operations.ListCardsSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="5881119b-63c7-492b-8c20-09d0fca99676")
+    res = moov.cards.list(account_id="5881119b-63c7-492b-8c20-09d0fca99676")
 
     # Handle response
     print(res)
@@ -485,16 +166,14 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `security`                                                                   | [operations.ListCardsSecurity](../../models/operations/listcardssecurity.md) | :heavy_check_mark:                                                           | N/A                                                                          |
-| `account_id`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
-| `x_moov_version`                                                             | [Optional[components.Versions]](../../models/components/versions.md)         | :heavy_minus_sign:                                                           | Specify an API version.                                                      |
-| `retries`                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)             | :heavy_minus_sign:                                                           | Configuration to override the default retry behavior of the client.          |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[List[components.Card]](../../models/.md)**
+**[operations.ListCardsResponse](../../models/operations/listcardsresponse.md)**
 
 ### Errors
 
@@ -502,29 +181,29 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_card
+## get
 
 Fetch a specific card associated with a Moov account. 
 
 Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.cards.get_card(security=operations.GetCardSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="21f0d82e-dc9b-4e80-ac2a-99b6babfebd7", card_id="01234567-89ab-cdef-0123-456789abcdef")
+    res = moov.cards.get(account_id="21f0d82e-dc9b-4e80-ac2a-99b6babfebd7", card_id="01234567-89ab-cdef-0123-456789abcdef")
 
     # Handle response
     print(res)
@@ -533,17 +212,15 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              | Example                                                                  |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `security`                                                               | [operations.GetCardSecurity](../../models/operations/getcardsecurity.md) | :heavy_check_mark:                                                       | N/A                                                                      |                                                                          |
-| `account_id`                                                             | *str*                                                                    | :heavy_check_mark:                                                       | N/A                                                                      |                                                                          |
-| `card_id`                                                                | *str*                                                                    | :heavy_check_mark:                                                       | N/A                                                                      | 01234567-89ab-cdef-0123-456789abcdef                                     |
-| `x_moov_version`                                                         | [Optional[components.Versions]](../../models/components/versions.md)     | :heavy_minus_sign:                                                       | Specify an API version.                                                  |                                                                          |
-| `retries`                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)         | :heavy_minus_sign:                                                       | Configuration to override the default retry behavior of the client.      |                                                                          |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
+| `card_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | 01234567-89ab-cdef-0123-456789abcdef                                |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
 
-**[components.Card](../../models/components/card.md)**
+**[operations.GetCardResponse](../../models/operations/getcardresponse.md)**
 
 ### Errors
 
@@ -551,7 +228,7 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## update_card
+## update
 
 Update a linked card and/or resubmit it for verification. 
 
@@ -564,23 +241,23 @@ more.
 
 Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.cards.update_card(security=operations.UpdateCardSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="a960061d-fb6d-4929-99b5-c96c672840f6", card_id="01234567-89ab-cdef-0123-456789abcdef", e2ee={
+    res = moov.cards.update(account_id="a960061d-fb6d-4929-99b5-c96c672840f6", card_id="01234567-89ab-cdef-0123-456789abcdef", e2ee={
         "token": "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTUyMSIsIngiOiJBS0NYVDM1WVdvTm8wbzExNy1SU0dqUGg3alN1NjFmLUhnYkx1dW0xVG1ueTRlcW5yX2hyU0hpY0w1d3gwODRCWDBRZjVTdEtkRUoydzY2ZUJqWHprRV9OIiwieSI6IkFIMEJfT2RaYTQtbG43dGJ4M3VBdlc1NDNQRE9HUXBCTDloRFFNWjlTQXNfOW05UWN3dnhRd1hrb1VrM3VzT1FnVV9ySVFrNFRoZ1NTUzV4UlhKcm5ZaTkifSwia2lkIjoiYmRvV3pLekpKUGw0TVFIaENDa05WYTZlZ1dmYi02V1haSjZKTFZqQ0hWMD0ifQ.HalyoHsfufBJEODd2lD9ThQvvVWw3b2kgWDLHGxmHhMv8rODyLL_Ug.rpQP178t8Ed_pUU2.Sn9UFeVoegAxiMUv11q7l3M0y9YHSLYi2n_JB7n7Pc777_47-icfaxstJemT0IC81w.akkq1EBxzWkBr4vEomSpWA",
     }, billing_address={
         "address_line1": "123 Main Street",
@@ -603,10 +280,8 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | [operations.UpdateCardSecurity](../../models/operations/updatecardsecurity.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `account_id`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `card_id`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | *str*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 01234567-89ab-cdef-0123-456789abcdef                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `x_moov_version`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Specify an API version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `e2ee`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | [Optional[components.E2EETokenUpdate]](../../models/components/e2eetokenupdate.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries. <br/>This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our <br/>[GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).                                                                                                                                                                                                                 | {<br/>"token": "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsia3R5IjoiRUMiLCJjcnYiOiJQLTUyMSIsIngiOiJBS0NYVDM1WVdvTm8wbzExNy1SU0dqUGg3alN1NjFmLUhnYkx1dW0xVG1ueTRlcW5yX2hyU0hpY0w1d3gwODRCWDBRZjVTdEtkRUoydzY2ZUJqWHprRV9OIiwieSI6IkFIMEJfT2RaYTQtbG43dGJ4M3VBdlc1NDNQRE9HUXBCTDloRFFNWjlTQXNfOW05UWN3dnhRd1hrb1VrM3VzT1FnVV9ySVFrNFRoZ1NTUzV4UlhKcm5ZaTkifSwia2lkIjoiYmRvV3pLekpKUGw0TVFIaENDa05WYTZlZ1dmYi02V1haSjZKTFZqQ0hWMD0ifQ.HalyoHsfufBJEODd2lD9ThQvvVWw3b2kgWDLHGxmHhMv8rODyLL_Ug.rpQP178t8Ed_pUU2.Sn9UFeVoegAxiMUv11q7l3M0y9YHSLYi2n_JB7n7Pc777_47-icfaxstJemT0IC81w.akkq1EBxzWkBr4vEomSpWA"<br/>} |
 | `billing_address`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | [Optional[components.UpdateCardAddress]](../../models/components/updatecardaddress.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | {<br/>"addressLine1": "123 Main Street",<br/>"addressLine2": "Apt 302",<br/>"city": "Boulder",<br/>"stateOrProvince": "CO",<br/>"postalCode": "80301",<br/>"country": "US"<br/>}                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `expiration`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | [Optional[components.UpdateCardExpiration]](../../models/components/updatecardexpiration.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | {<br/>"month": "01",<br/>"year": "21"<br/>}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -619,7 +294,7 @@ with Moov() as moov:
 
 ### Response
 
-**[components.Card](../../models/components/card.md)**
+**[operations.UpdateCardResponse](../../models/operations/updatecardresponse.md)**
 
 ### Errors
 
@@ -629,41 +304,44 @@ with Moov() as moov:
 | errors.UpdateCardError | 422                    | application/json       |
 | errors.APIError        | 4XX, 5XX               | \*/\*                  |
 
-## disable_card
+## disable
 
 Disables a card associated with a Moov account.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating 
-a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    moov.cards.disable_card(security=operations.DisableCardSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="a6b47d56-0b54-4dd8-9692-efad0ab1ebb4", card_id="01234567-89ab-cdef-0123-456789abcdef")
+    res = moov.cards.disable(account_id="a6b47d56-0b54-4dd8-9692-efad0ab1ebb4", card_id="01234567-89ab-cdef-0123-456789abcdef")
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `security`                                                                       | [operations.DisableCardSecurity](../../models/operations/disablecardsecurity.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
-| `account_id`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
-| `card_id`                                                                        | *str*                                                                            | :heavy_check_mark:                                                               | N/A                                                                              | 01234567-89ab-cdef-0123-456789abcdef                                             |
-| `x_moov_version`                                                                 | [Optional[components.Versions]](../../models/components/versions.md)             | :heavy_minus_sign:                                                               | Specify an API version.                                                          |                                                                                  |
-| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |                                                                                  |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
+| `card_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | 01234567-89ab-cdef-0123-456789abcdef                                |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
+
+### Response
+
+**[operations.DisableCardResponse](../../models/operations/disablecardresponse.md)**
 
 ### Errors
 

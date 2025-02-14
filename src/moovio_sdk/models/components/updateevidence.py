@@ -9,19 +9,15 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class UpdateEvidenceTypedDict(TypedDict):
-    r"""The template for adding optional properties."""
-
-    text: NotRequired[str]
-    r"""The text to associate with the dispute as evidence."""
     evidence_type: NotRequired[EvidenceType]
+    text: NotRequired[str]
+    r"""If updating text evidence, the new text to associate with the dispute."""
 
 
 class UpdateEvidence(BaseModel):
-    r"""The template for adding optional properties."""
-
-    text: Optional[str] = None
-    r"""The text to associate with the dispute as evidence."""
-
     evidence_type: Annotated[
         Optional[EvidenceType], pydantic.Field(alias="evidenceType")
     ] = None
+
+    text: Optional[str] = None
+    r"""If updating text evidence, the new text to associate with the dispute."""

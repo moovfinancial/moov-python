@@ -10,11 +10,10 @@ from typing import Any, Mapping, Optional
 
 
 class Authentication(BaseSDK):
-    def revoke_auth_token(
+    def revoke_access_token(
         self,
         *,
         token: str,
-        x_moov_version: Optional[components.Versions] = None,
         token_type_hint: Optional[components.TokenTypeHint] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
@@ -22,13 +21,12 @@ class Authentication(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.RevokeAccessTokenResponse:
         r"""Revoke an auth token.
 
         Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed.
 
         :param token: The access or refresh token to revoke.
-        :param x_moov_version: Specify an API version.
         :param token_type_hint: The type of token being revoked.
         :param client_id: Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
         :param client_secret: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
@@ -45,14 +43,11 @@ class Authentication(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.RevokeAuthTokenRequest(
-            x_moov_version=x_moov_version,
-            revoke_token_request=components.RevokeTokenRequest(
-                token=token,
-                token_type_hint=token_type_hint,
-                client_id=client_id,
-                client_secret=client_secret,
-            ),
+        request = components.RevokeTokenRequest(
+            token=token,
+            token_type_hint=token_type_hint,
+            client_id=client_id,
+            client_secret=client_secret,
         )
 
         req = self._build_request(
@@ -67,13 +62,12 @@ class Authentication(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.RevokeAccessTokenGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.revoke_token_request,
-                False,
-                False,
-                "json",
-                components.RevokeTokenRequest,
+                request, False, False, "json", components.RevokeTokenRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -88,7 +82,8 @@ class Authentication(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="revokeAuthToken",
+                base_url=base_url or "",
+                operation_id="revokeAccessToken",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -99,23 +94,35 @@ class Authentication(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.RevokeAccessTokenResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
+            response_data = utils.unmarshal_json(
                 http_res.text, errors.RevokeTokenRequestErrorData
             )
-            raise errors.RevokeTokenRequestError(data=data)
-        if utils.match_response(http_res, ["429", "4XX"], "*"):
+            raise errors.RevokeTokenRequestError(data=response_data)
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -130,11 +137,10 @@ class Authentication(BaseSDK):
             http_res,
         )
 
-    async def revoke_auth_token_async(
+    async def revoke_access_token_async(
         self,
         *,
         token: str,
-        x_moov_version: Optional[components.Versions] = None,
         token_type_hint: Optional[components.TokenTypeHint] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
@@ -142,13 +148,12 @@ class Authentication(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.RevokeAccessTokenResponse:
         r"""Revoke an auth token.
 
         Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed.
 
         :param token: The access or refresh token to revoke.
-        :param x_moov_version: Specify an API version.
         :param token_type_hint: The type of token being revoked.
         :param client_id: Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
         :param client_secret: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
@@ -165,14 +170,11 @@ class Authentication(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.RevokeAuthTokenRequest(
-            x_moov_version=x_moov_version,
-            revoke_token_request=components.RevokeTokenRequest(
-                token=token,
-                token_type_hint=token_type_hint,
-                client_id=client_id,
-                client_secret=client_secret,
-            ),
+        request = components.RevokeTokenRequest(
+            token=token,
+            token_type_hint=token_type_hint,
+            client_id=client_id,
+            client_secret=client_secret,
         )
 
         req = self._build_request_async(
@@ -187,13 +189,12 @@ class Authentication(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.RevokeAccessTokenGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.revoke_token_request,
-                False,
-                False,
-                "json",
-                components.RevokeTokenRequest,
+                request, False, False, "json", components.RevokeTokenRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -208,7 +209,8 @@ class Authentication(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="revokeAuthToken",
+                base_url=base_url or "",
+                operation_id="revokeAccessToken",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -219,23 +221,35 @@ class Authentication(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.RevokeAccessTokenResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
+            response_data = utils.unmarshal_json(
                 http_res.text, errors.RevokeTokenRequestErrorData
             )
-            raise errors.RevokeTokenRequestError(data=data)
-        if utils.match_response(http_res, ["429", "4XX"], "*"):
+            raise errors.RevokeTokenRequestError(data=response_data)
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -250,11 +264,10 @@ class Authentication(BaseSDK):
             http_res,
         )
 
-    def create_auth_token(
+    def create_access_token(
         self,
         *,
         grant_type: components.GrantType,
-        x_moov_version: Optional[components.Versions] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
         scope: Optional[str] = None,
@@ -263,11 +276,10 @@ class Authentication(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.AuthToken:
+    ) -> operations.CreateAccessTokenResponse:
         r"""Create or refresh an access token.
 
         :param grant_type: The type of grant being requested.    - `client_credentials`: A grant type used by clients to obtain an access token   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
-        :param x_moov_version: Specify an API version.
         :param client_id: Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
         :param client_secret: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
         :param scope: A space delimited list of scopes. Required when `grant_type` is `client_credentials`.
@@ -285,15 +297,12 @@ class Authentication(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.CreateAuthTokenRequest(
-            x_moov_version=x_moov_version,
-            auth_token_request=components.AuthTokenRequest(
-                grant_type=grant_type,
-                client_id=client_id,
-                client_secret=client_secret,
-                scope=scope,
-                refresh_token=refresh_token,
-            ),
+        request = components.AuthTokenRequest(
+            grant_type=grant_type,
+            client_id=client_id,
+            client_secret=client_secret,
+            scope=scope,
+            refresh_token=refresh_token,
         )
 
         req = self._build_request(
@@ -308,13 +317,12 @@ class Authentication(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateAccessTokenGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.auth_token_request,
-                False,
-                False,
-                "json",
-                components.AuthTokenRequest,
+                request, False, False, "json", components.AuthTokenRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -329,7 +337,8 @@ class Authentication(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="createAuthToken",
+                base_url=base_url or "",
+                operation_id="createAccessToken",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -340,21 +349,36 @@ class Authentication(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.AuthToken)
+            return operations.CreateAccessTokenResponse(
+                result=utils.unmarshal_json(http_res.text, components.AuthToken),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.AuthTokenRequestErrorData)
-            raise errors.AuthTokenRequestError(data=data)
-        if utils.match_response(http_res, ["429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.AuthTokenRequestErrorData
+            )
+            raise errors.AuthTokenRequestError(data=response_data)
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -369,11 +393,10 @@ class Authentication(BaseSDK):
             http_res,
         )
 
-    async def create_auth_token_async(
+    async def create_access_token_async(
         self,
         *,
         grant_type: components.GrantType,
-        x_moov_version: Optional[components.Versions] = None,
         client_id: Optional[str] = None,
         client_secret: Optional[str] = None,
         scope: Optional[str] = None,
@@ -382,11 +405,10 @@ class Authentication(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.AuthToken:
+    ) -> operations.CreateAccessTokenResponse:
         r"""Create or refresh an access token.
 
         :param grant_type: The type of grant being requested.    - `client_credentials`: A grant type used by clients to obtain an access token   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
-        :param x_moov_version: Specify an API version.
         :param client_id: Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
         :param client_secret: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
         :param scope: A space delimited list of scopes. Required when `grant_type` is `client_credentials`.
@@ -404,15 +426,12 @@ class Authentication(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.CreateAuthTokenRequest(
-            x_moov_version=x_moov_version,
-            auth_token_request=components.AuthTokenRequest(
-                grant_type=grant_type,
-                client_id=client_id,
-                client_secret=client_secret,
-                scope=scope,
-                refresh_token=refresh_token,
-            ),
+        request = components.AuthTokenRequest(
+            grant_type=grant_type,
+            client_id=client_id,
+            client_secret=client_secret,
+            scope=scope,
+            refresh_token=refresh_token,
         )
 
         req = self._build_request_async(
@@ -427,13 +446,12 @@ class Authentication(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateAccessTokenGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.auth_token_request,
-                False,
-                False,
-                "json",
-                components.AuthTokenRequest,
+                request, False, False, "json", components.AuthTokenRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -448,7 +466,8 @@ class Authentication(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="createAuthToken",
+                base_url=base_url or "",
+                operation_id="createAccessToken",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -459,21 +478,36 @@ class Authentication(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.AuthToken)
+            return operations.CreateAccessTokenResponse(
+                result=utils.unmarshal_json(http_res.text, components.AuthToken),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.AuthTokenRequestErrorData)
-            raise errors.AuthTokenRequestError(data=data)
-        if utils.match_response(http_res, ["429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.AuthTokenRequestErrorData
+            )
+            raise errors.AuthTokenRequestError(data=response_data)
+        if utils.match_response(http_res, "429", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

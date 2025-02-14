@@ -5,28 +5,44 @@
 
 ### Available Operations
 
-* [post_brand](#post_brand) - Creates the brand properties for the specified account.
-* [get_brand](#get_brand) - Gets the brand properties for the specified account.
-* [update_brand](#update_brand) - Updates the brand properties for the specified account.
+* [create](#create) - Create brand properties for the specified account.
 
-## post_brand
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+* [upsert](#upsert) - Create or replace brand properties for the specified account.
 
-Creates the brand properties for the specified account.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+* [get](#get) - Get brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.read` scope.
+* [update](#update) - Updates the brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+
+## create
+
+Create brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.branding.post_brand(security=operations.PostBrandSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="e0ae5cc2-d23b-44c7-b778-06f786dadb4b", colors=components.Colors(
+    res = moov.branding.create(account_id="7a621cf0-21cd-49cf-8540-3315211a509a", colors=components.BrandColors(
         dark={
             "accent": "#111111",
         },
@@ -42,17 +58,15 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `security`                                                                   | [operations.PostBrandSecurity](../../models/operations/postbrandsecurity.md) | :heavy_check_mark:                                                           | N/A                                                                          |
-| `account_id`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
-| `colors`                                                                     | [components.Colors](../../models/components/colors.md)                       | :heavy_check_mark:                                                           | Set brand accent colors for light and dark modes.                            |
-| `x_moov_version`                                                             | [Optional[components.Versions]](../../models/components/versions.md)         | :heavy_minus_sign:                                                           | Specify an API version.                                                      |
-| `retries`                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)             | :heavy_minus_sign:                                                           | Configuration to override the default retry behavior of the client.          |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `colors`                                                            | [components.BrandColors](../../models/components/brandcolors.md)    | :heavy_check_mark:                                                  | Brand colors for light and dark modes.                              |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[components.Brand](../../models/components/brand.md)**
+**[operations.CreateBrandResponse](../../models/operations/createbrandresponse.md)**
 
 ### Errors
 
@@ -62,24 +76,34 @@ with Moov() as moov:
 | errors.BrandValidationError | 422                         | application/json            |
 | errors.APIError             | 4XX, 5XX                    | \*/\*                       |
 
-## get_brand
+## upsert
 
-Gets the brand properties for the specified account.
+Create or replace brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.branding.get_brand(security=operations.GetBrandSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="07eb5173-1869-4649-9aa6-f399787a2751")
+    res = moov.branding.upsert(account_id="87673c22-1b80-4b69-b5bb-e92af8dcce02", colors=components.BrandColors(
+        dark={
+            "accent": "#111111",
+        },
+        light={
+            "accent": "#111111",
+        },
+    ))
 
     # Handle response
     print(res)
@@ -88,16 +112,61 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `security`                                                                 | [operations.GetBrandSecurity](../../models/operations/getbrandsecurity.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `account_id`                                                               | *str*                                                                      | :heavy_check_mark:                                                         | N/A                                                                        |
-| `x_moov_version`                                                           | [Optional[components.Versions]](../../models/components/versions.md)       | :heavy_minus_sign:                                                         | Specify an API version.                                                    |
-| `retries`                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)           | :heavy_minus_sign:                                                         | Configuration to override the default retry behavior of the client.        |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `colors`                                                            | [components.BrandColors](../../models/components/brandcolors.md)    | :heavy_check_mark:                                                  | Brand colors for light and dark modes.                              |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[components.Brand](../../models/components/brand.md)**
+**[operations.UpsertBrandResponse](../../models/operations/upsertbrandresponse.md)**
+
+### Errors
+
+| Error Type                  | Status Code                 | Content Type                |
+| --------------------------- | --------------------------- | --------------------------- |
+| errors.GenericError         | 400, 409                    | application/json            |
+| errors.BrandValidationError | 422                         | application/json            |
+| errors.APIError             | 4XX, 5XX                    | \*/\*                       |
+
+## get
+
+Get brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.read` scope.
+
+### Example Usage
+
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.branding.get(account_id="07eb5173-1869-4649-9aa6-f399787a2751")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.GetBrandResponse](../../models/operations/getbrandresponse.md)**
 
 ### Errors
 
@@ -105,24 +174,27 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## update_brand
+## update
 
 Updates the brand properties for the specified account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.branding.update_brand(security=operations.UpdateBrandSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="6c1f5632-7f37-4b3d-861e-10e31b8853de")
+    res = moov.branding.update(account_id="6c1f5632-7f37-4b3d-861e-10e31b8853de")
 
     # Handle response
     print(res)
@@ -131,17 +203,15 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `security`                                                                       | [operations.UpdateBrandSecurity](../../models/operations/updatebrandsecurity.md) | :heavy_check_mark:                                                               | N/A                                                                              |
-| `account_id`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | N/A                                                                              |
-| `x_moov_version`                                                                 | [Optional[components.Versions]](../../models/components/versions.md)             | :heavy_minus_sign:                                                               | Specify an API version.                                                          |
-| `colors`                                                                         | [Optional[components.UpdateColors]](../../models/components/updatecolors.md)     | :heavy_minus_sign:                                                               | N/A                                                                              |
-| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `account_id`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
+| `colors`                                                                     | [Optional[components.UpdateColors]](../../models/components/updatecolors.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `retries`                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)             | :heavy_minus_sign:                                                           | Configuration to override the default retry behavior of the client.          |
 
 ### Response
 
-**[components.Brand](../../models/components/brand.md)**
+**[operations.UpdateBrandResponse](../../models/operations/updatebrandresponse.md)**
 
 ### Errors
 

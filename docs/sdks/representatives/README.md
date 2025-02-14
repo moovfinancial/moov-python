@@ -5,27 +5,29 @@
 
 ### Available Operations
 
-* [create_representative](#create_representative) - Moov accounts associated with businesses require information regarding individuals who represent the business. 
+* [create](#create) - Moov accounts associated with businesses require information regarding individuals who represent the business. 
 You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [list_representatives](#list_representatives) - A Moov account may have multiple representatives depending on the associated business’s ownership and management structure. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+* [list](#list) - A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
 You can use this method to list all the representatives for a given Moov account. 
 Note that Moov accounts associated with an individual do not have representatives. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [delete_representative](#delete_representative) - Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+* [delete](#delete) - Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [get_representative](#get_representative) - Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+* [get](#get) - Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [update_representative](#update_representative) - If a representative’s information has changed you can patch the information associated with a specific representative ID. 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
+* [update](#update) - If a representative's information has changed you can patch the information associated with a specific representative ID. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
-
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 
 When **can** profile data be updated:
 
@@ -33,34 +35,38 @@ When **can** profile data be updated:
 - During the verification process, missing or incomplete profile data can be edited.
 - Verified representatives can only add missing profile data.
 
-When **can’t** profile data be updated:
+When **can't** profile data be updated:
 
 - Verified representatives cannot change any existing profile data.
 
 If you need to update information in a locked state, please contact Moov support.
 
-## create_representative
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+
+## create
 
 Moov accounts associated with businesses require information regarding individuals who represent the business. 
 You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.representatives.create_representative(security=operations.CreateRepresentativeSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="602bcb92-e33e-47e9-874b-f8c8cdea8a6e", name={
+    res = moov.representatives.create(account_id="602bcb92-e33e-47e9-874b-f8c8cdea8a6e", name={
         "first_name": "Jordan",
         "last_name": "Lee",
         "middle_name": "Reese",
@@ -93,10 +99,8 @@ with Moov() as moov:
 
 | Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      | Example                                                                                                          |
 | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                       | [operations.CreateRepresentativeSecurity](../../models/operations/createrepresentativesecurity.md)               | :heavy_check_mark:                                                                                               | N/A                                                                                                              |                                                                                                                  |
 | `account_id`                                                                                                     | *str*                                                                                                            | :heavy_check_mark:                                                                                               | ID of the account.                                                                                               |                                                                                                                  |
 | `name`                                                                                                           | [components.IndividualName](../../models/components/individualname.md)                                           | :heavy_check_mark:                                                                                               | N/A                                                                                                              |                                                                                                                  |
-| `x_moov_version`                                                                                                 | [Optional[components.Versions]](../../models/components/versions.md)                                             | :heavy_minus_sign:                                                                                               | Specify an API version.                                                                                          |                                                                                                                  |
 | `phone`                                                                                                          | [Optional[components.PhoneNumber]](../../models/components/phonenumber.md)                                       | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |                                                                                                                  |
 | `email`                                                                                                          | *Optional[str]*                                                                                                  | :heavy_minus_sign:                                                                                               | N/A                                                                                                              | jordan.lee@classbooker.dev                                                                                       |
 | `address`                                                                                                        | [Optional[components.Address]](../../models/components/address.md)                                               | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |                                                                                                                  |
@@ -107,7 +111,7 @@ with Moov() as moov:
 
 ### Response
 
-**[components.Representative](../../models/components/representative.md)**
+**[operations.CreateRepresentativeResponse](../../models/operations/createrepresentativeresponse.md)**
 
 ### Errors
 
@@ -117,29 +121,30 @@ with Moov() as moov:
 | errors.RepresentativeValidationError | 422                                  | application/json                     |
 | errors.APIError                      | 4XX, 5XX                             | \*/\*                                |
 
-## list_representatives
+## list
 
-A Moov account may have multiple representatives depending on the associated business’s ownership and management structure. 
+A Moov account may have multiple representatives depending on the associated business's ownership and management structure. 
 You can use this method to list all the representatives for a given Moov account. 
 Note that Moov accounts associated with an individual do not have representatives. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.representatives.list_representatives(security=operations.ListRepresentativesSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="33c72fc5-9781-4400-9547-0fa6966c8791")
+    res = moov.representatives.list(account_id="33c72fc5-9781-4400-9547-0fa6966c8791")
 
     # Handle response
     print(res)
@@ -148,16 +153,14 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `security`                                                                                       | [operations.ListRepresentativesSecurity](../../models/operations/listrepresentativessecurity.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `account_id`                                                                                     | *str*                                                                                            | :heavy_check_mark:                                                                               | ID of the account.                                                                               |
-| `x_moov_version`                                                                                 | [Optional[components.Versions]](../../models/components/versions.md)                             | :heavy_minus_sign:                                                                               | Specify an API version.                                                                          |
-| `retries`                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                 | :heavy_minus_sign:                                                                               | Configuration to override the default retry behavior of the client.                              |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | ID of the account.                                                  |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[List[components.Representative]](../../models/.md)**
+**[operations.ListRepresentativesResponse](../../models/operations/listrepresentativesresponse.md)**
 
 ### Errors
 
@@ -165,40 +168,44 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## delete_representative
+## delete
 
 Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    moov.representatives.delete_representative(security=operations.DeleteRepresentativeSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="8c15ae30-39cc-45a6-a9b1-f96dfd44efa8", representative_id="302eff0a-1b46-4437-bfa0-532d4401ffcd")
+    res = moov.representatives.delete(account_id="8c15ae30-39cc-45a6-a9b1-f96dfd44efa8", representative_id="302eff0a-1b46-4437-bfa0-532d4401ffcd")
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `security`                                                                                         | [operations.DeleteRepresentativeSecurity](../../models/operations/deleterepresentativesecurity.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `account_id`                                                                                       | *str*                                                                                              | :heavy_check_mark:                                                                                 | ID of the account.                                                                                 |
-| `representative_id`                                                                                | *str*                                                                                              | :heavy_check_mark:                                                                                 | ID of the representative.                                                                          |
-| `x_moov_version`                                                                                   | [Optional[components.Versions]](../../models/components/versions.md)                               | :heavy_minus_sign:                                                                                 | Specify an API version.                                                                            |
-| `retries`                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                   | :heavy_minus_sign:                                                                                 | Configuration to override the default retry behavior of the client.                                |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | ID of the account.                                                  |
+| `representative_id`                                                 | *str*                                                               | :heavy_check_mark:                                                  | ID of the representative.                                           |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.DeleteRepresentativeResponse](../../models/operations/deleterepresentativeresponse.md)**
 
 ### Errors
 
@@ -207,26 +214,27 @@ with Moov() as moov:
 | errors.GenericError | 400, 409            | application/json    |
 | errors.APIError     | 4XX, 5XX            | \*/\*               |
 
-## get_representative
+## get
 
 Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.representatives.get_representative(security=operations.GetRepresentativeSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="64980616-9a3a-476e-b482-151eb6571b76", representative_id="7b611595-93d0-48cc-9da4-3aac709d069a")
+    res = moov.representatives.get(account_id="64980616-9a3a-476e-b482-151eb6571b76", representative_id="7b611595-93d0-48cc-9da4-3aac709d069a")
 
     # Handle response
     print(res)
@@ -235,17 +243,15 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `security`                                                                                   | [operations.GetRepresentativeSecurity](../../models/operations/getrepresentativesecurity.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
-| `account_id`                                                                                 | *str*                                                                                        | :heavy_check_mark:                                                                           | ID of the account.                                                                           |
-| `representative_id`                                                                          | *str*                                                                                        | :heavy_check_mark:                                                                           | ID of the representative.                                                                    |
-| `x_moov_version`                                                                             | [Optional[components.Versions]](../../models/components/versions.md)                         | :heavy_minus_sign:                                                                           | Specify an API version.                                                                      |
-| `retries`                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                             | :heavy_minus_sign:                                                                           | Configuration to override the default retry behavior of the client.                          |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | ID of the account.                                                  |
+| `representative_id`                                                 | *str*                                                               | :heavy_check_mark:                                                  | ID of the representative.                                           |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[components.Representative](../../models/components/representative.md)**
+**[operations.GetRepresentativeResponse](../../models/operations/getrepresentativeresponse.md)**
 
 ### Errors
 
@@ -253,12 +259,10 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## update_representative
+## update
 
-If a representative’s information has changed you can patch the information associated with a specific representative ID. 
+If a representative's information has changed you can patch the information associated with a specific representative ID. 
 Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
-
-To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 
 When **can** profile data be updated:
 
@@ -266,26 +270,29 @@ When **can** profile data be updated:
 - During the verification process, missing or incomplete profile data can be edited.
 - Verified representatives can only add missing profile data.
 
-When **can’t** profile data be updated:
+When **can't** profile data be updated:
 
 - Verified representatives cannot change any existing profile data.
 
 If you need to update information in a locked state, please contact Moov support.
 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.representatives.update_representative(security=operations.UpdateRepresentativeSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="377d9553-179a-45f6-8ed4-c92810fbb4d0", representative_id="54619159-548e-45ed-b917-271fb71fc438", name={
+    res = moov.representatives.update(account_id="377d9553-179a-45f6-8ed4-c92810fbb4d0", representative_id="54619159-548e-45ed-b917-271fb71fc438", name={
         "first_name": "Jordan",
         "middle_name": "Reese",
         "last_name": "Lee",
@@ -318,10 +325,8 @@ with Moov() as moov:
 
 | Parameter                                                                                                                    | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                   | [operations.UpdateRepresentativeSecurity](../../models/operations/updaterepresentativesecurity.md)                           | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
 | `account_id`                                                                                                                 | *str*                                                                                                                        | :heavy_check_mark:                                                                                                           | ID of the account.                                                                                                           |
 | `representative_id`                                                                                                          | *str*                                                                                                                        | :heavy_check_mark:                                                                                                           | ID of the representative.                                                                                                    |
-| `x_moov_version`                                                                                                             | [Optional[components.Versions]](../../models/components/versions.md)                                                         | :heavy_minus_sign:                                                                                                           | Specify an API version.                                                                                                      |
 | `name`                                                                                                                       | [Optional[components.IndividualNameUpdate]](../../models/components/individualnameupdate.md)                                 | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
 | `phone`                                                                                                                      | [OptionalNullable[components.Phone]](../../models/components/phone.md)                                                       | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
 | `email`                                                                                                                      | [OptionalNullable[components.Email]](../../models/components/email.md)                                                       | :heavy_minus_sign:                                                                                                           | N/A                                                                                                                          |
@@ -333,7 +338,7 @@ with Moov() as moov:
 
 ### Response
 
-**[components.Representative](../../models/components/representative.md)**
+**[operations.UpdateRepresentativeResponse](../../models/operations/updaterepresentativeresponse.md)**
 
 ### Errors
 

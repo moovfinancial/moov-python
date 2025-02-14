@@ -10,37 +10,31 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class BankAccounts(BaseSDK):
-    def link_bank_account(
+    def link(
         self,
         *,
-        security: Union[
-            operations.LinkBankAccountSecurity,
-            operations.LinkBankAccountSecurityTypedDict,
-        ],
         account_id: str,
         link_bank_account: Union[
             components.LinkBankAccount, components.LinkBankAccountTypedDict
         ],
-        x_moov_version: Optional[components.Versions] = None,
         x_wait_for: Optional[components.BankAccountWaitFor] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccount:
+    ) -> operations.LinkBankAccountResponse:
         r"""Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
-
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 
         It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked
         bank-account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment
         Methods](https://docs.moov.io/api/sources/payment-methods/list/)
         endpoint to wait for the new payment methods to be available for use.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
+
         :param account_id:
         :param link_bank_account:
-        :param x_moov_version: Specify an API version.
         :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.  When this header is set to `payment-method`, the response will include any payment methods that were created for the newly linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -56,7 +50,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.LinkBankAccountRequest(
-            x_moov_version=x_moov_version,
             x_wait_for=x_wait_for,
             account_id=account_id,
             link_bank_account=utils.get_pydantic_model(
@@ -76,9 +69,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.LinkBankAccountSecurity
+            _globals=operations.LinkBankAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.link_bank_account,
                 False,
@@ -99,9 +93,12 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="linkBankAccount",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -120,23 +117,36 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.BankAccount)
+            return operations.LinkBankAccountResponse(
+                result=utils.unmarshal_json(http_res.text, components.BankAccount),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.BankAccountValidationErrorData
+            )
+            raise errors.BankAccountValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.BankAccountValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.BankAccountValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -151,37 +161,31 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    async def link_bank_account_async(
+    async def link_async(
         self,
         *,
-        security: Union[
-            operations.LinkBankAccountSecurity,
-            operations.LinkBankAccountSecurityTypedDict,
-        ],
         account_id: str,
         link_bank_account: Union[
             components.LinkBankAccount, components.LinkBankAccountTypedDict
         ],
-        x_moov_version: Optional[components.Versions] = None,
         x_wait_for: Optional[components.BankAccountWaitFor] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccount:
+    ) -> operations.LinkBankAccountResponse:
         r"""Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
-
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 
         It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked
         bank-account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment
         Methods](https://docs.moov.io/api/sources/payment-methods/list/)
         endpoint to wait for the new payment methods to be available for use.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
+
         :param account_id:
         :param link_bank_account:
-        :param x_moov_version: Specify an API version.
         :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.  When this header is set to `payment-method`, the response will include any payment methods that were created for the newly linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -197,7 +201,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.LinkBankAccountRequest(
-            x_moov_version=x_moov_version,
             x_wait_for=x_wait_for,
             account_id=account_id,
             link_bank_account=utils.get_pydantic_model(
@@ -217,9 +220,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.LinkBankAccountSecurity
+            _globals=operations.LinkBankAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.link_bank_account,
                 False,
@@ -240,9 +244,12 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="linkBankAccount",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -261,23 +268,36 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.BankAccount)
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
+            return operations.LinkBankAccountResponse(
+                result=utils.unmarshal_json(http_res.text, components.BankAccount),
+                headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
+            response_data = utils.unmarshal_json(
                 http_res.text, errors.BankAccountValidationErrorData
             )
-            raise errors.BankAccountValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            raise errors.BankAccountValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -292,29 +312,23 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    def list_bank_accounts(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListBankAccountsSecurity,
-            operations.ListBankAccountsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.BankAccount]:
+    ) -> operations.ListBankAccountsResponse:
         r"""List all the bank accounts associated with a particular Moov account.
 
-        Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more. To use this endpoint
-        from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
+        Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -329,7 +343,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.ListBankAccountsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -345,9 +358,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListBankAccountsSecurity
+            _globals=operations.ListBankAccountsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -361,9 +375,12 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listBankAccounts",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -371,13 +388,28 @@ class BankAccounts(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.BankAccount])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListBankAccountsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.BankAccount]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -392,29 +424,23 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    async def list_bank_accounts_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListBankAccountsSecurity,
-            operations.ListBankAccountsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.BankAccount]:
+    ) -> operations.ListBankAccountsResponse:
         r"""List all the bank accounts associated with a particular Moov account.
 
-        Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more. To use this endpoint
-        from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
+        Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -429,7 +455,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.ListBankAccountsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -445,9 +470,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListBankAccountsSecurity
+            _globals=operations.ListBankAccountsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -461,9 +487,12 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listBankAccounts",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -471,13 +500,28 @@ class BankAccounts(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.BankAccount])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListBankAccountsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.BankAccount]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -492,31 +536,25 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    def get_bank_account(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetBankAccountSecurity,
-            operations.GetBankAccountSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccount:
+    ) -> operations.GetBankAccountResponse:
         r"""Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov account.
 
-        Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more. To use this
-        endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope when
-        generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -531,7 +569,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.GetBankAccountRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
         )
@@ -548,9 +585,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetBankAccountSecurity
+            _globals=operations.GetBankAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -564,9 +602,12 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getBankAccount",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -574,13 +615,26 @@ class BankAccounts(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.BankAccount)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetBankAccountResponse(
+                result=utils.unmarshal_json(http_res.text, components.BankAccount),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -595,31 +649,25 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    async def get_bank_account_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetBankAccountSecurity,
-            operations.GetBankAccountSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccount:
+    ) -> operations.GetBankAccountResponse:
         r"""Retrieve bank account details (i.e. routing number or account type) associated with a specific Moov account.
 
-        Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more. To use this
-        endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope when
-        generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
+
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -634,7 +682,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.GetBankAccountRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
         )
@@ -651,9 +698,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetBankAccountSecurity
+            _globals=operations.GetBankAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -667,9 +715,12 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getBankAccount",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -677,13 +728,26 @@ class BankAccounts(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.BankAccount)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetBankAccountResponse(
+                result=utils.unmarshal_json(http_res.text, components.BankAccount),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -698,30 +762,23 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    def disable_bank_account(
+    def disable(
         self,
         *,
-        security: Union[
-            operations.DisableBankAccountSecurity,
-            operations.DisableBankAccountSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DisableBankAccountResponse:
         r"""Discontinue using a specified bank account linked to a Moov account.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope
-        when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -736,7 +793,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.DisableBankAccountRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
         )
@@ -753,9 +809,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.DisableBankAccountSecurity
+            _globals=operations.DisableBankAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -769,9 +826,12 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="disableBankAccount",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -789,18 +849,30 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.DisableBankAccountResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -815,30 +887,23 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    async def disable_bank_account_async(
+    async def disable_async(
         self,
         *,
-        security: Union[
-            operations.DisableBankAccountSecurity,
-            operations.DisableBankAccountSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DisableBankAccountResponse:
         r"""Discontinue using a specified bank account linked to a Moov account.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope
-        when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -853,7 +918,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.DisableBankAccountRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
         )
@@ -870,9 +934,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.DisableBankAccountSecurity
+            _globals=operations.DisableBankAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -886,9 +951,12 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="disableBankAccount",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -906,18 +974,30 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.DisableBankAccountResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -935,32 +1015,31 @@ class BankAccounts(BaseSDK):
     def initiate_micro_deposits(
         self,
         *,
-        security: Union[
-            operations.InitiateMicroDepositsSecurity,
-            operations.InitiateMicroDepositsSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity. Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account you want to confirm.
+    ) -> operations.InitiateMicroDepositsResponse:
+        r"""Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity.
+        Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account
+        you want to confirm.
 
-        If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request micro-deposits any time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated, Moov simultaneously initiates a debit to recoup the micro-deposits.
+        If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request micro-deposits any
+        time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated, Moov simultaneously
+        initiates a debit to recoup the micro-deposits.
 
-        `sandbox` - Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly verifiable once initiated.
+        Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly verifiable once initiated.
 
-        You can simulate micro-deposit verification in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#micro-deposits) guide for more information.
+        You can simulate micro-deposit verification in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#micro-deposits)
+        guide for more information.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -975,7 +1054,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.InitiateMicroDepositsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
         )
@@ -992,9 +1070,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.InitiateMicroDepositsSecurity
+            _globals=operations.InitiateMicroDepositsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1008,9 +1087,12 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="initiateMicroDeposits",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1028,18 +1110,30 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.InitiateMicroDepositsResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1057,32 +1151,31 @@ class BankAccounts(BaseSDK):
     async def initiate_micro_deposits_async(
         self,
         *,
-        security: Union[
-            operations.InitiateMicroDepositsSecurity,
-            operations.InitiateMicroDepositsSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity. Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account you want to confirm.
+    ) -> operations.InitiateMicroDepositsResponse:
+        r"""Micro-deposits help confirm bank account ownership, helping reduce fraud and the risk of unauthorized activity.
+        Use this method to initiate the micro-deposit verification, sending two small credit transfers to the bank account
+        you want to confirm.
 
-        If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request micro-deposits any time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated, Moov simultaneously initiates a debit to recoup the micro-deposits.
+        If you request micro-deposits before 4:15PM ET, they will appear that same day. If you request micro-deposits any
+        time after 4:15PM ET, they will appear the next banking day. When the two credits are initiated, Moov simultaneously
+        initiates a debit to recoup the micro-deposits.
 
-        `sandbox` - Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly verifiable once initiated.
+        Micro-deposits initiated for a `sandbox` bank account will always be `$0.00` / `$0.00` and instantly verifiable once initiated.
 
-        You can simulate micro-deposit verification in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#micro-deposits) guide for more information.
+        You can simulate micro-deposit verification in test mode. See our [test mode](https://docs.moov.io/guides/get-started/test-mode/#micro-deposits)
+        guide for more information.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1097,7 +1190,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.InitiateMicroDepositsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
         )
@@ -1114,9 +1206,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.InitiateMicroDepositsSecurity
+            _globals=operations.InitiateMicroDepositsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1130,9 +1223,12 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="initiateMicroDeposits",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1150,18 +1246,30 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.InitiateMicroDepositsResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1179,29 +1287,22 @@ class BankAccounts(BaseSDK):
     def complete_micro_deposits(
         self,
         *,
-        security: Union[
-            operations.CompleteMicroDepositsSecurity,
-            operations.CompleteMicroDepositsSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
         amounts: List[int],
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.CompletedMicroDeposits:
+    ) -> operations.CompleteMicroDepositsResponse:
         r"""Complete the micro-deposit validation process by passing the amounts of the two transfers within three tries.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
         :param amounts: Two positive integers, in cents, equal to the values of the micro-deposits sent to the bank account.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1216,7 +1317,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.CompleteMicroDepositsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
             complete_micro_deposits=components.CompleteMicroDeposits(
@@ -1236,9 +1336,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CompleteMicroDepositsSecurity
+            _globals=operations.CompleteMicroDepositsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.complete_micro_deposits,
                 False,
@@ -1259,9 +1360,12 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="completeMicroDeposits",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1280,25 +1384,38 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.CompletedMicroDeposits
+            return operations.CompleteMicroDepositsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.CompletedMicroDeposits
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.MicroDepositValidationErrorData
+            )
+            raise errors.MicroDepositValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.MicroDepositValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.MicroDepositValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1316,29 +1433,22 @@ class BankAccounts(BaseSDK):
     async def complete_micro_deposits_async(
         self,
         *,
-        security: Union[
-            operations.CompleteMicroDepositsSecurity,
-            operations.CompleteMicroDepositsSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
         amounts: List[int],
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.CompletedMicroDeposits:
+    ) -> operations.CompleteMicroDepositsResponse:
         r"""Complete the micro-deposit validation process by passing the amounts of the two transfers within three tries.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
         :param amounts: Two positive integers, in cents, equal to the values of the micro-deposits sent to the bank account.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1353,7 +1463,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.CompleteMicroDepositsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
             complete_micro_deposits=components.CompleteMicroDeposits(
@@ -1373,9 +1482,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CompleteMicroDepositsSecurity
+            _globals=operations.CompleteMicroDepositsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.complete_micro_deposits,
                 False,
@@ -1396,9 +1506,12 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="completeMicroDeposits",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1417,25 +1530,38 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.CompletedMicroDeposits
+            return operations.CompleteMicroDepositsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.CompletedMicroDeposits
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
+            response_data = utils.unmarshal_json(
                 http_res.text, errors.MicroDepositValidationErrorData
             )
-            raise errors.MicroDepositValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            raise errors.MicroDepositValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1450,21 +1576,16 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    def get_bank_account_verification(
+    def get_verification(
         self,
         *,
-        security: Union[
-            operations.GetBankAccountVerificationSecurity,
-            operations.GetBankAccountVerificationSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccountVerification:
+    ) -> operations.GetBankAccountVerificationResponse:
         r"""Retrieve the current status and details of an instant verification, including whether the verification method was instant or same-day
         ACH. This helps track the verification process in real-time and provides details in case of exceptions.
 
@@ -1476,13 +1597,11 @@ class BankAccounts(BaseSDK):
         - `expired`: Verification expired after 14 days, initiate another verification
         - `max-attempts-exceeded`: Five incorrect code attempts exhausted, initiate another verification
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1497,7 +1616,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.GetBankAccountVerificationRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
         )
@@ -1514,9 +1632,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetBankAccountVerificationSecurity
+            _globals=operations.GetBankAccountVerificationGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1530,9 +1649,12 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getBankAccountVerification",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1540,15 +1662,28 @@ class BankAccounts(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.BankAccountVerification
+            return operations.GetBankAccountVerificationResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.BankAccountVerification
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1563,21 +1698,16 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    async def get_bank_account_verification_async(
+    async def get_verification_async(
         self,
         *,
-        security: Union[
-            operations.GetBankAccountVerificationSecurity,
-            operations.GetBankAccountVerificationSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccountVerification:
+    ) -> operations.GetBankAccountVerificationResponse:
         r"""Retrieve the current status and details of an instant verification, including whether the verification method was instant or same-day
         ACH. This helps track the verification process in real-time and provides details in case of exceptions.
 
@@ -1589,13 +1719,11 @@ class BankAccounts(BaseSDK):
         - `expired`: Verification expired after 14 days, initiate another verification
         - `max-attempts-exceeded`: Five incorrect code attempts exhausted, initiate another verification
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1610,7 +1738,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.GetBankAccountVerificationRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
         )
@@ -1627,9 +1754,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetBankAccountVerificationSecurity
+            _globals=operations.GetBankAccountVerificationGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1643,9 +1771,12 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getBankAccountVerification",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1653,15 +1784,28 @@ class BankAccounts(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.BankAccountVerification
+            return operations.GetBankAccountVerificationResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.BankAccountVerification
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1676,29 +1820,24 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    def initiate_bank_account_verification(
+    def initiate_verification(
         self,
         *,
-        security: Union[
-            operations.InitiateBankAccountVerificationSecurity,
-            operations.InitiateBankAccountVerificationSecurityTypedDict,
-        ],
-        x_wait_for: components.BankAccountWaitFor,
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
+        x_wait_for: Optional[components.BankAccountWaitFor] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccountVerificationCreated:
+    ) -> operations.InitiateBankAccountVerificationResponse:
         r"""Instant micro-deposit verification offers a quick and efficient way to verify bank account ownership.
 
-        Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank’s capabilities. This
+        Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank's capabilities. This
         feature provides a faster alternative to traditional methods, allowing verification in a single session.
 
         It is recommended to use the `X-Wait-For: rail-response` header to synchronously receive the outcome of the instant credit in the
-         response payload.
+          response payload.
 
         Possible verification methods:
           - `instant`: Real-time verification credit sent via RTP
@@ -1709,14 +1848,12 @@ class BankAccounts(BaseSDK):
           - `sent-credit`: Credit sent, available for verification in the external bank account
           - `failed`: Verification failed due to credit rejection/return, details in `exceptionDetails`
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
-        :param x_wait_for: Optional header to wait for certain events, such as the rail response, to occur before returning a response.  When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
+        :param x_wait_for: Optional header to wait for certain events, such as the rail response, to occur before returning a response.  When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1731,7 +1868,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.InitiateBankAccountVerificationRequest(
-            x_moov_version=x_moov_version,
             x_wait_for=x_wait_for,
             account_id=account_id,
             bank_account_id=bank_account_id,
@@ -1749,9 +1885,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.InitiateBankAccountVerificationSecurity
+            _globals=operations.InitiateBankAccountVerificationGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1765,9 +1902,12 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="initiateBankAccountVerification",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1785,20 +1925,33 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.BankAccountVerificationCreated
+            return operations.InitiateBankAccountVerificationResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.BankAccountVerificationCreated
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1813,29 +1966,24 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    async def initiate_bank_account_verification_async(
+    async def initiate_verification_async(
         self,
         *,
-        security: Union[
-            operations.InitiateBankAccountVerificationSecurity,
-            operations.InitiateBankAccountVerificationSecurityTypedDict,
-        ],
-        x_wait_for: components.BankAccountWaitFor,
         account_id: str,
         bank_account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
+        x_wait_for: Optional[components.BankAccountWaitFor] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccountVerificationCreated:
+    ) -> operations.InitiateBankAccountVerificationResponse:
         r"""Instant micro-deposit verification offers a quick and efficient way to verify bank account ownership.
 
-        Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank’s capabilities. This
+        Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank's capabilities. This
         feature provides a faster alternative to traditional methods, allowing verification in a single session.
 
         It is recommended to use the `X-Wait-For: rail-response` header to synchronously receive the outcome of the instant credit in the
-         response payload.
+          response payload.
 
         Possible verification methods:
           - `instant`: Real-time verification credit sent via RTP
@@ -1846,14 +1994,12 @@ class BankAccounts(BaseSDK):
           - `sent-credit`: Credit sent, available for verification in the external bank account
           - `failed`: Verification failed due to credit rejection/return, details in `exceptionDetails`
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
-        :param x_wait_for: Optional header to wait for certain events, such as the rail response, to occur before returning a response.  When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
         :param account_id:
         :param bank_account_id:
-        :param x_moov_version: Specify an API version.
+        :param x_wait_for: Optional header to wait for certain events, such as the rail response, to occur before returning a response.  When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1868,7 +2014,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.InitiateBankAccountVerificationRequest(
-            x_moov_version=x_moov_version,
             x_wait_for=x_wait_for,
             account_id=account_id,
             bank_account_id=bank_account_id,
@@ -1886,9 +2031,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.InitiateBankAccountVerificationSecurity
+            _globals=operations.InitiateBankAccountVerificationGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1902,9 +2048,12 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="initiateBankAccountVerification",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1922,20 +2071,33 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.BankAccountVerificationCreated
+            return operations.InitiateBankAccountVerificationResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.BankAccountVerificationCreated
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1950,23 +2112,18 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    def complete_bank_account_verification(
+    def complete_verification(
         self,
         *,
-        security: Union[
-            operations.CompleteBankAccountVerificationSecurity,
-            operations.CompleteBankAccountVerificationSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
         code: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccountVerification:
-        r"""Finalize the instant micro-deposit verification by submitting the verification code displayed in the user’s bank account.
+    ) -> operations.CompleteBankAccountVerificationResponse:
+        r"""Finalize the instant micro-deposit verification by submitting the verification code displayed in the user's bank account.
 
         Upon successful verification, the bank account status will be updated to `verified` and eligible for ACH debit transactions.
 
@@ -1975,14 +2132,12 @@ class BankAccounts(BaseSDK):
         - `mv0000`
         - `0000`
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when
-        generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
         :param code: Code provided by user from their bank account transactions
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1997,7 +2152,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.CompleteBankAccountVerificationRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
             complete_bank_account_verification=components.CompleteBankAccountVerification(
@@ -2017,9 +2171,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CompleteBankAccountVerificationSecurity
+            _globals=operations.CompleteBankAccountVerificationGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.complete_bank_account_verification,
                 False,
@@ -2040,9 +2195,12 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="completeBankAccountVerification",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2061,20 +2219,33 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.BankAccountVerification
+            return operations.CompleteBankAccountVerificationResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.BankAccountVerification
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2089,23 +2260,18 @@ class BankAccounts(BaseSDK):
             http_res,
         )
 
-    async def complete_bank_account_verification_async(
+    async def complete_verification_async(
         self,
         *,
-        security: Union[
-            operations.CompleteBankAccountVerificationSecurity,
-            operations.CompleteBankAccountVerificationSecurityTypedDict,
-        ],
         account_id: str,
         bank_account_id: str,
         code: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.BankAccountVerification:
-        r"""Finalize the instant micro-deposit verification by submitting the verification code displayed in the user’s bank account.
+    ) -> operations.CompleteBankAccountVerificationResponse:
+        r"""Finalize the instant micro-deposit verification by submitting the verification code displayed in the user's bank account.
 
         Upon successful verification, the bank account status will be updated to `verified` and eligible for ACH debit transactions.
 
@@ -2114,14 +2280,12 @@ class BankAccounts(BaseSDK):
         - `mv0000`
         - `0000`
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope when
-        generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-        :param security:
         :param account_id:
         :param bank_account_id:
         :param code: Code provided by user from their bank account transactions
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2136,7 +2300,6 @@ class BankAccounts(BaseSDK):
             base_url = server_url
 
         request = operations.CompleteBankAccountVerificationRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             bank_account_id=bank_account_id,
             complete_bank_account_verification=components.CompleteBankAccountVerification(
@@ -2156,9 +2319,10 @@ class BankAccounts(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CompleteBankAccountVerificationSecurity
+            _globals=operations.CompleteBankAccountVerificationGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.complete_bank_account_verification,
                 False,
@@ -2179,9 +2343,12 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="completeBankAccountVerification",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2200,20 +2367,33 @@ class BankAccounts(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.BankAccountVerification
+            return operations.CompleteBankAccountVerificationResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.BankAccountVerification
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

@@ -11,21 +11,17 @@ from moovio_sdk.utils import get_security_from_env
 from typing import Any, List, Mapping, Optional, Union
 
 
-class GetDisputeEvidenceDataAcceptEnum(str, Enum):
+class GetEvidenceDataAcceptEnum(str, Enum):
     APPLICATION_PDF = "application/pdf"
     IMAGE_JPEG = "image/jpeg"
     IMAGE_TIFF = "image/tiff"
 
 
 class Disputes(BaseSDK):
-    def list_disputes(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListDisputesSecurity, operations.ListDisputesSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         start_date_time: Optional[datetime] = None,
@@ -42,17 +38,15 @@ class Disputes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Dispute]:
+    ) -> operations.ListDisputesResponse:
         r"""Returns the list of disputes.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param skip:
         :param count:
         :param start_date_time: Optional date-time parameter to filter all disputes created on and after the provided date and time.
@@ -79,7 +73,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.ListDisputesRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             skip=skip,
             count=count,
@@ -107,9 +100,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListDisputesSecurity
+            _globals=operations.ListDisputesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -123,23 +117,53 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listDisputes",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
-            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "409",
+                "429",
+                "4XX",
+                "500",
+                "504",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Dispute])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListDisputesResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Dispute]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -154,14 +178,10 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def list_disputes_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListDisputesSecurity, operations.ListDisputesSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         start_date_time: Optional[datetime] = None,
@@ -178,17 +198,15 @@ class Disputes(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Dispute]:
+    ) -> operations.ListDisputesResponse:
         r"""Returns the list of disputes.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param skip:
         :param count:
         :param start_date_time: Optional date-time parameter to filter all disputes created on and after the provided date and time.
@@ -215,7 +233,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.ListDisputesRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             skip=skip,
             count=count,
@@ -243,9 +260,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListDisputesSecurity
+            _globals=operations.ListDisputesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -259,23 +277,53 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listDisputes",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
-            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "409",
+                "429",
+                "4XX",
+                "500",
+                "504",
+                "5XX",
+            ],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Dispute])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListDisputesResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Dispute]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -290,31 +338,25 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def get_dispute(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetDisputeSecurity, operations.GetDisputeSecurityTypedDict
-        ],
         account_id: str,
         dispute_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Dispute:
+    ) -> operations.GetDisputeResponse:
         r"""Get a dispute by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -329,7 +371,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.GetDisputeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
         )
@@ -346,7 +387,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetDisputeSecurity),
+            _globals=operations.GetDisputeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -360,9 +404,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getDispute",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -370,13 +417,26 @@ class Disputes(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Dispute)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetDisputeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Dispute),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -391,31 +451,25 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def get_dispute_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetDisputeSecurity, operations.GetDisputeSecurityTypedDict
-        ],
         account_id: str,
         dispute_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Dispute:
+    ) -> operations.GetDisputeResponse:
         r"""Get a dispute by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -430,7 +484,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.GetDisputeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
         )
@@ -447,7 +500,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetDisputeSecurity),
+            _globals=operations.GetDisputeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -461,9 +517,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getDispute",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -471,13 +530,26 @@ class Disputes(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Dispute)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetDisputeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Dispute),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -492,31 +564,25 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def accept_dispute(
+    def accept(
         self,
         *,
-        security: Union[
-            operations.AcceptDisputeSecurity, operations.AcceptDisputeSecurityTypedDict
-        ],
         account_id: str,
         dispute_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Dispute:
-        r"""Accepts a dispute.
+    ) -> operations.AcceptDisputeResponse:
+        r"""Accepts liability for a dispute.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -531,7 +597,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.AcceptDisputeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
         )
@@ -548,9 +613,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.AcceptDisputeSecurity
+            _globals=operations.AcceptDisputeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -564,9 +630,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="acceptDispute",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -584,18 +653,31 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Dispute)
+            return operations.AcceptDisputeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Dispute),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -610,31 +692,25 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def accept_dispute_async(
+    async def accept_async(
         self,
         *,
-        security: Union[
-            operations.AcceptDisputeSecurity, operations.AcceptDisputeSecurityTypedDict
-        ],
         account_id: str,
         dispute_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Dispute:
-        r"""Accepts a dispute.
+    ) -> operations.AcceptDisputeResponse:
+        r"""Accepts liability for a dispute.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -649,7 +725,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.AcceptDisputeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
         )
@@ -666,9 +741,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.AcceptDisputeSecurity
+            _globals=operations.AcceptDisputeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -682,9 +758,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="acceptDispute",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -702,18 +781,31 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Dispute)
+            return operations.AcceptDisputeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Dispute),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -728,32 +820,25 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def list_dispute_evidence(
+    def list_evidence(
         self,
         *,
-        security: Union[
-            operations.ListDisputeEvidenceSecurity,
-            operations.ListDisputeEvidenceSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.DisputeEvidenceMetadata]:
+    ) -> operations.ListDisputeEvidenceResponse:
         r"""Returns a dispute's public evidence by its ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -768,7 +853,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.ListDisputeEvidenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
         )
@@ -785,9 +869,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListDisputeEvidenceSecurity
+            _globals=operations.ListDisputeEvidenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -801,9 +886,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listDisputeEvidence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -811,15 +899,28 @@ class Disputes(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.DisputeEvidenceMetadata]
+            return operations.ListDisputeEvidenceResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.DisputeEvidenceResponse]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -834,32 +935,25 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def list_dispute_evidence_async(
+    async def list_evidence_async(
         self,
         *,
-        security: Union[
-            operations.ListDisputeEvidenceSecurity,
-            operations.ListDisputeEvidenceSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.DisputeEvidenceMetadata]:
+    ) -> operations.ListDisputeEvidenceResponse:
         r"""Returns a dispute's public evidence by its ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -874,7 +968,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.ListDisputeEvidenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
         )
@@ -891,9 +984,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListDisputeEvidenceSecurity
+            _globals=operations.ListDisputeEvidenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -907,9 +1001,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listDisputeEvidence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -917,15 +1014,28 @@ class Disputes(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.DisputeEvidenceMetadata]
+            return operations.ListDisputeEvidenceResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.DisputeEvidenceResponse]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -940,36 +1050,29 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def upload_dispute_evidence_file(
+    def upload_evidence_file(
         self,
         *,
-        security: Union[
-            operations.UploadDisputeEvidenceFileSecurity,
-            operations.UploadDisputeEvidenceFileSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         file: Union[components.File, components.FileTypedDict],
         evidence_type: components.EvidenceType,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.UploadDisputeEvidenceFileResponse:
         r"""Uploads a file as evidence for a dispute.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param file: The file to upload as evidence. Valid types are [jpeg, tiff, pdf].  The `Content-Type` header for this form part must be one of the following:   - `image/jpeg`   - `image/tiff`   - `application/pdf`
         :param evidence_type:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -984,7 +1087,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.UploadDisputeEvidenceFileRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             create_evidence_file_multi_part=components.CreateEvidenceFileMultiPart(
@@ -1005,9 +1107,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UploadDisputeEvidenceFileSecurity
+            _globals=operations.UploadDisputeEvidenceFileGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_evidence_file_multi_part,
                 False,
@@ -1028,9 +1131,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceFile",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1039,6 +1145,7 @@ class Disputes(BaseSDK):
                 "403",
                 "404",
                 "409",
+                "422",
                 "429",
                 "4XX",
                 "500",
@@ -1048,18 +1155,38 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
-        if utils.match_response(http_res, "204", "*"):
-            return
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return operations.UploadDisputeEvidenceFileResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.EvidenceUploadResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.FileUploadValidationErrorData
+            )
+            raise errors.FileUploadValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1074,36 +1201,29 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def upload_dispute_evidence_file_async(
+    async def upload_evidence_file_async(
         self,
         *,
-        security: Union[
-            operations.UploadDisputeEvidenceFileSecurity,
-            operations.UploadDisputeEvidenceFileSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         file: Union[components.File, components.FileTypedDict],
         evidence_type: components.EvidenceType,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.UploadDisputeEvidenceFileResponse:
         r"""Uploads a file as evidence for a dispute.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param file: The file to upload as evidence. Valid types are [jpeg, tiff, pdf].  The `Content-Type` header for this form part must be one of the following:   - `image/jpeg`   - `image/tiff`   - `application/pdf`
         :param evidence_type:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1118,7 +1238,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.UploadDisputeEvidenceFileRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             create_evidence_file_multi_part=components.CreateEvidenceFileMultiPart(
@@ -1139,9 +1258,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UploadDisputeEvidenceFileSecurity
+            _globals=operations.UploadDisputeEvidenceFileGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_evidence_file_multi_part,
                 False,
@@ -1162,9 +1282,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceFile",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1173,6 +1296,7 @@ class Disputes(BaseSDK):
                 "403",
                 "404",
                 "409",
+                "422",
                 "429",
                 "4XX",
                 "500",
@@ -1182,18 +1306,38 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
-        if utils.match_response(http_res, "204", "*"):
-            return
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return operations.UploadDisputeEvidenceFileResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.EvidenceUploadResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.FileUploadValidationErrorData
+            )
+            raise errors.FileUploadValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1208,36 +1352,29 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def upload_dispute_evidence_text(
+    def upload_evidence_text(
         self,
         *,
-        security: Union[
-            operations.UploadDisputeEvidenceTextSecurity,
-            operations.UploadDisputeEvidenceTextSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         text: str,
         evidence_type: components.EvidenceType,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EvidenceText:
+    ) -> operations.UploadDisputeEvidenceTextResponse:
         r"""Uploads text as evidence for a dispute.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param text: The text to associate with the dispute as evidence.
         :param evidence_type:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1252,7 +1389,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.UploadDisputeEvidenceTextRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             create_evidence_text=components.CreateEvidenceText(
@@ -1273,9 +1409,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UploadDisputeEvidenceTextSecurity
+            _globals=operations.UploadDisputeEvidenceTextGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_evidence_text,
                 False,
@@ -1296,9 +1433,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceText",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1316,18 +1456,33 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.EvidenceText)
+            return operations.UploadDisputeEvidenceTextResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.EvidenceTextResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1342,36 +1497,29 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def upload_dispute_evidence_text_async(
+    async def upload_evidence_text_async(
         self,
         *,
-        security: Union[
-            operations.UploadDisputeEvidenceTextSecurity,
-            operations.UploadDisputeEvidenceTextSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         text: str,
         evidence_type: components.EvidenceType,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EvidenceText:
+    ) -> operations.UploadDisputeEvidenceTextResponse:
         r"""Uploads text as evidence for a dispute.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param text: The text to associate with the dispute as evidence.
         :param evidence_type:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1386,7 +1534,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.UploadDisputeEvidenceTextRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             create_evidence_text=components.CreateEvidenceText(
@@ -1407,9 +1554,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UploadDisputeEvidenceTextSecurity
+            _globals=operations.UploadDisputeEvidenceTextGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_evidence_text,
                 False,
@@ -1430,9 +1578,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceText",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1450,18 +1601,33 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.EvidenceText)
+            return operations.UploadDisputeEvidenceTextResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.EvidenceTextResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1476,21 +1642,16 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def submit_dispute_evidence(
+    def submit_evidence(
         self,
         *,
-        security: Union[
-            operations.SubmitDisputeEvidenceSecurity,
-            operations.SubmitDisputeEvidenceSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Dispute:
+    ) -> operations.SubmitDisputeEvidenceResponse:
         r"""Submit the evidence associated with a dispute.
 
         Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only
@@ -1498,13 +1659,11 @@ class Disputes(BaseSDK):
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1519,7 +1678,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.SubmitDisputeEvidenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
         )
@@ -1536,9 +1694,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.SubmitDisputeEvidenceSecurity
+            _globals=operations.SubmitDisputeEvidenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1552,9 +1711,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="submitDisputeEvidence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1572,18 +1734,31 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Dispute)
+            return operations.SubmitDisputeEvidenceResponse(
+                result=utils.unmarshal_json(http_res.text, components.Dispute),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1598,21 +1773,16 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def submit_dispute_evidence_async(
+    async def submit_evidence_async(
         self,
         *,
-        security: Union[
-            operations.SubmitDisputeEvidenceSecurity,
-            operations.SubmitDisputeEvidenceSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Dispute:
+    ) -> operations.SubmitDisputeEvidenceResponse:
         r"""Submit the evidence associated with a dispute.
 
         Evidence items must be uploaded using the appropriate endpoint(s) prior to calling this endpoint to submit it. **Evidence can only
@@ -1620,13 +1790,11 @@ class Disputes(BaseSDK):
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1641,7 +1809,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.SubmitDisputeEvidenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
         )
@@ -1658,9 +1825,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.SubmitDisputeEvidenceSecurity
+            _globals=operations.SubmitDisputeEvidenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1674,9 +1842,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="submitDisputeEvidence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1694,18 +1865,31 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Dispute)
+            return operations.SubmitDisputeEvidenceResponse(
+                result=utils.unmarshal_json(http_res.text, components.Dispute),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1720,34 +1904,27 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def get_dispute_evidence(
+    def get_evidence(
         self,
         *,
-        security: Union[
-            operations.GetDisputeEvidenceSecurity,
-            operations.GetDisputeEvidenceSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         evidence_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.DisputeEvidenceMetadata:
+    ) -> operations.GetDisputeEvidenceResponse:
         r"""Get dispute evidence by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param evidence_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1762,7 +1939,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.GetDisputeEvidenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             evidence_id=evidence_id,
@@ -1780,9 +1956,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetDisputeEvidenceSecurity
+            _globals=operations.GetDisputeEvidenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1796,9 +1973,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getDisputeEvidence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1806,15 +1986,28 @@ class Disputes(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.DisputeEvidenceMetadata
+            return operations.GetDisputeEvidenceResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.DisputeEvidenceResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1829,34 +2022,27 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def get_dispute_evidence_async(
+    async def get_evidence_async(
         self,
         *,
-        security: Union[
-            operations.GetDisputeEvidenceSecurity,
-            operations.GetDisputeEvidenceSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         evidence_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.DisputeEvidenceMetadata:
+    ) -> operations.GetDisputeEvidenceResponse:
         r"""Get dispute evidence by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param evidence_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1871,7 +2057,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.GetDisputeEvidenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             evidence_id=evidence_id,
@@ -1889,9 +2074,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetDisputeEvidenceSecurity
+            _globals=operations.GetDisputeEvidenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1905,9 +2091,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getDisputeEvidence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1915,15 +2104,28 @@ class Disputes(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.DisputeEvidenceMetadata
+            return operations.GetDisputeEvidenceResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.DisputeEvidenceResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1938,38 +2140,31 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def update_dispute_evidence(
+    def update_evidence(
         self,
         *,
-        security: Union[
-            operations.UpdateDisputeEvidenceSecurity,
-            operations.UpdateDisputeEvidenceSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         evidence_id: str,
-        x_moov_version: Optional[components.Versions] = None,
-        text: Optional[str] = None,
         evidence_type: Optional[components.EvidenceType] = None,
+        text: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.DisputeEvidenceMetadata:
+    ) -> operations.UpdateDisputeEvidenceResponse:
         r"""Updates dispute evidence by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param evidence_id:
-        :param x_moov_version: Specify an API version.
-        :param text: The text to associate with the dispute as evidence.
         :param evidence_type:
+        :param text: If updating text evidence, the new text to associate with the dispute.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1984,13 +2179,12 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateDisputeEvidenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             evidence_id=evidence_id,
             update_evidence=components.UpdateEvidence(
-                text=text,
                 evidence_type=evidence_type,
+                text=text,
             ),
         )
 
@@ -2006,9 +2200,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateDisputeEvidenceSecurity
+            _globals=operations.UpdateDisputeEvidenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_evidence, False, False, "json", components.UpdateEvidence
             ),
@@ -2025,9 +2220,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateDisputeEvidence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2044,20 +2242,33 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.DisputeEvidenceMetadata
+            return operations.UpdateDisputeEvidenceResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.DisputeEvidenceResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2072,38 +2283,31 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def update_dispute_evidence_async(
+    async def update_evidence_async(
         self,
         *,
-        security: Union[
-            operations.UpdateDisputeEvidenceSecurity,
-            operations.UpdateDisputeEvidenceSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         evidence_id: str,
-        x_moov_version: Optional[components.Versions] = None,
-        text: Optional[str] = None,
         evidence_type: Optional[components.EvidenceType] = None,
+        text: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.DisputeEvidenceMetadata:
+    ) -> operations.UpdateDisputeEvidenceResponse:
         r"""Updates dispute evidence by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param evidence_id:
-        :param x_moov_version: Specify an API version.
-        :param text: The text to associate with the dispute as evidence.
         :param evidence_type:
+        :param text: If updating text evidence, the new text to associate with the dispute.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2118,13 +2322,12 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateDisputeEvidenceRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             evidence_id=evidence_id,
             update_evidence=components.UpdateEvidence(
-                text=text,
                 evidence_type=evidence_type,
+                text=text,
             ),
         )
 
@@ -2140,9 +2343,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateDisputeEvidenceSecurity
+            _globals=operations.UpdateDisputeEvidenceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_evidence, False, False, "json", components.UpdateEvidence
             ),
@@ -2159,9 +2363,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateDisputeEvidence",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2178,20 +2385,33 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.DisputeEvidenceMetadata
+            return operations.UpdateDisputeEvidenceResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.DisputeEvidenceResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2206,34 +2426,27 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def delete_dispute_evidence_file(
+    def delete_evidence(
         self,
         *,
-        security: Union[
-            operations.DeleteDisputeEvidenceFileSecurity,
-            operations.DeleteDisputeEvidenceFileSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         evidence_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DeleteDisputeEvidenceFileResponse:
         r"""Deletes dispute evidence by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param evidence_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2248,7 +2461,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.DeleteDisputeEvidenceFileRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             evidence_id=evidence_id,
@@ -2266,9 +2478,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.DeleteDisputeEvidenceFileSecurity
+            _globals=operations.DeleteDisputeEvidenceFileGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -2282,9 +2495,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="deleteDisputeEvidenceFile",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2301,18 +2517,30 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.DeleteDisputeEvidenceFileResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2327,34 +2555,27 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def delete_dispute_evidence_file_async(
+    async def delete_evidence_async(
         self,
         *,
-        security: Union[
-            operations.DeleteDisputeEvidenceFileSecurity,
-            operations.DeleteDisputeEvidenceFileSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         evidence_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DeleteDisputeEvidenceFileResponse:
         r"""Deletes dispute evidence by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param evidence_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2369,7 +2590,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.DeleteDisputeEvidenceFileRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             evidence_id=evidence_id,
@@ -2387,9 +2607,10 @@ class Disputes(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.DeleteDisputeEvidenceFileSecurity
+            _globals=operations.DeleteDisputeEvidenceFileGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -2403,9 +2624,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="deleteDisputeEvidenceFile",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2422,18 +2646,30 @@ class Disputes(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.DeleteDisputeEvidenceFileResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2448,35 +2684,28 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    def get_dispute_evidence_data(
+    def get_evidence_data(
         self,
         *,
-        security: Union[
-            operations.GetDisputeEvidenceDataSecurity,
-            operations.GetDisputeEvidenceDataSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         evidence_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[GetDisputeEvidenceDataAcceptEnum] = None,
+        accept_header_override: Optional[GetEvidenceDataAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetDisputeEvidenceDataResponse:
         r"""Downloads dispute evidence data by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param evidence_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2492,7 +2721,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.GetDisputeEvidenceDataRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             evidence_id=evidence_id,
@@ -2512,9 +2740,10 @@ class Disputes(BaseSDK):
             if accept_header_override is not None
             else "application/pdf;q=1, image/jpeg;q=0.7, image/tiff;q=0",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetDisputeEvidenceDataSecurity
+            _globals=operations.GetDisputeEvidenceDataGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -2528,9 +2757,12 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getDisputeEvidenceData",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -2539,17 +2771,33 @@ class Disputes(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/pdf"):
-            return http_res
+            return operations.GetDisputeEvidenceDataResponse(
+                result=http_res, headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, "200", "image/jpeg"):
-            return http_res
+            return operations.GetDisputeEvidenceDataResponse(
+                result=http_res, headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, "200", "image/tiff"):
-            return http_res
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetDisputeEvidenceDataResponse(
+                result=http_res, headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2564,35 +2812,28 @@ class Disputes(BaseSDK):
             http_res,
         )
 
-    async def get_dispute_evidence_data_async(
+    async def get_evidence_data_async(
         self,
         *,
-        security: Union[
-            operations.GetDisputeEvidenceDataSecurity,
-            operations.GetDisputeEvidenceDataSecurityTypedDict,
-        ],
         account_id: str,
         dispute_id: str,
         evidence_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[GetDisputeEvidenceDataAcceptEnum] = None,
+        accept_header_override: Optional[GetEvidenceDataAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetDisputeEvidenceDataResponse:
         r"""Downloads dispute evidence data by ID.
 
         Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/transfers.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param dispute_id:
         :param evidence_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2608,7 +2849,6 @@ class Disputes(BaseSDK):
             base_url = server_url
 
         request = operations.GetDisputeEvidenceDataRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             dispute_id=dispute_id,
             evidence_id=evidence_id,
@@ -2628,9 +2868,10 @@ class Disputes(BaseSDK):
             if accept_header_override is not None
             else "application/pdf;q=1, image/jpeg;q=0.7, image/tiff;q=0",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetDisputeEvidenceDataSecurity
+            _globals=operations.GetDisputeEvidenceDataGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -2644,9 +2885,12 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getDisputeEvidenceData",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -2655,17 +2899,33 @@ class Disputes(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/pdf"):
-            return http_res
+            return operations.GetDisputeEvidenceDataResponse(
+                result=http_res, headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, "200", "image/jpeg"):
-            return http_res
+            return operations.GetDisputeEvidenceDataResponse(
+                result=http_res, headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, "200", "image/tiff"):
-            return http_res
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetDisputeEvidenceDataResponse(
+                result=http_res, headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

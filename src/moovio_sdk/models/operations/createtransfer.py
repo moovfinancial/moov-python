@@ -4,10 +4,9 @@ from __future__ import annotations
 from moovio_sdk.models.components import (
     asynctransfer as components_asynctransfer,
     createtransfer as components_createtransfer,
-    schemebasicauth as components_schemebasicauth,
     transfer as components_transfer,
+    transferresponse as components_transferresponse,
     transferwaitfor as components_transferwaitfor,
-    versions as components_versions,
 )
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import (
@@ -15,34 +14,42 @@ from moovio_sdk.utils import (
     HeaderMetadata,
     PathParamMetadata,
     RequestMetadata,
-    SecurityMetadata,
 )
 import pydantic
-from typing import Optional, Union
+from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class CreateTransferSecurityTypedDict(TypedDict):
-    basic_auth: NotRequired[components_schemebasicauth.SchemeBasicAuthTypedDict]
-    o_auth2_auth: NotRequired[str]
+class CreateTransferGlobalsTypedDict(TypedDict):
+    x_moov_version: NotRequired[str]
+    r"""Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where
+    - `YYYY` is the year
+    - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+    - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
+    - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    """
 
 
-class CreateTransferSecurity(BaseModel):
-    basic_auth: Annotated[
-        Optional[components_schemebasicauth.SchemeBasicAuth],
-        FieldMetadata(
-            security=SecurityMetadata(scheme=True, scheme_type="http", sub_type="basic")
-        ),
-    ] = None
-
-    o_auth2_auth: Annotated[
+class CreateTransferGlobals(BaseModel):
+    x_moov_version: Annotated[
         Optional[str],
-        FieldMetadata(
-            security=SecurityMetadata(
-                scheme=True, scheme_type="oauth2", field_name="Authorization"
-            )
-        ),
-    ] = None
+        pydantic.Field(alias="x-moov-version"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = "v2024.01.00"
+    r"""Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where
+    - `YYYY` is the year
+    - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+    - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
+    - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    """
 
 
 class CreateTransferRequestTypedDict(TypedDict):
@@ -51,8 +58,6 @@ class CreateTransferRequestTypedDict(TypedDict):
     account_id: str
     r"""The merchant's Moov account ID."""
     create_transfer: components_createtransfer.CreateTransferTypedDict
-    x_moov_version: NotRequired[components_versions.Versions]
-    r"""Specify an API version."""
     x_wait_for: NotRequired[components_transferwaitfor.TransferWaitFor]
     r"""Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
     asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
@@ -79,13 +84,6 @@ class CreateTransferRequest(BaseModel):
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 
-    x_moov_version: Annotated[
-        Optional[components_versions.Versions],
-        pydantic.Field(alias="x-moov-version"),
-        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = None
-    r"""Specify an API version."""
-
     x_wait_for: Annotated[
         Optional[components_transferwaitfor.TransferWaitFor],
         pydantic.Field(alias="x-wait-for"),
@@ -96,38 +94,32 @@ class CreateTransferRequest(BaseModel):
     """
 
 
-CreateTransferResponseBodyTypedDict = TypeAliasType(
-    "CreateTransferResponseBodyTypedDict",
+CreateTransferResponseResultTypedDict = TypeAliasType(
+    "CreateTransferResponseResultTypedDict",
     Union[
         components_asynctransfer.AsyncTransferTypedDict,
         components_transfer.TransferTypedDict,
-    ],
-)
-r"""The request completed successfully."""
-
-
-CreateTransferResponseBody = TypeAliasType(
-    "CreateTransferResponseBody",
-    Union[components_asynctransfer.AsyncTransfer, components_transfer.Transfer],
-)
-r"""The request completed successfully."""
-
-
-CreateTransferResponseTypedDict = TypeAliasType(
-    "CreateTransferResponseTypedDict",
-    Union[
-        components_asynctransfer.AsyncTransferTypedDict,
-        components_transfer.TransferTypedDict,
-        CreateTransferResponseBodyTypedDict,
+        components_transferresponse.TransferResponseTypedDict,
     ],
 )
 
 
-CreateTransferResponse = TypeAliasType(
-    "CreateTransferResponse",
+CreateTransferResponseResult = TypeAliasType(
+    "CreateTransferResponseResult",
     Union[
         components_asynctransfer.AsyncTransfer,
         components_transfer.Transfer,
-        CreateTransferResponseBody,
+        components_transferresponse.TransferResponse,
     ],
 )
+
+
+class CreateTransferResponseTypedDict(TypedDict):
+    headers: Dict[str, List[str]]
+    result: CreateTransferResponseResultTypedDict
+
+
+class CreateTransferResponse(BaseModel):
+    headers: Dict[str, List[str]]
+
+    result: CreateTransferResponseResult

@@ -9,7 +9,6 @@ from .accountnameverification import (
 )
 from .accounttype import AccountType
 from .accountverificationstatus import AccountVerificationStatus
-from .accountwaitfor import AccountWaitFor
 from .achcreditsamedaypaymentmethod import (
     AchCreditSameDayPaymentMethod,
     AchCreditSameDayPaymentMethodPaymentMethodType,
@@ -49,6 +48,7 @@ from .achtransactionstatus import ACHTransactionStatus
 from .addcapabilities import AddCapabilities, AddCapabilitiesTypedDict
 from .address import Address, AddressTypedDict
 from .addresserror import AddressError, AddressErrorTypedDict
+from .addresssuggestion import AddressSuggestion, AddressSuggestionTypedDict
 from .addressupdate import AddressUpdate, AddressUpdateTypedDict
 from .adjustment import Adjustment, AdjustmentTypedDict
 from .amount import Amount, AmountTypedDict
@@ -104,12 +104,13 @@ from .birthdatevalidationerror import (
     BirthDateValidationError,
     BirthDateValidationErrorTypedDict,
 )
-from .brand import Brand, BrandTypedDict
 from .brandcolor import BrandColor, BrandColorTypedDict
+from .brandcolors import BrandColors, BrandColorsTypedDict
 from .brandcolorvalidationerror import (
     BrandColorValidationError,
     BrandColorValidationErrorTypedDict,
 )
+from .brandproperties import BrandProperties, BrandPropertiesTypedDict
 from .businessprofile import BusinessProfile, BusinessProfileTypedDict
 from .businesstype import BusinessType
 from .calltoaction import CallToAction
@@ -126,7 +127,6 @@ from .cardacquiringdispute import CardAcquiringDispute, CardAcquiringDisputeType
 from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundTypedDict
 from .cardacquringmodel import CardAcquringModel
 from .cardaddress import CardAddress, CardAddressTypedDict
-from .cardaddresserror import CardAddressError, CardAddressErrorTypedDict
 from .cardbrand import CardBrand
 from .cardexpiration import CardExpiration, CardExpirationTypedDict
 from .cardexpirationerror import CardExpirationError, CardExpirationErrorTypedDict
@@ -161,7 +161,6 @@ from .cardvolumedistributionerror import (
     CardVolumeDistributionErrorTypedDict,
 )
 from .collectionpaymentmethodtype import CollectionPaymentMethodType
-from .colors import Colors, ColorsTypedDict
 from .colorsvalidationerror import ColorsValidationError, ColorsValidationErrorTypedDict
 from .completebankaccountverification import (
     CompleteBankAccountVerification,
@@ -286,9 +285,9 @@ from .debitholdperiod import DebitHoldPeriod
 from .disbursementpaymentmethodtype import DisbursementPaymentMethodType
 from .displayoptionserror import DisplayOptionsError, DisplayOptionsErrorTypedDict
 from .dispute import Dispute, DisputeTypedDict
-from .disputeevidencemetadata import (
-    DisputeEvidenceMetadata,
-    DisputeEvidenceMetadataTypedDict,
+from .disputeevidenceresponse import (
+    DisputeEvidenceResponse,
+    DisputeEvidenceResponseTypedDict,
 )
 from .disputephase import DisputePhase
 from .disputestatus import DisputeStatus
@@ -314,10 +313,19 @@ from .enrichedbusinessprofile import (
     EnrichedBusinessProfile,
     EnrichedBusinessProfileTypedDict,
 )
+from .enrichedbusinessresponse import (
+    EnrichedBusinessResponse,
+    EnrichedBusinessResponseTypedDict,
+)
+from .enrichedindustries import EnrichedIndustries, EnrichedIndustriesTypedDict
 from .enrichedindustry import EnrichedIndustry, EnrichedIndustryTypedDict
 from .enrichedindustrycodes import EnrichedIndustryCodes, EnrichedIndustryCodesTypedDict
-from .evidencetext import EvidenceText, EvidenceTextTypedDict
+from .evidencetextresponse import EvidenceTextResponse, EvidenceTextResponseTypedDict
 from .evidencetype import EvidenceType
+from .evidenceuploadresponse import (
+    EvidenceUploadResponse,
+    EvidenceUploadResponseTypedDict,
+)
 from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
 from .feecategory import FeeCategory
 from .feemodel import FeeModel
@@ -372,7 +380,6 @@ from .individualnameerror import IndividualNameError, IndividualNameErrorTypedDi
 from .individualnameupdate import IndividualNameUpdate, IndividualNameUpdateTypedDict
 from .individualprofile import IndividualProfile, IndividualProfileTypedDict
 from .industrycodes import IndustryCodes, IndustryCodesTypedDict
-from .industrycodesupdate import IndustryCodesUpdate, IndustryCodesUpdateTypedDict
 from .issuedcard import IssuedCard, IssuedCardTypedDict
 from .issuedcardauthorization import (
     IssuedCardAuthorization,
@@ -451,6 +458,7 @@ from .partnerpricingagreement import (
 )
 from .patchaccounterror import PatchAccountError, PatchAccountErrorTypedDict
 from .patchsweepconfig import PatchSweepConfig, PatchSweepConfigTypedDict
+from .patchtransfer import PatchTransfer, PatchTransferTypedDict
 from .paymentdetailserror import PaymentDetailsError, PaymentDetailsErrorTypedDict
 from .paymentlink import PaymentLink, PaymentLinkTypedDict
 from .paymentlinkcustomeroptions import (
@@ -483,6 +491,12 @@ from .paymentlinkpayoutdetailsupdate import (
 )
 from .paymentlinkstatus import PaymentLinkStatus
 from .paymentmethod import PaymentMethod, PaymentMethodTypedDict
+from .paymentmethodsbankaccount import (
+    PaymentMethodsBankAccount,
+    PaymentMethodsBankAccountTypedDict,
+)
+from .paymentmethodscard import PaymentMethodsCard, PaymentMethodsCardTypedDict
+from .paymentmethodswallet import PaymentMethodsWallet, PaymentMethodsWalletTypedDict
 from .paymentmethodtype import PaymentMethodType
 from .payoutdetailserror import PayoutDetailsError, PayoutDetailsErrorTypedDict
 from .payoutrecipient import PayoutRecipient, PayoutRecipientTypedDict
@@ -559,7 +573,6 @@ from .schedulepaymentmethod import (
     SchedulePaymentMethodTypedDict,
 )
 from .scheduleresponse import ScheduleResponse, ScheduleResponseTypedDict
-from .schemebasicauth import SchemeBasicAuth, SchemeBasicAuthTypedDict
 from .seccode import SECCode
 from .security import Security, SecurityTypedDict
 from .settings import Settings, SettingsTypedDict
@@ -598,6 +611,7 @@ from .transferaccount import TransferAccount, TransferAccountTypedDict
 from .transferdestination import TransferDestination, TransferDestinationTypedDict
 from .transferfailurereason import TransferFailureReason
 from .transferoptions import TransferOptions, TransferOptionsTypedDict
+from .transferresponse import TransferResponse, TransferResponseTypedDict
 from .transfersource import TransferSource, TransferSourceTypedDict
 from .transferstatus import TransferStatus
 from .transferwaitfor import TransferWaitFor
@@ -643,7 +657,6 @@ from .upsertschedule import UpsertSchedule, UpsertScheduleTypedDict
 from .verification import Verification, VerificationTypedDict
 from .verificationstatus import VerificationStatus
 from .verificationstatusdetail import VerificationStatusDetail
-from .versions import Versions
 from .volumebycustomertype import VolumeByCustomerType, VolumeByCustomerTypeTypedDict
 from .volumebycustomertypeerror import (
     VolumeByCustomerTypeError,
@@ -685,7 +698,6 @@ __all__ = [
     "AccountType",
     "AccountTypedDict",
     "AccountVerificationStatus",
-    "AccountWaitFor",
     "AchCreditSameDayPaymentMethod",
     "AchCreditSameDayPaymentMethodPaymentMethodType",
     "AchCreditSameDayPaymentMethodTypedDict",
@@ -711,6 +723,8 @@ __all__ = [
     "Address",
     "AddressError",
     "AddressErrorTypedDict",
+    "AddressSuggestion",
+    "AddressSuggestionTypedDict",
     "AddressTypedDict",
     "AddressUpdate",
     "AddressUpdateTypedDict",
@@ -777,12 +791,14 @@ __all__ = [
     "BirthDateUpdateTypedDict",
     "BirthDateValidationError",
     "BirthDateValidationErrorTypedDict",
-    "Brand",
     "BrandColor",
     "BrandColorTypedDict",
     "BrandColorValidationError",
     "BrandColorValidationErrorTypedDict",
-    "BrandTypedDict",
+    "BrandColors",
+    "BrandColorsTypedDict",
+    "BrandProperties",
+    "BrandPropertiesTypedDict",
     "BusinessProfile",
     "BusinessProfileTypedDict",
     "BusinessType",
@@ -807,8 +823,6 @@ __all__ = [
     "CardAcquiringRefundTypedDict",
     "CardAcquringModel",
     "CardAddress",
-    "CardAddressError",
-    "CardAddressErrorTypedDict",
     "CardAddressTypedDict",
     "CardBrand",
     "CardDetails",
@@ -844,8 +858,6 @@ __all__ = [
     "CardVolumeDistributionErrorTypedDict",
     "CardVolumeDistributionTypedDict",
     "CollectionPaymentMethodType",
-    "Colors",
-    "ColorsTypedDict",
     "ColorsValidationError",
     "ColorsValidationErrorTypedDict",
     "CompleteBankAccountVerification",
@@ -949,8 +961,8 @@ __all__ = [
     "DisplayOptionsError",
     "DisplayOptionsErrorTypedDict",
     "Dispute",
-    "DisputeEvidenceMetadata",
-    "DisputeEvidenceMetadataTypedDict",
+    "DisputeEvidenceResponse",
+    "DisputeEvidenceResponseTypedDict",
     "DisputePhase",
     "DisputeStatus",
     "DisputeTransferDetails",
@@ -975,15 +987,21 @@ __all__ = [
     "EnrichedAddressResponseTypedDict",
     "EnrichedBusinessProfile",
     "EnrichedBusinessProfileTypedDict",
+    "EnrichedBusinessResponse",
+    "EnrichedBusinessResponseTypedDict",
+    "EnrichedIndustries",
+    "EnrichedIndustriesTypedDict",
     "EnrichedIndustry",
     "EnrichedIndustryCodes",
     "EnrichedIndustryCodesTypedDict",
     "EnrichedIndustryTypedDict",
     "Error",
     "ErrorTypedDict",
-    "EvidenceText",
-    "EvidenceTextTypedDict",
+    "EvidenceTextResponse",
+    "EvidenceTextResponseTypedDict",
     "EvidenceType",
+    "EvidenceUploadResponse",
+    "EvidenceUploadResponseTypedDict",
     "FacilitatorFee",
     "FacilitatorFeeTypedDict",
     "FeeCategory",
@@ -1034,8 +1052,6 @@ __all__ = [
     "IndividualProfileTypedDict",
     "IndustryCodes",
     "IndustryCodesTypedDict",
-    "IndustryCodesUpdate",
-    "IndustryCodesUpdateTypedDict",
     "IssuedCard",
     "IssuedCardAuthorization",
     "IssuedCardAuthorizationEvent",
@@ -1121,6 +1137,8 @@ __all__ = [
     "PatchAccountErrorTypedDict",
     "PatchSweepConfig",
     "PatchSweepConfigTypedDict",
+    "PatchTransfer",
+    "PatchTransferTypedDict",
     "PaymentDetailsError",
     "PaymentDetailsErrorTypedDict",
     "PaymentLink",
@@ -1143,6 +1161,12 @@ __all__ = [
     "PaymentMethod",
     "PaymentMethodType",
     "PaymentMethodTypedDict",
+    "PaymentMethodsBankAccount",
+    "PaymentMethodsBankAccountTypedDict",
+    "PaymentMethodsCard",
+    "PaymentMethodsCardTypedDict",
+    "PaymentMethodsWallet",
+    "PaymentMethodsWalletTypedDict",
     "PayoutDetailsError",
     "PayoutDetailsErrorTypedDict",
     "PayoutRecipient",
@@ -1222,8 +1246,6 @@ __all__ = [
     "SchedulePaymentMethodTypedDict",
     "ScheduleResponse",
     "ScheduleResponseTypedDict",
-    "SchemeBasicAuth",
-    "SchemeBasicAuthTypedDict",
     "Security",
     "SecurityTypedDict",
     "Settings",
@@ -1265,6 +1287,8 @@ __all__ = [
     "TransferFailureReason",
     "TransferOptions",
     "TransferOptionsTypedDict",
+    "TransferResponse",
+    "TransferResponseTypedDict",
     "TransferSource",
     "TransferSourceTypedDict",
     "TransferStatus",
@@ -1316,7 +1340,6 @@ __all__ = [
     "VerificationStatus",
     "VerificationStatusDetail",
     "VerificationTypedDict",
-    "Versions",
     "VolumeByCustomerType",
     "VolumeByCustomerTypeError",
     "VolumeByCustomerTypeErrorTypedDict",

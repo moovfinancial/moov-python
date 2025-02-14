@@ -2,13 +2,16 @@
 
 Moov account capabilities.
 
+The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+
 
 ## Values
 
-| Name            | Value           |
-| --------------- | --------------- |
-| `TRANSFERS`     | transfers       |
-| `SEND_FUNDS`    | send-funds      |
-| `COLLECT_FUNDS` | collect-funds   |
-| `WALLET`        | wallet          |
-| `CARD_ISSUING`  | card-issuing    |
+| Name             | Value            |
+| ---------------- | ---------------- |
+| `TRANSFERS`      | transfers        |
+| `SEND_FUNDS`     | send-funds       |
+| `COLLECT_FUNDS`  | collect-funds    |
+| `WALLET`         | wallet           |
+| `CARD_ISSUING`   | card-issuing     |
+| `PRODUCTION_APP` | production-app   |

@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [revoke_auth_token](#revoke_auth_token) - Revoke an auth token.
+* [revoke_access_token](#revoke_access_token) - Revoke an auth token.
 
 Allows clients to notify the authorization server that a previously obtained refresh or access token is no longer needed.
-* [create_auth_token](#create_auth_token) - Create or refresh an access token.
+* [create_access_token](#create_access_token) - Create or refresh an access token.
 
-## revoke_auth_token
+## revoke_access_token
 
 Revoke an auth token.
 
@@ -29,9 +29,10 @@ with Moov(
     ),
 ) as moov:
 
-    moov.authentication.revoke_auth_token(token="<value>", client_id="5clTR_MdVrrkgxw2", client_secret="dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-")
+    res = moov.authentication.revoke_access_token(token="<value>", client_id="5clTR_MdVrrkgxw2", client_secret="dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-")
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 
@@ -40,11 +41,14 @@ with Moov(
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `token`                                                                                | *str*                                                                                  | :heavy_check_mark:                                                                     | The access or refresh token to revoke.                                                 |                                                                                        |
-| `x_moov_version`                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                   | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |                                                                                        |
 | `token_type_hint`                                                                      | [Optional[components.TokenTypeHint]](../../models/components/tokentypehint.md)         | :heavy_minus_sign:                                                                     | The type of token being revoked.                                                       |                                                                                        |
 | `client_id`                                                                            | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.     | 5clTR_MdVrrkgxw2                                                                       |
 | `client_secret`                                                                        | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | Client secret can be provided here in the body, or as the Password in HTTP Basic Auth. | dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-                                                       |
 | `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |                                                                                        |
+
+### Response
+
+**[operations.RevokeAccessTokenResponse](../../models/operations/revokeaccesstokenresponse.md)**
 
 ### Errors
 
@@ -54,7 +58,7 @@ with Moov(
 | errors.RevokeTokenRequestError | 422                            | application/json               |
 | errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
-## create_auth_token
+## create_access_token
 
 Create or refresh an access token.
 
@@ -71,7 +75,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.authentication.create_auth_token(grant_type=components.GrantType.REFRESH_TOKEN, client_id="5clTR_MdVrrkgxw2", client_secret="dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-", scope="/accounts.read /accounts.write", refresh_token="eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a...")
+    res = moov.authentication.create_access_token(grant_type=components.GrantType.CLIENT_CREDENTIALS, client_id="5clTR_MdVrrkgxw2", client_secret="dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-", scope="/accounts.read /accounts.write", refresh_token="eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a...")
 
     # Handle response
     print(res)
@@ -83,7 +87,6 @@ with Moov(
 | Parameter                                                                                                                                                                                                                 | Type                                                                                                                                                                                                                      | Required                                                                                                                                                                                                                  | Description                                                                                                                                                                                                               | Example                                                                                                                                                                                                                   |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `grant_type`                                                                                                                                                                                                              | [components.GrantType](../../models/components/granttype.md)                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                        | The type of grant being requested.<br/><br/>  - `client_credentials`: A grant type used by clients to obtain an access token<br/>  - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token |                                                                                                                                                                                                                           |
-| `x_moov_version`                                                                                                                                                                                                          | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                                        | Specify an API version.                                                                                                                                                                                                   |                                                                                                                                                                                                                           |
 | `client_id`                                                                                                                                                                                                               | *Optional[str]*                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                        | Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.                                                                                                                                        | 5clTR_MdVrrkgxw2                                                                                                                                                                                                          |
 | `client_secret`                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                        | Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.                                                                                                                                    | dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-                                                                                                                                                                                          |
 | `scope`                                                                                                                                                                                                                   | *Optional[str]*                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                        | A space delimited list of scopes. Required when `grant_type` is `client_credentials`.                                                                                                                                     | /accounts.read /accounts.write                                                                                                                                                                                            |
@@ -92,7 +95,7 @@ with Moov(
 
 ### Response
 
-**[components.AuthToken](../../models/components/authtoken.md)**
+**[operations.CreateAccessTokenResponse](../../models/operations/createaccesstokenresponse.md)**
 
 ### Errors
 

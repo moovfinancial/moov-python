@@ -10,19 +10,15 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class CardIssuing(BaseSDK):
-    def request_card(
+    def request(
         self,
         *,
-        security: Union[
-            operations.RequestCardSecurity, operations.RequestCardSecurityTypedDict
-        ],
         account_id: str,
         funding_wallet_id: str,
         authorized_user: Union[
             components.CreateAuthorizedUser, components.CreateAuthorizedUserTypedDict
         ],
         form_factor: components.IssuedCardFormFactor,
-        x_moov_version: Optional[components.Versions] = None,
         memo: Optional[str] = None,
         expiration: Optional[
             Union[components.CardExpiration, components.CardExpirationTypedDict]
@@ -34,18 +30,16 @@ class CardIssuing(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.IssuedCard:
+    ) -> operations.RequestCardResponse:
         r"""Request a virtual card be issued.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the card is to be issued.
         :param funding_wallet_id:
         :param authorized_user: Fields for identifying an authorized individual.
         :param form_factor: Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
-        :param x_moov_version: Specify an API version.
         :param memo: An optional descriptive name for the card.
         :param expiration: The expiration date of the card or token.
         :param controls:
@@ -63,7 +57,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.RequestCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             request_card=components.RequestCard(
                 funding_wallet_id=funding_wallet_id,
@@ -93,7 +86,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.RequestCardSecurity),
+            _globals=operations.RequestCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_card, False, False, "json", components.RequestCard
             ),
@@ -110,9 +106,12 @@ class CardIssuing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="requestCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -130,21 +129,36 @@ class CardIssuing(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.IssuedCard)
+            return operations.RequestCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.IssuedCard),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RequestCardErrorData
+            )
+            raise errors.RequestCardError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RequestCardErrorData)
-            raise errors.RequestCardError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -159,19 +173,15 @@ class CardIssuing(BaseSDK):
             http_res,
         )
 
-    async def request_card_async(
+    async def request_async(
         self,
         *,
-        security: Union[
-            operations.RequestCardSecurity, operations.RequestCardSecurityTypedDict
-        ],
         account_id: str,
         funding_wallet_id: str,
         authorized_user: Union[
             components.CreateAuthorizedUser, components.CreateAuthorizedUserTypedDict
         ],
         form_factor: components.IssuedCardFormFactor,
-        x_moov_version: Optional[components.Versions] = None,
         memo: Optional[str] = None,
         expiration: Optional[
             Union[components.CardExpiration, components.CardExpirationTypedDict]
@@ -183,18 +193,16 @@ class CardIssuing(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.IssuedCard:
+    ) -> operations.RequestCardResponse:
         r"""Request a virtual card be issued.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the card is to be issued.
         :param funding_wallet_id:
         :param authorized_user: Fields for identifying an authorized individual.
         :param form_factor: Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
-        :param x_moov_version: Specify an API version.
         :param memo: An optional descriptive name for the card.
         :param expiration: The expiration date of the card or token.
         :param controls:
@@ -212,7 +220,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.RequestCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             request_card=components.RequestCard(
                 funding_wallet_id=funding_wallet_id,
@@ -242,7 +249,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.RequestCardSecurity),
+            _globals=operations.RequestCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_card, False, False, "json", components.RequestCard
             ),
@@ -259,9 +269,12 @@ class CardIssuing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="requestCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -279,21 +292,36 @@ class CardIssuing(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.IssuedCard)
+            return operations.RequestCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.IssuedCard),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RequestCardErrorData)
-            raise errors.RequestCardError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RequestCardErrorData
+            )
+            raise errors.RequestCardError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -308,15 +336,10 @@ class CardIssuing(BaseSDK):
             http_res,
         )
 
-    def list_issued_cards(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListIssuedCardsSecurity,
-            operations.ListIssuedCardsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         states: Optional[List[components.IssuedCardState]] = None,
@@ -324,15 +347,13 @@ class CardIssuing(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.IssuedCard]:
+    ) -> operations.ListIssuedCardsResponse:
         r"""List Moov issued cards existing for the account.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the cards have been issued.
-        :param x_moov_version: Specify an API version.
         :param skip:
         :param count:
         :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
@@ -350,7 +371,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.ListIssuedCardsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             skip=skip,
             count=count,
@@ -369,9 +389,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListIssuedCardsSecurity
+            _globals=operations.ListIssuedCardsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -385,9 +406,12 @@ class CardIssuing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listIssuedCards",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -395,13 +419,26 @@ class CardIssuing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.IssuedCard])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListIssuedCardsResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.IssuedCard]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -416,15 +453,10 @@ class CardIssuing(BaseSDK):
             http_res,
         )
 
-    async def list_issued_cards_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListIssuedCardsSecurity,
-            operations.ListIssuedCardsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         states: Optional[List[components.IssuedCardState]] = None,
@@ -432,15 +464,13 @@ class CardIssuing(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.IssuedCard]:
+    ) -> operations.ListIssuedCardsResponse:
         r"""List Moov issued cards existing for the account.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the cards have been issued.
-        :param x_moov_version: Specify an API version.
         :param skip:
         :param count:
         :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
@@ -458,7 +488,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.ListIssuedCardsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             skip=skip,
             count=count,
@@ -477,9 +506,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListIssuedCardsSecurity
+            _globals=operations.ListIssuedCardsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -493,9 +523,12 @@ class CardIssuing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listIssuedCards",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -503,13 +536,26 @@ class CardIssuing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.IssuedCard])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListIssuedCardsResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.IssuedCard]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -524,29 +570,23 @@ class CardIssuing(BaseSDK):
             http_res,
         )
 
-    def get_issued_card(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetIssuedCardSecurity, operations.GetIssuedCardSecurityTypedDict
-        ],
         account_id: str,
         issued_card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.IssuedCard:
+    ) -> operations.GetIssuedCardResponse:
         r"""Retrieve a single issued card associated with a Moov account.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -561,7 +601,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.GetIssuedCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             issued_card_id=issued_card_id,
         )
@@ -578,9 +617,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetIssuedCardSecurity
+            _globals=operations.GetIssuedCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -594,9 +634,12 @@ class CardIssuing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getIssuedCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -604,13 +647,26 @@ class CardIssuing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.IssuedCard)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetIssuedCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.IssuedCard),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -625,29 +681,23 @@ class CardIssuing(BaseSDK):
             http_res,
         )
 
-    async def get_issued_card_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetIssuedCardSecurity, operations.GetIssuedCardSecurityTypedDict
-        ],
         account_id: str,
         issued_card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.IssuedCard:
+    ) -> operations.GetIssuedCardResponse:
         r"""Retrieve a single issued card associated with a Moov account.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -662,7 +712,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.GetIssuedCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             issued_card_id=issued_card_id,
         )
@@ -679,9 +728,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetIssuedCardSecurity
+            _globals=operations.GetIssuedCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -695,9 +745,12 @@ class CardIssuing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getIssuedCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -705,13 +758,26 @@ class CardIssuing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.IssuedCard)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetIssuedCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.IssuedCard),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -726,16 +792,11 @@ class CardIssuing(BaseSDK):
             http_res,
         )
 
-    def update_issued_card(
+    def update(
         self,
         *,
-        security: Union[
-            operations.UpdateIssuedCardSecurity,
-            operations.UpdateIssuedCardSecurityTypedDict,
-        ],
         account_id: str,
         issued_card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         state: Optional[components.IssuedCardState] = None,
         memo: Optional[str] = None,
         authorized_user: Optional[
@@ -748,16 +809,14 @@ class CardIssuing(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.UpdateIssuedCardResponse:
         r"""Update a Moov issued card.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
-        :param x_moov_version: Specify an API version.
         :param state: The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.  - `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation. - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process. - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires. - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
         :param memo:
         :param authorized_user: Fields for identifying an authorized individual.
@@ -775,7 +834,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateIssuedCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             issued_card_id=issued_card_id,
             update_issued_card=components.UpdateIssuedCard(
@@ -799,9 +857,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateIssuedCardSecurity
+            _globals=operations.UpdateIssuedCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_issued_card,
                 False,
@@ -822,9 +881,12 @@ class CardIssuing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateIssuedCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -843,21 +905,35 @@ class CardIssuing(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.UpdateIssuedCardResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UpdateIssuedCardErrorData
+            )
+            raise errors.UpdateIssuedCardError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UpdateIssuedCardErrorData)
-            raise errors.UpdateIssuedCardError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -872,16 +948,11 @@ class CardIssuing(BaseSDK):
             http_res,
         )
 
-    async def update_issued_card_async(
+    async def update_async(
         self,
         *,
-        security: Union[
-            operations.UpdateIssuedCardSecurity,
-            operations.UpdateIssuedCardSecurityTypedDict,
-        ],
         account_id: str,
         issued_card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         state: Optional[components.IssuedCardState] = None,
         memo: Optional[str] = None,
         authorized_user: Optional[
@@ -894,16 +965,14 @@ class CardIssuing(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.UpdateIssuedCardResponse:
         r"""Update a Moov issued card.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
-        :param x_moov_version: Specify an API version.
         :param state: The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.  - `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation. - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process. - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires. - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
         :param memo:
         :param authorized_user: Fields for identifying an authorized individual.
@@ -921,7 +990,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateIssuedCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             issued_card_id=issued_card_id,
             update_issued_card=components.UpdateIssuedCard(
@@ -945,9 +1013,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateIssuedCardSecurity
+            _globals=operations.UpdateIssuedCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_issued_card,
                 False,
@@ -968,9 +1037,12 @@ class CardIssuing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateIssuedCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -989,21 +1061,35 @@ class CardIssuing(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.UpdateIssuedCardResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UpdateIssuedCardErrorData
+            )
+            raise errors.UpdateIssuedCardError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UpdateIssuedCardErrorData)
-            raise errors.UpdateIssuedCardError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1018,32 +1104,25 @@ class CardIssuing(BaseSDK):
             http_res,
         )
 
-    def get_full_issued_card(
+    def get_full(
         self,
         *,
-        security: Union[
-            operations.GetFullIssuedCardSecurity,
-            operations.GetFullIssuedCardSecurityTypedDict,
-        ],
         account_id: str,
         issued_card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.FullIssuedCard:
+    ) -> operations.GetFullIssuedCardResponse:
         r"""Get issued card with PAN, CVV, and expiration.
 
         Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1058,7 +1137,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.GetFullIssuedCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             issued_card_id=issued_card_id,
         )
@@ -1075,9 +1153,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetFullIssuedCardSecurity
+            _globals=operations.GetFullIssuedCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1091,9 +1170,12 @@ class CardIssuing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getFullIssuedCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1101,13 +1183,26 @@ class CardIssuing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.FullIssuedCard)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetFullIssuedCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.FullIssuedCard),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1122,32 +1217,25 @@ class CardIssuing(BaseSDK):
             http_res,
         )
 
-    async def get_full_issued_card_async(
+    async def get_full_async(
         self,
         *,
-        security: Union[
-            operations.GetFullIssuedCardSecurity,
-            operations.GetFullIssuedCardSecurityTypedDict,
-        ],
         account_id: str,
         issued_card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.FullIssuedCard:
+    ) -> operations.GetFullIssuedCardResponse:
         r"""Get issued card with PAN, CVV, and expiration.
 
         Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
 
-        :param security:
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1162,7 +1250,6 @@ class CardIssuing(BaseSDK):
             base_url = server_url
 
         request = operations.GetFullIssuedCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             issued_card_id=issued_card_id,
         )
@@ -1179,9 +1266,10 @@ class CardIssuing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetFullIssuedCardSecurity
+            _globals=operations.GetFullIssuedCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1195,9 +1283,12 @@ class CardIssuing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getFullIssuedCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1205,13 +1296,26 @@ class CardIssuing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.FullIssuedCard)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetFullIssuedCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.FullIssuedCard),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

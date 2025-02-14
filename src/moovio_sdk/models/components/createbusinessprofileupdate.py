@@ -3,7 +3,7 @@
 from __future__ import annotations
 from .addressupdate import AddressUpdate, AddressUpdateTypedDict
 from .businesstype import BusinessType
-from .industrycodesupdate import IndustryCodesUpdate, IndustryCodesUpdateTypedDict
+from .industrycodes import IndustryCodes, IndustryCodesTypedDict
 from .phonenumber import PhoneNumber, PhoneNumberTypedDict
 from .primaryregulator import PrimaryRegulator
 from .taxidupdate import TaxIDUpdate, TaxIDUpdateTypedDict
@@ -27,7 +27,7 @@ class CreateBusinessProfileUpdateTypedDict(TypedDict):
     description: NotRequired[str]
     tax_id: NotRequired[TaxIDUpdateTypedDict]
     r"""An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN."""
-    industry_codes: NotRequired[IndustryCodesUpdateTypedDict]
+    industry_codes: NotRequired[IndustryCodesTypedDict]
     primary_regulator: NotRequired[PrimaryRegulator]
     r"""If the business is a financial institution, this field describes its primary regulator."""
 
@@ -62,7 +62,7 @@ class CreateBusinessProfileUpdate(BaseModel):
     r"""An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN."""
 
     industry_codes: Annotated[
-        Optional[IndustryCodesUpdate], pydantic.Field(alias="industryCodes")
+        Optional[IndustryCodes], pydantic.Field(alias="industryCodes")
     ] = None
 
     primary_regulator: Annotated[

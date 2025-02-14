@@ -6,34 +6,29 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import List, Mapping, Optional, Union
+from typing import List, Mapping, Optional
 
 
 class PaymentMethods(BaseSDK):
-    def list_payment_methods(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListPaymentMethodsSecurity,
-            operations.ListPaymentMethodsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         source_id: Optional[str] = None,
         payment_method_type: Optional[components.PaymentMethodType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.PaymentMethod]:
-        r"""Retrieve a list of payment methods associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
+    ) -> operations.ListPaymentMethodsResponse:
+        r"""Retrieve a list of payment methods associated with a Moov account. Read our [payment methods
+        guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
-        :param source_id: Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+        :param source_id: Optional parameter to filter the account's payment methods by source ID.   A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/),  or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
         :param payment_method_type: Optional parameter to filter the account's payment methods by payment method type.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -49,7 +44,6 @@ class PaymentMethods(BaseSDK):
             base_url = server_url
 
         request = operations.ListPaymentMethodsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             source_id=source_id,
             payment_method_type=payment_method_type,
@@ -67,9 +61,10 @@ class PaymentMethods(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListPaymentMethodsSecurity
+            _globals=operations.ListPaymentMethodsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -83,9 +78,12 @@ class PaymentMethods(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listPaymentMethods",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -93,13 +91,28 @@ class PaymentMethods(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.PaymentMethod])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListPaymentMethodsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.PaymentMethod]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -114,30 +127,25 @@ class PaymentMethods(BaseSDK):
             http_res,
         )
 
-    async def list_payment_methods_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListPaymentMethodsSecurity,
-            operations.ListPaymentMethodsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         source_id: Optional[str] = None,
         payment_method_type: Optional[components.PaymentMethodType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.PaymentMethod]:
-        r"""Retrieve a list of payment methods associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
+    ) -> operations.ListPaymentMethodsResponse:
+        r"""Retrieve a list of payment methods associated with a Moov account. Read our [payment methods
+        guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
-        :param source_id: Optional parameter to filter the account's payment methods by source ID. A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/), or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+        :param source_id: Optional parameter to filter the account's payment methods by source ID.   A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/),  or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
         :param payment_method_type: Optional parameter to filter the account's payment methods by payment method type.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -153,7 +161,6 @@ class PaymentMethods(BaseSDK):
             base_url = server_url
 
         request = operations.ListPaymentMethodsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             source_id=source_id,
             payment_method_type=payment_method_type,
@@ -171,9 +178,10 @@ class PaymentMethods(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListPaymentMethodsSecurity
+            _globals=operations.ListPaymentMethodsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -187,9 +195,12 @@ class PaymentMethods(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listPaymentMethods",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -197,13 +208,28 @@ class PaymentMethods(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.PaymentMethod])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListPaymentMethodsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.PaymentMethod]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -218,29 +244,23 @@ class PaymentMethods(BaseSDK):
             http_res,
         )
 
-    def get_payment_method(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetPaymentMethodSecurity,
-            operations.GetPaymentMethodSecurityTypedDict,
-        ],
         account_id: str,
         payment_method_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.PaymentMethod:
+    ) -> operations.GetPaymentMethodResponse:
         r"""Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
-        :param security:
         :param account_id:
         :param payment_method_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -255,7 +275,6 @@ class PaymentMethods(BaseSDK):
             base_url = server_url
 
         request = operations.GetPaymentMethodRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             payment_method_id=payment_method_id,
         )
@@ -272,9 +291,10 @@ class PaymentMethods(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetPaymentMethodSecurity
+            _globals=operations.GetPaymentMethodGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -288,9 +308,12 @@ class PaymentMethods(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getPaymentMethod",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -298,13 +321,26 @@ class PaymentMethods(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.PaymentMethod)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetPaymentMethodResponse(
+                result=utils.unmarshal_json(http_res.text, components.PaymentMethod),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -319,29 +355,23 @@ class PaymentMethods(BaseSDK):
             http_res,
         )
 
-    async def get_payment_method_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetPaymentMethodSecurity,
-            operations.GetPaymentMethodSecurityTypedDict,
-        ],
         account_id: str,
         payment_method_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.PaymentMethod:
+    ) -> operations.GetPaymentMethodResponse:
         r"""Get the specified payment method associated with a Moov account. Read our [payment methods guide](https://docs.moov.io/guides/money-movement/payment-methods/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
-        :param security:
         :param account_id:
         :param payment_method_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -356,7 +386,6 @@ class PaymentMethods(BaseSDK):
             base_url = server_url
 
         request = operations.GetPaymentMethodRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             payment_method_id=payment_method_id,
         )
@@ -373,9 +402,10 @@ class PaymentMethods(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetPaymentMethodSecurity
+            _globals=operations.GetPaymentMethodGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -389,9 +419,12 @@ class PaymentMethods(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getPaymentMethod",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -399,13 +432,26 @@ class PaymentMethods(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.PaymentMethod)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetPaymentMethodResponse(
+                result=utils.unmarshal_json(http_res.text, components.PaymentMethod),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

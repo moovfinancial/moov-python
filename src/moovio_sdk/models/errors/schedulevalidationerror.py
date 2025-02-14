@@ -3,11 +3,11 @@
 from __future__ import annotations
 from moovio_sdk import utils
 from moovio_sdk.types import BaseModel
-from typing import Optional
+from typing import Dict, Optional
 
 
 class ScheduleValidationErrorData(BaseModel):
-    occurrences: Optional[str] = None
+    occurrences: Optional[Dict[str, str]] = None
 
     recur: Optional[str] = None
 

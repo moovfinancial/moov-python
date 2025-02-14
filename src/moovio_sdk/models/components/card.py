@@ -40,8 +40,6 @@ class CardTypedDict(TypedDict):
     r"""The first six to eight digits of the card number, which identifies the financial institution that issued the card."""
     expiration: CardExpirationTypedDict
     r"""The expiration date of the card or token."""
-    holder_name: str
-    r"""The name of the cardholder as it appears on the card."""
     billing_address: CardAddressTypedDict
     card_verification: CardVerificationTypedDict
     r"""The results of submitting cardholder data to a card network for verification."""
@@ -53,12 +51,12 @@ class CardTypedDict(TypedDict):
     r"""URL of the issuer."""
     issuer_phone: str
     r"""Phone number of the issuer."""
-    card_on_file: bool
-    r"""Indicates cardholder has authorized card to be stored for future payments."""
     domestic_push_to_card: DomesticPushToCard
     r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
     domestic_pull_from_card: DomesticPullFromCard
     r"""Indicates if the card supports domestic pull-from-card transfer."""
+    holder_name: NotRequired[str]
+    r"""The name of the cardholder as it appears on the card."""
     commercial: NotRequired[bool]
     r"""If true, the card is for commercial use, or associated with a business.
     If false, the card is associated with a general consumer.
@@ -67,6 +65,8 @@ class CardTypedDict(TypedDict):
     r"""If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be limited based on the Durbin Amendment.
     If false, the card issuing bank is not regulated, and the scheme fees will not be limited.
     """
+    card_on_file: NotRequired[bool]
+    r"""Indicates cardholder has authorized card to be stored for future payments."""
     merchant_account_id: NotRequired[str]
     card_account_updater: NotRequired[CardAccountUpdaterTypedDict]
     r"""The results of the most recent card update request."""
@@ -105,9 +105,6 @@ class Card(BaseModel):
     expiration: CardExpiration
     r"""The expiration date of the card or token."""
 
-    holder_name: Annotated[str, pydantic.Field(alias="holderName")]
-    r"""The name of the cardholder as it appears on the card."""
-
     billing_address: Annotated[CardAddress, pydantic.Field(alias="billingAddress")]
 
     card_verification: Annotated[
@@ -127,9 +124,6 @@ class Card(BaseModel):
     issuer_phone: Annotated[str, pydantic.Field(alias="issuerPhone")]
     r"""Phone number of the issuer."""
 
-    card_on_file: Annotated[bool, pydantic.Field(alias="cardOnFile")]
-    r"""Indicates cardholder has authorized card to be stored for future payments."""
-
     domestic_push_to_card: Annotated[
         DomesticPushToCard, pydantic.Field(alias="domesticPushToCard")
     ]
@@ -140,6 +134,9 @@ class Card(BaseModel):
     ]
     r"""Indicates if the card supports domestic pull-from-card transfer."""
 
+    holder_name: Annotated[Optional[str], pydantic.Field(alias="holderName")] = None
+    r"""The name of the cardholder as it appears on the card."""
+
     commercial: Optional[bool] = None
     r"""If true, the card is for commercial use, or associated with a business.
     If false, the card is associated with a general consumer.
@@ -149,6 +146,9 @@ class Card(BaseModel):
     r"""If true, the card issuing bank is regulated, and the scheme fees for debit transactions will be limited based on the Durbin Amendment.
     If false, the card issuing bank is not regulated, and the scheme fees will not be limited.
     """
+
+    card_on_file: Annotated[Optional[bool], pydantic.Field(alias="cardOnFile")] = None
+    r"""Indicates cardholder has authorized card to be stored for future payments."""
 
     merchant_account_id: Annotated[
         Optional[str], pydantic.Field(alias="merchantAccountID")

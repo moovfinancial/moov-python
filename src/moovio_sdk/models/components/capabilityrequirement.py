@@ -12,13 +12,15 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class CapabilityRequirementTypedDict(TypedDict):
     r"""Represents individual and business data necessary to facilitate the enabling of a capability for an account."""
 
-    currently_due: List[RequirementID]
+    currently_due: NotRequired[List[RequirementID]]
     errors: NotRequired[List[RequirementErrorTypedDict]]
 
 
 class CapabilityRequirement(BaseModel):
     r"""Represents individual and business data necessary to facilitate the enabling of a capability for an account."""
 
-    currently_due: Annotated[List[RequirementID], pydantic.Field(alias="currentlyDue")]
+    currently_due: Annotated[
+        Optional[List[RequirementID]], pydantic.Field(alias="currentlyDue")
+    ] = None
 
     errors: Optional[List[RequirementError]] = None
