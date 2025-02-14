@@ -1,17 +1,9 @@
 # GetPaymentLinkQRCodeResponse
 
 
-## Supported Types
+## Fields
 
-### `components.QRCode`
-
-```python
-value: components.QRCode = /* values here */
-```
-
-### `httpx.Response`
-
-```python
-value: httpx.Response = /* values here */
-```
-
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `headers`                                                                                                      | Dict[str, List[*str*]]                                                                                         | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `result`                                                                                                       | [operations.GetPaymentLinkQRCodeResponseResult](../../models/operations/getpaymentlinkqrcoderesponseresult.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

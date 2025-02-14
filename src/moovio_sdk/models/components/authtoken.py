@@ -8,11 +8,7 @@ from typing_extensions import TypedDict
 
 class AuthTokenTypedDict(TypedDict):
     token_type: TokenType
-    r"""Type of token returned.
-
-    - `opaque`: A token following a proprietary format.
-    - `jwt`: A JSON Web Token (JWT), a self-contained token that contains claims about the user and is cryptographically signed.
-    """
+    r"""An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type."""
     access_token: str
     r"""A value passed to the authorization server to gain access to the system."""
     refresh_token: str
@@ -25,11 +21,7 @@ class AuthTokenTypedDict(TypedDict):
 
 class AuthToken(BaseModel):
     token_type: TokenType
-    r"""Type of token returned.
-
-    - `opaque`: A token following a proprietary format.
-    - `jwt`: A JSON Web Token (JWT), a self-contained token that contains claims about the user and is cryptographically signed.
-    """
+    r"""An [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750#section-6.1) token type."""
 
     access_token: str
     r"""A value passed to the authorization server to gain access to the system."""

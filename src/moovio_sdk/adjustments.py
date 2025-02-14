@@ -6,33 +6,26 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import List, Mapping, Optional, Union
+from typing import List, Mapping, Optional
 
 
 class Adjustments(BaseSDK):
-    def list_adjustments(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListAdjustmentsSecurity,
-            operations.ListAdjustmentsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         wallet_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Adjustment]:
+    ) -> operations.ListAdjustmentsResponse:
         r"""List adjustments associated with a Moov account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/wallets.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param wallet_id: A wallet ID to filter adjustments by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -48,7 +41,6 @@ class Adjustments(BaseSDK):
             base_url = server_url
 
         request = operations.ListAdjustmentsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             wallet_id=wallet_id,
         )
@@ -65,9 +57,10 @@ class Adjustments(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListAdjustmentsSecurity
+            _globals=operations.ListAdjustmentsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -81,9 +74,12 @@ class Adjustments(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listAdjustments",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -91,13 +87,26 @@ class Adjustments(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Adjustment])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListAdjustmentsResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Adjustment]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -112,29 +121,22 @@ class Adjustments(BaseSDK):
             http_res,
         )
 
-    async def list_adjustments_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListAdjustmentsSecurity,
-            operations.ListAdjustmentsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         wallet_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Adjustment]:
+    ) -> operations.ListAdjustmentsResponse:
         r"""List adjustments associated with a Moov account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/wallets.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param wallet_id: A wallet ID to filter adjustments by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -150,7 +152,6 @@ class Adjustments(BaseSDK):
             base_url = server_url
 
         request = operations.ListAdjustmentsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             wallet_id=wallet_id,
         )
@@ -167,9 +168,10 @@ class Adjustments(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListAdjustmentsSecurity
+            _globals=operations.ListAdjustmentsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -183,9 +185,12 @@ class Adjustments(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listAdjustments",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -193,13 +198,26 @@ class Adjustments(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Adjustment])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListAdjustmentsResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Adjustment]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -214,29 +232,23 @@ class Adjustments(BaseSDK):
             http_res,
         )
 
-    def get_adjustment(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetAdjustmentSecurity, operations.GetAdjustmentSecurityTypedDict
-        ],
         account_id: str,
         adjustment_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Adjustment:
+    ) -> operations.GetAdjustmentResponse:
         r"""Retrieve a specific adjustment associated with a Moov account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/wallets.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
-        :param security:
         :param account_id:
         :param adjustment_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -251,7 +263,6 @@ class Adjustments(BaseSDK):
             base_url = server_url
 
         request = operations.GetAdjustmentRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             adjustment_id=adjustment_id,
         )
@@ -268,9 +279,10 @@ class Adjustments(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetAdjustmentSecurity
+            _globals=operations.GetAdjustmentGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -284,9 +296,12 @@ class Adjustments(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getAdjustment",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -294,13 +309,26 @@ class Adjustments(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Adjustment)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetAdjustmentResponse(
+                result=utils.unmarshal_json(http_res.text, components.Adjustment),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -315,29 +343,23 @@ class Adjustments(BaseSDK):
             http_res,
         )
 
-    async def get_adjustment_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetAdjustmentSecurity, operations.GetAdjustmentSecurityTypedDict
-        ],
         account_id: str,
         adjustment_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Adjustment:
+    ) -> operations.GetAdjustmentResponse:
         r"""Retrieve a specific adjustment associated with a Moov account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/wallets.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
-        :param security:
         :param account_id:
         :param adjustment_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -352,7 +374,6 @@ class Adjustments(BaseSDK):
             base_url = server_url
 
         request = operations.GetAdjustmentRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             adjustment_id=adjustment_id,
         )
@@ -369,9 +390,10 @@ class Adjustments(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetAdjustmentSecurity
+            _globals=operations.GetAdjustmentGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -385,9 +407,12 @@ class Adjustments(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getAdjustment",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -395,13 +420,26 @@ class Adjustments(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Adjustment)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetAdjustmentResponse(
+                result=utils.unmarshal_json(http_res.text, components.Adjustment),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

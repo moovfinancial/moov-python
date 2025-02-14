@@ -17,7 +17,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CreateRepresentativeTypedDict(TypedDict):
-    r"""The template for omitting properties."""
+    r"""Describes a business representative to create."""
 
     name: IndividualNameTypedDict
     phone: NotRequired[PhoneNumberTypedDict]
@@ -30,7 +30,7 @@ class CreateRepresentativeTypedDict(TypedDict):
 
 
 class CreateRepresentative(BaseModel):
-    r"""The template for omitting properties."""
+    r"""Describes a business representative to create."""
 
     name: IndividualName
 

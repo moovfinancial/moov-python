@@ -10,26 +10,23 @@ from typing import Any, Mapping, Optional, Union
 
 
 class Branding(BaseSDK):
-    def post_brand(
+    def create(
         self,
         *,
-        security: Union[
-            operations.PostBrandSecurity, operations.PostBrandSecurityTypedDict
-        ],
         account_id: str,
-        colors: Union[components.Colors, components.ColorsTypedDict],
-        x_moov_version: Optional[components.Versions] = None,
+        colors: Union[components.BrandColors, components.BrandColorsTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Brand:
-        r"""Creates the brand properties for the specified account.
+    ) -> operations.CreateBrandResponse:
+        r"""Create brand properties for the specified account.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+
         :param account_id:
-        :param colors: Set brand accent colors for light and dark modes.
-        :param x_moov_version: Specify an API version.
+        :param colors: Brand colors for light and dark modes.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -43,11 +40,10 @@ class Branding(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.PostBrandRequest(
-            x_moov_version=x_moov_version,
+        request = operations.CreateBrandRequest(
             account_id=account_id,
-            brand=components.Brand(
-                colors=utils.get_pydantic_model(colors, components.Colors),
+            brand_properties=components.BrandProperties(
+                colors=utils.get_pydantic_model(colors, components.BrandColors),
             ),
         )
 
@@ -63,9 +59,16 @@ class Branding(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.PostBrandSecurity),
+            _globals=operations.CreateBrandGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.brand, False, False, "json", components.Brand
+                request.brand_properties,
+                False,
+                False,
+                "json",
+                components.BrandProperties,
             ),
             timeout_ms=timeout_ms,
         )
@@ -80,9 +83,12 @@ class Branding(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="postBrand",
+                base_url=base_url or "",
+                operation_id="createBrand",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -101,21 +107,36 @@ class Branding(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Brand)
+            return operations.CreateBrandResponse(
+                result=utils.unmarshal_json(http_res.text, components.BrandProperties),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.BrandValidationErrorData
+            )
+            raise errors.BrandValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BrandValidationErrorData)
-            raise errors.BrandValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -130,26 +151,23 @@ class Branding(BaseSDK):
             http_res,
         )
 
-    async def post_brand_async(
+    async def create_async(
         self,
         *,
-        security: Union[
-            operations.PostBrandSecurity, operations.PostBrandSecurityTypedDict
-        ],
         account_id: str,
-        colors: Union[components.Colors, components.ColorsTypedDict],
-        x_moov_version: Optional[components.Versions] = None,
+        colors: Union[components.BrandColors, components.BrandColorsTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Brand:
-        r"""Creates the brand properties for the specified account.
+    ) -> operations.CreateBrandResponse:
+        r"""Create brand properties for the specified account.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+
         :param account_id:
-        :param colors: Set brand accent colors for light and dark modes.
-        :param x_moov_version: Specify an API version.
+        :param colors: Brand colors for light and dark modes.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -163,11 +181,10 @@ class Branding(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.PostBrandRequest(
-            x_moov_version=x_moov_version,
+        request = operations.CreateBrandRequest(
             account_id=account_id,
-            brand=components.Brand(
-                colors=utils.get_pydantic_model(colors, components.Colors),
+            brand_properties=components.BrandProperties(
+                colors=utils.get_pydantic_model(colors, components.BrandColors),
             ),
         )
 
@@ -183,9 +200,16 @@ class Branding(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.PostBrandSecurity),
+            _globals=operations.CreateBrandGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.brand, False, False, "json", components.Brand
+                request.brand_properties,
+                False,
+                False,
+                "json",
+                components.BrandProperties,
             ),
             timeout_ms=timeout_ms,
         )
@@ -200,9 +224,12 @@ class Branding(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="postBrand",
+                base_url=base_url or "",
+                operation_id="createBrand",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -221,21 +248,36 @@ class Branding(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Brand)
+            return operations.CreateBrandResponse(
+                result=utils.unmarshal_json(http_res.text, components.BrandProperties),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.BrandValidationErrorData
+            )
+            raise errors.BrandValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BrandValidationErrorData)
-            raise errors.BrandValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -250,24 +292,303 @@ class Branding(BaseSDK):
             http_res,
         )
 
-    def get_brand(
+    def upsert(
         self,
         *,
-        security: Union[
-            operations.GetBrandSecurity, operations.GetBrandSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
+        colors: Union[components.BrandColors, components.BrandColorsTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Brand:
-        r"""Gets the brand properties for the specified account.
+    ) -> operations.UpsertBrandResponse:
+        r"""Create or replace brand properties for the specified account.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
+        :param colors: Brand colors for light and dark modes.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = operations.UpsertBrandRequest(
+            account_id=account_id,
+            brand_properties=components.BrandProperties(
+                colors=utils.get_pydantic_model(colors, components.BrandColors),
+            ),
+        )
+
+        req = self._build_request(
+            method="PUT",
+            path="/accounts/{accountID}/branding",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.UpsertBrandGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.brand_properties,
+                False,
+                False,
+                "json",
+                components.BrandProperties,
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="upsertBrand",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "504",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.UpsertBrandResponse(
+                result=utils.unmarshal_json(http_res.text, components.BrandProperties),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.BrandValidationErrorData
+            )
+            raise errors.BrandValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def upsert_async(
+        self,
+        *,
+        account_id: str,
+        colors: Union[components.BrandColors, components.BrandColorsTypedDict],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.UpsertBrandResponse:
+        r"""Create or replace brand properties for the specified account.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+
+        :param account_id:
+        :param colors: Brand colors for light and dark modes.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+
+        request = operations.UpsertBrandRequest(
+            account_id=account_id,
+            brand_properties=components.BrandProperties(
+                colors=utils.get_pydantic_model(colors, components.BrandColors),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PUT",
+            path="/accounts/{accountID}/branding",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.UpsertBrandGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.brand_properties,
+                False,
+                False,
+                "json",
+                components.BrandProperties,
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="upsertBrand",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "504",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.UpsertBrandResponse(
+                result=utils.unmarshal_json(http_res.text, components.BrandProperties),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.BrandValidationErrorData
+            )
+            raise errors.BrandValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def get(
+        self,
+        *,
+        account_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.GetBrandResponse:
+        r"""Get brand properties for the specified account.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/branding.read` scope.
+
+        :param account_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -282,7 +603,6 @@ class Branding(BaseSDK):
             base_url = server_url
 
         request = operations.GetBrandRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -298,7 +618,10 @@ class Branding(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetBrandSecurity),
+            _globals=operations.GetBrandGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -312,9 +635,12 @@ class Branding(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getBrand",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -322,13 +648,26 @@ class Branding(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Brand)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetBrandResponse(
+                result=utils.unmarshal_json(http_res.text, components.BrandProperties),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -343,24 +682,21 @@ class Branding(BaseSDK):
             http_res,
         )
 
-    async def get_brand_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetBrandSecurity, operations.GetBrandSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Brand:
-        r"""Gets the brand properties for the specified account.
+    ) -> operations.GetBrandResponse:
+        r"""Get brand properties for the specified account.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/branding.read` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -375,7 +711,6 @@ class Branding(BaseSDK):
             base_url = server_url
 
         request = operations.GetBrandRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -391,7 +726,10 @@ class Branding(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetBrandSecurity),
+            _globals=operations.GetBrandGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -405,9 +743,12 @@ class Branding(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getBrand",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -415,13 +756,26 @@ class Branding(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Brand)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetBrandResponse(
+                result=utils.unmarshal_json(http_res.text, components.BrandProperties),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -436,14 +790,10 @@ class Branding(BaseSDK):
             http_res,
         )
 
-    def update_brand(
+    def update(
         self,
         *,
-        security: Union[
-            operations.UpdateBrandSecurity, operations.UpdateBrandSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         colors: Optional[
             Union[components.UpdateColors, components.UpdateColorsTypedDict]
         ] = None,
@@ -451,12 +801,13 @@ class Branding(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Brand:
+    ) -> operations.UpdateBrandResponse:
         r"""Updates the brand properties for the specified account.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param colors:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -472,7 +823,6 @@ class Branding(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateBrandRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             update_brand=components.UpdateBrand(
                 colors=utils.get_pydantic_model(
@@ -493,7 +843,10 @@ class Branding(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.UpdateBrandSecurity),
+            _globals=operations.UpdateBrandGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_brand, False, False, "json", components.UpdateBrand
             ),
@@ -510,9 +863,12 @@ class Branding(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateBrand",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -531,21 +887,36 @@ class Branding(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Brand)
+            return operations.UpdateBrandResponse(
+                result=utils.unmarshal_json(http_res.text, components.BrandProperties),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.BrandValidationErrorData
+            )
+            raise errors.BrandValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BrandValidationErrorData)
-            raise errors.BrandValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -560,14 +931,10 @@ class Branding(BaseSDK):
             http_res,
         )
 
-    async def update_brand_async(
+    async def update_async(
         self,
         *,
-        security: Union[
-            operations.UpdateBrandSecurity, operations.UpdateBrandSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         colors: Optional[
             Union[components.UpdateColors, components.UpdateColorsTypedDict]
         ] = None,
@@ -575,12 +942,13 @@ class Branding(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Brand:
+    ) -> operations.UpdateBrandResponse:
         r"""Updates the brand properties for the specified account.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/branding.write` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param colors:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -596,7 +964,6 @@ class Branding(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateBrandRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             update_brand=components.UpdateBrand(
                 colors=utils.get_pydantic_model(
@@ -617,7 +984,10 @@ class Branding(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.UpdateBrandSecurity),
+            _globals=operations.UpdateBrandGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_brand, False, False, "json", components.UpdateBrand
             ),
@@ -634,9 +1004,12 @@ class Branding(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateBrand",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -655,21 +1028,36 @@ class Branding(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Brand)
+            return operations.UpdateBrandResponse(
+                result=utils.unmarshal_json(http_res.text, components.BrandProperties),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.BrandValidationErrorData
+            )
+            raise errors.BrandValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BrandValidationErrorData)
-            raise errors.BrandValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

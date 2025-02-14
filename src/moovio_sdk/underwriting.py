@@ -10,30 +10,23 @@ from typing import Any, Mapping, Optional, Union
 
 
 class Underwriting(BaseSDK):
-    def get_underwriting(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetUnderwritingSecurity,
-            operations.GetUnderwritingSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Underwriting:
+    ) -> operations.GetUnderwritingResponse:
         r"""Retrieve underwriting associated with a given Moov account.
 
         Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -48,7 +41,6 @@ class Underwriting(BaseSDK):
             base_url = server_url
 
         request = operations.GetUnderwritingRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -64,9 +56,10 @@ class Underwriting(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetUnderwritingSecurity
+            _globals=operations.GetUnderwritingGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -80,9 +73,12 @@ class Underwriting(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getUnderwriting",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -90,13 +86,26 @@ class Underwriting(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Underwriting)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetUnderwritingResponse(
+                result=utils.unmarshal_json(http_res.text, components.Underwriting),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -111,30 +120,23 @@ class Underwriting(BaseSDK):
             http_res,
         )
 
-    async def get_underwriting_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetUnderwritingSecurity,
-            operations.GetUnderwritingSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Underwriting:
+    ) -> operations.GetUnderwritingResponse:
         r"""Retrieve underwriting associated with a given Moov account.
 
         Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -149,7 +151,6 @@ class Underwriting(BaseSDK):
             base_url = server_url
 
         request = operations.GetUnderwritingRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -165,9 +166,10 @@ class Underwriting(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetUnderwritingSecurity
+            _globals=operations.GetUnderwritingGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -181,9 +183,12 @@ class Underwriting(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getUnderwriting",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -191,13 +196,26 @@ class Underwriting(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Underwriting)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetUnderwritingResponse(
+                result=utils.unmarshal_json(http_res.text, components.Underwriting),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -212,13 +230,9 @@ class Underwriting(BaseSDK):
             http_res,
         )
 
-    def update_underwriting(
+    def upsert(
         self,
         *,
-        security: Union[
-            operations.UpdateUnderwritingSecurity,
-            operations.UpdateUnderwritingSecurityTypedDict,
-        ],
         account_id: str,
         average_transaction_size: int,
         max_transaction_size: int,
@@ -233,20 +247,18 @@ class Underwriting(BaseSDK):
         fulfillment: Union[
             components.FulfillmentDetails, components.FulfillmentDetailsTypedDict
         ],
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Underwriting:
-        r"""Update the account's underwriting by passing new values for one or more of the fields.
+    ) -> operations.UpsertUnderwritingResponse:
+        r"""Create or update the account's underwriting.
 
         Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.write` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
-        :param security:
         :param account_id:
         :param average_transaction_size:
         :param max_transaction_size:
@@ -254,7 +266,6 @@ class Underwriting(BaseSDK):
         :param volume_by_customer_type:
         :param card_volume_distribution:
         :param fulfillment:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -268,8 +279,7 @@ class Underwriting(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.UpdateUnderwritingRequest(
-            x_moov_version=x_moov_version,
+        request = operations.UpsertUnderwritingRequest(
             account_id=account_id,
             update_underwriting=components.UpdateUnderwriting(
                 average_transaction_size=average_transaction_size,
@@ -299,9 +309,10 @@ class Underwriting(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateUnderwritingSecurity
+            _globals=operations.UpsertUnderwritingGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_underwriting,
                 False,
@@ -322,9 +333,12 @@ class Underwriting(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="updateUnderwriting",
+                base_url=base_url or "",
+                operation_id="upsertUnderwriting",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -343,23 +357,36 @@ class Underwriting(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Underwriting)
+            return operations.UpsertUnderwritingResponse(
+                result=utils.unmarshal_json(http_res.text, components.Underwriting),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UpdateUnderwritingErrorData
+            )
+            raise errors.UpdateUnderwritingError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.UpdateUnderwritingErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.UpdateUnderwritingError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -374,13 +401,9 @@ class Underwriting(BaseSDK):
             http_res,
         )
 
-    async def update_underwriting_async(
+    async def upsert_async(
         self,
         *,
-        security: Union[
-            operations.UpdateUnderwritingSecurity,
-            operations.UpdateUnderwritingSecurityTypedDict,
-        ],
         account_id: str,
         average_transaction_size: int,
         max_transaction_size: int,
@@ -395,20 +418,18 @@ class Underwriting(BaseSDK):
         fulfillment: Union[
             components.FulfillmentDetails, components.FulfillmentDetailsTypedDict
         ],
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Underwriting:
-        r"""Update the account's underwriting by passing new values for one or more of the fields.
+    ) -> operations.UpsertUnderwritingResponse:
+        r"""Create or update the account's underwriting.
 
         Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.write` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
-        :param security:
         :param account_id:
         :param average_transaction_size:
         :param max_transaction_size:
@@ -416,7 +437,6 @@ class Underwriting(BaseSDK):
         :param volume_by_customer_type:
         :param card_volume_distribution:
         :param fulfillment:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -430,8 +450,7 @@ class Underwriting(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.UpdateUnderwritingRequest(
-            x_moov_version=x_moov_version,
+        request = operations.UpsertUnderwritingRequest(
             account_id=account_id,
             update_underwriting=components.UpdateUnderwriting(
                 average_transaction_size=average_transaction_size,
@@ -461,9 +480,10 @@ class Underwriting(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateUnderwritingSecurity
+            _globals=operations.UpsertUnderwritingGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_underwriting,
                 False,
@@ -484,9 +504,12 @@ class Underwriting(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="updateUnderwriting",
+                base_url=base_url or "",
+                operation_id="upsertUnderwriting",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -505,23 +528,36 @@ class Underwriting(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Underwriting)
+            return operations.UpsertUnderwritingResponse(
+                result=utils.unmarshal_json(http_res.text, components.Underwriting),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UpdateUnderwritingErrorData
+            )
+            raise errors.UpdateUnderwritingError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.UpdateUnderwritingErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.UpdateUnderwritingError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

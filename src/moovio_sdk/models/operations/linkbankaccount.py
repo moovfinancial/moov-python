@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import (
+    bankaccount as components_bankaccount,
     bankaccountwaitfor as components_bankaccountwaitfor,
     linkbankaccount as components_linkbankaccount,
-    schemebasicauth as components_schemebasicauth,
-    versions as components_versions,
 )
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import (
@@ -13,41 +12,47 @@ from moovio_sdk.utils import (
     HeaderMetadata,
     PathParamMetadata,
     RequestMetadata,
-    SecurityMetadata,
 )
 import pydantic
-from typing import Optional
+from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class LinkBankAccountSecurityTypedDict(TypedDict):
-    basic_auth: NotRequired[components_schemebasicauth.SchemeBasicAuthTypedDict]
-    o_auth2_auth: NotRequired[str]
+class LinkBankAccountGlobalsTypedDict(TypedDict):
+    x_moov_version: NotRequired[str]
+    r"""Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where
+    - `YYYY` is the year
+    - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+    - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
+    - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    """
 
 
-class LinkBankAccountSecurity(BaseModel):
-    basic_auth: Annotated[
-        Optional[components_schemebasicauth.SchemeBasicAuth],
-        FieldMetadata(
-            security=SecurityMetadata(scheme=True, scheme_type="http", sub_type="basic")
-        ),
-    ] = None
-
-    o_auth2_auth: Annotated[
+class LinkBankAccountGlobals(BaseModel):
+    x_moov_version: Annotated[
         Optional[str],
-        FieldMetadata(
-            security=SecurityMetadata(
-                scheme=True, scheme_type="oauth2", field_name="Authorization"
-            )
-        ),
-    ] = None
+        pydantic.Field(alias="x-moov-version"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = "v2024.01.00"
+    r"""Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where
+    - `YYYY` is the year
+    - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+    - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
+    - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    """
 
 
 class LinkBankAccountRequestTypedDict(TypedDict):
     account_id: str
     link_bank_account: components_linkbankaccount.LinkBankAccountTypedDict
-    x_moov_version: NotRequired[components_versions.Versions]
-    r"""Specify an API version."""
     x_wait_for: NotRequired[components_bankaccountwaitfor.BankAccountWaitFor]
     r"""Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
 
@@ -68,13 +73,6 @@ class LinkBankAccountRequest(BaseModel):
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 
-    x_moov_version: Annotated[
-        Optional[components_versions.Versions],
-        pydantic.Field(alias="x-moov-version"),
-        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = None
-    r"""Specify an API version."""
-
     x_wait_for: Annotated[
         Optional[components_bankaccountwaitfor.BankAccountWaitFor],
         pydantic.Field(alias="x-wait-for"),
@@ -85,3 +83,14 @@ class LinkBankAccountRequest(BaseModel):
     When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
     linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
     """
+
+
+class LinkBankAccountResponseTypedDict(TypedDict):
+    headers: Dict[str, List[str]]
+    result: components_bankaccount.BankAccountTypedDict
+
+
+class LinkBankAccountResponse(BaseModel):
+    headers: Dict[str, List[str]]
+
+    result: components_bankaccount.BankAccount

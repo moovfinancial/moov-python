@@ -5,39 +5,48 @@
 
 ### Available Operations
 
-* [list_capabilities](#list_capabilities) - Retrieve all the capabilities an account has requested.
+* [list](#list) - Retrieve all the capabilities an account has requested.
 
 Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
-* [add_capabilities](#add_capabilities) - Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [get_capability](#get_capability) - Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
+* [request](#request) - Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [disable_capability](#disable_capability) - Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
+* [get](#get) - Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
+* [disable](#disable) - Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-## list_capabilities
+  To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
+
+## list
 
 Retrieve all the capabilities an account has requested.
 
 Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
+
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.capabilities.list_capabilities(security=operations.ListCapabilitiesSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="c236a258-0a99-455d-9fbb-2312bc028cd2")
+    res = moov.capabilities.list(account_id="c236a258-0a99-455d-9fbb-2312bc028cd2")
 
     # Handle response
     print(res)
@@ -46,16 +55,14 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `security`                                                                                 | [operations.ListCapabilitiesSecurity](../../models/operations/listcapabilitiessecurity.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `account_id`                                                                               | *str*                                                                                      | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `x_moov_version`                                                                           | [Optional[components.Versions]](../../models/components/versions.md)                       | :heavy_minus_sign:                                                                         | Specify an API version.                                                                    |
-| `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[List[components.Capability]](../../models/.md)**
+**[operations.ListCapabilitiesResponse](../../models/operations/listcapabilitiesresponse.md)**
 
 ### Errors
 
@@ -63,26 +70,27 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## add_capabilities
+## request
 
 Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.capabilities.add_capabilities(security=operations.AddCapabilitiesSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="1f48b82c-3158-4fa6-a507-0bd22afd441e", capabilities=[
+    res = moov.capabilities.request(account_id="32613610-de25-446e-8662-ec2709ffea9d", capabilities=[
         components.CapabilityID.COLLECT_FUNDS,
     ])
 
@@ -93,17 +101,15 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `security`                                                                               | [operations.AddCapabilitiesSecurity](../../models/operations/addcapabilitiessecurity.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `account_id`                                                                             | *str*                                                                                    | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `capabilities`                                                                           | List[[components.CapabilityID](../../models/components/capabilityid.md)]                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `x_moov_version`                                                                         | [Optional[components.Versions]](../../models/components/versions.md)                     | :heavy_minus_sign:                                                                       | Specify an API version.                                                                  |
-| `retries`                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                         | :heavy_minus_sign:                                                                       | Configuration to override the default retry behavior of the client.                      |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `account_id`                                                             | *str*                                                                    | :heavy_check_mark:                                                       | N/A                                                                      |
+| `capabilities`                                                           | List[[components.CapabilityID](../../models/components/capabilityid.md)] | :heavy_check_mark:                                                       | N/A                                                                      |
+| `retries`                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)         | :heavy_minus_sign:                                                       | Configuration to override the default retry behavior of the client.      |
 
 ### Response
 
-**[List[components.Capability]](../../models/.md)**
+**[operations.RequestCapabilitiesResponse](../../models/operations/requestcapabilitiesresponse.md)**
 
 ### Errors
 
@@ -113,26 +119,27 @@ with Moov() as moov:
 | errors.AddCapabilitiesError | 422                         | application/json            |
 | errors.APIError             | 4XX, 5XX                    | \*/\*                       |
 
-## get_capability
+## get
 
 Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.capabilities.get_capability(security=operations.GetCapabilitySecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="15fbc94d-721f-44a3-b5fb-77f58657305f", capability_id=components.CapabilityID.TRANSFERS)
+    res = moov.capabilities.get(account_id="15fbc94d-721f-44a3-b5fb-77f58657305f", capability_id=components.CapabilityID.TRANSFERS)
 
     # Handle response
     print(res)
@@ -141,17 +148,15 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `security`                                                                           | [operations.GetCapabilitySecurity](../../models/operations/getcapabilitysecurity.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `account_id`                                                                         | *str*                                                                                | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `capability_id`                                                                      | [components.CapabilityID](../../models/components/capabilityid.md)                   | :heavy_check_mark:                                                                   | Moov account capabilities.                                                           |
-| `x_moov_version`                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                 | :heavy_minus_sign:                                                                   | Specify an API version.                                                              |
-| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
+| Parameter                                                                                                                                                                                                                                                               | Type                                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `account_id`                                                                                                                                                                                                                                                            | *str*                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                     |
+| `capability_id`                                                                                                                                                                                                                                                         | [components.CapabilityID](../../models/components/capabilityid.md)                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                      | Moov account capabilities.<br/><br/>The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action. |
+| `retries`                                                                                                                                                                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                      | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                     |
 
 ### Response
 
-**[components.Capability](../../models/components/capability.md)**
+**[operations.GetCapabilityResponse](../../models/operations/getcapabilityresponse.md)**
 
 ### Errors
 
@@ -159,40 +164,44 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## disable_capability
+## disable
 
 Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+  To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    moov.capabilities.disable_capability(security=operations.DisableCapabilitySecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="c57b48d7-4182-4632-a345-eeed5a742b0d", capability_id=components.CapabilityID.CARD_ISSUING)
+    res = moov.capabilities.disable(account_id="c57b48d7-4182-4632-a345-eeed5a742b0d", capability_id=components.CapabilityID.CARD_ISSUING)
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `security`                                                                                   | [operations.DisableCapabilitySecurity](../../models/operations/disablecapabilitysecurity.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
-| `account_id`                                                                                 | *str*                                                                                        | :heavy_check_mark:                                                                           | N/A                                                                                          |
-| `capability_id`                                                                              | [components.CapabilityID](../../models/components/capabilityid.md)                           | :heavy_check_mark:                                                                           | Moov account capabilities.                                                                   |
-| `x_moov_version`                                                                             | [Optional[components.Versions]](../../models/components/versions.md)                         | :heavy_minus_sign:                                                                           | Specify an API version.                                                                      |
-| `retries`                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                             | :heavy_minus_sign:                                                                           | Configuration to override the default retry behavior of the client.                          |
+| Parameter                                                                                                                                                                                                                                                               | Type                                                                                                                                                                                                                                                                    | Required                                                                                                                                                                                                                                                                | Description                                                                                                                                                                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `account_id`                                                                                                                                                                                                                                                            | *str*                                                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                     |
+| `capability_id`                                                                                                                                                                                                                                                         | [components.CapabilityID](../../models/components/capabilityid.md)                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                      | Moov account capabilities.<br/><br/>The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action. |
+| `retries`                                                                                                                                                                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                      | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                     |
+
+### Response
+
+**[operations.DisableCapabilityResponse](../../models/operations/disablecapabilityresponse.md)**
 
 ### Errors
 

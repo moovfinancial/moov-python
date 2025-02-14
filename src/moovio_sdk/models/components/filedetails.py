@@ -6,7 +6,8 @@ from .filestatus import FileStatus
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class FileDetailsTypedDict(TypedDict):
@@ -20,10 +21,10 @@ class FileDetailsTypedDict(TypedDict):
     file_status: FileStatus
     r"""The file's status."""
     metadata: str
-    decision_reason: str
     file_size_bytes: int
     created_on: datetime
     updated_on: datetime
+    decision_reason: NotRequired[str]
 
 
 class FileDetails(BaseModel):
@@ -43,10 +44,12 @@ class FileDetails(BaseModel):
 
     metadata: str
 
-    decision_reason: Annotated[str, pydantic.Field(alias="decisionReason")]
-
     file_size_bytes: Annotated[int, pydantic.Field(alias="fileSizeBytes")]
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
+
+    decision_reason: Annotated[
+        Optional[str], pydantic.Field(alias="decisionReason")
+    ] = None

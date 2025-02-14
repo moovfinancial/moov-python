@@ -6,31 +6,27 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional
 
 
 class Capabilities(BaseSDK):
-    def list_capabilities(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListCapabilitiesSecurity,
-            operations.ListCapabilitiesSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Capability]:
+    ) -> operations.ListCapabilitiesResponse:
         r"""Retrieve all the capabilities an account has requested.
 
         Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -45,7 +41,6 @@ class Capabilities(BaseSDK):
             base_url = server_url
 
         request = operations.ListCapabilitiesRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -61,9 +56,10 @@ class Capabilities(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListCapabilitiesSecurity
+            _globals=operations.ListCapabilitiesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -77,9 +73,12 @@ class Capabilities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listCapabilities",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -87,13 +86,26 @@ class Capabilities(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Capability])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListCapabilitiesResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Capability]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -108,27 +120,23 @@ class Capabilities(BaseSDK):
             http_res,
         )
 
-    async def list_capabilities_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListCapabilitiesSecurity,
-            operations.ListCapabilitiesSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Capability]:
+    ) -> operations.ListCapabilitiesResponse:
         r"""Retrieve all the capabilities an account has requested.
 
         Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -143,7 +151,6 @@ class Capabilities(BaseSDK):
             base_url = server_url
 
         request = operations.ListCapabilitiesRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -159,9 +166,10 @@ class Capabilities(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListCapabilitiesSecurity
+            _globals=operations.ListCapabilitiesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -175,9 +183,12 @@ class Capabilities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listCapabilities",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -185,13 +196,26 @@ class Capabilities(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Capability])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListCapabilitiesResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Capability]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -206,29 +230,23 @@ class Capabilities(BaseSDK):
             http_res,
         )
 
-    def add_capabilities(
+    def request(
         self,
         *,
-        security: Union[
-            operations.AddCapabilitiesSecurity,
-            operations.AddCapabilitiesSecurityTypedDict,
-        ],
         account_id: str,
         capabilities: List[components.CapabilityID],
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Capability]:
+    ) -> operations.RequestCapabilitiesResponse:
         r"""Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
-        :param security:
         :param account_id:
         :param capabilities:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -242,8 +260,7 @@ class Capabilities(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.AddCapabilitiesRequest(
-            x_moov_version=x_moov_version,
+        request = operations.RequestCapabilitiesRequest(
             account_id=account_id,
             add_capabilities=components.AddCapabilities(
                 capabilities=capabilities,
@@ -262,9 +279,10 @@ class Capabilities(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.AddCapabilitiesSecurity
+            _globals=operations.RequestCapabilitiesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.add_capabilities,
                 False,
@@ -285,9 +303,12 @@ class Capabilities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="addCapabilities",
+                base_url=base_url or "",
+                operation_id="requestCapabilities",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -306,21 +327,36 @@ class Capabilities(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Capability])
+            return operations.RequestCapabilitiesResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Capability]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.AddCapabilitiesErrorData
+            )
+            raise errors.AddCapabilitiesError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.AddCapabilitiesErrorData)
-            raise errors.AddCapabilitiesError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -335,29 +371,23 @@ class Capabilities(BaseSDK):
             http_res,
         )
 
-    async def add_capabilities_async(
+    async def request_async(
         self,
         *,
-        security: Union[
-            operations.AddCapabilitiesSecurity,
-            operations.AddCapabilitiesSecurityTypedDict,
-        ],
         account_id: str,
         capabilities: List[components.CapabilityID],
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Capability]:
+    ) -> operations.RequestCapabilitiesResponse:
         r"""Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
-        :param security:
         :param account_id:
         :param capabilities:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -371,8 +401,7 @@ class Capabilities(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.AddCapabilitiesRequest(
-            x_moov_version=x_moov_version,
+        request = operations.RequestCapabilitiesRequest(
             account_id=account_id,
             add_capabilities=components.AddCapabilities(
                 capabilities=capabilities,
@@ -391,9 +420,10 @@ class Capabilities(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.AddCapabilitiesSecurity
+            _globals=operations.RequestCapabilitiesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.add_capabilities,
                 False,
@@ -414,9 +444,12 @@ class Capabilities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="addCapabilities",
+                base_url=base_url or "",
+                operation_id="requestCapabilities",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -435,21 +468,36 @@ class Capabilities(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Capability])
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
+            return operations.RequestCapabilitiesResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Capability]),
+                headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.AddCapabilitiesErrorData)
-            raise errors.AddCapabilitiesError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.AddCapabilitiesErrorData
+            )
+            raise errors.AddCapabilitiesError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -464,28 +512,23 @@ class Capabilities(BaseSDK):
             http_res,
         )
 
-    def get_capability(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetCapabilitySecurity, operations.GetCapabilitySecurityTypedDict
-        ],
         account_id: str,
         capability_id: components.CapabilityID,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Capability:
+    ) -> operations.GetCapabilityResponse:
         r"""Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
-        :param security:
         :param account_id:
-        :param capability_id: Moov account capabilities.
-        :param x_moov_version: Specify an API version.
+        :param capability_id: Moov account capabilities.  The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -500,7 +543,6 @@ class Capabilities(BaseSDK):
             base_url = server_url
 
         request = operations.GetCapabilityRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             capability_id=capability_id,
         )
@@ -517,9 +559,10 @@ class Capabilities(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetCapabilitySecurity
+            _globals=operations.GetCapabilityGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -533,9 +576,12 @@ class Capabilities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getCapability",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -543,13 +589,26 @@ class Capabilities(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Capability)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetCapabilityResponse(
+                result=utils.unmarshal_json(http_res.text, components.Capability),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -564,28 +623,23 @@ class Capabilities(BaseSDK):
             http_res,
         )
 
-    async def get_capability_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetCapabilitySecurity, operations.GetCapabilitySecurityTypedDict
-        ],
         account_id: str,
         capability_id: components.CapabilityID,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Capability:
+    ) -> operations.GetCapabilityResponse:
         r"""Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
-        :param security:
         :param account_id:
-        :param capability_id: Moov account capabilities.
-        :param x_moov_version: Specify an API version.
+        :param capability_id: Moov account capabilities.  The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -600,7 +654,6 @@ class Capabilities(BaseSDK):
             base_url = server_url
 
         request = operations.GetCapabilityRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             capability_id=capability_id,
         )
@@ -617,9 +670,10 @@ class Capabilities(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetCapabilitySecurity
+            _globals=operations.GetCapabilityGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -633,9 +687,12 @@ class Capabilities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getCapability",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -643,13 +700,26 @@ class Capabilities(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Capability)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetCapabilityResponse(
+                result=utils.unmarshal_json(http_res.text, components.Capability),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -664,29 +734,23 @@ class Capabilities(BaseSDK):
             http_res,
         )
 
-    def disable_capability(
+    def disable(
         self,
         *,
-        security: Union[
-            operations.DisableCapabilitySecurity,
-            operations.DisableCapabilitySecurityTypedDict,
-        ],
         account_id: str,
         capability_id: components.CapabilityID,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DisableCapabilityResponse:
         r"""Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+          To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
-        :param security:
         :param account_id:
-        :param capability_id: Moov account capabilities.
-        :param x_moov_version: Specify an API version.
+        :param capability_id: Moov account capabilities.  The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -701,7 +765,6 @@ class Capabilities(BaseSDK):
             base_url = server_url
 
         request = operations.DisableCapabilityRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             capability_id=capability_id,
         )
@@ -718,9 +781,10 @@ class Capabilities(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.DisableCapabilitySecurity
+            _globals=operations.DisableCapabilityGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -734,9 +798,12 @@ class Capabilities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="disableCapability",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -754,18 +821,30 @@ class Capabilities(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.DisableCapabilityResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -780,29 +859,23 @@ class Capabilities(BaseSDK):
             http_res,
         )
 
-    async def disable_capability_async(
+    async def disable_async(
         self,
         *,
-        security: Union[
-            operations.DisableCapabilitySecurity,
-            operations.DisableCapabilitySecurityTypedDict,
-        ],
         account_id: str,
         capability_id: components.CapabilityID,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DisableCapabilityResponse:
         r"""Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/capabilities.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+          To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
-        :param security:
         :param account_id:
-        :param capability_id: Moov account capabilities.
-        :param x_moov_version: Specify an API version.
+        :param capability_id: Moov account capabilities.  The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -817,7 +890,6 @@ class Capabilities(BaseSDK):
             base_url = server_url
 
         request = operations.DisableCapabilityRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             capability_id=capability_id,
         )
@@ -834,9 +906,10 @@ class Capabilities(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.DisableCapabilitySecurity
+            _globals=operations.DisableCapabilityGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -850,9 +923,12 @@ class Capabilities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="disableCapability",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -870,18 +946,30 @@ class Capabilities(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.DisableCapabilityResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

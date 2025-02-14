@@ -1,0 +1,9 @@
+# CreateFeePlanAgreementsResponse
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `headers`                                                                  | Dict[str, List[*str*]]                                                     | :heavy_check_mark:                                                         | N/A                                                                        |
+| `result`                                                                   | [components.FeePlanAgreement](../../models/components/feeplanagreement.md) | :heavy_check_mark:                                                         | N/A                                                                        |

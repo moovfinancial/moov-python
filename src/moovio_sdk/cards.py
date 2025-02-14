@@ -10,1310 +10,9 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Cards(BaseSDK):
-    def register_apple_pay_merchant_domains(
+    def link(
         self,
         *,
-        security: Union[
-            operations.RegisterApplePayMerchantDomainsSecurity,
-            operations.RegisterApplePayMerchantDomainsSecurityTypedDict,
-        ],
-        account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
-        display_name: Optional[str] = None,
-        domains: Optional[List[str]] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ApplePayMerchantDomains:
-        r"""Add domains to be registered with Apple Pay.
-
-        Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
-        with Apple.
-
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the merchant.
-        :param x_moov_version: Specify an API version.
-        :param display_name: A UTF-8 string to display in the Buy button.
-        :param domains: A unique list of fully-qualified, top-level or sub-domain names where you will accept Apple Pay.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.RegisterApplePayMerchantDomainsRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-            register_apple_pay_merchant_domains=components.RegisterApplePayMerchantDomains(
-                display_name=display_name,
-                domains=domains,
-            ),
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/accounts/{accountID}/apple-pay/domains",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.RegisterApplePayMerchantDomainsSecurity
-            ),
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.register_apple_pay_merchant_domains,
-                False,
-                False,
-                "json",
-                components.RegisterApplePayMerchantDomains,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="registerApplePayMerchantDomains",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "409",
-                "417",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.ApplePayMerchantDomains
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(
-            http_res, ["401", "403", "409", "417", "429", "4XX"], "*"
-        ):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def register_apple_pay_merchant_domains_async(
-        self,
-        *,
-        security: Union[
-            operations.RegisterApplePayMerchantDomainsSecurity,
-            operations.RegisterApplePayMerchantDomainsSecurityTypedDict,
-        ],
-        account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
-        display_name: Optional[str] = None,
-        domains: Optional[List[str]] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ApplePayMerchantDomains:
-        r"""Add domains to be registered with Apple Pay.
-
-        Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
-        with Apple.
-
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the merchant.
-        :param x_moov_version: Specify an API version.
-        :param display_name: A UTF-8 string to display in the Buy button.
-        :param domains: A unique list of fully-qualified, top-level or sub-domain names where you will accept Apple Pay.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.RegisterApplePayMerchantDomainsRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-            register_apple_pay_merchant_domains=components.RegisterApplePayMerchantDomains(
-                display_name=display_name,
-                domains=domains,
-            ),
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/accounts/{accountID}/apple-pay/domains",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.RegisterApplePayMerchantDomainsSecurity
-            ),
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.register_apple_pay_merchant_domains,
-                False,
-                False,
-                "json",
-                components.RegisterApplePayMerchantDomains,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="registerApplePayMerchantDomains",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "409",
-                "417",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.ApplePayMerchantDomains
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(
-            http_res, ["401", "403", "409", "417", "429", "4XX"], "*"
-        ):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def update_apple_pay_merchant_domains(
-        self,
-        *,
-        security: Union[
-            operations.UpdateApplePayMerchantDomainsSecurity,
-            operations.UpdateApplePayMerchantDomainsSecurityTypedDict,
-        ],
-        account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
-        add_domains: Optional[List[str]] = None,
-        remove_domains: Optional[List[str]] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Add or remove domains to be registered with Apple Pay.
-
-          Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
-          with Apple.
-
-          To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a
-          [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the merchant.
-        :param x_moov_version: Specify an API version.
-        :param add_domains: A unique list of fully-qualified, top-level or sub-domain names to add.
-        :param remove_domains: A unique list of fully-qualified, top-level or sub-domain names to remove.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.UpdateApplePayMerchantDomainsRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-            update_apple_pay_merchant_domains=components.UpdateApplePayMerchantDomains(
-                add_domains=add_domains,
-                remove_domains=remove_domains,
-            ),
-        )
-
-        req = self._build_request(
-            method="PATCH",
-            path="/accounts/{accountID}/apple-pay/domains",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateApplePayMerchantDomainsSecurity
-            ),
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_apple_pay_merchant_domains,
-                False,
-                False,
-                "json",
-                components.UpdateApplePayMerchantDomains,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="updateApplePayMerchantDomains",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "417",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "204", "*"):
-            return
-        if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(
-            http_res, ["401", "403", "404", "409", "417", "429", "4XX"], "*"
-        ):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def update_apple_pay_merchant_domains_async(
-        self,
-        *,
-        security: Union[
-            operations.UpdateApplePayMerchantDomainsSecurity,
-            operations.UpdateApplePayMerchantDomainsSecurityTypedDict,
-        ],
-        account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
-        add_domains: Optional[List[str]] = None,
-        remove_domains: Optional[List[str]] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Add or remove domains to be registered with Apple Pay.
-
-          Any domains that will be used to accept payments must first be [verified](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains)
-          with Apple.
-
-          To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating a
-          [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the merchant.
-        :param x_moov_version: Specify an API version.
-        :param add_domains: A unique list of fully-qualified, top-level or sub-domain names to add.
-        :param remove_domains: A unique list of fully-qualified, top-level or sub-domain names to remove.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.UpdateApplePayMerchantDomainsRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-            update_apple_pay_merchant_domains=components.UpdateApplePayMerchantDomains(
-                add_domains=add_domains,
-                remove_domains=remove_domains,
-            ),
-        )
-
-        req = self._build_request_async(
-            method="PATCH",
-            path="/accounts/{accountID}/apple-pay/domains",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateApplePayMerchantDomainsSecurity
-            ),
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_apple_pay_merchant_domains,
-                False,
-                False,
-                "json",
-                components.UpdateApplePayMerchantDomains,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="updateApplePayMerchantDomains",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "417",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "204", "*"):
-            return
-        if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(
-            http_res, ["401", "403", "404", "409", "417", "429", "4XX"], "*"
-        ):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def get_apple_pay_merchant_domains(
-        self,
-        *,
-        security: Union[
-            operations.GetApplePayMerchantDomainsSecurity,
-            operations.GetApplePayMerchantDomainsSecurityTypedDict,
-        ],
-        account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ApplePayMerchantDomains:
-        r"""Get domains registered with Apple Pay.
-
-          Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
-
-          To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope when generating a
-          [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the merchant.
-        :param x_moov_version: Specify an API version.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.GetApplePayMerchantDomainsRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-        )
-
-        req = self._build_request(
-            method="GET",
-            path="/accounts/{accountID}/apple-pay/domains",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetApplePayMerchantDomainsSecurity
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="getApplePayMerchantDomains",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
-            retry_config=retry_config,
-        )
-
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.ApplePayMerchantDomains
-            )
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def get_apple_pay_merchant_domains_async(
-        self,
-        *,
-        security: Union[
-            operations.GetApplePayMerchantDomainsSecurity,
-            operations.GetApplePayMerchantDomainsSecurityTypedDict,
-        ],
-        account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ApplePayMerchantDomains:
-        r"""Get domains registered with Apple Pay.
-
-          Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
-
-          To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope when generating a
-          [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the merchant.
-        :param x_moov_version: Specify an API version.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.GetApplePayMerchantDomainsRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-        )
-
-        req = self._build_request_async(
-            method="GET",
-            path="/accounts/{accountID}/apple-pay/domains",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetApplePayMerchantDomainsSecurity
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="getApplePayMerchantDomains",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
-            retry_config=retry_config,
-        )
-
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.ApplePayMerchantDomains
-            )
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def create_apple_pay_session(
-        self,
-        *,
-        security: Union[
-            operations.CreateApplePaySessionSecurity,
-            operations.CreateApplePaySessionSecurityTypedDict,
-        ],
-        account_id: str,
-        domain: str,
-        display_name: str,
-        x_moov_version: Optional[components.Versions] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> str:
-        r"""Create a session with Apple Pay to facilitate a payment.
-
-        Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
-        A successful response from this endpoint should be passed through to Apple Pay unchanged.
-
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the merchant.
-        :param domain: A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include \"https\".
-        :param display_name: A UTF-8 string to display in the Buy button.
-        :param x_moov_version: Specify an API version.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.CreateApplePaySessionRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-            create_apple_pay_session=components.CreateApplePaySession(
-                domain=domain,
-                display_name=display_name,
-            ),
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/accounts/{accountID}/apple-pay/sessions",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateApplePaySessionSecurity
-            ),
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_apple_pay_session,
-                False,
-                False,
-                "json",
-                components.CreateApplePaySession,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="createApplePaySession",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, str)
-        if utils.match_response(http_res, ["400", "409", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def create_apple_pay_session_async(
-        self,
-        *,
-        security: Union[
-            operations.CreateApplePaySessionSecurity,
-            operations.CreateApplePaySessionSecurityTypedDict,
-        ],
-        account_id: str,
-        domain: str,
-        display_name: str,
-        x_moov_version: Optional[components.Versions] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> str:
-        r"""Create a session with Apple Pay to facilitate a payment.
-
-        Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
-        A successful response from this endpoint should be passed through to Apple Pay unchanged.
-
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the merchant.
-        :param domain: A fully qualified top-level or sub-domain name where you will accept Apple Pay. Should not include \"https\".
-        :param display_name: A UTF-8 string to display in the Buy button.
-        :param x_moov_version: Specify an API version.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.CreateApplePaySessionRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-            create_apple_pay_session=components.CreateApplePaySession(
-                domain=domain,
-                display_name=display_name,
-            ),
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/accounts/{accountID}/apple-pay/sessions",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateApplePaySessionSecurity
-            ),
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_apple_pay_session,
-                False,
-                False,
-                "json",
-                components.CreateApplePaySession,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="createApplePaySession",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, str)
-        if utils.match_response(http_res, ["400", "409", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def link_apple_pay_token(
-        self,
-        *,
-        security: Union[
-            operations.LinkApplePayTokenSecurity,
-            operations.LinkApplePayTokenSecurityTypedDict,
-        ],
-        account_id: str,
-        token: Union[
-            components.LinkApplePayToken, components.LinkApplePayTokenTypedDict
-        ],
-        x_moov_version: Optional[components.Versions] = None,
-        billing_contact: Optional[
-            Union[
-                components.AppleBillingContact, components.AppleBillingContactTypedDict
-            ]
-        ] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.LinkedApplePayPaymentMethod:
-        r"""Connect an Apple Pay token to the specified account.
-
-        Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
-        The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
-
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the cardholder.
-        :param token: Contains the user's payment information as returned from Apple Pay.    Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)    for more information.
-        :param x_moov_version: Specify an API version.
-        :param billing_contact: Billing contact information as returned from Apple Pay.      Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)    for more information.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.LinkApplePayTokenRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-            link_apple_pay=components.LinkApplePay(
-                token=utils.get_pydantic_model(token, components.LinkApplePayToken),
-                billing_contact=utils.get_pydantic_model(
-                    billing_contact, Optional[components.AppleBillingContact]
-                ),
-            ),
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/accounts/{accountID}/apple-pay/tokens",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.LinkApplePayTokenSecurity
-            ),
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.link_apple_pay, False, False, "json", components.LinkApplePay
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="linkApplePayToken",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.LinkedApplePayPaymentMethod
-            )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.LinkApplePayErrorData)
-            raise errors.LinkApplePayError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def link_apple_pay_token_async(
-        self,
-        *,
-        security: Union[
-            operations.LinkApplePayTokenSecurity,
-            operations.LinkApplePayTokenSecurityTypedDict,
-        ],
-        account_id: str,
-        token: Union[
-            components.LinkApplePayToken, components.LinkApplePayTokenTypedDict
-        ],
-        x_moov_version: Optional[components.Versions] = None,
-        billing_contact: Optional[
-            Union[
-                components.AppleBillingContact, components.AppleBillingContactTypedDict
-            ]
-        ] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.LinkedApplePayPaymentMethod:
-        r"""Connect an Apple Pay token to the specified account.
-
-        Read our [Apple Pay tutorial](https://docs.moov.io/guides/sources/cards/apple-pay/#register-your-domains) to learn more.
-        The `token` data is defined by Apple Pay and should be passed through from Apple Pay's response unmodified.
-
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
-
-        :param security:
-        :param account_id: ID of the Moov account representing the cardholder.
-        :param token: Contains the user's payment information as returned from Apple Pay.    Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)    for more information.
-        :param x_moov_version: Specify an API version.
-        :param billing_contact: Billing contact information as returned from Apple Pay.      Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)    for more information.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.LinkApplePayTokenRequest(
-            x_moov_version=x_moov_version,
-            account_id=account_id,
-            link_apple_pay=components.LinkApplePay(
-                token=utils.get_pydantic_model(token, components.LinkApplePayToken),
-                billing_contact=utils.get_pydantic_model(
-                    billing_contact, Optional[components.AppleBillingContact]
-                ),
-            ),
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/accounts/{accountID}/apple-pay/tokens",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.LinkApplePayTokenSecurity
-            ),
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.link_apple_pay, False, False, "json", components.LinkApplePay
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="linkApplePayToken",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.LinkedApplePayPaymentMethod
-            )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.LinkApplePayErrorData)
-            raise errors.LinkApplePayError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise errors.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def link_card(
-        self,
-        *,
-        security: Union[
-            operations.LinkCardSecurity, operations.LinkCardSecurityTypedDict
-        ],
         account_id: str,
         card_number: str,
         card_cvv: str,
@@ -1321,7 +20,6 @@ class Cards(BaseSDK):
             components.CardExpiration, components.CardExpirationTypedDict
         ],
         billing_address: Union[components.CardAddress, components.CardAddressTypedDict],
-        x_moov_version: Optional[components.Versions] = None,
         x_wait_for: Optional[components.LinkCardWaitFor] = None,
         e2ee: Optional[
             Union[components.E2EEToken, components.E2EETokenTypedDict]
@@ -1334,7 +32,7 @@ class Cards(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Card:
+    ) -> operations.LinkCardResponse:
         r"""Link a card to an existing Moov account.
 
         Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
@@ -1351,16 +49,14 @@ class Cards(BaseSDK):
         Methods](https://docs.moov.io/api/sources/payment-methods/list/)
         endpoint to wait for the new payment methods to be available for use.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope
-        when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
-        :param security:
         :param account_id:
         :param card_number:
         :param card_cvv:
         :param expiration: The expiration date of the card or token.
         :param billing_address:
-        :param x_moov_version: Specify an API version.
         :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.  When this header is set to `payment-method`, the response will include any payment methods that were created for the newly  linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
         :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.  This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our  [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
         :param holder_name:
@@ -1381,7 +77,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.LinkCardRequest(
-            x_moov_version=x_moov_version,
             x_wait_for=x_wait_for,
             account_id=account_id,
             link_card=components.LinkCard(
@@ -1413,7 +108,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.LinkCardSecurity),
+            _globals=operations.LinkCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.link_card, False, False, "json", components.LinkCard
             ),
@@ -1430,9 +128,12 @@ class Cards(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="linkCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1451,21 +152,36 @@ class Cards(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Card)
+            return operations.LinkCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.Card),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.LinkCardErrorData
+            )
+            raise errors.LinkCardError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.LinkCardErrorData)
-            raise errors.LinkCardError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1480,12 +196,9 @@ class Cards(BaseSDK):
             http_res,
         )
 
-    async def link_card_async(
+    async def link_async(
         self,
         *,
-        security: Union[
-            operations.LinkCardSecurity, operations.LinkCardSecurityTypedDict
-        ],
         account_id: str,
         card_number: str,
         card_cvv: str,
@@ -1493,7 +206,6 @@ class Cards(BaseSDK):
             components.CardExpiration, components.CardExpirationTypedDict
         ],
         billing_address: Union[components.CardAddress, components.CardAddressTypedDict],
-        x_moov_version: Optional[components.Versions] = None,
         x_wait_for: Optional[components.LinkCardWaitFor] = None,
         e2ee: Optional[
             Union[components.E2EEToken, components.E2EETokenTypedDict]
@@ -1506,7 +218,7 @@ class Cards(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Card:
+    ) -> operations.LinkCardResponse:
         r"""Link a card to an existing Moov account.
 
         Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/#link-a-card) to learn more.
@@ -1523,16 +235,14 @@ class Cards(BaseSDK):
         Methods](https://docs.moov.io/api/sources/payment-methods/list/)
         endpoint to wait for the new payment methods to be available for use.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope
-        when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
-        :param security:
         :param account_id:
         :param card_number:
         :param card_cvv:
         :param expiration: The expiration date of the card or token.
         :param billing_address:
-        :param x_moov_version: Specify an API version.
         :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.  When this header is set to `payment-method`, the response will include any payment methods that were created for the newly  linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
         :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.  This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our  [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
         :param holder_name:
@@ -1553,7 +263,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.LinkCardRequest(
-            x_moov_version=x_moov_version,
             x_wait_for=x_wait_for,
             account_id=account_id,
             link_card=components.LinkCard(
@@ -1585,7 +294,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.LinkCardSecurity),
+            _globals=operations.LinkCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.link_card, False, False, "json", components.LinkCard
             ),
@@ -1602,9 +314,12 @@ class Cards(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="linkCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1623,21 +338,36 @@ class Cards(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Card)
+            return operations.LinkCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.Card),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.LinkCardErrorData)
-            raise errors.LinkCardError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.LinkCardErrorData
+            )
+            raise errors.LinkCardError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1652,29 +382,23 @@ class Cards(BaseSDK):
             http_res,
         )
 
-    def list_cards(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListCardsSecurity, operations.ListCardsSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Card]:
+    ) -> operations.ListCardsResponse:
         r"""List all the active cards associated with a Moov account.
 
         Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1689,7 +413,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.ListCardsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -1705,7 +428,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.ListCardsSecurity),
+            _globals=operations.ListCardsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1719,9 +445,12 @@ class Cards(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listCards",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -1729,13 +458,26 @@ class Cards(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Card])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListCardsResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Card]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1750,29 +492,23 @@ class Cards(BaseSDK):
             http_res,
         )
 
-    async def list_cards_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListCardsSecurity, operations.ListCardsSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Card]:
+    ) -> operations.ListCardsResponse:
         r"""List all the active cards associated with a Moov account.
 
         Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1787,7 +523,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.ListCardsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -1803,7 +538,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.ListCardsSecurity),
+            _globals=operations.ListCardsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1817,9 +555,12 @@ class Cards(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listCards",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -1827,13 +568,26 @@ class Cards(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Card])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListCardsResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Card]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1848,31 +602,25 @@ class Cards(BaseSDK):
             http_res,
         )
 
-    def get_card(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetCardSecurity, operations.GetCardSecurityTypedDict
-        ],
         account_id: str,
         card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Card:
+    ) -> operations.GetCardResponse:
         r"""Fetch a specific card associated with a Moov account.
 
         Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
-        :param security:
         :param account_id:
         :param card_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1887,7 +635,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.GetCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             card_id=card_id,
         )
@@ -1904,7 +651,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetCardSecurity),
+            _globals=operations.GetCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1918,9 +668,12 @@ class Cards(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1928,13 +681,26 @@ class Cards(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Card)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.Card),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1949,31 +715,25 @@ class Cards(BaseSDK):
             http_res,
         )
 
-    async def get_card_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetCardSecurity, operations.GetCardSecurityTypedDict
-        ],
         account_id: str,
         card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Card:
+    ) -> operations.GetCardResponse:
         r"""Fetch a specific card associated with a Moov account.
 
         Read our [accept card payments guide](https://docs.moov.io/guides/sources/cards/accept-card-payments/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.read` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
-        :param security:
         :param account_id:
         :param card_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1988,7 +748,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.GetCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             card_id=card_id,
         )
@@ -2005,7 +764,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetCardSecurity),
+            _globals=operations.GetCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -2019,9 +781,12 @@ class Cards(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -2029,13 +794,26 @@ class Cards(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Card)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.Card),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2050,15 +828,11 @@ class Cards(BaseSDK):
             http_res,
         )
 
-    def update_card(
+    def update(
         self,
         *,
-        security: Union[
-            operations.UpdateCardSecurity, operations.UpdateCardSecurityTypedDict
-        ],
         account_id: str,
         card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         e2ee: Optional[
             Union[components.E2EETokenUpdate, components.E2EETokenUpdateTypedDict]
         ] = None,
@@ -2080,7 +854,7 @@ class Cards(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Card:
+    ) -> operations.UpdateCardResponse:
         r"""Update a linked card and/or resubmit it for verification.
 
         If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration
@@ -2092,13 +866,11 @@ class Cards(BaseSDK):
 
         Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
-        :param security:
         :param account_id:
         :param card_id:
-        :param x_moov_version: Specify an API version.
         :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.  This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our  [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
         :param billing_address:
         :param expiration:
@@ -2121,7 +893,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             card_id=card_id,
             update_card=components.UpdateCard(
@@ -2154,7 +925,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.UpdateCardSecurity),
+            _globals=operations.UpdateCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_card, False, False, "json", components.UpdateCard
             ),
@@ -2171,9 +945,12 @@ class Cards(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2192,21 +969,36 @@ class Cards(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Card)
+            return operations.UpdateCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.Card),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UpdateCardErrorData
+            )
+            raise errors.UpdateCardError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UpdateCardErrorData)
-            raise errors.UpdateCardError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2221,15 +1013,11 @@ class Cards(BaseSDK):
             http_res,
         )
 
-    async def update_card_async(
+    async def update_async(
         self,
         *,
-        security: Union[
-            operations.UpdateCardSecurity, operations.UpdateCardSecurityTypedDict
-        ],
         account_id: str,
         card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         e2ee: Optional[
             Union[components.E2EETokenUpdate, components.E2EETokenUpdateTypedDict]
         ] = None,
@@ -2251,7 +1039,7 @@ class Cards(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Card:
+    ) -> operations.UpdateCardResponse:
         r"""Update a linked card and/or resubmit it for verification.
 
         If a value is provided for CVV, a new verification ($0 authorization) will be submitted for the card. Updating the expiration
@@ -2263,13 +1051,11 @@ class Cards(BaseSDK):
 
         Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
-        :param security:
         :param account_id:
         :param card_id:
-        :param x_moov_version: Specify an API version.
         :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.  This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our  [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
         :param billing_address:
         :param expiration:
@@ -2292,7 +1078,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             card_id=card_id,
             update_card=components.UpdateCard(
@@ -2325,7 +1110,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.UpdateCardSecurity),
+            _globals=operations.UpdateCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_card, False, False, "json", components.UpdateCard
             ),
@@ -2342,9 +1130,12 @@ class Cards(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2363,21 +1154,36 @@ class Cards(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Card)
+            return operations.UpdateCardResponse(
+                result=utils.unmarshal_json(http_res.text, components.Card),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.UpdateCardErrorData
+            )
+            raise errors.UpdateCardError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UpdateCardErrorData)
-            raise errors.UpdateCardError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2392,29 +1198,23 @@ class Cards(BaseSDK):
             http_res,
         )
 
-    def disable_card(
+    def disable(
         self,
         *,
-        security: Union[
-            operations.DisableCardSecurity, operations.DisableCardSecurityTypedDict
-        ],
         account_id: str,
         card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DisableCardResponse:
         r"""Disables a card associated with a Moov account.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
-        :param security:
         :param account_id:
         :param card_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2429,7 +1229,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.DisableCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             card_id=card_id,
         )
@@ -2446,7 +1245,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.DisableCardSecurity),
+            _globals=operations.DisableCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -2460,9 +1262,12 @@ class Cards(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="disableCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2480,18 +1285,30 @@ class Cards(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.DisableCardResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2506,29 +1323,23 @@ class Cards(BaseSDK):
             http_res,
         )
 
-    async def disable_card_async(
+    async def disable_async(
         self,
         *,
-        security: Union[
-            operations.DisableCardSecurity, operations.DisableCardSecurityTypedDict
-        ],
         account_id: str,
         card_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DisableCardResponse:
         r"""Disables a card associated with a Moov account.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/cards.write` scope when generating
-        a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
-        :param security:
         :param account_id:
         :param card_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2543,7 +1354,6 @@ class Cards(BaseSDK):
             base_url = server_url
 
         request = operations.DisableCardRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             card_id=card_id,
         )
@@ -2560,7 +1370,10 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.DisableCardSecurity),
+            _globals=operations.DisableCardGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -2574,9 +1387,12 @@ class Cards(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="disableCard",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2594,18 +1410,30 @@ class Cards(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.DisableCardResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

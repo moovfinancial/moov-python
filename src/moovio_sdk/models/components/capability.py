@@ -7,26 +7,33 @@ from .capabilitystatus import CapabilityStatus
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CapabilityTypedDict(TypedDict):
     capability: CapabilityID
-    r"""Moov account capabilities."""
+    r"""Moov account capabilities.
+
+    The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+    """
     account_id: str
     status: CapabilityStatus
     r"""The status of the capability requested for an account."""
     created_on: datetime
     updated_on: datetime
-    requirements: NotRequired[List[CapabilityRequirementTypedDict]]
+    requirements: NotRequired[CapabilityRequirementTypedDict]
+    r"""Represents individual and business data necessary to facilitate the enabling of a capability for an account."""
     disabled_reason: NotRequired[str]
     disabled_on: NotRequired[datetime]
 
 
 class Capability(BaseModel):
     capability: CapabilityID
-    r"""Moov account capabilities."""
+    r"""Moov account capabilities.
+
+    The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+    """
 
     account_id: Annotated[str, pydantic.Field(alias="accountID")]
 
@@ -37,7 +44,8 @@ class Capability(BaseModel):
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
 
-    requirements: Optional[List[CapabilityRequirement]] = None
+    requirements: Optional[CapabilityRequirement] = None
+    r"""Represents individual and business data necessary to facilitate the enabling of a capability for an account."""
 
     disabled_reason: Annotated[
         Optional[str], pydantic.Field(alias="disabledReason")

@@ -10,6 +10,7 @@ from moovio_sdk import utils
 from moovio_sdk._hooks import SDKHooks
 from moovio_sdk.accounts import Accounts
 from moovio_sdk.adjustments import Adjustments
+from moovio_sdk.apple_pay import ApplePay
 from moovio_sdk.authentication import Authentication
 from moovio_sdk.avatars import Avatars
 from moovio_sdk.bank_accounts import BankAccounts
@@ -52,10 +53,11 @@ class Moov(BaseSDK):
 
     accounts: Accounts
     adjustments: Adjustments
-    cards: Cards
+    apple_pay: ApplePay
     bank_accounts: BankAccounts
     branding: Branding
     capabilities: Capabilities
+    cards: Cards
     disputes: Disputes
     billing: Billing
     files: Files
@@ -174,10 +176,11 @@ class Moov(BaseSDK):
     def _init_sdks(self):
         self.accounts = Accounts(self.sdk_configuration)
         self.adjustments = Adjustments(self.sdk_configuration)
-        self.cards = Cards(self.sdk_configuration)
+        self.apple_pay = ApplePay(self.sdk_configuration)
         self.bank_accounts = BankAccounts(self.sdk_configuration)
         self.branding = Branding(self.sdk_configuration)
         self.capabilities = Capabilities(self.sdk_configuration)
+        self.cards = Cards(self.sdk_configuration)
         self.disputes = Disputes(self.sdk_configuration)
         self.billing = Billing(self.sdk_configuration)
         self.files = Files(self.sdk_configuration)

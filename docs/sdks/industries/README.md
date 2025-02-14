@@ -5,30 +5,32 @@
 
 ### Available Operations
 
-* [list_industries](#list_industries) -   Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
-  
-  To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+* [list](#list) - Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
 
-## list_industries
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
-  Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
-  
-  To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+## list
+
+Returns a list of all industry titles and their corresponding MCC/SIC/NAICS codes. Results are ordered by title.    
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/profile-enrichment.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.industries.list_industries(security=operations.ListIndustriesSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ))
+    res = moov.industries.list()
 
     # Handle response
     print(res)
@@ -37,15 +39,14 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `security`                                                                             | [operations.ListIndustriesSecurity](../../models/operations/listindustriessecurity.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `x_moov_version`                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                   | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |
-| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `request`                                                                            | [operations.ListIndustriesRequest](../../models/operations/listindustriesrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
 
 ### Response
 
-**[List[components.EnrichedIndustry]](../../models/.md)**
+**[operations.ListIndustriesResponse](../../models/operations/listindustriesresponse.md)**
 
 ### Errors
 

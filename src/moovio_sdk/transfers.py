@@ -5,19 +5,15 @@ from datetime import datetime
 from moovio_sdk import utils
 from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
-from moovio_sdk.types import OptionalNullable, UNSET
+from moovio_sdk.types import BaseModel, OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional, Union, cast
 
 
 class Transfers(BaseSDK):
-    def create_transfer(
+    def create(
         self,
         *,
-        security: Union[
-            operations.CreateTransferSecurity,
-            operations.CreateTransferSecurityTypedDict,
-        ],
         x_idempotency_key: str,
         account_id: str,
         source: Union[
@@ -28,7 +24,6 @@ class Transfers(BaseSDK):
             components.CreateTransferDestinationTypedDict,
         ],
         amount: Union[components.Amount, components.AmountTypedDict],
-        x_moov_version: Optional[components.Versions] = None,
         x_wait_for: Optional[components.TransferWaitFor] = None,
         facilitator_fee: Optional[
             Union[components.FacilitatorFee, components.FacilitatorFeeTypedDict]
@@ -44,16 +39,14 @@ class Transfers(BaseSDK):
 
         Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param x_idempotency_key: Prevents duplicate transfers from being created.
         :param account_id: The merchant's Moov account ID.
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
-        :param x_moov_version: Specify an API version.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer for your own internal use.
@@ -72,7 +65,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.CreateTransferRequest(
-            x_moov_version=x_moov_version,
             x_idempotency_key=x_idempotency_key,
             x_wait_for=x_wait_for,
             account_id=account_id,
@@ -104,9 +96,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateTransferSecurity
+            _globals=operations.CreateTransferGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_transfer, False, False, "json", components.CreateTransfer
             ),
@@ -123,9 +116,12 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createTransfer",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -142,32 +138,49 @@ class Transfers(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, operations.CreateTransferResponseBody
+            return operations.CreateTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.TransferResponse),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.AsyncTransfer)
+            return operations.CreateTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.AsyncTransfer),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "202", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Transfer)
+            return operations.CreateTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.Transfer),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.TransferData)
+            raise errors.Transfer(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.TransferValidationErrorData
+            )
+            raise errors.TransferValidationError(data=response_data)
+        if utils.match_response(http_res, ["404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.TransferData)
-            raise errors.Transfer(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.TransferValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.TransferValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -182,13 +195,9 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    async def create_transfer_async(
+    async def create_async(
         self,
         *,
-        security: Union[
-            operations.CreateTransferSecurity,
-            operations.CreateTransferSecurityTypedDict,
-        ],
         x_idempotency_key: str,
         account_id: str,
         source: Union[
@@ -199,7 +208,6 @@ class Transfers(BaseSDK):
             components.CreateTransferDestinationTypedDict,
         ],
         amount: Union[components.Amount, components.AmountTypedDict],
-        x_moov_version: Optional[components.Versions] = None,
         x_wait_for: Optional[components.TransferWaitFor] = None,
         facilitator_fee: Optional[
             Union[components.FacilitatorFee, components.FacilitatorFeeTypedDict]
@@ -215,16 +223,14 @@ class Transfers(BaseSDK):
 
         Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param x_idempotency_key: Prevents duplicate transfers from being created.
         :param account_id: The merchant's Moov account ID.
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
-        :param x_moov_version: Specify an API version.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer for your own internal use.
@@ -243,7 +249,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.CreateTransferRequest(
-            x_moov_version=x_moov_version,
             x_idempotency_key=x_idempotency_key,
             x_wait_for=x_wait_for,
             account_id=account_id,
@@ -275,9 +280,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateTransferSecurity
+            _globals=operations.CreateTransferGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_transfer, False, False, "json", components.CreateTransfer
             ),
@@ -294,9 +300,12 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createTransfer",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -313,32 +322,49 @@ class Transfers(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, operations.CreateTransferResponseBody
+            return operations.CreateTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.TransferResponse),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.AsyncTransfer)
-        if utils.match_response(http_res, "202", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Transfer)
-        if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
+            return operations.CreateTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.AsyncTransfer),
+                headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "202", "application/json"):
+            return operations.CreateTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.Transfer),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.TransferData)
-            raise errors.Transfer(data=data)
+            response_data = utils.unmarshal_json(http_res.text, errors.TransferData)
+            raise errors.Transfer(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
+            response_data = utils.unmarshal_json(
                 http_res.text, errors.TransferValidationErrorData
             )
-            raise errors.TransferValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            raise errors.TransferValidationError(data=response_data)
+        if utils.match_response(http_res, ["404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -353,14 +379,10 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    def list_transfers(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListTransfersSecurity, operations.ListTransfersSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         account_i_ds: Optional[List[str]] = None,
         status: Optional[components.TransferStatus] = None,
         start_date_time: Optional[datetime] = None,
@@ -374,22 +396,20 @@ class Transfers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Transfer]:
+    ) -> operations.ListTransfersResponse:
         r"""List all the transfers associated with a particular Moov account.
 
         Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
         When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example,
-        if you set `skip`= 10, you will see a results set of 200 transfers after the first 2000). If you are searching a high volume of transfers, the request will likely
+        if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely
         process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited
         period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param account_i_ds: Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
         :param status: Optional parameter for filtering transfers by status.
         :param start_date_time: Optional date-time which inclusively filters all transfers created after this date-time.
@@ -413,7 +433,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.ListTransfersRequest(
-            x_moov_version=x_moov_version,
             account_i_ds=account_i_ds,
             status=status,
             start_date_time=start_date_time,
@@ -438,9 +457,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListTransfersSecurity
+            _globals=operations.ListTransfersGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -454,9 +474,12 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listTransfers",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -464,13 +487,26 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Transfer])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListTransfersResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Transfer]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -485,14 +521,10 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    async def list_transfers_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListTransfersSecurity, operations.ListTransfersSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         account_i_ds: Optional[List[str]] = None,
         status: Optional[components.TransferStatus] = None,
         start_date_time: Optional[datetime] = None,
@@ -506,22 +538,20 @@ class Transfers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Transfer]:
+    ) -> operations.ListTransfersResponse:
         r"""List all the transfers associated with a particular Moov account.
 
         Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
         When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example,
-        if you set `skip`= 10, you will see a results set of 200 transfers after the first 2000). If you are searching a high volume of transfers, the request will likely
+        if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely
         process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited
         period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param account_i_ds: Optional, comma-separated account IDs by which the response is filtered based on whether the account ID is the source or destination.
         :param status: Optional parameter for filtering transfers by status.
         :param start_date_time: Optional date-time which inclusively filters all transfers created after this date-time.
@@ -545,7 +575,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.ListTransfersRequest(
-            x_moov_version=x_moov_version,
             account_i_ds=account_i_ds,
             status=status,
             start_date_time=start_date_time,
@@ -570,9 +599,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListTransfersSecurity
+            _globals=operations.ListTransfersGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -586,9 +616,12 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listTransfers",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -596,13 +629,26 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Transfer])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListTransfersResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Transfer]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -617,32 +663,26 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    def get_transfer(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetTransferSecurity, operations.GetTransferSecurityTypedDict
-        ],
         transfer_id: str,
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Transfer:
+    ) -> operations.GetTransferResponse:
         r"""Retrieve full transfer details for an individual transfer of a particular Moov account.
 
         Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/)
         to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param transfer_id: Identifier for the transfer.
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -657,7 +697,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.GetTransferRequest(
-            x_moov_version=x_moov_version,
             transfer_id=transfer_id,
             account_id=account_id,
         )
@@ -674,7 +713,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetTransferSecurity),
+            _globals=operations.GetTransferGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -688,9 +730,12 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getTransfer",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -698,13 +743,26 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Transfer)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.Transfer),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -719,32 +777,26 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    async def get_transfer_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetTransferSecurity, operations.GetTransferSecurityTypedDict
-        ],
         transfer_id: str,
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Transfer:
+    ) -> operations.GetTransferResponse:
         r"""Retrieve full transfer details for an individual transfer of a particular Moov account.
 
         Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/)
         to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param transfer_id: Identifier for the transfer.
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -759,7 +811,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.GetTransferRequest(
-            x_moov_version=x_moov_version,
             transfer_id=transfer_id,
             account_id=account_id,
         )
@@ -776,7 +827,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetTransferSecurity),
+            _globals=operations.GetTransferGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -790,9 +844,12 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getTransfer",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -800,13 +857,26 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Transfer)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.Transfer),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -821,31 +891,27 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    def patch_transfer(
+    def update(
         self,
         *,
-        security: Union[
-            operations.PatchTransferSecurity, operations.PatchTransferSecurityTypedDict
-        ],
         transfer_id: str,
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
+        metadata: OptionalNullable[Dict[str, str]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Transfer:
+    ) -> operations.UpdateTransferResponse:
         r"""Update the metadata contained on a transfer.
 
         Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param transfer_id: Identifier for the transfer.
         :param account_id:
-        :param x_moov_version: Specify an API version.
+        :param metadata:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -859,10 +925,12 @@ class Transfers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.PatchTransferRequest(
-            x_moov_version=x_moov_version,
+        request = operations.UpdateTransferRequest(
             transfer_id=transfer_id,
             account_id=account_id,
+            patch_transfer=components.PatchTransfer(
+                metadata=metadata,
+            ),
         )
 
         req = self._build_request(
@@ -871,14 +939,18 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.PatchTransferSecurity
+            _globals=operations.UpdateTransferGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.patch_transfer, False, False, "json", components.PatchTransfer
             ),
             timeout_ms=timeout_ms,
         )
@@ -893,9 +965,12 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="patchTransfer",
+                base_url=base_url or "",
+                operation_id="updateTransfer",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -903,13 +978,26 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Transfer)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.UpdateTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.Transfer),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -924,31 +1012,27 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    async def patch_transfer_async(
+    async def update_async(
         self,
         *,
-        security: Union[
-            operations.PatchTransferSecurity, operations.PatchTransferSecurityTypedDict
-        ],
         transfer_id: str,
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
+        metadata: OptionalNullable[Dict[str, str]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Transfer:
+    ) -> operations.UpdateTransferResponse:
         r"""Update the metadata contained on a transfer.
 
         Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param transfer_id: Identifier for the transfer.
         :param account_id:
-        :param x_moov_version: Specify an API version.
+        :param metadata:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -962,10 +1046,12 @@ class Transfers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.PatchTransferRequest(
-            x_moov_version=x_moov_version,
+        request = operations.UpdateTransferRequest(
             transfer_id=transfer_id,
             account_id=account_id,
+            patch_transfer=components.PatchTransfer(
+                metadata=metadata,
+            ),
         )
 
         req = self._build_request_async(
@@ -974,14 +1060,18 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.PatchTransferSecurity
+            _globals=operations.UpdateTransferGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.patch_transfer, False, False, "json", components.PatchTransfer
             ),
             timeout_ms=timeout_ms,
         )
@@ -996,9 +1086,12 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="patchTransfer",
+                base_url=base_url or "",
+                operation_id="updateTransfer",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1006,13 +1099,26 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Transfer)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.UpdateTransferResponse(
+                result=utils.unmarshal_json(http_res.text, components.Transfer),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1027,37 +1133,30 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    def refund_transfer(
+    def initiate_refund(
         self,
         *,
-        security: Union[
-            operations.RefundTransferSecurity,
-            operations.RefundTransferSecurityTypedDict,
-        ],
         x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         x_wait_for: Optional[components.TransferWaitFor] = None,
         amount: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.RefundTransferResponse:
+    ) -> operations.InitiateRefundResponse:
         r"""Initiate a refund for a card transfer.
 
         **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**
         See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param x_idempotency_key: Prevents duplicate refunds from being created.
         :param account_id: The merchant's Moov account ID.
         :param transfer_id: Identifier for the transfer.
-        :param x_moov_version: Specify an API version.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
         :param retries: Override the default retry configuration for this method
@@ -1073,8 +1172,7 @@ class Transfers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.RefundTransferRequest(
-            x_moov_version=x_moov_version,
+        request = operations.InitiateRefundRequest(
             x_idempotency_key=x_idempotency_key,
             x_wait_for=x_wait_for,
             account_id=account_id,
@@ -1096,9 +1194,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.RefundTransferSecurity
+            _globals=operations.InitiateRefundGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_refund,
                 False,
@@ -1119,9 +1218,12 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="refundTransfer",
+                base_url=base_url or "",
+                operation_id="initiateRefund",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1138,26 +1240,50 @@ class Transfers(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.CreateRefundResponse)
+            return operations.InitiateRefundResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.CreateRefundResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "202", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.CardAcquiringRefund)
+            return operations.InitiateRefundResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.CardAcquiringRefund
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.CardAcquiringRefundData
+            )
+            raise errors.CardAcquiringRefund(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RefundValidationErrorData
+            )
+            raise errors.RefundValidationError(data=response_data)
+        if utils.match_response(http_res, ["404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.CardAcquiringRefundData)
-            raise errors.CardAcquiringRefund(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RefundValidationErrorData)
-            raise errors.RefundValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1172,37 +1298,30 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    async def refund_transfer_async(
+    async def initiate_refund_async(
         self,
         *,
-        security: Union[
-            operations.RefundTransferSecurity,
-            operations.RefundTransferSecurityTypedDict,
-        ],
         x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         x_wait_for: Optional[components.TransferWaitFor] = None,
         amount: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.RefundTransferResponse:
+    ) -> operations.InitiateRefundResponse:
         r"""Initiate a refund for a card transfer.
 
         **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**
         See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.write`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param x_idempotency_key: Prevents duplicate refunds from being created.
         :param account_id: The merchant's Moov account ID.
         :param transfer_id: Identifier for the transfer.
-        :param x_moov_version: Specify an API version.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
         :param retries: Override the default retry configuration for this method
@@ -1218,8 +1337,7 @@ class Transfers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.RefundTransferRequest(
-            x_moov_version=x_moov_version,
+        request = operations.InitiateRefundRequest(
             x_idempotency_key=x_idempotency_key,
             x_wait_for=x_wait_for,
             account_id=account_id,
@@ -1241,9 +1359,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.RefundTransferSecurity
+            _globals=operations.InitiateRefundGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_refund,
                 False,
@@ -1264,9 +1383,12 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="refundTransfer",
+                base_url=base_url or "",
+                operation_id="initiateRefund",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1283,26 +1405,50 @@ class Transfers(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.CreateRefundResponse)
+            return operations.InitiateRefundResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.CreateRefundResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "202", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.CardAcquiringRefund)
+            return operations.InitiateRefundResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.CardAcquiringRefund
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.CardAcquiringRefundData
+            )
+            raise errors.CardAcquiringRefund(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RefundValidationErrorData
+            )
+            raise errors.RefundValidationError(data=response_data)
+        if utils.match_response(http_res, ["404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.CardAcquiringRefundData)
-            raise errors.CardAcquiringRefund(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RefundValidationErrorData)
-            raise errors.RefundValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1320,26 +1466,20 @@ class Transfers(BaseSDK):
     def list_refunds(
         self,
         *,
-        security: Union[
-            operations.ListRefundsSecurity, operations.ListRefundsSecurityTypedDict
-        ],
         account_id: str,
         transfer_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.CardAcquiringRefund]:
+    ) -> operations.ListRefundsResponse:
         r"""Get a list of refunds for a card transfer.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param transfer_id: Identifier for the transfer.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1354,7 +1494,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.ListRefundsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             transfer_id=transfer_id,
         )
@@ -1371,7 +1510,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.ListRefundsSecurity),
+            _globals=operations.ListRefundsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1385,9 +1527,12 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listRefunds",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -1395,15 +1540,28 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.CardAcquiringRefund]
+            return operations.ListRefundsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.CardAcquiringRefund]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1421,26 +1579,20 @@ class Transfers(BaseSDK):
     async def list_refunds_async(
         self,
         *,
-        security: Union[
-            operations.ListRefundsSecurity, operations.ListRefundsSecurityTypedDict
-        ],
         account_id: str,
         transfer_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.CardAcquiringRefund]:
+    ) -> operations.ListRefundsResponse:
         r"""Get a list of refunds for a card transfer.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param account_id:
         :param transfer_id: Identifier for the transfer.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1455,7 +1607,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.ListRefundsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             transfer_id=transfer_id,
         )
@@ -1472,7 +1623,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.ListRefundsSecurity),
+            _globals=operations.ListRefundsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1486,9 +1640,12 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listRefunds",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -1496,15 +1653,28 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.CardAcquiringRefund]
+            return operations.ListRefundsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.CardAcquiringRefund]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1522,28 +1692,22 @@ class Transfers(BaseSDK):
     def get_refund(
         self,
         *,
-        security: Union[
-            operations.GetRefundSecurity, operations.GetRefundSecurityTypedDict
-        ],
         transfer_id: str,
         account_id: str,
         refund_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.CardAcquiringRefund:
+    ) -> operations.GetRefundResponse:
         r"""Get details of a refund for a card transfer.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param transfer_id: Identifier for the transfer.
         :param account_id:
         :param refund_id: Identifier for the refund.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1558,7 +1722,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.GetRefundRequest(
-            x_moov_version=x_moov_version,
             transfer_id=transfer_id,
             account_id=account_id,
             refund_id=refund_id,
@@ -1576,7 +1739,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetRefundSecurity),
+            _globals=operations.GetRefundGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1590,9 +1756,12 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getRefund",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1600,13 +1769,28 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.CardAcquiringRefund)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetRefundResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.CardAcquiringRefund
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1624,28 +1808,22 @@ class Transfers(BaseSDK):
     async def get_refund_async(
         self,
         *,
-        security: Union[
-            operations.GetRefundSecurity, operations.GetRefundSecurityTypedDict
-        ],
         transfer_id: str,
         account_id: str,
         refund_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.CardAcquiringRefund:
+    ) -> operations.GetRefundResponse:
         r"""Get details of a refund for a card transfer.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts/{accountID}/transfers.read`
-        scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
         :param transfer_id: Identifier for the transfer.
         :param account_id:
         :param refund_id: Identifier for the refund.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1660,7 +1838,6 @@ class Transfers(BaseSDK):
             base_url = server_url
 
         request = operations.GetRefundRequest(
-            x_moov_version=x_moov_version,
             transfer_id=transfer_id,
             account_id=account_id,
             refund_id=refund_id,
@@ -1678,7 +1855,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetRefundSecurity),
+            _globals=operations.GetRefundGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1692,9 +1872,12 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getRefund",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1702,13 +1885,28 @@ class Transfers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.CardAcquiringRefund)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetRefundResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.CardAcquiringRefund
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1723,23 +1921,18 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    def reverse_transfer(
+    def create_reversal(
         self,
         *,
-        security: Union[
-            operations.ReverseTransferSecurity,
-            operations.ReverseTransferSecurityTypedDict,
-        ],
         x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
         amount: int,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Reversal:
+    ) -> operations.CreateReversalResponse:
         r"""Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
         Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
         to learn more.
@@ -1747,12 +1940,10 @@ class Transfers(BaseSDK):
         To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param x_idempotency_key: Prevents duplicate reversals from being created.
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
         :param amount: Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1766,8 +1957,7 @@ class Transfers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.ReverseTransferRequest(
-            x_moov_version=x_moov_version,
+        request = operations.CreateReversalRequest(
             x_idempotency_key=x_idempotency_key,
             account_id=account_id,
             transfer_id=transfer_id,
@@ -1788,9 +1978,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ReverseTransferSecurity
+            _globals=operations.CreateReversalGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_reversal,
                 False,
@@ -1811,9 +2002,12 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="reverseTransfer",
+                base_url=base_url or "",
+                operation_id="createReversal",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1832,23 +2026,36 @@ class Transfers(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, ["200", "202"], "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Reversal)
+            return operations.CreateReversalResponse(
+                result=utils.unmarshal_json(http_res.text, components.Reversal),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.ReversalValidationErrorData
+            )
+            raise errors.ReversalValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.ReversalValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.ReversalValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1863,23 +2070,18 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    async def reverse_transfer_async(
+    async def create_reversal_async(
         self,
         *,
-        security: Union[
-            operations.ReverseTransferSecurity,
-            operations.ReverseTransferSecurityTypedDict,
-        ],
         x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
         amount: int,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Reversal:
+    ) -> operations.CreateReversalResponse:
         r"""Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
         Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
         to learn more.
@@ -1887,12 +2089,10 @@ class Transfers(BaseSDK):
         To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param security:
         :param x_idempotency_key: Prevents duplicate reversals from being created.
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
         :param amount: Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1906,8 +2106,7 @@ class Transfers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.ReverseTransferRequest(
-            x_moov_version=x_moov_version,
+        request = operations.CreateReversalRequest(
             x_idempotency_key=x_idempotency_key,
             account_id=account_id,
             transfer_id=transfer_id,
@@ -1928,9 +2127,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ReverseTransferSecurity
+            _globals=operations.CreateReversalGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_reversal,
                 False,
@@ -1951,9 +2151,12 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="reverseTransfer",
+                base_url=base_url or "",
+                operation_id="createReversal",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1972,23 +2175,36 @@ class Transfers(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, ["200", "202"], "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Reversal)
+            return operations.CreateReversalResponse(
+                result=utils.unmarshal_json(http_res.text, components.Reversal),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.ReversalValidationErrorData
+            )
+            raise errors.ReversalValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.ReversalValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.ReversalValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2003,30 +2219,27 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    def create_transfer_options(
+    def generate_options(
         self,
         *,
-        security: Union[
-            operations.CreateTransferOptionsSecurity,
-            operations.CreateTransferOptionsSecurityTypedDict,
-        ],
-        x_moov_version: Optional[components.Versions] = None,
+        request: Union[
+            operations.CreateTransferOptionsRequest,
+            operations.CreateTransferOptionsRequestTypedDict,
+        ] = operations.CreateTransferOptionsRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.TransferOptions:
+    ) -> operations.CreateTransferOptionsResponse:
         r"""Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you
         supply in the request.
 
         Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{yourAccountID}/transfers.read` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/). The accountID included must be your accountID. You can find your
-        accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
-        :param x_moov_version: Specify an API version.
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2040,9 +2253,9 @@ class Transfers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.CreateTransferOptionsRequest(
-            x_moov_version=x_moov_version,
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.CreateTransferOptionsRequest)
+        request = cast(operations.CreateTransferOptionsRequest, request)
 
         req = self._build_request(
             method="POST",
@@ -2056,9 +2269,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateTransferOptionsSecurity
+            _globals=operations.CreateTransferOptionsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -2072,9 +2286,12 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createTransferOptions",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2091,23 +2308,36 @@ class Transfers(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.TransferOptions)
+            return operations.CreateTransferOptionsResponse(
+                result=utils.unmarshal_json(http_res.text, components.TransferOptions),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.TransferOptionsValidationErrorData
+            )
+            raise errors.TransferOptionsValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.TransferOptionsValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.TransferOptionsValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -2122,30 +2352,27 @@ class Transfers(BaseSDK):
             http_res,
         )
 
-    async def create_transfer_options_async(
+    async def generate_options_async(
         self,
         *,
-        security: Union[
-            operations.CreateTransferOptionsSecurity,
-            operations.CreateTransferOptionsSecurityTypedDict,
-        ],
-        x_moov_version: Optional[components.Versions] = None,
+        request: Union[
+            operations.CreateTransferOptionsRequest,
+            operations.CreateTransferOptionsRequestTypedDict,
+        ] = operations.CreateTransferOptionsRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.TransferOptions:
+    ) -> operations.CreateTransferOptionsResponse:
         r"""Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you
         supply in the request.
 
         Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
-        To use this endpoint from the browser, you'll need to specify the `/accounts/{yourAccountID}/transfers.read` scope when generating a
-        [token](https://docs.moov.io/api/authentication/access-tokens/). The accountID included must be your accountID. You can find your
-        accountID on the [Business details](https://dashboard.moov.io/settings/business) page.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param security:
-        :param x_moov_version: Specify an API version.
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2159,9 +2386,9 @@ class Transfers(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.CreateTransferOptionsRequest(
-            x_moov_version=x_moov_version,
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.CreateTransferOptionsRequest)
+        request = cast(operations.CreateTransferOptionsRequest, request)
 
         req = self._build_request_async(
             method="POST",
@@ -2175,9 +2402,10 @@ class Transfers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateTransferOptionsSecurity
+            _globals=operations.CreateTransferOptionsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -2191,9 +2419,12 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createTransferOptions",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -2210,23 +2441,36 @@ class Transfers(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.TransferOptions)
+            return operations.CreateTransferOptionsResponse(
+                result=utils.unmarshal_json(http_res.text, components.TransferOptions),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.TransferOptionsValidationErrorData
+            )
+            raise errors.TransferOptionsValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.TransferOptionsValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.TransferOptionsValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

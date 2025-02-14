@@ -5,32 +5,53 @@
 
 ### Available Operations
 
-* [create_schedule](#create_schedule) - Describes the schedule to create or modify.
-* [list_schedules](#list_schedules) - Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
-* [update_schedule](#update_schedule) - Describes the schedule to modify.
-* [get_schedules](#get_schedules) - Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
-* [cancel_schedule](#cancel_schedule) - Describes the schedule to cancel.
-* [get_scheduled_occurrence](#get_scheduled_occurrence) - Defines an occurrence for when to run a transfer.
+* [create](#create) - Describes the schedule to create or modify.
 
-## create_schedule
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [list](#list) - Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [update](#update) - Describes the schedule to modify.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [get](#get) - Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [cancel](#cancel) - Describes the schedule to cancel.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [get_occurrance](#get_occurrance) - Gets a specific occurrence.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+## create
 
 Describes the schedule to create or modify.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
 ```python
 import dateutil.parser
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.scheduling.create_schedule(security=operations.CreateScheduleSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="85154287-4ee0-4c8f-89d9-6c4a524b28f0", occurrences=[
+    res = moov.scheduling.create(account_id="85154287-4ee0-4c8f-89d9-6c4a524b28f0", occurrences=[
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
@@ -167,19 +188,17 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `security`                                                                             | [operations.CreateScheduleSecurity](../../models/operations/createschedulesecurity.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `account_id`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `x_moov_version`                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                   | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |
-| `description`                                                                          | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | Simple description of what the schedule is.                                            |
-| `occurrences`                                                                          | List[[components.Occurrence](../../models/components/occurrence.md)]                   | :heavy_minus_sign:                                                                     | N/A                                                                                    |
-| `recur`                                                                                | [Optional[components.Recur]](../../models/components/recur.md)                         | :heavy_minus_sign:                                                                     | Defines configuration for recurring transfers.                                         |
-| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `account_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `description`                                                        | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Simple description of what the schedule is.                          |
+| `occurrences`                                                        | List[[components.Occurrence](../../models/components/occurrence.md)] | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `recur`                                                              | [Optional[components.Recur]](../../models/components/recur.md)       | :heavy_minus_sign:                                                   | Defines configuration for recurring transfers.                       |
+| `retries`                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)     | :heavy_minus_sign:                                                   | Configuration to override the default retry behavior of the client.  |
 
 ### Response
 
-**[components.ScheduleResponse](../../models/components/scheduleresponse.md)**
+**[operations.CreateScheduleResponse](../../models/operations/createscheduleresponse.md)**
 
 ### Errors
 
@@ -189,24 +208,27 @@ with Moov() as moov:
 | errors.ScheduleValidationError | 422                            | application/json               |
 | errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
-## list_schedules
+## list
 
 Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.scheduling.list_schedules(security=operations.ListSchedulesSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="f5b39da1-b677-43d6-b114-65cbbea83ad5", skip=60, count=20)
+    res = moov.scheduling.list(account_id="f5b39da1-b677-43d6-b114-65cbbea83ad5", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -215,18 +237,16 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `security`                                                                           | [operations.ListSchedulesSecurity](../../models/operations/listschedulessecurity.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
-| `account_id`                                                                         | *str*                                                                                | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
-| `x_moov_version`                                                                     | [Optional[components.Versions]](../../models/components/versions.md)                 | :heavy_minus_sign:                                                                   | Specify an API version.                                                              |                                                                                      |
-| `skip`                                                                               | *Optional[int]*                                                                      | :heavy_minus_sign:                                                                   | N/A                                                                                  | 60                                                                                   |
-| `count`                                                                              | *Optional[int]*                                                                      | :heavy_minus_sign:                                                                   | N/A                                                                                  | 20                                                                                   |
-| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |                                                                                      |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
+| `skip`                                                              | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 | 60                                                                  |
+| `count`                                                             | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 | 20                                                                  |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
 
-**[List[components.ScheduleResponse]](../../models/.md)**
+**[operations.ListSchedulesResponse](../../models/operations/listschedulesresponse.md)**
 
 ### Errors
 
@@ -234,25 +254,28 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## update_schedule
+## update
 
 Describes the schedule to modify.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
 ```python
 import dateutil.parser
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.scheduling.update_schedule(security=operations.UpdateScheduleSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="9122f67d-60fd-4e10-9f18-023929ab3209", schedule_id="a4599c7c-e943-47b9-8e40-0834618798a5", occurrences=[
+    res = moov.scheduling.update(account_id="9122f67d-60fd-4e10-9f18-023929ab3209", schedule_id="a4599c7c-e943-47b9-8e40-0834618798a5", occurrences=[
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
@@ -357,20 +380,18 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `security`                                                                             | [operations.UpdateScheduleSecurity](../../models/operations/updateschedulesecurity.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `account_id`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `schedule_id`                                                                          | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `x_moov_version`                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                   | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |
-| `description`                                                                          | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | Simple description of what the schedule is.                                            |
-| `occurrences`                                                                          | List[[components.Occurrence](../../models/components/occurrence.md)]                   | :heavy_minus_sign:                                                                     | N/A                                                                                    |
-| `recur`                                                                                | [Optional[components.Recur]](../../models/components/recur.md)                         | :heavy_minus_sign:                                                                     | Defines configuration for recurring transfers.                                         |
-| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `account_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `schedule_id`                                                        | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `description`                                                        | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | Simple description of what the schedule is.                          |
+| `occurrences`                                                        | List[[components.Occurrence](../../models/components/occurrence.md)] | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `recur`                                                              | [Optional[components.Recur]](../../models/components/recur.md)       | :heavy_minus_sign:                                                   | Defines configuration for recurring transfers.                       |
+| `retries`                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)     | :heavy_minus_sign:                                                   | Configuration to override the default retry behavior of the client.  |
 
 ### Response
 
-**[components.ScheduleResponse](../../models/components/scheduleresponse.md)**
+**[operations.UpdateScheduleResponse](../../models/operations/updatescheduleresponse.md)**
 
 ### Errors
 
@@ -380,24 +401,27 @@ with Moov() as moov:
 | errors.ScheduleValidationError | 422                            | application/json               |
 | errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
-## get_schedules
+## get
 
 Describes a schedule associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.scheduling.get_schedules(security=operations.GetSchedulesSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="aa7a59b8-5d59-4efd-99e7-b644e71e5f8c", schedule_id="605976e8-f3ff-4e64-9b41-7255577d6f44")
+    res = moov.scheduling.get(account_id="aa7a59b8-5d59-4efd-99e7-b644e71e5f8c", schedule_id="605976e8-f3ff-4e64-9b41-7255577d6f44")
 
     # Handle response
     print(res)
@@ -406,17 +430,15 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `security`                                                                         | [operations.GetSchedulesSecurity](../../models/operations/getschedulessecurity.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
-| `account_id`                                                                       | *str*                                                                              | :heavy_check_mark:                                                                 | N/A                                                                                |
-| `schedule_id`                                                                      | *str*                                                                              | :heavy_check_mark:                                                                 | N/A                                                                                |
-| `x_moov_version`                                                                   | [Optional[components.Versions]](../../models/components/versions.md)               | :heavy_minus_sign:                                                                 | Specify an API version.                                                            |
-| `retries`                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                   | :heavy_minus_sign:                                                                 | Configuration to override the default retry behavior of the client.                |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `schedule_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[components.ScheduleResponse](../../models/components/scheduleresponse.md)**
+**[operations.GetSchedulesResponse](../../models/operations/getschedulesresponse.md)**
 
 ### Errors
 
@@ -424,38 +446,44 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## cancel_schedule
+## cancel
 
 Describes the schedule to cancel.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    moov.scheduling.cancel_schedule(security=operations.CancelScheduleSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="a1303a1c-8708-447e-a64b-5dba8417b641", schedule_id="ab5ca483-e27d-48f0-b596-09eed517874f")
+    res = moov.scheduling.cancel(account_id="a1303a1c-8708-447e-a64b-5dba8417b641", schedule_id="ab5ca483-e27d-48f0-b596-09eed517874f")
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `security`                                                                             | [operations.CancelScheduleSecurity](../../models/operations/cancelschedulesecurity.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `account_id`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `schedule_id`                                                                          | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `x_moov_version`                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                   | :heavy_minus_sign:                                                                     | Specify an API version.                                                                |
-| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `schedule_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.CancelScheduleResponse](../../models/operations/cancelscheduleresponse.md)**
 
 ### Errors
 
@@ -464,24 +492,27 @@ with Moov() as moov:
 | errors.GenericError | 400, 409            | application/json    |
 | errors.APIError     | 4XX, 5XX            | \*/\*               |
 
-## get_scheduled_occurrence
+## get_occurrance
 
-Defines an occurrence for when to run a transfer.
+Gets a specific occurrence.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.scheduling.get_scheduled_occurrence(security=operations.GetScheduledOccurrenceSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="7175f455-a6d6-4b87-8e24-cbd12c7dabe7", schedule_id="a4ffa63d-9228-4488-8f27-d2ff59d7760c", occurrence_filter="<value>")
+    res = moov.scheduling.get_occurrance(account_id="7175f455-a6d6-4b87-8e24-cbd12c7dabe7", schedule_id="a4ffa63d-9228-4488-8f27-d2ff59d7760c", occurrence_filter="<value>")
 
     # Handle response
     print(res)
@@ -492,16 +523,14 @@ with Moov() as moov:
 
 | Parameter                                                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                                                            |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                                                                                                             | [operations.GetScheduledOccurrenceSecurity](../../models/operations/getscheduledoccurrencesecurity.md)                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                                                    |
 | `account_id`                                                                                                                                                                                                                                                                           | *str*                                                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                                                    |
 | `schedule_id`                                                                                                                                                                                                                                                                          | *str*                                                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                                     | N/A                                                                                                                                                                                                                                                                                    |
 | `occurrence_filter`                                                                                                                                                                                                                                                                    | *str*                                                                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                                     | Allows the specification of additional filters beyond the UUID.<br/><br/>Specifying a UUID string returns the exact occurrence.<br/>Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.<br/>Specifying `latest` returns the latest occurrence at or before now. |
-| `x_moov_version`                                                                                                                                                                                                                                                                       | [Optional[components.Versions]](../../models/components/versions.md)                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | Specify an API version.                                                                                                                                                                                                                                                                |
 | `retries`                                                                                                                                                                                                                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                                                     | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                    |
 
 ### Response
 
-**[components.ScheduleResponse](../../models/components/scheduleresponse.md)**
+**[operations.GetScheduledOccurrenceResponse](../../models/operations/getscheduledoccurrenceresponse.md)**
 
 ### Errors
 

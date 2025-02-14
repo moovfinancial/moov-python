@@ -5,33 +5,42 @@
 
 ### Available Operations
 
-* [list_wallet_transactions](#list_wallet_transactions) - List all the transactions associated with a particular Moov wallet. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+* [list](#list) - List all the transactions associated with a particular Moov wallet. 
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
-* [get_wallet_transaction](#get_wallet_transaction) - Get details on a specific wallet transaction. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
 
-To use this endpoint from a browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+* [get](#get) - Get details on a specific wallet transaction. 
 
-## list_wallet_transactions
+Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
 
-List all the transactions associated with a particular Moov wallet. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
-To use this endpoint from the browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+## list
+
+List all the transactions associated with a particular Moov wallet. 
+
+Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.wallet_transactions.list_wallet_transactions(security=operations.ListWalletTransactionsSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="2d736837-1618-4c4a-9e51-aa9dd394b389", wallet_id="99432d06-8ac3-4c17-afc1-a12a328564ac", skip=60, count=20)
+    res = moov.wallet_transactions.list(account_id="2d736837-1618-4c4a-9e51-aa9dd394b389", wallet_id="99432d06-8ac3-4c17-afc1-a12a328564ac", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -42,10 +51,8 @@ with Moov() as moov:
 
 | Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                | Example                                                                                                    |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                 | [operations.ListWalletTransactionsSecurity](../../models/operations/listwallettransactionssecurity.md)     | :heavy_check_mark:                                                                                         | N/A                                                                                                        |                                                                                                            |
 | `account_id`                                                                                               | *str*                                                                                                      | :heavy_check_mark:                                                                                         | N/A                                                                                                        |                                                                                                            |
 | `wallet_id`                                                                                                | *str*                                                                                                      | :heavy_check_mark:                                                                                         | N/A                                                                                                        |                                                                                                            |
-| `x_moov_version`                                                                                           | [Optional[components.Versions]](../../models/components/versions.md)                                       | :heavy_minus_sign:                                                                                         | Specify an API version.                                                                                    |                                                                                                            |
 | `skip`                                                                                                     | *Optional[int]*                                                                                            | :heavy_minus_sign:                                                                                         | N/A                                                                                                        | 60                                                                                                         |
 | `count`                                                                                                    | *Optional[int]*                                                                                            | :heavy_minus_sign:                                                                                         | N/A                                                                                                        | 20                                                                                                         |
 | `transaction_type`                                                                                         | [Optional[components.WalletTransactionType]](../../models/components/wallettransactiontype.md)             | :heavy_minus_sign:                                                                                         | Optional parameter to filter by transaction type.                                                          |                                                                                                            |
@@ -61,7 +68,7 @@ with Moov() as moov:
 
 ### Response
 
-**[List[components.WalletTransaction]](../../models/.md)**
+**[operations.ListWalletTransactionsResponse](../../models/operations/listwallettransactionsresponse.md)**
 
 ### Errors
 
@@ -69,26 +76,29 @@ with Moov() as moov:
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_wallet_transaction
+## get
 
-Get details on a specific wallet transaction. Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+Get details on a specific wallet transaction. 
 
-To use this endpoint from a browser, you'll need to specify the `/accounts/{accountID}/wallets.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+Read our [wallet transactions guide](https://docs.moov.io/guides/sources/wallets/transactions/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
 ```python
 from moovio_sdk import Moov
-from moovio_sdk.models import components, operations
+from moovio_sdk.models import components
 
-with Moov() as moov:
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
 
-    res = moov.wallet_transactions.get_wallet_transaction(security=operations.GetWalletTransactionSecurity(
-        basic_auth=components.SchemeBasicAuth(
-            username="",
-            password="",
-        ),
-    ), account_id="a5040923-7566-4f60-af63-86465493f971", wallet_id="a49156a6-65e8-4c24-a71a-eca54c2c3855", transaction_id="8b5c4f2a-2bb8-4145-b0ea-69212338b5a1")
+    res = moov.wallet_transactions.get(account_id="a5040923-7566-4f60-af63-86465493f971", wallet_id="a49156a6-65e8-4c24-a71a-eca54c2c3855", transaction_id="8b5c4f2a-2bb8-4145-b0ea-69212338b5a1")
 
     # Handle response
     print(res)
@@ -97,18 +107,16 @@ with Moov() as moov:
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `security`                                                                                         | [operations.GetWalletTransactionSecurity](../../models/operations/getwallettransactionsecurity.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `account_id`                                                                                       | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `wallet_id`                                                                                        | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `transaction_id`                                                                                   | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `x_moov_version`                                                                                   | [Optional[components.Versions]](../../models/components/versions.md)                               | :heavy_minus_sign:                                                                                 | Specify an API version.                                                                            |
-| `retries`                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                   | :heavy_minus_sign:                                                                                 | Configuration to override the default retry behavior of the client.                                |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `wallet_id`                                                         | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `transaction_id`                                                    | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[components.WalletTransaction](../../models/components/wallettransaction.md)**
+**[operations.GetWalletTransactionResponse](../../models/operations/getwallettransactionresponse.md)**
 
 ### Errors
 

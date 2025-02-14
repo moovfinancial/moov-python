@@ -6,34 +6,27 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional
 
 
 class Billing(BaseSDK):
     def list_fee_plan_agreements(
         self,
         *,
-        security: Union[
-            operations.ListFeePlanAgreementsSecurity,
-            operations.ListFeePlanAgreementsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         agreement_id: Optional[List[str]] = None,
         status: Optional[List[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.FeePlanAgreement]:
+    ) -> operations.ListFeePlanAgreementsResponse:
         r"""List all fee plan agreements associated with an account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -50,7 +43,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.ListFeePlanAgreementsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             agreement_id=agreement_id,
             status=status,
@@ -68,9 +60,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListFeePlanAgreementsSecurity
+            _globals=operations.ListFeePlanAgreementsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -84,9 +77,12 @@ class Billing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listFeePlanAgreements",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -94,15 +90,28 @@ class Billing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.FeePlanAgreement]
+            return operations.ListFeePlanAgreementsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.FeePlanAgreement]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -120,27 +129,20 @@ class Billing(BaseSDK):
     async def list_fee_plan_agreements_async(
         self,
         *,
-        security: Union[
-            operations.ListFeePlanAgreementsSecurity,
-            operations.ListFeePlanAgreementsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         agreement_id: Optional[List[str]] = None,
         status: Optional[List[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.FeePlanAgreement]:
+    ) -> operations.ListFeePlanAgreementsResponse:
         r"""List all fee plan agreements associated with an account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -157,7 +159,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.ListFeePlanAgreementsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             agreement_id=agreement_id,
             status=status,
@@ -175,9 +176,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListFeePlanAgreementsSecurity
+            _globals=operations.ListFeePlanAgreementsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -191,9 +193,12 @@ class Billing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listFeePlanAgreements",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -201,15 +206,28 @@ class Billing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.FeePlanAgreement]
+            return operations.ListFeePlanAgreementsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.FeePlanAgreement]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -227,27 +245,20 @@ class Billing(BaseSDK):
     def create_fee_plan_agreements(
         self,
         *,
-        security: Union[
-            operations.CreateFeePlanAgreementsSecurity,
-            operations.CreateFeePlanAgreementsSecurityTypedDict,
-        ],
         account_id: str,
         plan_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.FeePlanAgreement:
+    ) -> operations.CreateFeePlanAgreementsResponse:
         r"""Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.write` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
-        :param security:
         :param account_id:
         :param plan_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -262,7 +273,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.CreateFeePlanAgreementsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             create_fee_plan_agreement=components.CreateFeePlanAgreement(
                 plan_id=plan_id,
@@ -281,9 +291,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateFeePlanAgreementsSecurity
+            _globals=operations.CreateFeePlanAgreementsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_fee_plan_agreement,
                 False,
@@ -304,9 +315,12 @@ class Billing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createFeePlanAgreements",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -325,21 +339,36 @@ class Billing(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.FeePlanAgreement)
+            return operations.CreateFeePlanAgreementsResponse(
+                result=utils.unmarshal_json(http_res.text, components.FeePlanAgreement),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.FeePlanAgreementErrorData
+            )
+            raise errors.FeePlanAgreementError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.FeePlanAgreementErrorData)
-            raise errors.FeePlanAgreementError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -357,27 +386,20 @@ class Billing(BaseSDK):
     async def create_fee_plan_agreements_async(
         self,
         *,
-        security: Union[
-            operations.CreateFeePlanAgreementsSecurity,
-            operations.CreateFeePlanAgreementsSecurityTypedDict,
-        ],
         account_id: str,
         plan_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.FeePlanAgreement:
+    ) -> operations.CreateFeePlanAgreementsResponse:
         r"""Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.write` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
-        :param security:
         :param account_id:
         :param plan_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -392,7 +414,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.CreateFeePlanAgreementsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             create_fee_plan_agreement=components.CreateFeePlanAgreement(
                 plan_id=plan_id,
@@ -411,9 +432,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateFeePlanAgreementsSecurity
+            _globals=operations.CreateFeePlanAgreementsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_fee_plan_agreement,
                 False,
@@ -434,9 +456,12 @@ class Billing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createFeePlanAgreements",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -455,21 +480,36 @@ class Billing(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.FeePlanAgreement)
+            return operations.CreateFeePlanAgreementsResponse(
+                result=utils.unmarshal_json(http_res.text, components.FeePlanAgreement),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.FeePlanAgreementErrorData
+            )
+            raise errors.FeePlanAgreementError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.FeePlanAgreementErrorData)
-            raise errors.FeePlanAgreementError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -487,26 +527,20 @@ class Billing(BaseSDK):
     def list_fee_plans(
         self,
         *,
-        security: Union[
-            operations.ListFeePlansSecurity, operations.ListFeePlansSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         plan_i_ds: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.FeePlan]:
+    ) -> operations.ListFeePlansResponse:
         r"""List all fee plans available for use by an account. This is intended to be used by an account when
         selecting a fee plan to apply to a connected account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param plan_i_ds: A comma-separated list of plan IDs to filter the results by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -522,7 +556,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.ListFeePlansRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             plan_i_ds=plan_i_ds,
         )
@@ -539,9 +572,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListFeePlansSecurity
+            _globals=operations.ListFeePlansGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -555,9 +589,12 @@ class Billing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listFeePlans",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -565,13 +602,26 @@ class Billing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.FeePlan])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListFeePlansResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.FeePlan]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -589,26 +639,20 @@ class Billing(BaseSDK):
     async def list_fee_plans_async(
         self,
         *,
-        security: Union[
-            operations.ListFeePlansSecurity, operations.ListFeePlansSecurityTypedDict
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         plan_i_ds: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.FeePlan]:
+    ) -> operations.ListFeePlansResponse:
         r"""List all fee plans available for use by an account. This is intended to be used by an account when
         selecting a fee plan to apply to a connected account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param plan_i_ds: A comma-separated list of plan IDs to filter the results by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -624,7 +668,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.ListFeePlansRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             plan_i_ds=plan_i_ds,
         )
@@ -641,9 +684,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListFeePlansSecurity
+            _globals=operations.ListFeePlansGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -657,9 +701,12 @@ class Billing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listFeePlans",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -667,13 +714,26 @@ class Billing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.FeePlan])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListFeePlansResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.FeePlan]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -691,26 +751,19 @@ class Billing(BaseSDK):
     def list_partner_pricing(
         self,
         *,
-        security: Union[
-            operations.ListPartnerPricingSecurity,
-            operations.ListPartnerPricingSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         plan_i_ds: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.PartnerPricing]:
+    ) -> operations.ListPartnerPricingResponse:
         r"""List all partner pricing plans available for use by an account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param plan_i_ds: A comma-separated list of plan IDs to filter the results by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -726,7 +779,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.ListPartnerPricingRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             plan_i_ds=plan_i_ds,
         )
@@ -743,9 +795,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListPartnerPricingSecurity
+            _globals=operations.ListPartnerPricingGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -759,9 +812,12 @@ class Billing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listPartnerPricing",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -769,13 +825,28 @@ class Billing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.PartnerPricing])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListPartnerPricingResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.PartnerPricing]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -793,26 +864,19 @@ class Billing(BaseSDK):
     async def list_partner_pricing_async(
         self,
         *,
-        security: Union[
-            operations.ListPartnerPricingSecurity,
-            operations.ListPartnerPricingSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         plan_i_ds: Optional[List[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.PartnerPricing]:
+    ) -> operations.ListPartnerPricingResponse:
         r"""List all partner pricing plans available for use by an account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param plan_i_ds: A comma-separated list of plan IDs to filter the results by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -828,7 +892,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.ListPartnerPricingRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             plan_i_ds=plan_i_ds,
         )
@@ -845,9 +908,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListPartnerPricingSecurity
+            _globals=operations.ListPartnerPricingGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -861,9 +925,12 @@ class Billing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listPartnerPricing",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -871,13 +938,28 @@ class Billing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.PartnerPricing])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListPartnerPricingResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.PartnerPricing]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -895,27 +977,20 @@ class Billing(BaseSDK):
     def list_partner_pricing_agreements(
         self,
         *,
-        security: Union[
-            operations.ListPartnerPricingAgreementsSecurity,
-            operations.ListPartnerPricingAgreementsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         agreement_id: Optional[List[str]] = None,
         status: Optional[List[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.PartnerPricingAgreement]:
+    ) -> operations.ListPartnerPricingAgreementsResponse:
         r"""List all partner pricing agreements associated with an account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -932,7 +1007,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.ListPartnerPricingAgreementsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             agreement_id=agreement_id,
             status=status,
@@ -950,9 +1024,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListPartnerPricingAgreementsSecurity
+            _globals=operations.ListPartnerPricingAgreementsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -966,9 +1041,12 @@ class Billing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listPartnerPricingAgreements",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -976,15 +1054,28 @@ class Billing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.PartnerPricingAgreement]
+            return operations.ListPartnerPricingAgreementsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.PartnerPricingAgreement]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1002,27 +1093,20 @@ class Billing(BaseSDK):
     async def list_partner_pricing_agreements_async(
         self,
         *,
-        security: Union[
-            operations.ListPartnerPricingAgreementsSecurity,
-            operations.ListPartnerPricingAgreementsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         agreement_id: Optional[List[str]] = None,
         status: Optional[List[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.PartnerPricingAgreement]:
+    ) -> operations.ListPartnerPricingAgreementsResponse:
         r"""List all partner pricing agreements associated with an account.
 
-        To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts/{accountID}/profile.read` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
-        :param security:
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -1039,7 +1123,6 @@ class Billing(BaseSDK):
             base_url = server_url
 
         request = operations.ListPartnerPricingAgreementsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             agreement_id=agreement_id,
             status=status,
@@ -1057,9 +1140,10 @@ class Billing(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListPartnerPricingAgreementsSecurity
+            _globals=operations.ListPartnerPricingAgreementsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1073,9 +1157,12 @@ class Billing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listPartnerPricingAgreements",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -1083,15 +1170,28 @@ class Billing(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, List[components.PartnerPricingAgreement]
+            return operations.ListPartnerPricingAgreementsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.PartnerPricingAgreement]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

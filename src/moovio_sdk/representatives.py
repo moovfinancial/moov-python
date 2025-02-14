@@ -10,16 +10,11 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Representatives(BaseSDK):
-    def create_representative(
+    def create(
         self,
         *,
-        security: Union[
-            operations.CreateRepresentativeSecurity,
-            operations.CreateRepresentativeSecurityTypedDict,
-        ],
         account_id: str,
         name: Union[components.IndividualName, components.IndividualNameTypedDict],
-        x_moov_version: Optional[components.Versions] = None,
         phone: Optional[
             Union[components.PhoneNumber, components.PhoneNumberTypedDict]
         ] = None,
@@ -43,17 +38,16 @@ class Representatives(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Representative:
+    ) -> operations.CreateRepresentativeResponse:
         r"""Moov accounts associated with businesses require information regarding individuals who represent the business.
         You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.
         Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
-        :param security:
         :param account_id: ID of the account.
         :param name:
-        :param x_moov_version: Specify an API version.
         :param phone:
         :param email:
         :param address:
@@ -74,7 +68,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.CreateRepresentativeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             create_representative=components.CreateRepresentative(
                 name=utils.get_pydantic_model(name, components.IndividualName),
@@ -106,9 +99,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateRepresentativeSecurity
+            _globals=operations.CreateRepresentativeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_representative,
                 False,
@@ -129,9 +123,12 @@ class Representatives(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createRepresentative",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -150,23 +147,36 @@ class Representatives(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Representative)
+            return operations.CreateRepresentativeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Representative),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.RepresentativeValidationErrorData
+            )
+            raise errors.RepresentativeValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.RepresentativeValidationErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.RepresentativeValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -181,16 +191,11 @@ class Representatives(BaseSDK):
             http_res,
         )
 
-    async def create_representative_async(
+    async def create_async(
         self,
         *,
-        security: Union[
-            operations.CreateRepresentativeSecurity,
-            operations.CreateRepresentativeSecurityTypedDict,
-        ],
         account_id: str,
         name: Union[components.IndividualName, components.IndividualNameTypedDict],
-        x_moov_version: Optional[components.Versions] = None,
         phone: Optional[
             Union[components.PhoneNumber, components.PhoneNumberTypedDict]
         ] = None,
@@ -214,17 +219,16 @@ class Representatives(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Representative:
+    ) -> operations.CreateRepresentativeResponse:
         r"""Moov accounts associated with businesses require information regarding individuals who represent the business.
         You can provide this information by creating a representative. Each account is allowed a maximum of 7 representatives.
         Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
-        :param security:
         :param account_id: ID of the account.
         :param name:
-        :param x_moov_version: Specify an API version.
         :param phone:
         :param email:
         :param address:
@@ -245,7 +249,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.CreateRepresentativeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             create_representative=components.CreateRepresentative(
                 name=utils.get_pydantic_model(name, components.IndividualName),
@@ -277,9 +280,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateRepresentativeSecurity
+            _globals=operations.CreateRepresentativeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_representative,
                 False,
@@ -300,9 +304,12 @@ class Representatives(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createRepresentative",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -321,23 +328,36 @@ class Representatives(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Representative)
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
+            return operations.CreateRepresentativeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Representative),
+                headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
+            response_data = utils.unmarshal_json(
                 http_res.text, errors.RepresentativeValidationErrorData
             )
-            raise errors.RepresentativeValidationError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            raise errors.RepresentativeValidationError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -352,30 +372,24 @@ class Representatives(BaseSDK):
             http_res,
         )
 
-    def list_representatives(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListRepresentativesSecurity,
-            operations.ListRepresentativesSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Representative]:
-        r"""A Moov account may have multiple representatives depending on the associated business’s ownership and management structure.
+    ) -> operations.ListRepresentativesResponse:
+        r"""A Moov account may have multiple representatives depending on the associated business's ownership and management structure.
         You can use this method to list all the representatives for a given Moov account.
         Note that Moov accounts associated with an individual do not have representatives.
         Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
-        :param security:
         :param account_id: ID of the account.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -390,7 +404,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.ListRepresentativesRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -406,9 +419,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListRepresentativesSecurity
+            _globals=operations.ListRepresentativesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -422,9 +436,12 @@ class Representatives(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listRepresentatives",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -432,13 +449,28 @@ class Representatives(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Representative])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListRepresentativesResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.Representative]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -453,30 +485,24 @@ class Representatives(BaseSDK):
             http_res,
         )
 
-    async def list_representatives_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListRepresentativesSecurity,
-            operations.ListRepresentativesSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Representative]:
-        r"""A Moov account may have multiple representatives depending on the associated business’s ownership and management structure.
+    ) -> operations.ListRepresentativesResponse:
+        r"""A Moov account may have multiple representatives depending on the associated business's ownership and management structure.
         You can use this method to list all the representatives for a given Moov account.
         Note that Moov accounts associated with an individual do not have representatives.
         Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
-        :param security:
         :param account_id: ID of the account.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -491,7 +517,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.ListRepresentativesRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -507,9 +532,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListRepresentativesSecurity
+            _globals=operations.ListRepresentativesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -523,9 +549,12 @@ class Representatives(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listRepresentatives",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -533,13 +562,28 @@ class Representatives(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Representative])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListRepresentativesResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.Representative]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -554,29 +598,23 @@ class Representatives(BaseSDK):
             http_res,
         )
 
-    def delete_representative(
+    def delete(
         self,
         *,
-        security: Union[
-            operations.DeleteRepresentativeSecurity,
-            operations.DeleteRepresentativeSecurityTypedDict,
-        ],
         account_id: str,
         representative_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DeleteRepresentativeResponse:
         r"""Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
-        :param security:
         :param account_id: ID of the account.
         :param representative_id: ID of the representative.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -591,7 +629,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.DeleteRepresentativeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             representative_id=representative_id,
         )
@@ -608,9 +645,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.DeleteRepresentativeSecurity
+            _globals=operations.DeleteRepresentativeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -624,9 +662,12 @@ class Representatives(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="deleteRepresentative",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -644,18 +685,30 @@ class Representatives(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.DeleteRepresentativeResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -670,29 +723,23 @@ class Representatives(BaseSDK):
             http_res,
         )
 
-    async def delete_representative_async(
+    async def delete_async(
         self,
         *,
-        security: Union[
-            operations.DeleteRepresentativeSecurity,
-            operations.DeleteRepresentativeSecurityTypedDict,
-        ],
         account_id: str,
         representative_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> operations.DeleteRepresentativeResponse:
         r"""Deletes a business representative associated with a Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
-        :param security:
         :param account_id: ID of the account.
         :param representative_id: ID of the representative.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -707,7 +754,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.DeleteRepresentativeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             representative_id=representative_id,
         )
@@ -724,9 +770,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.DeleteRepresentativeSecurity
+            _globals=operations.DeleteRepresentativeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -740,9 +787,12 @@ class Representatives(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="deleteRepresentative",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -760,18 +810,30 @@ class Representatives(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
-            return
+            return operations.DeleteRepresentativeResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -786,29 +848,23 @@ class Representatives(BaseSDK):
             http_res,
         )
 
-    def get_representative(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetRepresentativeSecurity,
-            operations.GetRepresentativeSecurityTypedDict,
-        ],
         account_id: str,
         representative_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Representative:
+    ) -> operations.GetRepresentativeResponse:
         r"""Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
-        :param security:
         :param account_id: ID of the account.
         :param representative_id: ID of the representative.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -823,7 +879,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.GetRepresentativeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             representative_id=representative_id,
         )
@@ -840,9 +895,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetRepresentativeSecurity
+            _globals=operations.GetRepresentativeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -856,9 +912,12 @@ class Representatives(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getRepresentative",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -866,13 +925,26 @@ class Representatives(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Representative)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetRepresentativeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Representative),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -887,29 +959,23 @@ class Representatives(BaseSDK):
             http_res,
         )
 
-    async def get_representative_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetRepresentativeSecurity,
-            operations.GetRepresentativeSecurityTypedDict,
-        ],
         account_id: str,
         representative_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Representative:
+    ) -> operations.GetRepresentativeResponse:
         r"""Retrieve a specific representative associated with a given Moov account. Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
 
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
-        :param security:
         :param account_id: ID of the account.
         :param representative_id: ID of the representative.
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -924,7 +990,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.GetRepresentativeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             representative_id=representative_id,
         )
@@ -941,9 +1006,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetRepresentativeSecurity
+            _globals=operations.GetRepresentativeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -957,9 +1023,12 @@ class Representatives(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getRepresentative",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -967,13 +1036,26 @@ class Representatives(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Representative)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetRepresentativeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Representative),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -988,16 +1070,11 @@ class Representatives(BaseSDK):
             http_res,
         )
 
-    def update_representative(
+    def update(
         self,
         *,
-        security: Union[
-            operations.UpdateRepresentativeSecurity,
-            operations.UpdateRepresentativeSecurityTypedDict,
-        ],
         account_id: str,
         representative_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         name: Optional[
             Union[
                 components.IndividualNameUpdate,
@@ -1035,11 +1112,9 @@ class Representatives(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Representative:
-        r"""If a representative’s information has changed you can patch the information associated with a specific representative ID.
+    ) -> operations.UpdateRepresentativeResponse:
+        r"""If a representative's information has changed you can patch the information associated with a specific representative ID.
         Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
-
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 
         When **can** profile data be updated:
 
@@ -1047,16 +1122,17 @@ class Representatives(BaseSDK):
         - During the verification process, missing or incomplete profile data can be edited.
         - Verified representatives can only add missing profile data.
 
-        When **can’t** profile data be updated:
+        When **can't** profile data be updated:
 
         - Verified representatives cannot change any existing profile data.
 
         If you need to update information in a locked state, please contact Moov support.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+
         :param account_id: ID of the account.
         :param representative_id: ID of the representative.
-        :param x_moov_version: Specify an API version.
         :param name:
         :param phone:
         :param email:
@@ -1078,7 +1154,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateRepresentativeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             representative_id=representative_id,
             update_representative=components.UpdateRepresentative(
@@ -1120,9 +1195,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateRepresentativeSecurity
+            _globals=operations.UpdateRepresentativeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_representative,
                 False,
@@ -1143,9 +1219,12 @@ class Representatives(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateRepresentative",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1163,18 +1242,31 @@ class Representatives(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Representative)
+            return operations.UpdateRepresentativeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Representative),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1189,16 +1281,11 @@ class Representatives(BaseSDK):
             http_res,
         )
 
-    async def update_representative_async(
+    async def update_async(
         self,
         *,
-        security: Union[
-            operations.UpdateRepresentativeSecurity,
-            operations.UpdateRepresentativeSecurityTypedDict,
-        ],
         account_id: str,
         representative_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         name: Optional[
             Union[
                 components.IndividualNameUpdate,
@@ -1236,11 +1323,9 @@ class Representatives(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Representative:
-        r"""If a representative’s information has changed you can patch the information associated with a specific representative ID.
+    ) -> operations.UpdateRepresentativeResponse:
+        r"""If a representative's information has changed you can patch the information associated with a specific representative ID.
         Read our [business representatives guide](https://docs.moov.io/guides/accounts/requirements/business-representatives/) to learn more.
-
-        To use this endpoint from the browser, you’ll need to specify the `/accounts/{accountID}/representatives.write` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
 
         When **can** profile data be updated:
 
@@ -1248,16 +1333,17 @@ class Representatives(BaseSDK):
         - During the verification process, missing or incomplete profile data can be edited.
         - Verified representatives can only add missing profile data.
 
-        When **can’t** profile data be updated:
+        When **can't** profile data be updated:
 
         - Verified representatives cannot change any existing profile data.
 
         If you need to update information in a locked state, please contact Moov support.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
+
         :param account_id: ID of the account.
         :param representative_id: ID of the representative.
-        :param x_moov_version: Specify an API version.
         :param name:
         :param phone:
         :param email:
@@ -1279,7 +1365,6 @@ class Representatives(BaseSDK):
             base_url = server_url
 
         request = operations.UpdateRepresentativeRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             representative_id=representative_id,
             update_representative=components.UpdateRepresentative(
@@ -1321,9 +1406,10 @@ class Representatives(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.UpdateRepresentativeSecurity
+            _globals=operations.UpdateRepresentativeGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_representative,
                 False,
@@ -1344,9 +1430,12 @@ class Representatives(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="updateRepresentative",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -1364,18 +1453,31 @@ class Representatives(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Representative)
+            return operations.UpdateRepresentativeResponse(
+                result=utils.unmarshal_json(http_res.text, components.Representative),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

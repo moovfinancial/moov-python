@@ -1,23 +1,9 @@
 # CreateTransferResponse
 
 
-## Supported Types
+## Fields
 
-### `operations.CreateTransferResponseBody`
-
-```python
-value: operations.CreateTransferResponseBody = /* values here */
-```
-
-### `components.AsyncTransfer`
-
-```python
-value: components.AsyncTransfer = /* values here */
-```
-
-### `components.Transfer`
-
-```python
-value: components.Transfer = /* values here */
-```
-
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `headers`                                                                                          | Dict[str, List[*str*]]                                                                             | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `result`                                                                                           | [operations.CreateTransferResponseResult](../../models/operations/createtransferresponseresult.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

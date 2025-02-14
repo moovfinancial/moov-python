@@ -1,17 +1,9 @@
 # GetAvatarResponse
 
 
-## Supported Types
+## Fields
 
-### `httpx.Response`
-
-```python
-value: httpx.Response = /* values here */
-```
-
-### `httpx.Response`
-
-```python
-value: httpx.Response = /* values here */
-```
-
+| Field                  | Type                   | Required               | Description            |
+| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
+| `headers`              | Dict[str, List[*str*]] | :heavy_check_mark:     | N/A                    |
+| `result`               | *httpx.Response*       | :heavy_check_mark:     | N/A                    |

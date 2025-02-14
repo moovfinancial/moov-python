@@ -6,39 +6,35 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional
 
 
 class Sweeps(BaseSDK):
-    def create_sweep_config(
+    def create_config(
         self,
         *,
-        security: Union[
-            operations.CreateSweepConfigSecurity,
-            operations.CreateSweepConfigSecurityTypedDict,
-        ],
         account_id: str,
         wallet_id: str,
         status: components.SweepConfigStatus,
         push_payment_method_id: str,
         pull_payment_method_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         statement_descriptor: Optional[str] = None,
         minimum_balance: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.SweepConfig:
+    ) -> operations.CreateSweepConfigResponse:
         r"""Create a sweep config for a wallet.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+
         :param account_id:
         :param wallet_id:
         :param status:
         :param push_payment_method_id: ID of the payment method.
         :param pull_payment_method_id: ID of the payment method.
-        :param x_moov_version: Specify an API version.
         :param statement_descriptor: The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
         :param minimum_balance:
         :param retries: Override the default retry configuration for this method
@@ -55,7 +51,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.CreateSweepConfigRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             create_sweep_config=components.CreateSweepConfig(
                 wallet_id=wallet_id,
@@ -79,9 +74,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateSweepConfigSecurity
+            _globals=operations.CreateSweepConfigGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_sweep_config,
                 False,
@@ -102,9 +98,12 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createSweepConfig",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -123,23 +122,36 @@ class Sweeps(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.SweepConfig)
+            return operations.CreateSweepConfigResponse(
+                result=utils.unmarshal_json(http_res.text, components.SweepConfig),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.CreateSweepConfigErrorData
+            )
+            raise errors.CreateSweepConfigError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, errors.CreateSweepConfigErrorData
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
-            raise errors.CreateSweepConfigError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -154,35 +166,31 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    async def create_sweep_config_async(
+    async def create_config_async(
         self,
         *,
-        security: Union[
-            operations.CreateSweepConfigSecurity,
-            operations.CreateSweepConfigSecurityTypedDict,
-        ],
         account_id: str,
         wallet_id: str,
         status: components.SweepConfigStatus,
         push_payment_method_id: str,
         pull_payment_method_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         statement_descriptor: Optional[str] = None,
         minimum_balance: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.SweepConfig:
+    ) -> operations.CreateSweepConfigResponse:
         r"""Create a sweep config for a wallet.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+
         :param account_id:
         :param wallet_id:
         :param status:
         :param push_payment_method_id: ID of the payment method.
         :param pull_payment_method_id: ID of the payment method.
-        :param x_moov_version: Specify an API version.
         :param statement_descriptor: The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
         :param minimum_balance:
         :param retries: Override the default retry configuration for this method
@@ -199,7 +207,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.CreateSweepConfigRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             create_sweep_config=components.CreateSweepConfig(
                 wallet_id=wallet_id,
@@ -223,9 +230,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.CreateSweepConfigSecurity
+            _globals=operations.CreateSweepConfigGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_sweep_config,
                 False,
@@ -246,9 +254,12 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="createSweepConfig",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -267,23 +278,36 @@ class Sweeps(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.SweepConfig)
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
+            return operations.CreateSweepConfigResponse(
+                result=utils.unmarshal_json(http_res.text, components.SweepConfig),
+                headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(
+            response_data = utils.unmarshal_json(
                 http_res.text, errors.CreateSweepConfigErrorData
             )
-            raise errors.CreateSweepConfigError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            raise errors.CreateSweepConfigError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -298,25 +322,21 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    def list_sweep_configs(
+    def list_configs(
         self,
         *,
-        security: Union[
-            operations.ListSweepConfigsSecurity,
-            operations.ListSweepConfigsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.SweepConfig]:
+    ) -> operations.ListSweepConfigsResponse:
         r"""List sweep configs associated with an account.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -331,7 +351,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.ListSweepConfigsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -347,9 +366,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListSweepConfigsSecurity
+            _globals=operations.ListSweepConfigsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -363,9 +383,12 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listSweepConfigs",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -373,13 +396,28 @@ class Sweeps(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.SweepConfig])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListSweepConfigsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.SweepConfig]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -394,25 +432,21 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    async def list_sweep_configs_async(
+    async def list_configs_async(
         self,
         *,
-        security: Union[
-            operations.ListSweepConfigsSecurity,
-            operations.ListSweepConfigsSecurityTypedDict,
-        ],
         account_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.SweepConfig]:
+    ) -> operations.ListSweepConfigsResponse:
         r"""List sweep configs associated with an account.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
         :param account_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -427,7 +461,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.ListSweepConfigsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
         )
 
@@ -443,9 +476,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.ListSweepConfigsSecurity
+            _globals=operations.ListSweepConfigsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -459,9 +493,12 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listSweepConfigs",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -469,13 +506,28 @@ class Sweeps(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.SweepConfig])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListSweepConfigsResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.SweepConfig]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -490,27 +542,23 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    def get_sweep_config(
+    def get_config(
         self,
         *,
-        security: Union[
-            operations.GetSweepConfigSecurity,
-            operations.GetSweepConfigSecurityTypedDict,
-        ],
         account_id: str,
         sweep_config_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.SweepConfig:
+    ) -> operations.GetSweepConfigResponse:
         r"""Get a sweep config associated with a wallet.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
         :param account_id:
         :param sweep_config_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -525,7 +573,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.GetSweepConfigRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             sweep_config_id=sweep_config_id,
         )
@@ -542,9 +589,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetSweepConfigSecurity
+            _globals=operations.GetSweepConfigGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -558,9 +606,12 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getSweepConfig",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -568,13 +619,26 @@ class Sweeps(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.SweepConfig)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetSweepConfigResponse(
+                result=utils.unmarshal_json(http_res.text, components.SweepConfig),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -589,27 +653,23 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    async def get_sweep_config_async(
+    async def get_config_async(
         self,
         *,
-        security: Union[
-            operations.GetSweepConfigSecurity,
-            operations.GetSweepConfigSecurityTypedDict,
-        ],
         account_id: str,
         sweep_config_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.SweepConfig:
+    ) -> operations.GetSweepConfigResponse:
         r"""Get a sweep config associated with a wallet.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
         :param account_id:
         :param sweep_config_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -624,7 +684,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.GetSweepConfigRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             sweep_config_id=sweep_config_id,
         )
@@ -641,9 +700,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetSweepConfigSecurity
+            _globals=operations.GetSweepConfigGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -657,9 +717,12 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getSweepConfig",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -667,13 +730,26 @@ class Sweeps(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.SweepConfig)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetSweepConfigResponse(
+                result=utils.unmarshal_json(http_res.text, components.SweepConfig),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -688,16 +764,11 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    def patch_sweep_config(
+    def update_config(
         self,
         *,
-        security: Union[
-            operations.PatchSweepConfigSecurity,
-            operations.PatchSweepConfigSecurityTypedDict,
-        ],
         account_id: str,
         sweep_config_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         status: Optional[components.SweepConfigStatus] = None,
         push_payment_method_id: Optional[str] = None,
         pull_payment_method_id: Optional[str] = None,
@@ -707,13 +778,14 @@ class Sweeps(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.SweepConfig:
+    ) -> operations.UpdateSweepConfigResponse:
         r"""Update settings on a sweep config.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+
         :param account_id:
         :param sweep_config_id:
-        :param x_moov_version: Specify an API version.
         :param status:
         :param push_payment_method_id: ID of the payment method.
         :param pull_payment_method_id: ID of the payment method.
@@ -732,8 +804,7 @@ class Sweeps(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.PatchSweepConfigRequest(
-            x_moov_version=x_moov_version,
+        request = operations.UpdateSweepConfigRequest(
             account_id=account_id,
             sweep_config_id=sweep_config_id,
             patch_sweep_config=components.PatchSweepConfig(
@@ -757,9 +828,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.PatchSweepConfigSecurity
+            _globals=operations.UpdateSweepConfigGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.patch_sweep_config,
                 False,
@@ -780,9 +852,12 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="patchSweepConfig",
+                base_url=base_url or "",
+                operation_id="updateSweepConfig",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -801,21 +876,36 @@ class Sweeps(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.SweepConfig)
+            return operations.UpdateSweepConfigResponse(
+                result=utils.unmarshal_json(http_res.text, components.SweepConfig),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.PatchSweepConfigErrorData
+            )
+            raise errors.PatchSweepConfigError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.PatchSweepConfigErrorData)
-            raise errors.PatchSweepConfigError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -830,16 +920,11 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    async def patch_sweep_config_async(
+    async def update_config_async(
         self,
         *,
-        security: Union[
-            operations.PatchSweepConfigSecurity,
-            operations.PatchSweepConfigSecurityTypedDict,
-        ],
         account_id: str,
         sweep_config_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         status: Optional[components.SweepConfigStatus] = None,
         push_payment_method_id: Optional[str] = None,
         pull_payment_method_id: Optional[str] = None,
@@ -849,13 +934,14 @@ class Sweeps(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.SweepConfig:
+    ) -> operations.UpdateSweepConfigResponse:
         r"""Update settings on a sweep config.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
+
         :param account_id:
         :param sweep_config_id:
-        :param x_moov_version: Specify an API version.
         :param status:
         :param push_payment_method_id: ID of the payment method.
         :param pull_payment_method_id: ID of the payment method.
@@ -874,8 +960,7 @@ class Sweeps(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = operations.PatchSweepConfigRequest(
-            x_moov_version=x_moov_version,
+        request = operations.UpdateSweepConfigRequest(
             account_id=account_id,
             sweep_config_id=sweep_config_id,
             patch_sweep_config=components.PatchSweepConfig(
@@ -899,9 +984,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.PatchSweepConfigSecurity
+            _globals=operations.UpdateSweepConfigGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.patch_sweep_config,
                 False,
@@ -922,9 +1008,12 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="patchSweepConfig",
+                base_url=base_url or "",
+                operation_id="updateSweepConfig",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=[
@@ -943,21 +1032,36 @@ class Sweeps(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.SweepConfig)
+            return operations.UpdateSweepConfigResponse(
+                result=utils.unmarshal_json(http_res.text, components.SweepConfig),
+                headers=utils.get_response_headers(http_res.headers),
+            )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=data)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
+            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.PatchSweepConfigErrorData)
-            raise errors.PatchSweepConfigError(data=data)
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+            response_data = utils.unmarshal_json(
+                http_res.text, errors.PatchSweepConfigErrorData
+            )
+            raise errors.PatchSweepConfigError(data=response_data)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -972,15 +1076,11 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    def list_sweeps(
+    def list(
         self,
         *,
-        security: Union[
-            operations.ListSweepsSecurity, operations.ListSweepsSecurityTypedDict
-        ],
         account_id: str,
         wallet_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         status: Optional[components.SweepStatus] = None,
@@ -989,13 +1089,14 @@ class Sweeps(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Sweep]:
+    ) -> operations.ListSweepsResponse:
         r"""List sweeps associated with a wallet.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
         :param account_id:
         :param wallet_id:
-        :param x_moov_version: Specify an API version.
         :param skip:
         :param count:
         :param status: Optional parameter to filter by sweep status.
@@ -1014,7 +1115,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.ListSweepsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             wallet_id=wallet_id,
             skip=skip,
@@ -1035,7 +1135,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.ListSweepsSecurity),
+            _globals=operations.ListSweepsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1049,9 +1152,12 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listSweeps",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -1059,13 +1165,26 @@ class Sweeps(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Sweep])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListSweepsResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Sweep]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1080,15 +1199,11 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    async def list_sweeps_async(
+    async def list_async(
         self,
         *,
-        security: Union[
-            operations.ListSweepsSecurity, operations.ListSweepsSecurityTypedDict
-        ],
         account_id: str,
         wallet_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         status: Optional[components.SweepStatus] = None,
@@ -1097,13 +1212,14 @@ class Sweeps(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[components.Sweep]:
+    ) -> operations.ListSweepsResponse:
         r"""List sweeps associated with a wallet.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
         :param account_id:
         :param wallet_id:
-        :param x_moov_version: Specify an API version.
         :param skip:
         :param count:
         :param status: Optional parameter to filter by sweep status.
@@ -1122,7 +1238,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.ListSweepsRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             wallet_id=wallet_id,
             skip=skip,
@@ -1143,7 +1258,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.ListSweepsSecurity),
+            _globals=operations.ListSweepsGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1157,9 +1275,12 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="listSweeps",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
@@ -1167,13 +1288,26 @@ class Sweeps(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, List[components.Sweep])
-        if utils.match_response(http_res, ["401", "403", "429", "4XX"], "*"):
+            return operations.ListSweepsResponse(
+                result=utils.unmarshal_json(http_res.text, List[components.Sweep]),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1188,28 +1322,25 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    def get_sweep(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetSweepSecurity, operations.GetSweepSecurityTypedDict
-        ],
         account_id: str,
         wallet_id: str,
         sweep_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Sweep:
+    ) -> operations.GetSweepResponse:
         r"""Get details on a specific sweep.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
         :param account_id:
         :param wallet_id:
         :param sweep_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1224,7 +1355,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.GetSweepRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             wallet_id=wallet_id,
             sweep_id=sweep_id,
@@ -1242,7 +1372,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetSweepSecurity),
+            _globals=operations.GetSweepGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1256,9 +1389,12 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getSweep",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1266,13 +1402,26 @@ class Sweeps(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Sweep)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetSweepResponse(
+                result=utils.unmarshal_json(http_res.text, components.Sweep),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -1287,28 +1436,25 @@ class Sweeps(BaseSDK):
             http_res,
         )
 
-    async def get_sweep_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetSweepSecurity, operations.GetSweepSecurityTypedDict
-        ],
         account_id: str,
         wallet_id: str,
         sweep_id: str,
-        x_moov_version: Optional[components.Versions] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.Sweep:
+    ) -> operations.GetSweepResponse:
         r"""Get details on a specific sweep.
 
-        :param security:
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
+
         :param account_id:
         :param wallet_id:
         :param sweep_id:
-        :param x_moov_version: Specify an API version.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1323,7 +1469,6 @@ class Sweeps(BaseSDK):
             base_url = server_url
 
         request = operations.GetSweepRequest(
-            x_moov_version=x_moov_version,
             account_id=account_id,
             wallet_id=wallet_id,
             sweep_id=sweep_id,
@@ -1341,7 +1486,10 @@ class Sweeps(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(security, operations.GetSweepSecurity),
+            _globals=operations.GetSweepGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1355,9 +1503,12 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getSweep",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -1365,13 +1516,26 @@ class Sweeps(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, components.Sweep)
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+            return operations.GetSweepResponse(
+                result=utils.unmarshal_json(http_res.text, components.Sweep),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

@@ -3,8 +3,6 @@
 from __future__ import annotations
 from moovio_sdk import utils
 from moovio_sdk.models.components import (
-    cardaddresserror as components_cardaddresserror,
-    cardexpirationerror as components_cardexpirationerror,
     end2endencryptionerror as components_end2endencryptionerror,
 )
 from moovio_sdk.types import BaseModel
@@ -22,13 +20,12 @@ class LinkCardErrorData(BaseModel):
 
     card_cvv: Annotated[Optional[str], pydantic.Field(alias="cardCvv")] = None
 
-    expiration: Optional[components_cardexpirationerror.CardExpirationError] = None
+    expiration: Optional[str] = None
 
     holder_name: Annotated[Optional[str], pydantic.Field(alias="holderName")] = None
 
     billing_address: Annotated[
-        Optional[components_cardaddresserror.CardAddressError],
-        pydantic.Field(alias="billingAddress"),
+        Optional[str], pydantic.Field(alias="billingAddress")
     ] = None
 
     card_on_file: Annotated[Optional[str], pydantic.Field(alias="cardOnFile")] = None

@@ -2,18 +2,19 @@
 
 from __future__ import annotations
 from moovio_sdk.types import BaseModel
-from typing_extensions import TypedDict
+from typing import Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class IndustryCodesTypedDict(TypedDict):
-    naics: str
-    sic: str
-    mcc: str
+    naics: NotRequired[str]
+    sic: NotRequired[str]
+    mcc: NotRequired[str]
 
 
 class IndustryCodes(BaseModel):
-    naics: str
+    naics: Optional[str] = None
 
-    sic: str
+    sic: Optional[str] = None
 
-    mcc: str
+    mcc: Optional[str] = None

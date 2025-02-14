@@ -2,68 +2,59 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import (
+    bankaccountverificationcreated as components_bankaccountverificationcreated,
     bankaccountwaitfor as components_bankaccountwaitfor,
-    schemebasicauth as components_schemebasicauth,
-    versions as components_versions,
 )
 from moovio_sdk.types import BaseModel
-from moovio_sdk.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    PathParamMetadata,
-    SecurityMetadata,
-)
+from moovio_sdk.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
 import pydantic
-from typing import Optional
+from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class InitiateBankAccountVerificationSecurityTypedDict(TypedDict):
-    basic_auth: NotRequired[components_schemebasicauth.SchemeBasicAuthTypedDict]
-    o_auth2_auth: NotRequired[str]
+class InitiateBankAccountVerificationGlobalsTypedDict(TypedDict):
+    x_moov_version: NotRequired[str]
+    r"""Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where
+    - `YYYY` is the year
+    - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+    - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
+    - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    """
 
 
-class InitiateBankAccountVerificationSecurity(BaseModel):
-    basic_auth: Annotated[
-        Optional[components_schemebasicauth.SchemeBasicAuth],
-        FieldMetadata(
-            security=SecurityMetadata(scheme=True, scheme_type="http", sub_type="basic")
-        ),
-    ] = None
-
-    o_auth2_auth: Annotated[
+class InitiateBankAccountVerificationGlobals(BaseModel):
+    x_moov_version: Annotated[
         Optional[str],
-        FieldMetadata(
-            security=SecurityMetadata(
-                scheme=True, scheme_type="oauth2", field_name="Authorization"
-            )
-        ),
-    ] = None
+        pydantic.Field(alias="x-moov-version"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = "v2024.01.00"
+    r"""Specify an API version.
+
+    API versioning follows the format `vYYYY.QQ.BB`, where
+    - `YYYY` is the year
+    - `QQ` is the two-digit month for the first month of the quarter (e.g., 01, 04, 07, 10)
+    - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
+    - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
+
+    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    """
 
 
 class InitiateBankAccountVerificationRequestTypedDict(TypedDict):
-    x_wait_for: components_bankaccountwaitfor.BankAccountWaitFor
+    account_id: str
+    bank_account_id: str
+    x_wait_for: NotRequired[components_bankaccountwaitfor.BankAccountWaitFor]
     r"""Optional header to wait for certain events, such as the rail response, to occur before returning a response.
 
     When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
     """
-    account_id: str
-    bank_account_id: str
-    x_moov_version: NotRequired[components_versions.Versions]
-    r"""Specify an API version."""
 
 
 class InitiateBankAccountVerificationRequest(BaseModel):
-    x_wait_for: Annotated[
-        components_bankaccountwaitfor.BankAccountWaitFor,
-        pydantic.Field(alias="x-wait-for"),
-        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ]
-    r"""Optional header to wait for certain events, such as the rail response, to occur before returning a response.
-
-    When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
-    """
-
     account_id: Annotated[
         str,
         pydantic.Field(alias="accountID"),
@@ -76,9 +67,23 @@ class InitiateBankAccountVerificationRequest(BaseModel):
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
 
-    x_moov_version: Annotated[
-        Optional[components_versions.Versions],
-        pydantic.Field(alias="x-moov-version"),
+    x_wait_for: Annotated[
+        Optional[components_bankaccountwaitfor.BankAccountWaitFor],
+        pydantic.Field(alias="x-wait-for"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
-    r"""Specify an API version."""
+    r"""Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+
+    When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+    """
+
+
+class InitiateBankAccountVerificationResponseTypedDict(TypedDict):
+    headers: Dict[str, List[str]]
+    result: components_bankaccountverificationcreated.BankAccountVerificationCreatedTypedDict
+
+
+class InitiateBankAccountVerificationResponse(BaseModel):
+    headers: Dict[str, List[str]]
+
+    result: components_bankaccountverificationcreated.BankAccountVerificationCreated

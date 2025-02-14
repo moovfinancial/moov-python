@@ -6,19 +6,14 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import Mapping, Optional, Union
+from typing import Mapping, Optional
 
 
 class EnrichedAddress(BaseSDK):
-    def get_enrichment_address(
+    def get(
         self,
         *,
-        security: Union[
-            operations.GetEnrichmentAddressSecurity,
-            operations.GetEnrichmentAddressSecurityTypedDict,
-        ],
         search: str,
-        x_moov_version: Optional[components.Versions] = None,
         max_results: Optional[int] = None,
         include_cities: Optional[str] = None,
         include_states: Optional[str] = None,
@@ -35,14 +30,13 @@ class EnrichedAddress(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EnrichedAddressResponse:
+    ) -> operations.GetEnrichmentAddressResponse:
         r"""Fetch enriched address suggestions. Requires a partial address.
 
-          To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/profile-enrichment.read` scope.
 
-        :param security:
         :param search: Partial or complete address to search.
-        :param x_moov_version: Specify an API version.
         :param max_results: Maximum number of results to return.
         :param include_cities: Limits results to a list of given cities.
         :param include_states: Limits results to a list of given states.
@@ -52,7 +46,7 @@ class EnrichedAddress(BaseSDK):
         :param prefer_states: Display results with the listed states at the top.
         :param prefer_zipcodes: Display results with the listed zipcodes at the top.
         :param prefer_ratio: Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
-        :param prefer_geolocation: If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state    to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is    not set to `none`, you may see addresses from areas you do not wish to see.
+        :param prefer_geolocation: If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state    to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is    not set to `none`, you may see addresses from areas you do not wish to see.
         :param selected: Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
         :param source: Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
         :param retries: Override the default retry configuration for this method
@@ -69,7 +63,6 @@ class EnrichedAddress(BaseSDK):
             base_url = server_url
 
         request = operations.GetEnrichmentAddressRequest(
-            x_moov_version=x_moov_version,
             search=search,
             max_results=max_results,
             include_cities=include_cities,
@@ -97,9 +90,10 @@ class EnrichedAddress(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetEnrichmentAddressSecurity
+            _globals=operations.GetEnrichmentAddressGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -113,9 +107,12 @@ class EnrichedAddress(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getEnrichmentAddress",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -123,15 +120,28 @@ class EnrichedAddress(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.EnrichedAddressResponse
+            return operations.GetEnrichmentAddressResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.EnrichedAddressResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -146,15 +156,10 @@ class EnrichedAddress(BaseSDK):
             http_res,
         )
 
-    async def get_enrichment_address_async(
+    async def get_async(
         self,
         *,
-        security: Union[
-            operations.GetEnrichmentAddressSecurity,
-            operations.GetEnrichmentAddressSecurityTypedDict,
-        ],
         search: str,
-        x_moov_version: Optional[components.Versions] = None,
         max_results: Optional[int] = None,
         include_cities: Optional[str] = None,
         include_states: Optional[str] = None,
@@ -171,14 +176,13 @@ class EnrichedAddress(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EnrichedAddressResponse:
+    ) -> operations.GetEnrichmentAddressResponse:
         r"""Fetch enriched address suggestions. Requires a partial address.
 
-          To use this endpoint from the browser, you'll need to specify the `/profile-enrichment.read` scope when generating a [token](https://docs.moov.io/api/authentication/access-tokens/).
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/profile-enrichment.read` scope.
 
-        :param security:
         :param search: Partial or complete address to search.
-        :param x_moov_version: Specify an API version.
         :param max_results: Maximum number of results to return.
         :param include_cities: Limits results to a list of given cities.
         :param include_states: Limits results to a list of given states.
@@ -188,7 +192,7 @@ class EnrichedAddress(BaseSDK):
         :param prefer_states: Display results with the listed states at the top.
         :param prefer_zipcodes: Display results with the listed zipcodes at the top.
         :param prefer_ratio: Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
-        :param prefer_geolocation: If omitted or set to `city`, it uses the sender’s IP address to determine location, then automatically adds the city and state    to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is    not set to `none`, you may see addresses from areas you do not wish to see.
+        :param prefer_geolocation: If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state    to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is    not set to `none`, you may see addresses from areas you do not wish to see.
         :param selected: Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
         :param source: Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
         :param retries: Override the default retry configuration for this method
@@ -205,7 +209,6 @@ class EnrichedAddress(BaseSDK):
             base_url = server_url
 
         request = operations.GetEnrichmentAddressRequest(
-            x_moov_version=x_moov_version,
             search=search,
             max_results=max_results,
             include_cities=include_cities,
@@ -233,9 +236,10 @@ class EnrichedAddress(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            security=utils.get_pydantic_model(
-                security, operations.GetEnrichmentAddressSecurity
+            _globals=operations.GetEnrichmentAddressGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -249,9 +253,12 @@ class EnrichedAddress(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="getEnrichmentAddress",
                 oauth2_scopes=[],
-                security_source=get_security_from_env(security, components.Security),
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
             ),
             request=req,
             error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
@@ -259,15 +266,28 @@ class EnrichedAddress(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, components.EnrichedAddressResponse
+            return operations.GetEnrichmentAddressResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.EnrichedAddressResponse
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "404", "429", "4XX"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
             )
-        if utils.match_response(http_res, ["500", "504", "5XX"], "*"):
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
