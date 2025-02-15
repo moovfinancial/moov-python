@@ -856,30 +856,29 @@ class Accounts(BaseSDK):
         self,
         *,
         account_id: str,
-        account_type: Optional[components.AccountType] = None,
         profile: Optional[
-            Union[
-                components.CreateProfileUpdate, components.CreateProfileUpdateTypedDict
-            ]
+            Union[components.PatchProfile, components.PatchProfileTypedDict]
         ] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: OptionalNullable[Dict[str, str]] = UNSET,
         terms_of_service: Optional[
             Union[
-                components.CreateAccountUpdateTermsOfService,
-                components.CreateAccountUpdateTermsOfServiceTypedDict,
+                components.PatchAccountTermsOfService,
+                components.PatchAccountTermsOfServiceTypedDict,
             ]
         ] = None,
         foreign_id: Optional[str] = None,
-        customer_support: Optional[
+        customer_support: OptionalNullable[
             Union[
-                components.CustomerSupportUpdate,
-                components.CustomerSupportUpdateTypedDict,
+                components.PatchAccountCustomerSupport,
+                components.PatchAccountCustomerSupportTypedDict,
+            ]
+        ] = UNSET,
+        settings: Optional[
+            Union[
+                components.CreateAccountSettings,
+                components.CreateAccountSettingsTypedDict,
             ]
         ] = None,
-        settings: Optional[
-            Union[components.SettingsUpdate, components.SettingsUpdateTypedDict]
-        ] = None,
-        capabilities: Optional[List[components.CapabilityID]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -899,14 +898,12 @@ class Accounts(BaseSDK):
         to specify the `/accounts/{accountID}/profile.write` scope.
 
         :param account_id:
-        :param account_type: The type of entity represented by this account.
-        :param profile:
-        :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param profile: Describes the fields available when patching a profile. Each object can be patched independent of patching the other fields.
+        :param metadata:
         :param terms_of_service:
-        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
-        :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account.
-        :param settings: User provided settings to manage an account.
-        :param capabilities:
+        :param foreign_id:
+        :param customer_support:
+        :param settings:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -922,24 +919,22 @@ class Accounts(BaseSDK):
 
         request = operations.UpdateAccountRequest(
             account_id=account_id,
-            create_account_update=components.CreateAccountUpdate(
-                account_type=account_type,
+            patch_account=components.PatchAccount(
                 profile=utils.get_pydantic_model(
-                    profile, Optional[components.CreateProfileUpdate]
+                    profile, Optional[components.PatchProfile]
                 ),
                 metadata=metadata,
                 terms_of_service=utils.get_pydantic_model(
-                    terms_of_service,
-                    Optional[components.CreateAccountUpdateTermsOfService],
+                    terms_of_service, Optional[components.PatchAccountTermsOfService]
                 ),
                 foreign_id=foreign_id,
                 customer_support=utils.get_pydantic_model(
-                    customer_support, Optional[components.CustomerSupportUpdate]
+                    customer_support,
+                    OptionalNullable[components.PatchAccountCustomerSupport],
                 ),
                 settings=utils.get_pydantic_model(
-                    settings, Optional[components.SettingsUpdate]
+                    settings, Optional[components.CreateAccountSettings]
                 ),
-                capabilities=capabilities,
             ),
         )
 
@@ -960,11 +955,7 @@ class Accounts(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_account_update,
-                False,
-                False,
-                "json",
-                components.CreateAccountUpdate,
+                request.patch_account, False, False, "json", components.PatchAccount
             ),
             timeout_ms=timeout_ms,
         )
@@ -1051,30 +1042,29 @@ class Accounts(BaseSDK):
         self,
         *,
         account_id: str,
-        account_type: Optional[components.AccountType] = None,
         profile: Optional[
-            Union[
-                components.CreateProfileUpdate, components.CreateProfileUpdateTypedDict
-            ]
+            Union[components.PatchProfile, components.PatchProfileTypedDict]
         ] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: OptionalNullable[Dict[str, str]] = UNSET,
         terms_of_service: Optional[
             Union[
-                components.CreateAccountUpdateTermsOfService,
-                components.CreateAccountUpdateTermsOfServiceTypedDict,
+                components.PatchAccountTermsOfService,
+                components.PatchAccountTermsOfServiceTypedDict,
             ]
         ] = None,
         foreign_id: Optional[str] = None,
-        customer_support: Optional[
+        customer_support: OptionalNullable[
             Union[
-                components.CustomerSupportUpdate,
-                components.CustomerSupportUpdateTypedDict,
+                components.PatchAccountCustomerSupport,
+                components.PatchAccountCustomerSupportTypedDict,
+            ]
+        ] = UNSET,
+        settings: Optional[
+            Union[
+                components.CreateAccountSettings,
+                components.CreateAccountSettingsTypedDict,
             ]
         ] = None,
-        settings: Optional[
-            Union[components.SettingsUpdate, components.SettingsUpdateTypedDict]
-        ] = None,
-        capabilities: Optional[List[components.CapabilityID]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1094,14 +1084,12 @@ class Accounts(BaseSDK):
         to specify the `/accounts/{accountID}/profile.write` scope.
 
         :param account_id:
-        :param account_type: The type of entity represented by this account.
-        :param profile:
-        :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param profile: Describes the fields available when patching a profile. Each object can be patched independent of patching the other fields.
+        :param metadata:
         :param terms_of_service:
-        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
-        :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account.
-        :param settings: User provided settings to manage an account.
-        :param capabilities:
+        :param foreign_id:
+        :param customer_support:
+        :param settings:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1117,24 +1105,22 @@ class Accounts(BaseSDK):
 
         request = operations.UpdateAccountRequest(
             account_id=account_id,
-            create_account_update=components.CreateAccountUpdate(
-                account_type=account_type,
+            patch_account=components.PatchAccount(
                 profile=utils.get_pydantic_model(
-                    profile, Optional[components.CreateProfileUpdate]
+                    profile, Optional[components.PatchProfile]
                 ),
                 metadata=metadata,
                 terms_of_service=utils.get_pydantic_model(
-                    terms_of_service,
-                    Optional[components.CreateAccountUpdateTermsOfService],
+                    terms_of_service, Optional[components.PatchAccountTermsOfService]
                 ),
                 foreign_id=foreign_id,
                 customer_support=utils.get_pydantic_model(
-                    customer_support, Optional[components.CustomerSupportUpdate]
+                    customer_support,
+                    OptionalNullable[components.PatchAccountCustomerSupport],
                 ),
                 settings=utils.get_pydantic_model(
-                    settings, Optional[components.SettingsUpdate]
+                    settings, Optional[components.CreateAccountSettings]
                 ),
-                capabilities=capabilities,
             ),
         )
 
@@ -1155,11 +1141,7 @@ class Accounts(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_account_update,
-                False,
-                False,
-                "json",
-                components.CreateAccountUpdate,
+                request.patch_account, False, False, "json", components.PatchAccount
             ),
             timeout_ms=timeout_ms,
         )

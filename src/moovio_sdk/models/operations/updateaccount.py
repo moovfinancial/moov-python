@@ -3,7 +3,7 @@
 from __future__ import annotations
 from moovio_sdk.models.components import (
     account as components_account,
-    createaccountupdate as components_createaccountupdate,
+    patchaccount as components_patchaccount,
 )
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import (
@@ -51,7 +51,7 @@ class UpdateAccountGlobals(BaseModel):
 
 class UpdateAccountRequestTypedDict(TypedDict):
     account_id: str
-    create_account_update: components_createaccountupdate.CreateAccountUpdateTypedDict
+    patch_account: components_patchaccount.PatchAccountTypedDict
 
 
 class UpdateAccountRequest(BaseModel):
@@ -61,8 +61,8 @@ class UpdateAccountRequest(BaseModel):
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
 
-    create_account_update: Annotated[
-        components_createaccountupdate.CreateAccountUpdate,
+    patch_account: Annotated[
+        components_patchaccount.PatchAccount,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 

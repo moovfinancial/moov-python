@@ -38,10 +38,6 @@ from .achpaymentdetailserror import (
     ACHPaymentDetailsErrorTypedDict,
 )
 from .achpaymentsettings import ACHPaymentSettings, ACHPaymentSettingsTypedDict
-from .achpaymentsettingsupdate import (
-    ACHPaymentSettingsUpdate,
-    ACHPaymentSettingsUpdateTypedDict,
-)
 from .achreturncode import ACHReturnCode
 from .achtransactiondetails import ACHTransactionDetails, ACHTransactionDetailsTypedDict
 from .achtransactionstatus import ACHTransactionStatus
@@ -187,12 +183,6 @@ from .createaccountsettings import (
     CreateAccountSettings,
     CreateAccountSettingsTypedDict,
 )
-from .createaccountupdate import (
-    CreateAccountUpdate,
-    CreateAccountUpdateTermsOfService,
-    CreateAccountUpdateTermsOfServiceTypedDict,
-    CreateAccountUpdateTypedDict,
-)
 from .createapplepaysession import CreateApplePaySession, CreateApplePaySessionTypedDict
 from .createauthorizeduser import CreateAuthorizedUser, CreateAuthorizedUserTypedDict
 from .createauthorizedusererror import (
@@ -214,10 +204,6 @@ from .createbusinesserror import (
     CreateBusinessErrorTypedDict,
 )
 from .createbusinessprofile import CreateBusinessProfile, CreateBusinessProfileTypedDict
-from .createbusinessprofileupdate import (
-    CreateBusinessProfileUpdate,
-    CreateBusinessProfileUpdateTypedDict,
-)
 from .createevidencefilemultipart import (
     CreateEvidenceFileMultiPart,
     CreateEvidenceFileMultiPartTypedDict,
@@ -243,14 +229,9 @@ from .createindividualprofile import (
     CreateIndividualProfile,
     CreateIndividualProfileTypedDict,
 )
-from .createindividualprofileupdate import (
-    CreateIndividualProfileUpdate,
-    CreateIndividualProfileUpdateTypedDict,
-)
 from .createpaymentlink import CreatePaymentLink, CreatePaymentLinkTypedDict
 from .createprofile import CreateProfile, CreateProfileTypedDict
 from .createprofileerror import CreateProfileError, CreateProfileErrorTypedDict
-from .createprofileupdate import CreateProfileUpdate, CreateProfileUpdateTypedDict
 from .createrefund import CreateRefund, CreateRefundTypedDict
 from .createrefundresponse import CreateRefundResponse, CreateRefundResponseTypedDict
 from .createrepresentative import CreateRepresentative, CreateRepresentativeTypedDict
@@ -280,7 +261,6 @@ from .createtransfersourcecard import (
 )
 from .customersupport import CustomerSupport, CustomerSupportTypedDict
 from .customersupporterror import CustomerSupportError, CustomerSupportErrorTypedDict
-from .customersupportupdate import CustomerSupportUpdate, CustomerSupportUpdateTypedDict
 from .debitholdperiod import DebitHoldPeriod
 from .disbursementpaymentmethodtype import DisbursementPaymentMethodType
 from .displayoptionserror import DisplayOptionsError, DisplayOptionsErrorTypedDict
@@ -456,7 +436,18 @@ from .partnerpricingagreement import (
     PartnerPricingAgreement,
     PartnerPricingAgreementTypedDict,
 )
+from .patchaccount import (
+    PatchAccount,
+    PatchAccountCustomerSupport,
+    PatchAccountCustomerSupportTypedDict,
+    PatchAccountTermsOfService,
+    PatchAccountTermsOfServiceTypedDict,
+    PatchAccountTypedDict,
+)
 from .patchaccounterror import PatchAccountError, PatchAccountErrorTypedDict
+from .patchbusiness import PatchBusiness, PatchBusinessTypedDict
+from .patchindividual import PatchIndividual, PatchIndividualTypedDict
+from .patchprofile import PatchProfile, PatchProfileTypedDict
 from .patchsweepconfig import PatchSweepConfig, PatchSweepConfigTypedDict
 from .patchtransfer import PatchTransfer, PatchTransferTypedDict
 from .paymentdetailserror import PaymentDetailsError, PaymentDetailsErrorTypedDict
@@ -576,7 +567,6 @@ from .scheduleresponse import ScheduleResponse, ScheduleResponseTypedDict
 from .seccode import SECCode
 from .security import Security, SecurityTypedDict
 from .settings import Settings, SettingsTypedDict
-from .settingsupdate import SettingsUpdate, SettingsUpdateTypedDict
 from .sweep import Sweep, SweepTypedDict
 from .sweepconfig import SweepConfig, SweepConfigTypedDict
 from .sweepconfigpaymentmethod import (
@@ -682,8 +672,6 @@ __all__ = [
     "ACHPaymentDetailsTypedDict",
     "ACHPaymentSettings",
     "ACHPaymentSettingsTypedDict",
-    "ACHPaymentSettingsUpdate",
-    "ACHPaymentSettingsUpdateTypedDict",
     "ACHReturnCode",
     "ACHTransactionDetails",
     "ACHTransactionDetailsTypedDict",
@@ -876,10 +864,6 @@ __all__ = [
     "CreateAccountTermsOfService",
     "CreateAccountTermsOfServiceTypedDict",
     "CreateAccountTypedDict",
-    "CreateAccountUpdate",
-    "CreateAccountUpdateTermsOfService",
-    "CreateAccountUpdateTermsOfServiceTypedDict",
-    "CreateAccountUpdateTypedDict",
     "CreateApplePaySession",
     "CreateApplePaySessionTypedDict",
     "CreateAuthorizedUser",
@@ -898,8 +882,6 @@ __all__ = [
     "CreateBusinessErrorTypedDict",
     "CreateBusinessProfile",
     "CreateBusinessProfileTypedDict",
-    "CreateBusinessProfileUpdate",
-    "CreateBusinessProfileUpdateTypedDict",
     "CreateEvidenceFileMultiPart",
     "CreateEvidenceFileMultiPartTypedDict",
     "CreateEvidenceText",
@@ -916,16 +898,12 @@ __all__ = [
     "CreateIndividualErrorTypedDict",
     "CreateIndividualProfile",
     "CreateIndividualProfileTypedDict",
-    "CreateIndividualProfileUpdate",
-    "CreateIndividualProfileUpdateTypedDict",
     "CreatePaymentLink",
     "CreatePaymentLinkTypedDict",
     "CreateProfile",
     "CreateProfileError",
     "CreateProfileErrorTypedDict",
     "CreateProfileTypedDict",
-    "CreateProfileUpdate",
-    "CreateProfileUpdateTypedDict",
     "CreateRefund",
     "CreateRefundResponse",
     "CreateRefundResponseTypedDict",
@@ -954,8 +932,6 @@ __all__ = [
     "CustomerSupportError",
     "CustomerSupportErrorTypedDict",
     "CustomerSupportTypedDict",
-    "CustomerSupportUpdate",
-    "CustomerSupportUpdateTypedDict",
     "DebitHoldPeriod",
     "DisbursementPaymentMethodType",
     "DisplayOptionsError",
@@ -1133,8 +1109,20 @@ __all__ = [
     "PartnerPricingAgreement",
     "PartnerPricingAgreementTypedDict",
     "PartnerPricingTypedDict",
+    "PatchAccount",
+    "PatchAccountCustomerSupport",
+    "PatchAccountCustomerSupportTypedDict",
     "PatchAccountError",
     "PatchAccountErrorTypedDict",
+    "PatchAccountTermsOfService",
+    "PatchAccountTermsOfServiceTypedDict",
+    "PatchAccountTypedDict",
+    "PatchBusiness",
+    "PatchBusinessTypedDict",
+    "PatchIndividual",
+    "PatchIndividualTypedDict",
+    "PatchProfile",
+    "PatchProfileTypedDict",
     "PatchSweepConfig",
     "PatchSweepConfigTypedDict",
     "PatchTransfer",
@@ -1250,8 +1238,6 @@ __all__ = [
     "SecurityTypedDict",
     "Settings",
     "SettingsTypedDict",
-    "SettingsUpdate",
-    "SettingsUpdateTypedDict",
     "Ssn",
     "SsnTypedDict",
     "Sweep",

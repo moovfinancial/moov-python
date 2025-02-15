@@ -1,4 +1,6 @@
-# CreateIndividualProfileUpdate
+# PatchIndividual
+
+Describes the fields available when patching an individual.
 
 
 ## Fields

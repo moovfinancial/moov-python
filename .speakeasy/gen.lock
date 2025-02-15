@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: cc2583485ef45acd0ba0422160127576
+  docChecksum: d51b87bf0322d1b06682a56ae859bba2
   docVersion: latest
-  speakeasyVersion: 1.492.0
+  speakeasyVersion: 1.493.0
   generationVersion: 2.512.4
-  releaseVersion: 0.2.0
-  configChecksum: 7d559cf5ab6c25245ffa419c1adbcad8
+  releaseVersion: 0.2.1
+  configChecksum: 6a243d601d5cd0d7474c8a3e3aac9274
   repoURL: https://github.com/moovfinancial/moov-python-gen.git
   installationURL: https://github.com/moovfinancial/moov-python-gen.git
 features:
@@ -63,7 +63,6 @@ generatedFiles:
   - docs/models/components/achpaymentdetails.md
   - docs/models/components/achpaymentdetailserror.md
   - docs/models/components/achpaymentsettings.md
-  - docs/models/components/achpaymentsettingsupdate.md
   - docs/models/components/achreturncode.md
   - docs/models/components/achtransactiondetails.md
   - docs/models/components/achtransactionstatus.md
@@ -158,8 +157,6 @@ generatedFiles:
   - docs/models/components/createaccounterror.md
   - docs/models/components/createaccountsettings.md
   - docs/models/components/createaccounttermsofservice.md
-  - docs/models/components/createaccountupdate.md
-  - docs/models/components/createaccountupdatetermsofservice.md
   - docs/models/components/createapplepaysession.md
   - docs/models/components/createauthorizeduser.md
   - docs/models/components/createauthorizedusererror.md
@@ -169,7 +166,6 @@ generatedFiles:
   - docs/models/components/createbusinesserrorindustrycodes.md
   - docs/models/components/createbusinesserrortaxid.md
   - docs/models/components/createbusinessprofile.md
-  - docs/models/components/createbusinessprofileupdate.md
   - docs/models/components/createevidencefilemultipart.md
   - docs/models/components/createevidencetext.md
   - docs/models/components/createfeeplanagreement.md
@@ -178,11 +174,9 @@ generatedFiles:
   - docs/models/components/createindividualerroritin.md
   - docs/models/components/createindividualerrorssn.md
   - docs/models/components/createindividualprofile.md
-  - docs/models/components/createindividualprofileupdate.md
   - docs/models/components/createpaymentlink.md
   - docs/models/components/createprofile.md
   - docs/models/components/createprofileerror.md
-  - docs/models/components/createprofileupdate.md
   - docs/models/components/createrefund.md
   - docs/models/components/createrefundresponse.md
   - docs/models/components/createrepresentative.md
@@ -197,7 +191,6 @@ generatedFiles:
   - docs/models/components/createtransfersourcecard.md
   - docs/models/components/customersupport.md
   - docs/models/components/customersupporterror.md
-  - docs/models/components/customersupportupdate.md
   - docs/models/components/debitholdperiod.md
   - docs/models/components/disbursementpaymentmethodtype.md
   - docs/models/components/displayoptionserror.md
@@ -299,7 +292,13 @@ generatedFiles:
   - docs/models/components/onboardingpartneraccount.md
   - docs/models/components/partnerpricing.md
   - docs/models/components/partnerpricingagreement.md
+  - docs/models/components/patchaccount.md
+  - docs/models/components/patchaccountcustomersupport.md
   - docs/models/components/patchaccounterror.md
+  - docs/models/components/patchaccounttermsofservice.md
+  - docs/models/components/patchbusiness.md
+  - docs/models/components/patchindividual.md
+  - docs/models/components/patchprofile.md
   - docs/models/components/patchsweepconfig.md
   - docs/models/components/patchtransfer.md
   - docs/models/components/paymentdetailserror.md
@@ -365,7 +364,6 @@ generatedFiles:
   - docs/models/components/seccode.md
   - docs/models/components/security.md
   - docs/models/components/settings.md
-  - docs/models/components/settingsupdate.md
   - docs/models/components/ssn.md
   - docs/models/components/sweep.md
   - docs/models/components/sweepconfig.md
@@ -903,7 +901,6 @@ generatedFiles:
   - src/moovio_sdk/models/components/achpaymentdetails.py
   - src/moovio_sdk/models/components/achpaymentdetailserror.py
   - src/moovio_sdk/models/components/achpaymentsettings.py
-  - src/moovio_sdk/models/components/achpaymentsettingsupdate.py
   - src/moovio_sdk/models/components/achreturncode.py
   - src/moovio_sdk/models/components/achtransactiondetails.py
   - src/moovio_sdk/models/components/achtransactionstatus.py
@@ -993,24 +990,20 @@ generatedFiles:
   - src/moovio_sdk/models/components/createaccount.py
   - src/moovio_sdk/models/components/createaccounterror.py
   - src/moovio_sdk/models/components/createaccountsettings.py
-  - src/moovio_sdk/models/components/createaccountupdate.py
   - src/moovio_sdk/models/components/createapplepaysession.py
   - src/moovio_sdk/models/components/createauthorizeduser.py
   - src/moovio_sdk/models/components/createauthorizedusererror.py
   - src/moovio_sdk/models/components/createauthorizeduserupdate.py
   - src/moovio_sdk/models/components/createbusinesserror.py
   - src/moovio_sdk/models/components/createbusinessprofile.py
-  - src/moovio_sdk/models/components/createbusinessprofileupdate.py
   - src/moovio_sdk/models/components/createevidencefilemultipart.py
   - src/moovio_sdk/models/components/createevidencetext.py
   - src/moovio_sdk/models/components/createfeeplanagreement.py
   - src/moovio_sdk/models/components/createindividualerror.py
   - src/moovio_sdk/models/components/createindividualprofile.py
-  - src/moovio_sdk/models/components/createindividualprofileupdate.py
   - src/moovio_sdk/models/components/createpaymentlink.py
   - src/moovio_sdk/models/components/createprofile.py
   - src/moovio_sdk/models/components/createprofileerror.py
-  - src/moovio_sdk/models/components/createprofileupdate.py
   - src/moovio_sdk/models/components/createrefund.py
   - src/moovio_sdk/models/components/createrefundresponse.py
   - src/moovio_sdk/models/components/createrepresentative.py
@@ -1025,7 +1018,6 @@ generatedFiles:
   - src/moovio_sdk/models/components/createtransfersourcecard.py
   - src/moovio_sdk/models/components/customersupport.py
   - src/moovio_sdk/models/components/customersupporterror.py
-  - src/moovio_sdk/models/components/customersupportupdate.py
   - src/moovio_sdk/models/components/debitholdperiod.py
   - src/moovio_sdk/models/components/disbursementpaymentmethodtype.py
   - src/moovio_sdk/models/components/displayoptionserror.py
@@ -1113,7 +1105,11 @@ generatedFiles:
   - src/moovio_sdk/models/components/onboardingpartneraccount.py
   - src/moovio_sdk/models/components/partnerpricing.py
   - src/moovio_sdk/models/components/partnerpricingagreement.py
+  - src/moovio_sdk/models/components/patchaccount.py
   - src/moovio_sdk/models/components/patchaccounterror.py
+  - src/moovio_sdk/models/components/patchbusiness.py
+  - src/moovio_sdk/models/components/patchindividual.py
+  - src/moovio_sdk/models/components/patchprofile.py
   - src/moovio_sdk/models/components/patchsweepconfig.py
   - src/moovio_sdk/models/components/patchtransfer.py
   - src/moovio_sdk/models/components/paymentdetailserror.py
@@ -1174,7 +1170,6 @@ generatedFiles:
   - src/moovio_sdk/models/components/seccode.py
   - src/moovio_sdk/models/components/security.py
   - src/moovio_sdk/models/components/settings.py
-  - src/moovio_sdk/models/components/settingsupdate.py
   - src/moovio_sdk/models/components/sweep.py
   - src/moovio_sdk/models/components/sweepconfig.py
   - src/moovio_sdk/models/components/sweepconfigpaymentmethod.py
@@ -2773,7 +2768,7 @@ examples:
           accountID: "95fa7f0e-7432-4ce4-a7cb-60cc78135dde"
         header: {}
       requestBody:
-        application/json: {"accountType": "business", "profile": {"individual": {"name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "birthDate": {"day": 9, "month": 11, "year": 1989}}, "business": {"legalBusinessName": "Classbooker, LLC", "businessType": "llc", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "description": "Local fitness gym paying out instructors", "taxID": {"ein": {"number": "12-3456789"}}, "industryCodes": {"naics": "713940", "sic": "7991", "mcc": "7997"}}}, "metadata": {"optional": "metadata"}, "termsOfService": {"acceptedIP": "172.217.2.46", "acceptedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36"}, "customerSupport": {"phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}}, "settings": {"cardPayment": {"statementDescriptor": "Whole Body Fitness"}, "achPayment": {"companyName": "WholeBodyFitness"}}}
+        application/json: {"profile": {"individual": {"name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "birthDate": {"day": 9, "month": 11, "year": 1989}}, "business": {"legalBusinessName": "Classbooker, LLC", "businessType": "llc", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "description": "Local fitness gym paying out instructors", "taxID": {"ein": {"number": "12-3456789"}}, "industryCodes": {"naics": "713940", "sic": "7991", "mcc": "7997"}}}, "metadata": {"optional": "metadata"}, "termsOfService": {"acceptedIP": "172.217.2.46", "acceptedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36"}, "customerSupport": {"phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}}, "settings": {"cardPayment": {"statementDescriptor": "Whole Body Fitness"}, "achPayment": {"companyName": "WholeBodyFitness"}}}
       responses:
         "200":
           application/json: {"accountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "accountType": "business", "displayName": "Whole Body Fitness", "profile": {"individual": {"name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}}, "business": {"legalBusinessName": "Classbooker, LLC", "businessType": "llc", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "description": "Local fitness gym paying out instructors", "representatives": [{"representativeID": "5898c125-a190-471c-a556-2af6646dadb3", "name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "responsibilities": {"ownershipPercentage": 38, "jobTitle": "CEO"}, "createdOn": "2023-09-24T19:37:32.283Z", "updatedOn": "2023-10-18T10:44:09.680Z"}, {"representativeID": "35a24506-17e6-4bb0-b579-d6f9464a3158", "name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "responsibilities": {"ownershipPercentage": 38, "jobTitle": "CEO"}, "createdOn": "2024-09-02T03:35:45.584Z", "updatedOn": "2024-05-22T21:03:36.028Z"}], "ownersProvided": false, "industryCodes": {"naics": "713940", "sic": "7991", "mcc": "7997"}}}, "metadata": {"optional": "metadata"}, "termsOfService": {"acceptedDate": "2024-03-31T23:04:03.133Z", "acceptedIP": "172.217.2.46"}, "verification": {"verificationStatus": "unverified", "status": "unverified", "documents": [{"documentID": "e07e83e8-9429-4e99-ac99-c941f719eb39", "type": "bankStatement", "contentType": "application/pdf", "uploadedAt": "2024-05-06T12:20:38.184Z"}]}, "customerSupport": {"phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}}, "settings": {"cardPayment": {"statementDescriptor": "Whole Body Fitness"}, "achPayment": {"companyName": "WholeBodyFitness"}}, "createdOn": "2024-05-06T12:20:38.184Z", "updatedOn": "2024-05-06T12:20:38.184Z", "disconnectedOn": "2024-05-06T12:20:38.184Z"}
