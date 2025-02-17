@@ -13,11 +13,9 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class CreateBusinessProfileUpdateTypedDict(TypedDict):
+class PatchBusinessTypedDict(TypedDict):
     legal_business_name: NotRequired[str]
-    r"""The legal name under which the entity is registered."""
     doing_business_as: NotRequired[str]
-    r"""A registered trade name under which the business operates, if different from its legal name."""
     business_type: NotRequired[BusinessType]
     r"""The type of entity represented by this business."""
     address: NotRequired[AddressUpdateTypedDict]
@@ -27,21 +25,20 @@ class CreateBusinessProfileUpdateTypedDict(TypedDict):
     description: NotRequired[str]
     tax_id: NotRequired[TaxIDUpdateTypedDict]
     r"""An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN."""
+    owners_provided: NotRequired[bool]
     industry_codes: NotRequired[IndustryCodesTypedDict]
     primary_regulator: NotRequired[PrimaryRegulator]
     r"""If the business is a financial institution, this field describes its primary regulator."""
 
 
-class CreateBusinessProfileUpdate(BaseModel):
+class PatchBusiness(BaseModel):
     legal_business_name: Annotated[
         Optional[str], pydantic.Field(alias="legalBusinessName")
     ] = None
-    r"""The legal name under which the entity is registered."""
 
     doing_business_as: Annotated[
         Optional[str], pydantic.Field(alias="doingBusinessAs")
     ] = None
-    r"""A registered trade name under which the business operates, if different from its legal name."""
 
     business_type: Annotated[
         Optional[BusinessType], pydantic.Field(alias="businessType")
@@ -60,6 +57,10 @@ class CreateBusinessProfileUpdate(BaseModel):
 
     tax_id: Annotated[Optional[TaxIDUpdate], pydantic.Field(alias="taxID")] = None
     r"""An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN."""
+
+    owners_provided: Annotated[
+        Optional[bool], pydantic.Field(alias="ownersProvided")
+    ] = None
 
     industry_codes: Annotated[
         Optional[IndustryCodes], pydantic.Field(alias="industryCodes")
