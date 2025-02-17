@@ -12,7 +12,9 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class CreateIndividualProfileUpdateTypedDict(TypedDict):
+class PatchIndividualTypedDict(TypedDict):
+    r"""Describes the fields available when patching an individual."""
+
     name: NotRequired[IndividualNameUpdateTypedDict]
     phone: NotRequired[PhoneNumberTypedDict]
     email: NotRequired[str]
@@ -21,7 +23,9 @@ class CreateIndividualProfileUpdateTypedDict(TypedDict):
     government_id: NotRequired[GovernmentIDTypedDict]
 
 
-class CreateIndividualProfileUpdate(BaseModel):
+class PatchIndividual(BaseModel):
+    r"""Describes the fields available when patching an individual."""
+
     name: Optional[IndividualNameUpdate] = None
 
     phone: Optional[PhoneNumber] = None
