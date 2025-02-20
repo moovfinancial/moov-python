@@ -250,6 +250,7 @@ from .createtransferdestinationcard import (
     CreateTransferDestinationCard,
     CreateTransferDestinationCardTypedDict,
 )
+from .createtransferoptions import CreateTransferOptions, CreateTransferOptionsTypedDict
 from .createtransfersource import CreateTransferSource, CreateTransferSourceTypedDict
 from .createtransfersourceach import (
     CreateTransferSourceACH,
@@ -338,6 +339,15 @@ from .fulfillmentdetailserror import (
     FulfillmentDetailsErrorTypedDict,
 )
 from .fullissuedcard import FullIssuedCard, FullIssuedCardTypedDict
+from .generatedby import GeneratedBy, GeneratedByTypedDict
+from .generatedbyaccountid import GeneratedByAccountID, GeneratedByAccountIDTypedDict
+from .generatedbybankaccountid import (
+    GeneratedByBankAccountID,
+    GeneratedByBankAccountIDTypedDict,
+)
+from .generatedbycardid import GeneratedByCardID, GeneratedByCardIDTypedDict
+from .generatedbydisputeid import GeneratedByDisputeID, GeneratedByDisputeIDTypedDict
+from .generatedbytransferid import GeneratedByTransferID, GeneratedByTransferIDTypedDict
 from .governmentid import (
     GovernmentID,
     GovernmentIDTypedDict,
@@ -355,6 +365,7 @@ from .governmentiderror import (
     GovernmentIDErrorTypedDict,
 )
 from .granttype import GrantType
+from .incurredfee import IncurredFee, IncurredFeeTypedDict
 from .individualname import IndividualName, IndividualNameTypedDict
 from .individualnameerror import IndividualNameError, IndividualNameErrorTypedDict
 from .individualnameupdate import IndividualNameUpdate, IndividualNameUpdateTypedDict
@@ -399,6 +410,7 @@ from .linkedapplepaypaymentmethod import (
     LinkedApplePayPaymentMethod,
     LinkedApplePayPaymentMethodTypedDict,
 )
+from .listfeesfetchrequest import ListFeesFetchRequest, ListFeesFetchRequestTypedDict
 from .manualtermsofservice import ManualTermsOfService, ManualTermsOfServiceTypedDict
 from .manualtermsofserviceupdate import (
     ManualTermsOfServiceUpdate,
@@ -567,6 +579,10 @@ from .scheduleresponse import ScheduleResponse, ScheduleResponseTypedDict
 from .seccode import SECCode
 from .security import Security, SecurityTypedDict
 from .settings import Settings, SettingsTypedDict
+from .sourcedestinationoptions import (
+    SourceDestinationOptions,
+    SourceDestinationOptionsTypedDict,
+)
 from .sweep import Sweep, SweepTypedDict
 from .sweepconfig import SweepConfig, SweepConfigTypedDict
 from .sweepconfigpaymentmethod import (
@@ -921,6 +937,8 @@ __all__ = [
     "CreateTransferDestinationCard",
     "CreateTransferDestinationCardTypedDict",
     "CreateTransferDestinationTypedDict",
+    "CreateTransferOptions",
+    "CreateTransferOptionsTypedDict",
     "CreateTransferSource",
     "CreateTransferSourceACH",
     "CreateTransferSourceACHTypedDict",
@@ -1009,6 +1027,18 @@ __all__ = [
     "FulfillmentDetailsTypedDict",
     "FullIssuedCard",
     "FullIssuedCardTypedDict",
+    "GeneratedBy",
+    "GeneratedByAccountID",
+    "GeneratedByAccountIDTypedDict",
+    "GeneratedByBankAccountID",
+    "GeneratedByBankAccountIDTypedDict",
+    "GeneratedByCardID",
+    "GeneratedByCardIDTypedDict",
+    "GeneratedByDisputeID",
+    "GeneratedByDisputeIDTypedDict",
+    "GeneratedByTransferID",
+    "GeneratedByTransferIDTypedDict",
+    "GeneratedByTypedDict",
     "GovernmentID",
     "GovernmentIDError",
     "GovernmentIDErrorItin",
@@ -1018,6 +1048,8 @@ __all__ = [
     "GovernmentIDErrorTypedDict",
     "GovernmentIDTypedDict",
     "GrantType",
+    "IncurredFee",
+    "IncurredFeeTypedDict",
     "IndividualName",
     "IndividualNameError",
     "IndividualNameErrorTypedDict",
@@ -1071,6 +1103,8 @@ __all__ = [
     "LinkCardWaitFor",
     "LinkedApplePayPaymentMethod",
     "LinkedApplePayPaymentMethodTypedDict",
+    "ListFeesFetchRequest",
+    "ListFeesFetchRequestTypedDict",
     "Logo",
     "LogoTypedDict",
     "MXAuthorizationCode",
@@ -1238,6 +1272,8 @@ __all__ = [
     "SecurityTypedDict",
     "Settings",
     "SettingsTypedDict",
+    "SourceDestinationOptions",
+    "SourceDestinationOptionsTypedDict",
     "Ssn",
     "SsnTypedDict",
     "Sweep",

@@ -39,6 +39,8 @@ class Branding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateBrandRequest(
             account_id=account_id,
@@ -180,6 +182,8 @@ class Branding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateBrandRequest(
             account_id=account_id,
@@ -321,6 +325,8 @@ class Branding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpsertBrandRequest(
             account_id=account_id,
@@ -462,6 +468,8 @@ class Branding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpsertBrandRequest(
             account_id=account_id,
@@ -601,6 +609,8 @@ class Branding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetBrandRequest(
             account_id=account_id,
@@ -709,6 +719,8 @@ class Branding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetBrandRequest(
             account_id=account_id,
@@ -821,6 +833,8 @@ class Branding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateBrandRequest(
             account_id=account_id,
@@ -962,6 +976,8 @@ class Branding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateBrandRequest(
             account_id=account_id,

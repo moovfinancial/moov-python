@@ -1,14 +1,14 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: d51b87bf0322d1b06682a56ae859bba2
+  docChecksum: ad9e0c274a187107458a68e9aa753d18
   docVersion: latest
-  speakeasyVersion: 1.493.0
-  generationVersion: 2.512.4
-  releaseVersion: 0.2.1
-  configChecksum: 6a243d601d5cd0d7474c8a3e3aac9274
-  repoURL: https://github.com/moovfinancial/moov-python-gen.git
-  installationURL: https://github.com/moovfinancial/moov-python-gen.git
+  speakeasyVersion: 1.497.0
+  generationVersion: 2.517.3
+  releaseVersion: 0.2.2
+  configChecksum: b1714b8e2183ffac043726c2c564c2dd
+  repoURL: https://github.com/moovfinancial/moov-python.git
+  installationURL: https://github.com/moovfinancial/moov-python.git
 features:
   python:
     acceptHeaders: 3.0.0
@@ -30,10 +30,10 @@ features:
     methodArguments: 1.0.2
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
-    nullables: 1.0.0
+    nullables: 1.0.1
     responseFormat: 1.0.1
     retries: 3.0.2
-    sdkHooks: 1.0.0
+    sdkHooks: 1.0.1
     unions: 3.0.4
     uploadStreams: 1.0.0
 generatedFiles:
@@ -186,6 +186,7 @@ generatedFiles:
   - docs/models/components/createtransferdestination.md
   - docs/models/components/createtransferdestinationach.md
   - docs/models/components/createtransferdestinationcard.md
+  - docs/models/components/createtransferoptions.md
   - docs/models/components/createtransfersource.md
   - docs/models/components/createtransfersourceach.md
   - docs/models/components/createtransfersourcecard.md
@@ -236,11 +237,18 @@ generatedFiles:
   - docs/models/components/fulfillmentdetails.md
   - docs/models/components/fulfillmentdetailserror.md
   - docs/models/components/fullissuedcard.md
+  - docs/models/components/generatedby.md
+  - docs/models/components/generatedbyaccountid.md
+  - docs/models/components/generatedbybankaccountid.md
+  - docs/models/components/generatedbycardid.md
+  - docs/models/components/generatedbydisputeid.md
+  - docs/models/components/generatedbytransferid.md
   - docs/models/components/governmentid.md
   - docs/models/components/governmentiderror.md
   - docs/models/components/governmentiderroritin.md
   - docs/models/components/governmentiderrorssn.md
   - docs/models/components/granttype.md
+  - docs/models/components/incurredfee.md
   - docs/models/components/individualname.md
   - docs/models/components/individualnameerror.md
   - docs/models/components/individualnameupdate.md
@@ -271,6 +279,7 @@ generatedFiles:
   - docs/models/components/linkcard.md
   - docs/models/components/linkcardwaitfor.md
   - docs/models/components/linkedapplepaypaymentmethod.md
+  - docs/models/components/listfeesfetchrequest.md
   - docs/models/components/logo.md
   - docs/models/components/manual.md
   - docs/models/components/manualtermsofservice.md
@@ -364,6 +373,7 @@ generatedFiles:
   - docs/models/components/seccode.md
   - docs/models/components/security.md
   - docs/models/components/settings.md
+  - docs/models/components/sourcedestinationoptions.md
   - docs/models/components/ssn.md
   - docs/models/components/sweep.md
   - docs/models/components/sweepconfig.md
@@ -505,7 +515,6 @@ generatedFiles:
   - docs/models/operations/createsweepconfigresponse.md
   - docs/models/operations/createtransferglobals.md
   - docs/models/operations/createtransferoptionsglobals.md
-  - docs/models/operations/createtransferoptionsrequest.md
   - docs/models/operations/createtransferoptionsresponse.md
   - docs/models/operations/createtransferrequest.md
   - docs/models/operations/createtransferresponse.md
@@ -690,6 +699,9 @@ generatedFiles:
   - docs/models/operations/listfeeplansglobals.md
   - docs/models/operations/listfeeplansrequest.md
   - docs/models/operations/listfeeplansresponse.md
+  - docs/models/operations/listfeesfetchglobals.md
+  - docs/models/operations/listfeesfetchrequest.md
+  - docs/models/operations/listfeesfetchresponse.md
   - docs/models/operations/listfilesglobals.md
   - docs/models/operations/listfilesrequest.md
   - docs/models/operations/listfilesresponse.md
@@ -762,6 +774,9 @@ generatedFiles:
   - docs/models/operations/requestcardglobals.md
   - docs/models/operations/requestcardrequest.md
   - docs/models/operations/requestcardresponse.md
+  - docs/models/operations/retrievefeesglobals.md
+  - docs/models/operations/retrievefeesrequest.md
+  - docs/models/operations/retrievefeesresponse.md
   - docs/models/operations/revokeaccesstokenglobals.md
   - docs/models/operations/revokeaccesstokenresponse.md
   - docs/models/operations/revokeonboardinginviteglobals.md
@@ -827,7 +842,6 @@ generatedFiles:
   - docs/sdks/authentication/README.md
   - docs/sdks/avatars/README.md
   - docs/sdks/bankaccounts/README.md
-  - docs/sdks/billing/README.md
   - docs/sdks/branding/README.md
   - docs/sdks/capabilities/README.md
   - docs/sdks/cardissuing/README.md
@@ -836,6 +850,7 @@ generatedFiles:
   - docs/sdks/endtoendencryption/README.md
   - docs/sdks/enrichedaddress/README.md
   - docs/sdks/enrichedprofile/README.md
+  - docs/sdks/feeplans/README.md
   - docs/sdks/files/README.md
   - docs/sdks/industries/README.md
   - docs/sdks/institutions/README.md
@@ -870,7 +885,6 @@ generatedFiles:
   - src/moovio_sdk/avatars.py
   - src/moovio_sdk/bank_accounts.py
   - src/moovio_sdk/basesdk.py
-  - src/moovio_sdk/billing.py
   - src/moovio_sdk/branding.py
   - src/moovio_sdk/capabilities.py
   - src/moovio_sdk/card_issuing.py
@@ -879,6 +893,7 @@ generatedFiles:
   - src/moovio_sdk/end_to_end_encryption.py
   - src/moovio_sdk/enriched_address.py
   - src/moovio_sdk/enriched_profile.py
+  - src/moovio_sdk/fee_plans.py
   - src/moovio_sdk/files.py
   - src/moovio_sdk/httpclient.py
   - src/moovio_sdk/industries.py
@@ -1013,6 +1028,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/createtransferdestination.py
   - src/moovio_sdk/models/components/createtransferdestinationach.py
   - src/moovio_sdk/models/components/createtransferdestinationcard.py
+  - src/moovio_sdk/models/components/createtransferoptions.py
   - src/moovio_sdk/models/components/createtransfersource.py
   - src/moovio_sdk/models/components/createtransfersourceach.py
   - src/moovio_sdk/models/components/createtransfersourcecard.py
@@ -1057,9 +1073,16 @@ generatedFiles:
   - src/moovio_sdk/models/components/fulfillmentdetails.py
   - src/moovio_sdk/models/components/fulfillmentdetailserror.py
   - src/moovio_sdk/models/components/fullissuedcard.py
+  - src/moovio_sdk/models/components/generatedby.py
+  - src/moovio_sdk/models/components/generatedbyaccountid.py
+  - src/moovio_sdk/models/components/generatedbybankaccountid.py
+  - src/moovio_sdk/models/components/generatedbycardid.py
+  - src/moovio_sdk/models/components/generatedbydisputeid.py
+  - src/moovio_sdk/models/components/generatedbytransferid.py
   - src/moovio_sdk/models/components/governmentid.py
   - src/moovio_sdk/models/components/governmentiderror.py
   - src/moovio_sdk/models/components/granttype.py
+  - src/moovio_sdk/models/components/incurredfee.py
   - src/moovio_sdk/models/components/individualname.py
   - src/moovio_sdk/models/components/individualnameerror.py
   - src/moovio_sdk/models/components/individualnameupdate.py
@@ -1089,6 +1112,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/linkcard.py
   - src/moovio_sdk/models/components/linkcardwaitfor.py
   - src/moovio_sdk/models/components/linkedapplepaypaymentmethod.py
+  - src/moovio_sdk/models/components/listfeesfetchrequest.py
   - src/moovio_sdk/models/components/manualtermsofservice.py
   - src/moovio_sdk/models/components/manualtermsofserviceupdate.py
   - src/moovio_sdk/models/components/microdepositstatus.py
@@ -1170,6 +1194,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/seccode.py
   - src/moovio_sdk/models/components/security.py
   - src/moovio_sdk/models/components/settings.py
+  - src/moovio_sdk/models/components/sourcedestinationoptions.py
   - src/moovio_sdk/models/components/sweep.py
   - src/moovio_sdk/models/components/sweepconfig.py
   - src/moovio_sdk/models/components/sweepconfigpaymentmethod.py
@@ -1332,6 +1357,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/listdisputes.py
   - src/moovio_sdk/models/operations/listfeeplanagreements.py
   - src/moovio_sdk/models/operations/listfeeplans.py
+  - src/moovio_sdk/models/operations/listfeesfetch.py
   - src/moovio_sdk/models/operations/listfiles.py
   - src/moovio_sdk/models/operations/listindustries.py
   - src/moovio_sdk/models/operations/listinstitutions.py
@@ -1356,6 +1382,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/registerapplepaymerchantdomains.py
   - src/moovio_sdk/models/operations/requestcapabilities.py
   - src/moovio_sdk/models/operations/requestcard.py
+  - src/moovio_sdk/models/operations/retrievefees.py
   - src/moovio_sdk/models/operations/revokeaccesstoken.py
   - src/moovio_sdk/models/operations/revokeonboardinginvite.py
   - src/moovio_sdk/models/operations/submitdisputeevidence.py
@@ -2463,6 +2490,8 @@ examples:
           application/json: {"cancellation": {"status": "completed", "createdOn": "2025-01-19T03:02:43.255309588Z"}}
   createTransferOptions:
     speakeasy-default-create-transfer-options:
+      requestBody:
+        application/json: {"source": {}, "destination": {}, "amount": {"currency": "USD", "value": 1204}}
       responses:
         "200":
           application/json: {"sourceOptions": [{"paymentMethodID": "069874bd-7731-4e53-b37c-17d4cf9c58d4", "paymentMethodType": "ach-debit-collect", "bankAccount": {"bankAccountID": "833fa3ef-14d3-4c97-ba45-6af66f739832", "fingerprint": "dd4cbfe5fbaf47b392770b5b595bec604fd99394749b7d017153e2b9cfbea40e", "status": "new", "holderName": "John Doe", "holderType": "individual", "bankName": "Gringotts Bank", "bankAccountType": "checking", "routingNumber": "123456780", "lastFourAccountNumber": "6789", "updatedOn": "2024-11-26T22:37:06Z"}}, {"paymentMethodID": "fb2a15d5-71f2-4f59-91d1-42322f250094", "paymentMethodType": "apple-pay", "applePay": {"brand": "Visa", "cardType": "credit", "cardDisplayName": "Visa 1256", "fingerprint": "9948962d92a1ce40c9f918cd9ece3a22bde62fb325a2f1fe2e833969de672ba3", "expiration": {"month": "01", "year": "21"}, "dynamicLastFour": "<value>", "issuerCountry": "US"}}, {"paymentMethodID": "485d092c-4964-48ef-bc16-103e629aa23d", "paymentMethodType": "pull-from-card", "card": {"cardID": "01234567-89ab-cdef-0123-456789abcdef", "fingerprint": "9948962d92a1ce40c9f918cd9ece3a22bde62fb325a2f1fe2e833969de672ba3", "brand": "Visa", "cardType": "credit", "lastFourCardNumber": "1234", "bin": "123456", "expiration": {"month": "01", "year": "21"}, "holderName": "Jules Jackson", "billingAddress": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "cardVerification": {"cvv": "match", "addressLine1": "match", "postalCode": "match", "accountName": {"firstName": "match", "lastName": "match", "middleName": "match", "fullName": "match"}}, "issuer": "GRINGOTTS BANK", "issuerCountry": "US", "cardOnFile": true, "merchantAccountID": "01234567-89ab-cdef-0123-456789abcdef", "cardAccountUpdater": {"updatedOn": "2024-05-06T12:20:38.184Z", "updateType": "number-update"}, "domesticPushToCard": "standard", "domesticPullFromCard": "supported"}}], "destinationOptions": [{"paymentMethodID": "4a1a61a0-c8af-47a1-bf84-f11a73a9632d", "paymentMethodType": "rtp-credit", "bankAccount": {"bankAccountID": "833fa3ef-14d3-4c97-ba45-6af66f739832", "fingerprint": "dd4cbfe5fbaf47b392770b5b595bec604fd99394749b7d017153e2b9cfbea40e", "status": "new", "holderName": "John Doe", "holderType": "individual", "bankName": "Gringotts Bank", "bankAccountType": "checking", "routingNumber": "123456780", "lastFourAccountNumber": "6789", "updatedOn": "2024-11-26T22:37:06Z"}}]}
@@ -2908,5 +2937,26 @@ examples:
           application/json: {"token_type": "Bearer", "access_token": "eyJhbGciOiJFZERTQSIsImN0eSI6IkpXVCIsImtpZCI6IkR...", "refresh_token": "eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a...", "expires_in": 1736964352, "scope": "/accounts.read /accounts.write"}
         "400": {}
         "422": {}
+  retrieveFees:
+    speakeasy-default-retrieve-fees:
+      parameters:
+        path:
+          accountID: "45954656-ded3-4bbc-9ef3-d42c2b99db12"
+        query:
+          skip: 60
+          count: 20
+        header: {}
+      responses:
+        "200":
+          application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
+  listFeesFetch:
+    speakeasy-default-list-fees-fetch:
+      parameters:
+        path:
+          accountID: "7b85e951-a6d9-4e67-a155-4d18e9d1ac58"
+        header: {}
+      responses:
+        "200":
+          application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, {"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.0
 generatedTests: {}

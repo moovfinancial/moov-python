@@ -80,6 +80,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreatePaymentLinkRequest(
             account_id=account_id,
@@ -271,6 +273,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreatePaymentLinkRequest(
             account_id=account_id,
@@ -426,6 +430,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPaymentLinksRequest(
             account_id=account_id,
@@ -536,6 +542,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPaymentLinksRequest(
             account_id=account_id,
@@ -648,6 +656,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetPaymentLinkRequest(
             account_id=account_id,
@@ -759,6 +769,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetPaymentLinkRequest(
             account_id=account_id,
@@ -904,6 +916,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdatePaymentLinkRequest(
             account_id=account_id,
@@ -1095,6 +1109,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdatePaymentLinkRequest(
             account_id=account_id,
@@ -1252,6 +1268,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.DisablePaymentLinkRequest(
             account_id=account_id,
@@ -1352,6 +1370,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.DisablePaymentLinkRequest(
             account_id=account_id,
@@ -1456,6 +1476,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetPaymentLinkQRCodeRequest(
             account_id=account_id,
@@ -1579,6 +1601,8 @@ class PaymentLinks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetPaymentLinkQRCodeRequest(
             account_id=account_id,

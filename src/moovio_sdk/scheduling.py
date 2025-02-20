@@ -45,6 +45,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateScheduleRequest(
             account_id=account_id,
@@ -192,6 +194,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateScheduleRequest(
             account_id=account_id,
@@ -335,6 +339,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListSchedulesRequest(
             skip=skip,
@@ -451,6 +457,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListSchedulesRequest(
             skip=skip,
@@ -573,6 +581,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateScheduleRequest(
             account_id=account_id,
@@ -723,6 +733,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateScheduleRequest(
             account_id=account_id,
@@ -865,6 +877,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetSchedulesRequest(
             account_id=account_id,
@@ -976,6 +990,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetSchedulesRequest(
             account_id=account_id,
@@ -1087,6 +1103,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CancelScheduleRequest(
             account_id=account_id,
@@ -1212,6 +1230,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CancelScheduleRequest(
             account_id=account_id,
@@ -1339,6 +1359,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetScheduledOccurrenceRequest(
             account_id=account_id,
@@ -1455,6 +1477,8 @@ class Scheduling(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetScheduledOccurrenceRequest(
             account_id=account_id,

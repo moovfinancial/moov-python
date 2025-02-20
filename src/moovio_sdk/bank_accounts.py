@@ -48,6 +48,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.LinkBankAccountRequest(
             x_wait_for=x_wait_for,
@@ -199,6 +201,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.LinkBankAccountRequest(
             x_wait_for=x_wait_for,
@@ -341,6 +345,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListBankAccountsRequest(
             account_id=account_id,
@@ -453,6 +459,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListBankAccountsRequest(
             account_id=account_id,
@@ -567,6 +575,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetBankAccountRequest(
             account_id=account_id,
@@ -680,6 +690,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetBankAccountRequest(
             account_id=account_id,
@@ -791,6 +803,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.DisableBankAccountRequest(
             account_id=account_id,
@@ -916,6 +930,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.DisableBankAccountRequest(
             account_id=account_id,
@@ -1052,6 +1068,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.InitiateMicroDepositsRequest(
             account_id=account_id,
@@ -1188,6 +1206,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.InitiateMicroDepositsRequest(
             account_id=account_id,
@@ -1315,6 +1335,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CompleteMicroDepositsRequest(
             account_id=account_id,
@@ -1461,6 +1483,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CompleteMicroDepositsRequest(
             account_id=account_id,
@@ -1614,6 +1638,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetBankAccountVerificationRequest(
             account_id=account_id,
@@ -1736,6 +1762,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetBankAccountVerificationRequest(
             account_id=account_id,
@@ -1866,6 +1894,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.InitiateBankAccountVerificationRequest(
             x_wait_for=x_wait_for,
@@ -2012,6 +2042,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.InitiateBankAccountVerificationRequest(
             x_wait_for=x_wait_for,
@@ -2150,6 +2182,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CompleteBankAccountVerificationRequest(
             account_id=account_id,
@@ -2298,6 +2332,8 @@ class BankAccounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CompleteBankAccountVerificationRequest(
             account_id=account_id,

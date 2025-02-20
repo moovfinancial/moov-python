@@ -38,7 +38,7 @@ class TransferTypedDict(TypedDict):
     r"""Total or markup fee."""
     moov_fee: NotRequired[int]
     r"""Fees charged to your platform account for transfers."""
-    moov_fee_decimal: NotRequired[int]
+    moov_fee_decimal: NotRequired[str]
     r"""Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision."""
     moov_fee_details: NotRequired[MoovFeeDetailsTypedDict]
     r"""Processing and pass-through costs that add up to the moovFee."""
@@ -92,7 +92,7 @@ class Transfer(BaseModel):
     r"""Fees charged to your platform account for transfers."""
 
     moov_fee_decimal: Annotated[
-        Optional[int], pydantic.Field(alias="moovFeeDecimal")
+        Optional[str], pydantic.Field(alias="moovFeeDecimal")
     ] = None
     r"""Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision."""
 

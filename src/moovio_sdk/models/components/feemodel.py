@@ -9,3 +9,4 @@ class FeeModel(str, Enum):
 
     FIXED = "fixed"
     BLENDED = "blended"
+    VARIABLE = "variable"

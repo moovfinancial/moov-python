@@ -49,6 +49,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateSweepConfigRequest(
             account_id=account_id,
@@ -205,6 +207,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateSweepConfigRequest(
             account_id=account_id,
@@ -349,6 +353,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListSweepConfigsRequest(
             account_id=account_id,
@@ -459,6 +465,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListSweepConfigsRequest(
             account_id=account_id,
@@ -571,6 +579,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetSweepConfigRequest(
             account_id=account_id,
@@ -682,6 +692,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetSweepConfigRequest(
             account_id=account_id,
@@ -803,6 +815,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateSweepConfigRequest(
             account_id=account_id,
@@ -959,6 +973,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateSweepConfigRequest(
             account_id=account_id,
@@ -1113,6 +1129,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListSweepsRequest(
             account_id=account_id,
@@ -1236,6 +1254,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListSweepsRequest(
             account_id=account_id,
@@ -1353,6 +1373,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetSweepRequest(
             account_id=account_id,
@@ -1467,6 +1489,8 @@ class Sweeps(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetSweepRequest(
             account_id=account_id,

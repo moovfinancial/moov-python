@@ -41,14 +41,6 @@ class CreateTransferOptionsGlobals(BaseModel):
     """
 
 
-class CreateTransferOptionsRequestTypedDict(TypedDict):
-    pass
-
-
-class CreateTransferOptionsRequest(BaseModel):
-    pass
-
-
 class CreateTransferOptionsResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
     result: components_transferoptions.TransferOptionsTypedDict

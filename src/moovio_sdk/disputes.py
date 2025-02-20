@@ -71,6 +71,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListDisputesRequest(
             account_id=account_id,
@@ -231,6 +233,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListDisputesRequest(
             account_id=account_id,
@@ -369,6 +373,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetDisputeRequest(
             account_id=account_id,
@@ -482,6 +488,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetDisputeRequest(
             account_id=account_id,
@@ -595,6 +603,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.AcceptDisputeRequest(
             account_id=account_id,
@@ -723,6 +733,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.AcceptDisputeRequest(
             account_id=account_id,
@@ -851,6 +863,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListDisputeEvidenceRequest(
             account_id=account_id,
@@ -966,6 +980,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListDisputeEvidenceRequest(
             account_id=account_id,
@@ -1085,6 +1101,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UploadDisputeEvidenceFileRequest(
             account_id=account_id,
@@ -1236,6 +1254,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UploadDisputeEvidenceFileRequest(
             account_id=account_id,
@@ -1387,6 +1407,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UploadDisputeEvidenceTextRequest(
             account_id=account_id,
@@ -1532,6 +1554,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UploadDisputeEvidenceTextRequest(
             account_id=account_id,
@@ -1676,6 +1700,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.SubmitDisputeEvidenceRequest(
             account_id=account_id,
@@ -1807,6 +1833,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.SubmitDisputeEvidenceRequest(
             account_id=account_id,
@@ -1937,6 +1965,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetDisputeEvidenceRequest(
             account_id=account_id,
@@ -2055,6 +2085,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetDisputeEvidenceRequest(
             account_id=account_id,
@@ -2177,6 +2209,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateDisputeEvidenceRequest(
             account_id=account_id,
@@ -2320,6 +2354,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateDisputeEvidenceRequest(
             account_id=account_id,
@@ -2459,6 +2495,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.DeleteDisputeEvidenceFileRequest(
             account_id=account_id,
@@ -2588,6 +2626,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.DeleteDisputeEvidenceFileRequest(
             account_id=account_id,
@@ -2719,6 +2759,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetDisputeEvidenceDataRequest(
             account_id=account_id,
@@ -2847,6 +2889,8 @@ class Disputes(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetDisputeEvidenceDataRequest(
             account_id=account_id,

@@ -71,6 +71,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = components.CreateAccount(
             account_type=account_type,
@@ -248,6 +250,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = components.CreateAccount(
             account_type=account_type,
@@ -411,6 +415,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListAccountsRequest(
             name=name,
@@ -547,6 +553,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListAccountsRequest(
             name=name,
@@ -663,6 +671,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetAccountRequest(
             account_id=account_id,
@@ -771,6 +781,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetAccountRequest(
             account_id=account_id,
@@ -916,6 +928,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateAccountRequest(
             account_id=account_id,
@@ -1102,6 +1116,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateAccountRequest(
             account_id=account_id,
@@ -1253,6 +1269,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.DisconnectAccountRequest(
             account_id=account_id,
@@ -1377,6 +1395,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.DisconnectAccountRequest(
             account_id=account_id,
@@ -1499,6 +1519,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetAccountCountriesRequest(
             account_id=account_id,
@@ -1607,6 +1629,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetAccountCountriesRequest(
             account_id=account_id,
@@ -1719,6 +1743,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.AssignAccountCountriesRequest(
             account_id=account_id,
@@ -1862,6 +1888,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.AssignAccountCountriesRequest(
             account_id=account_id,
@@ -2001,6 +2029,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetMerchantProcessingAgreementRequest(
             account_id=account_id,
@@ -2109,6 +2139,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetMerchantProcessingAgreementRequest(
             account_id=account_id,
@@ -2220,6 +2252,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetTermsOfServiceTokenRequest(
             origin=origin,
@@ -2334,6 +2368,8 @@ class Accounts(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetTermsOfServiceTokenRequest(
             origin=origin,

@@ -50,6 +50,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListIssuedCardAuthorizationsRequest(
             account_id=account_id,
@@ -178,6 +180,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListIssuedCardAuthorizationsRequest(
             account_id=account_id,
@@ -296,6 +300,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetIssuedCardAuthorizationRequest(
             account_id=account_id,
@@ -409,6 +415,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetIssuedCardAuthorizationRequest(
             account_id=account_id,
@@ -526,6 +534,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListIssuedCardAuthorizationEventsRequest(
             account_id=account_id,
@@ -645,6 +655,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListIssuedCardAuthorizationEventsRequest(
             account_id=account_id,
@@ -768,6 +780,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListIssuedCardTransactionsRequest(
             account_id=account_id,
@@ -893,6 +907,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListIssuedCardTransactionsRequest(
             account_id=account_id,
@@ -1010,6 +1026,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetIssuedCardTransactionRequest(
             account_id=account_id,
@@ -1123,6 +1141,8 @@ class IssuingTransactions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetIssuedCardTransactionRequest(
             account_id=account_id,

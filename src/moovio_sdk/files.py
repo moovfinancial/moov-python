@@ -49,6 +49,8 @@ class Files(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UploadFileRequest(
             account_id=account_id,
@@ -204,6 +206,8 @@ class Files(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UploadFileRequest(
             account_id=account_id,
@@ -347,6 +351,8 @@ class Files(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListFilesRequest(
             account_id=account_id,
@@ -457,6 +463,8 @@ class Files(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListFilesRequest(
             account_id=account_id,
@@ -569,6 +577,8 @@ class Files(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetFileDetailsRequest(
             account_id=account_id,
@@ -680,6 +690,8 @@ class Files(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetFileDetailsRequest(
             account_id=account_id,

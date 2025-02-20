@@ -9,7 +9,7 @@ from moovio_sdk.utils import get_security_from_env
 from typing import Any, List, Mapping, Optional
 
 
-class Billing(BaseSDK):
+class FeePlans(BaseSDK):
     def list_fee_plan_agreements(
         self,
         *,
@@ -41,6 +41,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListFeePlanAgreementsRequest(
             account_id=account_id,
@@ -157,6 +159,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListFeePlanAgreementsRequest(
             account_id=account_id,
@@ -271,6 +275,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateFeePlanAgreementsRequest(
             account_id=account_id,
@@ -412,6 +418,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateFeePlanAgreementsRequest(
             account_id=account_id,
@@ -554,6 +562,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListFeePlansRequest(
             account_id=account_id,
@@ -666,6 +676,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListFeePlansRequest(
             account_id=account_id,
@@ -748,6 +760,514 @@ class Billing(BaseSDK):
             http_res,
         )
 
+    def retrieve_fees(
+        self,
+        *,
+        account_id: str,
+        transfer_id: Optional[str] = None,
+        dispute_id: Optional[str] = None,
+        start_date_time: Optional[str] = None,
+        end_date_time: Optional[str] = None,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.RetrieveFeesResponse:
+        r"""Retrieve fees associated with an account.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id:
+        :param transfer_id: Optional transfer ID to filter the results by.
+        :param dispute_id: Optional dispute ID to filter the results by.
+        :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
+        :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
+        :param skip:
+        :param count:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.RetrieveFeesRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+            dispute_id=dispute_id,
+            start_date_time=start_date_time,
+            end_date_time=end_date_time,
+            skip=skip,
+            count=count,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/accounts/{accountID}/fees",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.RetrieveFeesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="retrieveFees",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.RetrieveFeesResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.IncurredFee]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def retrieve_fees_async(
+        self,
+        *,
+        account_id: str,
+        transfer_id: Optional[str] = None,
+        dispute_id: Optional[str] = None,
+        start_date_time: Optional[str] = None,
+        end_date_time: Optional[str] = None,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.RetrieveFeesResponse:
+        r"""Retrieve fees associated with an account.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id:
+        :param transfer_id: Optional transfer ID to filter the results by.
+        :param dispute_id: Optional dispute ID to filter the results by.
+        :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
+        :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
+        :param skip:
+        :param count:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.RetrieveFeesRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+            dispute_id=dispute_id,
+            start_date_time=start_date_time,
+            end_date_time=end_date_time,
+            skip=skip,
+            count=count,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/accounts/{accountID}/fees",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.RetrieveFeesGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="retrieveFees",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.RetrieveFeesResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.IncurredFee]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def list_fees_fetch(
+        self,
+        *,
+        account_id: str,
+        fee_i_ds: Optional[List[str]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListFeesFetchResponse:
+        r"""List fees associated with an account.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id:
+        :param fee_i_ds:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListFeesFetchRequest(
+            account_id=account_id,
+            list_fees_fetch_request=components.ListFeesFetchRequest(
+                fee_i_ds=fee_i_ds,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/accounts/{accountID}/fees/.fetch",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.ListFeesFetchGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.list_fees_fetch_request,
+                False,
+                True,
+                "json",
+                Optional[components.ListFeesFetchRequest],
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="listFeesFetch",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListFeesFetchResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.IncurredFee]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def list_fees_fetch_async(
+        self,
+        *,
+        account_id: str,
+        fee_i_ds: Optional[List[str]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListFeesFetchResponse:
+        r"""List fees associated with an account.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id:
+        :param fee_i_ds:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListFeesFetchRequest(
+            account_id=account_id,
+            list_fees_fetch_request=components.ListFeesFetchRequest(
+                fee_i_ds=fee_i_ds,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/accounts/{accountID}/fees/.fetch",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.ListFeesFetchGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.list_fees_fetch_request,
+                False,
+                True,
+                "json",
+                Optional[components.ListFeesFetchRequest],
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="listFeesFetch",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListFeesFetchResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.IncurredFee]
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
     def list_partner_pricing(
         self,
         *,
@@ -777,6 +1297,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPartnerPricingRequest(
             account_id=account_id,
@@ -890,6 +1412,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPartnerPricingRequest(
             account_id=account_id,
@@ -1005,6 +1529,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPartnerPricingAgreementsRequest(
             account_id=account_id,
@@ -1121,6 +1647,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPartnerPricingAgreementsRequest(
             account_id=account_id,
