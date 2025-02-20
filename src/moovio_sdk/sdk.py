@@ -14,7 +14,6 @@ from moovio_sdk.apple_pay import ApplePay
 from moovio_sdk.authentication import Authentication
 from moovio_sdk.avatars import Avatars
 from moovio_sdk.bank_accounts import BankAccounts
-from moovio_sdk.billing import Billing
 from moovio_sdk.branding import Branding
 from moovio_sdk.capabilities import Capabilities
 from moovio_sdk.card_issuing import CardIssuing
@@ -23,6 +22,7 @@ from moovio_sdk.disputes import Disputes
 from moovio_sdk.end_to_end_encryption import EndToEndEncryption
 from moovio_sdk.enriched_address import EnrichedAddress
 from moovio_sdk.enriched_profile import EnrichedProfile
+from moovio_sdk.fee_plans import FeePlans
 from moovio_sdk.files import Files
 from moovio_sdk.industries import Industries
 from moovio_sdk.institutions import Institutions
@@ -59,7 +59,7 @@ class Moov(BaseSDK):
     capabilities: Capabilities
     cards: Cards
     disputes: Disputes
-    billing: Billing
+    fee_plans: FeePlans
     files: Files
     payment_links: PaymentLinks
     payment_methods: PaymentMethods
@@ -182,7 +182,7 @@ class Moov(BaseSDK):
         self.capabilities = Capabilities(self.sdk_configuration)
         self.cards = Cards(self.sdk_configuration)
         self.disputes = Disputes(self.sdk_configuration)
-        self.billing = Billing(self.sdk_configuration)
+        self.fee_plans = FeePlans(self.sdk_configuration)
         self.files = Files(self.sdk_configuration)
         self.payment_links = PaymentLinks(self.sdk_configuration)
         self.payment_methods = PaymentMethods(self.sdk_configuration)

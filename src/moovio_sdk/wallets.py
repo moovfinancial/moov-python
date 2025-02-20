@@ -39,6 +39,8 @@ class Wallets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListWalletsRequest(
             account_id=account_id,
@@ -149,6 +151,8 @@ class Wallets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListWalletsRequest(
             account_id=account_id,
@@ -261,6 +265,8 @@ class Wallets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetWalletRequest(
             account_id=account_id,
@@ -374,6 +380,8 @@ class Wallets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetWalletRequest(
             account_id=account_id,

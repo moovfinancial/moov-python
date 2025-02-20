@@ -135,8 +135,6 @@ from .createtransfer import (
 from .createtransferoptions import (
     CreateTransferOptionsGlobals,
     CreateTransferOptionsGlobalsTypedDict,
-    CreateTransferOptionsRequest,
-    CreateTransferOptionsRequestTypedDict,
     CreateTransferOptionsResponse,
     CreateTransferOptionsResponseTypedDict,
 )
@@ -618,6 +616,14 @@ from .listfeeplans import (
     ListFeePlansResponse,
     ListFeePlansResponseTypedDict,
 )
+from .listfeesfetch import (
+    ListFeesFetchGlobals,
+    ListFeesFetchGlobalsTypedDict,
+    ListFeesFetchRequest,
+    ListFeesFetchRequestTypedDict,
+    ListFeesFetchResponse,
+    ListFeesFetchResponseTypedDict,
+)
 from .listfiles import (
     ListFilesGlobals,
     ListFilesGlobalsTypedDict,
@@ -809,6 +815,14 @@ from .requestcard import (
     RequestCardRequestTypedDict,
     RequestCardResponse,
     RequestCardResponseTypedDict,
+)
+from .retrievefees import (
+    RetrieveFeesGlobals,
+    RetrieveFeesGlobalsTypedDict,
+    RetrieveFeesRequest,
+    RetrieveFeesRequestTypedDict,
+    RetrieveFeesResponse,
+    RetrieveFeesResponseTypedDict,
 )
 from .revokeaccesstoken import (
     RevokeAccessTokenGlobals,
@@ -1063,8 +1077,6 @@ __all__ = [
     "CreateTransferGlobalsTypedDict",
     "CreateTransferOptionsGlobals",
     "CreateTransferOptionsGlobalsTypedDict",
-    "CreateTransferOptionsRequest",
-    "CreateTransferOptionsRequestTypedDict",
     "CreateTransferOptionsResponse",
     "CreateTransferOptionsResponseTypedDict",
     "CreateTransferRequest",
@@ -1433,6 +1445,12 @@ __all__ = [
     "ListFeePlansRequestTypedDict",
     "ListFeePlansResponse",
     "ListFeePlansResponseTypedDict",
+    "ListFeesFetchGlobals",
+    "ListFeesFetchGlobalsTypedDict",
+    "ListFeesFetchRequest",
+    "ListFeesFetchRequestTypedDict",
+    "ListFeesFetchResponse",
+    "ListFeesFetchResponseTypedDict",
     "ListFilesGlobals",
     "ListFilesGlobalsTypedDict",
     "ListFilesRequest",
@@ -1577,6 +1595,12 @@ __all__ = [
     "RequestCardRequestTypedDict",
     "RequestCardResponse",
     "RequestCardResponseTypedDict",
+    "RetrieveFeesGlobals",
+    "RetrieveFeesGlobalsTypedDict",
+    "RetrieveFeesRequest",
+    "RetrieveFeesRequestTypedDict",
+    "RetrieveFeesResponse",
+    "RetrieveFeesResponseTypedDict",
     "RevokeAccessTokenGlobals",
     "RevokeAccessTokenGlobalsTypedDict",
     "RevokeAccessTokenResponse",

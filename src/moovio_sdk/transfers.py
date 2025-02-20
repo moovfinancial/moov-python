@@ -5,9 +5,9 @@ from datetime import datetime
 from moovio_sdk import utils
 from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
-from moovio_sdk.types import BaseModel, OptionalNullable, UNSET
+from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import Any, Dict, List, Mapping, Optional, Union, cast
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Transfers(BaseSDK):
@@ -63,6 +63,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateTransferRequest(
             x_idempotency_key=x_idempotency_key,
@@ -247,6 +249,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateTransferRequest(
             x_idempotency_key=x_idempotency_key,
@@ -431,6 +435,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListTransfersRequest(
             account_i_ds=account_i_ds,
@@ -573,6 +579,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListTransfersRequest(
             account_i_ds=account_i_ds,
@@ -695,6 +703,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetTransferRequest(
             transfer_id=transfer_id,
@@ -809,6 +819,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetTransferRequest(
             transfer_id=transfer_id,
@@ -924,6 +936,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateTransferRequest(
             transfer_id=transfer_id,
@@ -1045,6 +1059,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateTransferRequest(
             transfer_id=transfer_id,
@@ -1171,6 +1187,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.InitiateRefundRequest(
             x_idempotency_key=x_idempotency_key,
@@ -1336,6 +1354,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.InitiateRefundRequest(
             x_idempotency_key=x_idempotency_key,
@@ -1492,6 +1512,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListRefundsRequest(
             account_id=account_id,
@@ -1605,6 +1627,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListRefundsRequest(
             account_id=account_id,
@@ -1720,6 +1744,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetRefundRequest(
             transfer_id=transfer_id,
@@ -1836,6 +1862,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetRefundRequest(
             transfer_id=transfer_id,
@@ -1956,6 +1984,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateReversalRequest(
             x_idempotency_key=x_idempotency_key,
@@ -2105,6 +2135,8 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateReversalRequest(
             x_idempotency_key=x_idempotency_key,
@@ -2222,10 +2254,15 @@ class Transfers(BaseSDK):
     def generate_options(
         self,
         *,
-        request: Union[
-            operations.CreateTransferOptionsRequest,
-            operations.CreateTransferOptionsRequestTypedDict,
-        ] = operations.CreateTransferOptionsRequest(),
+        source: Union[
+            components.SourceDestinationOptions,
+            components.SourceDestinationOptionsTypedDict,
+        ],
+        destination: Union[
+            components.SourceDestinationOptions,
+            components.SourceDestinationOptionsTypedDict,
+        ],
+        amount: Union[components.Amount, components.AmountTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2239,7 +2276,9 @@ class Transfers(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param request: The request object to send.
+        :param source:
+        :param destination:
+        :param amount:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2252,10 +2291,18 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.CreateTransferOptionsRequest)
-        request = cast(operations.CreateTransferOptionsRequest, request)
+        request = components.CreateTransferOptions(
+            source=utils.get_pydantic_model(
+                source, components.SourceDestinationOptions
+            ),
+            destination=utils.get_pydantic_model(
+                destination, components.SourceDestinationOptions
+            ),
+            amount=utils.get_pydantic_model(amount, components.Amount),
+        )
 
         req = self._build_request(
             method="POST",
@@ -2263,7 +2310,7 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2273,6 +2320,9 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", components.CreateTransferOptions
+            ),
             timeout_ms=timeout_ms,
         )
 
@@ -2355,10 +2405,15 @@ class Transfers(BaseSDK):
     async def generate_options_async(
         self,
         *,
-        request: Union[
-            operations.CreateTransferOptionsRequest,
-            operations.CreateTransferOptionsRequestTypedDict,
-        ] = operations.CreateTransferOptionsRequest(),
+        source: Union[
+            components.SourceDestinationOptions,
+            components.SourceDestinationOptionsTypedDict,
+        ],
+        destination: Union[
+            components.SourceDestinationOptions,
+            components.SourceDestinationOptionsTypedDict,
+        ],
+        amount: Union[components.Amount, components.AmountTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2372,7 +2427,9 @@ class Transfers(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param request: The request object to send.
+        :param source:
+        :param destination:
+        :param amount:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2385,10 +2442,18 @@ class Transfers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.CreateTransferOptionsRequest)
-        request = cast(operations.CreateTransferOptionsRequest, request)
+        request = components.CreateTransferOptions(
+            source=utils.get_pydantic_model(
+                source, components.SourceDestinationOptions
+            ),
+            destination=utils.get_pydantic_model(
+                destination, components.SourceDestinationOptions
+            ),
+            amount=utils.get_pydantic_model(amount, components.Amount),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -2396,7 +2461,7 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2406,6 +2471,9 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", components.CreateTransferOptions
+            ),
             timeout_ms=timeout_ms,
         )
 

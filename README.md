@@ -64,7 +64,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/moovfinancial/moov-python-gen.git
+pip install git+https://github.com/moovfinancial/moov-python.git
 ```
 
 ### Poetry
@@ -72,7 +72,7 @@ pip install git+https://github.com/moovfinancial/moov-python-gen.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/moovfinancial/moov-python-gen.git
+poetry add git+https://github.com/moovfinancial/moov-python.git
 ```
 
 ### Shell and script usage with `uv`
@@ -662,30 +662,6 @@ The following formats are accepted:
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
-### [billing](docs/sdks/billing/README.md)
-
-* [list_fee_plan_agreements](docs/sdks/billing/README.md#list_fee_plan_agreements) - List all fee plan agreements associated with an account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-* [create_fee_plan_agreements](docs/sdks/billing/README.md#create_fee_plan_agreements) - Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.write` scope.
-* [list_fee_plans](docs/sdks/billing/README.md#list_fee_plans) - List all fee plans available for use by an account. This is intended to be used by an account when 
-selecting a fee plan to apply to a connected account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-* [list_partner_pricing](docs/sdks/billing/README.md#list_partner_pricing) - List all partner pricing plans available for use by an account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-* [list_partner_pricing_agreements](docs/sdks/billing/README.md#list_partner_pricing_agreements) - List all partner pricing agreements associated with an account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-
 ### [branding](docs/sdks/branding/README.md)
 
 * [create](docs/sdks/branding/README.md#create) - Create brand properties for the specified account.
@@ -894,6 +870,38 @@ you'll need to specify the `/profile-enrichment.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/profile-enrichment.read` scope.
+
+### [fee_plans](docs/sdks/feeplans/README.md)
+
+* [list_fee_plan_agreements](docs/sdks/feeplans/README.md#list_fee_plan_agreements) - List all fee plan agreements associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [create_fee_plan_agreements](docs/sdks/feeplans/README.md#create_fee_plan_agreements) - Creates the subscription of a fee plan to a merchant account. Merchants are required to accept the fee plan terms prior to activation.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+* [list_fee_plans](docs/sdks/feeplans/README.md#list_fee_plans) - List all fee plans available for use by an account. This is intended to be used by an account when 
+selecting a fee plan to apply to a connected account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [retrieve_fees](docs/sdks/feeplans/README.md#retrieve_fees) - Retrieve fees associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [list_fees_fetch](docs/sdks/feeplans/README.md#list_fees_fetch) - List fees associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [list_partner_pricing](docs/sdks/feeplans/README.md#list_partner_pricing) - List all partner pricing plans available for use by an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [list_partner_pricing_agreements](docs/sdks/feeplans/README.md#list_partner_pricing_agreements) - List all partner pricing agreements associated with an account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### [files](docs/sdks/files/README.md)
 
@@ -1601,7 +1609,7 @@ with Moov(
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

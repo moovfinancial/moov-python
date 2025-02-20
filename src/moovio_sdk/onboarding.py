@@ -49,6 +49,8 @@ class Onboarding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = components.OnboardingInviteRequest(
             return_url=return_url,
@@ -200,6 +202,8 @@ class Onboarding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = components.OnboardingInviteRequest(
             return_url=return_url,
@@ -342,6 +346,8 @@ class Onboarding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.ListOnboardingInvitesRequest)
@@ -455,6 +461,8 @@ class Onboarding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(request, operations.ListOnboardingInvitesRequest)
@@ -565,6 +573,8 @@ class Onboarding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetOnboardingInviteRequest(
             code=code,
@@ -673,6 +683,8 @@ class Onboarding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetOnboardingInviteRequest(
             code=code,
@@ -781,6 +793,8 @@ class Onboarding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.RevokeOnboardingInviteRequest(
             code=code,
@@ -878,6 +892,8 @@ class Onboarding(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.RevokeOnboardingInviteRequest(
             code=code,

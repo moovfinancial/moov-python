@@ -44,6 +44,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.RegisterApplePayMerchantDomainsRequest(
             account_id=account_id,
@@ -187,6 +189,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.RegisterApplePayMerchantDomainsRequest(
             account_id=account_id,
@@ -330,6 +334,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateApplePayMerchantDomainsRequest(
             account_id=account_id,
@@ -473,6 +479,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateApplePayMerchantDomainsRequest(
             account_id=account_id,
@@ -611,6 +619,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetApplePayMerchantDomainsRequest(
             account_id=account_id,
@@ -723,6 +733,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetApplePayMerchantDomainsRequest(
             account_id=account_id,
@@ -840,6 +852,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateApplePaySessionRequest(
             account_id=account_id,
@@ -982,6 +996,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateApplePaySessionRequest(
             account_id=account_id,
@@ -1130,6 +1146,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.LinkApplePayTokenRequest(
             account_id=account_id,
@@ -1283,6 +1301,8 @@ class ApplePay(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = operations.LinkApplePayTokenRequest(
             account_id=account_id,
