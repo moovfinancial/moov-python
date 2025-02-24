@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: ad9e0c274a187107458a68e9aa753d18
+  docChecksum: f73b978daef12a9be239bec4a59b1f82
   docVersion: latest
-  speakeasyVersion: 1.497.0
-  generationVersion: 2.517.3
-  releaseVersion: 0.2.2
-  configChecksum: b1714b8e2183ffac043726c2c564c2dd
+  speakeasyVersion: 1.501.0
+  generationVersion: 2.522.1
+  releaseVersion: 0.3.0
+  configChecksum: 0512182d6da471e772ee1553ceb938d0
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.11.0
+    core: 5.12.1
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     downloadStreams: 1.0.1
@@ -182,6 +182,7 @@ generatedFiles:
   - docs/models/components/createrepresentative.md
   - docs/models/components/createreversal.md
   - docs/models/components/createsweepconfig.md
+  - docs/models/components/createterminalapplication.md
   - docs/models/components/createtransfer.md
   - docs/models/components/createtransferdestination.md
   - docs/models/components/createtransferdestinationach.md
@@ -383,6 +384,9 @@ generatedFiles:
   - docs/models/components/taxid.md
   - docs/models/components/taxidupdate.md
   - docs/models/components/taxidupdateein.md
+  - docs/models/components/terminalapplication.md
+  - docs/models/components/terminalapplicationplatform.md
+  - docs/models/components/terminalapplicationstatus.md
   - docs/models/components/termsofservice.md
   - docs/models/components/termsofserviceerror.md
   - docs/models/components/termsofservicetoken.md
@@ -458,6 +462,7 @@ generatedFiles:
   - docs/models/errors/reversalvalidationerror.md
   - docs/models/errors/revoketokenrequesterror.md
   - docs/models/errors/schedulevalidationerror.md
+  - docs/models/errors/terminalapplicationerror.md
   - docs/models/errors/transfer.md
   - docs/models/errors/transferoptionsvalidationerror.md
   - docs/models/errors/transfervalidationerror.md
@@ -513,6 +518,8 @@ generatedFiles:
   - docs/models/operations/createsweepconfigglobals.md
   - docs/models/operations/createsweepconfigrequest.md
   - docs/models/operations/createsweepconfigresponse.md
+  - docs/models/operations/createterminalapplicationglobals.md
+  - docs/models/operations/createterminalapplicationresponse.md
   - docs/models/operations/createtransferglobals.md
   - docs/models/operations/createtransferoptionsglobals.md
   - docs/models/operations/createtransferoptionsresponse.md
@@ -525,6 +532,9 @@ generatedFiles:
   - docs/models/operations/deleterepresentativeglobals.md
   - docs/models/operations/deleterepresentativerequest.md
   - docs/models/operations/deleterepresentativeresponse.md
+  - docs/models/operations/deleteterminalapplicationglobals.md
+  - docs/models/operations/deleteterminalapplicationrequest.md
+  - docs/models/operations/deleteterminalapplicationresponse.md
   - docs/models/operations/disablebankaccountglobals.md
   - docs/models/operations/disablebankaccountrequest.md
   - docs/models/operations/disablebankaccountresponse.md
@@ -638,6 +648,9 @@ generatedFiles:
   - docs/models/operations/getsweepglobals.md
   - docs/models/operations/getsweeprequest.md
   - docs/models/operations/getsweepresponse.md
+  - docs/models/operations/getterminalapplicationglobals.md
+  - docs/models/operations/getterminalapplicationrequest.md
+  - docs/models/operations/getterminalapplicationresponse.md
   - docs/models/operations/gettermsofservicetokenglobals.md
   - docs/models/operations/gettermsofservicetokenrequest.md
   - docs/models/operations/gettermsofservicetokenresponse.md
@@ -753,6 +766,9 @@ generatedFiles:
   - docs/models/operations/listsweepsglobals.md
   - docs/models/operations/listsweepsrequest.md
   - docs/models/operations/listsweepsresponse.md
+  - docs/models/operations/listterminalapplicationsglobals.md
+  - docs/models/operations/listterminalapplicationsrequest.md
+  - docs/models/operations/listterminalapplicationsresponse.md
   - docs/models/operations/listtransfersglobals.md
   - docs/models/operations/listtransfersrequest.md
   - docs/models/operations/listtransfersresponse.md
@@ -863,6 +879,7 @@ generatedFiles:
   - docs/sdks/representatives/README.md
   - docs/sdks/scheduling/README.md
   - docs/sdks/sweeps/README.md
+  - docs/sdks/terminalapplications/README.md
   - docs/sdks/transfers/README.md
   - docs/sdks/underwriting/README.md
   - docs/sdks/wallets/README.md
@@ -1024,6 +1041,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/createrepresentative.py
   - src/moovio_sdk/models/components/createreversal.py
   - src/moovio_sdk/models/components/createsweepconfig.py
+  - src/moovio_sdk/models/components/createterminalapplication.py
   - src/moovio_sdk/models/components/createtransfer.py
   - src/moovio_sdk/models/components/createtransferdestination.py
   - src/moovio_sdk/models/components/createtransferdestinationach.py
@@ -1202,6 +1220,9 @@ generatedFiles:
   - src/moovio_sdk/models/components/sweepstatus.py
   - src/moovio_sdk/models/components/taxid.py
   - src/moovio_sdk/models/components/taxidupdate.py
+  - src/moovio_sdk/models/components/terminalapplication.py
+  - src/moovio_sdk/models/components/terminalapplicationplatform.py
+  - src/moovio_sdk/models/components/terminalapplicationstatus.py
   - src/moovio_sdk/models/components/termsofservice.py
   - src/moovio_sdk/models/components/termsofserviceerror.py
   - src/moovio_sdk/models/components/termsofservicetoken.py
@@ -1269,6 +1290,7 @@ generatedFiles:
   - src/moovio_sdk/models/errors/reversalvalidationerror.py
   - src/moovio_sdk/models/errors/revoketokenrequesterror.py
   - src/moovio_sdk/models/errors/schedulevalidationerror.py
+  - src/moovio_sdk/models/errors/terminalapplicationerror.py
   - src/moovio_sdk/models/errors/transfer.py
   - src/moovio_sdk/models/errors/transferoptionsvalidationerror.py
   - src/moovio_sdk/models/errors/transfervalidationerror.py
@@ -1296,10 +1318,12 @@ generatedFiles:
   - src/moovio_sdk/models/operations/createreversal.py
   - src/moovio_sdk/models/operations/createschedule.py
   - src/moovio_sdk/models/operations/createsweepconfig.py
+  - src/moovio_sdk/models/operations/createterminalapplication.py
   - src/moovio_sdk/models/operations/createtransfer.py
   - src/moovio_sdk/models/operations/createtransferoptions.py
   - src/moovio_sdk/models/operations/deletedisputeevidencefile.py
   - src/moovio_sdk/models/operations/deleterepresentative.py
+  - src/moovio_sdk/models/operations/deleteterminalapplication.py
   - src/moovio_sdk/models/operations/disablebankaccount.py
   - src/moovio_sdk/models/operations/disablecapability.py
   - src/moovio_sdk/models/operations/disablecard.py
@@ -1337,6 +1361,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/getschedules.py
   - src/moovio_sdk/models/operations/getsweep.py
   - src/moovio_sdk/models/operations/getsweepconfig.py
+  - src/moovio_sdk/models/operations/getterminalapplication.py
   - src/moovio_sdk/models/operations/gettermsofservicetoken.py
   - src/moovio_sdk/models/operations/gettransfer.py
   - src/moovio_sdk/models/operations/getunderwriting.py
@@ -1375,6 +1400,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/listschedules.py
   - src/moovio_sdk/models/operations/listsweepconfigs.py
   - src/moovio_sdk/models/operations/listsweeps.py
+  - src/moovio_sdk/models/operations/listterminalapplications.py
   - src/moovio_sdk/models/operations/listtransfers.py
   - src/moovio_sdk/models/operations/listwallets.py
   - src/moovio_sdk/models/operations/listwallettransactions.py
@@ -1413,6 +1439,7 @@ generatedFiles:
   - src/moovio_sdk/sdk.py
   - src/moovio_sdk/sdkconfiguration.py
   - src/moovio_sdk/sweeps.py
+  - src/moovio_sdk/terminal_applications.py
   - src/moovio_sdk/transfers.py
   - src/moovio_sdk/types/__init__.py
   - src/moovio_sdk/types/basemodel.py
@@ -1997,7 +2024,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"aggreementID": "e326d153-ca61-4e3e-a86a-3e450e955fd6", "planID": "7a6c5eb4-879b-4c21-b9fa-71eb2181b3ad", "acceptedOn": "2024-03-10T19:49:08.718Z", "status": "terminated", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}, {"aggreementID": "0c6542c4-837f-4de6-bbbf-3a11a1ba31f2", "planID": "50844514-ef1f-40ee-adc6-d314e85a7739", "acceptedOn": "2024-02-27T23:25:25.370Z", "status": "terminated", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}]
+          application/json: [{"aggreementID": "e326d153-ca61-4e3e-a86a-3e450e955fd6", "planID": "7a6c5eb4-879b-4c21-b9fa-71eb2181b3ad", "name": "<value>", "acceptedOn": "2024-03-10T19:49:08.718Z", "status": "terminated", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}, {"aggreementID": "0c6542c4-837f-4de6-bbbf-3a11a1ba31f2", "planID": "50844514-ef1f-40ee-adc6-d314e85a7739", "name": "<value>", "acceptedOn": "2024-02-27T23:25:25.370Z", "status": "terminated", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}]
   createFeePlanAgreements:
     speakeasy-default-create-fee-plan-agreements:
       parameters:
@@ -2008,7 +2035,7 @@ examples:
         application/json: {"planID": "b97c2d59-80c5-49ac-b1fc-40e3a81d8daf"}
       responses:
         "201":
-          application/json: {"aggreementID": "0e7fb8cc-5d6a-4a0e-8955-4d9f85c03fa6", "planID": "10fadd5b-11fb-4499-ae95-794da03fdea6", "acceptedOn": "2024-03-30T02:16:07.411Z", "status": "active", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}
+          application/json: {"aggreementID": "0e7fb8cc-5d6a-4a0e-8955-4d9f85c03fa6", "planID": "10fadd5b-11fb-4499-ae95-794da03fdea6", "name": "<value>", "acceptedOn": "2024-03-30T02:16:07.411Z", "status": "active", "cardAcquringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -2042,7 +2069,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"aggreementID": "2e58b719-fcad-47dc-8484-21ac31dce8dd", "planID": "3f51f992-c3cc-4fd2-b0b7-17c682c67267", "acceptedOn": "2025-10-11T07:38:13.898Z", "status": "active", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "revenueShare": 10}]
+          application/json: [{"aggreementID": "2e58b719-fcad-47dc-8484-21ac31dce8dd", "planID": "3f51f992-c3cc-4fd2-b0b7-17c682c67267", "name": "<value>", "acceptedOn": "2025-10-11T07:38:13.898Z", "status": "active", "cardAcquringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "revenueShare": 10}]
   uploadFile:
     speakeasy-default-upload-file:
       parameters:
@@ -2958,5 +2985,34 @@ examples:
       responses:
         "200":
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}, {"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
+  createTerminalApplication:
+    speakeasy-default-create-terminal-application:
+      requestBody:
+        application/json: {"platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
+      responses:
+        "200":
+          application/json: {"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
+        "400": {}
+        "422": {}
+  listTerminalApplications:
+    speakeasy-default-list-terminal-applications:
+      responses:
+        "200":
+          application/json: [{"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}]
+  getTerminalApplication:
+    speakeasy-default-get-terminal-application:
+      parameters:
+        path:
+          terminalApplicationID: "01234567-89ab-cdef-0123-456789abcdef"
+        header: {}
+      responses:
+        "200":
+          application/json: {"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
+  deleteTerminalApplication:
+    speakeasy-default-delete-terminal-application:
+      parameters:
+        path:
+          terminalApplicationID: "01234567-89ab-cdef-0123-456789abcdef"
+        header: {}
 examplesVersion: 1.0.0
 generatedTests: {}
