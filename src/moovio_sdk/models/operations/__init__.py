@@ -122,6 +122,12 @@ from .createsweepconfig import (
     CreateSweepConfigResponse,
     CreateSweepConfigResponseTypedDict,
 )
+from .createterminalapplication import (
+    CreateTerminalApplicationGlobals,
+    CreateTerminalApplicationGlobalsTypedDict,
+    CreateTerminalApplicationResponse,
+    CreateTerminalApplicationResponseTypedDict,
+)
 from .createtransfer import (
     CreateTransferGlobals,
     CreateTransferGlobalsTypedDict,
@@ -153,6 +159,14 @@ from .deleterepresentative import (
     DeleteRepresentativeRequestTypedDict,
     DeleteRepresentativeResponse,
     DeleteRepresentativeResponseTypedDict,
+)
+from .deleteterminalapplication import (
+    DeleteTerminalApplicationGlobals,
+    DeleteTerminalApplicationGlobalsTypedDict,
+    DeleteTerminalApplicationRequest,
+    DeleteTerminalApplicationRequestTypedDict,
+    DeleteTerminalApplicationResponse,
+    DeleteTerminalApplicationResponseTypedDict,
 )
 from .disablebankaccount import (
     DisableBankAccountGlobals,
@@ -453,6 +467,14 @@ from .getsweepconfig import (
     GetSweepConfigRequestTypedDict,
     GetSweepConfigResponse,
     GetSweepConfigResponseTypedDict,
+)
+from .getterminalapplication import (
+    GetTerminalApplicationGlobals,
+    GetTerminalApplicationGlobalsTypedDict,
+    GetTerminalApplicationRequest,
+    GetTerminalApplicationRequestTypedDict,
+    GetTerminalApplicationResponse,
+    GetTerminalApplicationResponseTypedDict,
 )
 from .gettermsofservicetoken import (
     GetTermsOfServiceTokenGlobals,
@@ -759,6 +781,14 @@ from .listsweeps import (
     ListSweepsRequestTypedDict,
     ListSweepsResponse,
     ListSweepsResponseTypedDict,
+)
+from .listterminalapplications import (
+    ListTerminalApplicationsGlobals,
+    ListTerminalApplicationsGlobalsTypedDict,
+    ListTerminalApplicationsRequest,
+    ListTerminalApplicationsRequestTypedDict,
+    ListTerminalApplicationsResponse,
+    ListTerminalApplicationsResponseTypedDict,
 )
 from .listtransfers import (
     ListTransfersGlobals,
@@ -1073,6 +1103,10 @@ __all__ = [
     "CreateSweepConfigRequestTypedDict",
     "CreateSweepConfigResponse",
     "CreateSweepConfigResponseTypedDict",
+    "CreateTerminalApplicationGlobals",
+    "CreateTerminalApplicationGlobalsTypedDict",
+    "CreateTerminalApplicationResponse",
+    "CreateTerminalApplicationResponseTypedDict",
     "CreateTransferGlobals",
     "CreateTransferGlobalsTypedDict",
     "CreateTransferOptionsGlobals",
@@ -1097,6 +1131,12 @@ __all__ = [
     "DeleteRepresentativeRequestTypedDict",
     "DeleteRepresentativeResponse",
     "DeleteRepresentativeResponseTypedDict",
+    "DeleteTerminalApplicationGlobals",
+    "DeleteTerminalApplicationGlobalsTypedDict",
+    "DeleteTerminalApplicationRequest",
+    "DeleteTerminalApplicationRequestTypedDict",
+    "DeleteTerminalApplicationResponse",
+    "DeleteTerminalApplicationResponseTypedDict",
     "DisableBankAccountGlobals",
     "DisableBankAccountGlobalsTypedDict",
     "DisableBankAccountRequest",
@@ -1323,6 +1363,12 @@ __all__ = [
     "GetSweepRequestTypedDict",
     "GetSweepResponse",
     "GetSweepResponseTypedDict",
+    "GetTerminalApplicationGlobals",
+    "GetTerminalApplicationGlobalsTypedDict",
+    "GetTerminalApplicationRequest",
+    "GetTerminalApplicationRequestTypedDict",
+    "GetTerminalApplicationResponse",
+    "GetTerminalApplicationResponseTypedDict",
     "GetTermsOfServiceTokenGlobals",
     "GetTermsOfServiceTokenGlobalsTypedDict",
     "GetTermsOfServiceTokenRequest",
@@ -1553,6 +1599,12 @@ __all__ = [
     "ListSweepsRequestTypedDict",
     "ListSweepsResponse",
     "ListSweepsResponseTypedDict",
+    "ListTerminalApplicationsGlobals",
+    "ListTerminalApplicationsGlobalsTypedDict",
+    "ListTerminalApplicationsRequest",
+    "ListTerminalApplicationsRequestTypedDict",
+    "ListTerminalApplicationsResponse",
+    "ListTerminalApplicationsResponseTypedDict",
     "ListTransfersGlobals",
     "ListTransfersGlobalsTypedDict",
     "ListTransfersRequest",

@@ -50,6 +50,10 @@ from .schedulevalidationerror import (
     ScheduleValidationError,
     ScheduleValidationErrorData,
 )
+from .terminalapplicationerror import (
+    TerminalApplicationError,
+    TerminalApplicationErrorData,
+)
 from .transfer import Transfer, TransferData
 from .transferoptionsvalidationerror import (
     TransferOptionsValidationError,
@@ -125,6 +129,8 @@ __all__ = [
     "RevokeTokenRequestErrorData",
     "ScheduleValidationError",
     "ScheduleValidationErrorData",
+    "TerminalApplicationError",
+    "TerminalApplicationErrorData",
     "Transfer",
     "TransferData",
     "TransferOptionsValidationError",

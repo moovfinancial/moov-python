@@ -14,6 +14,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class PartnerPricingAgreementTypedDict(TypedDict):
     aggreement_id: str
     plan_id: str
+    name: str
+    r"""The name of the agreement."""
     accepted_on: datetime
     status: FeePlanAgreementStatus
     card_acquring_model: CardAcquringModel
@@ -22,12 +24,17 @@ class PartnerPricingAgreementTypedDict(TypedDict):
     revenue_share: int
     r"""The integer percentage value of the revenue split for partner."""
     account_id: NotRequired[str]
+    description: NotRequired[str]
+    r"""The description of the agreement."""
 
 
 class PartnerPricingAgreement(BaseModel):
     aggreement_id: Annotated[str, pydantic.Field(alias="aggreementID")]
 
     plan_id: Annotated[str, pydantic.Field(alias="planID")]
+
+    name: str
+    r"""The name of the agreement."""
 
     accepted_on: Annotated[datetime, pydantic.Field(alias="acceptedOn")]
 
@@ -44,3 +51,6 @@ class PartnerPricingAgreement(BaseModel):
     r"""The integer percentage value of the revenue split for partner."""
 
     account_id: Annotated[Optional[str], pydantic.Field(alias="accountID")] = None
+
+    description: Optional[str] = None
+    r"""The description of the agreement."""

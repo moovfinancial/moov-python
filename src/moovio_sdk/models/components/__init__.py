@@ -237,6 +237,10 @@ from .createrefundresponse import CreateRefundResponse, CreateRefundResponseType
 from .createrepresentative import CreateRepresentative, CreateRepresentativeTypedDict
 from .createreversal import CreateReversal, CreateReversalTypedDict
 from .createsweepconfig import CreateSweepConfig, CreateSweepConfigTypedDict
+from .createterminalapplication import (
+    CreateTerminalApplication,
+    CreateTerminalApplicationTypedDict,
+)
 from .createtransfer import CreateTransfer, CreateTransferTypedDict
 from .createtransferdestination import (
     CreateTransferDestination,
@@ -598,6 +602,9 @@ from .taxidupdate import (
     TaxIDUpdateEinTypedDict,
     TaxIDUpdateTypedDict,
 )
+from .terminalapplication import TerminalApplication, TerminalApplicationTypedDict
+from .terminalapplicationplatform import TerminalApplicationPlatform
+from .terminalapplicationstatus import TerminalApplicationStatus
 from .termsofservice import TermsOfService, TermsOfServiceTypedDict
 from .termsofserviceerror import (
     Manual,
@@ -930,6 +937,8 @@ __all__ = [
     "CreateReversalTypedDict",
     "CreateSweepConfig",
     "CreateSweepConfigTypedDict",
+    "CreateTerminalApplication",
+    "CreateTerminalApplicationTypedDict",
     "CreateTransfer",
     "CreateTransferDestination",
     "CreateTransferDestinationACH",
@@ -1290,6 +1299,10 @@ __all__ = [
     "TaxIDUpdateEin",
     "TaxIDUpdateEinTypedDict",
     "TaxIDUpdateTypedDict",
+    "TerminalApplication",
+    "TerminalApplicationPlatform",
+    "TerminalApplicationStatus",
+    "TerminalApplicationTypedDict",
     "TermsOfService",
     "TermsOfServiceError",
     "TermsOfServiceErrorTypedDict",

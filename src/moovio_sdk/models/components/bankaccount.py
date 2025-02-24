@@ -33,7 +33,7 @@ class BankAccountTypedDict(TypedDict):
     routing_number: str
     last_four_account_number: str
     updated_on: datetime
-    status_reason: BankAccountStatusReason
+    status_reason: NotRequired[BankAccountStatusReason]
     r"""The reason the bank account status changed to the current value."""
     exception_details: NotRequired[BankAccountExceptionTypedDict]
     r"""Reason for, and details related to, an `errored` or `verificationFailed` bank account status."""
@@ -79,8 +79,8 @@ class BankAccount(BaseModel):
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
 
     status_reason: Annotated[
-        BankAccountStatusReason, pydantic.Field(alias="statusReason")
-    ]
+        Optional[BankAccountStatusReason], pydantic.Field(alias="statusReason")
+    ] = None
     r"""The reason the bank account status changed to the current value."""
 
     exception_details: Annotated[
