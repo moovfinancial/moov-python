@@ -7,7 +7,7 @@ from .wallettransactiontype import WalletTransactionType
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -39,6 +39,8 @@ class WalletTransactionTypedDict(TypedDict):
     net_amount_decimal: str
     r"""Net amount is the gross amount less fees paid, and the amount that affects the wallet's balance. Same as `netAmount`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521."""
     completed_on: NotRequired[datetime]
+    fee_i_ds: NotRequired[List[str]]
+    r"""The IDs of the fees paid for the transaction."""
     available_balance: NotRequired[int]
     r"""The wallet's total available balance after recording a completed transaction. The value is in the smallest unit of the specified currency. In USD this is cents, for example, $12.04 is 1204 and $0.99 is 99."""
     available_balance_decimal: NotRequired[str]
@@ -95,6 +97,9 @@ class WalletTransaction(BaseModel):
     completed_on: Annotated[Optional[datetime], pydantic.Field(alias="completedOn")] = (
         None
     )
+
+    fee_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="feeIDs")] = None
+    r"""The IDs of the fees paid for the transaction."""
 
     available_balance: Annotated[
         Optional[int], pydantic.Field(alias="availableBalance")

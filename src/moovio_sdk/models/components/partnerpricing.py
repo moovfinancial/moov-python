@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .billablefee import BillableFee, BillableFeeTypedDict
-from .cardacquringmodel import CardAcquringModel
+from .cardacquiringmodel import CardAcquiringModel
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -16,7 +16,7 @@ class PartnerPricingTypedDict(TypedDict):
     r"""The name of the fee plan."""
     revenue_share: int
     r"""The integer percentage value of the revenue split for partner."""
-    card_acquring_model: CardAcquringModel
+    card_acquiring_model: CardAcquiringModel
     r"""Specifies the card processing pricing model"""
     billable_fees: List[BillableFeeTypedDict]
     created_at: datetime
@@ -33,8 +33,8 @@ class PartnerPricing(BaseModel):
     revenue_share: Annotated[int, pydantic.Field(alias="revenueShare")]
     r"""The integer percentage value of the revenue split for partner."""
 
-    card_acquring_model: Annotated[
-        CardAcquringModel, pydantic.Field(alias="cardAcquringModel")
+    card_acquiring_model: Annotated[
+        CardAcquiringModel, pydantic.Field(alias="cardAcquiringModel")
     ]
     r"""Specifies the card processing pricing model"""
 

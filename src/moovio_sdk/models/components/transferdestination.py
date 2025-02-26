@@ -2,16 +2,22 @@
 
 from __future__ import annotations
 from .achtransactiondetails import ACHTransactionDetails, ACHTransactionDetailsTypedDict
-from .bankaccount import BankAccount, BankAccountTypedDict
+from .applepayresponse import ApplePayResponse, ApplePayResponseTypedDict
 from .cardtransactiondetails import (
     CardTransactionDetails,
     CardTransactionDetailsTypedDict,
 )
+from .paymentmethodsbankaccount import (
+    PaymentMethodsBankAccount,
+    PaymentMethodsBankAccountTypedDict,
+)
+from .paymentmethodscard import PaymentMethodsCard, PaymentMethodsCardTypedDict
+from .paymentmethodswallet import PaymentMethodsWallet, PaymentMethodsWalletTypedDict
 from .rtptransactiondetails import RTPTransactionDetails, RTPTransactionDetailsTypedDict
 from .transferaccount import TransferAccount, TransferAccountTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import Any, Optional
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -19,13 +25,15 @@ class TransferDestinationTypedDict(TypedDict):
     payment_method_id: str
     payment_method_type: str
     account: TransferAccountTypedDict
-    bank_account: NotRequired[BankAccountTypedDict]
-    r"""Describes a bank account linked to a Moov account."""
-    wallet: NotRequired[Any]
-    card: NotRequired[Any]
+    bank_account: NotRequired[PaymentMethodsBankAccountTypedDict]
+    r"""A bank account as contained within a payment method."""
+    wallet: NotRequired[PaymentMethodsWalletTypedDict]
+    card: NotRequired[PaymentMethodsCardTypedDict]
+    r"""A card as contained within a payment method."""
     ach_details: NotRequired[ACHTransactionDetailsTypedDict]
     r"""ACH specific details about the transaction."""
-    apple_pay: NotRequired[Any]
+    apple_pay: NotRequired[ApplePayResponseTypedDict]
+    r"""Describes an Apple Pay token on a Moov account."""
     card_details: NotRequired[CardTransactionDetailsTypedDict]
     r"""Card-specific details about the transaction."""
     rtp_details: NotRequired[RTPTransactionDetailsTypedDict]
@@ -40,20 +48,24 @@ class TransferDestination(BaseModel):
     account: TransferAccount
 
     bank_account: Annotated[
-        Optional[BankAccount], pydantic.Field(alias="bankAccount")
+        Optional[PaymentMethodsBankAccount], pydantic.Field(alias="bankAccount")
     ] = None
-    r"""Describes a bank account linked to a Moov account."""
+    r"""A bank account as contained within a payment method."""
 
-    wallet: Optional[Any] = None
+    wallet: Optional[PaymentMethodsWallet] = None
 
-    card: Optional[Any] = None
+    card: Optional[PaymentMethodsCard] = None
+    r"""A card as contained within a payment method."""
 
     ach_details: Annotated[
         Optional[ACHTransactionDetails], pydantic.Field(alias="achDetails")
     ] = None
     r"""ACH specific details about the transaction."""
 
-    apple_pay: Annotated[Optional[Any], pydantic.Field(alias="applePay")] = None
+    apple_pay: Annotated[
+        Optional[ApplePayResponse], pydantic.Field(alias="applePay")
+    ] = None
+    r"""Describes an Apple Pay token on a Moov account."""
 
     card_details: Annotated[
         Optional[CardTransactionDetails], pydantic.Field(alias="cardDetails")

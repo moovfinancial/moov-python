@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .billablefee import BillableFee, BillableFeeTypedDict
-from .cardacquringmodel import CardAcquringModel
+from .cardacquiringmodel import CardAcquiringModel
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -14,7 +14,7 @@ class FeePlanTypedDict(TypedDict):
     plan_id: str
     name: str
     r"""The name of the fee plan."""
-    card_acquring_model: CardAcquringModel
+    card_acquiring_model: CardAcquiringModel
     r"""Specifies the card processing pricing model"""
     billable_fees: List[BillableFeeTypedDict]
     r"""Additional usage-based fees for this plan."""
@@ -29,8 +29,8 @@ class FeePlan(BaseModel):
     name: str
     r"""The name of the fee plan."""
 
-    card_acquring_model: Annotated[
-        CardAcquringModel, pydantic.Field(alias="cardAcquringModel")
+    card_acquiring_model: Annotated[
+        CardAcquiringModel, pydantic.Field(alias="cardAcquiringModel")
     ]
     r"""Specifies the card processing pricing model"""
 

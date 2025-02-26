@@ -30,10 +30,6 @@ class CardTypedDict(TypedDict):
     r"""The card brand."""
     card_type: CardType
     r"""The type of the card."""
-    card_category: str
-    r"""The category or level of the card defined by the issuer.
-    Examples include, but not limited to, \"REWARDS\", \"TRADITIONAL REWARDS\", \"CLASSIC\", and \"CORPORATE PURCHASING\".
-    """
     last_four_card_number: str
     r"""Last four digits of the card number"""
     bin: str
@@ -55,6 +51,10 @@ class CardTypedDict(TypedDict):
     r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
     domestic_pull_from_card: DomesticPullFromCard
     r"""Indicates if the card supports domestic pull-from-card transfer."""
+    card_category: NotRequired[str]
+    r"""The category or level of the card defined by the issuer.
+    Examples include, but not limited to, \"REWARDS\", \"TRADITIONAL REWARDS\", \"CLASSIC\", and \"CORPORATE PURCHASING\".
+    """
     holder_name: NotRequired[str]
     r"""The name of the cardholder as it appears on the card."""
     commercial: NotRequired[bool]
@@ -90,11 +90,6 @@ class Card(BaseModel):
 
     card_type: Annotated[CardType, pydantic.Field(alias="cardType")]
     r"""The type of the card."""
-
-    card_category: Annotated[str, pydantic.Field(alias="cardCategory")]
-    r"""The category or level of the card defined by the issuer.
-    Examples include, but not limited to, \"REWARDS\", \"TRADITIONAL REWARDS\", \"CLASSIC\", and \"CORPORATE PURCHASING\".
-    """
 
     last_four_card_number: Annotated[str, pydantic.Field(alias="lastFourCardNumber")]
     r"""Last four digits of the card number"""
@@ -133,6 +128,11 @@ class Card(BaseModel):
         DomesticPullFromCard, pydantic.Field(alias="domesticPullFromCard")
     ]
     r"""Indicates if the card supports domestic pull-from-card transfer."""
+
+    card_category: Annotated[Optional[str], pydantic.Field(alias="cardCategory")] = None
+    r"""The category or level of the card defined by the issuer.
+    Examples include, but not limited to, \"REWARDS\", \"TRADITIONAL REWARDS\", \"CLASSIC\", and \"CORPORATE PURCHASING\".
+    """
 
     holder_name: Annotated[Optional[str], pydantic.Field(alias="holderName")] = None
     r"""The name of the cardholder as it appears on the card."""

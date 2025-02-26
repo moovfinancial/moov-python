@@ -9,11 +9,14 @@ from typing_extensions import Annotated, TypedDict
 
 
 class CancellationTypedDict(TypedDict):
+    cancellation_id: str
     status: CancellationStatus
     created_on: datetime
 
 
 class Cancellation(BaseModel):
+    cancellation_id: Annotated[str, pydantic.Field(alias="cancellationID")]
+
     status: CancellationStatus
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]

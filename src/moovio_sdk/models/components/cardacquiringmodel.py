@@ -4,7 +4,7 @@ from __future__ import annotations
 from enum import Enum
 
 
-class CardAcquringModel(str, Enum):
+class CardAcquiringModel(str, Enum):
     r"""Specifies the card processing pricing model"""
 
     COST_PLUS = "cost-plus"

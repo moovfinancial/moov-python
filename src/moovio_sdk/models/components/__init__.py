@@ -120,8 +120,8 @@ from .capabilitystatus import CapabilityStatus
 from .card import Card, CardTypedDict
 from .cardaccountupdater import CardAccountUpdater, CardAccountUpdaterTypedDict
 from .cardacquiringdispute import CardAcquiringDispute, CardAcquiringDisputeTypedDict
+from .cardacquiringmodel import CardAcquiringModel
 from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundTypedDict
-from .cardacquringmodel import CardAcquringModel
 from .cardaddress import CardAddress, CardAddressTypedDict
 from .cardbrand import CardBrand
 from .cardexpiration import CardExpiration, CardExpirationTypedDict
@@ -317,16 +317,7 @@ from .feemodel import FeeModel
 from .feeplan import FeePlan, FeePlanTypedDict
 from .feeplanagreement import FeePlanAgreement, FeePlanAgreementTypedDict
 from .feeplanagreementstatus import FeePlanAgreementStatus
-from .feeproperties import (
-    FeeProperties,
-    FeePropertiesTypedDict,
-    FixedAmount,
-    FixedAmountTypedDict,
-    MaxPerTransaction,
-    MaxPerTransactionTypedDict,
-    MinPerTransaction,
-    MinPerTransactionTypedDict,
-)
+from .feeproperties import FeeProperties, FeePropertiesTypedDict
 from .filedetails import FileDetails, FileDetailsTypedDict
 from .filepurpose import FilePurpose
 from .filestatus import FileStatus
@@ -830,9 +821,9 @@ __all__ = [
     "CardAccountUpdaterTypedDict",
     "CardAcquiringDispute",
     "CardAcquiringDisputeTypedDict",
+    "CardAcquiringModel",
     "CardAcquiringRefund",
     "CardAcquiringRefundTypedDict",
-    "CardAcquringModel",
     "CardAddress",
     "CardAddressTypedDict",
     "CardBrand",
@@ -1028,8 +1019,6 @@ __all__ = [
     "FileUploadRequestMultiPartTypedDict",
     "FinancialInstitutions",
     "FinancialInstitutionsTypedDict",
-    "FixedAmount",
-    "FixedAmountTypedDict",
     "FulfillmentDetails",
     "FulfillmentDetailsError",
     "FulfillmentDetailsErrorTypedDict",
@@ -1124,11 +1113,7 @@ __all__ = [
     "ManualTermsOfServiceUpdate",
     "ManualTermsOfServiceUpdateTypedDict",
     "ManualTypedDict",
-    "MaxPerTransaction",
-    "MaxPerTransactionTypedDict",
     "MicroDepositStatus",
-    "MinPerTransaction",
-    "MinPerTransactionTypedDict",
     "Mode",
     "MoovFeeDetails",
     "MoovFeeDetailsTypedDict",
