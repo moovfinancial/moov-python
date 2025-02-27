@@ -43,6 +43,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -95,6 +96,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -138,6 +140,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(
@@ -184,6 +187,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -191,7 +195,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.update_config(account_id="7573cb48-6325-4d3d-841d-81108fcfe6f2", sweep_config_id="49e8f3b1-259f-458e-9367-adb3b938f8c8", status=components.SweepConfigStatus.DISABLED)
+    res = moov.sweeps.update_config(account_id="7573cb48-6325-4d3d-841d-81108fcfe6f2", sweep_config_id="49e8f3b1-259f-458e-9367-adb3b938f8c8", status=components.Status.DISABLED)
 
     # Handle response
     print(res)
@@ -200,16 +204,16 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                                                                                                                       | Type                                                                                                                                                            | Required                                                                                                                                                        | Description                                                                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `account_id`                                                                                                                                                    | *str*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
-| `sweep_config_id`                                                                                                                                               | *str*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                              | N/A                                                                                                                                                             |
-| `status`                                                                                                                                                        | [Optional[components.SweepConfigStatus]](../../models/components/sweepconfigstatus.md)                                                                          | :heavy_minus_sign:                                                                                                                                              | N/A                                                                                                                                                             |
-| `push_payment_method_id`                                                                                                                                        | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | ID of the payment method.                                                                                                                                       |
-| `pull_payment_method_id`                                                                                                                                        | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | ID of the payment method.                                                                                                                                       |
-| `statement_descriptor`                                                                                                                                          | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor. |
-| `minimum_balance`                                                                                                                                               | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | N/A                                                                                                                                                             |
-| `retries`                                                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                | :heavy_minus_sign:                                                                                                                                              | Configuration to override the default retry behavior of the client.                                                                                             |
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `account_id`                                                                                       | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `sweep_config_id`                                                                                  | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `status`                                                                                           | [OptionalNullable[components.Status]](../../models/components/status.md)                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `push_payment_method_id`                                                                           | [OptionalNullable[components.PushPaymentMethodID]](../../models/components/pushpaymentmethodid.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `pull_payment_method_id`                                                                           | [OptionalNullable[components.PullPaymentMethodID]](../../models/components/pullpaymentmethodid.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `statement_descriptor`                                                                             | [OptionalNullable[components.StatementDescriptor]](../../models/components/statementdescriptor.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `minimum_balance`                                                                                  | *Optional[str]*                                                                                    | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `retries`                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                   | :heavy_minus_sign:                                                                                 | Configuration to override the default retry behavior of the client.                                |
 
 ### Response
 
@@ -235,6 +239,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(
@@ -284,6 +289,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(

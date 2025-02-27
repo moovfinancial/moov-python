@@ -48,6 +48,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -93,6 +94,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(
@@ -142,6 +144,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -186,6 +189,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(
@@ -237,6 +241,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -282,6 +287,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -326,6 +332,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(

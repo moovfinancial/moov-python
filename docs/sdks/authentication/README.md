@@ -22,6 +22,7 @@ Allows clients to notify the authorization server that a previously obtained ref
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -67,6 +68,7 @@ Create or refresh an access token.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(

@@ -94,6 +94,7 @@ to specify the `/accounts.write` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -231,6 +232,7 @@ to specify the `/accounts.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -283,6 +285,7 @@ to specify the `/accounts/{accountID}/profile.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -334,6 +337,7 @@ to specify the `/accounts/{accountID}/profile.write` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(
@@ -470,6 +474,7 @@ you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -514,6 +519,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(
@@ -560,6 +566,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(
@@ -610,6 +617,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -654,6 +662,7 @@ token patched to the account. Read more in our [documentation](https://docs.moov
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(

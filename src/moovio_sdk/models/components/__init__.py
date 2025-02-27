@@ -455,7 +455,23 @@ from .patchaccounterror import PatchAccountError, PatchAccountErrorTypedDict
 from .patchbusiness import PatchBusiness, PatchBusinessTypedDict
 from .patchindividual import PatchIndividual, PatchIndividualTypedDict
 from .patchprofile import PatchProfile, PatchProfileTypedDict
-from .patchsweepconfig import PatchSweepConfig, PatchSweepConfigTypedDict
+from .patchsweepconfig import (
+    PatchSweepConfig,
+    PatchSweepConfigTypedDict,
+    PullPaymentMethodID,
+    PullPaymentMethodID2,
+    PullPaymentMethodID2TypedDict,
+    PullPaymentMethodIDTypedDict,
+    PushPaymentMethodID,
+    PushPaymentMethodID2,
+    PushPaymentMethodID2TypedDict,
+    PushPaymentMethodIDTypedDict,
+    StatementDescriptor,
+    StatementDescriptor2,
+    StatementDescriptor2TypedDict,
+    StatementDescriptorTypedDict,
+    Status,
+)
 from .patchtransfer import PatchTransfer, PatchTransferTypedDict
 from .paymentdetailserror import PaymentDetailsError, PaymentDetailsErrorTypedDict
 from .paymentlink import PaymentLink, PaymentLinkTypedDict
@@ -1211,6 +1227,14 @@ __all__ = [
     "PullFromCardPaymentMethod",
     "PullFromCardPaymentMethodPaymentMethodType",
     "PullFromCardPaymentMethodTypedDict",
+    "PullPaymentMethodID",
+    "PullPaymentMethodID2",
+    "PullPaymentMethodID2TypedDict",
+    "PullPaymentMethodIDTypedDict",
+    "PushPaymentMethodID",
+    "PushPaymentMethodID2",
+    "PushPaymentMethodID2TypedDict",
+    "PushPaymentMethodIDTypedDict",
     "PushToCardPaymentMethod",
     "PushToCardPaymentMethodPaymentMethodType",
     "PushToCardPaymentMethodTypedDict",
@@ -1270,6 +1294,11 @@ __all__ = [
     "SourceDestinationOptionsTypedDict",
     "Ssn",
     "SsnTypedDict",
+    "StatementDescriptor",
+    "StatementDescriptor2",
+    "StatementDescriptor2TypedDict",
+    "StatementDescriptorTypedDict",
+    "Status",
     "Sweep",
     "SweepConfig",
     "SweepConfigPaymentMethod",

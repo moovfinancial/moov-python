@@ -6,7 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional
+from typing import Any, List, Mapping, Optional, Union
 
 
 class Sweeps(BaseSDK):
@@ -781,10 +781,22 @@ class Sweeps(BaseSDK):
         *,
         account_id: str,
         sweep_config_id: str,
-        status: Optional[components.SweepConfigStatus] = None,
-        push_payment_method_id: Optional[str] = None,
-        pull_payment_method_id: Optional[str] = None,
-        statement_descriptor: Optional[str] = None,
+        status: OptionalNullable[components.Status] = UNSET,
+        push_payment_method_id: OptionalNullable[
+            Union[
+                components.PushPaymentMethodID, components.PushPaymentMethodIDTypedDict
+            ]
+        ] = UNSET,
+        pull_payment_method_id: OptionalNullable[
+            Union[
+                components.PullPaymentMethodID, components.PullPaymentMethodIDTypedDict
+            ]
+        ] = UNSET,
+        statement_descriptor: OptionalNullable[
+            Union[
+                components.StatementDescriptor, components.StatementDescriptorTypedDict
+            ]
+        ] = UNSET,
         minimum_balance: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -799,9 +811,9 @@ class Sweeps(BaseSDK):
         :param account_id:
         :param sweep_config_id:
         :param status:
-        :param push_payment_method_id: ID of the payment method.
-        :param pull_payment_method_id: ID of the payment method.
-        :param statement_descriptor: The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+        :param push_payment_method_id:
+        :param pull_payment_method_id:
+        :param statement_descriptor:
         :param minimum_balance:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -823,9 +835,18 @@ class Sweeps(BaseSDK):
             sweep_config_id=sweep_config_id,
             patch_sweep_config=components.PatchSweepConfig(
                 status=status,
-                push_payment_method_id=push_payment_method_id,
-                pull_payment_method_id=pull_payment_method_id,
-                statement_descriptor=statement_descriptor,
+                push_payment_method_id=utils.get_pydantic_model(
+                    push_payment_method_id,
+                    OptionalNullable[components.PushPaymentMethodID],
+                ),
+                pull_payment_method_id=utils.get_pydantic_model(
+                    pull_payment_method_id,
+                    OptionalNullable[components.PullPaymentMethodID],
+                ),
+                statement_descriptor=utils.get_pydantic_model(
+                    statement_descriptor,
+                    OptionalNullable[components.StatementDescriptor],
+                ),
                 minimum_balance=minimum_balance,
             ),
         )
@@ -939,10 +960,22 @@ class Sweeps(BaseSDK):
         *,
         account_id: str,
         sweep_config_id: str,
-        status: Optional[components.SweepConfigStatus] = None,
-        push_payment_method_id: Optional[str] = None,
-        pull_payment_method_id: Optional[str] = None,
-        statement_descriptor: Optional[str] = None,
+        status: OptionalNullable[components.Status] = UNSET,
+        push_payment_method_id: OptionalNullable[
+            Union[
+                components.PushPaymentMethodID, components.PushPaymentMethodIDTypedDict
+            ]
+        ] = UNSET,
+        pull_payment_method_id: OptionalNullable[
+            Union[
+                components.PullPaymentMethodID, components.PullPaymentMethodIDTypedDict
+            ]
+        ] = UNSET,
+        statement_descriptor: OptionalNullable[
+            Union[
+                components.StatementDescriptor, components.StatementDescriptorTypedDict
+            ]
+        ] = UNSET,
         minimum_balance: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -957,9 +990,9 @@ class Sweeps(BaseSDK):
         :param account_id:
         :param sweep_config_id:
         :param status:
-        :param push_payment_method_id: ID of the payment method.
-        :param pull_payment_method_id: ID of the payment method.
-        :param statement_descriptor: The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
+        :param push_payment_method_id:
+        :param pull_payment_method_id:
+        :param statement_descriptor:
         :param minimum_balance:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -981,9 +1014,18 @@ class Sweeps(BaseSDK):
             sweep_config_id=sweep_config_id,
             patch_sweep_config=components.PatchSweepConfig(
                 status=status,
-                push_payment_method_id=push_payment_method_id,
-                pull_payment_method_id=pull_payment_method_id,
-                statement_descriptor=statement_descriptor,
+                push_payment_method_id=utils.get_pydantic_model(
+                    push_payment_method_id,
+                    OptionalNullable[components.PushPaymentMethodID],
+                ),
+                pull_payment_method_id=utils.get_pydantic_model(
+                    pull_payment_method_id,
+                    OptionalNullable[components.PullPaymentMethodID],
+                ),
+                statement_descriptor=utils.get_pydantic_model(
+                    statement_descriptor,
+                    OptionalNullable[components.StatementDescriptor],
+                ),
                 minimum_balance=minimum_balance,
             ),
         )

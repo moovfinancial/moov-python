@@ -39,6 +39,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -82,6 +83,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(
@@ -132,6 +134,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -176,6 +179,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(

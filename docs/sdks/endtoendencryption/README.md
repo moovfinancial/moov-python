@@ -24,6 +24,7 @@ you'll need to specify the `/ping.read` scope.
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -65,6 +66,7 @@ Generates a public key used to create a JWE token for passing secure authenticat
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(

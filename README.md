@@ -127,6 +127,7 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -230,6 +231,7 @@ from moovio_sdk import Moov
 from moovio_sdk.models import components
 
 async def main():
+
     async with Moov(
         security=components.Security(
             username="",
@@ -341,6 +343,7 @@ You can set the security parameters through the `security` optional parameter wh
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     security=components.Security(
@@ -1263,6 +1266,7 @@ Certain SDK methods accept file objects as part of a request body or multi-part 
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -1291,6 +1295,7 @@ To change the default retry strategy for a single API call, simply provide a `Re
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 from moovio_sdk.utils import BackoffStrategy, RetryConfig
+
 
 with Moov(
     security=components.Security(
@@ -1392,6 +1397,7 @@ If you'd like to override the default retry strategy for all operations that sup
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 from moovio_sdk.utils import BackoffStrategy, RetryConfig
+
 
 with Moov(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
@@ -1517,6 +1523,7 @@ When custom error responses are specified for an operation, the SDK may also rai
 from moovio_sdk import Moov
 from moovio_sdk.models import components, errors
 
+
 with Moov(
     security=components.Security(
         username="",
@@ -1632,6 +1639,7 @@ The default server can be overridden globally by passing a URL to the `server_ur
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+
 
 with Moov(
     server_url="https://api.moov.io",
@@ -1821,6 +1829,7 @@ The `Moov` class implements the context manager protocol and registers a finaliz
 from moovio_sdk import Moov
 from moovio_sdk.models import components
 def main():
+
     with Moov(
         security=components.Security(
             username="",
@@ -1832,6 +1841,7 @@ def main():
 
 # Or when using async:
 async def amain():
+
     async with Moov(
         security=components.Security(
             username="",

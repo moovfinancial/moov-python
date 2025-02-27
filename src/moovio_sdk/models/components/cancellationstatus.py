@@ -7,3 +7,4 @@ from enum import Enum
 class CancellationStatus(str, Enum):
     PENDING = "pending"
     COMPLETED = "completed"
+    FAILED = "failed"

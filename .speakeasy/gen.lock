@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 93d8f8ba97accd92d7d58cb5ce612582
+  docChecksum: ff2ed1c5b88d490148e43832c6e96989
   docVersion: latest
-  speakeasyVersion: 1.504.1
-  generationVersion: 2.529.2
-  releaseVersion: 0.3.1
-  configChecksum: f3291b33e9e8abfd0860c315fbe5a354
+  speakeasyVersion: 1.505.1
+  generationVersion: 2.531.0
+  releaseVersion: 0.3.2
+  configChecksum: f6a6fa4f2af1d229f4bb02975de5a137
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
 features:
@@ -338,6 +338,10 @@ generatedFiles:
   - docs/models/components/profile.md
   - docs/models/components/pullfromcardpaymentmethod.md
   - docs/models/components/pullfromcardpaymentmethodpaymentmethodtype.md
+  - docs/models/components/pullpaymentmethodid.md
+  - docs/models/components/pullpaymentmethodid2.md
+  - docs/models/components/pushpaymentmethodid.md
+  - docs/models/components/pushpaymentmethodid2.md
   - docs/models/components/pushtocardpaymentmethod.md
   - docs/models/components/pushtocardpaymentmethodpaymentmethodtype.md
   - docs/models/components/qrcode.md
@@ -373,6 +377,9 @@ generatedFiles:
   - docs/models/components/settings.md
   - docs/models/components/sourcedestinationoptions.md
   - docs/models/components/ssn.md
+  - docs/models/components/statementdescriptor.md
+  - docs/models/components/statementdescriptor2.md
+  - docs/models/components/status.md
   - docs/models/components/sweep.md
   - docs/models/components/sweepconfig.md
   - docs/models/components/sweepconfigpaymentmethod.md
@@ -1934,8 +1941,10 @@ examples:
       responses:
         "400":
           application/json: {"error": "<value>"}
-        "201": {}
-        "422": {}
+        "201":
+          application/json: {"evidenceID": "9190d267-bea7-4723-a193-9ba89cb7df82", "disputeID": "494aabdd-cd85-450e-b6b0-a1e547e0dcc9", "filename": "example.file", "mimeType": "<value>", "size": 662669, "evidenceType": "generic-evidence", "createdOn": "2023-08-12T06:14:09.174Z"}
+        "422":
+          application/json: {}
   uploadDisputeEvidenceText:
     speakeasy-default-upload-dispute-evidence-text:
       parameters:
@@ -2021,7 +2030,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"agreementID": "4c49ae91-2b32-4a4d-91bf-f062f3c2f38d", "planID": "7a6c5eb4-879b-4c21-b9fa-71eb2181b3ad", "name": "<value>", "acceptedOn": "2024-03-10T19:49:08.718Z", "status": "terminated", "cardAcquiringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}, {"agreementID": "e326d153-ca61-4e3e-a86a-3e450e955fd6", "planID": "50844514-ef1f-40ee-adc6-d314e85a7739", "name": "<value>", "acceptedOn": "2024-02-27T23:25:25.370Z", "status": "terminated", "cardAcquiringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}]
+          application/json: [{"agreementID": "4c49ae91-2b32-4a4d-91bf-f062f3c2f38d", "planID": "7a6c5eb4-879b-4c21-b9fa-71eb2181b3ad", "name": "<value>", "acceptedOn": "2024-03-10T19:49:08.718Z", "status": "terminated", "cardAcquiringModel": "flat-rate", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}]}, {"agreementID": "e326d153-ca61-4e3e-a86a-3e450e955fd6", "planID": "50844514-ef1f-40ee-adc6-d314e85a7739", "name": "<value>", "acceptedOn": "2024-02-27T23:25:25.370Z", "status": "terminated", "cardAcquiringModel": "cost-plus", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}]}]
   createFeePlanAgreements:
     speakeasy-default-create-fee-plan-agreements:
       parameters:
@@ -2032,7 +2041,7 @@ examples:
         application/json: {"planID": "b97c2d59-80c5-49ac-b1fc-40e3a81d8daf"}
       responses:
         "201":
-          application/json: {"agreementID": "b97c2d59-80c5-49ac-b1fc-40e3a81d8daf", "planID": "10fadd5b-11fb-4499-ae95-794da03fdea6", "name": "<value>", "acceptedOn": "2024-03-30T02:16:07.411Z", "status": "active", "cardAcquiringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}]}
+          application/json: {"agreementID": "b97c2d59-80c5-49ac-b1fc-40e3a81d8daf", "planID": "10fadd5b-11fb-4499-ae95-794da03fdea6", "name": "<value>", "acceptedOn": "2024-03-30T02:16:07.411Z", "status": "active", "cardAcquiringModel": "cost-plus", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}]}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -2046,7 +2055,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"planID": "f1a4db2c-3482-4573-9821-edd05204e301", "name": "Fixed Rate Merchant Plan", "cardAcquiringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2023-12-22T05:57:14.362Z"}, {"planID": "a628b889-6bfb-4f2f-912a-3c4b130a524d", "name": "Fixed Rate Merchant Plan", "cardAcquiringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2023-01-09T04:17:35.274Z"}, {"planID": "9cfe1840-53c0-4033-9160-f52358028560", "name": "Fixed Rate Merchant Plan", "cardAcquiringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "network-passthrough", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2023-09-22T11:26:32.898Z"}]
+          application/json: [{"planID": "f1a4db2c-3482-4573-9821-edd05204e301", "name": "Fixed Rate Merchant Plan", "cardAcquiringModel": "flat-rate", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}], "createdAt": "2023-12-22T05:57:14.362Z"}, {"planID": "a628b889-6bfb-4f2f-912a-3c4b130a524d", "name": "Fixed Rate Merchant Plan", "cardAcquiringModel": "flat-rate", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}], "createdAt": "2023-01-09T04:17:35.274Z"}, {"planID": "9cfe1840-53c0-4033-9160-f52358028560", "name": "Fixed Rate Merchant Plan", "cardAcquiringModel": "flat-rate", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}], "createdAt": "2023-09-22T11:26:32.898Z"}]
   listPartnerPricing:
     speakeasy-default-list-partner-pricing:
       parameters:
@@ -2056,7 +2065,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"planID": "22ea0420-e1a7-4f8c-a9bf-8f0da89f6cb4", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquiringModel": "flat-rate", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "ach", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2025-08-17T12:11:01.383Z"}, {"planID": "324369ab-9721-41b3-a7e8-71264af093a2", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquiringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "fixed", "feeCategory": "card-other", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "rtp", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "createdAt": "2024-12-29T12:10:26.937Z"}, {"planID": "6958b000-957d-46d5-aac4-ed28a886adea", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquiringModel": "flat-rate", "billableFees": [], "createdAt": "2023-01-12T00:50:08.214Z"}]
+          application/json: [{"planID": "22ea0420-e1a7-4f8c-a9bf-8f0da89f6cb4", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquiringModel": "flat-rate", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}], "createdAt": "2025-08-17T12:11:01.383Z"}, {"planID": "324369ab-9721-41b3-a7e8-71264af093a2", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquiringModel": "cost-plus", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}], "createdAt": "2024-12-29T12:10:26.937Z"}, {"planID": "6958b000-957d-46d5-aac4-ed28a886adea", "name": "Fixed Rate Merchant Plan", "revenueShare": 10, "cardAcquiringModel": "flat-rate", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}], "createdAt": "2023-01-12T00:50:08.214Z"}]
   listPartnerPricingAgreements:
     speakeasy-default-list-partner-pricing-agreements:
       parameters:
@@ -2066,7 +2075,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"agreementID": "9366921a-25de-4c52-8ec6-4cd4ef557223", "planID": "3f51f992-c3cc-4fd2-b0b7-17c682c67267", "name": "<value>", "acceptedOn": "2025-10-11T07:38:13.898Z", "status": "active", "cardAcquiringModel": "cost-plus", "billableFees": [{"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-pull", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}, {"billableEvent": "ach-volume", "feeName": "ACH Direct Debit", "feeModel": "blended", "feeCategory": "card-push", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "variableRate": "0.05", "minPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}, "maxPerTransaction": {"currency": "USD", "valueDecimal": "12.987654321"}}, "feeConditions": {"cardBrand": ["visa"]}}], "revenueShare": 10}]
+          application/json: [{"agreementID": "9366921a-25de-4c52-8ec6-4cd4ef557223", "planID": "3f51f992-c3cc-4fd2-b0b7-17c682c67267", "name": "<value>", "acceptedOn": "2025-10-11T07:38:13.898Z", "status": "active", "cardAcquiringModel": "cost-plus", "billableFees": [{"billableFeeID": "9d957d33-1a9a-47aa-9460-fe1a90f003dd", "billableEvent": "card-auth-volume", "feeName": "Card decline fee", "feeModel": "fixed", "feeCategory": "card-acquiring", "feeProperties": {"fixedAmount": {"currency": "USD", "valueDecimal": "0.1"}}, "feeConditions": {"transactionType": ["decline"]}}], "revenueShare": 10}]
   uploadFile:
     speakeasy-default-upload-file:
       parameters:
@@ -2600,6 +2609,7 @@ examples:
         "200":
           image/png: "x-file: example.file"
           image/jpeg: "x-file: example.file"
+          image/*: "x-file: example.file"
   testEndToEndToken:
     speakeasy-default-test-end-to-end-token:
       requestBody:
@@ -2825,8 +2835,10 @@ examples:
       responses:
         "200":
           application/json: {"accountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "mode": "production", "accountType": "business", "displayName": "Whole Body Fitness", "profile": {"individual": {"name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}}, "business": {"legalBusinessName": "Classbooker, LLC", "businessType": "llc", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "description": "Local fitness gym paying out instructors", "representatives": [{"representativeID": "5898c125-a190-471c-a556-2af6646dadb3", "name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "responsibilities": {"ownershipPercentage": 38, "jobTitle": "CEO"}, "createdOn": "2023-09-24T19:37:32.283Z", "updatedOn": "2023-10-18T10:44:09.680Z"}, {"representativeID": "35a24506-17e6-4bb0-b579-d6f9464a3158", "name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "responsibilities": {"ownershipPercentage": 38, "jobTitle": "CEO"}, "createdOn": "2024-09-02T03:35:45.584Z", "updatedOn": "2024-05-22T21:03:36.028Z"}], "ownersProvided": false, "industryCodes": {"naics": "713940", "sic": "7991", "mcc": "7997"}}}, "metadata": {"optional": "metadata"}, "termsOfService": {"acceptedDate": "2024-03-31T23:04:03.133Z", "acceptedIP": "172.217.2.46"}, "verification": {"verificationStatus": "unverified", "status": "unverified", "documents": [{"documentID": "e07e83e8-9429-4e99-ac99-c941f719eb39", "type": "bankStatement", "contentType": "application/pdf", "uploadedAt": "2024-05-06T12:20:38.184Z"}]}, "customerSupport": {"phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}}, "settings": {"cardPayment": {"statementDescriptor": "Whole Body Fitness"}, "achPayment": {"companyName": "WholeBodyFitness"}}, "createdOn": "2024-05-06T12:20:38.184Z", "updatedOn": "2024-05-06T12:20:38.184Z", "disconnectedOn": "2024-05-06T12:20:38.184Z"}
-        "400": {}
-        "422": {}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {"error": {}}
   createBrand:
     speakeasy-default-create-brand:
       parameters:
@@ -2838,8 +2850,10 @@ examples:
       responses:
         "200":
           application/json: {"colors": {"dark": {"accent": "#111111"}, "light": {"accent": "#111111"}}}
-        "400": {}
-        "422": {}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
   upsertBrand:
     speakeasy-default-upsert-brand:
       parameters:
@@ -2851,8 +2865,10 @@ examples:
       responses:
         "200":
           application/json: {"colors": {"dark": {"accent": "#111111"}, "light": {"accent": "#111111"}}}
-        "400": {}
-        "422": {}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
   requestCapabilities:
     "":
       parameters:
@@ -2946,11 +2962,23 @@ examples:
         header: {}
       requestBody:
         application/json: {"averageTransactionSize": 543422, "maxTransactionSize": 470183, "averageMonthlyTransactionVolume": 390496, "volumeByCustomerType": {"businessToBusinessPercentage": 478438, "consumerToBusinessPercentage": 232067}, "cardVolumeDistribution": {"ecommercePercentage": 766938, "cardPresentPercentage": 138671, "mailOrPhonePercentage": 146928, "debtRepaymentPercentage": 114639}, "fulfillment": {"hasPhysicalGoods": false, "isShippingProduct": false, "shipmentDurationDays": 5009, "returnPolicy": "withinThirtyDays"}}
+      responses:
+        "200":
+          application/json: {"averageTransactionSize": 543422, "maxTransactionSize": 470183, "averageMonthlyTransactionVolume": 390496, "status": "pendingReview", "volumeByCustomerType": {"businessToBusinessPercentage": 232067, "consumerToBusinessPercentage": 766938}, "cardVolumeDistribution": {"ecommercePercentage": 138671, "cardPresentPercentage": 146928, "mailOrPhonePercentage": 114639, "debtRepaymentPercentage": 696861}, "fulfillment": {"hasPhysicalGoods": false, "isShippingProduct": true, "shipmentDurationDays": 697758, "returnPolicy": "exchangeOnly"}}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {"error": {}}
   revokeAccessToken:
     speakeasy-default-revoke-access-token:
       requestBody:
         application/x-www-form-urlencoded: {"token": "<value>", "client_id": "5clTR_MdVrrkgxw2", "client_secret": "dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"}
         application/json: {"token": "<value>", "client_id": "5clTR_MdVrrkgxw2", "client_secret": "dNC-hg7sVm22jc3g_Eogtyu0_1Mqh_4-"}
+      responses:
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
   createAccessToken:
     speakeasy-default-create-access-token:
       requestBody:
@@ -2959,8 +2987,10 @@ examples:
       responses:
         "200":
           application/json: {"token_type": "Bearer", "access_token": "eyJhbGciOiJFZERTQSIsImN0eSI6IkpXVCIsImtpZCI6IkR...", "refresh_token": "eyJhbGc0eSI6TQSIsImN0kpXVCIsImtp6IkpXVsImtpZC0a...", "expires_in": 1736964352, "scope": "/accounts.read /accounts.write"}
-        "400": {}
-        "422": {}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
   retrieveFees:
     speakeasy-default-retrieve-fees:
       parameters:
@@ -2989,8 +3019,10 @@ examples:
       responses:
         "200":
           application/json: {"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
-        "400": {}
-        "422": {}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
   listTerminalApplications:
     speakeasy-default-list-terminal-applications:
       responses:
@@ -3011,5 +3043,8 @@ examples:
         path:
           terminalApplicationID: "01234567-89ab-cdef-0123-456789abcdef"
         header: {}
+      responses:
+        "400":
+          application/json: {"error": "<value>"}
 examplesVersion: 1.0.0
 generatedTests: {}
