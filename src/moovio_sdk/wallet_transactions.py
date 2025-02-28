@@ -19,6 +19,7 @@ class WalletTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         transaction_type: Optional[components.WalletTransactionType] = None,
+        transaction_types: Optional[List[components.WalletTransactionType]] = None,
         source_type: Optional[components.WalletTransactionSourceType] = None,
         source_id: Optional[str] = None,
         status: Optional[components.WalletTransactionStatus] = None,
@@ -44,6 +45,7 @@ class WalletTransactions(BaseSDK):
         :param skip:
         :param count:
         :param transaction_type: Optional parameter to filter by transaction type.
+        :param transaction_types: Optional, comma-separated parameter to filter by transaction types.
         :param source_type: Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
         :param source_id: Optional parameter to filter by source ID.
         :param status: Optional parameter to filter by status (`pending` or `completed`).
@@ -73,6 +75,7 @@ class WalletTransactions(BaseSDK):
             count=count,
             wallet_id=wallet_id,
             transaction_type=transaction_type,
+            transaction_types=transaction_types,
             source_type=source_type,
             source_id=source_id,
             status=status,
@@ -169,6 +172,7 @@ class WalletTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         transaction_type: Optional[components.WalletTransactionType] = None,
+        transaction_types: Optional[List[components.WalletTransactionType]] = None,
         source_type: Optional[components.WalletTransactionSourceType] = None,
         source_id: Optional[str] = None,
         status: Optional[components.WalletTransactionStatus] = None,
@@ -194,6 +198,7 @@ class WalletTransactions(BaseSDK):
         :param skip:
         :param count:
         :param transaction_type: Optional parameter to filter by transaction type.
+        :param transaction_types: Optional, comma-separated parameter to filter by transaction types.
         :param source_type: Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
         :param source_id: Optional parameter to filter by source ID.
         :param status: Optional parameter to filter by status (`pending` or `completed`).
@@ -223,6 +228,7 @@ class WalletTransactions(BaseSDK):
             count=count,
             wallet_id=wallet_id,
             transaction_type=transaction_type,
+            transaction_types=transaction_types,
             source_type=source_type,
             source_id=source_id,
             status=status,

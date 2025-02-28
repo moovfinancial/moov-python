@@ -11,7 +11,7 @@ from moovio_sdk.types import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Optional, Union
+from typing import Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -79,7 +79,7 @@ class PatchSweepConfigTypedDict(TypedDict):
     push_payment_method_id: NotRequired[Nullable[PushPaymentMethodIDTypedDict]]
     pull_payment_method_id: NotRequired[Nullable[PullPaymentMethodIDTypedDict]]
     statement_descriptor: NotRequired[Nullable[StatementDescriptorTypedDict]]
-    minimum_balance: NotRequired[str]
+    minimum_balance: NotRequired[Nullable[str]]
 
 
 class PatchSweepConfig(BaseModel):
@@ -101,8 +101,8 @@ class PatchSweepConfig(BaseModel):
     ] = UNSET
 
     minimum_balance: Annotated[
-        Optional[str], pydantic.Field(alias="minimumBalance")
-    ] = None
+        OptionalNullable[str], pydantic.Field(alias="minimumBalance")
+    ] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -118,6 +118,7 @@ class PatchSweepConfig(BaseModel):
             "pushPaymentMethodID",
             "pullPaymentMethodID",
             "statementDescriptor",
+            "minimumBalance",
         ]
         null_default_fields = []
 

@@ -61,6 +61,10 @@ class ListWalletTransactionsRequestTypedDict(TypedDict):
         components_wallettransactiontype.WalletTransactionType
     ]
     r"""Optional parameter to filter by transaction type."""
+    transaction_types: NotRequired[
+        List[components_wallettransactiontype.WalletTransactionType]
+    ]
+    r"""Optional, comma-separated parameter to filter by transaction types."""
     source_type: NotRequired[
         components_wallettransactionsourcetype.WalletTransactionSourceType
     ]
@@ -110,6 +114,13 @@ class ListWalletTransactionsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""Optional parameter to filter by transaction type."""
+
+    transaction_types: Annotated[
+        Optional[List[components_wallettransactiontype.WalletTransactionType]],
+        pydantic.Field(alias="transactionTypes"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional, comma-separated parameter to filter by transaction types."""
 
     source_type: Annotated[
         Optional[components_wallettransactionsourcetype.WalletTransactionSourceType],

@@ -797,7 +797,7 @@ class Sweeps(BaseSDK):
                 components.StatementDescriptor, components.StatementDescriptorTypedDict
             ]
         ] = UNSET,
-        minimum_balance: Optional[str] = None,
+        minimum_balance: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -976,7 +976,7 @@ class Sweeps(BaseSDK):
                 components.StatementDescriptor, components.StatementDescriptorTypedDict
             ]
         ] = UNSET,
-        minimum_balance: Optional[str] = None,
+        minimum_balance: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,

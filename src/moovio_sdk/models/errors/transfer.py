@@ -25,14 +25,14 @@ class TransferData(BaseModel):
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
+    source: components_transfersource.TransferSource
+
+    destination: components_transferdestination.TransferDestination
+
     status: components_transferstatus.TransferStatus
     r"""Status of a transfer."""
 
     amount: components_amount.Amount
-
-    source: Optional[components_transfersource.TransferSource] = None
-
-    destination: Optional[components_transferdestination.TransferDestination] = None
 
     completed_on: Annotated[Optional[datetime], pydantic.Field(alias="completedOn")] = (
         None

@@ -22,11 +22,11 @@ class TransferTypedDict(TypedDict):
 
     transfer_id: str
     created_on: datetime
+    source: TransferSourceTypedDict
+    destination: TransferDestinationTypedDict
     status: TransferStatus
     r"""Status of a transfer."""
     amount: AmountTypedDict
-    source: NotRequired[TransferSourceTypedDict]
-    destination: NotRequired[TransferDestinationTypedDict]
     completed_on: NotRequired[datetime]
     failure_reason: NotRequired[TransferFailureReason]
     r"""Reason for a transfer's failure."""
@@ -59,14 +59,14 @@ class Transfer(BaseModel):
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
+    source: TransferSource
+
+    destination: TransferDestination
+
     status: TransferStatus
     r"""Status of a transfer."""
 
     amount: Amount
-
-    source: Optional[TransferSource] = None
-
-    destination: Optional[TransferDestination] = None
 
     completed_on: Annotated[Optional[datetime], pydantic.Field(alias="completedOn")] = (
         None

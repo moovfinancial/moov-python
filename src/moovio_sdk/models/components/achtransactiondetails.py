@@ -30,6 +30,7 @@ class ACHTransactionDetailsTypedDict(TypedDict):
     originated_on: NotRequired[datetime]
     corrected_on: NotRequired[datetime]
     returned_on: NotRequired[datetime]
+    failed_on: NotRequired[datetime]
     completed_on: NotRequired[datetime]
     debit_hold_period: NotRequired[DebitHoldPeriod]
     r"""An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting."""
@@ -75,6 +76,8 @@ class ACHTransactionDetails(BaseModel):
     returned_on: Annotated[Optional[datetime], pydantic.Field(alias="returnedOn")] = (
         None
     )
+
+    failed_on: Annotated[Optional[datetime], pydantic.Field(alias="failedOn")] = None
 
     completed_on: Annotated[Optional[datetime], pydantic.Field(alias="completedOn")] = (
         None

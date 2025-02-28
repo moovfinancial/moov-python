@@ -13,6 +13,7 @@ from .paymentmethodsbankaccount import (
 )
 from .paymentmethodscard import PaymentMethodsCard, PaymentMethodsCardTypedDict
 from .paymentmethodswallet import PaymentMethodsWallet, PaymentMethodsWalletTypedDict
+from .paymentmethodtype import PaymentMethodType
 from .rtptransactiondetails import RTPTransactionDetails, RTPTransactionDetailsTypedDict
 from .transferaccount import TransferAccount, TransferAccountTypedDict
 from moovio_sdk.types import BaseModel
@@ -23,7 +24,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class TransferDestinationTypedDict(TypedDict):
     payment_method_id: str
-    payment_method_type: str
+    payment_method_type: PaymentMethodType
+    r"""The payment method type that represents a payment rail and directionality"""
     account: TransferAccountTypedDict
     bank_account: NotRequired[PaymentMethodsBankAccountTypedDict]
     r"""A bank account as contained within a payment method."""
@@ -43,7 +45,10 @@ class TransferDestinationTypedDict(TypedDict):
 class TransferDestination(BaseModel):
     payment_method_id: Annotated[str, pydantic.Field(alias="paymentMethodID")]
 
-    payment_method_type: Annotated[str, pydantic.Field(alias="paymentMethodType")]
+    payment_method_type: Annotated[
+        PaymentMethodType, pydantic.Field(alias="paymentMethodType")
+    ]
+    r"""The payment method type that represents a payment rail and directionality"""
 
     account: TransferAccount
 

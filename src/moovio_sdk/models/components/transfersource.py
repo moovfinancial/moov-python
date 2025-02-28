@@ -13,6 +13,7 @@ from .paymentmethodsbankaccount import (
 )
 from .paymentmethodscard import PaymentMethodsCard, PaymentMethodsCardTypedDict
 from .paymentmethodswallet import PaymentMethodsWallet, PaymentMethodsWalletTypedDict
+from .paymentmethodtype import PaymentMethodType
 from .transferaccount import TransferAccount, TransferAccountTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -22,8 +23,11 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class TransferSourceTypedDict(TypedDict):
     payment_method_id: str
-    payment_method_type: str
+    payment_method_type: PaymentMethodType
+    r"""The payment method type that represents a payment rail and directionality"""
     account: TransferAccountTypedDict
+    transfer_id: NotRequired[str]
+    r"""UUID present only if the transfer is part of a transfer group."""
     bank_account: NotRequired[PaymentMethodsBankAccountTypedDict]
     r"""A bank account as contained within a payment method."""
     wallet: NotRequired[PaymentMethodsWalletTypedDict]
@@ -40,9 +44,15 @@ class TransferSourceTypedDict(TypedDict):
 class TransferSource(BaseModel):
     payment_method_id: Annotated[str, pydantic.Field(alias="paymentMethodID")]
 
-    payment_method_type: Annotated[str, pydantic.Field(alias="paymentMethodType")]
+    payment_method_type: Annotated[
+        PaymentMethodType, pydantic.Field(alias="paymentMethodType")
+    ]
+    r"""The payment method type that represents a payment rail and directionality"""
 
     account: TransferAccount
+
+    transfer_id: Annotated[Optional[str], pydantic.Field(alias="transferID")] = None
+    r"""UUID present only if the transfer is part of a transfer group."""
 
     bank_account: Annotated[
         Optional[PaymentMethodsBankAccount], pydantic.Field(alias="bankAccount")
