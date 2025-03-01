@@ -14,6 +14,8 @@ class FeePlans(BaseSDK):
         self,
         *,
         account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
         agreement_id: Optional[List[str]] = None,
         status: Optional[List[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -27,6 +29,8 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
         :param account_id:
+        :param skip:
+        :param count:
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -45,6 +49,8 @@ class FeePlans(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListFeePlanAgreementsRequest(
+            skip=skip,
+            count=count,
             account_id=account_id,
             agreement_id=agreement_id,
             status=status,
@@ -132,6 +138,8 @@ class FeePlans(BaseSDK):
         self,
         *,
         account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
         agreement_id: Optional[List[str]] = None,
         status: Optional[List[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -145,6 +153,8 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
         :param account_id:
+        :param skip:
+        :param count:
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -163,6 +173,8 @@ class FeePlans(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListFeePlanAgreementsRequest(
+            skip=skip,
+            count=count,
             account_id=account_id,
             agreement_id=agreement_id,
             status=status,
@@ -1502,6 +1514,8 @@ class FeePlans(BaseSDK):
         self,
         *,
         account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
         agreement_id: Optional[List[str]] = None,
         status: Optional[List[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1515,6 +1529,8 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
         :param account_id:
+        :param skip:
+        :param count:
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -1533,6 +1549,8 @@ class FeePlans(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPartnerPricingAgreementsRequest(
+            skip=skip,
+            count=count,
             account_id=account_id,
             agreement_id=agreement_id,
             status=status,
@@ -1620,6 +1638,8 @@ class FeePlans(BaseSDK):
         self,
         *,
         account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
         agreement_id: Optional[List[str]] = None,
         status: Optional[List[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1633,6 +1653,8 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
         :param account_id:
+        :param skip:
+        :param count:
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -1651,6 +1673,8 @@ class FeePlans(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPartnerPricingAgreementsRequest(
+            skip=skip,
+            count=count,
             account_id=account_id,
             agreement_id=agreement_id,
             status=status,

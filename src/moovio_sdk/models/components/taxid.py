@@ -5,21 +5,21 @@ from moovio_sdk.types import BaseModel
 from typing_extensions import TypedDict
 
 
-class EinTypedDict(TypedDict):
+class TaxIDEinTypedDict(TypedDict):
     number: str
 
 
-class Ein(BaseModel):
+class TaxIDEin(BaseModel):
     number: str
 
 
 class TaxIDTypedDict(TypedDict):
     r"""An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN."""
 
-    ein: EinTypedDict
+    ein: TaxIDEinTypedDict
 
 
 class TaxID(BaseModel):
     r"""An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN."""
 
-    ein: Ein
+    ein: TaxIDEin

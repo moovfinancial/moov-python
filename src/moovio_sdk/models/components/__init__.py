@@ -345,19 +345,19 @@ from .generatedbydisputeid import GeneratedByDisputeID, GeneratedByDisputeIDType
 from .generatedbytransferid import GeneratedByTransferID, GeneratedByTransferIDTypedDict
 from .governmentid import (
     GovernmentID,
+    GovernmentIDItin,
+    GovernmentIDItinTypedDict,
+    GovernmentIDSsn,
+    GovernmentIDSsnTypedDict,
     GovernmentIDTypedDict,
+)
+from .governmentiderror import (
+    GovernmentIDError,
+    GovernmentIDErrorTypedDict,
     Itin,
     ItinTypedDict,
     Ssn,
     SsnTypedDict,
-)
-from .governmentiderror import (
-    GovernmentIDError,
-    GovernmentIDErrorItin,
-    GovernmentIDErrorItinTypedDict,
-    GovernmentIDErrorSsn,
-    GovernmentIDErrorSsnTypedDict,
-    GovernmentIDErrorTypedDict,
 )
 from .granttype import GrantType
 from .incurredfee import IncurredFee, IncurredFeeTypedDict
@@ -602,13 +602,8 @@ from .sweepconfigpaymentmethod import (
 )
 from .sweepconfigstatus import SweepConfigStatus
 from .sweepstatus import SweepStatus
-from .taxid import Ein, EinTypedDict, TaxID, TaxIDTypedDict
-from .taxidupdate import (
-    TaxIDUpdate,
-    TaxIDUpdateEin,
-    TaxIDUpdateEinTypedDict,
-    TaxIDUpdateTypedDict,
-)
+from .taxid import TaxID, TaxIDEin, TaxIDEinTypedDict, TaxIDTypedDict
+from .taxidupdate import Ein, EinTypedDict, TaxIDUpdate, TaxIDUpdateTypedDict
 from .terminalapplication import TerminalApplication, TerminalApplicationTypedDict
 from .terminalapplicationplatform import TerminalApplicationPlatform
 from .terminalapplicationstatus import TerminalApplicationStatus
@@ -1055,11 +1050,11 @@ __all__ = [
     "GeneratedByTypedDict",
     "GovernmentID",
     "GovernmentIDError",
-    "GovernmentIDErrorItin",
-    "GovernmentIDErrorItinTypedDict",
-    "GovernmentIDErrorSsn",
-    "GovernmentIDErrorSsnTypedDict",
     "GovernmentIDErrorTypedDict",
+    "GovernmentIDItin",
+    "GovernmentIDItinTypedDict",
+    "GovernmentIDSsn",
+    "GovernmentIDSsnTypedDict",
     "GovernmentIDTypedDict",
     "GrantType",
     "IncurredFee",
@@ -1308,10 +1303,10 @@ __all__ = [
     "SweepStatus",
     "SweepTypedDict",
     "TaxID",
+    "TaxIDEin",
+    "TaxIDEinTypedDict",
     "TaxIDTypedDict",
     "TaxIDUpdate",
-    "TaxIDUpdateEin",
-    "TaxIDUpdateEinTypedDict",
     "TaxIDUpdateTypedDict",
     "TerminalApplication",
     "TerminalApplicationPlatform",

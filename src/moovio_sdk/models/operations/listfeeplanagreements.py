@@ -51,6 +51,8 @@ class ListFeePlanAgreementsGlobals(BaseModel):
 
 class ListFeePlanAgreementsRequestTypedDict(TypedDict):
     account_id: str
+    skip: NotRequired[int]
+    count: NotRequired[int]
     agreement_id: NotRequired[List[str]]
     r"""A comma-separated list of agreement IDs to filter the results by."""
     status: NotRequired[List[components_feeplanagreementstatus.FeePlanAgreementStatus]]
@@ -63,6 +65,16 @@ class ListFeePlanAgreementsRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+
+    skip: Annotated[
+        Optional[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+
+    count: Annotated[
+        Optional[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
 
     agreement_id: Annotated[
         Optional[List[str]],

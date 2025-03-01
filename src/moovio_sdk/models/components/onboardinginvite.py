@@ -35,6 +35,8 @@ class OnboardingInviteTypedDict(TypedDict):
     r"""The scopes requested by the inviter."""
     terms_of_service_url: NotRequired[str]
     r"""The terms of service URL set by the inviter."""
+    redeemed_account_id: NotRequired[str]
+    r"""The account ID of the account that redeemed the invite."""
     prefill: NotRequired[CreateAccountTypedDict]
     partner: NotRequired[OnboardingPartnerAccountTypedDict]
     r"""The account that created the onboarding invite."""
@@ -68,9 +70,14 @@ class OnboardingInvite(BaseModel):
     r"""The scopes requested by the inviter."""
 
     terms_of_service_url: Annotated[
-        Optional[str], pydantic.Field(alias="TermsOfServiceURL")
+        Optional[str], pydantic.Field(alias="termsOfServiceURL")
     ] = None
     r"""The terms of service URL set by the inviter."""
+
+    redeemed_account_id: Annotated[
+        Optional[str], pydantic.Field(alias="redeemedAccountID")
+    ] = None
+    r"""The account ID of the account that redeemed the invite."""
 
     prefill: Optional[CreateAccount] = None
 

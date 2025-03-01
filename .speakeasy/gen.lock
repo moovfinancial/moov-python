@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: a7e28ac7ea2dc59298d66942cca5bcc5
+  docChecksum: 203a4ce2fad90a1ff07e6efd8f15a974
   docVersion: latest
-  speakeasyVersion: 1.507.0
-  generationVersion: 2.533.0
-  releaseVersion: 0.3.3
-  configChecksum: bb15af5a3c08c048d8ae5586e13c301f
+  speakeasyVersion: 1.508.0
+  generationVersion: 2.536.0
+  releaseVersion: 0.3.4
+  configChecksum: 1964185b3907ae47caf0245cc88c2db5
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
 features:
@@ -245,8 +245,8 @@ generatedFiles:
   - docs/models/components/generatedbytransferid.md
   - docs/models/components/governmentid.md
   - docs/models/components/governmentiderror.md
-  - docs/models/components/governmentiderroritin.md
-  - docs/models/components/governmentiderrorssn.md
+  - docs/models/components/governmentiditin.md
+  - docs/models/components/governmentidssn.md
   - docs/models/components/granttype.md
   - docs/models/components/incurredfee.md
   - docs/models/components/individualname.md
@@ -386,8 +386,8 @@ generatedFiles:
   - docs/models/components/sweepconfigstatus.md
   - docs/models/components/sweepstatus.md
   - docs/models/components/taxid.md
+  - docs/models/components/taxidein.md
   - docs/models/components/taxidupdate.md
-  - docs/models/components/taxidupdateein.md
   - docs/models/components/terminalapplication.md
   - docs/models/components/terminalapplicationplatform.md
   - docs/models/components/terminalapplicationstatus.md
@@ -2026,7 +2026,9 @@ examples:
       parameters:
         path:
           accountID: "4c49ae91-2b32-4a4d-91bf-f062f3c2f38d"
-        query: {}
+        query:
+          skip: 60
+          count: 20
         header: {}
       responses:
         "200":
@@ -2071,7 +2073,9 @@ examples:
       parameters:
         path:
           accountID: "9366921a-25de-4c52-8ec6-4cd4ef557223"
-        query: {}
+        query:
+          skip: 60
+          count: 20
         header: {}
       responses:
         "200":
