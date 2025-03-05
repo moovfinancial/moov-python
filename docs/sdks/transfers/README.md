@@ -35,6 +35,14 @@ Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/o
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [create_cancellation](#create_cancellation) -   Initiate a cancellation for a card, ACH, or queued transfer.
+  
+  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+  to specify the `/accounts/{accountID}/transfers.write` scope.
+* [get_cancellation](#get_cancellation) -   Get details of a cancellation for a transfer.
+  
+  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+  to specify the `/accounts/{accountID}/transfers.read` scope.
 * [initiate_refund](#initiate_refund) - Initiate a refund for a card transfer.
 
 **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
@@ -303,6 +311,100 @@ with Moov(
 ### Response
 
 **[operations.UpdateTransferResponse](../../models/operations/updatetransferresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## create_cancellation
+
+  Initiate a cancellation for a card, ACH, or queued transfer.
+  
+  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+  to specify the `/accounts/{accountID}/transfers.write` scope.
+
+### Example Usage
+
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.create_cancellation(account_id="12dbe811-b86d-497b-ae0f-fb7cfda35251", transfer_id="6bb9450c-10a9-4c8d-a8d2-d3fa18648706")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | The partner's Moov account ID.                                      |
+| `transfer_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The transfer ID to cancel.                                          |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.CreateCancellationResponse](../../models/operations/createcancellationresponse.md)**
+
+### Errors
+
+| Error Type          | Status Code         | Content Type        |
+| ------------------- | ------------------- | ------------------- |
+| errors.GenericError | 400                 | application/json    |
+| errors.APIError     | 4XX, 5XX            | \*/\*               |
+
+## get_cancellation
+
+  Get details of a cancellation for a transfer.
+  
+  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+  to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage
+
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.get_cancellation(account_id="fe098575-0376-4404-9a9c-6fe55e3766af", transfer_id="b3b49c6a-9b74-4a85-9d49-864ada05cbf2", cancellation_id="5848c1db-18ac-41eb-b107-b6499987902c")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | Moov account ID of the partner or transfer's source or destination. |
+| `transfer_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Identifier for the transfer.                                        |
+| `cancellation_id`                                                   | *str*                                                               | :heavy_check_mark:                                                  | Identifier for the cancellation.                                    |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.GetCancellationResponse](../../models/operations/getcancellationresponse.md)**
 
 ### Errors
 

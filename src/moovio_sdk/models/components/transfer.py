@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .amount import Amount, AmountTypedDict
+from .cancellation import Cancellation, CancellationTypedDict
 from .cardacquiringdispute import CardAcquiringDispute, CardAcquiringDisputeTypedDict
 from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundTypedDict
 from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
@@ -43,6 +44,7 @@ class TransferTypedDict(TypedDict):
     moov_fee_details: NotRequired[MoovFeeDetailsTypedDict]
     r"""Processing and pass-through costs that add up to the moovFee."""
     group_id: NotRequired[str]
+    cancellations: NotRequired[List[CancellationTypedDict]]
     refunded_amount: NotRequired[AmountTypedDict]
     refunds: NotRequired[List[CardAcquiringRefundTypedDict]]
     disputed_amount: NotRequired[AmountTypedDict]
@@ -102,6 +104,8 @@ class Transfer(BaseModel):
     r"""Processing and pass-through costs that add up to the moovFee."""
 
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupID")] = None
+
+    cancellations: Optional[List[Cancellation]] = None
 
     refunded_amount: Annotated[
         Optional[Amount], pydantic.Field(alias="refundedAmount")

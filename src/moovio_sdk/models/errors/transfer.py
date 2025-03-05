@@ -5,6 +5,7 @@ from datetime import datetime
 from moovio_sdk import utils
 from moovio_sdk.models.components import (
     amount as components_amount,
+    cancellation as components_cancellation,
     cardacquiringdispute as components_cardacquiringdispute,
     cardacquiringrefund as components_cardacquiringrefund,
     facilitatorfee as components_facilitatorfee,
@@ -71,6 +72,8 @@ class TransferData(BaseModel):
     r"""Processing and pass-through costs that add up to the moovFee."""
 
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupID")] = None
+
+    cancellations: Optional[List[components_cancellation.Cancellation]] = None
 
     refunded_amount: Annotated[
         Optional[components_amount.Amount], pydantic.Field(alias="refundedAmount")
