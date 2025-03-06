@@ -8,3 +8,6 @@ targets:
     latest:
         target: python
         source: latest
+        publish:
+            pypi:
+                token: $pypi_token
