@@ -1,6 +1,6 @@
-# moovio_sdk
+# Moov Python
 
-Developer-friendly & type-safe Python SDK specifically catered to leverage *moovio_sdk* API.
+The official SDK for interacting with the Moov API.
 
 <div align="left">
     <a href="https://www.speakeasy.com/?utm_source=moovio-sdk&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
@@ -8,11 +8,6 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *moov
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
 </div>
-
-
-<br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/moov/moov). Delete this section before > publishing to a package manager.
 
 <!-- Start Summary [summary] -->
 ## Summary
@@ -26,7 +21,7 @@ works at a high level, read our [concepts](https://docs.moov.io/guides/get-start
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [moovio_sdk](https://github.com/moovfinancial/moov-python/blob/master/#mooviosdk)
+* [Moov Python](https://github.com/moovfinancial/moov-python/blob/master/#moov-python)
   * [SDK Installation](https://github.com/moovfinancial/moov-python/blob/master/#sdk-installation)
   * [IDE Support](https://github.com/moovfinancial/moov-python/blob/master/#ide-support)
   * [SDK Example Usage](https://github.com/moovfinancial/moov-python/blob/master/#sdk-example-usage)
@@ -136,60 +131,60 @@ with Moov(
 ) as moov:
 
     res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
-        individual={
-            "name": {
-                "first_name": "Jordan",
-                "last_name": "Lee",
-                "middle_name": "Reese",
-                "suffix": "Jr",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "birth_date": {
-                "day": 9,
-                "month": 11,
-                "year": 1989,
-            },
-        },
-        business={
-            "legal_business_name": "Classbooker, LLC",
-            "business_type": components.BusinessType.LLC,
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "description": "Local fitness gym paying out instructors",
-            "tax_id": {
-                "ein": {
-                    "number": "12-3456789",
-                },
-            },
-            "industry_codes": {
-                "naics": "713940",
-                "sic": "7991",
-                "mcc": "7997",
-            },
-        },
+        individual=components.CreateIndividualProfile(
+            name=components.IndividualName(
+                first_name="Jordan",
+                last_name="Lee",
+                middle_name="Reese",
+                suffix="Jr",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            birth_date=components.BirthDate(
+                day=9,
+                month=11,
+                year=1989,
+            ),
+        ),
+        business=components.CreateBusinessProfile(
+            legal_business_name="Classbooker, LLC",
+            business_type=components.BusinessType.LLC,
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            description="Local fitness gym paying out instructors",
+            tax_id=components.TaxID(
+                ein=components.TaxIDEin(
+                    number="12-3456789",
+                ),
+            ),
+            industry_codes=components.IndustryCodes(
+                naics="713940",
+                sic="7991",
+                mcc="7997",
+            ),
+        ),
     ), metadata={
         "optional": "metadata",
     }, terms_of_service={
@@ -240,60 +235,60 @@ async def main():
     ) as moov:
 
         res = await moov.accounts.create_async(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
-            individual={
-                "name": {
-                    "first_name": "Jordan",
-                    "last_name": "Lee",
-                    "middle_name": "Reese",
-                    "suffix": "Jr",
-                },
-                "phone": {
-                    "number": "8185551212",
-                    "country_code": "1",
-                },
-                "email": "jordan.lee@classbooker.dev",
-                "address": {
-                    "address_line1": "123 Main Street",
-                    "city": "Boulder",
-                    "state_or_province": "CO",
-                    "postal_code": "80301",
-                    "country": "US",
-                    "address_line2": "Apt 302",
-                },
-                "birth_date": {
-                    "day": 9,
-                    "month": 11,
-                    "year": 1989,
-                },
-            },
-            business={
-                "legal_business_name": "Classbooker, LLC",
-                "business_type": components.BusinessType.LLC,
-                "address": {
-                    "address_line1": "123 Main Street",
-                    "city": "Boulder",
-                    "state_or_province": "CO",
-                    "postal_code": "80301",
-                    "country": "US",
-                    "address_line2": "Apt 302",
-                },
-                "phone": {
-                    "number": "8185551212",
-                    "country_code": "1",
-                },
-                "email": "jordan.lee@classbooker.dev",
-                "description": "Local fitness gym paying out instructors",
-                "tax_id": {
-                    "ein": {
-                        "number": "12-3456789",
-                    },
-                },
-                "industry_codes": {
-                    "naics": "713940",
-                    "sic": "7991",
-                    "mcc": "7997",
-                },
-            },
+            individual=components.CreateIndividualProfile(
+                name=components.IndividualName(
+                    first_name="Jordan",
+                    last_name="Lee",
+                    middle_name="Reese",
+                    suffix="Jr",
+                ),
+                phone=components.PhoneNumber(
+                    number="8185551212",
+                    country_code="1",
+                ),
+                email="jordan.lee@classbooker.dev",
+                address=components.Address(
+                    address_line1="123 Main Street",
+                    city="Boulder",
+                    state_or_province="CO",
+                    postal_code="80301",
+                    country="US",
+                    address_line2="Apt 302",
+                ),
+                birth_date=components.BirthDate(
+                    day=9,
+                    month=11,
+                    year=1989,
+                ),
+            ),
+            business=components.CreateBusinessProfile(
+                legal_business_name="Classbooker, LLC",
+                business_type=components.BusinessType.LLC,
+                address=components.Address(
+                    address_line1="123 Main Street",
+                    city="Boulder",
+                    state_or_province="CO",
+                    postal_code="80301",
+                    country="US",
+                    address_line2="Apt 302",
+                ),
+                phone=components.PhoneNumber(
+                    number="8185551212",
+                    country_code="1",
+                ),
+                email="jordan.lee@classbooker.dev",
+                description="Local fitness gym paying out instructors",
+                tax_id=components.TaxID(
+                    ein=components.TaxIDEin(
+                        number="12-3456789",
+                    ),
+                ),
+                industry_codes=components.IndustryCodes(
+                    naics="713940",
+                    sic="7991",
+                    mcc="7997",
+                ),
+            ),
         ), metadata={
             "optional": "metadata",
         }, terms_of_service={
@@ -353,60 +348,60 @@ with Moov(
 ) as moov:
 
     res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
-        individual={
-            "name": {
-                "first_name": "Jordan",
-                "last_name": "Lee",
-                "middle_name": "Reese",
-                "suffix": "Jr",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "birth_date": {
-                "day": 9,
-                "month": 11,
-                "year": 1989,
-            },
-        },
-        business={
-            "legal_business_name": "Classbooker, LLC",
-            "business_type": components.BusinessType.LLC,
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "description": "Local fitness gym paying out instructors",
-            "tax_id": {
-                "ein": {
-                    "number": "12-3456789",
-                },
-            },
-            "industry_codes": {
-                "naics": "713940",
-                "sic": "7991",
-                "mcc": "7997",
-            },
-        },
+        individual=components.CreateIndividualProfile(
+            name=components.IndividualName(
+                first_name="Jordan",
+                last_name="Lee",
+                middle_name="Reese",
+                suffix="Jr",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            birth_date=components.BirthDate(
+                day=9,
+                month=11,
+                year=1989,
+            ),
+        ),
+        business=components.CreateBusinessProfile(
+            legal_business_name="Classbooker, LLC",
+            business_type=components.BusinessType.LLC,
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            description="Local fitness gym paying out instructors",
+            tax_id=components.TaxID(
+                ein=components.TaxIDEin(
+                    number="12-3456789",
+                ),
+            ),
+            industry_codes=components.IndustryCodes(
+                naics="713940",
+                sic="7991",
+                mcc="7997",
+            ),
+        ),
     ), metadata={
         "optional": "metadata",
     }, terms_of_service={
@@ -1029,6 +1024,17 @@ you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/ping.read` scope.
 
+### [receipts](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/receipts/README.md)
+
+* [create](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/receipts/README.md#create) -  Create receipts for transfers and scheduled transfers.
+
+ To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [list](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/receipts/README.md#list) - List receipts by trasnferID, scheduleID, or occurrenceID.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
 ### [representatives](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/representatives/README.md)
 
 * [create](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/representatives/README.md#create) - Moov accounts associated with businesses require information regarding individuals who represent the business. 
@@ -1313,60 +1319,60 @@ with Moov(
 ) as moov:
 
     res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
-        individual={
-            "name": {
-                "first_name": "Jordan",
-                "last_name": "Lee",
-                "middle_name": "Reese",
-                "suffix": "Jr",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "birth_date": {
-                "day": 9,
-                "month": 11,
-                "year": 1989,
-            },
-        },
-        business={
-            "legal_business_name": "Classbooker, LLC",
-            "business_type": components.BusinessType.LLC,
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "description": "Local fitness gym paying out instructors",
-            "tax_id": {
-                "ein": {
-                    "number": "12-3456789",
-                },
-            },
-            "industry_codes": {
-                "naics": "713940",
-                "sic": "7991",
-                "mcc": "7997",
-            },
-        },
+        individual=components.CreateIndividualProfile(
+            name=components.IndividualName(
+                first_name="Jordan",
+                last_name="Lee",
+                middle_name="Reese",
+                suffix="Jr",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            birth_date=components.BirthDate(
+                day=9,
+                month=11,
+                year=1989,
+            ),
+        ),
+        business=components.CreateBusinessProfile(
+            legal_business_name="Classbooker, LLC",
+            business_type=components.BusinessType.LLC,
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            description="Local fitness gym paying out instructors",
+            tax_id=components.TaxID(
+                ein=components.TaxIDEin(
+                    number="12-3456789",
+                ),
+            ),
+            industry_codes=components.IndustryCodes(
+                naics="713940",
+                sic="7991",
+                mcc="7997",
+            ),
+        ),
     ), metadata={
         "optional": "metadata",
     }, terms_of_service={
@@ -1416,60 +1422,60 @@ with Moov(
 ) as moov:
 
     res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
-        individual={
-            "name": {
-                "first_name": "Jordan",
-                "last_name": "Lee",
-                "middle_name": "Reese",
-                "suffix": "Jr",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "birth_date": {
-                "day": 9,
-                "month": 11,
-                "year": 1989,
-            },
-        },
-        business={
-            "legal_business_name": "Classbooker, LLC",
-            "business_type": components.BusinessType.LLC,
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "description": "Local fitness gym paying out instructors",
-            "tax_id": {
-                "ein": {
-                    "number": "12-3456789",
-                },
-            },
-            "industry_codes": {
-                "naics": "713940",
-                "sic": "7991",
-                "mcc": "7997",
-            },
-        },
+        individual=components.CreateIndividualProfile(
+            name=components.IndividualName(
+                first_name="Jordan",
+                last_name="Lee",
+                middle_name="Reese",
+                suffix="Jr",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            birth_date=components.BirthDate(
+                day=9,
+                month=11,
+                year=1989,
+            ),
+        ),
+        business=components.CreateBusinessProfile(
+            legal_business_name="Classbooker, LLC",
+            business_type=components.BusinessType.LLC,
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            description="Local fitness gym paying out instructors",
+            tax_id=components.TaxID(
+                ein=components.TaxIDEin(
+                    number="12-3456789",
+                ),
+            ),
+            industry_codes=components.IndustryCodes(
+                naics="713940",
+                sic="7991",
+                mcc="7997",
+            ),
+        ),
     ), metadata={
         "optional": "metadata",
     }, terms_of_service={
@@ -1542,60 +1548,60 @@ with Moov(
     try:
 
         res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
-            individual={
-                "name": {
-                    "first_name": "Jordan",
-                    "last_name": "Lee",
-                    "middle_name": "Reese",
-                    "suffix": "Jr",
-                },
-                "phone": {
-                    "number": "8185551212",
-                    "country_code": "1",
-                },
-                "email": "jordan.lee@classbooker.dev",
-                "address": {
-                    "address_line1": "123 Main Street",
-                    "city": "Boulder",
-                    "state_or_province": "CO",
-                    "postal_code": "80301",
-                    "country": "US",
-                    "address_line2": "Apt 302",
-                },
-                "birth_date": {
-                    "day": 9,
-                    "month": 11,
-                    "year": 1989,
-                },
-            },
-            business={
-                "legal_business_name": "Classbooker, LLC",
-                "business_type": components.BusinessType.LLC,
-                "address": {
-                    "address_line1": "123 Main Street",
-                    "city": "Boulder",
-                    "state_or_province": "CO",
-                    "postal_code": "80301",
-                    "country": "US",
-                    "address_line2": "Apt 302",
-                },
-                "phone": {
-                    "number": "8185551212",
-                    "country_code": "1",
-                },
-                "email": "jordan.lee@classbooker.dev",
-                "description": "Local fitness gym paying out instructors",
-                "tax_id": {
-                    "ein": {
-                        "number": "12-3456789",
-                    },
-                },
-                "industry_codes": {
-                    "naics": "713940",
-                    "sic": "7991",
-                    "mcc": "7997",
-                },
-            },
+            individual=components.CreateIndividualProfile(
+                name=components.IndividualName(
+                    first_name="Jordan",
+                    last_name="Lee",
+                    middle_name="Reese",
+                    suffix="Jr",
+                ),
+                phone=components.PhoneNumber(
+                    number="8185551212",
+                    country_code="1",
+                ),
+                email="jordan.lee@classbooker.dev",
+                address=components.Address(
+                    address_line1="123 Main Street",
+                    city="Boulder",
+                    state_or_province="CO",
+                    postal_code="80301",
+                    country="US",
+                    address_line2="Apt 302",
+                ),
+                birth_date=components.BirthDate(
+                    day=9,
+                    month=11,
+                    year=1989,
+                ),
+            ),
+            business=components.CreateBusinessProfile(
+                legal_business_name="Classbooker, LLC",
+                business_type=components.BusinessType.LLC,
+                address=components.Address(
+                    address_line1="123 Main Street",
+                    city="Boulder",
+                    state_or_province="CO",
+                    postal_code="80301",
+                    country="US",
+                    address_line2="Apt 302",
+                ),
+                phone=components.PhoneNumber(
+                    number="8185551212",
+                    country_code="1",
+                ),
+                email="jordan.lee@classbooker.dev",
+                description="Local fitness gym paying out instructors",
+                tax_id=components.TaxID(
+                    ein=components.TaxIDEin(
+                        number="12-3456789",
+                    ),
+                ),
+                industry_codes=components.IndustryCodes(
+                    naics="713940",
+                    sic="7991",
+                    mcc="7997",
+                ),
+            ),
         ), metadata={
             "optional": "metadata",
         }, terms_of_service={
@@ -1658,60 +1664,60 @@ with Moov(
 ) as moov:
 
     res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
-        individual={
-            "name": {
-                "first_name": "Jordan",
-                "last_name": "Lee",
-                "middle_name": "Reese",
-                "suffix": "Jr",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "birth_date": {
-                "day": 9,
-                "month": 11,
-                "year": 1989,
-            },
-        },
-        business={
-            "legal_business_name": "Classbooker, LLC",
-            "business_type": components.BusinessType.LLC,
-            "address": {
-                "address_line1": "123 Main Street",
-                "city": "Boulder",
-                "state_or_province": "CO",
-                "postal_code": "80301",
-                "country": "US",
-                "address_line2": "Apt 302",
-            },
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
-            "email": "jordan.lee@classbooker.dev",
-            "description": "Local fitness gym paying out instructors",
-            "tax_id": {
-                "ein": {
-                    "number": "12-3456789",
-                },
-            },
-            "industry_codes": {
-                "naics": "713940",
-                "sic": "7991",
-                "mcc": "7997",
-            },
-        },
+        individual=components.CreateIndividualProfile(
+            name=components.IndividualName(
+                first_name="Jordan",
+                last_name="Lee",
+                middle_name="Reese",
+                suffix="Jr",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            birth_date=components.BirthDate(
+                day=9,
+                month=11,
+                year=1989,
+            ),
+        ),
+        business=components.CreateBusinessProfile(
+            legal_business_name="Classbooker, LLC",
+            business_type=components.BusinessType.LLC,
+            address=components.Address(
+                address_line1="123 Main Street",
+                city="Boulder",
+                state_or_province="CO",
+                postal_code="80301",
+                country="US",
+                address_line2="Apt 302",
+            ),
+            phone=components.PhoneNumber(
+                number="8185551212",
+                country_code="1",
+            ),
+            email="jordan.lee@classbooker.dev",
+            description="Local fitness gym paying out instructors",
+            tax_id=components.TaxID(
+                ein=components.TaxIDEin(
+                    number="12-3456789",
+                ),
+            ),
+            industry_codes=components.IndustryCodes(
+                naics="713940",
+                sic="7991",
+                mcc="7997",
+            ),
+        ),
     ), metadata={
         "optional": "metadata",
     }, terms_of_service={

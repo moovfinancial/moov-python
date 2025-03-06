@@ -1,0 +1,10 @@
+# SentReceipt
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `receipt_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | Unique identifier for the receipt.                                   |                                                                      |
+| `idempotency_key`                                                    | *str*                                                                | :heavy_check_mark:                                                   | The idempotency key used when creating the receipt.                  |                                                                      |
+| `sent_on`                                                            | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | When the receipt was sent.                                           | 2009-11-10T23:00:00Z                                                 |

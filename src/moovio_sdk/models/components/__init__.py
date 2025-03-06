@@ -535,6 +535,9 @@ from .pushtocardpaymentmethod import (
     PushToCardPaymentMethodTypedDict,
 )
 from .qrcode import QRCode, QRCodeTypedDict
+from .receiptkind import ReceiptKind
+from .receiptrequest import ReceiptRequest, ReceiptRequestTypedDict
+from .receiptresponse import ReceiptResponse, ReceiptResponseTypedDict
 from .recur import Recur, RecurTypedDict
 from .refundcarddetails import RefundCardDetails, RefundCardDetailsTypedDict
 from .refundcardstatus import RefundCardStatus
@@ -589,6 +592,7 @@ from .schedulepaymentmethod import (
 from .scheduleresponse import ScheduleResponse, ScheduleResponseTypedDict
 from .seccode import SECCode
 from .security import Security, SecurityTypedDict
+from .sentreceipt import SentReceipt, SentReceiptTypedDict
 from .settings import Settings, SettingsTypedDict
 from .sourcedestinationoptions import (
     SourceDestinationOptions,
@@ -1240,6 +1244,11 @@ __all__ = [
     "RTPTransactionDetails",
     "RTPTransactionDetailsTypedDict",
     "RTPTransactionStatus",
+    "ReceiptKind",
+    "ReceiptRequest",
+    "ReceiptRequestTypedDict",
+    "ReceiptResponse",
+    "ReceiptResponseTypedDict",
     "Recur",
     "RecurTypedDict",
     "RefundCardDetails",
@@ -1283,6 +1292,8 @@ __all__ = [
     "ScheduleResponseTypedDict",
     "Security",
     "SecurityTypedDict",
+    "SentReceipt",
+    "SentReceiptTypedDict",
     "Settings",
     "SettingsTypedDict",
     "SourceDestinationOptions",

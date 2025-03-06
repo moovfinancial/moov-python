@@ -44,12 +44,12 @@ with Moov(
 ) as moov:
 
     res = moov.branding.create(account_id="7a621cf0-21cd-49cf-8540-3315211a509a", colors=components.BrandColors(
-        dark={
-            "accent": "#111111",
-        },
-        light={
-            "accent": "#111111",
-        },
+        dark=components.BrandColor(
+            accent="#111111",
+        ),
+        light=components.BrandColor(
+            accent="#111111",
+        ),
     ))
 
     # Handle response
@@ -99,12 +99,12 @@ with Moov(
 ) as moov:
 
     res = moov.branding.upsert(account_id="87673c22-1b80-4b69-b5bb-e92af8dcce02", colors=components.BrandColors(
-        dark={
-            "accent": "#111111",
-        },
-        light={
-            "accent": "#111111",
-        },
+        dark=components.BrandColor(
+            accent="#111111",
+        ),
+        light=components.BrandColor(
+            accent="#111111",
+        ),
     ))
 
     # Handle response

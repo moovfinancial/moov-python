@@ -32,6 +32,7 @@ from moovio_sdk.onboarding import Onboarding
 from moovio_sdk.payment_links import PaymentLinks
 from moovio_sdk.payment_methods import PaymentMethods
 from moovio_sdk.ping import Ping
+from moovio_sdk.receipts import Receipts
 from moovio_sdk.representatives import Representatives
 from moovio_sdk.scheduling import Scheduling
 from moovio_sdk.sweeps import Sweeps
@@ -82,6 +83,7 @@ class Moov(BaseSDK):
     authentication: Authentication
     onboarding: Onboarding
     ping: Ping
+    receipts: Receipts
     terminal_applications: TerminalApplications
 
     def __init__(
@@ -214,6 +216,7 @@ class Moov(BaseSDK):
         self.authentication = Authentication(self.sdk_configuration)
         self.onboarding = Onboarding(self.sdk_configuration)
         self.ping = Ping(self.sdk_configuration)
+        self.receipts = Receipts(self.sdk_configuration)
         self.terminal_applications = TerminalApplications(self.sdk_configuration)
 
     def __enter__(self):

@@ -98,6 +98,12 @@ from .createpaymentlink import (
     CreatePaymentLinkResponse,
     CreatePaymentLinkResponseTypedDict,
 )
+from .createreceipts import (
+    CreateReceiptsGlobals,
+    CreateReceiptsGlobalsTypedDict,
+    CreateReceiptsResponse,
+    CreateReceiptsResponseTypedDict,
+)
 from .createrepresentative import (
     CreateRepresentativeGlobals,
     CreateRepresentativeGlobalsTypedDict,
@@ -758,6 +764,14 @@ from .listpaymentmethods import (
     ListPaymentMethodsResponse,
     ListPaymentMethodsResponseTypedDict,
 )
+from .listreceipts import (
+    ListReceiptsGlobals,
+    ListReceiptsGlobalsTypedDict,
+    ListReceiptsRequest,
+    ListReceiptsRequestTypedDict,
+    ListReceiptsResponse,
+    ListReceiptsResponseTypedDict,
+)
 from .listrefunds import (
     ListRefundsGlobals,
     ListRefundsGlobalsTypedDict,
@@ -1101,6 +1115,10 @@ __all__ = [
     "CreatePaymentLinkRequestTypedDict",
     "CreatePaymentLinkResponse",
     "CreatePaymentLinkResponseTypedDict",
+    "CreateReceiptsGlobals",
+    "CreateReceiptsGlobalsTypedDict",
+    "CreateReceiptsResponse",
+    "CreateReceiptsResponseTypedDict",
     "CreateRepresentativeGlobals",
     "CreateRepresentativeGlobalsTypedDict",
     "CreateRepresentativeRequest",
@@ -1597,6 +1615,12 @@ __all__ = [
     "ListPaymentMethodsRequestTypedDict",
     "ListPaymentMethodsResponse",
     "ListPaymentMethodsResponseTypedDict",
+    "ListReceiptsGlobals",
+    "ListReceiptsGlobalsTypedDict",
+    "ListReceiptsRequest",
+    "ListReceiptsRequestTypedDict",
+    "ListReceiptsResponse",
+    "ListReceiptsResponseTypedDict",
     "ListRefundsGlobals",
     "ListRefundsGlobalsTypedDict",
     "ListRefundsRequest",

@@ -57,31 +57,31 @@ with Moov(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
-                amount={
-                    "currency": "USD",
-                    "value": 1204,
-                },
-                destination={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                amount=components.Amount(
+                    currency="USD",
+                    value=1204,
+                ),
+                destination=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 partner_account_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                source={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                source=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 description="ajar ornate bah calculus circumference fiercely ornate",
             ),
         ),
@@ -89,31 +89,31 @@ with Moov(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
-                amount={
-                    "currency": "USD",
-                    "value": 1204,
-                },
-                destination={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                amount=components.Amount(
+                    currency="USD",
+                    value=1204,
+                ),
+                destination=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 partner_account_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                source={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                source=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 description="scented whether once why unexpectedly",
             ),
         ),
@@ -121,62 +121,62 @@ with Moov(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
-                amount={
-                    "currency": "USD",
-                    "value": 1204,
-                },
-                destination={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                amount=components.Amount(
+                    currency="USD",
+                    value=1204,
+                ),
+                destination=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 partner_account_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                source={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                source=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 description="formation dreamily exasperation but yuck psst nautical",
             ),
         ),
     ], recur=components.Recur(
         recurrence_rule="<value>",
         run_transfer=components.RunTransfer(
-            amount={
-                "currency": "USD",
-                "value": 1204,
-            },
-            destination={
-                "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                "ach_details": {
-                    "company_entry_description": "Gym dues",
-                    "originating_company_name": "Whole Body Fit",
-                },
-                "card_details": {
-                    "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                },
-            },
+            amount=components.Amount(
+                currency="USD",
+                value=1204,
+            ),
+            destination=components.SchedulePaymentMethod(
+                payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                ach_details=components.AchDetails(
+                    company_entry_description="Gym dues",
+                    originating_company_name="Whole Body Fit",
+                ),
+                card_details=components.CardDetails(
+                    dynamic_descriptor="WhlBdy *Yoga 11-12",
+                ),
+            ),
             partner_account_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-            source={
-                "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                "ach_details": {
-                    "company_entry_description": "Gym dues",
-                    "originating_company_name": "Whole Body Fit",
-                },
-                "card_details": {
-                    "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                },
-            },
+            source=components.SchedulePaymentMethod(
+                payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                ach_details=components.AchDetails(
+                    company_entry_description="Gym dues",
+                    originating_company_name="Whole Body Fit",
+                ),
+                card_details=components.CardDetails(
+                    dynamic_descriptor="WhlBdy *Yoga 11-12",
+                ),
+            ),
             description="adjourn briskly amidst modulo gosh foolishly",
         ),
         start=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
@@ -283,31 +283,31 @@ with Moov(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
-                amount={
-                    "currency": "USD",
-                    "value": 1204,
-                },
-                destination={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                amount=components.Amount(
+                    currency="USD",
+                    value=1204,
+                ),
+                destination=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 partner_account_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                source={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                source=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 description="playfully better now relative athwart lest anesthetize",
             ),
         ),
@@ -315,62 +315,62 @@ with Moov(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
-                amount={
-                    "currency": "USD",
-                    "value": 1204,
-                },
-                destination={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                amount=components.Amount(
+                    currency="USD",
+                    value=1204,
+                ),
+                destination=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 partner_account_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                source={
-                    "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    "ach_details": {
-                        "company_entry_description": "Gym dues",
-                        "originating_company_name": "Whole Body Fit",
-                    },
-                    "card_details": {
-                        "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                    },
-                },
+                source=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
                 description="whereas reboot probate prejudge which mobility carefully",
             ),
         ),
     ], recur=components.Recur(
         recurrence_rule="<value>",
         run_transfer=components.RunTransfer(
-            amount={
-                "currency": "USD",
-                "value": 1204,
-            },
-            destination={
-                "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                "ach_details": {
-                    "company_entry_description": "Gym dues",
-                    "originating_company_name": "Whole Body Fit",
-                },
-                "card_details": {
-                    "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                },
-            },
+            amount=components.Amount(
+                currency="USD",
+                value=1204,
+            ),
+            destination=components.SchedulePaymentMethod(
+                payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                ach_details=components.AchDetails(
+                    company_entry_description="Gym dues",
+                    originating_company_name="Whole Body Fit",
+                ),
+                card_details=components.CardDetails(
+                    dynamic_descriptor="WhlBdy *Yoga 11-12",
+                ),
+            ),
             partner_account_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-            source={
-                "payment_method_id": "c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                "ach_details": {
-                    "company_entry_description": "Gym dues",
-                    "originating_company_name": "Whole Body Fit",
-                },
-                "card_details": {
-                    "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-                },
-            },
+            source=components.SchedulePaymentMethod(
+                payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                ach_details=components.AchDetails(
+                    company_entry_description="Gym dues",
+                    originating_company_name="Whole Body Fit",
+                ),
+                card_details=components.CardDetails(
+                    dynamic_descriptor="WhlBdy *Yoga 11-12",
+                ),
+            ),
             description="fooey heavily immediately abaft justly phooey when separately",
         ),
         start=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),

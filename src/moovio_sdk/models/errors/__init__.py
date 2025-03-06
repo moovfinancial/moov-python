@@ -30,6 +30,7 @@ from .microdepositvalidationerror import (
 )
 from .onboardinginviteerror import OnboardingInviteError, OnboardingInviteErrorData
 from .patchsweepconfigerror import PatchSweepConfigError, PatchSweepConfigErrorData
+from .receiptvalidationerror import ReceiptValidationError, ReceiptValidationErrorData
 from .refundvalidationerror import RefundValidationError, RefundValidationErrorData
 from .representativevalidationerror import (
     Error,
@@ -117,6 +118,8 @@ __all__ = [
     "OnboardingInviteErrorData",
     "PatchSweepConfigError",
     "PatchSweepConfigErrorData",
+    "ReceiptValidationError",
+    "ReceiptValidationErrorData",
     "RefundValidationError",
     "RefundValidationErrorData",
     "RepresentativeValidationError",
