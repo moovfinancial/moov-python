@@ -43,10 +43,6 @@ works at a high level, read our [concepts](https://docs.moov.io/guides/get-start
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 > [!NOTE]
 > **Python version upgrade policy**
 >
@@ -59,7 +55,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/moovfinancial/moov-python.git
+pip install moovio_sdk
 ```
 
 ### Poetry
@@ -67,7 +63,7 @@ pip install git+https://github.com/moovfinancial/moov-python.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/moovfinancial/moov-python.git
+poetry add moovio_sdk
 ```
 
 ### Shell and script usage with `uv`
@@ -210,7 +206,7 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    })
+    }, mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)
@@ -314,7 +310,7 @@ async def main():
             "ach_payment": {
                 "company_name": "WholeBodyFitness",
             },
-        })
+        }, mode=components.Mode.PRODUCTION)
 
         # Handle response
         print(res)
@@ -427,7 +423,7 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    })
+    }, mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)
@@ -1398,7 +1394,7 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    },
+    }, mode=components.Mode.PRODUCTION,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -1501,7 +1497,7 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    })
+    }, mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)
@@ -1627,7 +1623,7 @@ with Moov(
             "ach_payment": {
                 "company_name": "WholeBodyFitness",
             },
-        })
+        }, mode=components.Mode.PRODUCTION)
 
         # Handle response
         print(res)
@@ -1743,7 +1739,7 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    })
+    }, mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)

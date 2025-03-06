@@ -1,18 +1,18 @@
-speakeasyVersion: 1.510.0
+speakeasyVersion: 1.511.0
 sources:
     latest:
         sourceNamespace: api-latest
-        sourceRevisionDigest: sha256:28b91089c52b4dbae23e53ff1749fce624196e764d8dba8f6aad57e5b7f7ceea
-        sourceBlobDigest: sha256:8409ac09976f25585c89251217b3b593a31ceafc907feafcd7b30fc479f1f97c
+        sourceRevisionDigest: sha256:e7aed53bcc12c481c2490a7150819f9272c52f654cf70477492824c41bd385bd
+        sourceBlobDigest: sha256:a619dbc1046dbc23a45d12367a8e41e01c46ae6b78afcd8bacd532e28892b5c0
         tags:
             - latest
-            - speakeasy-sdk-regen-1741219889
+            - speakeasy-sdk-regen-1741281419
 targets:
     latest:
         source: latest
         sourceNamespace: api-latest
-        sourceRevisionDigest: sha256:28b91089c52b4dbae23e53ff1749fce624196e764d8dba8f6aad57e5b7f7ceea
-        sourceBlobDigest: sha256:8409ac09976f25585c89251217b3b593a31ceafc907feafcd7b30fc479f1f97c
+        sourceRevisionDigest: sha256:e7aed53bcc12c481c2490a7150819f9272c52f654cf70477492824c41bd385bd
+        sourceBlobDigest: sha256:a619dbc1046dbc23a45d12367a8e41e01c46ae6b78afcd8bacd532e28892b5c0
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -24,3 +24,6 @@ workflow:
         latest:
             target: python
             source: latest
+            publish:
+                pypi:
+                    token: $pypi_token

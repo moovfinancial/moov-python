@@ -92,7 +92,7 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    })
+    }, mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)
@@ -196,7 +196,7 @@ async def main():
             "ach_payment": {
                 "company_name": "WholeBodyFitness",
             },
-        })
+        }, mode=components.Mode.PRODUCTION)
 
         # Handle response
         print(res)

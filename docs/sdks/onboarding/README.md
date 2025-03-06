@@ -140,6 +140,7 @@ with Moov(
                 company_name="WholeBodyFitness",
             ),
         ),
+        mode=components.Mode.PRODUCTION,
     ))
 
     # Handle response

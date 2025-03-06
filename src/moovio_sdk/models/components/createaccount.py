@@ -6,6 +6,7 @@ from .capabilityid import CapabilityID
 from .createprofile import CreateProfile, CreateProfileTypedDict
 from .customersupport import CustomerSupport, CustomerSupportTypedDict
 from .manualtermsofservice import ManualTermsOfService, ManualTermsOfServiceTypedDict
+from .mode import Mode
 from .settings import Settings, SettingsTypedDict
 from .termsofservicetoken import TermsOfServiceToken, TermsOfServiceTokenTypedDict
 from moovio_sdk.types import BaseModel
@@ -41,6 +42,8 @@ class CreateAccountTypedDict(TypedDict):
     settings: NotRequired[SettingsTypedDict]
     r"""User provided settings to manage an account."""
     capabilities: NotRequired[List[CapabilityID]]
+    mode: NotRequired[Mode]
+    r"""The operating mode for an account."""
 
 
 class CreateAccount(BaseModel):
@@ -70,3 +73,6 @@ class CreateAccount(BaseModel):
     r"""User provided settings to manage an account."""
 
     capabilities: Optional[List[CapabilityID]] = None
+
+    mode: Optional[Mode] = None
+    r"""The operating mode for an account."""

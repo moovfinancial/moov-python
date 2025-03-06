@@ -30,6 +30,7 @@ class Accounts(BaseSDK):
             Union[components.Settings, components.SettingsTypedDict]
         ] = None,
         capabilities: Optional[List[components.CapabilityID]] = None,
+        mode: Optional[components.Mode] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -59,6 +60,7 @@ class Accounts(BaseSDK):
         :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account.
         :param settings: User provided settings to manage an account.
         :param capabilities:
+        :param mode: The operating mode for an account.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -87,6 +89,7 @@ class Accounts(BaseSDK):
             ),
             settings=utils.get_pydantic_model(settings, Optional[components.Settings]),
             capabilities=capabilities,
+            mode=mode,
         )
 
         req = self._build_request(
@@ -209,6 +212,7 @@ class Accounts(BaseSDK):
             Union[components.Settings, components.SettingsTypedDict]
         ] = None,
         capabilities: Optional[List[components.CapabilityID]] = None,
+        mode: Optional[components.Mode] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -238,6 +242,7 @@ class Accounts(BaseSDK):
         :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account.
         :param settings: User provided settings to manage an account.
         :param capabilities:
+        :param mode: The operating mode for an account.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -266,6 +271,7 @@ class Accounts(BaseSDK):
             ),
             settings=utils.get_pydantic_model(settings, Optional[components.Settings]),
             capabilities=capabilities,
+            mode=mode,
         )
 
         req = self._build_request_async(

@@ -12,3 +12,4 @@ class ACHTransactionStatus(str, Enum):
     CORRECTED = "corrected"
     RETURNED = "returned"
     COMPLETED = "completed"
+    CANCELED = "canceled"

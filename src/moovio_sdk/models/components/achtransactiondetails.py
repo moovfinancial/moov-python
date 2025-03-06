@@ -26,6 +26,7 @@ class ACHTransactionDetailsTypedDict(TypedDict):
     r"""An optional override of the default NACHA company name for a transfer."""
     sec_code: NotRequired[SECCode]
     r"""Code used to identify the ACH authorization method."""
+    canceled_on: NotRequired[datetime]
     initiated_on: NotRequired[datetime]
     originated_on: NotRequired[datetime]
     corrected_on: NotRequired[datetime]
@@ -60,6 +61,10 @@ class ACHTransactionDetails(BaseModel):
 
     sec_code: Annotated[Optional[SECCode], pydantic.Field(alias="secCode")] = None
     r"""Code used to identify the ACH authorization method."""
+
+    canceled_on: Annotated[Optional[datetime], pydantic.Field(alias="canceledOn")] = (
+        None
+    )
 
     initiated_on: Annotated[Optional[datetime], pydantic.Field(alias="initiatedOn")] = (
         None
