@@ -29,10 +29,10 @@ class TerminalApplications(BaseSDK):
         you'll need to specify the `/terminalApplications.write` scope.
 
         :param platform: Platform of the terminal application.
-        :param app_bundle_id: The app bundle identifier of the terminal application. Required if platform is ios.
-        :param package_name: The app package name of the terminal application. Required if platform is android.
-        :param sha256_digest: The app version of the terminal application. Required if paltform is android.
-        :param version_code: The app version of the terminal application. Required if platform is android.
+        :param app_bundle_id: The app bundle identifier of the terminal application. Required if platform is `ios`.
+        :param package_name: The app package name of the terminal application. Required if platform is `android`.
+        :param sha256_digest: The app version of the terminal application. Required if paltform is `android`.
+        :param version_code: The app version of the terminal application. Required if platform is `android`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -177,10 +177,10 @@ class TerminalApplications(BaseSDK):
         you'll need to specify the `/terminalApplications.write` scope.
 
         :param platform: Platform of the terminal application.
-        :param app_bundle_id: The app bundle identifier of the terminal application. Required if platform is ios.
-        :param package_name: The app package name of the terminal application. Required if platform is android.
-        :param sha256_digest: The app version of the terminal application. Required if paltform is android.
-        :param version_code: The app version of the terminal application. Required if platform is android.
+        :param app_bundle_id: The app bundle identifier of the terminal application. Required if platform is `ios`.
+        :param package_name: The app package name of the terminal application. Required if platform is `android`.
+        :param sha256_digest: The app version of the terminal application. Required if paltform is `android`.
+        :param version_code: The app version of the terminal application. Required if platform is `android`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
