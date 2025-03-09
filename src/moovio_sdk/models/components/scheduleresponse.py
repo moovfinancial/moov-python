@@ -7,7 +7,7 @@ from .recur import Recur, RecurTypedDict
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -23,7 +23,7 @@ class ScheduleResponseTypedDict(TypedDict):
     updated_on: datetime
     description: NotRequired[str]
     r"""Simple description to place on the transfer."""
-    occurrences: NotRequired[OccurrencesResponseTypedDict]
+    occurrences: NotRequired[List[OccurrencesResponseTypedDict]]
     recur: NotRequired[RecurTypedDict]
     r"""Defines configuration for recurring transfers."""
     disabled_on: NotRequired[datetime]
@@ -50,7 +50,7 @@ class ScheduleResponse(BaseModel):
     description: Optional[str] = None
     r"""Simple description to place on the transfer."""
 
-    occurrences: Optional[OccurrencesResponse] = None
+    occurrences: Optional[List[OccurrencesResponse]] = None
 
     recur: Optional[Recur] = None
     r"""Defines configuration for recurring transfers."""
