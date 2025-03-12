@@ -5,8 +5,8 @@ An optional override of your default ACH hold period in banking days. The hold p
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `NO_HOLD`  | no-hold    |
-| `ONE_DAY`  | 1-day      |
-| `TWO_DAYS` | 2-days     |
+| Name             | Value            |
+| ---------------- | ---------------- |
+| `NO_HOLD`        | no-hold          |
+| `ONE_MINUS_DAY`  | 1-day            |
+| `TWO_MINUS_DAYS` | 2-days           |

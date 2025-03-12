@@ -438,6 +438,10 @@ from .onboardingpartneraccount import (
     OnboardingPartnerAccount,
     OnboardingPartnerAccountTypedDict,
 )
+from .partialscheduleaccount import (
+    PartialScheduleAccount,
+    PartialScheduleAccountTypedDict,
+)
 from .partnerpricing import PartnerPricing, PartnerPricingTypedDict
 from .partnerpricingagreement import (
     PartnerPricingAgreement,
@@ -581,6 +585,7 @@ from .rtprejectioncode import RTPRejectionCode
 from .rtptransactiondetails import RTPTransactionDetails, RTPTransactionDetailsTypedDict
 from .rtptransactionstatus import RTPTransactionStatus
 from .runtransfer import RunTransfer, RunTransferTypedDict
+from .schedulelistresponse import ScheduleListResponse, ScheduleListResponseTypedDict
 from .schedulepaymentmethod import (
     AchDetails,
     AchDetailsTypedDict,
@@ -1148,6 +1153,8 @@ __all__ = [
     "OnboardingInviteTypedDict",
     "OnboardingPartnerAccount",
     "OnboardingPartnerAccountTypedDict",
+    "PartialScheduleAccount",
+    "PartialScheduleAccountTypedDict",
     "PartnerPricing",
     "PartnerPricingAgreement",
     "PartnerPricingAgreementTypedDict",
@@ -1286,6 +1293,8 @@ __all__ = [
     "RunTransfer",
     "RunTransferTypedDict",
     "SECCode",
+    "ScheduleListResponse",
+    "ScheduleListResponseTypedDict",
     "SchedulePaymentMethod",
     "SchedulePaymentMethodTypedDict",
     "ScheduleResponse",

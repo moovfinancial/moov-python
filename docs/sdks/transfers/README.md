@@ -103,7 +103,7 @@ with Moov(
         "ach_details": {
             "company_entry_description": "Gym dues",
             "originating_company_name": "Whole Body Fit",
-            "debit_hold_period": components.DebitHoldPeriod.TWO_DAYS,
+            "debit_hold_period": components.DebitHoldPeriod.TWO_MINUS_DAYS,
         },
     }, destination={
         "payment_method_id": "3f9969cf-a1f3-4d83-8ddc-229a506651cf",

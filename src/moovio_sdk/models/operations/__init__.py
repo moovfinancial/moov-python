@@ -789,6 +789,7 @@ from .listrepresentatives import (
     ListRepresentativesResponseTypedDict,
 )
 from .listschedules import (
+    Hydrate,
     ListSchedulesGlobals,
     ListSchedulesGlobalsTypedDict,
     ListSchedulesRequest,
@@ -1445,6 +1446,7 @@ __all__ = [
     "GetWalletTransactionRequestTypedDict",
     "GetWalletTransactionResponse",
     "GetWalletTransactionResponseTypedDict",
+    "Hydrate",
     "InitiateBankAccountVerificationGlobals",
     "InitiateBankAccountVerificationGlobalsTypedDict",
     "InitiateBankAccountVerificationRequest",

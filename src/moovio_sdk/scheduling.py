@@ -314,12 +314,13 @@ class Scheduling(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
+        hydrate: Optional[operations.Hydrate] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.ListSchedulesResponse:
-        r"""Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+        r"""Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -327,6 +328,7 @@ class Scheduling(BaseSDK):
         :param account_id:
         :param skip:
         :param count:
+        :param hydrate:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -345,6 +347,7 @@ class Scheduling(BaseSDK):
         request = operations.ListSchedulesRequest(
             skip=skip,
             count=count,
+            hydrate=hydrate,
             account_id=account_id,
         )
 
@@ -392,7 +395,7 @@ class Scheduling(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListSchedulesResponse(
                 result=utils.unmarshal_json(
-                    http_res.text, List[components.ScheduleResponse]
+                    http_res.text, List[components.ScheduleListResponse]
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -432,12 +435,13 @@ class Scheduling(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
+        hydrate: Optional[operations.Hydrate] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.ListSchedulesResponse:
-        r"""Describes a list of schedules associated with an account. Requires at least 1 occurrence or recurTransfer to be specified.
+        r"""Describes a list of schedules associated with an account. Append the `hydrate=accounts` query parameter to include partial account details in the response.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -445,6 +449,7 @@ class Scheduling(BaseSDK):
         :param account_id:
         :param skip:
         :param count:
+        :param hydrate:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -463,6 +468,7 @@ class Scheduling(BaseSDK):
         request = operations.ListSchedulesRequest(
             skip=skip,
             count=count,
+            hydrate=hydrate,
             account_id=account_id,
         )
 
@@ -510,7 +516,7 @@ class Scheduling(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListSchedulesResponse(
                 result=utils.unmarshal_json(
-                    http_res.text, List[components.ScheduleResponse]
+                    http_res.text, List[components.ScheduleListResponse]
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
