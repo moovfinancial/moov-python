@@ -7,34 +7,34 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class GovernmentIDSsnTypedDict(TypedDict):
+class SsnTypedDict(TypedDict):
     full: NotRequired[str]
     last_four: NotRequired[str]
 
 
-class GovernmentIDSsn(BaseModel):
+class Ssn(BaseModel):
     full: Optional[str] = None
 
     last_four: Annotated[Optional[str], pydantic.Field(alias="lastFour")] = None
 
 
-class GovernmentIDItinTypedDict(TypedDict):
+class ItinTypedDict(TypedDict):
     full: NotRequired[str]
     last_four: NotRequired[str]
 
 
-class GovernmentIDItin(BaseModel):
+class Itin(BaseModel):
     full: Optional[str] = None
 
     last_four: Annotated[Optional[str], pydantic.Field(alias="lastFour")] = None
 
 
 class GovernmentIDTypedDict(TypedDict):
-    ssn: NotRequired[GovernmentIDSsnTypedDict]
-    itin: NotRequired[GovernmentIDItinTypedDict]
+    ssn: NotRequired[SsnTypedDict]
+    itin: NotRequired[ItinTypedDict]
 
 
 class GovernmentID(BaseModel):
-    ssn: Optional[GovernmentIDSsn] = None
+    ssn: Optional[Ssn] = None
 
-    itin: Optional[GovernmentIDItin] = None
+    itin: Optional[Itin] = None

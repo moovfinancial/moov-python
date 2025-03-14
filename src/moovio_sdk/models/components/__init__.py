@@ -138,6 +138,11 @@ from .cardpaymentpaymentmethod import (
     CardPaymentPaymentMethodTypedDict,
 )
 from .cardpaymentsettings import CardPaymentSettings, CardPaymentSettingsTypedDict
+from .cardpresentpaymentpaymentmethod import (
+    CardPresentPaymentPaymentMethod,
+    CardPresentPaymentPaymentMethodPaymentMethodType,
+    CardPresentPaymentPaymentMethodTypedDict,
+)
 from .cardtransactiondetails import (
     CardTransactionDetails,
     CardTransactionDetailsTypedDict,
@@ -305,6 +310,7 @@ from .enrichedbusinessresponse import (
 from .enrichedindustries import EnrichedIndustries, EnrichedIndustriesTypedDict
 from .enrichedindustry import EnrichedIndustry, EnrichedIndustryTypedDict
 from .enrichedindustrycodes import EnrichedIndustryCodes, EnrichedIndustryCodesTypedDict
+from .entrymode import EntryMode
 from .evidencetextresponse import EvidenceTextResponse, EvidenceTextResponseTypedDict
 from .evidencetype import EvidenceType
 from .evidenceuploadresponse import (
@@ -345,19 +351,19 @@ from .generatedbydisputeid import GeneratedByDisputeID, GeneratedByDisputeIDType
 from .generatedbytransferid import GeneratedByTransferID, GeneratedByTransferIDTypedDict
 from .governmentid import (
     GovernmentID,
-    GovernmentIDItin,
-    GovernmentIDItinTypedDict,
-    GovernmentIDSsn,
-    GovernmentIDSsnTypedDict,
     GovernmentIDTypedDict,
-)
-from .governmentiderror import (
-    GovernmentIDError,
-    GovernmentIDErrorTypedDict,
     Itin,
     ItinTypedDict,
     Ssn,
     SsnTypedDict,
+)
+from .governmentiderror import (
+    GovernmentIDError,
+    GovernmentIDErrorItin,
+    GovernmentIDErrorItinTypedDict,
+    GovernmentIDErrorSsn,
+    GovernmentIDErrorSsnTypedDict,
+    GovernmentIDErrorTypedDict,
 )
 from .granttype import GrantType
 from .incurredfee import IncurredFee, IncurredFeeTypedDict
@@ -611,11 +617,17 @@ from .sweepconfigpaymentmethod import (
 )
 from .sweepconfigstatus import SweepConfigStatus
 from .sweepstatus import SweepStatus
-from .taxid import TaxID, TaxIDEin, TaxIDEinTypedDict, TaxIDTypedDict
-from .taxidupdate import Ein, EinTypedDict, TaxIDUpdate, TaxIDUpdateTypedDict
+from .taxid import Ein, EinTypedDict, TaxID, TaxIDTypedDict
+from .taxidupdate import (
+    TaxIDUpdate,
+    TaxIDUpdateEin,
+    TaxIDUpdateEinTypedDict,
+    TaxIDUpdateTypedDict,
+)
 from .terminalapplication import TerminalApplication, TerminalApplicationTypedDict
 from .terminalapplicationplatform import TerminalApplicationPlatform
 from .terminalapplicationstatus import TerminalApplicationStatus
+from .terminalcard import TerminalCard, TerminalCardTypedDict
 from .termsofservice import TermsOfService, TermsOfServiceTypedDict
 from .termsofserviceerror import (
     Manual,
@@ -865,6 +877,9 @@ __all__ = [
     "CardPaymentSettings",
     "CardPaymentSettingsTypedDict",
     "CardPaymentTypedDict",
+    "CardPresentPaymentPaymentMethod",
+    "CardPresentPaymentPaymentMethodPaymentMethodType",
+    "CardPresentPaymentPaymentMethodTypedDict",
     "CardTransactionDetails",
     "CardTransactionDetailsTypedDict",
     "CardTransactionFailureCode",
@@ -1009,6 +1024,7 @@ __all__ = [
     "EnrichedIndustryCodes",
     "EnrichedIndustryCodesTypedDict",
     "EnrichedIndustryTypedDict",
+    "EntryMode",
     "Error",
     "ErrorTypedDict",
     "EvidenceTextResponse",
@@ -1059,11 +1075,11 @@ __all__ = [
     "GeneratedByTypedDict",
     "GovernmentID",
     "GovernmentIDError",
+    "GovernmentIDErrorItin",
+    "GovernmentIDErrorItinTypedDict",
+    "GovernmentIDErrorSsn",
+    "GovernmentIDErrorSsnTypedDict",
     "GovernmentIDErrorTypedDict",
-    "GovernmentIDItin",
-    "GovernmentIDItinTypedDict",
-    "GovernmentIDSsn",
-    "GovernmentIDSsnTypedDict",
     "GovernmentIDTypedDict",
     "GrantType",
     "IncurredFee",
@@ -1323,15 +1339,17 @@ __all__ = [
     "SweepStatus",
     "SweepTypedDict",
     "TaxID",
-    "TaxIDEin",
-    "TaxIDEinTypedDict",
     "TaxIDTypedDict",
     "TaxIDUpdate",
+    "TaxIDUpdateEin",
+    "TaxIDUpdateEinTypedDict",
     "TaxIDUpdateTypedDict",
     "TerminalApplication",
     "TerminalApplicationPlatform",
     "TerminalApplicationStatus",
     "TerminalApplicationTypedDict",
+    "TerminalCard",
+    "TerminalCardTypedDict",
     "TermsOfService",
     "TermsOfServiceError",
     "TermsOfServiceErrorTypedDict",

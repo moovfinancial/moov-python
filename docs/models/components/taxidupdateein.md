@@ -1,8 +1,8 @@
-# TaxIDEin
+# TaxIDUpdateEin
 
 
 ## Fields
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `number`           | *str*              | :heavy_check_mark: | N/A                | 12-3456789         |
+| `number`           | *Optional[str]*    | :heavy_minus_sign: | N/A                | 12-3456789         |

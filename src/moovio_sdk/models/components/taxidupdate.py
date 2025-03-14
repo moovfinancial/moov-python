@@ -6,21 +6,21 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class EinTypedDict(TypedDict):
+class TaxIDUpdateEinTypedDict(TypedDict):
     number: NotRequired[str]
 
 
-class Ein(BaseModel):
+class TaxIDUpdateEin(BaseModel):
     number: Optional[str] = None
 
 
 class TaxIDUpdateTypedDict(TypedDict):
     r"""An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN."""
 
-    ein: NotRequired[EinTypedDict]
+    ein: NotRequired[TaxIDUpdateEinTypedDict]
 
 
 class TaxIDUpdate(BaseModel):
     r"""An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN."""
 
-    ein: Optional[Ein] = None
+    ein: Optional[TaxIDUpdateEin] = None

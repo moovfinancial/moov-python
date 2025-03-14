@@ -97,7 +97,7 @@ with Moov(
                 email="jordan.lee@classbooker.dev",
                 description="Local fitness gym paying out instructors",
                 tax_id=components.TaxID(
-                    ein=components.TaxIDEin(
+                    ein=components.Ein(
                         number="12-3456789",
                     ),
                 ),

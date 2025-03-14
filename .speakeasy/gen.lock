@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: f9505e7a2416146dc504211f35de71d6
+  docChecksum: 37260ca5a9a4954d13bd8b9f1887eca6
   docVersion: latest
-  speakeasyVersion: 1.517.0
-  generationVersion: 2.548.1
-  releaseVersion: 0.3.11
-  configChecksum: 0f9094478d85d5997182728bf537fe1e
+  speakeasyVersion: 1.517.3
+  generationVersion: 2.548.6
+  releaseVersion: 0.3.12
+  configChecksum: b0d0db67ee1c102ad4d618bda4ea6a1c
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -139,6 +139,8 @@ generatedFiles:
   - docs/models/components/cardpaymentpaymentmethod.md
   - docs/models/components/cardpaymentpaymentmethodpaymentmethodtype.md
   - docs/models/components/cardpaymentsettings.md
+  - docs/models/components/cardpresentpaymentpaymentmethod.md
+  - docs/models/components/cardpresentpaymentpaymentmethodpaymentmethodtype.md
   - docs/models/components/cardtransactiondetails.md
   - docs/models/components/cardtransactionfailurecode.md
   - docs/models/components/cardtransactionstatus.md
@@ -217,6 +219,7 @@ generatedFiles:
   - docs/models/components/enrichedindustries.md
   - docs/models/components/enrichedindustry.md
   - docs/models/components/enrichedindustrycodes.md
+  - docs/models/components/entrymode.md
   - docs/models/components/error.md
   - docs/models/components/evidencetextresponse.md
   - docs/models/components/evidencetype.md
@@ -246,8 +249,8 @@ generatedFiles:
   - docs/models/components/generatedbytransferid.md
   - docs/models/components/governmentid.md
   - docs/models/components/governmentiderror.md
-  - docs/models/components/governmentiditin.md
-  - docs/models/components/governmentidssn.md
+  - docs/models/components/governmentiderroritin.md
+  - docs/models/components/governmentiderrorssn.md
   - docs/models/components/granttype.md
   - docs/models/components/incurredfee.md
   - docs/models/components/individualname.md
@@ -393,11 +396,12 @@ generatedFiles:
   - docs/models/components/sweepconfigstatus.md
   - docs/models/components/sweepstatus.md
   - docs/models/components/taxid.md
-  - docs/models/components/taxidein.md
   - docs/models/components/taxidupdate.md
+  - docs/models/components/taxidupdateein.md
   - docs/models/components/terminalapplication.md
   - docs/models/components/terminalapplicationplatform.md
   - docs/models/components/terminalapplicationstatus.md
+  - docs/models/components/terminalcard.md
   - docs/models/components/termsofservice.md
   - docs/models/components/termsofserviceerror.md
   - docs/models/components/termsofservicetoken.md
@@ -1030,6 +1034,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/cardpaymentdetailserror.py
   - src/moovio_sdk/models/components/cardpaymentpaymentmethod.py
   - src/moovio_sdk/models/components/cardpaymentsettings.py
+  - src/moovio_sdk/models/components/cardpresentpaymentpaymentmethod.py
   - src/moovio_sdk/models/components/cardtransactiondetails.py
   - src/moovio_sdk/models/components/cardtransactionfailurecode.py
   - src/moovio_sdk/models/components/cardtransactionstatus.py
@@ -1099,6 +1104,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/enrichedindustries.py
   - src/moovio_sdk/models/components/enrichedindustry.py
   - src/moovio_sdk/models/components/enrichedindustrycodes.py
+  - src/moovio_sdk/models/components/entrymode.py
   - src/moovio_sdk/models/components/evidencetextresponse.py
   - src/moovio_sdk/models/components/evidencetype.py
   - src/moovio_sdk/models/components/evidenceuploadresponse.py
@@ -1255,6 +1261,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/terminalapplication.py
   - src/moovio_sdk/models/components/terminalapplicationplatform.py
   - src/moovio_sdk/models/components/terminalapplicationstatus.py
+  - src/moovio_sdk/models/components/terminalcard.py
   - src/moovio_sdk/models/components/termsofservice.py
   - src/moovio_sdk/models/components/termsofserviceerror.py
   - src/moovio_sdk/models/components/termsofservicetoken.py

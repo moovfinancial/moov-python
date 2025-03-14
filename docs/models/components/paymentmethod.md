@@ -65,3 +65,9 @@ value: components.PullFromCardPaymentMethod = /* values here */
 value: components.ApplePayPaymentMethod = /* values here */
 ```
 
+### `components.CardPresentPaymentPaymentMethod`
+
+```python
+value: components.CardPresentPaymentPaymentMethod = /* values here */
+```
+
