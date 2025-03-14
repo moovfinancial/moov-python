@@ -103,7 +103,7 @@ class Receipts(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "201", "application/json"):
             return operations.CreateReceiptsResponse(
                 result=utils.unmarshal_json(http_res.text, components.ReceiptResponse),
                 headers=utils.get_response_headers(http_res.headers),
@@ -239,7 +239,7 @@ class Receipts(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "201", "application/json"):
             return operations.CreateReceiptsResponse(
                 result=utils.unmarshal_json(http_res.text, components.ReceiptResponse),
                 headers=utils.get_response_headers(http_res.headers),

@@ -4,6 +4,7 @@ from __future__ import annotations
 from .billablefee import BillableFee, BillableFeeTypedDict
 from .cardacquiringmodel import CardAcquiringModel
 from .feeplanagreementstatus import FeePlanAgreementStatus
+from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -21,6 +22,8 @@ class PartnerPricingAgreementTypedDict(TypedDict):
     card_acquiring_model: CardAcquiringModel
     r"""Specifies the card processing pricing model"""
     billable_fees: List[BillableFeeTypedDict]
+    minimum_commitment: MinimumCommitmentTypedDict
+    r"""The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference."""
     revenue_share: int
     r"""The integer percentage value of the revenue split for partner."""
     account_id: NotRequired[str]
@@ -46,6 +49,11 @@ class PartnerPricingAgreement(BaseModel):
     r"""Specifies the card processing pricing model"""
 
     billable_fees: Annotated[List[BillableFee], pydantic.Field(alias="billableFees")]
+
+    minimum_commitment: Annotated[
+        MinimumCommitment, pydantic.Field(alias="minimumCommitment")
+    ]
+    r"""The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference."""
 
     revenue_share: Annotated[int, pydantic.Field(alias="revenueShare")]
     r"""The integer percentage value of the revenue split for partner."""

@@ -418,6 +418,7 @@ from .manualtermsofserviceupdate import (
     ManualTermsOfServiceUpdateTypedDict,
 )
 from .microdepositstatus import MicroDepositStatus
+from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
 from .mode import Mode
 from .moovfeedetails import MoovFeeDetails, MoovFeeDetailsTypedDict
 from .moovwalletpaymentmethod import (
@@ -1150,6 +1151,8 @@ __all__ = [
     "ManualTermsOfServiceUpdateTypedDict",
     "ManualTypedDict",
     "MicroDepositStatus",
+    "MinimumCommitment",
+    "MinimumCommitmentTypedDict",
     "Mode",
     "MoovFeeDetails",
     "MoovFeeDetailsTypedDict",
