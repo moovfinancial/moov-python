@@ -23,6 +23,7 @@ class CreateTransferSourceTypedDict(TypedDict):
     associating the new transfer with a parent transfer.
     """
     payment_method_id: NotRequired[str]
+    payment_token: NotRequired[str]
     card_details: NotRequired[CreateTransferSourceCardTypedDict]
     ach_details: NotRequired[CreateTransferSourceACHTypedDict]
 
@@ -38,6 +39,8 @@ class CreateTransferSource(BaseModel):
     payment_method_id: Annotated[
         Optional[str], pydantic.Field(alias="paymentMethodID")
     ] = None
+
+    payment_token: Annotated[Optional[str], pydantic.Field(alias="paymentToken")] = None
 
     card_details: Annotated[
         Optional[CreateTransferSourceCard], pydantic.Field(alias="cardDetails")

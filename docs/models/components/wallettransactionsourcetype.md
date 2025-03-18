@@ -11,3 +11,4 @@
 | `ISSUING_AUTHORIZATION`    | issuing-authorization      |
 | `SWEEP`                    | sweep                      |
 | `ADJUSTMENT`               | adjustment                 |
+| `FEE`                      | fee                        |
