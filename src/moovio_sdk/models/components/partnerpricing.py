@@ -4,6 +4,7 @@ from __future__ import annotations
 from .billablefee import BillableFee, BillableFeeTypedDict
 from .cardacquiringmodel import CardAcquiringModel
 from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
+from .monthlyplatformfee import MonthlyPlatformFee, MonthlyPlatformFeeTypedDict
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -22,6 +23,8 @@ class PartnerPricingTypedDict(TypedDict):
     billable_fees: List[BillableFeeTypedDict]
     minimum_commitment: MinimumCommitmentTypedDict
     r"""The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference."""
+    monthly_platform_fee: MonthlyPlatformFeeTypedDict
+    r"""Fixed recurring amount paid in the billing period regardless of usage."""
     created_at: datetime
     description: NotRequired[str]
     r"""A description of the fee plan."""
@@ -47,6 +50,11 @@ class PartnerPricing(BaseModel):
         MinimumCommitment, pydantic.Field(alias="minimumCommitment")
     ]
     r"""The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference."""
+
+    monthly_platform_fee: Annotated[
+        MonthlyPlatformFee, pydantic.Field(alias="monthlyPlatformFee")
+    ]
+    r"""Fixed recurring amount paid in the billing period regardless of usage."""
 
     created_at: Annotated[datetime, pydantic.Field(alias="createdAt")]
 
