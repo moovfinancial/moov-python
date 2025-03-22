@@ -630,6 +630,7 @@ from .terminalapplication import TerminalApplication, TerminalApplicationTypedDi
 from .terminalapplicationplatform import TerminalApplicationPlatform
 from .terminalapplicationstatus import TerminalApplicationStatus
 from .terminalcard import TerminalCard, TerminalCardTypedDict
+from .terminalconfiguration import TerminalConfiguration, TerminalConfigurationTypedDict
 from .termsofservice import TermsOfService, TermsOfServiceTypedDict
 from .termsofserviceerror import (
     Manual,
@@ -1356,6 +1357,8 @@ __all__ = [
     "TerminalApplicationTypedDict",
     "TerminalCard",
     "TerminalCardTypedDict",
+    "TerminalConfiguration",
+    "TerminalConfigurationTypedDict",
     "TermsOfService",
     "TermsOfServiceError",
     "TermsOfServiceErrorTypedDict",

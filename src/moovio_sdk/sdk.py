@@ -37,6 +37,7 @@ from moovio_sdk.representatives import Representatives
 from moovio_sdk.scheduling import Scheduling
 from moovio_sdk.sweeps import Sweeps
 from moovio_sdk.terminal_applications import TerminalApplications
+from moovio_sdk.terminal_configurations import TerminalConfigurations
 from moovio_sdk.transfers import Transfers
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.underwriting import Underwriting
@@ -68,6 +69,7 @@ class Moov(BaseSDK):
     representatives: Representatives
     scheduling: Scheduling
     sweeps: Sweeps
+    terminal_configurations: TerminalConfigurations
     transfers: Transfers
     underwriting: Underwriting
     wallets: Wallets
@@ -201,6 +203,7 @@ class Moov(BaseSDK):
         self.representatives = Representatives(self.sdk_configuration)
         self.scheduling = Scheduling(self.sdk_configuration)
         self.sweeps = Sweeps(self.sdk_configuration)
+        self.terminal_configurations = TerminalConfigurations(self.sdk_configuration)
         self.transfers = Transfers(self.sdk_configuration)
         self.underwriting = Underwriting(self.sdk_configuration)
         self.wallets = Wallets(self.sdk_configuration)

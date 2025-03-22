@@ -1145,6 +1145,13 @@ you'll need to specify the `/terminalApplications.read` scope.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/terminalApplications.write` scope.
 
+### [terminal_configurations](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/terminalconfigurations/README.md)
+
+* [get](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/terminalconfigurations/README.md#get) - Fetch the configuration for a given Terminal Application
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+
 ### [transfers](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md)
 
 * [create](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#create) - Move money by providing the source, destination, and amount in the request body.

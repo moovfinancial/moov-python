@@ -498,6 +498,14 @@ from .getterminalapplication import (
     GetTerminalApplicationResponse,
     GetTerminalApplicationResponseTypedDict,
 )
+from .getterminalconfiguration import (
+    GetTerminalConfigurationGlobals,
+    GetTerminalConfigurationGlobalsTypedDict,
+    GetTerminalConfigurationRequest,
+    GetTerminalConfigurationRequestTypedDict,
+    GetTerminalConfigurationResponse,
+    GetTerminalConfigurationResponseTypedDict,
+)
 from .gettermsofservicetoken import (
     GetTermsOfServiceTokenGlobals,
     GetTermsOfServiceTokenGlobalsTypedDict,
@@ -1416,6 +1424,12 @@ __all__ = [
     "GetTerminalApplicationRequestTypedDict",
     "GetTerminalApplicationResponse",
     "GetTerminalApplicationResponseTypedDict",
+    "GetTerminalConfigurationGlobals",
+    "GetTerminalConfigurationGlobalsTypedDict",
+    "GetTerminalConfigurationRequest",
+    "GetTerminalConfigurationRequestTypedDict",
+    "GetTerminalConfigurationResponse",
+    "GetTerminalConfigurationResponseTypedDict",
     "GetTermsOfServiceTokenGlobals",
     "GetTermsOfServiceTokenGlobalsTypedDict",
     "GetTermsOfServiceTokenRequest",

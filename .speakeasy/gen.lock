@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: b0ce04f6dc2599f592af1217442aa9b9
+  docChecksum: 936f007af0ba2b0c930e1e3f8434f6be
   docVersion: latest
-  speakeasyVersion: 1.521.1
-  generationVersion: 2.558.5
-  releaseVersion: 0.3.15
-  configChecksum: 85ad4f896bf88392396626fddc3e2158
+  speakeasyVersion: 1.522.0
+  generationVersion: 2.559.0
+  releaseVersion: 0.3.16
+  configChecksum: 11ce4281c1486069317162a479e8d1b5
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -404,6 +404,7 @@ generatedFiles:
   - docs/models/components/terminalapplicationplatform.md
   - docs/models/components/terminalapplicationstatus.md
   - docs/models/components/terminalcard.md
+  - docs/models/components/terminalconfiguration.md
   - docs/models/components/termsofservice.md
   - docs/models/components/termsofserviceerror.md
   - docs/models/components/termsofservicetoken.md
@@ -677,6 +678,9 @@ generatedFiles:
   - docs/models/operations/getterminalapplicationglobals.md
   - docs/models/operations/getterminalapplicationrequest.md
   - docs/models/operations/getterminalapplicationresponse.md
+  - docs/models/operations/getterminalconfigurationglobals.md
+  - docs/models/operations/getterminalconfigurationrequest.md
+  - docs/models/operations/getterminalconfigurationresponse.md
   - docs/models/operations/gettermsofservicetokenglobals.md
   - docs/models/operations/gettermsofservicetokenrequest.md
   - docs/models/operations/gettermsofservicetokenresponse.md
@@ -911,6 +915,7 @@ generatedFiles:
   - docs/sdks/scheduling/README.md
   - docs/sdks/sweeps/README.md
   - docs/sdks/terminalapplications/README.md
+  - docs/sdks/terminalconfigurations/README.md
   - docs/sdks/transfers/README.md
   - docs/sdks/underwriting/README.md
   - docs/sdks/wallets/README.md
@@ -1266,6 +1271,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/terminalapplicationplatform.py
   - src/moovio_sdk/models/components/terminalapplicationstatus.py
   - src/moovio_sdk/models/components/terminalcard.py
+  - src/moovio_sdk/models/components/terminalconfiguration.py
   - src/moovio_sdk/models/components/termsofservice.py
   - src/moovio_sdk/models/components/termsofserviceerror.py
   - src/moovio_sdk/models/components/termsofservicetoken.py
@@ -1409,6 +1415,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/getsweep.py
   - src/moovio_sdk/models/operations/getsweepconfig.py
   - src/moovio_sdk/models/operations/getterminalapplication.py
+  - src/moovio_sdk/models/operations/getterminalconfiguration.py
   - src/moovio_sdk/models/operations/gettermsofservicetoken.py
   - src/moovio_sdk/models/operations/gettransfer.py
   - src/moovio_sdk/models/operations/getunderwriting.py
@@ -1489,6 +1496,7 @@ generatedFiles:
   - src/moovio_sdk/sdkconfiguration.py
   - src/moovio_sdk/sweeps.py
   - src/moovio_sdk/terminal_applications.py
+  - src/moovio_sdk/terminal_configurations.py
   - src/moovio_sdk/transfers.py
   - src/moovio_sdk/types/__init__.py
   - src/moovio_sdk/types/basemodel.py
@@ -3154,5 +3162,15 @@ examples:
       responses:
         "200":
           application/json: [{"receiptID": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "createdBy": "1e276671-8d6d-4461-b2e0-aee1b9ddf121", "disabledOn": "2009-11-10T23:00:00Z", "kind": "sale.customer.v1", "email": "jordan.lee@classbooker.dev", "sentFor": [{"receiptID": "2a4c8104-fb45-41a7-a0cf-c8fe07fbc60a", "idempotencyKey": "960d5611-ff65-473e-90a6-2331ad7c07cc", "sentOn": "2009-11-10T23:00:00Z"}, {"receiptID": "81991696-ebd8-434b-b7d8-c2236e085944", "idempotencyKey": "bceb27bd-4753-4d0a-917c-478e329a9ec9", "sentOn": "2009-11-10T23:00:00Z"}, {"receiptID": "938e1a63-0f5f-4e36-a808-2fa02e0874e7", "idempotencyKey": "307648ec-2ed7-4f30-939d-ec6f45d97b2c", "sentOn": "2009-11-10T23:00:00Z"}]}, {"receiptID": "d7f7bcfa-269a-4f21-b94d-5861b3fe5754", "createdBy": "0c551a92-c743-41dd-8f19-3e2177ab4c4d", "disabledOn": "2009-11-10T23:00:00Z", "kind": "sale.customer.v1", "email": "jordan.lee@classbooker.dev", "sentFor": []}, {"receiptID": "cedb55c7-155b-40db-ba7a-30fd263f0cce", "createdBy": "19e17aef-2e28-4695-bca4-33b1104d1efa", "disabledOn": "2009-11-10T23:00:00Z", "kind": "sale.customer.v1", "email": "jordan.lee@classbooker.dev", "sentFor": [{"receiptID": "ad1494b3-d276-4b63-9f80-6d94b843a1ce", "idempotencyKey": "23bc77dd-5bb4-42fc-8fa6-f3f7b3d58ee6", "sentOn": "2009-11-10T23:00:00Z"}, {"receiptID": "458f7304-a0a3-4715-ae54-f642e86b7c60", "idempotencyKey": "73f56981-2ed5-452f-9f7f-fa2f9aacddda", "sentOn": "2009-11-10T23:00:00Z"}]}]
+  getTerminalConfiguration:
+    speakeasy-default-get-terminal-configuration:
+      parameters:
+        path:
+          accountID: "b888f774-3e7c-4135-a18c-6b985523c4bc"
+          terminalApplicationID: "01234567-89ab-cdef-0123-456789abcdef"
+        header: {}
+      responses:
+        "200":
+          application/json: {"configuration": "Zm9vYmFyCg=="}
 examplesVersion: 1.0.0
 generatedTests: {}
