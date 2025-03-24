@@ -4,25 +4,34 @@ from __future__ import annotations
 from .cardverificationresult import CardVerificationResult
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class AccountNameVerificationTypedDict(TypedDict):
     r"""The results of submitting cardholder name to a card network for verification."""
 
-    first_name: CardVerificationResult
-    last_name: CardVerificationResult
-    middle_name: CardVerificationResult
-    full_name: CardVerificationResult
+    first_name: NotRequired[CardVerificationResult]
+    last_name: NotRequired[CardVerificationResult]
+    middle_name: NotRequired[CardVerificationResult]
+    full_name: NotRequired[CardVerificationResult]
 
 
 class AccountNameVerification(BaseModel):
     r"""The results of submitting cardholder name to a card network for verification."""
 
-    first_name: Annotated[CardVerificationResult, pydantic.Field(alias="firstName")]
+    first_name: Annotated[
+        Optional[CardVerificationResult], pydantic.Field(alias="firstName")
+    ] = None
 
-    last_name: Annotated[CardVerificationResult, pydantic.Field(alias="lastName")]
+    last_name: Annotated[
+        Optional[CardVerificationResult], pydantic.Field(alias="lastName")
+    ] = None
 
-    middle_name: Annotated[CardVerificationResult, pydantic.Field(alias="middleName")]
+    middle_name: Annotated[
+        Optional[CardVerificationResult], pydantic.Field(alias="middleName")
+    ] = None
 
-    full_name: Annotated[CardVerificationResult, pydantic.Field(alias="fullName")]
+    full_name: Annotated[
+        Optional[CardVerificationResult], pydantic.Field(alias="fullName")
+    ] = None

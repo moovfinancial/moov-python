@@ -8,7 +8,8 @@ from .accountnameverification import (
 from .cardverificationresult import CardVerificationResult
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CardVerificationTypedDict(TypedDict):
@@ -17,7 +18,7 @@ class CardVerificationTypedDict(TypedDict):
     cvv: CardVerificationResult
     address_line1: CardVerificationResult
     postal_code: CardVerificationResult
-    account_name: AccountNameVerificationTypedDict
+    account_name: NotRequired[AccountNameVerificationTypedDict]
     r"""The results of submitting cardholder name to a card network for verification."""
 
 
@@ -33,6 +34,6 @@ class CardVerification(BaseModel):
     postal_code: Annotated[CardVerificationResult, pydantic.Field(alias="postalCode")]
 
     account_name: Annotated[
-        AccountNameVerification, pydantic.Field(alias="accountName")
-    ]
+        Optional[AccountNameVerification], pydantic.Field(alias="accountName")
+    ] = None
     r"""The results of submitting cardholder name to a card network for verification."""
