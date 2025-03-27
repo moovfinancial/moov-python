@@ -38,21 +38,21 @@ class PaymentMethodsCardTypedDict(TypedDict):
     billing_address: CardAddressTypedDict
     card_verification: CardVerificationTypedDict
     r"""The results of submitting cardholder data to a card network for verification."""
-    issuer: str
-    r"""Financial institution that issued the card."""
-    issuer_country: str
-    r"""Country where the card was issued."""
-    domestic_push_to_card: DomesticPushToCard
-    r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
-    domestic_pull_from_card: DomesticPullFromCard
-    r"""Indicates if the card supports domestic pull-from-card transfer."""
     holder_name: NotRequired[str]
     r"""The name of the cardholder as it appears on the card."""
+    issuer: NotRequired[str]
+    r"""Financial institution that issued the card."""
+    issuer_country: NotRequired[str]
+    r"""Country where the card was issued."""
     card_on_file: NotRequired[bool]
     r"""Indicates cardholder has authorized card to be stored for future payments."""
     merchant_account_id: NotRequired[str]
     card_account_updater: NotRequired[CardAccountUpdaterTypedDict]
     r"""The results of the most recent card update request."""
+    domestic_push_to_card: NotRequired[DomesticPushToCard]
+    r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
+    domestic_pull_from_card: NotRequired[DomesticPullFromCard]
+    r"""Indicates if the card supports domestic pull-from-card transfer."""
 
 
 class PaymentMethodsCard(BaseModel):
@@ -89,24 +89,16 @@ class PaymentMethodsCard(BaseModel):
     ]
     r"""The results of submitting cardholder data to a card network for verification."""
 
-    issuer: str
-    r"""Financial institution that issued the card."""
-
-    issuer_country: Annotated[str, pydantic.Field(alias="issuerCountry")]
-    r"""Country where the card was issued."""
-
-    domestic_push_to_card: Annotated[
-        DomesticPushToCard, pydantic.Field(alias="domesticPushToCard")
-    ]
-    r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
-
-    domestic_pull_from_card: Annotated[
-        DomesticPullFromCard, pydantic.Field(alias="domesticPullFromCard")
-    ]
-    r"""Indicates if the card supports domestic pull-from-card transfer."""
-
     holder_name: Annotated[Optional[str], pydantic.Field(alias="holderName")] = None
     r"""The name of the cardholder as it appears on the card."""
+
+    issuer: Optional[str] = None
+    r"""Financial institution that issued the card."""
+
+    issuer_country: Annotated[Optional[str], pydantic.Field(alias="issuerCountry")] = (
+        None
+    )
+    r"""Country where the card was issued."""
 
     card_on_file: Annotated[Optional[bool], pydantic.Field(alias="cardOnFile")] = None
     r"""Indicates cardholder has authorized card to be stored for future payments."""
@@ -119,3 +111,13 @@ class PaymentMethodsCard(BaseModel):
         Optional[CardAccountUpdater], pydantic.Field(alias="cardAccountUpdater")
     ] = None
     r"""The results of the most recent card update request."""
+
+    domestic_push_to_card: Annotated[
+        Optional[DomesticPushToCard], pydantic.Field(alias="domesticPushToCard")
+    ] = None
+    r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
+
+    domestic_pull_from_card: Annotated[
+        Optional[DomesticPullFromCard], pydantic.Field(alias="domesticPullFromCard")
+    ] = None
+    r"""Indicates if the card supports domestic pull-from-card transfer."""

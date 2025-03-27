@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 2a2fafc743d395eb7f031d0aaf58968b
+  docChecksum: eb2419a3b7e29e59421e716ed47cf02d
   docVersion: latest
-  speakeasyVersion: 1.523.0
-  generationVersion: 2.559.0
-  releaseVersion: 0.3.17
-  configChecksum: 5618133829c12d3f2a5cd46d119fc167
+  speakeasyVersion: 1.524.0
+  generationVersion: 2.562.2
+  releaseVersion: 0.3.18
+  configChecksum: 6cdb7c6c3d12f87508acb16f49482535
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -2726,7 +2726,7 @@ examples:
     speakeasy-default-list-institutions:
       responses:
         "200":
-          application/json: {"achParticipants": [{"achLocation": {"address": "123 Main Street", "city": "Boulder", "postalCode": "80301", "postalCodeExtension": "0000", "state": "Colorado"}, "customerName": "Main Street Bank", "newRoutingNumber": "987654321", "officeCode": "0", "phoneNumber": "1234567789", "recordTypeCode": "1", "revised": "041921", "routingNumber": "123456789", "servicingFRBNumber": "123456789", "statusCode": "1", "viewCode": "1", "cleanName": "Main Street Bank", "logo": null}]}
+          application/json: {"achParticipants": [{"achLocation": {"address": "123 Main Street", "city": "Boulder", "postalCode": "80301", "postalCodeExtension": "0000", "state": "Colorado"}, "customerName": "Main Street Bank", "newRoutingNumber": "987654321", "officeCode": "0", "phoneNumber": "1234567789", "recordTypeCode": "1", "revised": "041921", "routingNumber": "123456789", "servicingFRBNumber": "123456789", "statusCode": "1", "viewCode": "1", "cleanName": "Main Street Bank", "logo": {"name": "Main Street Bank", "url": "https://www.mainstreetbank.com/logo.png"}}]}
         "400":
           application/json: {"error": "<value>"}
   listIssuedCardAuthorizations:

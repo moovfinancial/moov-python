@@ -77,7 +77,7 @@ class Wallets(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listWallets",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -189,7 +189,7 @@ class Wallets(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listWallets",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -304,7 +304,7 @@ class Wallets(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getWallet",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -419,7 +419,7 @@ class Wallets(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getWallet",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),

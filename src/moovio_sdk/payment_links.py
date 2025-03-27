@@ -144,7 +144,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createPaymentLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -337,7 +337,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createPaymentLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -468,7 +468,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listPaymentLinks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -580,7 +580,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listPaymentLinks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -695,7 +695,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getPaymentLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -808,7 +808,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getPaymentLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -980,7 +980,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updatePaymentLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1173,7 +1173,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updatePaymentLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1307,7 +1307,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="disablePaymentLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1409,7 +1409,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="disablePaymentLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1517,7 +1517,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getPaymentLinkQRCode",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1642,7 +1642,7 @@ class PaymentLinks(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getPaymentLinkQRCode",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),

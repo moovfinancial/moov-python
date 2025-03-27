@@ -39,24 +39,20 @@ class CardTypedDict(TypedDict):
     billing_address: CardAddressTypedDict
     card_verification: CardVerificationTypedDict
     r"""The results of submitting cardholder data to a card network for verification."""
-    issuer: str
-    r"""Financial institution that issued the card."""
-    issuer_country: str
-    r"""Country where the card was issued."""
-    issuer_url: str
-    r"""URL of the issuer."""
-    issuer_phone: str
-    r"""Phone number of the issuer."""
-    domestic_push_to_card: DomesticPushToCard
-    r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
-    domestic_pull_from_card: DomesticPullFromCard
-    r"""Indicates if the card supports domestic pull-from-card transfer."""
     card_category: NotRequired[str]
     r"""The category or level of the card defined by the issuer.
     Examples include, but not limited to, \"REWARDS\", \"TRADITIONAL REWARDS\", \"CLASSIC\", and \"CORPORATE PURCHASING\".
     """
     holder_name: NotRequired[str]
     r"""The name of the cardholder as it appears on the card."""
+    issuer: NotRequired[str]
+    r"""Financial institution that issued the card."""
+    issuer_country: NotRequired[str]
+    r"""Country where the card was issued."""
+    issuer_url: NotRequired[str]
+    r"""URL of the issuer."""
+    issuer_phone: NotRequired[str]
+    r"""Phone number of the issuer."""
     commercial: NotRequired[bool]
     r"""If true, the card is for commercial use, or associated with a business.
     If false, the card is associated with a general consumer.
@@ -70,6 +66,10 @@ class CardTypedDict(TypedDict):
     merchant_account_id: NotRequired[str]
     card_account_updater: NotRequired[CardAccountUpdaterTypedDict]
     r"""The results of the most recent card update request."""
+    domestic_push_to_card: NotRequired[DomesticPushToCard]
+    r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
+    domestic_pull_from_card: NotRequired[DomesticPullFromCard]
+    r"""Indicates if the card supports domestic pull-from-card transfer."""
     payment_methods: NotRequired[List[BasicPaymentMethodTypedDict]]
 
 
@@ -107,28 +107,6 @@ class Card(BaseModel):
     ]
     r"""The results of submitting cardholder data to a card network for verification."""
 
-    issuer: str
-    r"""Financial institution that issued the card."""
-
-    issuer_country: Annotated[str, pydantic.Field(alias="issuerCountry")]
-    r"""Country where the card was issued."""
-
-    issuer_url: Annotated[str, pydantic.Field(alias="issuerURL")]
-    r"""URL of the issuer."""
-
-    issuer_phone: Annotated[str, pydantic.Field(alias="issuerPhone")]
-    r"""Phone number of the issuer."""
-
-    domestic_push_to_card: Annotated[
-        DomesticPushToCard, pydantic.Field(alias="domesticPushToCard")
-    ]
-    r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
-
-    domestic_pull_from_card: Annotated[
-        DomesticPullFromCard, pydantic.Field(alias="domesticPullFromCard")
-    ]
-    r"""Indicates if the card supports domestic pull-from-card transfer."""
-
     card_category: Annotated[Optional[str], pydantic.Field(alias="cardCategory")] = None
     r"""The category or level of the card defined by the issuer.
     Examples include, but not limited to, \"REWARDS\", \"TRADITIONAL REWARDS\", \"CLASSIC\", and \"CORPORATE PURCHASING\".
@@ -136,6 +114,20 @@ class Card(BaseModel):
 
     holder_name: Annotated[Optional[str], pydantic.Field(alias="holderName")] = None
     r"""The name of the cardholder as it appears on the card."""
+
+    issuer: Optional[str] = None
+    r"""Financial institution that issued the card."""
+
+    issuer_country: Annotated[Optional[str], pydantic.Field(alias="issuerCountry")] = (
+        None
+    )
+    r"""Country where the card was issued."""
+
+    issuer_url: Annotated[Optional[str], pydantic.Field(alias="issuerURL")] = None
+    r"""URL of the issuer."""
+
+    issuer_phone: Annotated[Optional[str], pydantic.Field(alias="issuerPhone")] = None
+    r"""Phone number of the issuer."""
 
     commercial: Optional[bool] = None
     r"""If true, the card is for commercial use, or associated with a business.
@@ -158,6 +150,16 @@ class Card(BaseModel):
         Optional[CardAccountUpdater], pydantic.Field(alias="cardAccountUpdater")
     ] = None
     r"""The results of the most recent card update request."""
+
+    domestic_push_to_card: Annotated[
+        Optional[DomesticPushToCard], pydantic.Field(alias="domesticPushToCard")
+    ] = None
+    r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
+
+    domestic_pull_from_card: Annotated[
+        Optional[DomesticPullFromCard], pydantic.Field(alias="domesticPullFromCard")
+    ] = None
+    r"""Indicates if the card supports domestic pull-from-card transfer."""
 
     payment_methods: Annotated[
         Optional[List[BasicPaymentMethod]], pydantic.Field(alias="paymentMethods")

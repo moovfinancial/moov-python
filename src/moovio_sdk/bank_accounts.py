@@ -97,7 +97,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="linkBankAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -250,7 +250,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="linkBankAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -383,7 +383,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listBankAccounts",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -497,7 +497,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listBankAccounts",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -614,7 +614,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getBankAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -729,7 +729,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getBankAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -842,7 +842,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="disableBankAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -969,7 +969,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="disableBankAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1107,7 +1107,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="initiateMicroDeposits",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1245,7 +1245,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="initiateMicroDeposits",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1384,7 +1384,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="completeMicroDeposits",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1532,7 +1532,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="completeMicroDeposits",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1677,7 +1677,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getBankAccountVerification",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1801,7 +1801,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getBankAccountVerification",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1934,7 +1934,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="initiateBankAccountVerification",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2082,7 +2082,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="initiateBankAccountVerification",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2231,7 +2231,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="completeBankAccountVerification",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2381,7 +2381,7 @@ class BankAccounts(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="completeBankAccountVerification",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
