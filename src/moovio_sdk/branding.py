@@ -87,7 +87,7 @@ class Branding(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createBrand",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -230,7 +230,7 @@ class Branding(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createBrand",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -373,7 +373,7 @@ class Branding(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="upsertBrand",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -516,7 +516,7 @@ class Branding(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="upsertBrand",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -647,7 +647,7 @@ class Branding(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getBrand",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -757,7 +757,7 @@ class Branding(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getBrand",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -879,7 +879,7 @@ class Branding(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateBrand",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1022,7 +1022,7 @@ class Branding(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateBrand",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),

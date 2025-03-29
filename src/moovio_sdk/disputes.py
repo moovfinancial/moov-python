@@ -121,7 +121,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listDisputes",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -283,7 +283,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listDisputes",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -412,7 +412,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getDispute",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -527,7 +527,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getDispute",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -642,7 +642,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="acceptDispute",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -772,7 +772,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="acceptDispute",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -902,7 +902,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listDisputeEvidence",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1019,7 +1019,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listDisputeEvidence",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1151,7 +1151,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceFile",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1304,7 +1304,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceFile",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1457,7 +1457,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceText",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1604,7 +1604,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceText",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1739,7 +1739,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="submitDisputeEvidence",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1872,7 +1872,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="submitDisputeEvidence",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2005,7 +2005,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getDisputeEvidence",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2125,7 +2125,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getDisputeEvidence",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2256,7 +2256,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateDisputeEvidence",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2401,7 +2401,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateDisputeEvidence",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2535,7 +2535,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteDisputeEvidenceFile",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2666,7 +2666,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="deleteDisputeEvidenceFile",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2801,7 +2801,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getDisputeEvidenceData",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2931,7 +2931,7 @@ class Disputes(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getDisputeEvidenceData",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),

@@ -102,7 +102,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createSweepConfig",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -260,7 +260,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createSweepConfig",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -391,7 +391,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listSweepConfigs",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -503,7 +503,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listSweepConfigs",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -618,7 +618,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getSweepConfig",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -731,7 +731,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getSweepConfig",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -889,7 +889,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateSweepConfig",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1068,7 +1068,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateSweepConfig",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1214,7 +1214,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listSweeps",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1339,7 +1339,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listSweeps",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1455,7 +1455,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getSweep",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1571,7 +1571,7 @@ class Sweeps(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getSweep",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),

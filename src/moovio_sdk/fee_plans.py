@@ -87,7 +87,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listFeePlanAgreements",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -211,7 +211,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listFeePlanAgreements",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -335,7 +335,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createFeePlanAgreements",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -478,7 +478,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createFeePlanAgreements",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -613,7 +613,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listFeePlans",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -727,7 +727,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listFeePlans",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -855,7 +855,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="retrieveFees",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -985,7 +985,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="retrieveFees",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1109,7 +1109,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listFeesFetch",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1233,7 +1233,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listFeesFetch",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1348,7 +1348,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listPartnerPricing",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1463,7 +1463,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listPartnerPricing",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1587,7 +1587,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listPartnerPricingAgreements",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1711,7 +1711,7 @@ class FeePlans(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listPartnerPricingAgreements",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),

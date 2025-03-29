@@ -30,6 +30,9 @@ class Transfers(BaseSDK):
         ] = None,
         description: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
+        sales_tax_amount: Optional[
+            Union[components.Amount, components.AmountTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -51,6 +54,7 @@ class Transfers(BaseSDK):
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -83,6 +87,9 @@ class Transfers(BaseSDK):
                 ),
                 description=description,
                 metadata=metadata,
+                sales_tax_amount=utils.get_pydantic_model(
+                    sales_tax_amount, Optional[components.Amount]
+                ),
             ),
         )
 
@@ -120,7 +127,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createTransfer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -216,6 +223,9 @@ class Transfers(BaseSDK):
         ] = None,
         description: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
+        sales_tax_amount: Optional[
+            Union[components.Amount, components.AmountTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -237,6 +247,7 @@ class Transfers(BaseSDK):
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -269,6 +280,9 @@ class Transfers(BaseSDK):
                 ),
                 description=description,
                 metadata=metadata,
+                sales_tax_amount=utils.get_pydantic_model(
+                    sales_tax_amount, Optional[components.Amount]
+                ),
             ),
         )
 
@@ -306,7 +320,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createTransfer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -482,7 +496,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listTransfers",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -626,7 +640,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listTransfers",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -742,7 +756,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getTransfer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -858,7 +872,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getTransfer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -981,7 +995,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateTransfer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1104,7 +1118,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateTransfer",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1217,7 +1231,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createCancellation",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1344,7 +1358,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createCancellation",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1474,7 +1488,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getCancellation",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1590,7 +1604,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getCancellation",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1724,7 +1738,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="initiateRefund",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1891,7 +1905,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="initiateRefund",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2037,7 +2051,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listRefunds",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2152,7 +2166,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listRefunds",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2270,7 +2284,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getRefund",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2388,7 +2402,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getRefund",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2520,7 +2534,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createReversal",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2671,7 +2685,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createReversal",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2824,7 +2838,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createTransferOptions",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -2975,7 +2989,7 @@ class Transfers(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="createTransferOptions",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),

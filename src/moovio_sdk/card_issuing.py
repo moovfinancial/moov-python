@@ -110,7 +110,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="requestCard",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -275,7 +275,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="requestCard",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -414,7 +414,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listIssuedCards",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -533,7 +533,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="listIssuedCards",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -646,7 +646,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getIssuedCard",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -759,7 +759,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getIssuedCard",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -897,7 +897,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateIssuedCard",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1055,7 +1055,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="updateIssuedCard",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1190,7 +1190,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getFullIssuedCard",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -1305,7 +1305,7 @@ class CardIssuing(BaseSDK):
             hook_ctx=HookContext(
                 base_url=base_url or "",
                 operation_id="getFullIssuedCard",
-                oauth2_scopes=None,
+                oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),

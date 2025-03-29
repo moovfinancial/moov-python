@@ -95,6 +95,11 @@ class TransferData(BaseModel):
 
     occurrence_id: Annotated[Optional[str], pydantic.Field(alias="occurrenceID")] = None
 
+    sales_tax_amount: Annotated[
+        Optional[components_amount.Amount], pydantic.Field(alias="salesTaxAmount")
+    ] = None
+    r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
+
 
 class Transfer(Exception):
     r"""Details of a Transfer."""
