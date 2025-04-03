@@ -46,7 +46,7 @@ class TransferData(BaseModel):
     r"""Reason for a transfer's failure."""
 
     description: Optional[str] = None
-    r"""An optional description of the transfer for your own internal use."""
+    r"""An optional description of the transfer that is used on receipts and for your own internal use."""
 
     metadata: Optional[Dict[str, str]] = None
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""

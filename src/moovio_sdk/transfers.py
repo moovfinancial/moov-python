@@ -52,7 +52,7 @@ class Transfers(BaseSDK):
         :param amount:
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
         :param facilitator_fee: Total or markup fee.
-        :param description: An optional description of the transfer for your own internal use.
+        :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
         :param retries: Override the default retry configuration for this method
@@ -245,7 +245,7 @@ class Transfers(BaseSDK):
         :param amount:
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
         :param facilitator_fee: Total or markup fee.
-        :param description: An optional description of the transfer for your own internal use.
+        :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
         :param retries: Override the default retry configuration for this method

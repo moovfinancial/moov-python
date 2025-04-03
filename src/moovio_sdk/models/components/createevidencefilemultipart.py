@@ -36,7 +36,7 @@ class File(BaseModel):
 
 class CreateEvidenceFileMultiPartTypedDict(TypedDict):
     file: FileTypedDict
-    r"""The file to upload as evidence. Valid types are [jpeg, tiff, pdf].
+    r"""The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
 
     The `Content-Type` header for this form part must be one of the following:
     - `image/jpeg`
@@ -48,7 +48,7 @@ class CreateEvidenceFileMultiPartTypedDict(TypedDict):
 
 class CreateEvidenceFileMultiPart(BaseModel):
     file: Annotated[File, FieldMetadata(multipart=MultipartFormMetadata(file=True))]
-    r"""The file to upload as evidence. Valid types are [jpeg, tiff, pdf].
+    r"""The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
 
     The `Content-Type` header for this form part must be one of the following:
     - `image/jpeg`
