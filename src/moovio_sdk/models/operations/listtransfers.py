@@ -62,6 +62,8 @@ class ListTransfersRequestTypedDict(TypedDict):
     r"""Optional date-time which exclusively filters all transfers created before this date-time."""
     group_id: NotRequired[str]
     r"""Optional ID to filter for transfers in the same group."""
+    schedule_id: NotRequired[str]
+    r"""Optional ID to filter for transfer occurrences belonging to the same schedule."""
     refunded: NotRequired[bool]
     r"""Optional parameter to only return refunded transfers."""
     disputed: NotRequired[bool]
@@ -110,6 +112,13 @@ class ListTransfersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""Optional ID to filter for transfers in the same group."""
+
+    schedule_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="scheduleID"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional ID to filter for transfer occurrences belonging to the same schedule."""
 
     refunded: Annotated[
         Optional[bool],
