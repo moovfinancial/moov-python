@@ -52,7 +52,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.scheduling.create(account_id="85154287-4ee0-4c8f-89d9-6c4a524b28f0", occurrences=[
+    res = moov.scheduling.create(account_id="9ab418fe-7b54-4964-a372-69b08e55ee8a", occurrences=[
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
@@ -82,7 +82,7 @@ with Moov(
                         dynamic_descriptor="WhlBdy *Yoga 11-12",
                     ),
                 ),
-                description="ajar ornate bah calculus circumference fiercely ornate",
+                description="delightfully fumigate convection though zowie up bulky electronics",
             ),
         ),
         components.Occurrence(
@@ -114,39 +114,7 @@ with Moov(
                         dynamic_descriptor="WhlBdy *Yoga 11-12",
                     ),
                 ),
-                description="scented whether once why unexpectedly",
-            ),
-        ),
-        components.Occurrence(
-            occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-            run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
-            run_transfer=components.RunTransfer(
-                amount=components.Amount(
-                    currency="USD",
-                    value=1204,
-                ),
-                destination=components.SchedulePaymentMethod(
-                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    ach_details=components.AchDetails(
-                        company_entry_description="Gym dues",
-                        originating_company_name="Whole Body Fit",
-                    ),
-                    card_details=components.CardDetails(
-                        dynamic_descriptor="WhlBdy *Yoga 11-12",
-                    ),
-                ),
-                partner_account_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                source=components.SchedulePaymentMethod(
-                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-                    ach_details=components.AchDetails(
-                        company_entry_description="Gym dues",
-                        originating_company_name="Whole Body Fit",
-                    ),
-                    card_details=components.CardDetails(
-                        dynamic_descriptor="WhlBdy *Yoga 11-12",
-                    ),
-                ),
-                description="formation dreamily exasperation but yuck psst nautical",
+                description="tackle unabashedly mentor early miserly stealthily without",
             ),
         ),
     ], recur=components.Recur(
@@ -177,7 +145,7 @@ with Moov(
                     dynamic_descriptor="WhlBdy *Yoga 11-12",
                 ),
             ),
-            description="adjourn briskly amidst modulo gosh foolishly",
+            description="via deeply writ amid pupil yawningly wasabi when excepting councilman",
         ),
         start=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
     ))
@@ -230,7 +198,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.scheduling.list(account_id="f5b39da1-b677-43d6-b114-65cbbea83ad5", skip=60, count=20)
+    res = moov.scheduling.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -279,7 +247,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.scheduling.update(account_id="9122f67d-60fd-4e10-9f18-023929ab3209", schedule_id="a4599c7c-e943-47b9-8e40-0834618798a5", occurrences=[
+    res = moov.scheduling.update(account_id="916f66c9-4a48-4a10-94fb-c5837b3ed84e", schedule_id="ce88be33-c224-42c1-ae8b-3533cc7b3742", occurrences=[
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
@@ -309,7 +277,7 @@ with Moov(
                         dynamic_descriptor="WhlBdy *Yoga 11-12",
                     ),
                 ),
-                description="playfully better now relative athwart lest anesthetize",
+                description="technician eulogise whereas till mild than during",
             ),
         ),
         components.Occurrence(
@@ -341,7 +309,39 @@ with Moov(
                         dynamic_descriptor="WhlBdy *Yoga 11-12",
                     ),
                 ),
-                description="whereas reboot probate prejudge which mobility carefully",
+                description="gosh frantically belabor past",
+            ),
+        ),
+        components.Occurrence(
+            occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+            run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
+            run_transfer=components.RunTransfer(
+                amount=components.Amount(
+                    currency="USD",
+                    value=1204,
+                ),
+                destination=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
+                partner_account_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                source=components.SchedulePaymentMethod(
+                    payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
+                    ach_details=components.AchDetails(
+                        company_entry_description="Gym dues",
+                        originating_company_name="Whole Body Fit",
+                    ),
+                    card_details=components.CardDetails(
+                        dynamic_descriptor="WhlBdy *Yoga 11-12",
+                    ),
+                ),
+                description="perfumed fisherman with",
             ),
         ),
     ], recur=components.Recur(
@@ -372,7 +372,7 @@ with Moov(
                     dynamic_descriptor="WhlBdy *Yoga 11-12",
                 ),
             ),
-            description="fooey heavily immediately abaft justly phooey when separately",
+            description="hydrolyze lazily whenever how what",
         ),
         start=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
     ))
@@ -426,7 +426,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.scheduling.get(account_id="aa7a59b8-5d59-4efd-99e7-b644e71e5f8c", schedule_id="605976e8-f3ff-4e64-9b41-7255577d6f44")
+    res = moov.scheduling.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", schedule_id="e50f7622-81da-484b-9c66-1c8a99c6b71b")
 
     # Handle response
     print(res)
@@ -472,7 +472,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.scheduling.cancel(account_id="a1303a1c-8708-447e-a64b-5dba8417b641", schedule_id="ab5ca483-e27d-48f0-b596-09eed517874f")
+    res = moov.scheduling.cancel(account_id="0f713502-9233-41c6-9ebd-c570b7edb496", schedule_id="d50fbe4e-3e32-4613-8574-4d82f3fd6b3c")
 
     # Handle response
     print(res)
@@ -519,7 +519,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.scheduling.get_occurrance(account_id="7175f455-a6d6-4b87-8e24-cbd12c7dabe7", schedule_id="a4ffa63d-9228-4488-8f27-d2ff59d7760c", occurrence_filter="<value>")
+    res = moov.scheduling.get_occurrance(account_id="cdeb0c02-04f9-4e60-9768-3c10a2b2201d", schedule_id="47a51a3b-df1e-40c5-8048-918f18949779", occurrence_filter="<value>")
 
     # Handle response
     print(res)

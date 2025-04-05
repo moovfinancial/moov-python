@@ -119,7 +119,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.link(account_id="5049418d-b6dc-4a6f-a285-091c0e15dc6a", link_bank_account={
+    res = moov.bank_accounts.link(account_id="0ffc839a-9198-4ea1-98a2-6cccee057439", link_bank_account={
         "plaid": {
             "token": "<value>",
         },
@@ -174,7 +174,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.list(account_id="91095bec-ade2-4a8c-9f46-ae7f07234fee")
+    res = moov.bank_accounts.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
 
     # Handle response
     print(res)
@@ -221,7 +221,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.get(account_id="30085225-d87e-47cd-8f08-001465f8cd22", bank_account_id="6c5a7be6-792b-4628-af28-a852f8c9de5b")
+    res = moov.bank_accounts.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", bank_account_id="e50f7622-81da-484b-9c66-1c8a99c6b71b")
 
     # Handle response
     print(res)
@@ -267,7 +267,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.disable(account_id="d01209e7-2701-46cc-b0ba-56eabf4e1ec7", bank_account_id="0ae3f56a-e391-4a80-962d-9fe4c7a45b97")
+    res = moov.bank_accounts.disable(account_id="cd7cd1ce-90cc-444b-ac3e-badb79be277f", bank_account_id="0f131553-3a08-4820-a7ac-ba935765809c")
 
     # Handle response
     print(res)
@@ -433,7 +433,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.get_verification(account_id="0102058c-a936-482a-a3ca-2355850903d7", bank_account_id="ee6888ef-544e-4146-bab7-ea04e31b2274")
+    res = moov.bank_accounts.get_verification(account_id="eb35bc20-d74d-4acc-b152-c4db94d9355b", bank_account_id="2572c1db-032d-464b-b55d-1fd7052232be")
 
     # Handle response
     print(res)
@@ -494,7 +494,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.initiate_verification(account_id="c2b4967e-86a5-474e-a78e-f013315f7dcc", bank_account_id="d648f8f3-7641-4e40-8a99-c08de14889c8", x_wait_for=components.BankAccountWaitFor.PAYMENT_METHOD)
+    res = moov.bank_accounts.initiate_verification(account_id="96925880-1f29-484d-9ce4-a55f78c3d5fc", bank_account_id="c9cadc5c-d322-467d-bc62-d133abcc5ec1")
 
     # Handle response
     print(res)
@@ -549,7 +549,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.complete_verification(account_id="88cf5aa5-bf76-406e-a986-eb33cd8890e3", bank_account_id="0157260f-ae3c-496c-a9d8-24de5fbc6b31", code="MV1234")
+    res = moov.bank_accounts.complete_verification(account_id="3b83f70f-82ce-4e0f-8a75-e4717ad684e4", bank_account_id="c4c7442d-4aa1-4dfe-9ab1-5206164dce64", code="MV1234")
 
     # Handle response
     print(res)

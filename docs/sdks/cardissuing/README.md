@@ -49,9 +49,9 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.card_issuing.request(account_id="9c0ff49b-9aaf-4815-b4a4-3e412558f6bc", funding_wallet_id="df7610a6-b14e-4eee-9a55-1890b6b3207c", authorized_user={
-        "first_name": "Tanya",
-        "last_name": "Flatley",
+    res = moov.card_issuing.request(account_id="bd26796d-dd52-401c-9686-e370e79ebc50", funding_wallet_id="32613610-de25-446e-8662-ec2709ffea9d", authorized_user={
+        "first_name": "Leta",
+        "last_name": "Satterfield",
         "birth_date": {
             "day": 9,
             "month": 11,
@@ -62,6 +62,10 @@ with Moov(
         "year": "21",
     }, controls={
         "velocity_limits": [
+            {
+                "amount": 10000,
+                "interval": components.IssuingIntervalLimit.PER_TRANSACTION,
+            },
             {
                 "amount": 10000,
                 "interval": components.IssuingIntervalLimit.PER_TRANSACTION,
@@ -124,7 +128,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.card_issuing.list(account_id="33bbd03b-931d-4e6d-b831-8698f4aee791", skip=60, count=20)
+    res = moov.card_issuing.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -172,7 +176,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.card_issuing.get(account_id="c63d9bae-2097-4bfa-8ac7-e9e8dff6e9ae", issued_card_id="aa0c86df-7f7d-4200-9ee4-24ba8870a7d4")
+    res = moov.card_issuing.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", issued_card_id="e50f7622-81da-484b-9c66-1c8a99c6b71b")
 
     # Handle response
     print(res)
@@ -218,7 +222,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.card_issuing.update(account_id="fc445a8c-5b64-4ab9-ba30-5bdb0ffc02b0", issued_card_id="064f9e03-fc5f-4a7d-83d2-2ec946f77ff2", authorized_user={
+    res = moov.card_issuing.update(account_id="d95fa7f0-e743-42ce-b47c-b60cc78135dd", issued_card_id="b85898c1-25a1-4907-a1c5-562af6646dad", authorized_user={
         "birth_date": {
             "day": 9,
             "month": 11,
@@ -277,7 +281,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.card_issuing.get_full(account_id="f03c4c3e-2685-44e6-8d4b-0d5bd082a301", issued_card_id="1da6b593-679e-44ab-a9e4-6db6db4b8f46")
+    res = moov.card_issuing.get_full(account_id="04e9a1b9-0751-4f2d-b0d4-51e47b62623c", issued_card_id="13ddb970-c10a-44bb-a2e6-73beac428022")
 
     # Handle response
     print(res)

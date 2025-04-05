@@ -47,7 +47,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.issuing_transactions.list_authorizations(account_id="8b15de20-a7c4-4720-a646-88309ab5093d", skip=60, count=20)
+    res = moov.issuing_transactions.list_authorizations(account_id="c2c85e2d-634b-4cc0-8c5b-763c22a727b6", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -98,7 +98,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.issuing_transactions.get_authorization(account_id="8c490d50-8951-4810-9506-ecd5648c2a39", authorization_id="f037a459-fbd3-47b9-8181-09847ea9f557")
+    res = moov.issuing_transactions.get_authorization(account_id="7fe28e4d-1e30-4ebb-8d22-aae768170b82", authorization_id="8db4b0c4-d99d-4878-bcde-c2700f82e331")
 
     # Handle response
     print(res)
@@ -144,7 +144,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.issuing_transactions.list_authorization_events(account_id="78666549-e9e4-4769-8bd4-1456f277ddce", authorization_id="fcc21f8e-61f5-4554-a253-362fd57052bb", skip=60, count=20)
+    res = moov.issuing_transactions.list_authorization_events(account_id="e52b1b82-54cb-42aa-911b-6359b8490650", authorization_id="f1a90d72-3787-49c4-a11d-9e7efe0b3763", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -192,7 +192,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.issuing_transactions.list(account_id="b137f097-2f49-4fc7-afb4-b59a6fe762cd", skip=60, count=20)
+    res = moov.issuing_transactions.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -242,7 +242,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.issuing_transactions.get(account_id="4bebfda4-7627-4fb8-9945-5ef57c25a867", card_transaction_id="33615eaf-e358-4f62-ac49-f7cca27d44ba")
+    res = moov.issuing_transactions.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", card_transaction_id="e50f7622-81da-484b-9c66-1c8a99c6b71b")
 
     # Handle response
     print(res)

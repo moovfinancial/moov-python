@@ -47,7 +47,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.capabilities.list(account_id="c236a258-0a99-455d-9fbb-2312bc028cd2")
+    res = moov.capabilities.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
 
     # Handle response
     print(res)
@@ -142,7 +142,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.capabilities.get(account_id="15fbc94d-721f-44a3-b5fb-77f58657305f", capability_id=components.CapabilityID.TRANSFERS)
+    res = moov.capabilities.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", capability_id=components.CapabilityID.PRODUCTION_APP)
 
     # Handle response
     print(res)
@@ -188,7 +188,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.capabilities.disable(account_id="c57b48d7-4182-4632-a345-eeed5a742b0d", capability_id=components.CapabilityID.CARD_ISSUING)
+    res = moov.capabilities.disable(account_id="cd7cd1ce-90cc-444b-ac3e-badb79be277f", capability_id=components.CapabilityID.TRANSFERS)
 
     # Handle response
     print(res)

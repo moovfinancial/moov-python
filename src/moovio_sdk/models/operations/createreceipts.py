@@ -43,10 +43,10 @@ class CreateReceiptsGlobals(BaseModel):
 
 class CreateReceiptsResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
-    result: components_receiptresponse.ReceiptResponseTypedDict
+    result: List[components_receiptresponse.ReceiptResponseTypedDict]
 
 
 class CreateReceiptsResponse(BaseModel):
     headers: Dict[str, List[str]]
 
-    result: components_receiptresponse.ReceiptResponse
+    result: List[components_receiptresponse.ReceiptResponse]

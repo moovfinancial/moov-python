@@ -105,18 +105,15 @@ class Receipts(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return operations.CreateReceiptsResponse(
-                result=utils.unmarshal_json(http_res.text, components.ReceiptResponse),
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.ReceiptResponse]
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
             raise errors.GenericError(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.ReceiptValidationErrorData
-            )
-            raise errors.ReceiptValidationError(data=response_data)
-        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "422", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -241,18 +238,15 @@ class Receipts(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return operations.CreateReceiptsResponse(
-                result=utils.unmarshal_json(http_res.text, components.ReceiptResponse),
+                result=utils.unmarshal_json(
+                    http_res.text, List[components.ReceiptResponse]
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
             raise errors.GenericError(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, errors.ReceiptValidationErrorData
-            )
-            raise errors.ReceiptValidationError(data=response_data)
-        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "422", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -285,18 +279,18 @@ class Receipts(BaseSDK):
     def list(
         self,
         *,
-        id: Optional[str] = None,
+        id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.ListReceiptsResponse:
-        r"""List receipts by trasnferID, scheduleID, or occurrenceID.
+        r"""List receipts by transferID, scheduleID, or occurrenceID.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param id: The unique identifier to filter receipts by.
+        :param id: The transfer, schedule, or transfer occurrence ID to filter receipts by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -397,18 +391,18 @@ class Receipts(BaseSDK):
     async def list_async(
         self,
         *,
-        id: Optional[str] = None,
+        id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.ListReceiptsResponse:
-        r"""List receipts by trasnferID, scheduleID, or occurrenceID.
+        r"""List receipts by transferID, scheduleID, or occurrenceID.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param id: The unique identifier to filter receipts by.
+        :param id: The transfer, schedule, or transfer occurrence ID to filter receipts by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

@@ -45,7 +45,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.files.upload(account_id="997f59d4-6b68-4f95-a825-1ae3f3faf278", file={
+    res = moov.files.upload(account_id="6886a454-7910-4a2b-b98a-ab61ec65fc41", file={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
     }, file_purpose=components.FilePurpose.REPRESENTATIVE_VERIFICATION, metadata="{\"requirement_id\": \"document.individual.verification\"}")
@@ -98,7 +98,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.files.list(account_id="a3c35406-9eb6-4801-bbac-0649c31c058a")
+    res = moov.files.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
 
     # Handle response
     print(res)
@@ -143,7 +143,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.files.get(account_id="346add0a-4dae-4729-8e74-1a50d00d677a", file_id="bf657841-ba2d-4060-ad21-eb2b7372cf85")
+    res = moov.files.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", file_id="e50f7622-81da-484b-9c66-1c8a99c6b71b")
 
     # Handle response
     print(res)

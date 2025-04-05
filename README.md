@@ -130,8 +130,8 @@ with Moov(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
-                last_name="Lee",
                 middle_name="Reese",
+                last_name="Lee",
                 suffix="Jr",
             ),
             phone=components.PhoneNumber(
@@ -141,11 +141,11 @@ with Moov(
             email="jordan.lee@classbooker.dev",
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             birth_date=components.BirthDate(
                 day=9,
@@ -158,11 +158,11 @@ with Moov(
             business_type=components.BusinessType.LLC,
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             phone=components.PhoneNumber(
                 number="8185551212",
@@ -193,11 +193,11 @@ with Moov(
         "email": "jordan.lee@classbooker.dev",
         "address": {
             "address_line1": "123 Main Street",
+            "address_line2": "Apt 302",
             "city": "Boulder",
             "state_or_province": "CO",
             "postal_code": "80301",
             "country": "US",
-            "address_line2": "Apt 302",
         },
     }, settings={
         "card_payment": {
@@ -234,8 +234,8 @@ async def main():
             individual=components.CreateIndividualProfile(
                 name=components.IndividualName(
                     first_name="Jordan",
-                    last_name="Lee",
                     middle_name="Reese",
+                    last_name="Lee",
                     suffix="Jr",
                 ),
                 phone=components.PhoneNumber(
@@ -245,11 +245,11 @@ async def main():
                 email="jordan.lee@classbooker.dev",
                 address=components.Address(
                     address_line1="123 Main Street",
+                    address_line2="Apt 302",
                     city="Boulder",
                     state_or_province="CO",
                     postal_code="80301",
                     country="US",
-                    address_line2="Apt 302",
                 ),
                 birth_date=components.BirthDate(
                     day=9,
@@ -262,11 +262,11 @@ async def main():
                 business_type=components.BusinessType.LLC,
                 address=components.Address(
                     address_line1="123 Main Street",
+                    address_line2="Apt 302",
                     city="Boulder",
                     state_or_province="CO",
                     postal_code="80301",
                     country="US",
-                    address_line2="Apt 302",
                 ),
                 phone=components.PhoneNumber(
                     number="8185551212",
@@ -297,11 +297,11 @@ async def main():
             "email": "jordan.lee@classbooker.dev",
             "address": {
                 "address_line1": "123 Main Street",
+                "address_line2": "Apt 302",
                 "city": "Boulder",
                 "state_or_province": "CO",
                 "postal_code": "80301",
                 "country": "US",
-                "address_line2": "Apt 302",
             },
         }, settings={
             "card_payment": {
@@ -347,8 +347,8 @@ with Moov(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
-                last_name="Lee",
                 middle_name="Reese",
+                last_name="Lee",
                 suffix="Jr",
             ),
             phone=components.PhoneNumber(
@@ -358,11 +358,11 @@ with Moov(
             email="jordan.lee@classbooker.dev",
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             birth_date=components.BirthDate(
                 day=9,
@@ -375,11 +375,11 @@ with Moov(
             business_type=components.BusinessType.LLC,
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             phone=components.PhoneNumber(
                 number="8185551212",
@@ -410,11 +410,11 @@ with Moov(
         "email": "jordan.lee@classbooker.dev",
         "address": {
             "address_line1": "123 Main Street",
+            "address_line2": "Apt 302",
             "city": "Boulder",
             "state_or_province": "CO",
             "postal_code": "80301",
             "country": "US",
-            "address_line2": "Apt 302",
         },
     }, settings={
         "card_payment": {
@@ -1026,7 +1026,7 @@ you'll need to specify the `/ping.read` scope.
 
  To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
  you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
-* [list](docs/sdks/receipts/README.md#list) - List receipts by trasnferID, scheduleID, or occurrenceID.
+* [list](docs/sdks/receipts/README.md#list) - List receipts by transferID, scheduleID, or occurrenceID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -1291,7 +1291,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.disputes.upload_evidence_file(account_id="ac81921c-4c1a-4e7a-8a8f-dfc0d0027ac5", dispute_id="49c04fa3-f5c3-4ddd-aece-4b5fb6e8a071", file={
+    res = moov.disputes.upload_evidence_file(account_id="190d267b-ea77-4231-9939-ba89cb7df82b", dispute_id="94aabddc-d855-40e6-ab0a-1e547e0dcc9d", file={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
     }, evidence_type=components.EvidenceType.CUSTOMER_COMMUNICATION)
@@ -1325,8 +1325,8 @@ with Moov(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
-                last_name="Lee",
                 middle_name="Reese",
+                last_name="Lee",
                 suffix="Jr",
             ),
             phone=components.PhoneNumber(
@@ -1336,11 +1336,11 @@ with Moov(
             email="jordan.lee@classbooker.dev",
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             birth_date=components.BirthDate(
                 day=9,
@@ -1353,11 +1353,11 @@ with Moov(
             business_type=components.BusinessType.LLC,
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             phone=components.PhoneNumber(
                 number="8185551212",
@@ -1388,11 +1388,11 @@ with Moov(
         "email": "jordan.lee@classbooker.dev",
         "address": {
             "address_line1": "123 Main Street",
+            "address_line2": "Apt 302",
             "city": "Boulder",
             "state_or_province": "CO",
             "postal_code": "80301",
             "country": "US",
-            "address_line2": "Apt 302",
         },
     }, settings={
         "card_payment": {
@@ -1428,8 +1428,8 @@ with Moov(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
-                last_name="Lee",
                 middle_name="Reese",
+                last_name="Lee",
                 suffix="Jr",
             ),
             phone=components.PhoneNumber(
@@ -1439,11 +1439,11 @@ with Moov(
             email="jordan.lee@classbooker.dev",
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             birth_date=components.BirthDate(
                 day=9,
@@ -1456,11 +1456,11 @@ with Moov(
             business_type=components.BusinessType.LLC,
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             phone=components.PhoneNumber(
                 number="8185551212",
@@ -1491,11 +1491,11 @@ with Moov(
         "email": "jordan.lee@classbooker.dev",
         "address": {
             "address_line1": "123 Main Street",
+            "address_line2": "Apt 302",
             "city": "Boulder",
             "state_or_province": "CO",
             "postal_code": "80301",
             "country": "US",
-            "address_line2": "Apt 302",
         },
     }, settings={
         "card_payment": {
@@ -1554,8 +1554,8 @@ with Moov(
             individual=components.CreateIndividualProfile(
                 name=components.IndividualName(
                     first_name="Jordan",
-                    last_name="Lee",
                     middle_name="Reese",
+                    last_name="Lee",
                     suffix="Jr",
                 ),
                 phone=components.PhoneNumber(
@@ -1565,11 +1565,11 @@ with Moov(
                 email="jordan.lee@classbooker.dev",
                 address=components.Address(
                     address_line1="123 Main Street",
+                    address_line2="Apt 302",
                     city="Boulder",
                     state_or_province="CO",
                     postal_code="80301",
                     country="US",
-                    address_line2="Apt 302",
                 ),
                 birth_date=components.BirthDate(
                     day=9,
@@ -1582,11 +1582,11 @@ with Moov(
                 business_type=components.BusinessType.LLC,
                 address=components.Address(
                     address_line1="123 Main Street",
+                    address_line2="Apt 302",
                     city="Boulder",
                     state_or_province="CO",
                     postal_code="80301",
                     country="US",
-                    address_line2="Apt 302",
                 ),
                 phone=components.PhoneNumber(
                     number="8185551212",
@@ -1617,11 +1617,11 @@ with Moov(
             "email": "jordan.lee@classbooker.dev",
             "address": {
                 "address_line1": "123 Main Street",
+                "address_line2": "Apt 302",
                 "city": "Boulder",
                 "state_or_province": "CO",
                 "postal_code": "80301",
                 "country": "US",
-                "address_line2": "Apt 302",
             },
         }, settings={
             "card_payment": {
@@ -1670,8 +1670,8 @@ with Moov(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
-                last_name="Lee",
                 middle_name="Reese",
+                last_name="Lee",
                 suffix="Jr",
             ),
             phone=components.PhoneNumber(
@@ -1681,11 +1681,11 @@ with Moov(
             email="jordan.lee@classbooker.dev",
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             birth_date=components.BirthDate(
                 day=9,
@@ -1698,11 +1698,11 @@ with Moov(
             business_type=components.BusinessType.LLC,
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             phone=components.PhoneNumber(
                 number="8185551212",
@@ -1733,11 +1733,11 @@ with Moov(
         "email": "jordan.lee@classbooker.dev",
         "address": {
             "address_line1": "123 Main Street",
+            "address_line2": "Apt 302",
             "city": "Boulder",
             "state_or_province": "CO",
             "postal_code": "80301",
             "country": "US",
-            "address_line2": "Apt 302",
         },
     }, settings={
         "card_payment": {

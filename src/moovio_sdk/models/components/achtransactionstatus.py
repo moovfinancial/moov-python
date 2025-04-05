@@ -7,6 +7,7 @@ from enum import Enum
 class ACHTransactionStatus(str, Enum):
     r"""Status of a transaction within the ACH lifecycle."""
 
+    UNKNOWN = ""
     INITIATED = "initiated"
     ORIGINATED = "originated"
     CORRECTED = "corrected"

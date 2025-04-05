@@ -51,7 +51,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.create_config(account_id="3a373e85-2777-40fe-aacd-52d6fc641d76", wallet_id="01234567-89ab-cdef-0123-456789abcdef", status=components.SweepConfigStatus.ENABLED, push_payment_method_id="01234567-89ab-cdef-0123-456789abcdef", pull_payment_method_id="01234567-89ab-cdef-0123-456789abcdef")
+    res = moov.sweeps.create_config(account_id="2c0dfb65-d7ef-4c8e-8c74-e6c7773550bc", wallet_id="01234567-89ab-cdef-0123-456789abcdef", status=components.SweepConfigStatus.ENABLED, push_payment_method_id="01234567-89ab-cdef-0123-456789abcdef", pull_payment_method_id="01234567-89ab-cdef-0123-456789abcdef")
 
     # Handle response
     print(res)
@@ -104,7 +104,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.list_configs(account_id="b06d7726-4020-4fef-9035-75779c0fc48c")
+    res = moov.sweeps.list_configs(account_id="5d9d568d-fb5d-478b-a301-d495422f1c35")
 
     # Handle response
     print(res)
@@ -149,7 +149,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.get_config(account_id="1f4428ca-3d11-441b-93d5-3fada6a5db01", sweep_config_id="acef9550-4b7b-4675-807b-71755d182b2f")
+    res = moov.sweeps.get_config(account_id="12f68c4e-1e8d-483b-9f62-b5d6458d538c", sweep_config_id="ce92235d-dd84-4e14-9895-3b98a0003522")
 
     # Handle response
     print(res)
@@ -248,7 +248,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.list(account_id="0fe45272-ee0d-401f-a10e-21e396676598", wallet_id="5f738f67-1989-4589-beb1-3d2f5c53a821", skip=60, count=20)
+    res = moov.sweeps.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6", wallet_id="21e27667-18d6-4d46-812e-0aee1b9ddf12", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -298,7 +298,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.get(account_id="adb697e6-2888-48b9-b2c5-f2c3d487add5", wallet_id="9f00e2b3-9dfb-48a3-9a25-a08e80f9cf36", sweep_id="a5324f55-fbec-4323-94e4-c512608bb175")
+    res = moov.sweeps.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", wallet_id="e50f7622-81da-484b-9c66-1c8a99c6b71b", sweep_id="ecd62b8f-7112-4aaf-90ab-4e43b4cca371")
 
     # Handle response
     print(res)

@@ -53,7 +53,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.create(account_id="d0d0cf2f-fdd4-483d-957a-f12f86d9640f", partner_account_id="d290f1ee-6c54-4b01-90e6-d701748f0851", merchant_payment_method_id="4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", amount={
+    res = moov.payment_links.create(account_id="621cf021-cd9c-4f54-a033-15211a509a30", partner_account_id="d290f1ee-6c54-4b01-90e6-d701748f0851", merchant_payment_method_id="4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", amount={
         "currency": "USD",
         "value": 1204,
     }, display={
@@ -137,7 +137,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.list(account_id="9f728868-b3c8-409c-9aa0-282a13d8ddc8")
+    res = moov.payment_links.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
 
     # Handle response
     print(res)
@@ -182,7 +182,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.get(account_id="34a1451d-384e-4fff-a7ce-e90c2bb61969", payment_link_code="uc7ZYKrMhi")
+    res = moov.payment_links.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", payment_link_code="uc7ZYKrMhi")
 
     # Handle response
     print(res)
@@ -228,7 +228,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.update(account_id="94fe6aeb-a005-4850-b45d-bb0fa580425d", payment_link_code="uc7ZYKrMhi", amount={
+    res = moov.payment_links.update(account_id="d95fa7f0-e743-42ce-b47c-b60cc78135dd", payment_link_code="uc7ZYKrMhi", amount={
         "currency": "USD",
         "value": 1204,
     }, customer={
@@ -300,7 +300,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.disable(account_id="edc2775b-a4a3-4513-8870-3bdf4aaaed8e", payment_link_code="uc7ZYKrMhi")
+    res = moov.payment_links.disable(account_id="cd7cd1ce-90cc-444b-ac3e-badb79be277f", payment_link_code="uc7ZYKrMhi")
 
     # Handle response
     print(res)
@@ -348,7 +348,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.get_qr_code(account_id="248ffcf9-c53a-4e8e-a8b8-8c5014496a79", payment_link_code="uc7ZYKrMhi")
+    res = moov.payment_links.get_qr_code(account_id="2014a1ff-9924-40b3-ac01-f4ed64dac1b8", payment_link_code="uc7ZYKrMhi")
 
     # Handle response
     print(res)

@@ -153,7 +153,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.branding.get(account_id="07eb5173-1869-4649-9aa6-f399787a2751")
+    res = moov.branding.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc")
 
     # Handle response
     print(res)
@@ -198,7 +198,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.branding.update(account_id="6c1f5632-7f37-4b3d-861e-10e31b8853de")
+    res = moov.branding.update(account_id="d95fa7f0-e743-42ce-b47c-b60cc78135dd")
 
     # Handle response
     print(res)

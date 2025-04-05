@@ -64,7 +64,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.register_merchant_domains(account_id="133fed79-519d-4b63-99ec-26b95076a45b", domains=[
+    res = moov.apple_pay.register_merchant_domains(account_id="c62b8770-bdbc-406f-8160-fddb553f5b33", domains=[
         "checkout.classbooker.dev",
     ])
 
@@ -117,7 +117,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.update_merchant_domains(account_id="b7d68fce-1dbc-4562-93aa-d9ad030c78e6", add_domains=[
+    res = moov.apple_pay.update_merchant_domains(account_id="4dfea880-7ff8-42f8-bc8d-392cba179113", add_domains=[
         "pay.classbooker.dev",
     ], remove_domains=[
         "checkout.classbooker.dev",
@@ -171,7 +171,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.get_merchant_domains(account_id="cd0931b0-e02f-47b3-87fc-0789a05479e9")
+    res = moov.apple_pay.get_merchant_domains(account_id="5f873241-11ec-45e4-929d-00a704a9b582")
 
     # Handle response
     print(res)
@@ -219,7 +219,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.create_session(account_id="1d911f27-36e5-4497-8e9e-c3ecff1a8ae0", domain="checkout.classbooker.dev", display_name="Lillie.Abbott74")
+    res = moov.apple_pay.create_session(account_id="7f4bef45-927c-48cf-9312-d337467ac9fb", domain="checkout.classbooker.dev", display_name="Kaylee40")
 
     # Handle response
     print(res)
@@ -270,15 +270,15 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.link_token(account_id="f4d3b593-6370-42f3-acf5-eab4393e2a01", token={
+    res = moov.apple_pay.link_token(account_id="3f415d64-c57f-409e-80d0-cb8bd8246ace", token={
         "payment_data": {
             "version": "EC_v1",
             "data": "3+f4oOTwPa6f1UZ6tG...CE=",
             "signature": "MIAGCSqGSIb3DQ.AAAA==",
             "header": {
+                "ephemeral_public_key": "MFkwEK...Md==",
                 "public_key_hash": "l0CnXdMv...D1I=",
                 "transaction_id": "32b...4f3",
-                "ephemeral_public_key": "MFkwEK...Md==",
             },
         },
         "payment_method": {

@@ -42,16 +42,15 @@ class ListReceiptsGlobals(BaseModel):
 
 
 class ListReceiptsRequestTypedDict(TypedDict):
-    id: NotRequired[str]
-    r"""The unique identifier to filter receipts by."""
+    id: str
+    r"""The transfer, schedule, or transfer occurrence ID to filter receipts by."""
 
 
 class ListReceiptsRequest(BaseModel):
     id: Annotated[
-        Optional[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-    r"""The unique identifier to filter receipts by."""
+        str, FieldMetadata(query=QueryParamMetadata(style="form", explode=False))
+    ]
+    r"""The transfer, schedule, or transfer occurrence ID to filter receipts by."""
 
 
 class ListReceiptsResponseTypedDict(TypedDict):

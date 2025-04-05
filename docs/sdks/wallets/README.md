@@ -41,7 +41,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.wallets.list(account_id="60acf390-dc7f-4510-9b9b-ec968d375f0c")
+    res = moov.wallets.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
 
     # Handle response
     print(res)
@@ -88,7 +88,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.wallets.get(account_id="499bec36-0099-43cb-884f-620887342259", wallet_id="bc779af6-b7d5-464a-ad1f-f6476fa72706")
+    res = moov.wallets.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", wallet_id="e50f7622-81da-484b-9c66-1c8a99c6b71b")
 
     # Handle response
     print(res)

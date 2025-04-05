@@ -106,8 +106,8 @@ with Moov(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
-                last_name="Lee",
                 middle_name="Reese",
+                last_name="Lee",
                 suffix="Jr",
             ),
             phone=components.PhoneNumber(
@@ -117,11 +117,11 @@ with Moov(
             email="jordan.lee@classbooker.dev",
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             birth_date=components.BirthDate(
                 day=9,
@@ -134,11 +134,11 @@ with Moov(
             business_type=components.BusinessType.LLC,
             address=components.Address(
                 address_line1="123 Main Street",
+                address_line2="Apt 302",
                 city="Boulder",
                 state_or_province="CO",
                 postal_code="80301",
                 country="US",
-                address_line2="Apt 302",
             ),
             phone=components.PhoneNumber(
                 number="8185551212",
@@ -169,11 +169,11 @@ with Moov(
         "email": "jordan.lee@classbooker.dev",
         "address": {
             "address_line1": "123 Main Street",
+            "address_line2": "Apt 302",
             "city": "Boulder",
             "state_or_province": "CO",
             "postal_code": "80301",
             "country": "US",
-            "address_line2": "Apt 302",
         },
     }, settings={
         "card_payment": {
@@ -294,7 +294,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.get(account_id="45ce7519-7f28-40c8-94bf-6edae7a38315")
+    res = moov.accounts.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc")
 
     # Handle response
     print(res)
@@ -375,7 +375,6 @@ with Moov(
             ),
         ),
         business=components.PatchBusiness(
-            legal_business_name="Classbooker, LLC",
             business_type=components.BusinessType.LLC,
             address=components.AddressUpdate(
                 address_line1="123 Main Street",
@@ -390,7 +389,6 @@ with Moov(
                 country_code="1",
             ),
             email="jordan.lee@classbooker.dev",
-            description="Local fitness gym paying out instructors",
             tax_id=components.TaxIDUpdate(
                 ein=components.TaxIDUpdateEin(
                     number="12-3456789",
@@ -420,13 +418,6 @@ with Moov(
             "state_or_province": "CO",
             "postal_code": "80301",
             "country": "US",
-        },
-    }, settings={
-        "card_payment": {
-            "statement_descriptor": "Whole Body Fitness",
-        },
-        "ach_payment": {
-            "company_name": "WholeBodyFitness",
         },
     })
 
@@ -483,7 +474,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.disconnect(account_id="97814a93-ba26-470e-bb15-3cb32711e8ea")
+    res = moov.accounts.disconnect(account_id="ac3cbe09-fcd4-4c5e-ada2-89eaaa9c149e")
 
     # Handle response
     print(res)
@@ -529,7 +520,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.get_countries(account_id="df471fd8-7bb3-4db3-bf74-52fe588b8d2b")
+    res = moov.accounts.get_countries(account_id="b49c57bf-7b36-4308-8206-c1f5ce8067ac")
 
     # Handle response
     print(res)
@@ -576,7 +567,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.assign_countries(account_id="9ba3f09c-c93c-4ca1-b68f-1dbb0841a40a", countries=[
+    res = moov.accounts.assign_countries(account_id="aa2dc19b-77dd-481f-a0a8-c76f2cfc1372", countries=[
         "United States",
     ])
 
