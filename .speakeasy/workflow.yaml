@@ -4,10 +4,6 @@ sources:
     latest:
         inputs:
             - location: registry.speakeasyapi.dev/moov/moov/api-latest
-        overlays:
-            - location: .speakeasy/speakeasy-modifications-overlay.yaml
-        registry:
-            location: registry.speakeasyapi.dev/moov/moov/latest
 
 targets:
     latest:
@@ -16,9 +12,3 @@ targets:
         publish:
             pypi:
                 token: $pypi_token
-        codeSamples:
-            registry:
-                location: registry.speakeasyapi.dev/moov/moov/latest-python-code-samples
-            labelOverride:
-                fixedValue: Python (SDK)
-            blocking: false
