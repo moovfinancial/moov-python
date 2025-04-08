@@ -209,6 +209,7 @@ from .createbusinesserror import (
     CreateBusinessErrorTypedDict,
 )
 from .createbusinessprofile import CreateBusinessProfile, CreateBusinessProfileTypedDict
+from .createdtransfer import CreatedTransfer, CreatedTransferTypedDict
 from .createevidencefilemultipart import (
     CreateEvidenceFileMultiPart,
     CreateEvidenceFileMultiPartTypedDict,
@@ -650,7 +651,6 @@ from .transferaccount import TransferAccount, TransferAccountTypedDict
 from .transferdestination import TransferDestination, TransferDestinationTypedDict
 from .transferfailurereason import TransferFailureReason
 from .transferoptions import TransferOptions, TransferOptionsTypedDict
-from .transferresponse import TransferResponse, TransferResponseTypedDict
 from .transfersource import TransferSource, TransferSourceTypedDict
 from .transferstatus import TransferStatus
 from .transferwaitfor import TransferWaitFor
@@ -984,6 +984,8 @@ __all__ = [
     "CreateTransferSourceCardTypedDict",
     "CreateTransferSourceTypedDict",
     "CreateTransferTypedDict",
+    "CreatedTransfer",
+    "CreatedTransferTypedDict",
     "CustomerSupport",
     "CustomerSupportError",
     "CustomerSupportErrorTypedDict",
@@ -1378,8 +1380,6 @@ __all__ = [
     "TransferFailureReason",
     "TransferOptions",
     "TransferOptionsTypedDict",
-    "TransferResponse",
-    "TransferResponseTypedDict",
     "TransferSource",
     "TransferSourceTypedDict",
     "TransferStatus",

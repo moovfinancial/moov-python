@@ -3,9 +3,9 @@
 from __future__ import annotations
 from moovio_sdk.models.components import (
     asynctransfer as components_asynctransfer,
+    createdtransfer as components_createdtransfer,
     createtransfer as components_createtransfer,
     transfer as components_transfer,
-    transferresponse as components_transferresponse,
     transferwaitfor as components_transferwaitfor,
 )
 from moovio_sdk.types import BaseModel
@@ -98,8 +98,8 @@ CreateTransferResponseResultTypedDict = TypeAliasType(
     "CreateTransferResponseResultTypedDict",
     Union[
         components_asynctransfer.AsyncTransferTypedDict,
+        components_createdtransfer.CreatedTransferTypedDict,
         components_transfer.TransferTypedDict,
-        components_transferresponse.TransferResponseTypedDict,
     ],
 )
 
@@ -108,8 +108,8 @@ CreateTransferResponseResult = TypeAliasType(
     "CreateTransferResponseResult",
     Union[
         components_asynctransfer.AsyncTransfer,
+        components_createdtransfer.CreatedTransfer,
         components_transfer.Transfer,
-        components_transferresponse.TransferResponse,
     ],
 )
 

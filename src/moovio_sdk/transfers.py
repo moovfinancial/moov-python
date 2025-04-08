@@ -150,7 +150,7 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferResponse(
-                result=utils.unmarshal_json(http_res.text, components.TransferResponse),
+                result=utils.unmarshal_json(http_res.text, components.CreatedTransfer),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "201", "application/json"):
@@ -343,7 +343,7 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferResponse(
-                result=utils.unmarshal_json(http_res.text, components.TransferResponse),
+                result=utils.unmarshal_json(http_res.text, components.CreatedTransfer),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "201", "application/json"):
