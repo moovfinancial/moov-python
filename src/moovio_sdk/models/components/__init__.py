@@ -422,6 +422,7 @@ from .microdepositstatus import MicroDepositStatus
 from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
 from .mode import Mode
 from .monthlyplatformfee import MonthlyPlatformFee, MonthlyPlatformFeeTypedDict
+from .moovfee import MoovFee, MoovFeeTypedDict
 from .moovfeedetails import MoovFeeDetails, MoovFeeDetailsTypedDict
 from .moovwalletpaymentmethod import (
     MoovWalletPaymentMethod,
@@ -651,6 +652,7 @@ from .transferaccount import TransferAccount, TransferAccountTypedDict
 from .transferdestination import TransferDestination, TransferDestinationTypedDict
 from .transferfailurereason import TransferFailureReason
 from .transferoptions import TransferOptions, TransferOptionsTypedDict
+from .transferparty import TransferParty
 from .transfersource import TransferSource, TransferSourceTypedDict
 from .transferstatus import TransferStatus
 from .transferwaitfor import TransferWaitFor
@@ -1160,8 +1162,10 @@ __all__ = [
     "Mode",
     "MonthlyPlatformFee",
     "MonthlyPlatformFeeTypedDict",
+    "MoovFee",
     "MoovFeeDetails",
     "MoovFeeDetailsTypedDict",
+    "MoovFeeTypedDict",
     "MoovWalletPaymentMethod",
     "MoovWalletPaymentMethodPaymentMethodType",
     "MoovWalletPaymentMethodTypedDict",
@@ -1380,6 +1384,7 @@ __all__ = [
     "TransferFailureReason",
     "TransferOptions",
     "TransferOptionsTypedDict",
+    "TransferParty",
     "TransferSource",
     "TransferSourceTypedDict",
     "TransferStatus",

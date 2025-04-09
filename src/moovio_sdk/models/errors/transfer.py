@@ -9,6 +9,7 @@ from moovio_sdk.models.components import (
     cardacquiringdispute as components_cardacquiringdispute,
     cardacquiringrefund as components_cardacquiringrefund,
     facilitatorfee as components_facilitatorfee,
+    moovfee as components_moovfee,
     moovfeedetails as components_moovfeedetails,
     transferdestination as components_transferdestination,
     transferfailurereason as components_transferfailurereason,
@@ -70,6 +71,11 @@ class TransferData(BaseModel):
         pydantic.Field(alias="moovFeeDetails"),
     ] = None
     r"""Processing and pass-through costs that add up to the moovFee."""
+
+    moov_fees: Annotated[
+        Optional[List[components_moovfee.MoovFee]], pydantic.Field(alias="moovFees")
+    ] = None
+    r"""Fees charged to accounts involved in the transfer."""
 
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupID")] = None
 

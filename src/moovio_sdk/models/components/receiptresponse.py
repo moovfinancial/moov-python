@@ -17,8 +17,6 @@ class ReceiptResponseTypedDict(TypedDict):
     r"""AccountID for which the receipt request was created."""
     kind: ReceiptKind
     r"""The type of receipt."""
-    sent_for: List[SentReceiptTypedDict]
-    r"""The list of receipts that have been sent."""
     disabled_on: NotRequired[datetime]
     r"""The date and time the receipt was disabled."""
     email: NotRequired[str]
@@ -41,6 +39,8 @@ class ReceiptResponseTypedDict(TypedDict):
     r"""The ID of the schedule occurrence associated with this receipt.
     Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
     """
+    sent_for: NotRequired[List[SentReceiptTypedDict]]
+    r"""The list of receipts that have been sent."""
 
 
 class ReceiptResponse(BaseModel):
@@ -52,9 +52,6 @@ class ReceiptResponse(BaseModel):
 
     kind: ReceiptKind
     r"""The type of receipt."""
-
-    sent_for: Annotated[List[SentReceipt], pydantic.Field(alias="sentFor")]
-    r"""The list of receipts that have been sent."""
 
     disabled_on: Annotated[Optional[datetime], pydantic.Field(alias="disabledOn")] = (
         None
@@ -93,3 +90,8 @@ class ReceiptResponse(BaseModel):
     r"""The ID of the schedule occurrence associated with this receipt.
     Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
     """
+
+    sent_for: Annotated[
+        Optional[List[SentReceipt]], pydantic.Field(alias="sentFor")
+    ] = None
+    r"""The list of receipts that have been sent."""

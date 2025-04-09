@@ -6,6 +6,7 @@ from .cancellation import Cancellation, CancellationTypedDict
 from .cardacquiringdispute import CardAcquiringDispute, CardAcquiringDisputeTypedDict
 from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundTypedDict
 from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
+from .moovfee import MoovFee, MoovFeeTypedDict
 from .moovfeedetails import MoovFeeDetails, MoovFeeDetailsTypedDict
 from .transferdestination import TransferDestination, TransferDestinationTypedDict
 from .transferfailurereason import TransferFailureReason
@@ -43,6 +44,8 @@ class TransferTypedDict(TypedDict):
     r"""Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision."""
     moov_fee_details: NotRequired[MoovFeeDetailsTypedDict]
     r"""Processing and pass-through costs that add up to the moovFee."""
+    moov_fees: NotRequired[List[MoovFeeTypedDict]]
+    r"""Fees charged to accounts involved in the transfer."""
     group_id: NotRequired[str]
     cancellations: NotRequired[List[CancellationTypedDict]]
     refunded_amount: NotRequired[AmountTypedDict]
@@ -104,6 +107,11 @@ class Transfer(BaseModel):
         Optional[MoovFeeDetails], pydantic.Field(alias="moovFeeDetails")
     ] = None
     r"""Processing and pass-through costs that add up to the moovFee."""
+
+    moov_fees: Annotated[Optional[List[MoovFee]], pydantic.Field(alias="moovFees")] = (
+        None
+    )
+    r"""Fees charged to accounts involved in the transfer."""
 
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupID")] = None
 
