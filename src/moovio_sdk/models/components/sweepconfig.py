@@ -33,7 +33,6 @@ class SweepConfigTypedDict(TypedDict):
     r"""The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor."""
     locked_fields: NotRequired[List[str]]
     r"""An array of fields that are locked. To request updates, please contact Moov support."""
-    disabled_on: NotRequired[datetime]
 
 
 class SweepConfig(BaseModel):
@@ -75,7 +74,3 @@ class SweepConfig(BaseModel):
         Optional[List[str]], pydantic.Field(alias="lockedFields")
     ] = None
     r"""An array of fields that are locked. To request updates, please contact Moov support."""
-
-    disabled_on: Annotated[Optional[datetime], pydantic.Field(alias="disabledOn")] = (
-        None
-    )
