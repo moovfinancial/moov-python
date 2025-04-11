@@ -11,9 +11,3 @@ targets:
         publish:
             pypi:
                 token: $pypi_token
-    codeSamples:
-        registry:
-            location: registry.speakeasyapi.dev/moov/moov/latest-python-code-samples
-        labelOverride:
-            fixedValue: Python (SDK)
-        blocking: false
