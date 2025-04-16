@@ -71,6 +71,10 @@ class CardTypedDict(TypedDict):
     domestic_pull_from_card: NotRequired[DomesticPullFromCard]
     r"""Indicates if the card supports domestic pull-from-card transfer."""
     payment_methods: NotRequired[List[BasicPaymentMethodTypedDict]]
+    r"""Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+
+    Only returned by the link card endpoint; not included when getting or listing cards.
+    """
 
 
 class Card(BaseModel):
@@ -164,3 +168,7 @@ class Card(BaseModel):
     payment_methods: Annotated[
         Optional[List[BasicPaymentMethod]], pydantic.Field(alias="paymentMethods")
     ] = None
+    r"""Includes any payment methods created as a result of linking a card with the `x-wait-for` header set to `payment-method`.
+
+    Only returned by the link card endpoint; not included when getting or listing cards.
+    """
