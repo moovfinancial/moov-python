@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 68a8f836eb04da91df8ac588edb5d80e
+  docChecksum: 40f919d4ab074ec073901202164e54d1
   docVersion: latest
-  speakeasyVersion: 1.533.0
-  generationVersion: 2.578.0
-  releaseVersion: 0.4.0
-  configChecksum: 634a0bf1496f64b0d475bc4f3fe72bd8
+  speakeasyVersion: 1.535.1
+  generationVersion: 2.585.2
+  releaseVersion: 0.4.1
+  configChecksum: a1f0b15477ebd788a2b639fd888a90f4
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true

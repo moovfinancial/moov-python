@@ -50,7 +50,7 @@ class Transfers(BaseSDK):
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
-        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
+        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
@@ -243,7 +243,7 @@ class Transfers(BaseSDK):
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
-        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
+        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
@@ -1679,7 +1679,7 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate refunds from being created.
         :param account_id: The merchant's Moov account ID.
         :param transfer_id: Identifier for the transfer.
-        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
+        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1846,7 +1846,7 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate refunds from being created.
         :param account_id: The merchant's Moov account ID.
         :param transfer_id: Identifier for the transfer.
-        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted).
+        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
