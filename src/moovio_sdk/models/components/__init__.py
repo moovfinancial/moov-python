@@ -398,6 +398,10 @@ from .issuingvelocitylimiterror import (
     IssuingVelocityLimitErrorTypedDict,
 )
 from .jsonwebkey import JSONWebKey, JSONWebKeyTypedDict, Use
+from .linkaccountterminalapplication import (
+    LinkAccountTerminalApplication,
+    LinkAccountTerminalApplicationTypedDict,
+)
 from .linkapplepay import LinkApplePay, LinkApplePayTypedDict
 from .linkapplepaymentdata import LinkApplePaymentData, LinkApplePaymentDataTypedDict
 from .linkapplepaymentmethod import (
@@ -1129,6 +1133,8 @@ __all__ = [
     "ItinTypedDict",
     "JSONWebKey",
     "JSONWebKeyTypedDict",
+    "LinkAccountTerminalApplication",
+    "LinkAccountTerminalApplicationTypedDict",
     "LinkApplePay",
     "LinkApplePayToken",
     "LinkApplePayTokenTypedDict",

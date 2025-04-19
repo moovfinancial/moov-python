@@ -1,4 +1,4 @@
-# CreateTerminalApplicationResponse
+# LinkAccountTerminalApplicationResponse
 
 
 ## Fields

@@ -4,35 +4,29 @@ from .basesdk import BaseSDK
 from moovio_sdk import utils
 from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
-from moovio_sdk.types import BaseModel, OptionalNullable, UNSET
+from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union, cast
+from typing import Any, List, Mapping, Optional
 
 
-class TerminalApplications(BaseSDK):
-    def create(
+class AccountTerminalApplications(BaseSDK):
+    def link(
         self,
         *,
-        platform: components.TerminalApplicationPlatform,
-        app_bundle_id: Optional[str] = None,
-        package_name: Optional[str] = None,
-        sha256_digest: Optional[str] = None,
-        version_code: Optional[str] = None,
+        account_id: str,
+        terminal_application_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.CreateTerminalApplicationResponse:
-        r"""Create a new terminal application.
+    ) -> operations.LinkAccountTerminalApplicationResponse:
+        r"""Link an account with a terminal application.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/terminal-applications.write` scope.
+        you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
 
-        :param platform: Platform of the terminal application.
-        :param app_bundle_id: The app bundle identifier of the terminal application. Required if platform is `ios`.
-        :param package_name: The app package name of the terminal application. Required if platform is `android`.
-        :param sha256_digest: The app version of the terminal application. Required if paltform is `android`.
-        :param version_code: The app version of the terminal application. Required if platform is `android`.
+        :param account_id:
+        :param terminal_application_id: ID of the terminal application.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -48,32 +42,35 @@ class TerminalApplications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = components.CreateTerminalApplication(
-            platform=platform,
-            app_bundle_id=app_bundle_id,
-            package_name=package_name,
-            sha256_digest=sha256_digest,
-            version_code=version_code,
+        request = operations.LinkAccountTerminalApplicationRequest(
+            account_id=account_id,
+            link_account_terminal_application=components.LinkAccountTerminalApplication(
+                terminal_application_id=terminal_application_id,
+            ),
         )
 
         req = self._build_request(
             method="POST",
-            path="/terminal-applications",
+            path="/accounts/{accountID}/terminal-applications",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=True,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CreateTerminalApplicationGlobals(
+            _globals=operations.LinkAccountTerminalApplicationGlobals(
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", components.CreateTerminalApplication
+                request.link_account_terminal_application,
+                False,
+                False,
+                "json",
+                components.LinkAccountTerminalApplication,
             ),
             timeout_ms=timeout_ms,
         )
@@ -89,7 +86,7 @@ class TerminalApplications(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="createTerminalApplication",
+                operation_id="linkAccountTerminalApplication",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -114,7 +111,7 @@ class TerminalApplications(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.CreateTerminalApplicationResponse(
+            return operations.LinkAccountTerminalApplicationResponse(
                 result=utils.unmarshal_json(
                     http_res.text, components.TerminalApplication
                 ),
@@ -125,9 +122,9 @@ class TerminalApplications(BaseSDK):
             raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, errors.TerminalApplicationErrorData
+                http_res.text, errors.AccountTerminalApplicationErrorData
             )
-            raise errors.TerminalApplicationError(data=response_data)
+            raise errors.AccountTerminalApplicationError(data=response_data)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
@@ -158,29 +155,23 @@ class TerminalApplications(BaseSDK):
             http_res,
         )
 
-    async def create_async(
+    async def link_async(
         self,
         *,
-        platform: components.TerminalApplicationPlatform,
-        app_bundle_id: Optional[str] = None,
-        package_name: Optional[str] = None,
-        sha256_digest: Optional[str] = None,
-        version_code: Optional[str] = None,
+        account_id: str,
+        terminal_application_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.CreateTerminalApplicationResponse:
-        r"""Create a new terminal application.
+    ) -> operations.LinkAccountTerminalApplicationResponse:
+        r"""Link an account with a terminal application.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/terminal-applications.write` scope.
+        you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
 
-        :param platform: Platform of the terminal application.
-        :param app_bundle_id: The app bundle identifier of the terminal application. Required if platform is `ios`.
-        :param package_name: The app package name of the terminal application. Required if platform is `android`.
-        :param sha256_digest: The app version of the terminal application. Required if paltform is `android`.
-        :param version_code: The app version of the terminal application. Required if platform is `android`.
+        :param account_id:
+        :param terminal_application_id: ID of the terminal application.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -196,32 +187,35 @@ class TerminalApplications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = components.CreateTerminalApplication(
-            platform=platform,
-            app_bundle_id=app_bundle_id,
-            package_name=package_name,
-            sha256_digest=sha256_digest,
-            version_code=version_code,
+        request = operations.LinkAccountTerminalApplicationRequest(
+            account_id=account_id,
+            link_account_terminal_application=components.LinkAccountTerminalApplication(
+                terminal_application_id=terminal_application_id,
+            ),
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/terminal-applications",
+            path="/accounts/{accountID}/terminal-applications",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=True,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CreateTerminalApplicationGlobals(
+            _globals=operations.LinkAccountTerminalApplicationGlobals(
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", components.CreateTerminalApplication
+                request.link_account_terminal_application,
+                False,
+                False,
+                "json",
+                components.LinkAccountTerminalApplication,
             ),
             timeout_ms=timeout_ms,
         )
@@ -237,7 +231,7 @@ class TerminalApplications(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="createTerminalApplication",
+                operation_id="linkAccountTerminalApplication",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -262,7 +256,7 @@ class TerminalApplications(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.CreateTerminalApplicationResponse(
+            return operations.LinkAccountTerminalApplicationResponse(
                 result=utils.unmarshal_json(
                     http_res.text, components.TerminalApplication
                 ),
@@ -273,9 +267,9 @@ class TerminalApplications(BaseSDK):
             raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, errors.TerminalApplicationErrorData
+                http_res.text, errors.AccountTerminalApplicationErrorData
             )
-            raise errors.TerminalApplicationError(data=response_data)
+            raise errors.AccountTerminalApplicationError(data=response_data)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
@@ -309,21 +303,18 @@ class TerminalApplications(BaseSDK):
     def list(
         self,
         *,
-        request: Union[
-            operations.ListTerminalApplicationsRequest,
-            operations.ListTerminalApplicationsRequestTypedDict,
-        ] = operations.ListTerminalApplicationsRequest(),
+        account_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.ListTerminalApplicationsResponse:
-        r"""List all the terminal applications for a Moov Account.
+    ) -> operations.ListAccountTerminalApplicationsResponse:
+        r"""Retrieve all terminal applications linked to a specific account.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/terminal-applications.read` scope.
+        you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
 
-        :param request: The request object to send.
+        :param account_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -339,25 +330,23 @@ class TerminalApplications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, operations.ListTerminalApplicationsRequest
-            )
-        request = cast(operations.ListTerminalApplicationsRequest, request)
+        request = operations.ListAccountTerminalApplicationsRequest(
+            account_id=account_id,
+        )
 
         req = self._build_request(
             method="GET",
-            path="/terminal-applications",
+            path="/accounts/{accountID}/terminal-applications",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListTerminalApplicationsGlobals(
+            _globals=operations.ListAccountTerminalApplicationsGlobals(
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
@@ -375,7 +364,7 @@ class TerminalApplications(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="listTerminalApplications",
+                operation_id="listAccountTerminalApplications",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -387,7 +376,7 @@ class TerminalApplications(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.ListTerminalApplicationsResponse(
+            return operations.ListAccountTerminalApplicationsResponse(
                 result=utils.unmarshal_json(
                     http_res.text, List[components.TerminalApplication]
                 ),
@@ -426,21 +415,18 @@ class TerminalApplications(BaseSDK):
     async def list_async(
         self,
         *,
-        request: Union[
-            operations.ListTerminalApplicationsRequest,
-            operations.ListTerminalApplicationsRequestTypedDict,
-        ] = operations.ListTerminalApplicationsRequest(),
+        account_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.ListTerminalApplicationsResponse:
-        r"""List all the terminal applications for a Moov Account.
+    ) -> operations.ListAccountTerminalApplicationsResponse:
+        r"""Retrieve all terminal applications linked to a specific account.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/terminal-applications.read` scope.
+        you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
 
-        :param request: The request object to send.
+        :param account_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -456,25 +442,23 @@ class TerminalApplications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, operations.ListTerminalApplicationsRequest
-            )
-        request = cast(operations.ListTerminalApplicationsRequest, request)
+        request = operations.ListAccountTerminalApplicationsRequest(
+            account_id=account_id,
+        )
 
         req = self._build_request_async(
             method="GET",
-            path="/terminal-applications",
+            path="/accounts/{accountID}/terminal-applications",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListTerminalApplicationsGlobals(
+            _globals=operations.ListAccountTerminalApplicationsGlobals(
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
@@ -492,7 +476,7 @@ class TerminalApplications(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="listTerminalApplications",
+                operation_id="listAccountTerminalApplications",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -504,7 +488,7 @@ class TerminalApplications(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.ListTerminalApplicationsResponse(
+            return operations.ListAccountTerminalApplicationsResponse(
                 result=utils.unmarshal_json(
                     http_res.text, List[components.TerminalApplication]
                 ),
@@ -543,17 +527,19 @@ class TerminalApplications(BaseSDK):
     def get(
         self,
         *,
+        account_id: str,
         terminal_application_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.GetTerminalApplicationResponse:
-        r"""Fetch a specific terminal application.
+    ) -> operations.GetAccountTerminalApplicationResponse:
+        r"""Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/terminal-applications.read` scope.
+        you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
 
+        :param account_id:
         :param terminal_application_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -570,13 +556,14 @@ class TerminalApplications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.GetTerminalApplicationRequest(
+        request = operations.GetAccountTerminalApplicationRequest(
+            account_id=account_id,
             terminal_application_id=terminal_application_id,
         )
 
         req = self._build_request(
             method="GET",
-            path="/terminal-applications/{terminalApplicationID}",
+            path="/accounts/{accountID}/terminal-applications/{terminalApplicationID}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -586,7 +573,7 @@ class TerminalApplications(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetTerminalApplicationGlobals(
+            _globals=operations.GetAccountTerminalApplicationGlobals(
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
@@ -604,7 +591,7 @@ class TerminalApplications(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="getTerminalApplication",
+                operation_id="getAccountTerminalApplication",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -616,7 +603,7 @@ class TerminalApplications(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.GetTerminalApplicationResponse(
+            return operations.GetAccountTerminalApplicationResponse(
                 result=utils.unmarshal_json(
                     http_res.text, components.TerminalApplication
                 ),
@@ -655,17 +642,19 @@ class TerminalApplications(BaseSDK):
     async def get_async(
         self,
         *,
+        account_id: str,
         terminal_application_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.GetTerminalApplicationResponse:
-        r"""Fetch a specific terminal application.
+    ) -> operations.GetAccountTerminalApplicationResponse:
+        r"""Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/terminal-applications.read` scope.
+        you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
 
+        :param account_id:
         :param terminal_application_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -682,13 +671,14 @@ class TerminalApplications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.GetTerminalApplicationRequest(
+        request = operations.GetAccountTerminalApplicationRequest(
+            account_id=account_id,
             terminal_application_id=terminal_application_id,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/terminal-applications/{terminalApplicationID}",
+            path="/accounts/{accountID}/terminal-applications/{terminalApplicationID}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -698,7 +688,7 @@ class TerminalApplications(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetTerminalApplicationGlobals(
+            _globals=operations.GetAccountTerminalApplicationGlobals(
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
@@ -716,7 +706,7 @@ class TerminalApplications(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="getTerminalApplication",
+                operation_id="getAccountTerminalApplication",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
@@ -728,7 +718,7 @@ class TerminalApplications(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.GetTerminalApplicationResponse(
+            return operations.GetAccountTerminalApplicationResponse(
                 result=utils.unmarshal_json(
                     http_res.text, components.TerminalApplication
                 ),
@@ -764,20 +754,22 @@ class TerminalApplications(BaseSDK):
             http_res,
         )
 
-    def delete(
+    def get_configuration(
         self,
         *,
+        account_id: str,
         terminal_application_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.DeleteTerminalApplicationResponse:
-        r"""Delete a specific terminal application.
+    ) -> operations.GetTerminalConfigurationResponse:
+        r"""Fetch the configuration for a given Terminal Application linked to a specific Account.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/terminal-applications.write` scope.
+        you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
 
+        :param account_id:
         :param terminal_application_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -794,13 +786,14 @@ class TerminalApplications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.DeleteTerminalApplicationRequest(
+        request = operations.GetTerminalConfigurationRequest(
+            account_id=account_id,
             terminal_application_id=terminal_application_id,
         )
 
         req = self._build_request(
-            method="DELETE",
-            path="/terminal-applications/{terminalApplicationID}",
+            method="GET",
+            path="/accounts/{accountID}/terminal-applications/{terminalApplicationID}/configuration",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -810,7 +803,7 @@ class TerminalApplications(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.DeleteTerminalApplicationGlobals(
+            _globals=operations.GetTerminalConfigurationGlobals(
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
@@ -828,36 +821,24 @@ class TerminalApplications(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="deleteTerminalApplication",
+                operation_id="getTerminalConfiguration",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
-        if utils.match_response(http_res, "204", "*"):
-            return operations.DeleteTerminalApplicationResponse(
-                headers=utils.get_response_headers(http_res.headers)
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.GetTerminalConfigurationResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.TerminalConfiguration
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
@@ -888,20 +869,22 @@ class TerminalApplications(BaseSDK):
             http_res,
         )
 
-    async def delete_async(
+    async def get_configuration_async(
         self,
         *,
+        account_id: str,
         terminal_application_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.DeleteTerminalApplicationResponse:
-        r"""Delete a specific terminal application.
+    ) -> operations.GetTerminalConfigurationResponse:
+        r"""Fetch the configuration for a given Terminal Application linked to a specific Account.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/terminal-applications.write` scope.
+        you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
 
+        :param account_id:
         :param terminal_application_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -918,13 +901,14 @@ class TerminalApplications(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.DeleteTerminalApplicationRequest(
+        request = operations.GetTerminalConfigurationRequest(
+            account_id=account_id,
             terminal_application_id=terminal_application_id,
         )
 
         req = self._build_request_async(
-            method="DELETE",
-            path="/terminal-applications/{terminalApplicationID}",
+            method="GET",
+            path="/accounts/{accountID}/terminal-applications/{terminalApplicationID}/configuration",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -934,7 +918,7 @@ class TerminalApplications(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.DeleteTerminalApplicationGlobals(
+            _globals=operations.GetTerminalConfigurationGlobals(
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
@@ -952,36 +936,24 @@ class TerminalApplications(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="deleteTerminalApplication",
+                operation_id="getTerminalConfiguration",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
-        if utils.match_response(http_res, "204", "*"):
-            return operations.DeleteTerminalApplicationResponse(
-                headers=utils.get_response_headers(http_res.headers)
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.GetTerminalConfigurationResponse(
+                result=utils.unmarshal_json(
+                    http_res.text, components.TerminalConfiguration
+                ),
+                headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
-            raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(

@@ -1,8 +1,10 @@
-# DeleteTerminalApplicationRequest
+# LinkAccountTerminalApplication
+
+Describes a request to link an account with a terminal application.
 
 
 ## Fields
 
 | Field                                | Type                                 | Required                             | Description                          | Example                              |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `terminal_application_id`            | *str*                                | :heavy_check_mark:                   | N/A                                  | 12345678-1234-1234-1234-123456789012 |
+| `terminal_application_id`            | *str*                                | :heavy_check_mark:                   | ID of the terminal application.      | 12345678-1234-1234-1234-123456789012 |

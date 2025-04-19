@@ -1,4 +1,4 @@
-# GetTerminalConfigurationRequest
+# GetAccountTerminalApplicationRequest
 
 
 ## Fields

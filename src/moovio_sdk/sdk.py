@@ -8,6 +8,7 @@ from .utils.retries import RetryConfig
 import httpx
 from moovio_sdk import utils
 from moovio_sdk._hooks import SDKHooks
+from moovio_sdk.account_terminal_applications import AccountTerminalApplications
 from moovio_sdk.accounts import Accounts
 from moovio_sdk.adjustments import Adjustments
 from moovio_sdk.apple_pay import ApplePay
@@ -37,7 +38,6 @@ from moovio_sdk.representatives import Representatives
 from moovio_sdk.scheduling import Scheduling
 from moovio_sdk.sweeps import Sweeps
 from moovio_sdk.terminal_applications import TerminalApplications
-from moovio_sdk.terminal_configurations import TerminalConfigurations
 from moovio_sdk.transfers import Transfers
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.underwriting import Underwriting
@@ -69,7 +69,7 @@ class Moov(BaseSDK):
     representatives: Representatives
     scheduling: Scheduling
     sweeps: Sweeps
-    terminal_configurations: TerminalConfigurations
+    account_terminal_applications: AccountTerminalApplications
     transfers: Transfers
     underwriting: Underwriting
     wallets: Wallets
@@ -203,7 +203,9 @@ class Moov(BaseSDK):
         self.representatives = Representatives(self.sdk_configuration)
         self.scheduling = Scheduling(self.sdk_configuration)
         self.sweeps = Sweeps(self.sdk_configuration)
-        self.terminal_configurations = TerminalConfigurations(self.sdk_configuration)
+        self.account_terminal_applications = AccountTerminalApplications(
+            self.sdk_configuration
+        )
         self.transfers = Transfers(self.sdk_configuration)
         self.underwriting = Underwriting(self.sdk_configuration)
         self.wallets = Wallets(self.sdk_configuration)

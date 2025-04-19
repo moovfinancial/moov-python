@@ -1,4 +1,4 @@
-# CreateTerminalApplicationResponse
+# GetAccountTerminalApplicationResponse
 
 
 ## Fields

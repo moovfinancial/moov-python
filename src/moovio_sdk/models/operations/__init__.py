@@ -246,6 +246,14 @@ from .getaccountcountries import (
     GetAccountCountriesResponse,
     GetAccountCountriesResponseTypedDict,
 )
+from .getaccountterminalapplication import (
+    GetAccountTerminalApplicationGlobals,
+    GetAccountTerminalApplicationGlobalsTypedDict,
+    GetAccountTerminalApplicationRequest,
+    GetAccountTerminalApplicationRequestTypedDict,
+    GetAccountTerminalApplicationResponse,
+    GetAccountTerminalApplicationResponseTypedDict,
+)
 from .getadjustment import (
     GetAdjustmentGlobals,
     GetAdjustmentGlobalsTypedDict,
@@ -572,6 +580,14 @@ from .initiaterefund import (
     InitiateRefundResponseResultTypedDict,
     InitiateRefundResponseTypedDict,
 )
+from .linkaccountterminalapplication import (
+    LinkAccountTerminalApplicationGlobals,
+    LinkAccountTerminalApplicationGlobalsTypedDict,
+    LinkAccountTerminalApplicationRequest,
+    LinkAccountTerminalApplicationRequestTypedDict,
+    LinkAccountTerminalApplicationResponse,
+    LinkAccountTerminalApplicationResponseTypedDict,
+)
 from .linkapplepaytoken import (
     LinkApplePayTokenGlobals,
     LinkApplePayTokenGlobalsTypedDict,
@@ -603,6 +619,14 @@ from .listaccounts import (
     ListAccountsRequestTypedDict,
     ListAccountsResponse,
     ListAccountsResponseTypedDict,
+)
+from .listaccountterminalapplications import (
+    ListAccountTerminalApplicationsGlobals,
+    ListAccountTerminalApplicationsGlobalsTypedDict,
+    ListAccountTerminalApplicationsRequest,
+    ListAccountTerminalApplicationsRequestTypedDict,
+    ListAccountTerminalApplicationsResponse,
+    ListAccountTerminalApplicationsResponseTypedDict,
 )
 from .listadjustments import (
     ListAdjustmentsGlobals,
@@ -1234,6 +1258,12 @@ __all__ = [
     "GetAccountRequestTypedDict",
     "GetAccountResponse",
     "GetAccountResponseTypedDict",
+    "GetAccountTerminalApplicationGlobals",
+    "GetAccountTerminalApplicationGlobalsTypedDict",
+    "GetAccountTerminalApplicationRequest",
+    "GetAccountTerminalApplicationRequestTypedDict",
+    "GetAccountTerminalApplicationResponse",
+    "GetAccountTerminalApplicationResponseTypedDict",
     "GetAdjustmentGlobals",
     "GetAdjustmentGlobalsTypedDict",
     "GetAdjustmentRequest",
@@ -1481,6 +1511,12 @@ __all__ = [
     "InitiateRefundResponseResult",
     "InitiateRefundResponseResultTypedDict",
     "InitiateRefundResponseTypedDict",
+    "LinkAccountTerminalApplicationGlobals",
+    "LinkAccountTerminalApplicationGlobalsTypedDict",
+    "LinkAccountTerminalApplicationRequest",
+    "LinkAccountTerminalApplicationRequestTypedDict",
+    "LinkAccountTerminalApplicationResponse",
+    "LinkAccountTerminalApplicationResponseTypedDict",
     "LinkApplePayTokenGlobals",
     "LinkApplePayTokenGlobalsTypedDict",
     "LinkApplePayTokenRequest",
@@ -1499,6 +1535,12 @@ __all__ = [
     "LinkCardRequestTypedDict",
     "LinkCardResponse",
     "LinkCardResponseTypedDict",
+    "ListAccountTerminalApplicationsGlobals",
+    "ListAccountTerminalApplicationsGlobalsTypedDict",
+    "ListAccountTerminalApplicationsRequest",
+    "ListAccountTerminalApplicationsRequestTypedDict",
+    "ListAccountTerminalApplicationsResponse",
+    "ListAccountTerminalApplicationsResponseTypedDict",
     "ListAccountsGlobals",
     "ListAccountsGlobalsTypedDict",
     "ListAccountsRequest",

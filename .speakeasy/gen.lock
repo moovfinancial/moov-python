@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 40f919d4ab074ec073901202164e54d1
+  docChecksum: 10a0eec41139736a8682c4fca785ad2c
   docVersion: latest
   speakeasyVersion: 1.535.1
   generationVersion: 2.585.2
-  releaseVersion: 0.4.1
-  configChecksum: a1f0b15477ebd788a2b639fd888a90f4
+  releaseVersion: 0.4.2
+  configChecksum: 76fb2eb73e90ee7cfb9eaeb76ab1c619
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -276,6 +276,7 @@ generatedFiles:
   - docs/models/components/issuingvelocitylimiterror.md
   - docs/models/components/itin.md
   - docs/models/components/jsonwebkey.md
+  - docs/models/components/linkaccountterminalapplication.md
   - docs/models/components/linkapplepay.md
   - docs/models/components/linkapplepaymentdata.md
   - docs/models/components/linkapplepaymentmethod.md
@@ -456,6 +457,7 @@ generatedFiles:
   - docs/models/components/wallettransactionsourcetype.md
   - docs/models/components/wallettransactionstatus.md
   - docs/models/components/wallettransactiontype.md
+  - docs/models/errors/accountterminalapplicationerror.md
   - docs/models/errors/addcapabilitieserror.md
   - docs/models/errors/assigncountrieserror.md
   - docs/models/errors/authtokenrequesterror.md
@@ -584,6 +586,9 @@ generatedFiles:
   - docs/models/operations/getaccountglobals.md
   - docs/models/operations/getaccountrequest.md
   - docs/models/operations/getaccountresponse.md
+  - docs/models/operations/getaccountterminalapplicationglobals.md
+  - docs/models/operations/getaccountterminalapplicationrequest.md
+  - docs/models/operations/getaccountterminalapplicationresponse.md
   - docs/models/operations/getadjustmentglobals.md
   - docs/models/operations/getadjustmentrequest.md
   - docs/models/operations/getadjustmentresponse.md
@@ -708,6 +713,9 @@ generatedFiles:
   - docs/models/operations/initiaterefundrequest.md
   - docs/models/operations/initiaterefundresponse.md
   - docs/models/operations/initiaterefundresponseresult.md
+  - docs/models/operations/linkaccountterminalapplicationglobals.md
+  - docs/models/operations/linkaccountterminalapplicationrequest.md
+  - docs/models/operations/linkaccountterminalapplicationresponse.md
   - docs/models/operations/linkapplepaytokenglobals.md
   - docs/models/operations/linkapplepaytokenrequest.md
   - docs/models/operations/linkapplepaytokenresponse.md
@@ -720,6 +728,9 @@ generatedFiles:
   - docs/models/operations/listaccountsglobals.md
   - docs/models/operations/listaccountsrequest.md
   - docs/models/operations/listaccountsresponse.md
+  - docs/models/operations/listaccountterminalapplicationsglobals.md
+  - docs/models/operations/listaccountterminalapplicationsrequest.md
+  - docs/models/operations/listaccountterminalapplicationsresponse.md
   - docs/models/operations/listadjustmentsglobals.md
   - docs/models/operations/listadjustmentsrequest.md
   - docs/models/operations/listadjustmentsresponse.md
@@ -888,6 +899,7 @@ generatedFiles:
   - docs/models/operations/upsertunderwritingresponse.md
   - docs/models/utils/retryconfig.md
   - docs/sdks/accounts/README.md
+  - docs/sdks/accountterminalapplications/README.md
   - docs/sdks/adjustments/README.md
   - docs/sdks/applepay/README.md
   - docs/sdks/authentication/README.md
@@ -916,7 +928,6 @@ generatedFiles:
   - docs/sdks/scheduling/README.md
   - docs/sdks/sweeps/README.md
   - docs/sdks/terminalapplications/README.md
-  - docs/sdks/terminalconfigurations/README.md
   - docs/sdks/transfers/README.md
   - docs/sdks/underwriting/README.md
   - docs/sdks/wallets/README.md
@@ -932,6 +943,7 @@ generatedFiles:
   - src/moovio_sdk/_hooks/sdkhooks.py
   - src/moovio_sdk/_hooks/types.py
   - src/moovio_sdk/_version.py
+  - src/moovio_sdk/account_terminal_applications.py
   - src/moovio_sdk/accounts.py
   - src/moovio_sdk/adjustments.py
   - src/moovio_sdk/apple_pay.py
@@ -1163,6 +1175,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/issuingvelocitylimit.py
   - src/moovio_sdk/models/components/issuingvelocitylimiterror.py
   - src/moovio_sdk/models/components/jsonwebkey.py
+  - src/moovio_sdk/models/components/linkaccountterminalapplication.py
   - src/moovio_sdk/models/components/linkapplepay.py
   - src/moovio_sdk/models/components/linkapplepaymentdata.py
   - src/moovio_sdk/models/components/linkapplepaymentmethod.py
@@ -1317,6 +1330,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/wallettransactionstatus.py
   - src/moovio_sdk/models/components/wallettransactiontype.py
   - src/moovio_sdk/models/errors/__init__.py
+  - src/moovio_sdk/models/errors/accountterminalapplicationerror.py
   - src/moovio_sdk/models/errors/addcapabilitieserror.py
   - src/moovio_sdk/models/errors/apierror.py
   - src/moovio_sdk/models/errors/assigncountrieserror.py
@@ -1386,6 +1400,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/generateendtoendkey.py
   - src/moovio_sdk/models/operations/getaccount.py
   - src/moovio_sdk/models/operations/getaccountcountries.py
+  - src/moovio_sdk/models/operations/getaccountterminalapplication.py
   - src/moovio_sdk/models/operations/getadjustment.py
   - src/moovio_sdk/models/operations/getapplepaymerchantdomains.py
   - src/moovio_sdk/models/operations/getavatar.py
@@ -1426,10 +1441,12 @@ generatedFiles:
   - src/moovio_sdk/models/operations/initiatebankaccountverification.py
   - src/moovio_sdk/models/operations/initiatemicrodeposits.py
   - src/moovio_sdk/models/operations/initiaterefund.py
+  - src/moovio_sdk/models/operations/linkaccountterminalapplication.py
   - src/moovio_sdk/models/operations/linkapplepaytoken.py
   - src/moovio_sdk/models/operations/linkbankaccount.py
   - src/moovio_sdk/models/operations/linkcard.py
   - src/moovio_sdk/models/operations/listaccounts.py
+  - src/moovio_sdk/models/operations/listaccountterminalapplications.py
   - src/moovio_sdk/models/operations/listadjustments.py
   - src/moovio_sdk/models/operations/listbankaccounts.py
   - src/moovio_sdk/models/operations/listcapabilities.py
@@ -1498,7 +1515,6 @@ generatedFiles:
   - src/moovio_sdk/sdkconfiguration.py
   - src/moovio_sdk/sweeps.py
   - src/moovio_sdk/terminal_applications.py
-  - src/moovio_sdk/terminal_configurations.py
   - src/moovio_sdk/transfers.py
   - src/moovio_sdk/types/__init__.py
   - src/moovio_sdk/types/basemodel.py
@@ -2515,8 +2531,8 @@ examples:
     speakeasy-default-get-terminal-configuration:
       parameters:
         path:
-          accountID: "b888f774-3e7c-4135-a18c-6b985523c4bc"
-          terminalApplicationID: "01234567-89ab-cdef-0123-456789abcdef"
+          accountID: "76d4c8a0-1f2b-4e3b-8f5c-7a9e1b2c3d4e"
+          terminalApplicationID: "12345678-1234-1234-1234-123456789012"
         header: {}
       responses:
         "200":
@@ -3016,7 +3032,7 @@ examples:
         application/json: {"platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
       responses:
         "200":
-          application/json: {"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
+          application/json: {"terminalApplicationID": "12345678-1234-1234-1234-123456789012", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -3025,24 +3041,58 @@ examples:
     speakeasy-default-list-terminal-applications:
       responses:
         "200":
-          application/json: [{"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}]
+          application/json: [{"terminalApplicationID": "12345678-1234-1234-1234-123456789012", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}]
   getTerminalApplication:
     speakeasy-default-get-terminal-application:
       parameters:
         path:
-          terminalApplicationID: "01234567-89ab-cdef-0123-456789abcdef"
+          terminalApplicationID: "12345678-1234-1234-1234-123456789012"
         header: {}
       responses:
         "200":
-          application/json: {"terminalApplicationID": "01234567-89ab-cdef-0123-456789abcdef", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
+          application/json: {"terminalApplicationID": "12345678-1234-1234-1234-123456789012", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
   deleteTerminalApplication:
     speakeasy-default-delete-terminal-application:
       parameters:
         path:
-          terminalApplicationID: "01234567-89ab-cdef-0123-456789abcdef"
+          terminalApplicationID: "12345678-1234-1234-1234-123456789012"
         header: {}
       responses:
         "400":
           application/json: {"error": "<value>"}
+  linkAccountTerminalApplication:
+    speakeasy-default-link-account-terminal-application:
+      parameters:
+        path:
+          accountID: "76d4c8a0-1f2b-4e3b-8f5c-7a9e1b2c3d4e"
+        header: {}
+      requestBody:
+        application/json: {"terminalApplicationID": "12345678-1234-1234-1234-123456789012"}
+      responses:
+        "200":
+          application/json: {"terminalApplicationID": "12345678-1234-1234-1234-123456789012", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  listAccountTerminalApplications:
+    speakeasy-default-list-account-terminal-applications:
+      parameters:
+        path:
+          accountID: "76d4c8a0-1f2b-4e3b-8f5c-7a9e1b2c3d4e"
+        header: {}
+      responses:
+        "200":
+          application/json: [{"terminalApplicationID": "12345678-1234-1234-1234-123456789012", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}]
+  getAccountTerminalApplication:
+    speakeasy-default-get-account-terminal-application:
+      parameters:
+        path:
+          accountID: "76d4c8a0-1f2b-4e3b-8f5c-7a9e1b2c3d4e"
+          terminalApplicationID: "12345678-1234-1234-1234-123456789012"
+        header: {}
+      responses:
+        "200":
+          application/json: {"terminalApplicationID": "12345678-1234-1234-1234-123456789012", "status": "enabled", "platform": "ios", "appBundleID": "com.example.app", "packageName": "com.example.app", "sha256Digest": "1234567890", "versionCode": "1.0.0"}
 examplesVersion: 1.0.1
 generatedTests: {}

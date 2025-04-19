@@ -437,6 +437,25 @@ with Moov(
 <details open>
 <summary>Available methods</summary>
 
+### [account_terminal_applications](docs/sdks/accountterminalapplications/README.md)
+
+* [link](docs/sdks/accountterminalapplications/README.md#link) - Link an account with a terminal application.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-applications.write` scope.
+* [list](docs/sdks/accountterminalapplications/README.md#list) - Retrieve all terminal applications linked to a specific account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
+* [get](docs/sdks/accountterminalapplications/README.md#get) - Verifies if a specific Terminal Application is linked to an Account. This endpoint acts as a validation check for the link's existence.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-applications.read` scope.
+* [get_configuration](docs/sdks/accountterminalapplications/README.md#get_configuration) - Fetch the configuration for a given Terminal Application linked to a specific Account.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+
 ### [accounts](docs/sdks/accounts/README.md)
 
 * [create](docs/sdks/accounts/README.md#create) - You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
@@ -1131,26 +1150,19 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 * [create](docs/sdks/terminalapplications/README.md#create) - Create a new terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.write` scope.
+you'll need to specify the `/terminal-applications.write` scope.
 * [list](docs/sdks/terminalapplications/README.md#list) - List all the terminal applications for a Moov Account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.read` scope.
+you'll need to specify the `/terminal-applications.read` scope.
 * [get](docs/sdks/terminalapplications/README.md#get) - Fetch a specific terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.read` scope.
+you'll need to specify the `/terminal-applications.read` scope.
 * [delete](docs/sdks/terminalapplications/README.md#delete) - Delete a specific terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.write` scope.
-
-### [terminal_configurations](docs/sdks/terminalconfigurations/README.md)
-
-* [get](docs/sdks/terminalconfigurations/README.md#get) - Fetch the configuration for a given Terminal Application
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` scope.
+you'll need to specify the `/terminal-applications.write` scope.
 
 ### [transfers](docs/sdks/transfers/README.md)
 

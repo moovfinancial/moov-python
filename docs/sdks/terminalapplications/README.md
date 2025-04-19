@@ -8,26 +8,26 @@
 * [create](#create) - Create a new terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.write` scope.
+you'll need to specify the `/terminal-applications.write` scope.
 * [list](#list) - List all the terminal applications for a Moov Account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.read` scope.
+you'll need to specify the `/terminal-applications.read` scope.
 * [get](#get) - Fetch a specific terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.read` scope.
+you'll need to specify the `/terminal-applications.read` scope.
 * [delete](#delete) - Delete a specific terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.write` scope.
+you'll need to specify the `/terminal-applications.write` scope.
 
 ## create
 
 Create a new terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.write` scope.
+you'll need to specify the `/terminal-applications.write` scope.
 
 ### Example Usage
 
@@ -78,7 +78,7 @@ with Moov(
 List all the terminal applications for a Moov Account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.read` scope.
+you'll need to specify the `/terminal-applications.read` scope.
 
 ### Example Usage
 
@@ -123,7 +123,7 @@ with Moov(
 Fetch a specific terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.read` scope.
+you'll need to specify the `/terminal-applications.read` scope.
 
 ### Example Usage
 
@@ -139,7 +139,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.terminal_applications.get(terminal_application_id="01234567-89ab-cdef-0123-456789abcdef")
+    res = moov.terminal_applications.get(terminal_application_id="12345678-1234-1234-1234-123456789012")
 
     # Handle response
     print(res)
@@ -150,7 +150,7 @@ with Moov(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `terminal_application_id`                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | 01234567-89ab-cdef-0123-456789abcdef                                |
+| `terminal_application_id`                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | 12345678-1234-1234-1234-123456789012                                |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
@@ -168,7 +168,7 @@ with Moov(
 Delete a specific terminal application.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/terminalApplications.write` scope.
+you'll need to specify the `/terminal-applications.write` scope.
 
 ### Example Usage
 
@@ -184,7 +184,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.terminal_applications.delete(terminal_application_id="01234567-89ab-cdef-0123-456789abcdef")
+    res = moov.terminal_applications.delete(terminal_application_id="12345678-1234-1234-1234-123456789012")
 
     # Handle response
     print(res)
@@ -195,7 +195,7 @@ with Moov(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `terminal_application_id`                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | 01234567-89ab-cdef-0123-456789abcdef                                |
+| `terminal_application_id`                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 | 12345678-1234-1234-1234-123456789012                                |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
