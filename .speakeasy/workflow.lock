@@ -1,18 +1,20 @@
-speakeasyVersion: 1.535.1
+speakeasyVersion: 1.537.1
 sources:
     latest:
         sourceNamespace: api-latest
-        sourceRevisionDigest: sha256:d666c9cb0f4f4f84eda6726995ea4e2b524ed4cab4748df3e94f2f7d75f1f057
-        sourceBlobDigest: sha256:4e287db9fcb7b46f86a2aa5b74d7f8fefba6829770365bbe3fcbe06a5b35fd57
+        sourceRevisionDigest: sha256:3e84bb5a9c40bea3b47f2323deb562e0db3ba37ab5c4d6ec2129590b04171499
+        sourceBlobDigest: sha256:7f0c7d900c72da2c6d2d73b4d15b7a08e0acb5cd672fb9767413cca71ec9707c
         tags:
             - latest
-            - speakeasy-sdk-regen-1745021488
+            - speakeasy-sdk-regen-1745367121
 targets:
     latest:
         source: latest
         sourceNamespace: api-latest
-        sourceRevisionDigest: sha256:d666c9cb0f4f4f84eda6726995ea4e2b524ed4cab4748df3e94f2f7d75f1f057
-        sourceBlobDigest: sha256:4e287db9fcb7b46f86a2aa5b74d7f8fefba6829770365bbe3fcbe06a5b35fd57
+        sourceRevisionDigest: sha256:3e84bb5a9c40bea3b47f2323deb562e0db3ba37ab5c4d6ec2129590b04171499
+        sourceBlobDigest: sha256:7f0c7d900c72da2c6d2d73b4d15b7a08e0acb5cd672fb9767413cca71ec9707c
+        codeSamplesNamespace: latest-python-code-samples
+        codeSamplesRevisionDigest: sha256:7c7f112eaeeb4bbdfe5dc2afaf0bf687f8e726b808eb9511243beada3c3adb18
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -20,6 +22,8 @@ workflow:
         latest:
             inputs:
                 - location: registry.speakeasyapi.dev/moov/moov/api-latest
+            registry:
+                location: registry.speakeasyapi.dev/moov/moov/latest
     targets:
         latest:
             target: python
@@ -27,3 +31,9 @@ workflow:
             publish:
                 pypi:
                     token: $pypi_token
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/moov/moov/latest-python-code-samples
+                labelOverride:
+                    fixedValue: Python (SDK)
+                blocking: false

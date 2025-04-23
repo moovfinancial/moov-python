@@ -23,6 +23,8 @@ class DisputeEvidenceResponseTypedDict(TypedDict):
     r"""For file evidence, the name of the file."""
     size: NotRequired[int]
     r"""For file evidence, the size of the file."""
+    submitted_on: NotRequired[datetime]
+    r"""When the evidence was submitted for review."""
 
 
 class DisputeEvidenceResponse(BaseModel):
@@ -47,3 +49,8 @@ class DisputeEvidenceResponse(BaseModel):
 
     size: Optional[int] = None
     r"""For file evidence, the size of the file."""
+
+    submitted_on: Annotated[Optional[datetime], pydantic.Field(alias="submittedOn")] = (
+        None
+    )
+    r"""When the evidence was submitted for review."""

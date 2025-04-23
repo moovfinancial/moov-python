@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 10a0eec41139736a8682c4fca785ad2c
+  docChecksum: 624bb4aeda8b9190a8d1b7db0e86d102
   docVersion: latest
-  speakeasyVersion: 1.535.1
-  generationVersion: 2.585.2
-  releaseVersion: 0.4.2
-  configChecksum: 76fb2eb73e90ee7cfb9eaeb76ab1c619
+  speakeasyVersion: 1.537.1
+  generationVersion: 2.588.4
+  releaseVersion: 0.5.0
+  configChecksum: b5972d19f313212eb75c143081b582de
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.14.0
+    core: 5.15.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     downloadStreams: 1.0.1
@@ -1521,6 +1521,7 @@ generatedFiles:
   - src/moovio_sdk/underwriting.py
   - src/moovio_sdk/utils/__init__.py
   - src/moovio_sdk/utils/annotations.py
+  - src/moovio_sdk/utils/datetimes.py
   - src/moovio_sdk/utils/enums.py
   - src/moovio_sdk/utils/eventstreaming.py
   - src/moovio_sdk/utils/forms.py

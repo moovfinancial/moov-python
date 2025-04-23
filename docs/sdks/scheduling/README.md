@@ -40,9 +40,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 ### Example Usage
 
 ```python
-import dateutil.parser
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
@@ -55,7 +55,7 @@ with Moov(
     res = moov.scheduling.create(account_id="9ab418fe-7b54-4964-a372-69b08e55ee8a", occurrences=[
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-            run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
+            run_on=parse_datetime("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
                 amount=components.Amount(
                     currency="USD",
@@ -87,7 +87,7 @@ with Moov(
         ),
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-            run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
+            run_on=parse_datetime("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
                 amount=components.Amount(
                     currency="USD",
@@ -147,7 +147,7 @@ with Moov(
             ),
             description="via deeply writ amid pupil yawningly wasabi when excepting councilman",
         ),
-        start=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
+        start=parse_datetime("2009-11-10T23:00:00Z"),
     ))
 
     # Handle response
@@ -235,9 +235,9 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 ### Example Usage
 
 ```python
-import dateutil.parser
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
@@ -250,7 +250,7 @@ with Moov(
     res = moov.scheduling.update(account_id="916f66c9-4a48-4a10-94fb-c5837b3ed84e", schedule_id="ce88be33-c224-42c1-ae8b-3533cc7b3742", occurrences=[
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-            run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
+            run_on=parse_datetime("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
                 amount=components.Amount(
                     currency="USD",
@@ -282,7 +282,7 @@ with Moov(
         ),
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-            run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
+            run_on=parse_datetime("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
                 amount=components.Amount(
                     currency="USD",
@@ -314,7 +314,7 @@ with Moov(
         ),
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
-            run_on=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
+            run_on=parse_datetime("2009-11-10T23:00:00Z"),
             run_transfer=components.RunTransfer(
                 amount=components.Amount(
                     currency="USD",
@@ -374,7 +374,7 @@ with Moov(
             ),
             description="hydrolyze lazily whenever how what",
         ),
-        start=dateutil.parser.isoparse("2009-11-10T23:00:00Z"),
+        start=parse_datetime("2009-11-10T23:00:00Z"),
     ))
 
     # Handle response
