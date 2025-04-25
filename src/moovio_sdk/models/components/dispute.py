@@ -38,6 +38,7 @@ class DisputeTypedDict(TypedDict):
     created_on: datetime
     network_reason_description: NotRequired[str]
     r"""Provides detail on the card network's categorization of the dispute."""
+    submitted_on: NotRequired[datetime]
 
 
 class Dispute(BaseModel):
@@ -74,3 +75,7 @@ class Dispute(BaseModel):
         Optional[str], pydantic.Field(alias="networkReasonDescription")
     ] = None
     r"""Provides detail on the card network's categorization of the dispute."""
+
+    submitted_on: Annotated[Optional[datetime], pydantic.Field(alias="submittedOn")] = (
+        None
+    )
