@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 0746c99852bac52fdb03b1ae7e9b7fee
+  docChecksum: 78c10d358888202b7e267d0a8d8f9fc7
   docVersion: latest
-  speakeasyVersion: 1.539.2
-  generationVersion: 2.591.1
-  releaseVersion: 0.6.0
-  configChecksum: d1acb13fc2de2dc3b0be35cb2ccebf7d
+  speakeasyVersion: 1.540.1
+  generationVersion: 2.593.4
+  releaseVersion: 0.7.0
+  configChecksum: 802a839b209b13f0e28374ea29777dcc
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -28,6 +28,7 @@ features:
     globalServerURLs: 3.1.0
     globals: 3.0.0
     hiddenGlobals: 1.0.0
+    includes: 3.0.0
     methodArguments: 1.0.2
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
@@ -457,6 +458,40 @@ generatedFiles:
   - docs/models/components/wallettransactionsourcetype.md
   - docs/models/components/wallettransactionstatus.md
   - docs/models/components/wallettransactiontype.md
+  - docs/models/components/webhookdata.md
+  - docs/models/components/webhookdataaccountcreated.md
+  - docs/models/components/webhookdataaccountdeleted.md
+  - docs/models/components/webhookdataaccountupdated.md
+  - docs/models/components/webhookdatabalanceupdated.md
+  - docs/models/components/webhookdatabankaccountcreated.md
+  - docs/models/components/webhookdatabankaccountdeleted.md
+  - docs/models/components/webhookdatabankaccountupdated.md
+  - docs/models/components/webhookdatacancellationcreated.md
+  - docs/models/components/webhookdatacancellationupdated.md
+  - docs/models/components/webhookdatacapabilityrequested.md
+  - docs/models/components/webhookdatacapabilityupdated.md
+  - docs/models/components/webhookdatacardautoupdated.md
+  - docs/models/components/webhookdatadisputecreated.md
+  - docs/models/components/webhookdatadisputeupdated.md
+  - docs/models/components/webhookdatanetworkidupdated.md
+  - docs/models/components/webhookdatapaymentmethoddisabled.md
+  - docs/models/components/webhookdatapaymentmethodenabled.md
+  - docs/models/components/webhookdatarefundcreated.md
+  - docs/models/components/webhookdatarefundupdated.md
+  - docs/models/components/webhookdatarepresentativecreated.md
+  - docs/models/components/webhookdatarepresentativedisabled.md
+  - docs/models/components/webhookdatarepresentativeupdated.md
+  - docs/models/components/webhookdatasweepcreated.md
+  - docs/models/components/webhookdatasweepupdated.md
+  - docs/models/components/webhookdataterminalapplicationcreated.md
+  - docs/models/components/webhookdataterminalapplicationupdated.md
+  - docs/models/components/webhookdatatransfercreated.md
+  - docs/models/components/webhookdatatransferupdated.md
+  - docs/models/components/webhookdatawallettransactionupdated.md
+  - docs/models/components/webhookevent.md
+  - docs/models/components/webhookeventtype.md
+  - docs/models/components/webhooktransferpaymentmethoddetails.md
+  - docs/models/components/webhookwalletavailablebalance.md
   - docs/models/errors/accountterminalapplicationerror.md
   - docs/models/errors/addcapabilitieserror.md
   - docs/models/errors/assigncountrieserror.md
@@ -1329,6 +1364,40 @@ generatedFiles:
   - src/moovio_sdk/models/components/wallettransactionsourcetype.py
   - src/moovio_sdk/models/components/wallettransactionstatus.py
   - src/moovio_sdk/models/components/wallettransactiontype.py
+  - src/moovio_sdk/models/components/webhookdata.py
+  - src/moovio_sdk/models/components/webhookdataaccountcreated.py
+  - src/moovio_sdk/models/components/webhookdataaccountdeleted.py
+  - src/moovio_sdk/models/components/webhookdataaccountupdated.py
+  - src/moovio_sdk/models/components/webhookdatabalanceupdated.py
+  - src/moovio_sdk/models/components/webhookdatabankaccountcreated.py
+  - src/moovio_sdk/models/components/webhookdatabankaccountdeleted.py
+  - src/moovio_sdk/models/components/webhookdatabankaccountupdated.py
+  - src/moovio_sdk/models/components/webhookdatacancellationcreated.py
+  - src/moovio_sdk/models/components/webhookdatacancellationupdated.py
+  - src/moovio_sdk/models/components/webhookdatacapabilityrequested.py
+  - src/moovio_sdk/models/components/webhookdatacapabilityupdated.py
+  - src/moovio_sdk/models/components/webhookdatacardautoupdated.py
+  - src/moovio_sdk/models/components/webhookdatadisputecreated.py
+  - src/moovio_sdk/models/components/webhookdatadisputeupdated.py
+  - src/moovio_sdk/models/components/webhookdatanetworkidupdated.py
+  - src/moovio_sdk/models/components/webhookdatapaymentmethoddisabled.py
+  - src/moovio_sdk/models/components/webhookdatapaymentmethodenabled.py
+  - src/moovio_sdk/models/components/webhookdatarefundcreated.py
+  - src/moovio_sdk/models/components/webhookdatarefundupdated.py
+  - src/moovio_sdk/models/components/webhookdatarepresentativecreated.py
+  - src/moovio_sdk/models/components/webhookdatarepresentativedisabled.py
+  - src/moovio_sdk/models/components/webhookdatarepresentativeupdated.py
+  - src/moovio_sdk/models/components/webhookdatasweepcreated.py
+  - src/moovio_sdk/models/components/webhookdatasweepupdated.py
+  - src/moovio_sdk/models/components/webhookdataterminalapplicationcreated.py
+  - src/moovio_sdk/models/components/webhookdataterminalapplicationupdated.py
+  - src/moovio_sdk/models/components/webhookdatatransfercreated.py
+  - src/moovio_sdk/models/components/webhookdatatransferupdated.py
+  - src/moovio_sdk/models/components/webhookdatawallettransactionupdated.py
+  - src/moovio_sdk/models/components/webhookevent.py
+  - src/moovio_sdk/models/components/webhookeventtype.py
+  - src/moovio_sdk/models/components/webhooktransferpaymentmethoddetails.py
+  - src/moovio_sdk/models/components/webhookwalletavailablebalance.py
   - src/moovio_sdk/models/errors/__init__.py
   - src/moovio_sdk/models/errors/accountterminalapplicationerror.py
   - src/moovio_sdk/models/errors/addcapabilitieserror.py
