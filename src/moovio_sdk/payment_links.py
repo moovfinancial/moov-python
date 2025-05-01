@@ -1313,13 +1313,23 @@ class PaymentLinks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "204", "*"):
             return operations.DisablePaymentLinkResponse(
                 headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1415,13 +1425,23 @@ class PaymentLinks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "204", "*"):
             return operations.DisablePaymentLinkResponse(
                 headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
