@@ -16,7 +16,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 python:
-  version: 0.7.1
+  version: 0.8.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -47,6 +47,7 @@ python:
   inputModelSuffix: input
   maxMethodParams: 999
   methodArguments: infer-optional-args
+  moduleName: ""
   outputModelSuffix: output
   packageName: moovio_sdk
   pytestTimeout: 0
