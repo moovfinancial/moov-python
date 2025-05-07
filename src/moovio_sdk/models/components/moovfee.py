@@ -15,7 +15,7 @@ class MoovFeeTypedDict(TypedDict):
     account_id: str
     r"""ID of the account that fees were charged to."""
     transfer_party: TransferParty
-    r"""Indicates whether the account charged is the source, destination, or partner account."""
+    r"""Indicates whether the account charged was the partner, source, or destination of the transfer."""
     total_amount: AmountDecimalTypedDict
     r"""The total amount of fees charged to the account."""
     fee_i_ds: List[str]
@@ -29,7 +29,7 @@ class MoovFee(BaseModel):
     r"""ID of the account that fees were charged to."""
 
     transfer_party: Annotated[TransferParty, pydantic.Field(alias="transferParty")]
-    r"""Indicates whether the account charged is the source, destination, or partner account."""
+    r"""Indicates whether the account charged was the partner, source, or destination of the transfer."""
 
     total_amount: Annotated[AmountDecimal, pydantic.Field(alias="totalAmount")]
     r"""The total amount of fees charged to the account."""

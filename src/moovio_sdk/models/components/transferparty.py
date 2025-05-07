@@ -5,8 +5,6 @@ from enum import Enum
 
 
 class TransferParty(str, Enum):
-    r"""Indicates whether an account was the source or destination of a transfer."""
-
     SOURCE = "source"
     DESTINATION = "destination"
     PARTNER = "partner"
