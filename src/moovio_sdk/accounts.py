@@ -13,7 +13,7 @@ class Accounts(BaseSDK):
     def create(
         self,
         *,
-        account_type: components.AccountType,
+        account_type: components.CreateAccountType,
         profile: Union[components.CreateProfile, components.CreateProfileTypedDict],
         metadata: Optional[Dict[str, str]] = None,
         terms_of_service: Optional[
@@ -52,7 +52,7 @@ class Accounts(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts.write` scope.
 
-        :param account_type: The type of entity represented by this account.
+        :param account_type:
         :param profile:
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param terms_of_service:
@@ -195,7 +195,7 @@ class Accounts(BaseSDK):
     async def create_async(
         self,
         *,
-        account_type: components.AccountType,
+        account_type: components.CreateAccountType,
         profile: Union[components.CreateProfile, components.CreateProfileTypedDict],
         metadata: Optional[Dict[str, str]] = None,
         terms_of_service: Optional[
@@ -234,7 +234,7 @@ class Accounts(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts.write` scope.
 
-        :param account_type: The type of entity represented by this account.
+        :param account_type:
         :param profile:
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param terms_of_service:
@@ -380,6 +380,7 @@ class Accounts(BaseSDK):
         name: Optional[str] = None,
         email: Optional[str] = None,
         type_: Optional[components.AccountType] = None,
+        include_guest: Optional[bool] = None,
         foreign_id: Optional[str] = None,
         include_disconnected: Optional[bool] = None,
         capability: Optional[components.CapabilityID] = None,
@@ -403,6 +404,7 @@ class Accounts(BaseSDK):
         :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>
         :param email: Filter connected accounts by email address.    Provide the full email address to filter by email.
         :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+        :param include_guest: Filter accounts with AccountType guest.      If true, the response will include guest accounts.
         :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
         :param include_disconnected: Filter disconnected accounts.  If true, the response will include disconnected accounts.
         :param capability: Filter connected accounts by the capability.
@@ -428,6 +430,7 @@ class Accounts(BaseSDK):
             name=name,
             email=email,
             type=type_,
+            include_guest=include_guest,
             foreign_id=foreign_id,
             include_disconnected=include_disconnected,
             capability=capability,
@@ -518,6 +521,7 @@ class Accounts(BaseSDK):
         name: Optional[str] = None,
         email: Optional[str] = None,
         type_: Optional[components.AccountType] = None,
+        include_guest: Optional[bool] = None,
         foreign_id: Optional[str] = None,
         include_disconnected: Optional[bool] = None,
         capability: Optional[components.CapabilityID] = None,
@@ -541,6 +545,7 @@ class Accounts(BaseSDK):
         :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>
         :param email: Filter connected accounts by email address.    Provide the full email address to filter by email.
         :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+        :param include_guest: Filter accounts with AccountType guest.      If true, the response will include guest accounts.
         :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
         :param include_disconnected: Filter disconnected accounts.  If true, the response will include disconnected accounts.
         :param capability: Filter connected accounts by the capability.
@@ -566,6 +571,7 @@ class Accounts(BaseSDK):
             name=name,
             email=email,
             type=type_,
+            include_guest=include_guest,
             foreign_id=foreign_id,
             include_disconnected=include_disconnected,
             capability=capability,

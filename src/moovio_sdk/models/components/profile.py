@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .businessprofile import BusinessProfile, BusinessProfileTypedDict
+from .guestprofile import GuestProfile, GuestProfileTypedDict
 from .individualprofile import IndividualProfile, IndividualProfileTypedDict
 from moovio_sdk.types import BaseModel
 from typing import Optional
@@ -15,6 +16,8 @@ class ProfileTypedDict(TypedDict):
     r"""Describes an individual."""
     business: NotRequired[BusinessProfileTypedDict]
     r"""Describes a business."""
+    guest: NotRequired[GuestProfileTypedDict]
+    r"""Describes a guest account profile."""
 
 
 class Profile(BaseModel):
@@ -25,3 +28,6 @@ class Profile(BaseModel):
 
     business: Optional[BusinessProfile] = None
     r"""Describes a business."""
+
+    guest: Optional[GuestProfile] = None
+    r"""Describes a guest account profile."""

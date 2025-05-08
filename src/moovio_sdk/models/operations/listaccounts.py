@@ -69,6 +69,11 @@ class ListAccountsRequestTypedDict(TypedDict):
     be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
     the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
     """
+    include_guest: NotRequired[bool]
+    r"""Filter accounts with AccountType guest.
+
+    If true, the response will include guest accounts.
+    """
     foreign_id: NotRequired[str]
     r"""Serves as an optional alias from a foreign/external system which can be used to reference this resource."""
     include_disconnected: NotRequired[bool]
@@ -117,6 +122,16 @@ class ListAccountsRequest(BaseModel):
     If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
     be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
     the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+    """
+
+    include_guest: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="includeGuest"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Filter accounts with AccountType guest.
+
+    If true, the response will include guest accounts.
     """
 
     foreign_id: Annotated[

@@ -51,7 +51,7 @@ with Moov(
     ], fee_plan_codes=[
         "merchant-direct",
     ], prefill=components.CreateAccount(
-        account_type=components.AccountType.BUSINESS,
+        account_type=components.CreateAccountType.BUSINESS,
         profile=components.CreateProfile(
             individual=components.CreateIndividualProfile(
                 name=components.IndividualName(

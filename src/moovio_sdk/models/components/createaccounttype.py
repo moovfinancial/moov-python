@@ -4,9 +4,6 @@ from __future__ import annotations
 from enum import Enum
 
 
-class AccountType(str, Enum):
-    r"""The type of entity represented by this account."""
-
+class CreateAccountType(str, Enum):
     INDIVIDUAL = "individual"
     BUSINESS = "business"
-    GUEST = "guest"

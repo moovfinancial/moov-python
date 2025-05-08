@@ -126,7 +126,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
+    res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
@@ -230,7 +230,7 @@ async def main():
         ),
     ) as moov:
 
-        res = await moov.accounts.create_async(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
+        res = await moov.accounts.create_async(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
             individual=components.CreateIndividualProfile(
                 name=components.IndividualName(
                     first_name="Jordan",
@@ -343,7 +343,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
+    res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
@@ -1333,7 +1333,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
+    res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
@@ -1436,7 +1436,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
+    res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",
@@ -1562,7 +1562,7 @@ with Moov(
     res = None
     try:
 
-        res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
+        res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
             individual=components.CreateIndividualProfile(
                 name=components.IndividualName(
                     first_name="Jordan",
@@ -1678,7 +1678,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
+    res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
         individual=components.CreateIndividualProfile(
             name=components.IndividualName(
                 first_name="Jordan",

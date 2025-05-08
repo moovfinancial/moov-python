@@ -9,3 +9,4 @@ class BankAccountHolderType(str, Enum):
 
     INDIVIDUAL = "individual"
     BUSINESS = "business"
+    GUEST = "guest"
