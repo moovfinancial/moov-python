@@ -127,7 +127,7 @@ with Moov(
 
 | Error Type           | Status Code          | Content Type         |
 | -------------------- | -------------------- | -------------------- |
-| errors.GenericError  | 400, 409             | application/json     |
+| errors.GenericError  | 400                  | application/json     |
 | errors.LinkCardError | 422                  | application/json     |
 | errors.APIError      | 4XX, 5XX             | \*/\*                |
 

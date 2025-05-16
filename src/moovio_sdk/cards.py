@@ -160,7 +160,7 @@ class Cards(BaseSDK):
                 result=utils.unmarshal_json(http_res.text, components.Card),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
+        if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
             raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -168,7 +168,7 @@ class Cards(BaseSDK):
                 http_res.text, errors.LinkCardErrorData
             )
             raise errors.LinkCardError(data=response_data)
-        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "409", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -348,7 +348,7 @@ class Cards(BaseSDK):
                 result=utils.unmarshal_json(http_res.text, components.Card),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
+        if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(http_res.text, errors.GenericErrorData)
             raise errors.GenericError(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
@@ -356,7 +356,7 @@ class Cards(BaseSDK):
                 http_res.text, errors.LinkCardErrorData
             )
             raise errors.LinkCardError(data=response_data)
-        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "409", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

@@ -56,7 +56,7 @@ class CreateTransferRequestTypedDict(TypedDict):
     x_idempotency_key: str
     r"""Prevents duplicate transfers from being created."""
     account_id: str
-    r"""The merchant's Moov account ID."""
+    r"""Your Moov account ID."""
     create_transfer: components_createtransfer.CreateTransferTypedDict
     x_wait_for: NotRequired[components_transferwaitfor.TransferWaitFor]
     r"""Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
@@ -77,7 +77,7 @@ class CreateTransferRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
-    r"""The merchant's Moov account ID."""
+    r"""Your Moov account ID."""
 
     create_transfer: Annotated[
         components_createtransfer.CreateTransfer,

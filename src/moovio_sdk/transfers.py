@@ -46,7 +46,7 @@ class Transfers(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
         :param x_idempotency_key: Prevents duplicate transfers from being created.
-        :param account_id: The merchant's Moov account ID.
+        :param account_id: Your Moov account ID.
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
@@ -239,7 +239,7 @@ class Transfers(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
         :param x_idempotency_key: Prevents duplicate transfers from being created.
-        :param account_id: The merchant's Moov account ID.
+        :param account_id: Your Moov account ID.
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
