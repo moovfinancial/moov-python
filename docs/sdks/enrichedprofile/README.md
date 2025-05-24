@@ -31,7 +31,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.enriched_profile.get(email="Keeley_Lebsack@hotmail.com")
+    res = moov.enriched_profile.get(email="Thaddeus.Welch@gmail.com")
 
     # Handle response
     print(res)

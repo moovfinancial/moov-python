@@ -64,7 +64,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.register_merchant_domains(account_id="c62b8770-bdbc-406f-8160-fddb553f5b33", domains=[
+    res = moov.apple_pay.register_merchant_domains(account_id="60825531-8c7e-421c-8014-019c6603250c", domains=[
         "checkout.classbooker.dev",
     ])
 
@@ -117,7 +117,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.update_merchant_domains(account_id="4dfea880-7ff8-42f8-bc8d-392cba179113", add_domains=[
+    res = moov.apple_pay.update_merchant_domains(account_id="34b1c132-91d4-4676-9864-87e1d961d56d", add_domains=[
         "pay.classbooker.dev",
     ], remove_domains=[
         "checkout.classbooker.dev",
@@ -171,7 +171,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.get_merchant_domains(account_id="5f873241-11ec-45e4-929d-00a704a9b582")
+    res = moov.apple_pay.get_merchant_domains(account_id="28704d00-d07b-47db-9e54-016a9713d697")
 
     # Handle response
     print(res)
@@ -219,7 +219,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.create_session(account_id="7f4bef45-927c-48cf-9312-d337467ac9fb", domain="checkout.classbooker.dev", display_name="Kaylee40")
+    res = moov.apple_pay.create_session(account_id="32ab62ca-7afd-4f49-89cb-0bb237258f23", domain="checkout.classbooker.dev", display_name="Fay11")
 
     # Handle response
     print(res)
@@ -270,7 +270,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.apple_pay.link_token(account_id="3f415d64-c57f-409e-80d0-cb8bd8246ace", token={
+    res = moov.apple_pay.link_token(account_id="bf498c07-3852-4060-b561-bf992e26a851", token={
         "payment_data": {
             "version": "EC_v1",
             "data": "3+f4oOTwPa6f1UZ6tG...CE=",

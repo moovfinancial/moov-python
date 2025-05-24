@@ -93,6 +93,7 @@ to specify the `/accounts.write` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
@@ -103,64 +104,16 @@ with Moov(
 ) as moov:
 
     res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
-        individual=components.CreateIndividualProfile(
-            name=components.IndividualName(
-                first_name="Jordan",
-                middle_name="Reese",
-                last_name="Lee",
-                suffix="Jr",
-            ),
-            phone=components.PhoneNumber(
-                number="8185551212",
-                country_code="1",
-            ),
-            email="jordan.lee@classbooker.dev",
-            address=components.Address(
-                address_line1="123 Main Street",
-                address_line2="Apt 302",
-                city="Boulder",
-                state_or_province="CO",
-                postal_code="80301",
-                country="US",
-            ),
-            birth_date=components.BirthDate(
-                day=9,
-                month=11,
-                year=1989,
-            ),
-        ),
         business=components.CreateBusinessProfile(
-            legal_business_name="Classbooker, LLC",
-            business_type=components.BusinessType.LLC,
-            address=components.Address(
-                address_line1="123 Main Street",
-                address_line2="Apt 302",
-                city="Boulder",
-                state_or_province="CO",
-                postal_code="80301",
-                country="US",
-            ),
-            phone=components.PhoneNumber(
-                number="8185551212",
-                country_code="1",
-            ),
-            email="jordan.lee@classbooker.dev",
-            description="Local fitness gym paying out instructors",
-            tax_id=components.TaxID(
-                ein=components.Ein(
-                    number="12-3456789",
-                ),
-            ),
-            industry_codes=components.IndustryCodes(
-                naics="713940",
-                sic="7991",
-                mcc="7997",
-            ),
+            legal_business_name="Whole Body Fitness LLC",
         ),
     ), metadata={
         "optional": "metadata",
     }, terms_of_service={
-        "token": "kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4",
+        "accepted_date": parse_datetime("2023-05-21T04:53:54.554Z"),
+        "accepted_ip": "172.217.2.46",
+        "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
+        "accepted_domain": "https://esteemed-velocity.net",
     }, customer_support={
         "phone": {
             "number": "8185551212",
@@ -295,7 +248,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc")
+    res = moov.accounts.get(account_id="2f93a6cf-3b3b-4c17-8d3b-110dfadccea4")
 
     # Handle response
     print(res)
@@ -348,7 +301,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.update(account_id="95fa7f0e-7432-4ce4-a7cb-60cc78135dde", profile=components.PatchProfile(
+    res = moov.accounts.update(account_id="433cb9d1-5943-4fd5-91b4-2aef5b30e2e7", profile=components.PatchProfile(
         individual=components.PatchIndividual(
             name=components.IndividualNameUpdate(
                 first_name="Jordan",
@@ -404,8 +357,7 @@ with Moov(
     ), metadata={
         "optional": "metadata",
     }, terms_of_service={
-        "accepted_ip": "172.217.2.46",
-        "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
+        "token": "kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4",
     }, customer_support={
         "phone": {
             "number": "8185551212",
@@ -475,7 +427,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.disconnect(account_id="ac3cbe09-fcd4-4c5e-ada2-89eaaa9c149e")
+    res = moov.accounts.disconnect(account_id="cfdfea7d-f185-4de5-ba90-b09f14fe6683")
 
     # Handle response
     print(res)
@@ -521,7 +473,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.get_countries(account_id="b49c57bf-7b36-4308-8206-c1f5ce8067ac")
+    res = moov.accounts.get_countries(account_id="a2026036-cc26-42c1-beef-950662d13b5d")
 
     # Handle response
     print(res)
@@ -568,7 +520,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.assign_countries(account_id="aa2dc19b-77dd-481f-a0a8-c76f2cfc1372", countries=[
+    res = moov.accounts.assign_countries(account_id="46736fa8-4bf7-4144-8e0e-dbea1eb0805b", countries=[
         "United States",
     ])
 
@@ -618,7 +570,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.get_merchant_processing_agreement(account_id="d2cfd0d3-6efb-4bc4-a193-53f35dd0d912")
+    res = moov.accounts.get_merchant_processing_agreement(account_id="6180d9b9-2377-4190-8530-70a99d31a578")
 
     # Handle response
     print(res)

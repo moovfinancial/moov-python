@@ -53,9 +53,9 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.create(account_id="621cf021-cd9c-4f54-a033-15211a509a30", partner_account_id="d290f1ee-6c54-4b01-90e6-d701748f0851", merchant_payment_method_id="4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", amount={
+    res = moov.payment_links.create(account_id="cc1d04a8-03b1-4600-b675-e6180d574074", partner_account_id="d290f1ee-6c54-4b01-90e6-d701748f0851", merchant_payment_method_id="4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", amount={
         "currency": "USD",
-        "value": 1204,
+        "value": 10000,
     }, display={
         "title": "Example Payment Link",
         "description": "This is an example payment link.",
@@ -67,16 +67,9 @@ with Moov(
             components.CollectionPaymentMethodType.CARD_PAYMENT,
             components.CollectionPaymentMethodType.ACH_DEBIT_COLLECT,
         ],
-        "card_details": {
-            "dynamic_descriptor": "WhlBdy *Yoga 11-12",
-        },
-        "ach_details": {
-            "company_entry_description": "Gym dues",
-            "originating_company_name": "Whole Body Fit",
-        },
     }, payout={
         "allowed_methods": [
-            components.DisbursementPaymentMethodType.ACH_CREDIT_SAME_DAY,
+            components.DisbursementPaymentMethodType.ACH_CREDIT_STANDARD,
         ],
         "recipient": {
             "email": "jordan.lee@classbooker.dev",
@@ -137,7 +130,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+    res = moov.payment_links.list(account_id="d1039e6d-21ee-4a29-8adf-1dd2a6625a0d")
 
     # Handle response
     print(res)
@@ -182,7 +175,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", payment_link_code="uc7ZYKrMhi")
+    res = moov.payment_links.get(account_id="323f95b1-3798-4203-8a73-5c8668a9226e", payment_link_code="uc7ZYKrMhi")
 
     # Handle response
     print(res)
@@ -228,9 +221,9 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.update(account_id="d95fa7f0-e743-42ce-b47c-b60cc78135dd", payment_link_code="uc7ZYKrMhi", amount={
+    res = moov.payment_links.update(account_id="ddad6613-2350-446a-883b-f76abb2cd4ea", payment_link_code="uc7ZYKrMhi", amount={
         "currency": "USD",
-        "value": 1204,
+        "value": 12099,
     }, customer={
         "require_address": True,
         "require_phone": True,
@@ -300,7 +293,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.disable(account_id="cd7cd1ce-90cc-444b-ac3e-badb79be277f", payment_link_code="uc7ZYKrMhi")
+    res = moov.payment_links.disable(account_id="c1cf000d-0dd9-4dec-bd5e-a88e135adf82", payment_link_code="uc7ZYKrMhi")
 
     # Handle response
     print(res)
@@ -348,7 +341,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.get_qr_code(account_id="2014a1ff-9924-40b3-ac01-f4ed64dac1b8", payment_link_code="uc7ZYKrMhi")
+    res = moov.payment_links.get_qr_code(account_id="2f01a42a-aa5a-424f-9f47-6f8999ed05dc", payment_link_code="uc7ZYKrMhi")
 
     # Handle response
     print(res)

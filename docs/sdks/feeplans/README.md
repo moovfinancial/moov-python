@@ -56,7 +56,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.fee_plans.list_fee_plan_agreements(account_id="4c49ae91-2b32-4a4d-91bf-f062f3c2f38d", skip=60, count=20)
+    res = moov.fee_plans.list_fee_plan_agreements(account_id="93c43634-5477-42a7-972d-01fa76a09e17", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -105,7 +105,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.fee_plans.create_fee_plan_agreements(account_id="19962eb8-00cd-44e5-8a66-a1ebaf88c2fe", plan_id="b97c2d59-80c5-49ac-b1fc-40e3a81d8daf")
+    res = moov.fee_plans.create_fee_plan_agreements(account_id="409c6b4b-e622-40c2-9dc4-fb494e555723", plan_id="19801f96-ea27-4610-b4d1-8c6b46f37928")
 
     # Handle response
     print(res)
@@ -154,7 +154,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.fee_plans.list_fee_plans(account_id="ac8fa716-4b75-4902-b296-d734524ca45c")
+    res = moov.fee_plans.list_fee_plans(account_id="b3d59179-f74e-4ee8-b123-33220b3c7d4b")
 
     # Handle response
     print(res)
@@ -200,7 +200,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.fee_plans.retrieve_fees(account_id="45954656-ded3-4bbc-9ef3-d42c2b99db12", skip=60, count=20)
+    res = moov.fee_plans.retrieve_fees(account_id="89daf02d-b6b3-4fbf-b20d-5bf967324682", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -251,7 +251,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.fee_plans.list_fees_fetch(account_id="7b85e951-a6d9-4e67-a155-4d18e9d1ac58")
+    res = moov.fee_plans.list_fees_fetch(account_id="55c34e26-269d-4872-8e42-0fa83e3f4b10")
 
     # Handle response
     print(res)
@@ -297,7 +297,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.fee_plans.list_partner_pricing(account_id="85f15b07-5c44-4302-ab6f-d22f8d45b7f4")
+    res = moov.fee_plans.list_partner_pricing(account_id="600637f9-c38a-473f-b909-0d5ac537b8a5")
 
     # Handle response
     print(res)
@@ -343,7 +343,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.fee_plans.list_partner_pricing_agreements(account_id="9366921a-25de-4c52-8ec6-4cd4ef557223", skip=60, count=20)
+    res = moov.fee_plans.list_partner_pricing_agreements(account_id="123bfe5e-2288-4146-9d8a-4c07264c3758", skip=60, count=20)
 
     # Handle response
     print(res)

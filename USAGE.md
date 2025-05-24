@@ -3,6 +3,7 @@
 # Synchronous Example
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
@@ -13,64 +14,16 @@ with Moov(
 ) as moov:
 
     res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
-        individual=components.CreateIndividualProfile(
-            name=components.IndividualName(
-                first_name="Jordan",
-                middle_name="Reese",
-                last_name="Lee",
-                suffix="Jr",
-            ),
-            phone=components.PhoneNumber(
-                number="8185551212",
-                country_code="1",
-            ),
-            email="jordan.lee@classbooker.dev",
-            address=components.Address(
-                address_line1="123 Main Street",
-                address_line2="Apt 302",
-                city="Boulder",
-                state_or_province="CO",
-                postal_code="80301",
-                country="US",
-            ),
-            birth_date=components.BirthDate(
-                day=9,
-                month=11,
-                year=1989,
-            ),
-        ),
         business=components.CreateBusinessProfile(
-            legal_business_name="Classbooker, LLC",
-            business_type=components.BusinessType.LLC,
-            address=components.Address(
-                address_line1="123 Main Street",
-                address_line2="Apt 302",
-                city="Boulder",
-                state_or_province="CO",
-                postal_code="80301",
-                country="US",
-            ),
-            phone=components.PhoneNumber(
-                number="8185551212",
-                country_code="1",
-            ),
-            email="jordan.lee@classbooker.dev",
-            description="Local fitness gym paying out instructors",
-            tax_id=components.TaxID(
-                ein=components.Ein(
-                    number="12-3456789",
-                ),
-            ),
-            industry_codes=components.IndustryCodes(
-                naics="713940",
-                sic="7991",
-                mcc="7997",
-            ),
+            legal_business_name="Whole Body Fitness LLC",
         ),
     ), metadata={
         "optional": "metadata",
     }, terms_of_service={
-        "token": "kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4",
+        "accepted_date": parse_datetime("2023-05-21T04:53:54.554Z"),
+        "accepted_ip": "172.217.2.46",
+        "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
+        "accepted_domain": "https://esteemed-velocity.net",
     }, customer_support={
         "phone": {
             "number": "8185551212",
@@ -106,6 +59,7 @@ The same SDK client can also be used to make asychronous requests by importing a
 import asyncio
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+from moovio_sdk.utils import parse_datetime
 
 async def main():
 
@@ -117,64 +71,16 @@ async def main():
     ) as moov:
 
         res = await moov.accounts.create_async(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
-            individual=components.CreateIndividualProfile(
-                name=components.IndividualName(
-                    first_name="Jordan",
-                    middle_name="Reese",
-                    last_name="Lee",
-                    suffix="Jr",
-                ),
-                phone=components.PhoneNumber(
-                    number="8185551212",
-                    country_code="1",
-                ),
-                email="jordan.lee@classbooker.dev",
-                address=components.Address(
-                    address_line1="123 Main Street",
-                    address_line2="Apt 302",
-                    city="Boulder",
-                    state_or_province="CO",
-                    postal_code="80301",
-                    country="US",
-                ),
-                birth_date=components.BirthDate(
-                    day=9,
-                    month=11,
-                    year=1989,
-                ),
-            ),
             business=components.CreateBusinessProfile(
-                legal_business_name="Classbooker, LLC",
-                business_type=components.BusinessType.LLC,
-                address=components.Address(
-                    address_line1="123 Main Street",
-                    address_line2="Apt 302",
-                    city="Boulder",
-                    state_or_province="CO",
-                    postal_code="80301",
-                    country="US",
-                ),
-                phone=components.PhoneNumber(
-                    number="8185551212",
-                    country_code="1",
-                ),
-                email="jordan.lee@classbooker.dev",
-                description="Local fitness gym paying out instructors",
-                tax_id=components.TaxID(
-                    ein=components.Ein(
-                        number="12-3456789",
-                    ),
-                ),
-                industry_codes=components.IndustryCodes(
-                    naics="713940",
-                    sic="7991",
-                    mcc="7997",
-                ),
+                legal_business_name="Whole Body Fitness LLC",
             ),
         ), metadata={
             "optional": "metadata",
         }, terms_of_service={
-            "token": "kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4",
+            "accepted_date": parse_datetime("2024-08-23T23:57:42.538Z"),
+            "accepted_ip": "172.217.2.46",
+            "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
+            "accepted_domain": "https://flowery-marketplace.com",
         }, customer_support={
             "phone": {
                 "number": "8185551212",

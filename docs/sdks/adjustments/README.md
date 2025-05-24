@@ -35,7 +35,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.adjustments.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+    res = moov.adjustments.list(account_id="c054f3a6-d542-4310-a955-830739f800f0")
 
     # Handle response
     print(res)
@@ -81,7 +81,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.adjustments.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", adjustment_id="e50f7622-81da-484b-9c66-1c8a99c6b71b")
+    res = moov.adjustments.get(account_id="3ef4e658-8aaa-449f-a7a4-95a6839172a1", adjustment_id="cbe4a8e7-605f-4667-a308-1afde85cd7a5")
 
     # Handle response
     print(res)

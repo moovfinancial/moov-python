@@ -6,45 +6,48 @@ from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 import httpx
+import importlib
 from moovio_sdk import utils
 from moovio_sdk._hooks import SDKHooks
-from moovio_sdk.account_terminal_applications import AccountTerminalApplications
-from moovio_sdk.accounts import Accounts
-from moovio_sdk.adjustments import Adjustments
-from moovio_sdk.apple_pay import ApplePay
-from moovio_sdk.authentication import Authentication
-from moovio_sdk.avatars import Avatars
-from moovio_sdk.bank_accounts import BankAccounts
-from moovio_sdk.branding import Branding
-from moovio_sdk.capabilities import Capabilities
-from moovio_sdk.card_issuing import CardIssuing
-from moovio_sdk.cards import Cards
-from moovio_sdk.disputes import Disputes
-from moovio_sdk.end_to_end_encryption import EndToEndEncryption
-from moovio_sdk.enriched_address import EnrichedAddress
-from moovio_sdk.enriched_profile import EnrichedProfile
-from moovio_sdk.fee_plans import FeePlans
-from moovio_sdk.files import Files
-from moovio_sdk.industries import Industries
-from moovio_sdk.institutions import Institutions
-from moovio_sdk.issuing_transactions import IssuingTransactions
 from moovio_sdk.models import components, internal
-from moovio_sdk.onboarding import Onboarding
-from moovio_sdk.payment_links import PaymentLinks
-from moovio_sdk.payment_methods import PaymentMethods
-from moovio_sdk.ping import Ping
-from moovio_sdk.receipts import Receipts
-from moovio_sdk.representatives import Representatives
-from moovio_sdk.scheduling import Scheduling
-from moovio_sdk.sweeps import Sweeps
-from moovio_sdk.terminal_applications import TerminalApplications
-from moovio_sdk.transfers import Transfers
 from moovio_sdk.types import OptionalNullable, UNSET
-from moovio_sdk.underwriting import Underwriting
-from moovio_sdk.wallet_transactions import WalletTransactions
-from moovio_sdk.wallets import Wallets
-from typing import Callable, Dict, Optional, Union, cast
+from typing import Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
+
+if TYPE_CHECKING:
+    from moovio_sdk.account_terminal_applications import AccountTerminalApplications
+    from moovio_sdk.accounts import Accounts
+    from moovio_sdk.adjustments import Adjustments
+    from moovio_sdk.apple_pay import ApplePay
+    from moovio_sdk.authentication import Authentication
+    from moovio_sdk.avatars import Avatars
+    from moovio_sdk.bank_accounts import BankAccounts
+    from moovio_sdk.branding import Branding
+    from moovio_sdk.capabilities import Capabilities
+    from moovio_sdk.card_issuing import CardIssuing
+    from moovio_sdk.cards import Cards
+    from moovio_sdk.disputes import Disputes
+    from moovio_sdk.end_to_end_encryption import EndToEndEncryption
+    from moovio_sdk.enriched_address import EnrichedAddress
+    from moovio_sdk.enriched_profile import EnrichedProfile
+    from moovio_sdk.fee_plans import FeePlans
+    from moovio_sdk.files import Files
+    from moovio_sdk.industries import Industries
+    from moovio_sdk.institutions import Institutions
+    from moovio_sdk.issuing_transactions import IssuingTransactions
+    from moovio_sdk.onboarding import Onboarding
+    from moovio_sdk.payment_links import PaymentLinks
+    from moovio_sdk.payment_methods import PaymentMethods
+    from moovio_sdk.ping import Ping
+    from moovio_sdk.receipts import Receipts
+    from moovio_sdk.representatives import Representatives
+    from moovio_sdk.scheduling import Scheduling
+    from moovio_sdk.sweeps import Sweeps
+    from moovio_sdk.terminal_applications import TerminalApplications
+    from moovio_sdk.transfers import Transfers
+    from moovio_sdk.underwriting import Underwriting
+    from moovio_sdk.wallet_transactions import WalletTransactions
+    from moovio_sdk.wallets import Wallets
 
 
 class Moov(BaseSDK):
@@ -54,39 +57,86 @@ class Moov(BaseSDK):
     works at a high level, read our [concepts](https://docs.moov.io/guides/get-started/glossary/) guide.
     """
 
-    accounts: Accounts
-    adjustments: Adjustments
-    apple_pay: ApplePay
-    bank_accounts: BankAccounts
-    branding: Branding
-    capabilities: Capabilities
-    cards: Cards
-    disputes: Disputes
-    fee_plans: FeePlans
-    files: Files
-    payment_links: PaymentLinks
-    payment_methods: PaymentMethods
-    representatives: Representatives
-    scheduling: Scheduling
-    sweeps: Sweeps
-    account_terminal_applications: AccountTerminalApplications
-    transfers: Transfers
-    underwriting: Underwriting
-    wallets: Wallets
-    wallet_transactions: WalletTransactions
-    avatars: Avatars
-    end_to_end_encryption: EndToEndEncryption
-    enriched_address: EnrichedAddress
-    enriched_profile: EnrichedProfile
-    industries: Industries
-    institutions: Institutions
-    issuing_transactions: IssuingTransactions
-    card_issuing: CardIssuing
-    authentication: Authentication
-    onboarding: Onboarding
-    ping: Ping
-    receipts: Receipts
-    terminal_applications: TerminalApplications
+    accounts: "Accounts"
+    adjustments: "Adjustments"
+    apple_pay: "ApplePay"
+    bank_accounts: "BankAccounts"
+    branding: "Branding"
+    capabilities: "Capabilities"
+    cards: "Cards"
+    disputes: "Disputes"
+    fee_plans: "FeePlans"
+    files: "Files"
+    payment_links: "PaymentLinks"
+    payment_methods: "PaymentMethods"
+    representatives: "Representatives"
+    scheduling: "Scheduling"
+    sweeps: "Sweeps"
+    account_terminal_applications: "AccountTerminalApplications"
+    transfers: "Transfers"
+    underwriting: "Underwriting"
+    wallets: "Wallets"
+    wallet_transactions: "WalletTransactions"
+    avatars: "Avatars"
+    end_to_end_encryption: "EndToEndEncryption"
+    enriched_address: "EnrichedAddress"
+    enriched_profile: "EnrichedProfile"
+    industries: "Industries"
+    institutions: "Institutions"
+    issuing_transactions: "IssuingTransactions"
+    card_issuing: "CardIssuing"
+    authentication: "Authentication"
+    onboarding: "Onboarding"
+    ping: "Ping"
+    receipts: "Receipts"
+    terminal_applications: "TerminalApplications"
+    _sub_sdk_map = {
+        "accounts": ("moovio_sdk.accounts", "Accounts"),
+        "adjustments": ("moovio_sdk.adjustments", "Adjustments"),
+        "apple_pay": ("moovio_sdk.apple_pay", "ApplePay"),
+        "bank_accounts": ("moovio_sdk.bank_accounts", "BankAccounts"),
+        "branding": ("moovio_sdk.branding", "Branding"),
+        "capabilities": ("moovio_sdk.capabilities", "Capabilities"),
+        "cards": ("moovio_sdk.cards", "Cards"),
+        "disputes": ("moovio_sdk.disputes", "Disputes"),
+        "fee_plans": ("moovio_sdk.fee_plans", "FeePlans"),
+        "files": ("moovio_sdk.files", "Files"),
+        "payment_links": ("moovio_sdk.payment_links", "PaymentLinks"),
+        "payment_methods": ("moovio_sdk.payment_methods", "PaymentMethods"),
+        "representatives": ("moovio_sdk.representatives", "Representatives"),
+        "scheduling": ("moovio_sdk.scheduling", "Scheduling"),
+        "sweeps": ("moovio_sdk.sweeps", "Sweeps"),
+        "account_terminal_applications": (
+            "moovio_sdk.account_terminal_applications",
+            "AccountTerminalApplications",
+        ),
+        "transfers": ("moovio_sdk.transfers", "Transfers"),
+        "underwriting": ("moovio_sdk.underwriting", "Underwriting"),
+        "wallets": ("moovio_sdk.wallets", "Wallets"),
+        "wallet_transactions": ("moovio_sdk.wallet_transactions", "WalletTransactions"),
+        "avatars": ("moovio_sdk.avatars", "Avatars"),
+        "end_to_end_encryption": (
+            "moovio_sdk.end_to_end_encryption",
+            "EndToEndEncryption",
+        ),
+        "enriched_address": ("moovio_sdk.enriched_address", "EnrichedAddress"),
+        "enriched_profile": ("moovio_sdk.enriched_profile", "EnrichedProfile"),
+        "industries": ("moovio_sdk.industries", "Industries"),
+        "institutions": ("moovio_sdk.institutions", "Institutions"),
+        "issuing_transactions": (
+            "moovio_sdk.issuing_transactions",
+            "IssuingTransactions",
+        ),
+        "card_issuing": ("moovio_sdk.card_issuing", "CardIssuing"),
+        "authentication": ("moovio_sdk.authentication", "Authentication"),
+        "onboarding": ("moovio_sdk.onboarding", "Onboarding"),
+        "ping": ("moovio_sdk.ping", "Ping"),
+        "receipts": ("moovio_sdk.receipts", "Receipts"),
+        "terminal_applications": (
+            "moovio_sdk.terminal_applications",
+            "TerminalApplications",
+        ),
+    }
 
     def __init__(
         self,
@@ -185,44 +235,32 @@ class Moov(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
-        self._init_sdks()
+    def __getattr__(self, name: str):
+        if name in self._sub_sdk_map:
+            module_path, class_name = self._sub_sdk_map[name]
+            try:
+                module = importlib.import_module(module_path)
+                klass = getattr(module, class_name)
+                instance = klass(self.sdk_configuration)
+                setattr(self, name, instance)
+                return instance
+            except ImportError as e:
+                raise AttributeError(
+                    f"Failed to import module {module_path} for attribute {name}: {e}"
+                ) from e
+            except AttributeError as e:
+                raise AttributeError(
+                    f"Failed to find class {class_name} in module {module_path} for attribute {name}: {e}"
+                ) from e
 
-    def _init_sdks(self):
-        self.accounts = Accounts(self.sdk_configuration)
-        self.adjustments = Adjustments(self.sdk_configuration)
-        self.apple_pay = ApplePay(self.sdk_configuration)
-        self.bank_accounts = BankAccounts(self.sdk_configuration)
-        self.branding = Branding(self.sdk_configuration)
-        self.capabilities = Capabilities(self.sdk_configuration)
-        self.cards = Cards(self.sdk_configuration)
-        self.disputes = Disputes(self.sdk_configuration)
-        self.fee_plans = FeePlans(self.sdk_configuration)
-        self.files = Files(self.sdk_configuration)
-        self.payment_links = PaymentLinks(self.sdk_configuration)
-        self.payment_methods = PaymentMethods(self.sdk_configuration)
-        self.representatives = Representatives(self.sdk_configuration)
-        self.scheduling = Scheduling(self.sdk_configuration)
-        self.sweeps = Sweeps(self.sdk_configuration)
-        self.account_terminal_applications = AccountTerminalApplications(
-            self.sdk_configuration
+        raise AttributeError(
+            f"'{type(self).__name__}' object has no attribute '{name}'"
         )
-        self.transfers = Transfers(self.sdk_configuration)
-        self.underwriting = Underwriting(self.sdk_configuration)
-        self.wallets = Wallets(self.sdk_configuration)
-        self.wallet_transactions = WalletTransactions(self.sdk_configuration)
-        self.avatars = Avatars(self.sdk_configuration)
-        self.end_to_end_encryption = EndToEndEncryption(self.sdk_configuration)
-        self.enriched_address = EnrichedAddress(self.sdk_configuration)
-        self.enriched_profile = EnrichedProfile(self.sdk_configuration)
-        self.industries = Industries(self.sdk_configuration)
-        self.institutions = Institutions(self.sdk_configuration)
-        self.issuing_transactions = IssuingTransactions(self.sdk_configuration)
-        self.card_issuing = CardIssuing(self.sdk_configuration)
-        self.authentication = Authentication(self.sdk_configuration)
-        self.onboarding = Onboarding(self.sdk_configuration)
-        self.ping = Ping(self.sdk_configuration)
-        self.receipts = Receipts(self.sdk_configuration)
-        self.terminal_applications = TerminalApplications(self.sdk_configuration)
+
+    def __dir__(self):
+        default_attrs = list(super().__dir__())
+        lazy_attrs = list(self._sub_sdk_map.keys())
+        return sorted(list(set(default_attrs + lazy_attrs)))
 
     def __enter__(self):
         return self

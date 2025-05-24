@@ -37,7 +37,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_methods.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+    res = moov.payment_methods.list(account_id="f5503781-dfe4-4bcd-9487-5b5fe2b4d53b")
 
     # Handle response
     print(res)
@@ -84,7 +84,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_methods.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", payment_method_id="e50f7622-81da-484b-9c66-1c8a99c6b71b")
+    res = moov.payment_methods.get(account_id="56878537-30b0-48ee-9c54-07ab3a8b243d", payment_method_id="aa740bf3-4c5f-459b-9370-4f7d4bea382b")
 
     # Handle response
     print(res)

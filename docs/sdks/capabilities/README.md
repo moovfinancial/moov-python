@@ -47,7 +47,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.capabilities.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+    res = moov.capabilities.list(account_id="1a50ab1c-1714-49e7-a016-cea17b33511a")
 
     # Handle response
     print(res)
@@ -92,7 +92,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.capabilities.request(account_id="32613610-de25-446e-8662-ec2709ffea9d", capabilities=[
+    res = moov.capabilities.request(account_id="0de140d5-cc78-4eeb-ab00-1f51aaf6c814", capabilities=[
         components.CapabilityID.COLLECT_FUNDS,
     ])
 
@@ -142,7 +142,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.capabilities.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", capability_id=components.CapabilityID.PRODUCTION_APP)
+    res = moov.capabilities.get(account_id="c1697ea6-c984-4ba1-9b81-93e5e18660af", capability_id=components.CapabilityID.SEND_FUNDS)
 
     # Handle response
     print(res)
@@ -188,7 +188,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.capabilities.disable(account_id="cd7cd1ce-90cc-444b-ac3e-badb79be277f", capability_id=components.CapabilityID.TRANSFERS)
+    res = moov.capabilities.disable(account_id="2be80c4e-d409-49ea-8a8a-76dfa4006d69", capability_id=components.CapabilityID.TRANSFERS)
 
     # Handle response
     print(res)

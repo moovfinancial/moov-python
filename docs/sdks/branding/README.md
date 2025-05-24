@@ -43,7 +43,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.branding.create(account_id="7a621cf0-21cd-49cf-8540-3315211a509a", colors=components.BrandColors(
+    res = moov.branding.create(account_id="0a6ae927-b52b-4ef4-86d0-288f27479817", colors=components.BrandColors(
         dark=components.BrandColor(
             accent="#111111",
         ),
@@ -98,7 +98,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.branding.upsert(account_id="87673c22-1b80-4b69-b5bb-e92af8dcce02", colors=components.BrandColors(
+    res = moov.branding.upsert(account_id="0cd408b1-a57d-477b-825b-12331c2ed00a", colors=components.BrandColors(
         dark=components.BrandColor(
             accent="#111111",
         ),
@@ -153,7 +153,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.branding.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc")
+    res = moov.branding.get(account_id="8a4ec43e-d45f-481d-a291-683cb221e3cc")
 
     # Handle response
     print(res)
@@ -198,7 +198,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.branding.update(account_id="d95fa7f0-e743-42ce-b47c-b60cc78135dd")
+    res = moov.branding.update(account_id="0c0dc4a5-ecd9-4223-810a-a71632980156")
 
     # Handle response
     print(res)

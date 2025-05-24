@@ -35,12 +35,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.receipts.create(request=[
-        {
-            "kind": components.ReceiptKind.SALE_CUSTOMER_V1,
-            "email": "jordan.lee@classbooker.dev",
-        },
-    ])
+    res = moov.receipts.create(request=[])
 
     # Handle response
     print(res)
@@ -86,7 +81,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.receipts.list(id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+    res = moov.receipts.list(id="8508cf6c-9ce4-4e35-84c1-4b77320a620b")
 
     # Handle response
     print(res)

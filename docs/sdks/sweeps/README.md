@@ -51,7 +51,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.create_config(account_id="2c0dfb65-d7ef-4c8e-8c74-e6c7773550bc", wallet_id="01234567-89ab-cdef-0123-456789abcdef", status=components.SweepConfigStatus.ENABLED, push_payment_method_id="01234567-89ab-cdef-0123-456789abcdef", pull_payment_method_id="01234567-89ab-cdef-0123-456789abcdef")
+    res = moov.sweeps.create_config(account_id="cd0ec32e-bd84-418c-90d3-fffbc5465f8b", wallet_id="01234567-89ab-cdef-0123-456789abcdef", status=components.SweepConfigStatus.ENABLED, push_payment_method_id="01234567-89ab-cdef-0123-456789abcdef", pull_payment_method_id="01234567-89ab-cdef-0123-456789abcdef")
 
     # Handle response
     print(res)
@@ -104,7 +104,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.list_configs(account_id="5d9d568d-fb5d-478b-a301-d495422f1c35")
+    res = moov.sweeps.list_configs(account_id="ed67e4c8-03d3-4d88-ba38-fcd87de45a92")
 
     # Handle response
     print(res)
@@ -149,7 +149,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.get_config(account_id="12f68c4e-1e8d-483b-9f62-b5d6458d538c", sweep_config_id="ce92235d-dd84-4e14-9895-3b98a0003522")
+    res = moov.sweeps.get_config(account_id="ae1c2e76-3195-4fc8-b922-b7af6dcf1aad", sweep_config_id="bfddff28-5291-4d9b-a0f8-22a0895e8486")
 
     # Handle response
     print(res)
@@ -195,7 +195,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.update_config(account_id="7573cb48-6325-4d3d-841d-81108fcfe6f2", sweep_config_id="49e8f3b1-259f-458e-9367-adb3b938f8c8", status=components.Status.DISABLED)
+    res = moov.sweeps.update_config(account_id="c16d0264-3e93-4d13-b8d8-6e8e98122631", sweep_config_id="f7943244-882b-4a3a-837a-a58418358399", status=components.Status.DISABLED)
 
     # Handle response
     print(res)
@@ -248,7 +248,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6", wallet_id="21e27667-18d6-4d46-812e-0aee1b9ddf12", skip=60, count=20)
+    res = moov.sweeps.list(account_id="a227b50c-035d-4b7f-932c-a4b7e02aaf5c", wallet_id="d01e5b34-b207-4a5c-b249-6e049be6a841", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -298,7 +298,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", wallet_id="e50f7622-81da-484b-9c66-1c8a99c6b71b", sweep_id="ecd62b8f-7112-4aaf-90ab-4e43b4cca371")
+    res = moov.sweeps.get(account_id="481bc941-34a2-4c2a-a4f8-feaa9a25d630", wallet_id="e63a4638-ad67-44fb-9b59-ed7311023602", sweep_id="c88c9731-06c2-4b4a-a7d2-34c8b936d9ae")
 
     # Handle response
     print(res)

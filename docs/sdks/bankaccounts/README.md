@@ -119,9 +119,9 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.link(account_id="0ffc839a-9198-4ea1-98a2-6cccee057439", link_bank_account={
-        "plaid": {
-            "token": "<value>",
+    res = moov.bank_accounts.link(account_id="b326319d-6118-4921-8d82-d5810d562eef", link_bank_account={
+        "plaid_link": {
+            "public_token": "<value>",
         },
     })
 
@@ -174,7 +174,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.list(account_id="c8a232aa-0b11-4b8a-b005-71e9e705d0e6")
+    res = moov.bank_accounts.list(account_id="85539920-22dd-4900-a07e-7a88268456d9")
 
     # Handle response
     print(res)
@@ -221,7 +221,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.get(account_id="b888f774-3e7c-4135-a18c-6b985523c4bc", bank_account_id="e50f7622-81da-484b-9c66-1c8a99c6b71b")
+    res = moov.bank_accounts.get(account_id="32ac681d-3244-4673-8541-362e40b7677a", bank_account_id="dd241177-be83-4aad-80f8-31aded5f3616")
 
     # Handle response
     print(res)
@@ -267,7 +267,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.disable(account_id="cd7cd1ce-90cc-444b-ac3e-badb79be277f", bank_account_id="0f131553-3a08-4820-a7ac-ba935765809c")
+    res = moov.bank_accounts.disable(account_id="6b6ade5f-0b20-493c-b483-cf1f670a1055", bank_account_id="b9295fc2-f5fd-4767-894f-5ca45abfd3fc")
 
     # Handle response
     print(res)
@@ -325,7 +325,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.initiate_micro_deposits(account_id="ff04d5ff-8ad2-4d87-baf2-0c9dcb6d3e2a", bank_account_id="10ed8688-d7e2-4a70-827d-af795759945d")
+    res = moov.bank_accounts.initiate_micro_deposits(account_id="ced90412-ebb4-43d4-a171-0a929ed5fb37", bank_account_id="f2b630cc-a8ae-44be-970b-7bed47b2d952")
 
     # Handle response
     print(res)
@@ -372,7 +372,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.complete_micro_deposits(account_id="ebfc273d-980b-4a92-8dd9-bf9996f2a16e", bank_account_id="3e6af61e-a5cb-4281-b0e6-e7e3d39edf65", amounts=[
+    res = moov.bank_accounts.complete_micro_deposits(account_id="af0efd2b-a1fa-40fd-998b-2007b8df0766", bank_account_id="b468e916-699b-4590-becf-ede76d1413cb", amounts=[
         18,
         21,
     ])
@@ -433,7 +433,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.get_verification(account_id="eb35bc20-d74d-4acc-b152-c4db94d9355b", bank_account_id="2572c1db-032d-464b-b55d-1fd7052232be")
+    res = moov.bank_accounts.get_verification(account_id="c87bc077-580a-4c2a-b312-2afbd21fc1cd", bank_account_id="aaceed83-ef83-4d48-8136-096f834280cc")
 
     # Handle response
     print(res)
@@ -494,7 +494,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.initiate_verification(account_id="96925880-1f29-484d-9ce4-a55f78c3d5fc", bank_account_id="c9cadc5c-d322-467d-bc62-d133abcc5ec1")
+    res = moov.bank_accounts.initiate_verification(account_id="9d6d433b-c13a-48d7-849a-1897fa71375b", bank_account_id="bd092468-393d-4ee0-85a8-48238fee70d2")
 
     # Handle response
     print(res)
@@ -549,7 +549,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.bank_accounts.complete_verification(account_id="3b83f70f-82ce-4e0f-8a75-e4717ad684e4", bank_account_id="c4c7442d-4aa1-4dfe-9ab1-5206164dce64", code="MV1234")
+    res = moov.bank_accounts.complete_verification(account_id="2116e60b-0ea7-447e-a7af-5d647f92f06a", bank_account_id="96606c15-fd37-49fe-9af2-4e42dcf44fe3", code="MV1234")
 
     # Handle response
     print(res)

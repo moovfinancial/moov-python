@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 from .sweepstatus import SweepStatus
+from .sweepsubtotal import SweepSubtotal, SweepSubtotalTypedDict
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -31,6 +32,8 @@ class SweepTypedDict(TypedDict):
     r"""Amount that is transferred."""
     statement_descriptor: NotRequired[str]
     r"""The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor."""
+    subtotals: NotRequired[List[SweepSubtotalTypedDict]]
+    r"""The subtotal of each transaction type contributing to the sweep's accrued amount."""
 
 
 class Sweep(BaseModel):
@@ -78,3 +81,6 @@ class Sweep(BaseModel):
         Optional[str], pydantic.Field(alias="statementDescriptor")
     ] = None
     r"""The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor."""
+
+    subtotals: Optional[List[SweepSubtotal]] = None
+    r"""The subtotal of each transaction type contributing to the sweep's accrued amount."""
