@@ -95,6 +95,7 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="linkBankAccount",
                 oauth2_scopes=[],
@@ -248,6 +249,7 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="linkBankAccount",
                 oauth2_scopes=[],
@@ -381,6 +383,7 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listBankAccounts",
                 oauth2_scopes=[],
@@ -495,6 +498,7 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listBankAccounts",
                 oauth2_scopes=[],
@@ -612,6 +616,7 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getBankAccount",
                 oauth2_scopes=[],
@@ -727,6 +732,7 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getBankAccount",
                 oauth2_scopes=[],
@@ -840,6 +846,7 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="disableBankAccount",
                 oauth2_scopes=[],
@@ -967,6 +974,7 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="disableBankAccount",
                 oauth2_scopes=[],
@@ -1105,6 +1113,7 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="initiateMicroDeposits",
                 oauth2_scopes=[],
@@ -1243,6 +1252,7 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="initiateMicroDeposits",
                 oauth2_scopes=[],
@@ -1382,6 +1392,7 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="completeMicroDeposits",
                 oauth2_scopes=[],
@@ -1530,6 +1541,7 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="completeMicroDeposits",
                 oauth2_scopes=[],
@@ -1675,6 +1687,7 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getBankAccountVerification",
                 oauth2_scopes=[],
@@ -1799,6 +1812,7 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getBankAccountVerification",
                 oauth2_scopes=[],
@@ -1932,6 +1946,7 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="initiateBankAccountVerification",
                 oauth2_scopes=[],
@@ -2080,6 +2095,7 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="initiateBankAccountVerification",
                 oauth2_scopes=[],
@@ -2229,6 +2245,7 @@ class BankAccounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="completeBankAccountVerification",
                 oauth2_scopes=[],
@@ -2379,6 +2396,7 @@ class BankAccounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="completeBankAccountVerification",
                 oauth2_scopes=[],

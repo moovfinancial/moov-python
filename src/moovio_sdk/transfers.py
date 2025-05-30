@@ -125,6 +125,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createTransfer",
                 oauth2_scopes=[],
@@ -318,6 +319,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createTransfer",
                 oauth2_scopes=[],
@@ -497,6 +499,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listTransfers",
                 oauth2_scopes=[],
@@ -644,6 +647,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listTransfers",
                 oauth2_scopes=[],
@@ -760,6 +764,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTransfer",
                 oauth2_scopes=[],
@@ -876,6 +881,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTransfer",
                 oauth2_scopes=[],
@@ -999,6 +1005,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateTransfer",
                 oauth2_scopes=[],
@@ -1122,6 +1129,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateTransfer",
                 oauth2_scopes=[],
@@ -1235,6 +1243,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createCancellation",
                 oauth2_scopes=[],
@@ -1362,6 +1371,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createCancellation",
                 oauth2_scopes=[],
@@ -1492,6 +1502,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getCancellation",
                 oauth2_scopes=[],
@@ -1608,6 +1619,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getCancellation",
                 oauth2_scopes=[],
@@ -1742,6 +1754,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="initiateRefund",
                 oauth2_scopes=[],
@@ -1909,6 +1922,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="initiateRefund",
                 oauth2_scopes=[],
@@ -2055,6 +2069,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listRefunds",
                 oauth2_scopes=[],
@@ -2170,6 +2185,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listRefunds",
                 oauth2_scopes=[],
@@ -2288,6 +2304,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getRefund",
                 oauth2_scopes=[],
@@ -2406,6 +2423,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getRefund",
                 oauth2_scopes=[],
@@ -2538,6 +2556,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createReversal",
                 oauth2_scopes=[],
@@ -2689,6 +2708,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createReversal",
                 oauth2_scopes=[],
@@ -2842,6 +2862,7 @@ class Transfers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createTransferOptions",
                 oauth2_scopes=[],
@@ -2993,6 +3014,7 @@ class Transfers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createTransferOptions",
                 oauth2_scopes=[],

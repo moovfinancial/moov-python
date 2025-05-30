@@ -124,6 +124,7 @@ class Accounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createAccount",
                 oauth2_scopes=[],
@@ -306,6 +307,7 @@ class Accounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createAccount",
                 oauth2_scopes=[],
@@ -468,6 +470,7 @@ class Accounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listAccounts",
                 oauth2_scopes=[],
@@ -609,6 +612,7 @@ class Accounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listAccounts",
                 oauth2_scopes=[],
@@ -719,6 +723,7 @@ class Accounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getAccount",
                 oauth2_scopes=[],
@@ -829,6 +834,7 @@ class Accounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getAccount",
                 oauth2_scopes=[],
@@ -996,6 +1002,7 @@ class Accounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateAccount",
                 oauth2_scopes=[],
@@ -1184,6 +1191,7 @@ class Accounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateAccount",
                 oauth2_scopes=[],
@@ -1317,6 +1325,7 @@ class Accounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="disconnectAccount",
                 oauth2_scopes=[],
@@ -1443,6 +1452,7 @@ class Accounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="disconnectAccount",
                 oauth2_scopes=[],
@@ -1567,6 +1577,7 @@ class Accounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getAccountCountries",
                 oauth2_scopes=[],
@@ -1677,6 +1688,7 @@ class Accounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getAccountCountries",
                 oauth2_scopes=[],
@@ -1801,6 +1813,7 @@ class Accounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="assignAccountCountries",
                 oauth2_scopes=[],
@@ -1946,6 +1959,7 @@ class Accounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="assignAccountCountries",
                 oauth2_scopes=[],
@@ -2077,6 +2091,7 @@ class Accounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantProcessingAgreement",
                 oauth2_scopes=[],
@@ -2187,6 +2202,7 @@ class Accounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantProcessingAgreement",
                 oauth2_scopes=[],
@@ -2301,6 +2317,7 @@ class Accounts(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTermsOfServiceToken",
                 oauth2_scopes=[],
@@ -2417,6 +2434,7 @@ class Accounts(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTermsOfServiceToken",
                 oauth2_scopes=[],

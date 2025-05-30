@@ -100,6 +100,7 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createSweepConfig",
                 oauth2_scopes=[],
@@ -258,6 +259,7 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createSweepConfig",
                 oauth2_scopes=[],
@@ -389,6 +391,7 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listSweepConfigs",
                 oauth2_scopes=[],
@@ -501,6 +504,7 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listSweepConfigs",
                 oauth2_scopes=[],
@@ -616,6 +620,7 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getSweepConfig",
                 oauth2_scopes=[],
@@ -729,6 +734,7 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getSweepConfig",
                 oauth2_scopes=[],
@@ -887,6 +893,7 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateSweepConfig",
                 oauth2_scopes=[],
@@ -1066,6 +1073,7 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateSweepConfig",
                 oauth2_scopes=[],
@@ -1212,6 +1220,7 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listSweeps",
                 oauth2_scopes=[],
@@ -1337,6 +1346,7 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listSweeps",
                 oauth2_scopes=[],
@@ -1453,6 +1463,7 @@ class Sweeps(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getSweep",
                 oauth2_scopes=[],
@@ -1569,6 +1580,7 @@ class Sweeps(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getSweep",
                 oauth2_scopes=[],

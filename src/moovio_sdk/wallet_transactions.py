@@ -115,6 +115,7 @@ class WalletTransactions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listWalletTransactions",
                 oauth2_scopes=[],
@@ -268,6 +269,7 @@ class WalletTransactions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listWalletTransactions",
                 oauth2_scopes=[],
@@ -388,6 +390,7 @@ class WalletTransactions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getWalletTransaction",
                 oauth2_scopes=[],
@@ -508,6 +511,7 @@ class WalletTransactions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getWalletTransaction",
                 oauth2_scopes=[],

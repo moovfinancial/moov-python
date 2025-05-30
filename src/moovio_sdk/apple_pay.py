@@ -91,6 +91,7 @@ class ApplePay(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="registerApplePayMerchantDomains",
                 oauth2_scopes=[],
@@ -236,6 +237,7 @@ class ApplePay(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="registerApplePayMerchantDomains",
                 oauth2_scopes=[],
@@ -381,6 +383,7 @@ class ApplePay(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateApplePayMerchantDomains",
                 oauth2_scopes=[],
@@ -526,6 +529,7 @@ class ApplePay(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateApplePayMerchantDomains",
                 oauth2_scopes=[],
@@ -655,6 +659,7 @@ class ApplePay(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getApplePayMerchantDomains",
                 oauth2_scopes=[],
@@ -769,6 +774,7 @@ class ApplePay(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getApplePayMerchantDomains",
                 oauth2_scopes=[],
@@ -899,6 +905,7 @@ class ApplePay(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createApplePaySession",
                 oauth2_scopes=[],
@@ -1043,6 +1050,7 @@ class ApplePay(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createApplePaySession",
                 oauth2_scopes=[],
@@ -1191,6 +1199,7 @@ class ApplePay(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="linkApplePayToken",
                 oauth2_scopes=[],
@@ -1346,6 +1355,7 @@ class ApplePay(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="linkApplePayToken",
                 oauth2_scopes=[],

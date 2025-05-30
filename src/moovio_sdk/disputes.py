@@ -119,6 +119,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listDisputes",
                 oauth2_scopes=[],
@@ -281,6 +282,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listDisputes",
                 oauth2_scopes=[],
@@ -410,6 +412,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getDispute",
                 oauth2_scopes=[],
@@ -525,6 +528,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getDispute",
                 oauth2_scopes=[],
@@ -640,6 +644,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="acceptDispute",
                 oauth2_scopes=[],
@@ -770,6 +775,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="acceptDispute",
                 oauth2_scopes=[],
@@ -900,6 +906,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listDisputeEvidence",
                 oauth2_scopes=[],
@@ -1017,6 +1024,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listDisputeEvidence",
                 oauth2_scopes=[],
@@ -1149,6 +1157,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceFile",
                 oauth2_scopes=[],
@@ -1302,6 +1311,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceFile",
                 oauth2_scopes=[],
@@ -1455,6 +1465,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceText",
                 oauth2_scopes=[],
@@ -1602,6 +1613,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="uploadDisputeEvidenceText",
                 oauth2_scopes=[],
@@ -1737,6 +1749,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="submitDisputeEvidence",
                 oauth2_scopes=[],
@@ -1870,6 +1883,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="submitDisputeEvidence",
                 oauth2_scopes=[],
@@ -2003,6 +2017,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getDisputeEvidence",
                 oauth2_scopes=[],
@@ -2123,6 +2138,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getDisputeEvidence",
                 oauth2_scopes=[],
@@ -2254,6 +2270,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateDisputeEvidence",
                 oauth2_scopes=[],
@@ -2399,6 +2416,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateDisputeEvidence",
                 oauth2_scopes=[],
@@ -2533,6 +2551,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="deleteDisputeEvidenceFile",
                 oauth2_scopes=[],
@@ -2664,6 +2683,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="deleteDisputeEvidenceFile",
                 oauth2_scopes=[],
@@ -2799,6 +2819,7 @@ class Disputes(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getDisputeEvidenceData",
                 oauth2_scopes=[],
@@ -2929,6 +2950,7 @@ class Disputes(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getDisputeEvidenceData",
                 oauth2_scopes=[],

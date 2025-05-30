@@ -85,6 +85,7 @@ class Branding(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createBrand",
                 oauth2_scopes=[],
@@ -228,6 +229,7 @@ class Branding(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createBrand",
                 oauth2_scopes=[],
@@ -371,6 +373,7 @@ class Branding(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="upsertBrand",
                 oauth2_scopes=[],
@@ -514,6 +517,7 @@ class Branding(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="upsertBrand",
                 oauth2_scopes=[],
@@ -645,6 +649,7 @@ class Branding(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getBrand",
                 oauth2_scopes=[],
@@ -755,6 +760,7 @@ class Branding(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getBrand",
                 oauth2_scopes=[],
@@ -877,6 +883,7 @@ class Branding(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateBrand",
                 oauth2_scopes=[],
@@ -1020,6 +1027,7 @@ class Branding(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateBrand",
                 oauth2_scopes=[],
