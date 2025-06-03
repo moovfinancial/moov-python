@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: e6fb0c93d5cb170dbe2b093ce468930f
+  docChecksum: 9c49204b798bde23002e5729d0227d21
   docVersion: latest
-  speakeasyVersion: 1.554.1
-  generationVersion: 2.616.1
-  releaseVersion: 0.11.0
-  configChecksum: cb3225406e02ee71900080e0df567664
+  speakeasyVersion: 1.555.0
+  generationVersion: 2.618.0
+  releaseVersion: 0.11.1
+  configChecksum: bc53c26357a96bb8411262fab5e1776a
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -220,7 +220,6 @@ generatedFiles:
   - docs/models/components/enrichedbusinessprofile.md
   - docs/models/components/enrichedbusinessresponse.md
   - docs/models/components/enrichedindustries.md
-  - docs/models/components/enrichedindustry.md
   - docs/models/components/enrichedindustrycodes.md
   - docs/models/components/entrymode.md
   - docs/models/components/error.md
@@ -262,6 +261,7 @@ generatedFiles:
   - docs/models/components/individualnameupdate.md
   - docs/models/components/individualprofile.md
   - docs/models/components/industrycodes.md
+  - docs/models/components/industrytaxonomy.md
   - docs/models/components/issuedcard.md
   - docs/models/components/issuedcardauthorization.md
   - docs/models/components/issuedcardauthorizationevent.md
@@ -1162,7 +1162,6 @@ generatedFiles:
   - src/moovio_sdk/models/components/enrichedbusinessprofile.py
   - src/moovio_sdk/models/components/enrichedbusinessresponse.py
   - src/moovio_sdk/models/components/enrichedindustries.py
-  - src/moovio_sdk/models/components/enrichedindustry.py
   - src/moovio_sdk/models/components/enrichedindustrycodes.py
   - src/moovio_sdk/models/components/entrymode.py
   - src/moovio_sdk/models/components/evidencetextresponse.py
@@ -1199,6 +1198,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/individualnameupdate.py
   - src/moovio_sdk/models/components/individualprofile.py
   - src/moovio_sdk/models/components/industrycodes.py
+  - src/moovio_sdk/models/components/industrytaxonomy.py
   - src/moovio_sdk/models/components/issuedcard.py
   - src/moovio_sdk/models/components/issuedcardauthorization.py
   - src/moovio_sdk/models/components/issuedcardauthorizationevent.py

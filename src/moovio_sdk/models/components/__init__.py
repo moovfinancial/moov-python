@@ -364,7 +364,6 @@ if TYPE_CHECKING:
         EnrichedBusinessResponseTypedDict,
     )
     from .enrichedindustries import EnrichedIndustries, EnrichedIndustriesTypedDict
-    from .enrichedindustry import EnrichedIndustry, EnrichedIndustryTypedDict
     from .enrichedindustrycodes import (
         EnrichedIndustryCodes,
         EnrichedIndustryCodesTypedDict,
@@ -450,6 +449,7 @@ if TYPE_CHECKING:
     )
     from .individualprofile import IndividualProfile, IndividualProfileTypedDict
     from .industrycodes import IndustryCodes, IndustryCodesTypedDict
+    from .industrytaxonomy import IndustryTaxonomy, IndustryTaxonomyTypedDict
     from .issuedcard import IssuedCard, IssuedCardTypedDict
     from .issuedcardauthorization import (
         IssuedCardAuthorization,
@@ -1281,10 +1281,8 @@ __all__ = [
     "EnrichedBusinessResponseTypedDict",
     "EnrichedIndustries",
     "EnrichedIndustriesTypedDict",
-    "EnrichedIndustry",
     "EnrichedIndustryCodes",
     "EnrichedIndustryCodesTypedDict",
-    "EnrichedIndustryTypedDict",
     "EntryMode",
     "Error",
     "ErrorTypedDict",
@@ -1357,6 +1355,8 @@ __all__ = [
     "IndividualProfileTypedDict",
     "IndustryCodes",
     "IndustryCodesTypedDict",
+    "IndustryTaxonomy",
+    "IndustryTaxonomyTypedDict",
     "IssuedCard",
     "IssuedCardAuthorization",
     "IssuedCardAuthorizationEvent",
@@ -2088,8 +2088,6 @@ _dynamic_imports: dict[str, str] = {
     "EnrichedBusinessResponseTypedDict": ".enrichedbusinessresponse",
     "EnrichedIndustries": ".enrichedindustries",
     "EnrichedIndustriesTypedDict": ".enrichedindustries",
-    "EnrichedIndustry": ".enrichedindustry",
-    "EnrichedIndustryTypedDict": ".enrichedindustry",
     "EnrichedIndustryCodes": ".enrichedindustrycodes",
     "EnrichedIndustryCodesTypedDict": ".enrichedindustrycodes",
     "EntryMode": ".entrymode",
@@ -2164,6 +2162,8 @@ _dynamic_imports: dict[str, str] = {
     "IndividualProfileTypedDict": ".individualprofile",
     "IndustryCodes": ".industrycodes",
     "IndustryCodesTypedDict": ".industrycodes",
+    "IndustryTaxonomy": ".industrytaxonomy",
+    "IndustryTaxonomyTypedDict": ".industrytaxonomy",
     "IssuedCard": ".issuedcard",
     "IssuedCardTypedDict": ".issuedcard",
     "IssuedCardAuthorization": ".issuedcardauthorization",
