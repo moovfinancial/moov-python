@@ -7,6 +7,7 @@ from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
+    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -64,6 +65,7 @@ from moovio_sdk.utils import parse_datetime
 async def main():
 
     async with Moov(
+        x_moov_version="v2024.01.00",
         security=components.Security(
             username="",
             password="",
@@ -77,10 +79,10 @@ async def main():
         ), metadata={
             "optional": "metadata",
         }, terms_of_service={
-            "accepted_date": parse_datetime("2024-08-23T23:57:42.538Z"),
+            "accepted_date": parse_datetime("2023-05-21T04:53:54.554Z"),
             "accepted_ip": "172.217.2.46",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
-            "accepted_domain": "https://flowery-marketplace.com",
+            "accepted_domain": "https://esteemed-velocity.net",
         }, customer_support={
             "phone": {
                 "number": "8185551212",

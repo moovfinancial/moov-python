@@ -1,0 +1,9 @@
+# SearchInstitutionsResponse
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `headers`                                                                                      | Dict[str, List[*str*]]                                                                         | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `result`                                                                                       | [components.InstitutionsSearchResponse](../../models/components/institutionssearchresponse.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |

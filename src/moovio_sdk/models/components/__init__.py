@@ -34,6 +34,7 @@ if TYPE_CHECKING:
         AchDebitFundPaymentMethodTypedDict,
     )
     from .achexception import ACHException, ACHExceptionTypedDict
+    from .achinstitution import ACHInstitution, ACHInstitutionTypedDict
     from .achlocation import AchLocation, AchLocationTypedDict
     from .achparticipant import (
         AchParticipant,
@@ -202,6 +203,7 @@ if TYPE_CHECKING:
         CompleteMicroDeposits,
         CompleteMicroDepositsTypedDict,
     )
+    from .contact import Contact, ContactTypedDict
     from .countrieserrors import CountriesErrors, CountriesErrorsTypedDict
     from .createaccount import (
         CreateAccount,
@@ -450,6 +452,10 @@ if TYPE_CHECKING:
     from .individualprofile import IndividualProfile, IndividualProfileTypedDict
     from .industrycodes import IndustryCodes, IndustryCodesTypedDict
     from .industrytaxonomy import IndustryTaxonomy, IndustryTaxonomyTypedDict
+    from .institutionssearchresponse import (
+        InstitutionsSearchResponse,
+        InstitutionsSearchResponseTypedDict,
+    )
     from .issuedcard import IssuedCard, IssuedCardTypedDict
     from .issuedcardauthorization import (
         IssuedCardAuthorization,
@@ -702,7 +708,9 @@ if TYPE_CHECKING:
         RtpCreditPaymentMethodTypedDict,
     )
     from .rtpfailurecode import RTPFailureCode
+    from .rtpinstitution import RTPInstitution, RTPInstitutionTypedDict
     from .rtprejectioncode import RTPRejectionCode
+    from .rtpservices import RTPServices, RTPServicesTypedDict
     from .rtptransactiondetails import (
         RTPTransactionDetails,
         RTPTransactionDetailsTypedDict,
@@ -966,10 +974,14 @@ if TYPE_CHECKING:
         WebhookWalletAvailableBalance,
         WebhookWalletAvailableBalanceTypedDict,
     )
+    from .wireinstitution import WireInstitution, WireInstitutionTypedDict
+    from .wireservices import WireServices, WireServicesTypedDict
 
 __all__ = [
     "ACHException",
     "ACHExceptionTypedDict",
+    "ACHInstitution",
+    "ACHInstitutionTypedDict",
     "ACHPaymentDetails",
     "ACHPaymentDetailsError",
     "ACHPaymentDetailsErrorTypedDict",
@@ -1161,6 +1173,8 @@ __all__ = [
     "CompleteMicroDepositsTypedDict",
     "CompletedMicroDeposits",
     "CompletedMicroDepositsTypedDict",
+    "Contact",
+    "ContactTypedDict",
     "CountriesErrors",
     "CountriesErrorsTypedDict",
     "CreateAccount",
@@ -1357,6 +1371,8 @@ __all__ = [
     "IndustryCodesTypedDict",
     "IndustryTaxonomy",
     "IndustryTaxonomyTypedDict",
+    "InstitutionsSearchResponse",
+    "InstitutionsSearchResponseTypedDict",
     "IssuedCard",
     "IssuedCardAuthorization",
     "IssuedCardAuthorizationEvent",
@@ -1534,7 +1550,11 @@ __all__ = [
     "QRCode",
     "QRCodeTypedDict",
     "RTPFailureCode",
+    "RTPInstitution",
+    "RTPInstitutionTypedDict",
     "RTPRejectionCode",
+    "RTPServices",
+    "RTPServicesTypedDict",
     "RTPTransactionDetails",
     "RTPTransactionDetailsTypedDict",
     "RTPTransactionStatus",
@@ -1776,6 +1796,10 @@ __all__ = [
     "WebhookTransferPaymentMethodDetailsTypedDict",
     "WebhookWalletAvailableBalance",
     "WebhookWalletAvailableBalanceTypedDict",
+    "WireInstitution",
+    "WireInstitutionTypedDict",
+    "WireServices",
+    "WireServicesTypedDict",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -1803,6 +1827,8 @@ _dynamic_imports: dict[str, str] = {
     "AchDebitFundPaymentMethodTypedDict": ".achdebitfundpaymentmethod",
     "ACHException": ".achexception",
     "ACHExceptionTypedDict": ".achexception",
+    "ACHInstitution": ".achinstitution",
+    "ACHInstitutionTypedDict": ".achinstitution",
     "AchLocation": ".achlocation",
     "AchLocationTypedDict": ".achlocation",
     "AchParticipant": ".achparticipant",
@@ -1966,6 +1992,8 @@ _dynamic_imports: dict[str, str] = {
     "CompletedMicroDepositsTypedDict": ".completedmicrodeposits",
     "CompleteMicroDeposits": ".completemicrodeposits",
     "CompleteMicroDepositsTypedDict": ".completemicrodeposits",
+    "Contact": ".contact",
+    "ContactTypedDict": ".contact",
     "CountriesErrors": ".countrieserrors",
     "CountriesErrorsTypedDict": ".countrieserrors",
     "CreateAccount": ".createaccount",
@@ -2164,6 +2192,8 @@ _dynamic_imports: dict[str, str] = {
     "IndustryCodesTypedDict": ".industrycodes",
     "IndustryTaxonomy": ".industrytaxonomy",
     "IndustryTaxonomyTypedDict": ".industrytaxonomy",
+    "InstitutionsSearchResponse": ".institutionssearchresponse",
+    "InstitutionsSearchResponseTypedDict": ".institutionssearchresponse",
     "IssuedCard": ".issuedcard",
     "IssuedCardTypedDict": ".issuedcard",
     "IssuedCardAuthorization": ".issuedcardauthorization",
@@ -2379,7 +2409,11 @@ _dynamic_imports: dict[str, str] = {
     "RtpCreditPaymentMethodPaymentMethodType": ".rtpcreditpaymentmethod",
     "RtpCreditPaymentMethodTypedDict": ".rtpcreditpaymentmethod",
     "RTPFailureCode": ".rtpfailurecode",
+    "RTPInstitution": ".rtpinstitution",
+    "RTPInstitutionTypedDict": ".rtpinstitution",
     "RTPRejectionCode": ".rtprejectioncode",
+    "RTPServices": ".rtpservices",
+    "RTPServicesTypedDict": ".rtpservices",
     "RTPTransactionDetails": ".rtptransactiondetails",
     "RTPTransactionDetailsTypedDict": ".rtptransactiondetails",
     "RTPTransactionStatus": ".rtptransactionstatus",
@@ -2587,6 +2621,10 @@ _dynamic_imports: dict[str, str] = {
     "WebhookTransferPaymentMethodDetailsTypedDict": ".webhooktransferpaymentmethoddetails",
     "WebhookWalletAvailableBalance": ".webhookwalletavailablebalance",
     "WebhookWalletAvailableBalanceTypedDict": ".webhookwalletavailablebalance",
+    "WireInstitution": ".wireinstitution",
+    "WireInstitutionTypedDict": ".wireinstitution",
+    "WireServices": ".wireservices",
+    "WireServicesTypedDict": ".wireservices",
 }
 
 

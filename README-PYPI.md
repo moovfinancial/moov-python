@@ -121,6 +121,7 @@ from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
+    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -178,6 +179,7 @@ from moovio_sdk.utils import parse_datetime
 async def main():
 
     async with Moov(
+        x_moov_version="v2024.01.00",
         security=components.Security(
             username="",
             password="",
@@ -191,10 +193,10 @@ async def main():
         ), metadata={
             "optional": "metadata",
         }, terms_of_service={
-            "accepted_date": parse_datetime("2024-08-23T23:57:42.538Z"),
+            "accepted_date": parse_datetime("2023-05-21T04:53:54.554Z"),
             "accepted_ip": "172.217.2.46",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
-            "accepted_domain": "https://flowery-marketplace.com",
+            "accepted_domain": "https://esteemed-velocity.net",
         }, customer_support={
             "phone": {
                 "number": "8185551212",
@@ -248,6 +250,7 @@ with Moov(
         username="",
         password="",
     ),
+    x_moov_version="v2024.01.00",
 ) as moov:
 
     res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
@@ -802,6 +805,14 @@ you'll need to specify the `/profile-enrichment.read` scope.
 
 ### [institutions](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/institutions/README.md)
 
+* [search_institutions](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/institutions/README.md#search_institutions) - Search for financial institutions by name or routing number.
+
+This endpoint returns metadata about each matched institution, including basic identifying details (such as name, routing number, and address) and information about which payment services they support (e.g., ACH, RTP, and Wire).
+
+This can be used to validate a financial institution before initiating payment activity, or to check which payment rails are available for a given routing number.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/institutions.read` scope.
 * [search](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/institutions/README.md#search) - Search for institutions by either their name or routing number.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -1156,6 +1167,7 @@ from moovio_sdk.models import components
 
 
 with Moov(
+    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1186,6 +1198,7 @@ from moovio_sdk.utils import BackoffStrategy, RetryConfig, parse_datetime
 
 
 with Moov(
+    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1241,6 +1254,7 @@ from moovio_sdk.utils import BackoffStrategy, RetryConfig, parse_datetime
 
 with Moov(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
+    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1318,6 +1332,7 @@ from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
+    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1389,6 +1404,7 @@ from moovio_sdk.utils import parse_datetime
 
 with Moov(
     server_url="https://api.moov.io",
+    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1529,6 +1545,7 @@ from moovio_sdk.models import components
 def main():
 
     with Moov(
+        x_moov_version="v2024.01.00",
         security=components.Security(
             username="",
             password="",
@@ -1541,6 +1558,7 @@ def main():
 async def amain():
 
     async with Moov(
+        x_moov_version="v2024.01.00",
         security=components.Security(
             username="",
             password="",
