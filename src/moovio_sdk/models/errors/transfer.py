@@ -101,6 +101,10 @@ class TransferData(BaseModel):
 
     occurrence_id: Annotated[Optional[str], pydantic.Field(alias="occurrenceID")] = None
 
+    payment_link_id: Annotated[Optional[str], pydantic.Field(alias="paymentLinkID")] = (
+        None
+    )
+
     sales_tax_amount: Annotated[
         Optional[components_amount.Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
