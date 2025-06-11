@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 91d8e74309c0f4481831f1402e482c97
+  docChecksum: 7ff28a795edc333e9c49366f5590d78c
   docVersion: latest
-  speakeasyVersion: 1.558.1
-  generationVersion: 2.623.4
-  releaseVersion: 0.11.3
-  configChecksum: 0f5c7875df794885d681851a9a700dab
+  speakeasyVersion: 1.559.0
+  generationVersion: 2.624.0
+  releaseVersion: 0.11.4
+  configChecksum: cd82d0cd81e5500caa687b4be28a22ef
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -494,12 +494,12 @@ generatedFiles:
   - docs/models/components/webhookdataterminalapplicationcreated.md
   - docs/models/components/webhookdataterminalapplicationupdated.md
   - docs/models/components/webhookdatatransfercreated.md
+  - docs/models/components/webhookdatatransferstatus.md
   - docs/models/components/webhookdatatransferupdated.md
   - docs/models/components/webhookdatawallettransactionupdated.md
   - docs/models/components/webhookevent.md
   - docs/models/components/webhookeventtype.md
   - docs/models/components/webhooktransferpaymentmethoddetails.md
-  - docs/models/components/webhookwalletavailablebalance.md
   - docs/models/components/wireinstitution.md
   - docs/models/components/wireservices.md
   - docs/models/errors/accountterminalapplicationerror.md
@@ -1413,12 +1413,12 @@ generatedFiles:
   - src/moovio_sdk/models/components/webhookdataterminalapplicationcreated.py
   - src/moovio_sdk/models/components/webhookdataterminalapplicationupdated.py
   - src/moovio_sdk/models/components/webhookdatatransfercreated.py
+  - src/moovio_sdk/models/components/webhookdatatransferstatus.py
   - src/moovio_sdk/models/components/webhookdatatransferupdated.py
   - src/moovio_sdk/models/components/webhookdatawallettransactionupdated.py
   - src/moovio_sdk/models/components/webhookevent.py
   - src/moovio_sdk/models/components/webhookeventtype.py
   - src/moovio_sdk/models/components/webhooktransferpaymentmethoddetails.py
-  - src/moovio_sdk/models/components/webhookwalletavailablebalance.py
   - src/moovio_sdk/models/components/wireinstitution.py
   - src/moovio_sdk/models/components/wireservices.py
   - src/moovio_sdk/models/errors/__init__.py

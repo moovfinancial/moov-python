@@ -64,8 +64,8 @@ class ListTransfersRequestTypedDict(TypedDict):
     r"""Optional ID to filter for transfers in the same group."""
     schedule_id: NotRequired[str]
     r"""Optional ID to filter for transfer occurrences belonging to the same schedule."""
-    payment_link_id: NotRequired[str]
-    r"""Optional ID to filter for transfers associated with the payment link."""
+    payment_link_code: NotRequired[str]
+    r"""Optional code to filter for transfers associated with the payment link."""
     refunded: NotRequired[bool]
     r"""Optional parameter to only return refunded transfers."""
     disputed: NotRequired[bool]
@@ -122,12 +122,12 @@ class ListTransfersRequest(BaseModel):
     ] = None
     r"""Optional ID to filter for transfer occurrences belonging to the same schedule."""
 
-    payment_link_id: Annotated[
+    payment_link_code: Annotated[
         Optional[str],
-        pydantic.Field(alias="paymentLinkID"),
+        pydantic.Field(alias="paymentLinkCode"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
-    r"""Optional ID to filter for transfers associated with the payment link."""
+    r"""Optional code to filter for transfers associated with the payment link."""
 
     refunded: Annotated[
         Optional[bool],

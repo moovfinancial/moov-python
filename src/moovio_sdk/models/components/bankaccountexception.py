@@ -5,13 +5,16 @@ from .achreturncode import ACHReturnCode
 from .rtprejectioncode import RTPRejectionCode
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class BankAccountExceptionTypedDict(TypedDict):
     r"""Reason for, and details related to, an `errored` or `verificationFailed` bank account status."""
 
-    ach_return_code: ACHReturnCode
+    description: str
+    r"""Details related to an `errored` or `verificationFailed` bank account status."""
+    ach_return_code: NotRequired[ACHReturnCode]
     r"""The return code of an ACH transaction that caused the bank account status to change.
 
     - R02: Account Closed
@@ -35,7 +38,7 @@ class BankAccountExceptionTypedDict(TypedDict):
     - R38: Stop Payment on Source Document (Adjustment Entry)
     - R39: Improper Source Document
     """
-    rtp_rejection_code: RTPRejectionCode
+    rtp_rejection_code: NotRequired[RTPRejectionCode]
     r"""The rejection code of an RTP transaction that caused the bank account status to change.
 
     - AC03: Account Invalid
@@ -46,14 +49,17 @@ class BankAccountExceptionTypedDict(TypedDict):
     - AG03: Transaction Type Not Supported
     - MD07: Customer Deceased
     """
-    description: str
-    r"""Details related to an `errored` or `verificationFailed` bank account status."""
 
 
 class BankAccountException(BaseModel):
     r"""Reason for, and details related to, an `errored` or `verificationFailed` bank account status."""
 
-    ach_return_code: Annotated[ACHReturnCode, pydantic.Field(alias="achReturnCode")]
+    description: str
+    r"""Details related to an `errored` or `verificationFailed` bank account status."""
+
+    ach_return_code: Annotated[
+        Optional[ACHReturnCode], pydantic.Field(alias="achReturnCode")
+    ] = None
     r"""The return code of an ACH transaction that caused the bank account status to change.
 
     - R02: Account Closed
@@ -79,8 +85,8 @@ class BankAccountException(BaseModel):
     """
 
     rtp_rejection_code: Annotated[
-        RTPRejectionCode, pydantic.Field(alias="rtpRejectionCode")
-    ]
+        Optional[RTPRejectionCode], pydantic.Field(alias="rtpRejectionCode")
+    ] = None
     r"""The rejection code of an RTP transaction that caused the bank account status to change.
 
     - AC03: Account Invalid
@@ -91,6 +97,3 @@ class BankAccountException(BaseModel):
     - AG03: Transaction Type Not Supported
     - MD07: Customer Deceased
     """
-
-    description: str
-    r"""Details related to an `errored` or `verificationFailed` bank account status."""

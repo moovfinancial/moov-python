@@ -7,6 +7,7 @@ from enum import Enum
 class WebhookEventType(str, Enum):
     r"""The type of event that occurred."""
 
+    WILDCARD_ = "*"
     ACCOUNT_CREATED = "account.created"
     ACCOUNT_UPDATED = "account.updated"
     ACCOUNT_DELETED = "account.deleted"

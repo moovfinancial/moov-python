@@ -409,7 +409,7 @@ class Transfers(BaseSDK):
         end_date_time: Optional[datetime] = None,
         group_id: Optional[str] = None,
         schedule_id: Optional[str] = None,
-        payment_link_id: Optional[str] = None,
+        payment_link_code: Optional[str] = None,
         refunded: Optional[bool] = None,
         disputed: Optional[bool] = None,
         skip: Optional[int] = None,
@@ -438,7 +438,7 @@ class Transfers(BaseSDK):
         :param end_date_time: Optional date-time which exclusively filters all transfers created before this date-time.
         :param group_id: Optional ID to filter for transfers in the same group.
         :param schedule_id: Optional ID to filter for transfer occurrences belonging to the same schedule.
-        :param payment_link_id: Optional ID to filter for transfers associated with the payment link.
+        :param payment_link_code: Optional code to filter for transfers associated with the payment link.
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
         :param skip:
@@ -465,7 +465,7 @@ class Transfers(BaseSDK):
             end_date_time=end_date_time,
             group_id=group_id,
             schedule_id=schedule_id,
-            payment_link_id=payment_link_id,
+            payment_link_code=payment_link_code,
             refunded=refunded,
             disputed=disputed,
             skip=skip,
@@ -560,7 +560,7 @@ class Transfers(BaseSDK):
         end_date_time: Optional[datetime] = None,
         group_id: Optional[str] = None,
         schedule_id: Optional[str] = None,
-        payment_link_id: Optional[str] = None,
+        payment_link_code: Optional[str] = None,
         refunded: Optional[bool] = None,
         disputed: Optional[bool] = None,
         skip: Optional[int] = None,
@@ -589,7 +589,7 @@ class Transfers(BaseSDK):
         :param end_date_time: Optional date-time which exclusively filters all transfers created before this date-time.
         :param group_id: Optional ID to filter for transfers in the same group.
         :param schedule_id: Optional ID to filter for transfer occurrences belonging to the same schedule.
-        :param payment_link_id: Optional ID to filter for transfers associated with the payment link.
+        :param payment_link_code: Optional code to filter for transfers associated with the payment link.
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
         :param skip:
@@ -616,7 +616,7 @@ class Transfers(BaseSDK):
             end_date_time=end_date_time,
             group_id=group_id,
             schedule_id=schedule_id,
-            payment_link_id=payment_link_id,
+            payment_link_code=payment_link_code,
             refunded=refunded,
             disputed=disputed,
             skip=skip,

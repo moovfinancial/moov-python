@@ -55,7 +55,7 @@ class TransferTypedDict(TypedDict):
     sweep_id: NotRequired[str]
     schedule_id: NotRequired[str]
     occurrence_id: NotRequired[str]
-    payment_link_id: NotRequired[str]
+    payment_link_code: NotRequired[str]
     sales_tax_amount: NotRequired[AmountTypedDict]
     r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
 
@@ -136,9 +136,9 @@ class Transfer(BaseModel):
 
     occurrence_id: Annotated[Optional[str], pydantic.Field(alias="occurrenceID")] = None
 
-    payment_link_id: Annotated[Optional[str], pydantic.Field(alias="paymentLinkID")] = (
-        None
-    )
+    payment_link_code: Annotated[
+        Optional[str], pydantic.Field(alias="paymentLinkCode")
+    ] = None
 
     sales_tax_amount: Annotated[
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")

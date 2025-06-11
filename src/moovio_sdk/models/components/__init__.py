@@ -956,6 +956,7 @@ if TYPE_CHECKING:
         WebhookDataTransferCreated,
         WebhookDataTransferCreatedTypedDict,
     )
+    from .webhookdatatransferstatus import WebhookDataTransferStatus
     from .webhookdatatransferupdated import (
         WebhookDataTransferUpdated,
         WebhookDataTransferUpdatedTypedDict,
@@ -969,10 +970,6 @@ if TYPE_CHECKING:
     from .webhooktransferpaymentmethoddetails import (
         WebhookTransferPaymentMethodDetails,
         WebhookTransferPaymentMethodDetailsTypedDict,
-    )
-    from .webhookwalletavailablebalance import (
-        WebhookWalletAvailableBalance,
-        WebhookWalletAvailableBalanceTypedDict,
     )
     from .wireinstitution import WireInstitution, WireInstitutionTypedDict
     from .wireservices import WireServices, WireServicesTypedDict
@@ -1784,6 +1781,7 @@ __all__ = [
     "WebhookDataTerminalApplicationUpdatedTypedDict",
     "WebhookDataTransferCreated",
     "WebhookDataTransferCreatedTypedDict",
+    "WebhookDataTransferStatus",
     "WebhookDataTransferUpdated",
     "WebhookDataTransferUpdatedTypedDict",
     "WebhookDataTypedDict",
@@ -1794,8 +1792,6 @@ __all__ = [
     "WebhookEventTypedDict",
     "WebhookTransferPaymentMethodDetails",
     "WebhookTransferPaymentMethodDetailsTypedDict",
-    "WebhookWalletAvailableBalance",
-    "WebhookWalletAvailableBalanceTypedDict",
     "WireInstitution",
     "WireInstitutionTypedDict",
     "WireServices",
@@ -2610,6 +2606,7 @@ _dynamic_imports: dict[str, str] = {
     "WebhookDataTerminalApplicationUpdatedTypedDict": ".webhookdataterminalapplicationupdated",
     "WebhookDataTransferCreated": ".webhookdatatransfercreated",
     "WebhookDataTransferCreatedTypedDict": ".webhookdatatransfercreated",
+    "WebhookDataTransferStatus": ".webhookdatatransferstatus",
     "WebhookDataTransferUpdated": ".webhookdatatransferupdated",
     "WebhookDataTransferUpdatedTypedDict": ".webhookdatatransferupdated",
     "WebhookDataWalletTransactionUpdated": ".webhookdatawallettransactionupdated",
@@ -2619,8 +2616,6 @@ _dynamic_imports: dict[str, str] = {
     "WebhookEventType": ".webhookeventtype",
     "WebhookTransferPaymentMethodDetails": ".webhooktransferpaymentmethoddetails",
     "WebhookTransferPaymentMethodDetailsTypedDict": ".webhooktransferpaymentmethoddetails",
-    "WebhookWalletAvailableBalance": ".webhookwalletavailablebalance",
-    "WebhookWalletAvailableBalanceTypedDict": ".webhookwalletavailablebalance",
     "WireInstitution": ".wireinstitution",
     "WireInstitutionTypedDict": ".wireinstitution",
     "WireServices": ".wireservices",
