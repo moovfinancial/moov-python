@@ -1036,6 +1036,15 @@ you'll need to specify the `/terminal-applications.write` scope.
 
 ### [transfers](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md)
 
+* [generate_options_for_account](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#generate_options_for_account) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+supply in the request body.
+
+The accountID in the route should the partner's accountID.
+
+Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 * [create](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#create) - Move money by providing the source, destination, and amount in the request body.
 
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
@@ -1101,7 +1110,7 @@ supply in the request.
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### [underwriting](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/underwriting/README.md)
 

@@ -5,6 +5,15 @@
 
 ### Available Operations
 
+* [generate_options_for_account](#generate_options_for_account) - Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+supply in the request body.
+
+The accountID in the route should the partner's accountID.
+
+Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 * [create](#create) - Move money by providing the source, destination, and amount in the request body.
 
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more. 
@@ -70,7 +79,66 @@ supply in the request.
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
+## generate_options_for_account
+
+Generate available payment method options for one or multiple transfer participants depending on the accountID or paymentMethodID you 
+supply in the request body.
+
+The accountID in the route should the partner's accountID.
+
+Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
+### Example Usage
+
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="v2024.01.00",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.generate_options_for_account(account_id="d00e90ff-48ce-48a8-b5e0-b7fd222c1b3a", source={}, destination={}, amount={
+        "currency": "USD",
+        "value": 1204,
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `account_id`                                                                               | *str*                                                                                      | :heavy_check_mark:                                                                         | The partner's Moov account ID.                                                             |
+| `source`                                                                                   | [components.SourceDestinationOptions](../../models/components/sourcedestinationoptions.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `destination`                                                                              | [components.SourceDestinationOptions](../../models/components/sourcedestinationoptions.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `amount`                                                                                   | [components.Amount](../../models/components/amount.md)                                     | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
+
+### Response
+
+**[operations.CreateTransferOptionsForAccountResponse](../../models/operations/createtransferoptionsforaccountresponse.md)**
+
+### Errors
+
+| Error Type                            | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.GenericError                   | 400                                   | application/json                      |
+| errors.TransferOptionsValidationError | 422                                   | application/json                      |
+| errors.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
 ## create
 
@@ -621,7 +689,7 @@ supply in the request.
 Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
