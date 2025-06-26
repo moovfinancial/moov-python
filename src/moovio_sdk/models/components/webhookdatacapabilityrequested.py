@@ -13,7 +13,7 @@ class WebhookDataCapabilityRequestedTypedDict(TypedDict):
     capability_id: CapabilityID
     r"""Moov account capabilities.
 
-    The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+    The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
     """
     foreign_id: NotRequired[str]
 
@@ -24,7 +24,7 @@ class WebhookDataCapabilityRequested(BaseModel):
     capability_id: Annotated[CapabilityID, pydantic.Field(alias="capabilityID")]
     r"""Moov account capabilities.
 
-    The `production-app` capability might appear in your list. This is a read-only capability that Moov requests and uses for account verification purposes. The capability remains active with your account and requires no additional action.
+    The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
     """
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
