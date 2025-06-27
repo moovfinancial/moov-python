@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 15cff255b35f5638801c67cec860cc31
+  docChecksum: 0e712d2aa7732fe657e95ee2ff87d85f
   docVersion: latest
-  speakeasyVersion: 1.570.0
-  generationVersion: 2.638.0
-  releaseVersion: 0.11.6
-  configChecksum: 260a747c935789816b47df7caaf8dd49
+  speakeasyVersion: 1.570.2
+  generationVersion: 2.638.5
+  releaseVersion: 0.12.0
+  configChecksum: 8e218c59154d557c4be6378d18c8110f
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -30,6 +30,7 @@ features:
     hiddenGlobals: 1.0.0
     includes: 3.0.0
     methodArguments: 1.0.2
+    mockServer: 0.1.0
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
     nullables: 1.0.1
@@ -114,6 +115,7 @@ generatedFiles:
   - docs/models/components/brandcolors.md
   - docs/models/components/brandcolorvalidationerror.md
   - docs/models/components/brandproperties.md
+  - docs/models/components/businesspresence.md
   - docs/models/components/businessprofile.md
   - docs/models/components/businesstype.md
   - docs/models/components/calltoaction.md
@@ -125,6 +127,8 @@ generatedFiles:
   - docs/models/components/capabilityrequirement.md
   - docs/models/components/capabilitystatus.md
   - docs/models/components/card.md
+  - docs/models/components/cardacceptancemethods.md
+  - docs/models/components/cardacceptancemethodserror.md
   - docs/models/components/cardaccountupdater.md
   - docs/models/components/cardacquiringdispute.md
   - docs/models/components/cardacquiringmodel.md
@@ -152,6 +156,12 @@ generatedFiles:
   - docs/models/components/cardverificationresult.md
   - docs/models/components/cardvolumedistribution.md
   - docs/models/components/cardvolumedistributionerror.md
+  - docs/models/components/collectfunds.md
+  - docs/models/components/collectfundsach.md
+  - docs/models/components/collectfundsacherror.md
+  - docs/models/components/collectfundscardpayments.md
+  - docs/models/components/collectfundscardpaymentserror.md
+  - docs/models/components/collectfundserror.md
   - docs/models/components/collectionpaymentmethodtype.md
   - docs/models/components/colorsvalidationerror.md
   - docs/models/components/completebankaccountverification.md
@@ -225,6 +235,8 @@ generatedFiles:
   - docs/models/components/enrichedindustrycodes.md
   - docs/models/components/entrymode.md
   - docs/models/components/error.md
+  - docs/models/components/estimatedactivity.md
+  - docs/models/components/estimatedactivityerror.md
   - docs/models/components/evidencetextresponse.md
   - docs/models/components/evidencetype.md
   - docs/models/components/evidenceuploadresponse.md
@@ -242,8 +254,12 @@ generatedFiles:
   - docs/models/components/fileuploadrequestmultipart.md
   - docs/models/components/fileuploadrequestmultipartfile.md
   - docs/models/components/financialinstitutions.md
+  - docs/models/components/fulfillment.md
   - docs/models/components/fulfillmentdetails.md
   - docs/models/components/fulfillmentdetailserror.md
+  - docs/models/components/fulfillmenterror.md
+  - docs/models/components/fulfillmentmethod.md
+  - docs/models/components/fulfillmenttimeframe.md
   - docs/models/components/fullissuedcard.md
   - docs/models/components/generatedby.md
   - docs/models/components/generatedbyaccountid.md
@@ -251,6 +267,7 @@ generatedFiles:
   - docs/models/components/generatedbycardid.md
   - docs/models/components/generatedbydisputeid.md
   - docs/models/components/generatedbytransferid.md
+  - docs/models/components/geographicreach.md
   - docs/models/components/governmentid.md
   - docs/models/components/governmentiderror.md
   - docs/models/components/governmentiderroritin.md
@@ -299,7 +316,14 @@ generatedFiles:
   - docs/models/components/microdepositstatus.md
   - docs/models/components/minimumcommitment.md
   - docs/models/components/mode.md
+  - docs/models/components/moneytransfer.md
+  - docs/models/components/moneytransfererror.md
+  - docs/models/components/moneytransferpullfromcard.md
+  - docs/models/components/moneytransferpullfromcarderror.md
+  - docs/models/components/moneytransferpushtocard.md
+  - docs/models/components/moneytransferpushtocarderror.md
   - docs/models/components/monthlyplatformfee.md
+  - docs/models/components/monthlyvolumerange.md
   - docs/models/components/moovfee.md
   - docs/models/components/moovfeedetails.md
   - docs/models/components/moovwalletpaymentmethod.md
@@ -343,6 +367,7 @@ generatedFiles:
   - docs/models/components/payoutrecipient.md
   - docs/models/components/payoutrecipienterror.md
   - docs/models/components/payoutrecipientupdate.md
+  - docs/models/components/pendinglitigation.md
   - docs/models/components/phone.md
   - docs/models/components/phonenumber.md
   - docs/models/components/phonenumbererror.md
@@ -367,6 +392,7 @@ generatedFiles:
   - docs/models/components/recur.md
   - docs/models/components/refundcarddetails.md
   - docs/models/components/refundcardstatus.md
+  - docs/models/components/refundpolicy.md
   - docs/models/components/refundstatus.md
   - docs/models/components/registerapplepaymerchantdomains.md
   - docs/models/components/representative.md
@@ -396,6 +422,14 @@ generatedFiles:
   - docs/models/components/scheduleresponse.md
   - docs/models/components/seccode.md
   - docs/models/components/security.md
+  - docs/models/components/sendfunds.md
+  - docs/models/components/sendfundsach.md
+  - docs/models/components/sendfundsacherror.md
+  - docs/models/components/sendfundserror.md
+  - docs/models/components/sendfundspushtocard.md
+  - docs/models/components/sendfundspushtocarderror.md
+  - docs/models/components/sendfundsrtp.md
+  - docs/models/components/sendfundsrtperror.md
   - docs/models/components/sentreceipt.md
   - docs/models/components/settings.md
   - docs/models/components/sourcedestinationoptions.md
@@ -454,12 +488,15 @@ generatedFiles:
   - docs/models/components/updaterepresentativessn.md
   - docs/models/components/updateunderwriting.md
   - docs/models/components/upsertschedule.md
+  - docs/models/components/upsertunderwriting.md
   - docs/models/components/use.md
   - docs/models/components/verification.md
   - docs/models/components/verificationstatus.md
   - docs/models/components/verificationstatusdetail.md
   - docs/models/components/volumebycustomertype.md
   - docs/models/components/volumebycustomertypeerror.md
+  - docs/models/components/volumesharebycustomertype.md
+  - docs/models/components/volumesharebycustomertypeerror.md
   - docs/models/components/wallet.md
   - docs/models/components/walletavailablebalance.md
   - docs/models/components/wallettransaction.md
@@ -539,6 +576,7 @@ generatedFiles:
   - docs/models/errors/updatepaymentlinkerror.md
   - docs/models/errors/updateunderwritingerror.md
   - docs/models/errors/updateunderwritingerrorerror.md
+  - docs/models/errors/upsertunderwritingerror.md
   - docs/models/internal/globals.md
   - docs/models/operations/acceptdisputeglobals.md
   - docs/models/operations/acceptdisputerequest.md
@@ -892,6 +930,9 @@ generatedFiles:
   - docs/models/operations/revokeonboardinginviteglobals.md
   - docs/models/operations/revokeonboardinginviterequest.md
   - docs/models/operations/revokeonboardinginviteresponse.md
+  - docs/models/operations/saveunderwritingglobals.md
+  - docs/models/operations/saveunderwritingrequest.md
+  - docs/models/operations/saveunderwritingresponse.md
   - docs/models/operations/searchinstitutionsglobals.md
   - docs/models/operations/searchinstitutionsrequest.md
   - docs/models/operations/searchinstitutionsresponse.md
@@ -1082,6 +1123,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/brandcolors.py
   - src/moovio_sdk/models/components/brandcolorvalidationerror.py
   - src/moovio_sdk/models/components/brandproperties.py
+  - src/moovio_sdk/models/components/businesspresence.py
   - src/moovio_sdk/models/components/businessprofile.py
   - src/moovio_sdk/models/components/businesstype.py
   - src/moovio_sdk/models/components/calltoaction.py
@@ -1093,6 +1135,8 @@ generatedFiles:
   - src/moovio_sdk/models/components/capabilityrequirement.py
   - src/moovio_sdk/models/components/capabilitystatus.py
   - src/moovio_sdk/models/components/card.py
+  - src/moovio_sdk/models/components/cardacceptancemethods.py
+  - src/moovio_sdk/models/components/cardacceptancemethodserror.py
   - src/moovio_sdk/models/components/cardaccountupdater.py
   - src/moovio_sdk/models/components/cardacquiringdispute.py
   - src/moovio_sdk/models/components/cardacquiringmodel.py
@@ -1116,6 +1160,12 @@ generatedFiles:
   - src/moovio_sdk/models/components/cardverificationresult.py
   - src/moovio_sdk/models/components/cardvolumedistribution.py
   - src/moovio_sdk/models/components/cardvolumedistributionerror.py
+  - src/moovio_sdk/models/components/collectfunds.py
+  - src/moovio_sdk/models/components/collectfundsach.py
+  - src/moovio_sdk/models/components/collectfundsacherror.py
+  - src/moovio_sdk/models/components/collectfundscardpayments.py
+  - src/moovio_sdk/models/components/collectfundscardpaymentserror.py
+  - src/moovio_sdk/models/components/collectfundserror.py
   - src/moovio_sdk/models/components/collectionpaymentmethodtype.py
   - src/moovio_sdk/models/components/colorsvalidationerror.py
   - src/moovio_sdk/models/components/completebankaccountverification.py
@@ -1179,6 +1229,8 @@ generatedFiles:
   - src/moovio_sdk/models/components/enrichedindustries.py
   - src/moovio_sdk/models/components/enrichedindustrycodes.py
   - src/moovio_sdk/models/components/entrymode.py
+  - src/moovio_sdk/models/components/estimatedactivity.py
+  - src/moovio_sdk/models/components/estimatedactivityerror.py
   - src/moovio_sdk/models/components/evidencetextresponse.py
   - src/moovio_sdk/models/components/evidencetype.py
   - src/moovio_sdk/models/components/evidenceuploadresponse.py
@@ -1194,8 +1246,12 @@ generatedFiles:
   - src/moovio_sdk/models/components/filestatus.py
   - src/moovio_sdk/models/components/fileuploadrequestmultipart.py
   - src/moovio_sdk/models/components/financialinstitutions.py
+  - src/moovio_sdk/models/components/fulfillment.py
   - src/moovio_sdk/models/components/fulfillmentdetails.py
   - src/moovio_sdk/models/components/fulfillmentdetailserror.py
+  - src/moovio_sdk/models/components/fulfillmenterror.py
+  - src/moovio_sdk/models/components/fulfillmentmethod.py
+  - src/moovio_sdk/models/components/fulfillmenttimeframe.py
   - src/moovio_sdk/models/components/fullissuedcard.py
   - src/moovio_sdk/models/components/generatedby.py
   - src/moovio_sdk/models/components/generatedbyaccountid.py
@@ -1203,6 +1259,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/generatedbycardid.py
   - src/moovio_sdk/models/components/generatedbydisputeid.py
   - src/moovio_sdk/models/components/generatedbytransferid.py
+  - src/moovio_sdk/models/components/geographicreach.py
   - src/moovio_sdk/models/components/governmentid.py
   - src/moovio_sdk/models/components/governmentiderror.py
   - src/moovio_sdk/models/components/granttype.py
@@ -1246,7 +1303,14 @@ generatedFiles:
   - src/moovio_sdk/models/components/microdepositstatus.py
   - src/moovio_sdk/models/components/minimumcommitment.py
   - src/moovio_sdk/models/components/mode.py
+  - src/moovio_sdk/models/components/moneytransfer.py
+  - src/moovio_sdk/models/components/moneytransfererror.py
+  - src/moovio_sdk/models/components/moneytransferpullfromcard.py
+  - src/moovio_sdk/models/components/moneytransferpullfromcarderror.py
+  - src/moovio_sdk/models/components/moneytransferpushtocard.py
+  - src/moovio_sdk/models/components/moneytransferpushtocarderror.py
   - src/moovio_sdk/models/components/monthlyplatformfee.py
+  - src/moovio_sdk/models/components/monthlyvolumerange.py
   - src/moovio_sdk/models/components/moovfee.py
   - src/moovio_sdk/models/components/moovfeedetails.py
   - src/moovio_sdk/models/components/moovwalletpaymentmethod.py
@@ -1287,6 +1351,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/payoutrecipient.py
   - src/moovio_sdk/models/components/payoutrecipienterror.py
   - src/moovio_sdk/models/components/payoutrecipientupdate.py
+  - src/moovio_sdk/models/components/pendinglitigation.py
   - src/moovio_sdk/models/components/phonenumber.py
   - src/moovio_sdk/models/components/phonenumbererror.py
   - src/moovio_sdk/models/components/plaidintegration.py
@@ -1304,6 +1369,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/recur.py
   - src/moovio_sdk/models/components/refundcarddetails.py
   - src/moovio_sdk/models/components/refundcardstatus.py
+  - src/moovio_sdk/models/components/refundpolicy.py
   - src/moovio_sdk/models/components/refundstatus.py
   - src/moovio_sdk/models/components/registerapplepaymerchantdomains.py
   - src/moovio_sdk/models/components/representative.py
@@ -1331,6 +1397,14 @@ generatedFiles:
   - src/moovio_sdk/models/components/scheduleresponse.py
   - src/moovio_sdk/models/components/seccode.py
   - src/moovio_sdk/models/components/security.py
+  - src/moovio_sdk/models/components/sendfunds.py
+  - src/moovio_sdk/models/components/sendfundsach.py
+  - src/moovio_sdk/models/components/sendfundsacherror.py
+  - src/moovio_sdk/models/components/sendfundserror.py
+  - src/moovio_sdk/models/components/sendfundspushtocard.py
+  - src/moovio_sdk/models/components/sendfundspushtocarderror.py
+  - src/moovio_sdk/models/components/sendfundsrtp.py
+  - src/moovio_sdk/models/components/sendfundsrtperror.py
   - src/moovio_sdk/models/components/sentreceipt.py
   - src/moovio_sdk/models/components/settings.py
   - src/moovio_sdk/models/components/sourcedestinationoptions.py
@@ -1377,11 +1451,14 @@ generatedFiles:
   - src/moovio_sdk/models/components/updaterepresentative.py
   - src/moovio_sdk/models/components/updateunderwriting.py
   - src/moovio_sdk/models/components/upsertschedule.py
+  - src/moovio_sdk/models/components/upsertunderwriting.py
   - src/moovio_sdk/models/components/verification.py
   - src/moovio_sdk/models/components/verificationstatus.py
   - src/moovio_sdk/models/components/verificationstatusdetail.py
   - src/moovio_sdk/models/components/volumebycustomertype.py
   - src/moovio_sdk/models/components/volumebycustomertypeerror.py
+  - src/moovio_sdk/models/components/volumesharebycustomertype.py
+  - src/moovio_sdk/models/components/volumesharebycustomertypeerror.py
   - src/moovio_sdk/models/components/wallet.py
   - src/moovio_sdk/models/components/walletavailablebalance.py
   - src/moovio_sdk/models/components/wallettransaction.py
@@ -1460,6 +1537,7 @@ generatedFiles:
   - src/moovio_sdk/models/errors/updateissuedcarderror.py
   - src/moovio_sdk/models/errors/updatepaymentlinkerror.py
   - src/moovio_sdk/models/errors/updateunderwritingerror.py
+  - src/moovio_sdk/models/errors/upsertunderwritingerror.py
   - src/moovio_sdk/models/internal/__init__.py
   - src/moovio_sdk/models/internal/globals.py
   - src/moovio_sdk/models/operations/__init__.py
@@ -1581,6 +1659,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/retrievefees.py
   - src/moovio_sdk/models/operations/revokeaccesstoken.py
   - src/moovio_sdk/models/operations/revokeonboardinginvite.py
+  - src/moovio_sdk/models/operations/saveunderwriting.py
   - src/moovio_sdk/models/operations/searchinstitutions.py
   - src/moovio_sdk/models/operations/submitdisputeevidence.py
   - src/moovio_sdk/models/operations/testendtoendtoken.py
@@ -1634,6 +1713,667 @@ generatedFiles:
   - src/moovio_sdk/utils/values.py
   - src/moovio_sdk/wallet_transactions.py
   - src/moovio_sdk/wallets.py
+  - tests/mockserver/.gitignore
+  - tests/mockserver/Dockerfile
+  - tests/mockserver/Makefile
+  - tests/mockserver/README.md
+  - tests/mockserver/go.mod
+  - tests/mockserver/go.sum
+  - tests/mockserver/internal/handler/assert/contenttype.go
+  - tests/mockserver/internal/handler/assert/header.go
+  - tests/mockserver/internal/handler/assert/parameter.go
+  - tests/mockserver/internal/handler/assert/pointer.go
+  - tests/mockserver/internal/handler/assert/security.go
+  - tests/mockserver/internal/handler/doc.go
+  - tests/mockserver/internal/handler/generated_handler.go
+  - tests/mockserver/internal/handler/generated_handlers.go
+  - tests/mockserver/internal/handler/values/files.go
+  - tests/mockserver/internal/logging/doc.go
+  - tests/mockserver/internal/logging/formats.go
+  - tests/mockserver/internal/logging/http_file.go
+  - tests/mockserver/internal/logging/http_logger.go
+  - tests/mockserver/internal/logging/levels.go
+  - tests/mockserver/internal/logging/logger.go
+  - tests/mockserver/internal/logging/oas_operation.go
+  - tests/mockserver/internal/logging/oas_operation_call.go
+  - tests/mockserver/internal/sdk/models/components/account.go
+  - tests/mockserver/internal/sdk/models/components/accountcapability.go
+  - tests/mockserver/internal/sdk/models/components/accountcountries.go
+  - tests/mockserver/internal/sdk/models/components/accountnameverification.go
+  - tests/mockserver/internal/sdk/models/components/accounttype.go
+  - tests/mockserver/internal/sdk/models/components/accountverificationstatus.go
+  - tests/mockserver/internal/sdk/models/components/achcreditsamedaypaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/achcreditstandardpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/achdebitcollectpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/achdebitfundpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/achexception.go
+  - tests/mockserver/internal/sdk/models/components/achinstitution.go
+  - tests/mockserver/internal/sdk/models/components/achlocation.go
+  - tests/mockserver/internal/sdk/models/components/achparticipant.go
+  - tests/mockserver/internal/sdk/models/components/achpaymentdetails.go
+  - tests/mockserver/internal/sdk/models/components/achpaymentdetailserror.go
+  - tests/mockserver/internal/sdk/models/components/achpaymentsettings.go
+  - tests/mockserver/internal/sdk/models/components/achreturncode.go
+  - tests/mockserver/internal/sdk/models/components/achtransactiondetails.go
+  - tests/mockserver/internal/sdk/models/components/achtransactionstatus.go
+  - tests/mockserver/internal/sdk/models/components/addcapabilities.go
+  - tests/mockserver/internal/sdk/models/components/address.go
+  - tests/mockserver/internal/sdk/models/components/addresserror.go
+  - tests/mockserver/internal/sdk/models/components/addresssuggestion.go
+  - tests/mockserver/internal/sdk/models/components/addressupdate.go
+  - tests/mockserver/internal/sdk/models/components/adjustment.go
+  - tests/mockserver/internal/sdk/models/components/amount.go
+  - tests/mockserver/internal/sdk/models/components/amountdecimal.go
+  - tests/mockserver/internal/sdk/models/components/amountupdate.go
+  - tests/mockserver/internal/sdk/models/components/amountvalidationerror.go
+  - tests/mockserver/internal/sdk/models/components/applebillingcontact.go
+  - tests/mockserver/internal/sdk/models/components/applepayheader.go
+  - tests/mockserver/internal/sdk/models/components/applepaymerchantdomains.go
+  - tests/mockserver/internal/sdk/models/components/applepaypaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/applepayresponse.go
+  - tests/mockserver/internal/sdk/models/components/applicationscope.go
+  - tests/mockserver/internal/sdk/models/components/asynccreatedrefund.go
+  - tests/mockserver/internal/sdk/models/components/asynctransfer.go
+  - tests/mockserver/internal/sdk/models/components/authorizeduser.go
+  - tests/mockserver/internal/sdk/models/components/authtoken.go
+  - tests/mockserver/internal/sdk/models/components/authtokenrequest.go
+  - tests/mockserver/internal/sdk/models/components/bankaccount.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountexception.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountholdertype.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountintegration.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountpayload.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountstatus.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountstatusreason.go
+  - tests/mockserver/internal/sdk/models/components/bankaccounttype.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountverification.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountverificationcreated.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountverificationmethod.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountverificationstatus.go
+  - tests/mockserver/internal/sdk/models/components/bankaccountwaitfor.go
+  - tests/mockserver/internal/sdk/models/components/basicpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/billablefee.go
+  - tests/mockserver/internal/sdk/models/components/birthdate.go
+  - tests/mockserver/internal/sdk/models/components/birthdateerror.go
+  - tests/mockserver/internal/sdk/models/components/birthdateupdate.go
+  - tests/mockserver/internal/sdk/models/components/birthdatevalidationerror.go
+  - tests/mockserver/internal/sdk/models/components/brandcolor.go
+  - tests/mockserver/internal/sdk/models/components/brandcolors.go
+  - tests/mockserver/internal/sdk/models/components/brandcolorvalidationerror.go
+  - tests/mockserver/internal/sdk/models/components/brandproperties.go
+  - tests/mockserver/internal/sdk/models/components/businesspresence.go
+  - tests/mockserver/internal/sdk/models/components/businessprofile.go
+  - tests/mockserver/internal/sdk/models/components/businesstype.go
+  - tests/mockserver/internal/sdk/models/components/calltoaction.go
+  - tests/mockserver/internal/sdk/models/components/cancellation.go
+  - tests/mockserver/internal/sdk/models/components/cancellationstatus.go
+  - tests/mockserver/internal/sdk/models/components/capabilitieserror.go
+  - tests/mockserver/internal/sdk/models/components/capability.go
+  - tests/mockserver/internal/sdk/models/components/capabilityid.go
+  - tests/mockserver/internal/sdk/models/components/capabilityrequirement.go
+  - tests/mockserver/internal/sdk/models/components/capabilitystatus.go
+  - tests/mockserver/internal/sdk/models/components/card.go
+  - tests/mockserver/internal/sdk/models/components/cardacceptancemethods.go
+  - tests/mockserver/internal/sdk/models/components/cardacceptancemethodserror.go
+  - tests/mockserver/internal/sdk/models/components/cardaccountupdater.go
+  - tests/mockserver/internal/sdk/models/components/cardacquiringdispute.go
+  - tests/mockserver/internal/sdk/models/components/cardacquiringmodel.go
+  - tests/mockserver/internal/sdk/models/components/cardacquiringrefund.go
+  - tests/mockserver/internal/sdk/models/components/cardaddress.go
+  - tests/mockserver/internal/sdk/models/components/cardbrand.go
+  - tests/mockserver/internal/sdk/models/components/cardexpiration.go
+  - tests/mockserver/internal/sdk/models/components/cardexpirationerror.go
+  - tests/mockserver/internal/sdk/models/components/cardissuingnetwork.go
+  - tests/mockserver/internal/sdk/models/components/cardpaymentdetails.go
+  - tests/mockserver/internal/sdk/models/components/cardpaymentdetailserror.go
+  - tests/mockserver/internal/sdk/models/components/cardpaymentpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/cardpaymentsettings.go
+  - tests/mockserver/internal/sdk/models/components/cardpresentpaymentpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/cardtransactiondetails.go
+  - tests/mockserver/internal/sdk/models/components/cardtransactionfailurecode.go
+  - tests/mockserver/internal/sdk/models/components/cardtransactionstatus.go
+  - tests/mockserver/internal/sdk/models/components/cardtype.go
+  - tests/mockserver/internal/sdk/models/components/cardupdatereason.go
+  - tests/mockserver/internal/sdk/models/components/cardverification.go
+  - tests/mockserver/internal/sdk/models/components/cardverificationresult.go
+  - tests/mockserver/internal/sdk/models/components/cardvolumedistribution.go
+  - tests/mockserver/internal/sdk/models/components/cardvolumedistributionerror.go
+  - tests/mockserver/internal/sdk/models/components/collectfunds.go
+  - tests/mockserver/internal/sdk/models/components/collectfundsach.go
+  - tests/mockserver/internal/sdk/models/components/collectfundsacherror.go
+  - tests/mockserver/internal/sdk/models/components/collectfundscardpayments.go
+  - tests/mockserver/internal/sdk/models/components/collectfundscardpaymentserror.go
+  - tests/mockserver/internal/sdk/models/components/collectfundserror.go
+  - tests/mockserver/internal/sdk/models/components/collectionpaymentmethodtype.go
+  - tests/mockserver/internal/sdk/models/components/colorsvalidationerror.go
+  - tests/mockserver/internal/sdk/models/components/completebankaccountverification.go
+  - tests/mockserver/internal/sdk/models/components/completedmicrodeposits.go
+  - tests/mockserver/internal/sdk/models/components/completemicrodeposits.go
+  - tests/mockserver/internal/sdk/models/components/contact.go
+  - tests/mockserver/internal/sdk/models/components/countrieserrors.go
+  - tests/mockserver/internal/sdk/models/components/createaccount.go
+  - tests/mockserver/internal/sdk/models/components/createaccounterror.go
+  - tests/mockserver/internal/sdk/models/components/createaccountsettings.go
+  - tests/mockserver/internal/sdk/models/components/createaccounttype.go
+  - tests/mockserver/internal/sdk/models/components/createapplepaysession.go
+  - tests/mockserver/internal/sdk/models/components/createauthorizeduser.go
+  - tests/mockserver/internal/sdk/models/components/createauthorizedusererror.go
+  - tests/mockserver/internal/sdk/models/components/createauthorizeduserupdate.go
+  - tests/mockserver/internal/sdk/models/components/createbusinesserror.go
+  - tests/mockserver/internal/sdk/models/components/createbusinessprofile.go
+  - tests/mockserver/internal/sdk/models/components/createdtransfer.go
+  - tests/mockserver/internal/sdk/models/components/createevidencefilemultipart.go
+  - tests/mockserver/internal/sdk/models/components/createevidencetext.go
+  - tests/mockserver/internal/sdk/models/components/createfeeplanagreement.go
+  - tests/mockserver/internal/sdk/models/components/createindividualerror.go
+  - tests/mockserver/internal/sdk/models/components/createindividualprofile.go
+  - tests/mockserver/internal/sdk/models/components/createpaymentlink.go
+  - tests/mockserver/internal/sdk/models/components/createprofile.go
+  - tests/mockserver/internal/sdk/models/components/createprofileerror.go
+  - tests/mockserver/internal/sdk/models/components/createrefund.go
+  - tests/mockserver/internal/sdk/models/components/createrefundresponse.go
+  - tests/mockserver/internal/sdk/models/components/createrepresentative.go
+  - tests/mockserver/internal/sdk/models/components/createreversal.go
+  - tests/mockserver/internal/sdk/models/components/createsweepconfig.go
+  - tests/mockserver/internal/sdk/models/components/createterminalapplication.go
+  - tests/mockserver/internal/sdk/models/components/createtransfer.go
+  - tests/mockserver/internal/sdk/models/components/createtransferdestination.go
+  - tests/mockserver/internal/sdk/models/components/createtransferdestinationach.go
+  - tests/mockserver/internal/sdk/models/components/createtransferdestinationcard.go
+  - tests/mockserver/internal/sdk/models/components/createtransferoptions.go
+  - tests/mockserver/internal/sdk/models/components/createtransfersource.go
+  - tests/mockserver/internal/sdk/models/components/createtransfersourceach.go
+  - tests/mockserver/internal/sdk/models/components/createtransfersourcecard.go
+  - tests/mockserver/internal/sdk/models/components/customersupport.go
+  - tests/mockserver/internal/sdk/models/components/customersupporterror.go
+  - tests/mockserver/internal/sdk/models/components/debitholdperiod.go
+  - tests/mockserver/internal/sdk/models/components/disbursementpaymentmethodtype.go
+  - tests/mockserver/internal/sdk/models/components/displayoptionserror.go
+  - tests/mockserver/internal/sdk/models/components/dispute.go
+  - tests/mockserver/internal/sdk/models/components/disputeevidenceresponse.go
+  - tests/mockserver/internal/sdk/models/components/disputephase.go
+  - tests/mockserver/internal/sdk/models/components/disputestatus.go
+  - tests/mockserver/internal/sdk/models/components/disputetransferdetails.go
+  - tests/mockserver/internal/sdk/models/components/document.go
+  - tests/mockserver/internal/sdk/models/components/documenttype.go
+  - tests/mockserver/internal/sdk/models/components/domesticpullfromcard.go
+  - tests/mockserver/internal/sdk/models/components/domesticpushtocard.go
+  - tests/mockserver/internal/sdk/models/components/e2eetoken.go
+  - tests/mockserver/internal/sdk/models/components/e2eetokenupdate.go
+  - tests/mockserver/internal/sdk/models/components/end2endencryptionerror.go
+  - tests/mockserver/internal/sdk/models/components/enrichedaddressresponse.go
+  - tests/mockserver/internal/sdk/models/components/enrichedbusinessprofile.go
+  - tests/mockserver/internal/sdk/models/components/enrichedbusinessresponse.go
+  - tests/mockserver/internal/sdk/models/components/enrichedindustries.go
+  - tests/mockserver/internal/sdk/models/components/enrichedindustrycodes.go
+  - tests/mockserver/internal/sdk/models/components/entrymode.go
+  - tests/mockserver/internal/sdk/models/components/estimatedactivity.go
+  - tests/mockserver/internal/sdk/models/components/estimatedactivityerror.go
+  - tests/mockserver/internal/sdk/models/components/evidencetextresponse.go
+  - tests/mockserver/internal/sdk/models/components/evidencetype.go
+  - tests/mockserver/internal/sdk/models/components/evidenceuploadresponse.go
+  - tests/mockserver/internal/sdk/models/components/facilitatorfee.go
+  - tests/mockserver/internal/sdk/models/components/feecategory.go
+  - tests/mockserver/internal/sdk/models/components/feemodel.go
+  - tests/mockserver/internal/sdk/models/components/feeplan.go
+  - tests/mockserver/internal/sdk/models/components/feeplanagreement.go
+  - tests/mockserver/internal/sdk/models/components/feeplanagreementstatus.go
+  - tests/mockserver/internal/sdk/models/components/feeproperties.go
+  - tests/mockserver/internal/sdk/models/components/filedetails.go
+  - tests/mockserver/internal/sdk/models/components/filepurpose.go
+  - tests/mockserver/internal/sdk/models/components/filestatus.go
+  - tests/mockserver/internal/sdk/models/components/fileuploadrequestmultipart.go
+  - tests/mockserver/internal/sdk/models/components/fileuploadvalidationerror.go
+  - tests/mockserver/internal/sdk/models/components/financialinstitutions.go
+  - tests/mockserver/internal/sdk/models/components/fulfillment.go
+  - tests/mockserver/internal/sdk/models/components/fulfillmentdetails.go
+  - tests/mockserver/internal/sdk/models/components/fulfillmentdetailserror.go
+  - tests/mockserver/internal/sdk/models/components/fulfillmenterror.go
+  - tests/mockserver/internal/sdk/models/components/fulfillmentmethod.go
+  - tests/mockserver/internal/sdk/models/components/fulfillmenttimeframe.go
+  - tests/mockserver/internal/sdk/models/components/fullissuedcard.go
+  - tests/mockserver/internal/sdk/models/components/generatedby.go
+  - tests/mockserver/internal/sdk/models/components/generatedbyaccountid.go
+  - tests/mockserver/internal/sdk/models/components/generatedbybankaccountid.go
+  - tests/mockserver/internal/sdk/models/components/generatedbycardid.go
+  - tests/mockserver/internal/sdk/models/components/generatedbydisputeid.go
+  - tests/mockserver/internal/sdk/models/components/generatedbytransferid.go
+  - tests/mockserver/internal/sdk/models/components/geographicreach.go
+  - tests/mockserver/internal/sdk/models/components/governmentid.go
+  - tests/mockserver/internal/sdk/models/components/governmentiderror.go
+  - tests/mockserver/internal/sdk/models/components/granttype.go
+  - tests/mockserver/internal/sdk/models/components/guestprofile.go
+  - tests/mockserver/internal/sdk/models/components/httpmetadata.go
+  - tests/mockserver/internal/sdk/models/components/incurredfee.go
+  - tests/mockserver/internal/sdk/models/components/individualname.go
+  - tests/mockserver/internal/sdk/models/components/individualnameerror.go
+  - tests/mockserver/internal/sdk/models/components/individualnameupdate.go
+  - tests/mockserver/internal/sdk/models/components/individualprofile.go
+  - tests/mockserver/internal/sdk/models/components/industrycodes.go
+  - tests/mockserver/internal/sdk/models/components/industrytaxonomy.go
+  - tests/mockserver/internal/sdk/models/components/institutionssearchresponse.go
+  - tests/mockserver/internal/sdk/models/components/issuedcard.go
+  - tests/mockserver/internal/sdk/models/components/issuedcardauthorization.go
+  - tests/mockserver/internal/sdk/models/components/issuedcardauthorizationevent.go
+  - tests/mockserver/internal/sdk/models/components/issuedcardauthorizationeventresult.go
+  - tests/mockserver/internal/sdk/models/components/issuedcardeventtype.go
+  - tests/mockserver/internal/sdk/models/components/issuedcardformfactor.go
+  - tests/mockserver/internal/sdk/models/components/issuedcardstate.go
+  - tests/mockserver/internal/sdk/models/components/issuedcardtransaction.go
+  - tests/mockserver/internal/sdk/models/components/issuingauthorizationstatus.go
+  - tests/mockserver/internal/sdk/models/components/issuingcontrols.go
+  - tests/mockserver/internal/sdk/models/components/issuingcontrolserror.go
+  - tests/mockserver/internal/sdk/models/components/issuingintervallimit.go
+  - tests/mockserver/internal/sdk/models/components/issuingmerchantdata.go
+  - tests/mockserver/internal/sdk/models/components/issuingvelocitylimit.go
+  - tests/mockserver/internal/sdk/models/components/issuingvelocitylimiterror.go
+  - tests/mockserver/internal/sdk/models/components/jsonwebkey.go
+  - tests/mockserver/internal/sdk/models/components/linkaccountterminalapplication.go
+  - tests/mockserver/internal/sdk/models/components/linkapplepay.go
+  - tests/mockserver/internal/sdk/models/components/linkapplepaymentdata.go
+  - tests/mockserver/internal/sdk/models/components/linkapplepaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/linkapplepaytoken.go
+  - tests/mockserver/internal/sdk/models/components/linkbankaccount.go
+  - tests/mockserver/internal/sdk/models/components/linkcard.go
+  - tests/mockserver/internal/sdk/models/components/linkcardwaitfor.go
+  - tests/mockserver/internal/sdk/models/components/linkedapplepaypaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/listfeesfetchrequest.go
+  - tests/mockserver/internal/sdk/models/components/manualtermsofservice.go
+  - tests/mockserver/internal/sdk/models/components/manualtermsofserviceupdate.go
+  - tests/mockserver/internal/sdk/models/components/microdepositstatus.go
+  - tests/mockserver/internal/sdk/models/components/minimumcommitment.go
+  - tests/mockserver/internal/sdk/models/components/mode.go
+  - tests/mockserver/internal/sdk/models/components/moneytransfer.go
+  - tests/mockserver/internal/sdk/models/components/moneytransfererror.go
+  - tests/mockserver/internal/sdk/models/components/moneytransferpullfromcard.go
+  - tests/mockserver/internal/sdk/models/components/moneytransferpullfromcarderror.go
+  - tests/mockserver/internal/sdk/models/components/moneytransferpushtocard.go
+  - tests/mockserver/internal/sdk/models/components/moneytransferpushtocarderror.go
+  - tests/mockserver/internal/sdk/models/components/monthlyplatformfee.go
+  - tests/mockserver/internal/sdk/models/components/monthlyvolumerange.go
+  - tests/mockserver/internal/sdk/models/components/moovfee.go
+  - tests/mockserver/internal/sdk/models/components/moovfeedetails.go
+  - tests/mockserver/internal/sdk/models/components/moovwalletpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/mxauthorizationcode.go
+  - tests/mockserver/internal/sdk/models/components/mxpayload.go
+  - tests/mockserver/internal/sdk/models/components/occurrence.go
+  - tests/mockserver/internal/sdk/models/components/occurrencesresponse.go
+  - tests/mockserver/internal/sdk/models/components/occurrencestatus.go
+  - tests/mockserver/internal/sdk/models/components/onboardinginvite.go
+  - tests/mockserver/internal/sdk/models/components/onboardinginviterequest.go
+  - tests/mockserver/internal/sdk/models/components/onboardingpartneraccount.go
+  - tests/mockserver/internal/sdk/models/components/partialscheduleaccount.go
+  - tests/mockserver/internal/sdk/models/components/partnerpricing.go
+  - tests/mockserver/internal/sdk/models/components/partnerpricingagreement.go
+  - tests/mockserver/internal/sdk/models/components/patchaccount.go
+  - tests/mockserver/internal/sdk/models/components/patchaccounterror.go
+  - tests/mockserver/internal/sdk/models/components/patchbusiness.go
+  - tests/mockserver/internal/sdk/models/components/patchindividual.go
+  - tests/mockserver/internal/sdk/models/components/patchprofile.go
+  - tests/mockserver/internal/sdk/models/components/patchsweepconfig.go
+  - tests/mockserver/internal/sdk/models/components/patchtransfer.go
+  - tests/mockserver/internal/sdk/models/components/paymentdetailserror.go
+  - tests/mockserver/internal/sdk/models/components/paymentlink.go
+  - tests/mockserver/internal/sdk/models/components/paymentlinkcustomeroptions.go
+  - tests/mockserver/internal/sdk/models/components/paymentlinkdisplayoptions.go
+  - tests/mockserver/internal/sdk/models/components/paymentlinkdisplayoptionsupdate.go
+  - tests/mockserver/internal/sdk/models/components/paymentlinkpaymentdetails.go
+  - tests/mockserver/internal/sdk/models/components/paymentlinkpaymentdetailsupdate.go
+  - tests/mockserver/internal/sdk/models/components/paymentlinkpayoutdetails.go
+  - tests/mockserver/internal/sdk/models/components/paymentlinkpayoutdetailsupdate.go
+  - tests/mockserver/internal/sdk/models/components/paymentlinkstatus.go
+  - tests/mockserver/internal/sdk/models/components/paymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/paymentmethodsbankaccount.go
+  - tests/mockserver/internal/sdk/models/components/paymentmethodscard.go
+  - tests/mockserver/internal/sdk/models/components/paymentmethodswallet.go
+  - tests/mockserver/internal/sdk/models/components/paymentmethodtype.go
+  - tests/mockserver/internal/sdk/models/components/payoutdetailserror.go
+  - tests/mockserver/internal/sdk/models/components/payoutrecipient.go
+  - tests/mockserver/internal/sdk/models/components/payoutrecipienterror.go
+  - tests/mockserver/internal/sdk/models/components/payoutrecipientupdate.go
+  - tests/mockserver/internal/sdk/models/components/pendinglitigation.go
+  - tests/mockserver/internal/sdk/models/components/phonenumber.go
+  - tests/mockserver/internal/sdk/models/components/phonenumbererror.go
+  - tests/mockserver/internal/sdk/models/components/plaidintegration.go
+  - tests/mockserver/internal/sdk/models/components/plaidlinkintegration.go
+  - tests/mockserver/internal/sdk/models/components/plaidlinkpayload.go
+  - tests/mockserver/internal/sdk/models/components/plaidpayload.go
+  - tests/mockserver/internal/sdk/models/components/primaryregulator.go
+  - tests/mockserver/internal/sdk/models/components/profile.go
+  - tests/mockserver/internal/sdk/models/components/pullfromcardpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/pushtocardpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/qrcode.go
+  - tests/mockserver/internal/sdk/models/components/receiptkind.go
+  - tests/mockserver/internal/sdk/models/components/receiptrequest.go
+  - tests/mockserver/internal/sdk/models/components/receiptresponse.go
+  - tests/mockserver/internal/sdk/models/components/recur.go
+  - tests/mockserver/internal/sdk/models/components/refundcarddetails.go
+  - tests/mockserver/internal/sdk/models/components/refundcardstatus.go
+  - tests/mockserver/internal/sdk/models/components/refundpolicy.go
+  - tests/mockserver/internal/sdk/models/components/refundstatus.go
+  - tests/mockserver/internal/sdk/models/components/registerapplepaymerchantdomains.go
+  - tests/mockserver/internal/sdk/models/components/representative.go
+  - tests/mockserver/internal/sdk/models/components/representativeresponsibilities.go
+  - tests/mockserver/internal/sdk/models/components/representativeresponsibilitieserror.go
+  - tests/mockserver/internal/sdk/models/components/representativevalidationerror.go
+  - tests/mockserver/internal/sdk/models/components/requestcard.go
+  - tests/mockserver/internal/sdk/models/components/requirementerror.go
+  - tests/mockserver/internal/sdk/models/components/requirementerrorcode.go
+  - tests/mockserver/internal/sdk/models/components/requirementid.go
+  - tests/mockserver/internal/sdk/models/components/returnpolicytype.go
+  - tests/mockserver/internal/sdk/models/components/reversal.go
+  - tests/mockserver/internal/sdk/models/components/reversedwithcancellation.go
+  - tests/mockserver/internal/sdk/models/components/reversedwithrefund.go
+  - tests/mockserver/internal/sdk/models/components/revoketokenrequest.go
+  - tests/mockserver/internal/sdk/models/components/rtpcreditpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/rtpfailurecode.go
+  - tests/mockserver/internal/sdk/models/components/rtpinstitution.go
+  - tests/mockserver/internal/sdk/models/components/rtprejectioncode.go
+  - tests/mockserver/internal/sdk/models/components/rtpservices.go
+  - tests/mockserver/internal/sdk/models/components/rtptransactiondetails.go
+  - tests/mockserver/internal/sdk/models/components/rtptransactionstatus.go
+  - tests/mockserver/internal/sdk/models/components/runtransfer.go
+  - tests/mockserver/internal/sdk/models/components/schedulelistresponse.go
+  - tests/mockserver/internal/sdk/models/components/schedulepaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/scheduleresponse.go
+  - tests/mockserver/internal/sdk/models/components/seccode.go
+  - tests/mockserver/internal/sdk/models/components/security.go
+  - tests/mockserver/internal/sdk/models/components/sendfunds.go
+  - tests/mockserver/internal/sdk/models/components/sendfundsach.go
+  - tests/mockserver/internal/sdk/models/components/sendfundsacherror.go
+  - tests/mockserver/internal/sdk/models/components/sendfundserror.go
+  - tests/mockserver/internal/sdk/models/components/sendfundspushtocard.go
+  - tests/mockserver/internal/sdk/models/components/sendfundspushtocarderror.go
+  - tests/mockserver/internal/sdk/models/components/sendfundsrtp.go
+  - tests/mockserver/internal/sdk/models/components/sendfundsrtperror.go
+  - tests/mockserver/internal/sdk/models/components/sentreceipt.go
+  - tests/mockserver/internal/sdk/models/components/settings.go
+  - tests/mockserver/internal/sdk/models/components/sourcedestinationoptions.go
+  - tests/mockserver/internal/sdk/models/components/sweep.go
+  - tests/mockserver/internal/sdk/models/components/sweepconfig.go
+  - tests/mockserver/internal/sdk/models/components/sweepconfigpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/components/sweepconfigstatus.go
+  - tests/mockserver/internal/sdk/models/components/sweepstatus.go
+  - tests/mockserver/internal/sdk/models/components/sweepsubtotal.go
+  - tests/mockserver/internal/sdk/models/components/taxid.go
+  - tests/mockserver/internal/sdk/models/components/taxidupdate.go
+  - tests/mockserver/internal/sdk/models/components/terminalapplication.go
+  - tests/mockserver/internal/sdk/models/components/terminalapplicationplatform.go
+  - tests/mockserver/internal/sdk/models/components/terminalapplicationstatus.go
+  - tests/mockserver/internal/sdk/models/components/terminalcard.go
+  - tests/mockserver/internal/sdk/models/components/terminalconfiguration.go
+  - tests/mockserver/internal/sdk/models/components/termsofservice.go
+  - tests/mockserver/internal/sdk/models/components/termsofserviceerror.go
+  - tests/mockserver/internal/sdk/models/components/termsofservicetoken.go
+  - tests/mockserver/internal/sdk/models/components/termsofservicetokenupdate.go
+  - tests/mockserver/internal/sdk/models/components/tokentype.go
+  - tests/mockserver/internal/sdk/models/components/transactionsource.go
+  - tests/mockserver/internal/sdk/models/components/transfer.go
+  - tests/mockserver/internal/sdk/models/components/transferaccount.go
+  - tests/mockserver/internal/sdk/models/components/transferdestination.go
+  - tests/mockserver/internal/sdk/models/components/transferfailurereason.go
+  - tests/mockserver/internal/sdk/models/components/transferoptions.go
+  - tests/mockserver/internal/sdk/models/components/transferparty.go
+  - tests/mockserver/internal/sdk/models/components/transfersource.go
+  - tests/mockserver/internal/sdk/models/components/transferstatus.go
+  - tests/mockserver/internal/sdk/models/components/transferwaitfor.go
+  - tests/mockserver/internal/sdk/models/components/underwriting.go
+  - tests/mockserver/internal/sdk/models/components/underwritingstatus.go
+  - tests/mockserver/internal/sdk/models/components/updateapplepaymerchantdomains.go
+  - tests/mockserver/internal/sdk/models/components/updatebrand.go
+  - tests/mockserver/internal/sdk/models/components/updatecard.go
+  - tests/mockserver/internal/sdk/models/components/updatecardaddress.go
+  - tests/mockserver/internal/sdk/models/components/updatecardexpiration.go
+  - tests/mockserver/internal/sdk/models/components/updatecolor.go
+  - tests/mockserver/internal/sdk/models/components/updatecolors.go
+  - tests/mockserver/internal/sdk/models/components/updateevidence.go
+  - tests/mockserver/internal/sdk/models/components/updateissuedcard.go
+  - tests/mockserver/internal/sdk/models/components/updatepaymentlink.go
+  - tests/mockserver/internal/sdk/models/components/updaterepresentative.go
+  - tests/mockserver/internal/sdk/models/components/updateunderwriting.go
+  - tests/mockserver/internal/sdk/models/components/updateunderwritingerror.go
+  - tests/mockserver/internal/sdk/models/components/upsertschedule.go
+  - tests/mockserver/internal/sdk/models/components/upsertunderwriting.go
+  - tests/mockserver/internal/sdk/models/components/verification.go
+  - tests/mockserver/internal/sdk/models/components/verificationstatus.go
+  - tests/mockserver/internal/sdk/models/components/verificationstatusdetail.go
+  - tests/mockserver/internal/sdk/models/components/volumebycustomertype.go
+  - tests/mockserver/internal/sdk/models/components/volumebycustomertypeerror.go
+  - tests/mockserver/internal/sdk/models/components/volumesharebycustomertype.go
+  - tests/mockserver/internal/sdk/models/components/volumesharebycustomertypeerror.go
+  - tests/mockserver/internal/sdk/models/components/wallet.go
+  - tests/mockserver/internal/sdk/models/components/walletavailablebalance.go
+  - tests/mockserver/internal/sdk/models/components/wallettransaction.go
+  - tests/mockserver/internal/sdk/models/components/wallettransactionsourcetype.go
+  - tests/mockserver/internal/sdk/models/components/wallettransactionstatus.go
+  - tests/mockserver/internal/sdk/models/components/wallettransactiontype.go
+  - tests/mockserver/internal/sdk/models/components/webhookdata.go
+  - tests/mockserver/internal/sdk/models/components/webhookdataaccountcreated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdataaccountdeleted.go
+  - tests/mockserver/internal/sdk/models/components/webhookdataaccountupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatabalanceupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatabankaccountcreated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatabankaccountdeleted.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatabankaccountupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatacancellationcreated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatacancellationupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatacapabilityrequested.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatacapabilityupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatacardautoupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatadisputecreated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatadisputeupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatanetworkidupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatapaymentmethoddisabled.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatapaymentmethodenabled.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatarefundcreated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatarefundupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatarepresentativecreated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatarepresentativedisabled.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatarepresentativeupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatasweepcreated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatasweepupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdataterminalapplicationcreated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdataterminalapplicationupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatatransfercreated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatatransferstatus.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatatransferupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookdatawallettransactionupdated.go
+  - tests/mockserver/internal/sdk/models/components/webhookevent.go
+  - tests/mockserver/internal/sdk/models/components/webhookeventtype.go
+  - tests/mockserver/internal/sdk/models/components/webhooktransferpaymentmethoddetails.go
+  - tests/mockserver/internal/sdk/models/components/wireinstitution.go
+  - tests/mockserver/internal/sdk/models/components/wireservices.go
+  - tests/mockserver/internal/sdk/models/operations/acceptdispute.go
+  - tests/mockserver/internal/sdk/models/operations/assignaccountcountries.go
+  - tests/mockserver/internal/sdk/models/operations/cancelschedule.go
+  - tests/mockserver/internal/sdk/models/operations/completebankaccountverification.go
+  - tests/mockserver/internal/sdk/models/operations/completemicrodeposits.go
+  - tests/mockserver/internal/sdk/models/operations/createaccesstoken.go
+  - tests/mockserver/internal/sdk/models/operations/createaccount.go
+  - tests/mockserver/internal/sdk/models/operations/createapplepaysession.go
+  - tests/mockserver/internal/sdk/models/operations/createbrand.go
+  - tests/mockserver/internal/sdk/models/operations/createcancellation.go
+  - tests/mockserver/internal/sdk/models/operations/createfeeplanagreements.go
+  - tests/mockserver/internal/sdk/models/operations/createonboardinginvite.go
+  - tests/mockserver/internal/sdk/models/operations/createpaymentlink.go
+  - tests/mockserver/internal/sdk/models/operations/createreceipts.go
+  - tests/mockserver/internal/sdk/models/operations/createrepresentative.go
+  - tests/mockserver/internal/sdk/models/operations/createreversal.go
+  - tests/mockserver/internal/sdk/models/operations/createschedule.go
+  - tests/mockserver/internal/sdk/models/operations/createsweepconfig.go
+  - tests/mockserver/internal/sdk/models/operations/createterminalapplication.go
+  - tests/mockserver/internal/sdk/models/operations/createtransfer.go
+  - tests/mockserver/internal/sdk/models/operations/createtransferoptions.go
+  - tests/mockserver/internal/sdk/models/operations/createtransferoptionsforaccount.go
+  - tests/mockserver/internal/sdk/models/operations/deletedisputeevidencefile.go
+  - tests/mockserver/internal/sdk/models/operations/deleterepresentative.go
+  - tests/mockserver/internal/sdk/models/operations/deleteterminalapplication.go
+  - tests/mockserver/internal/sdk/models/operations/disablebankaccount.go
+  - tests/mockserver/internal/sdk/models/operations/disablecapability.go
+  - tests/mockserver/internal/sdk/models/operations/disablecard.go
+  - tests/mockserver/internal/sdk/models/operations/disablepaymentlink.go
+  - tests/mockserver/internal/sdk/models/operations/disconnectaccount.go
+  - tests/mockserver/internal/sdk/models/operations/generateendtoendkey.go
+  - tests/mockserver/internal/sdk/models/operations/getaccount.go
+  - tests/mockserver/internal/sdk/models/operations/getaccountcountries.go
+  - tests/mockserver/internal/sdk/models/operations/getaccountterminalapplication.go
+  - tests/mockserver/internal/sdk/models/operations/getadjustment.go
+  - tests/mockserver/internal/sdk/models/operations/getapplepaymerchantdomains.go
+  - tests/mockserver/internal/sdk/models/operations/getavatar.go
+  - tests/mockserver/internal/sdk/models/operations/getbankaccount.go
+  - tests/mockserver/internal/sdk/models/operations/getbankaccountverification.go
+  - tests/mockserver/internal/sdk/models/operations/getbrand.go
+  - tests/mockserver/internal/sdk/models/operations/getcancellation.go
+  - tests/mockserver/internal/sdk/models/operations/getcapability.go
+  - tests/mockserver/internal/sdk/models/operations/getcard.go
+  - tests/mockserver/internal/sdk/models/operations/getdispute.go
+  - tests/mockserver/internal/sdk/models/operations/getdisputeevidence.go
+  - tests/mockserver/internal/sdk/models/operations/getdisputeevidencedata.go
+  - tests/mockserver/internal/sdk/models/operations/getenrichmentaddress.go
+  - tests/mockserver/internal/sdk/models/operations/getenrichmentprofile.go
+  - tests/mockserver/internal/sdk/models/operations/getfiledetails.go
+  - tests/mockserver/internal/sdk/models/operations/getfullissuedcard.go
+  - tests/mockserver/internal/sdk/models/operations/getissuedcard.go
+  - tests/mockserver/internal/sdk/models/operations/getissuedcardauthorization.go
+  - tests/mockserver/internal/sdk/models/operations/getissuedcardtransaction.go
+  - tests/mockserver/internal/sdk/models/operations/getmerchantprocessingagreement.go
+  - tests/mockserver/internal/sdk/models/operations/getonboardinginvite.go
+  - tests/mockserver/internal/sdk/models/operations/getpaymentlink.go
+  - tests/mockserver/internal/sdk/models/operations/getpaymentlinkqrcode.go
+  - tests/mockserver/internal/sdk/models/operations/getpaymentmethod.go
+  - tests/mockserver/internal/sdk/models/operations/getrefund.go
+  - tests/mockserver/internal/sdk/models/operations/getrepresentative.go
+  - tests/mockserver/internal/sdk/models/operations/getscheduledoccurrence.go
+  - tests/mockserver/internal/sdk/models/operations/getschedules.go
+  - tests/mockserver/internal/sdk/models/operations/getsweep.go
+  - tests/mockserver/internal/sdk/models/operations/getsweepconfig.go
+  - tests/mockserver/internal/sdk/models/operations/getterminalapplication.go
+  - tests/mockserver/internal/sdk/models/operations/getterminalconfiguration.go
+  - tests/mockserver/internal/sdk/models/operations/gettermsofservicetoken.go
+  - tests/mockserver/internal/sdk/models/operations/gettransfer.go
+  - tests/mockserver/internal/sdk/models/operations/getunderwriting.go
+  - tests/mockserver/internal/sdk/models/operations/getwallet.go
+  - tests/mockserver/internal/sdk/models/operations/getwallettransaction.go
+  - tests/mockserver/internal/sdk/models/operations/initiatebankaccountverification.go
+  - tests/mockserver/internal/sdk/models/operations/initiatemicrodeposits.go
+  - tests/mockserver/internal/sdk/models/operations/initiaterefund.go
+  - tests/mockserver/internal/sdk/models/operations/linkaccountterminalapplication.go
+  - tests/mockserver/internal/sdk/models/operations/linkapplepaytoken.go
+  - tests/mockserver/internal/sdk/models/operations/linkbankaccount.go
+  - tests/mockserver/internal/sdk/models/operations/linkcard.go
+  - tests/mockserver/internal/sdk/models/operations/listaccounts.go
+  - tests/mockserver/internal/sdk/models/operations/listaccountterminalapplications.go
+  - tests/mockserver/internal/sdk/models/operations/listadjustments.go
+  - tests/mockserver/internal/sdk/models/operations/listbankaccounts.go
+  - tests/mockserver/internal/sdk/models/operations/listcapabilities.go
+  - tests/mockserver/internal/sdk/models/operations/listcards.go
+  - tests/mockserver/internal/sdk/models/operations/listdisputeevidence.go
+  - tests/mockserver/internal/sdk/models/operations/listdisputes.go
+  - tests/mockserver/internal/sdk/models/operations/listfeeplanagreements.go
+  - tests/mockserver/internal/sdk/models/operations/listfeeplans.go
+  - tests/mockserver/internal/sdk/models/operations/listfeesfetch.go
+  - tests/mockserver/internal/sdk/models/operations/listfiles.go
+  - tests/mockserver/internal/sdk/models/operations/listindustries.go
+  - tests/mockserver/internal/sdk/models/operations/listinstitutions.go
+  - tests/mockserver/internal/sdk/models/operations/listissuedcardauthorizationevents.go
+  - tests/mockserver/internal/sdk/models/operations/listissuedcardauthorizations.go
+  - tests/mockserver/internal/sdk/models/operations/listissuedcards.go
+  - tests/mockserver/internal/sdk/models/operations/listissuedcardtransactions.go
+  - tests/mockserver/internal/sdk/models/operations/listonboardinginvites.go
+  - tests/mockserver/internal/sdk/models/operations/listpartnerpricing.go
+  - tests/mockserver/internal/sdk/models/operations/listpartnerpricingagreements.go
+  - tests/mockserver/internal/sdk/models/operations/listpaymentlinks.go
+  - tests/mockserver/internal/sdk/models/operations/listpaymentmethods.go
+  - tests/mockserver/internal/sdk/models/operations/listreceipts.go
+  - tests/mockserver/internal/sdk/models/operations/listrefunds.go
+  - tests/mockserver/internal/sdk/models/operations/listrepresentatives.go
+  - tests/mockserver/internal/sdk/models/operations/listschedules.go
+  - tests/mockserver/internal/sdk/models/operations/listsweepconfigs.go
+  - tests/mockserver/internal/sdk/models/operations/listsweeps.go
+  - tests/mockserver/internal/sdk/models/operations/listterminalapplications.go
+  - tests/mockserver/internal/sdk/models/operations/listtransfers.go
+  - tests/mockserver/internal/sdk/models/operations/listwallets.go
+  - tests/mockserver/internal/sdk/models/operations/listwallettransactions.go
+  - tests/mockserver/internal/sdk/models/operations/ping.go
+  - tests/mockserver/internal/sdk/models/operations/registerapplepaymerchantdomains.go
+  - tests/mockserver/internal/sdk/models/operations/requestcapabilities.go
+  - tests/mockserver/internal/sdk/models/operations/requestcard.go
+  - tests/mockserver/internal/sdk/models/operations/retrievefees.go
+  - tests/mockserver/internal/sdk/models/operations/revokeaccesstoken.go
+  - tests/mockserver/internal/sdk/models/operations/revokeonboardinginvite.go
+  - tests/mockserver/internal/sdk/models/operations/saveunderwriting.go
+  - tests/mockserver/internal/sdk/models/operations/searchinstitutions.go
+  - tests/mockserver/internal/sdk/models/operations/submitdisputeevidence.go
+  - tests/mockserver/internal/sdk/models/operations/testendtoendtoken.go
+  - tests/mockserver/internal/sdk/models/operations/updateaccount.go
+  - tests/mockserver/internal/sdk/models/operations/updateapplepaymerchantdomains.go
+  - tests/mockserver/internal/sdk/models/operations/updatebrand.go
+  - tests/mockserver/internal/sdk/models/operations/updatecard.go
+  - tests/mockserver/internal/sdk/models/operations/updatedisputeevidence.go
+  - tests/mockserver/internal/sdk/models/operations/updateissuedcard.go
+  - tests/mockserver/internal/sdk/models/operations/updatepaymentlink.go
+  - tests/mockserver/internal/sdk/models/operations/updaterepresentative.go
+  - tests/mockserver/internal/sdk/models/operations/updateschedule.go
+  - tests/mockserver/internal/sdk/models/operations/updatesweepconfig.go
+  - tests/mockserver/internal/sdk/models/operations/updatetransfer.go
+  - tests/mockserver/internal/sdk/models/operations/uploaddisputeevidencefile.go
+  - tests/mockserver/internal/sdk/models/operations/uploaddisputeevidencetext.go
+  - tests/mockserver/internal/sdk/models/operations/uploadfile.go
+  - tests/mockserver/internal/sdk/models/operations/upsertbrand.go
+  - tests/mockserver/internal/sdk/models/operations/upsertunderwriting.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/accountterminalapplicationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/addcapabilitieserror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/assigncountrieserror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/authtokenrequesterror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/bankaccountvalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/brandvalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/cardacquiringrefunderror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/createaccount.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/createpaymentlinkerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/createsweepconfigerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/feeplanagreementerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/fileuploadvalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/filevalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/genericerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/linkapplepayerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/linkcarderror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/microdepositvalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/onboardinginviteerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/patchsweepconfigerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/refundvalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/representativevalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/requestcarderror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/reversalvalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/revoketokenrequesterror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/schedulevalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/terminalapplicationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/transfererror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/transferoptionsvalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/transfervalidationerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/updateaccount.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/updatecarderror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/updateissuedcarderror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/updatepaymentlinkerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/updateunderwritingerror.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/upsertunderwritingerror.go
+  - tests/mockserver/internal/sdk/types/bigint.go
+  - tests/mockserver/internal/sdk/types/date.go
+  - tests/mockserver/internal/sdk/types/datetime.go
+  - tests/mockserver/internal/sdk/types/decimal.go
+  - tests/mockserver/internal/sdk/types/jsonl/jsonl.go
+  - tests/mockserver/internal/sdk/types/pointers.go
+  - tests/mockserver/internal/sdk/utils/json.go
+  - tests/mockserver/internal/sdk/utils/reflect.go
+  - tests/mockserver/internal/sdk/utils/sort.go
+  - tests/mockserver/internal/server/doc.go
+  - tests/mockserver/internal/server/generated_handlers.go
+  - tests/mockserver/internal/server/internal_handlers.go
+  - tests/mockserver/internal/server/server.go
+  - tests/mockserver/internal/server/server_option.go
+  - tests/mockserver/internal/server/templates/log/index.html.tmpl
+  - tests/mockserver/internal/server/templates/log/operation.html.tmpl
+  - tests/mockserver/internal/server/templates/log/style.css.tmpl
+  - tests/mockserver/internal/tracking/requesttracker.go
+  - tests/mockserver/main.go
 examples:
   createAccount:
     speakeasy-default-create-account:
@@ -3117,7 +3857,7 @@ examples:
           x-moov-version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"averageTransactionSize": 808922, "maxTransactionSize": 971571, "averageMonthlyTransactionVolume": 770579, "status": "pending", "volumeByCustomerType": {"businessToBusinessPercentage": 34876, "consumerToBusinessPercentage": 321682}, "cardVolumeDistribution": {"ecommercePercentage": 371017, "cardPresentPercentage": 897389, "mailOrPhonePercentage": 257332, "debtRepaymentPercentage": 643662}, "fulfillment": {"hasPhysicalGoods": false, "isShippingProduct": true, "shipmentDurationDays": 116118, "returnPolicy": "other"}}
+          application/json: {}
   upsertUnderwriting:
     speakeasy-default-upsert-underwriting:
       parameters:
@@ -3129,7 +3869,7 @@ examples:
         application/json: {"averageTransactionSize": 622191, "maxTransactionSize": 123692, "averageMonthlyTransactionVolume": 438164, "volumeByCustomerType": {"businessToBusinessPercentage": 671399, "consumerToBusinessPercentage": 482010}, "cardVolumeDistribution": {"ecommercePercentage": 47450, "cardPresentPercentage": 146275, "mailOrPhonePercentage": 309315, "debtRepaymentPercentage": 990303}, "fulfillment": {"hasPhysicalGoods": true, "isShippingProduct": true, "shipmentDurationDays": 388451, "returnPolicy": "other"}}
       responses:
         "200":
-          application/json: {"averageTransactionSize": 272674, "maxTransactionSize": 313833, "averageMonthlyTransactionVolume": 43330, "status": "pendingReview", "volumeByCustomerType": {"businessToBusinessPercentage": 671399, "consumerToBusinessPercentage": 482010}, "cardVolumeDistribution": {"ecommercePercentage": 47450, "cardPresentPercentage": 146275, "mailOrPhonePercentage": 309315, "debtRepaymentPercentage": 990303}, "fulfillment": {"hasPhysicalGoods": true, "isShippingProduct": true, "shipmentDurationDays": 388451, "returnPolicy": "other"}}
+          application/json: {}
         "400":
           application/json: {"error": "<value>"}
         "422":
@@ -3574,6 +4314,22 @@ examples:
       responses:
         "200":
           application/json: {"sourceOptions": [{"paymentMethodID": "eb230495-a226-4829-9d02-3f844444cc8a", "paymentMethodType": "ach-credit-same-day", "bankAccount": {"bankAccountID": "5085fc54-58da-43e8-bbf0-577eceb9d83a", "fingerprint": "<value>", "status": "pending", "holderName": "<value>", "holderType": "individual", "bankName": "<value>", "bankAccountType": "checking", "routingNumber": "<value>", "lastFourAccountNumber": "<value>", "updatedOn": "2024-11-08T07:29:55.577Z"}}], "destinationOptions": [{"paymentMethodID": "e561dbd2-aaea-4556-a271-1ba0eb9f81a7", "paymentMethodType": "ach-debit-fund", "bankAccount": {"bankAccountID": "5085fc54-58da-43e8-bbf0-577eceb9d83a", "fingerprint": "<value>", "status": "pending", "holderName": "<value>", "holderType": "individual", "bankName": "<value>", "bankAccountType": "checking", "routingNumber": "<value>", "lastFourAccountNumber": "<value>", "updatedOn": "2024-11-08T07:29:55.577Z"}}]}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  saveUnderwriting:
+    speakeasy-default-save-underwriting:
+      parameters:
+        path:
+          accountID: "ffe3ca1b-de3f-4305-8d8c-cfd28f279cad"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
         "400":
           application/json: {"error": "<value>"}
         "422":

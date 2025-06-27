@@ -8,7 +8,8 @@ from .webhooktransferpaymentmethoddetails import (
 )
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class WebhookDataTransferUpdatedTypedDict(TypedDict):
@@ -20,6 +21,7 @@ class WebhookDataTransferUpdatedTypedDict(TypedDict):
     r"""Payment method details for the source or destination of a transfer."""
     destination: WebhookTransferPaymentMethodDetailsTypedDict
     r"""Payment method details for the source or destination of a transfer."""
+    foreign_id: NotRequired[str]
 
 
 class WebhookDataTransferUpdated(BaseModel):
@@ -35,3 +37,5 @@ class WebhookDataTransferUpdated(BaseModel):
 
     destination: WebhookTransferPaymentMethodDetails
     r"""Payment method details for the source or destination of a transfer."""
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None

@@ -28,6 +28,8 @@ class CreateTransferTypedDict(TypedDict):
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
     sales_tax_amount: NotRequired[AmountTypedDict]
     r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
+    foreign_id: NotRequired[str]
+    r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
 
 class CreateTransfer(BaseModel):
@@ -54,3 +56,6 @@ class CreateTransfer(BaseModel):
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
     r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
+    r"""Optional alias from a foreign/external system which can be used to reference this resource."""

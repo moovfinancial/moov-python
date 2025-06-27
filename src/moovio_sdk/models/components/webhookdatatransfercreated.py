@@ -4,7 +4,8 @@ from __future__ import annotations
 from .webhookdatatransferstatus import WebhookDataTransferStatus
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class WebhookDataTransferCreatedTypedDict(TypedDict):
@@ -12,6 +13,7 @@ class WebhookDataTransferCreatedTypedDict(TypedDict):
     r"""The accountID which facilitated the transfer."""
     transfer_id: str
     status: WebhookDataTransferStatus
+    foreign_id: NotRequired[str]
 
 
 class WebhookDataTransferCreated(BaseModel):
@@ -21,3 +23,5 @@ class WebhookDataTransferCreated(BaseModel):
     transfer_id: Annotated[str, pydantic.Field(alias="transferID")]
 
     status: WebhookDataTransferStatus
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None

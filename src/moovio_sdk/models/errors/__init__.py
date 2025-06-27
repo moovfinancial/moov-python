@@ -90,6 +90,10 @@ if TYPE_CHECKING:
         UpdateUnderwritingErrorError,
         UpdateUnderwritingErrorErrorTypedDict,
     )
+    from .upsertunderwritingerror import (
+        UpsertUnderwritingError,
+        UpsertUnderwritingErrorData,
+    )
 
 __all__ = [
     "APIError",
@@ -167,6 +171,8 @@ __all__ = [
     "UpdateUnderwritingErrorData",
     "UpdateUnderwritingErrorError",
     "UpdateUnderwritingErrorErrorTypedDict",
+    "UpsertUnderwritingError",
+    "UpsertUnderwritingErrorData",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -245,6 +251,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateUnderwritingErrorData": ".updateunderwritingerror",
     "UpdateUnderwritingErrorError": ".updateunderwritingerror",
     "UpdateUnderwritingErrorErrorTypedDict": ".updateunderwritingerror",
+    "UpsertUnderwritingError": ".upsertunderwritingerror",
+    "UpsertUnderwritingErrorData": ".upsertunderwritingerror",
 }
 
 

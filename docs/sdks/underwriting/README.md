@@ -11,6 +11,12 @@ Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [save](#save) - Create or update the account's underwriting.
+
+Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 * [upsert](#upsert) - Create or update the account's underwriting.
 
 Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
@@ -65,6 +71,63 @@ with Moov(
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## save
+
+Create or update the account's underwriting.
+
+Read our [underwriting guide](https://docs.moov.io/guides/accounts/requirements/underwriting/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.write` scope.
+
+### Example Usage
+
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="v2024.01.00",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.underwriting.save(account_id="ffe3ca1b-de3f-4305-8d8c-cfd28f279cad")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `account_id`                                                                                           | *str*                                                                                                  | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `geographic_reach`                                                                                     | [Optional[components.GeographicReach]](../../models/components/geographicreach.md)                     | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `business_presence`                                                                                    | [Optional[components.BusinessPresence]](../../models/components/businesspresence.md)                   | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `pending_litigation`                                                                                   | [Optional[components.PendingLitigation]](../../models/components/pendinglitigation.md)                 | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `volume_share_by_customer_type`                                                                        | [Optional[components.VolumeShareByCustomerType]](../../models/components/volumesharebycustomertype.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `collect_funds`                                                                                        | [Optional[components.CollectFunds]](../../models/components/collectfunds.md)                           | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `money_transfer`                                                                                       | [Optional[components.MoneyTransfer]](../../models/components/moneytransfer.md)                         | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `send_funds`                                                                                           | [Optional[components.SendFunds]](../../models/components/sendfunds.md)                                 | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `retries`                                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                       | :heavy_minus_sign:                                                                                     | Configuration to override the default retry behavior of the client.                                    |
+
+### Response
+
+**[operations.SaveUnderwritingResponse](../../models/operations/saveunderwritingresponse.md)**
+
+### Errors
+
+| Error Type                     | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| errors.GenericError            | 400, 409                       | application/json               |
+| errors.UpsertUnderwritingError | 422                            | application/json               |
+| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
 ## upsert
 

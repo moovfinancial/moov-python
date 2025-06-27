@@ -70,6 +70,8 @@ class ListTransfersRequestTypedDict(TypedDict):
     r"""Optional parameter to only return refunded transfers."""
     disputed: NotRequired[bool]
     r"""Optional parameter to only return disputed transfers."""
+    foreign_id: NotRequired[str]
+    r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     skip: NotRequired[int]
     count: NotRequired[int]
 
@@ -140,6 +142,13 @@ class ListTransfersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""Optional parameter to only return disputed transfers."""
+
+    foreign_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="foreignID"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
     skip: Annotated[
         Optional[int],

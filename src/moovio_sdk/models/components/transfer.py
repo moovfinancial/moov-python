@@ -58,6 +58,8 @@ class TransferTypedDict(TypedDict):
     payment_link_code: NotRequired[str]
     sales_tax_amount: NotRequired[AmountTypedDict]
     r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
+    foreign_id: NotRequired[str]
+    r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
 
 class Transfer(BaseModel):
@@ -144,3 +146,6 @@ class Transfer(BaseModel):
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
     r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
+    r"""Optional alias from a foreign/external system which can be used to reference this resource."""

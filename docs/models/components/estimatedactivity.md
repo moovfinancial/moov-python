@@ -1,0 +1,10 @@
+# EstimatedActivity
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `average_transaction_amount`                                                             | *Optional[int]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `maximum_transaction_amount`                                                             | *Optional[int]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `monthly_volume_range`                                                                   | [Optional[components.MonthlyVolumeRange]](../../models/components/monthlyvolumerange.md) | :heavy_minus_sign:                                                                       | The low value in each range is included. The high value in each range is excluded.       |

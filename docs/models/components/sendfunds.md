@@ -1,0 +1,10 @@
+# SendFunds
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ach`                                                                                      | [Optional[components.SendFundsAch]](../../models/components/sendfundsach.md)               | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `push_to_card`                                                                             | [Optional[components.SendFundsPushToCard]](../../models/components/sendfundspushtocard.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `rtp`                                                                                      | [Optional[components.SendFundsRtp]](../../models/components/sendfundsrtp.md)               | :heavy_minus_sign:                                                                         | N/A                                                                                        |

@@ -359,6 +359,7 @@ class Transfers(BaseSDK):
         sales_tax_amount: Optional[
             Union[components.Amount, components.AmountTypedDict]
         ] = None,
+        foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -381,6 +382,7 @@ class Transfers(BaseSDK):
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -416,6 +418,7 @@ class Transfers(BaseSDK):
                 sales_tax_amount=utils.get_pydantic_model(
                     sales_tax_amount, Optional[components.Amount]
                 ),
+                foreign_id=foreign_id,
             ),
         )
 
@@ -553,6 +556,7 @@ class Transfers(BaseSDK):
         sales_tax_amount: Optional[
             Union[components.Amount, components.AmountTypedDict]
         ] = None,
+        foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -575,6 +579,7 @@ class Transfers(BaseSDK):
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -610,6 +615,7 @@ class Transfers(BaseSDK):
                 sales_tax_amount=utils.get_pydantic_model(
                     sales_tax_amount, Optional[components.Amount]
                 ),
+                foreign_id=foreign_id,
             ),
         )
 
@@ -738,6 +744,7 @@ class Transfers(BaseSDK):
         payment_link_code: Optional[str] = None,
         refunded: Optional[bool] = None,
         disputed: Optional[bool] = None,
+        foreign_id: Optional[str] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -767,6 +774,7 @@ class Transfers(BaseSDK):
         :param payment_link_code: Optional code to filter for transfers associated with the payment link.
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
+        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -794,6 +802,7 @@ class Transfers(BaseSDK):
             payment_link_code=payment_link_code,
             refunded=refunded,
             disputed=disputed,
+            foreign_id=foreign_id,
             skip=skip,
             count=count,
             account_id=account_id,
@@ -889,6 +898,7 @@ class Transfers(BaseSDK):
         payment_link_code: Optional[str] = None,
         refunded: Optional[bool] = None,
         disputed: Optional[bool] = None,
+        foreign_id: Optional[str] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -918,6 +928,7 @@ class Transfers(BaseSDK):
         :param payment_link_code: Optional code to filter for transfers associated with the payment link.
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
+        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -945,6 +956,7 @@ class Transfers(BaseSDK):
             payment_link_code=payment_link_code,
             refunded=refunded,
             disputed=disputed,
+            foreign_id=foreign_id,
             skip=skip,
             count=count,
             account_id=account_id,
