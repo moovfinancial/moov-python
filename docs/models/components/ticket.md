@@ -1,0 +1,16 @@
+# Ticket
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `ticket_id`                                                          | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `number`                                                             | *int*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `title`                                                              | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `contact`                                                            | [components.TicketContact](../../models/components/ticketcontact.md) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `status`                                                             | [components.TicketStatus](../../models/components/ticketstatus.md)   | :heavy_check_mark:                                                   | N/A                                                                  |
+| `created_on`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `updated_on`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `latest_message_on`                                                  | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `closed_on`                                                          | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |

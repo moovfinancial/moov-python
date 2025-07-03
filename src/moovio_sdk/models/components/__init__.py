@@ -319,6 +319,11 @@ if TYPE_CHECKING:
         CreateTerminalApplication,
         CreateTerminalApplicationTypedDict,
     )
+    from .createticket import CreateTicket, CreateTicketTypedDict
+    from .createticketcontacterror import (
+        CreateTicketContactError,
+        CreateTicketContactErrorTypedDict,
+    )
     from .createtransfer import CreateTransfer, CreateTransferTypedDict
     from .createtransferdestination import (
         CreateTransferDestination,
@@ -840,6 +845,10 @@ if TYPE_CHECKING:
         TermsOfServiceTokenUpdate,
         TermsOfServiceTokenUpdateTypedDict,
     )
+    from .ticket import Ticket, TicketTypedDict
+    from .ticketcontact import TicketContact, TicketContactTypedDict
+    from .ticketmessage import TicketMessage, TicketMessageTypedDict
+    from .ticketstatus import TicketStatus
     from .tokentype import TokenType
     from .transactionsource import TransactionSource
     from .transfer import Transfer, TransferTypedDict
@@ -891,6 +900,8 @@ if TYPE_CHECKING:
         UpdateRepresentativeSsnTypedDict,
         UpdateRepresentativeTypedDict,
     )
+    from .updateticket import UpdateTicket, UpdateTicketTypedDict
+    from .updateticketstatus import UpdateTicketStatus
     from .updateunderwriting import UpdateUnderwriting, UpdateUnderwritingTypedDict
     from .upsertschedule import UpsertSchedule, UpsertScheduleTypedDict
     from .upsertunderwriting import UpsertUnderwriting, UpsertUnderwritingTypedDict
@@ -1327,6 +1338,10 @@ __all__ = [
     "CreateSweepConfigTypedDict",
     "CreateTerminalApplication",
     "CreateTerminalApplicationTypedDict",
+    "CreateTicket",
+    "CreateTicketContactError",
+    "CreateTicketContactErrorTypedDict",
+    "CreateTicketTypedDict",
     "CreateTransfer",
     "CreateTransferDestination",
     "CreateTransferDestinationACH",
@@ -1784,6 +1799,13 @@ __all__ = [
     "TermsOfServiceTokenUpdate",
     "TermsOfServiceTokenUpdateTypedDict",
     "TermsOfServiceTypedDict",
+    "Ticket",
+    "TicketContact",
+    "TicketContactTypedDict",
+    "TicketMessage",
+    "TicketMessageTypedDict",
+    "TicketStatus",
+    "TicketTypedDict",
     "TokenType",
     "TokenTypeHint",
     "TransactionSource",
@@ -1838,6 +1860,9 @@ __all__ = [
     "UpdateRepresentativeSsn",
     "UpdateRepresentativeSsnTypedDict",
     "UpdateRepresentativeTypedDict",
+    "UpdateTicket",
+    "UpdateTicketStatus",
+    "UpdateTicketTypedDict",
     "UpdateUnderwriting",
     "UpdateUnderwritingTypedDict",
     "UpsertSchedule",
@@ -2218,6 +2243,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateSweepConfigTypedDict": ".createsweepconfig",
     "CreateTerminalApplication": ".createterminalapplication",
     "CreateTerminalApplicationTypedDict": ".createterminalapplication",
+    "CreateTicket": ".createticket",
+    "CreateTicketTypedDict": ".createticket",
+    "CreateTicketContactError": ".createticketcontacterror",
+    "CreateTicketContactErrorTypedDict": ".createticketcontacterror",
     "CreateTransfer": ".createtransfer",
     "CreateTransferTypedDict": ".createtransfer",
     "CreateTransferDestination": ".createtransferdestination",
@@ -2669,6 +2698,13 @@ _dynamic_imports: dict[str, str] = {
     "TermsOfServiceTokenTypedDict": ".termsofservicetoken",
     "TermsOfServiceTokenUpdate": ".termsofservicetokenupdate",
     "TermsOfServiceTokenUpdateTypedDict": ".termsofservicetokenupdate",
+    "Ticket": ".ticket",
+    "TicketTypedDict": ".ticket",
+    "TicketContact": ".ticketcontact",
+    "TicketContactTypedDict": ".ticketcontact",
+    "TicketMessage": ".ticketmessage",
+    "TicketMessageTypedDict": ".ticketmessage",
+    "TicketStatus": ".ticketstatus",
     "TokenType": ".tokentype",
     "TransactionSource": ".transactionsource",
     "Transfer": ".transfer",
@@ -2728,6 +2764,9 @@ _dynamic_imports: dict[str, str] = {
     "UpdateRepresentativeSsn": ".updaterepresentative",
     "UpdateRepresentativeSsnTypedDict": ".updaterepresentative",
     "UpdateRepresentativeTypedDict": ".updaterepresentative",
+    "UpdateTicket": ".updateticket",
+    "UpdateTicketTypedDict": ".updateticket",
+    "UpdateTicketStatus": ".updateticketstatus",
     "UpdateUnderwriting": ".updateunderwriting",
     "UpdateUnderwritingTypedDict": ".updateunderwriting",
     "UpsertSchedule": ".upsertschedule",

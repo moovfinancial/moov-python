@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from datetime import datetime
-from moovio_sdk import utils
+import httpx
 from moovio_sdk.models.components import (
     amount as components_amount,
     cancellation as components_cancellation,
@@ -16,6 +16,7 @@ from moovio_sdk.models.components import (
     transfersource as components_transfersource,
     transferstatus as components_transferstatus,
 )
+from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
 import pydantic
 from typing import Dict, List, Optional
@@ -114,13 +115,17 @@ class TransferData(BaseModel):
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
 
-class Transfer(Exception):
+class Transfer(MoovError):
     r"""Details of a Transfer."""
 
     data: TransferData
 
-    def __init__(self, data: TransferData):
+    def __init__(
+        self,
+        data: TransferData,
+        raw_response: httpx.Response,
+        body: Optional[str] = None,
+    ):
+        message = body or raw_response.text
+        super().__init__(message, raw_response, body)
         self.data = data
-
-    def __str__(self) -> str:
-        return utils.marshal_json(self.data, TransferData)

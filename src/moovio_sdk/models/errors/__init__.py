@@ -27,6 +27,7 @@ if TYPE_CHECKING:
         CreateSweepConfigError,
         CreateSweepConfigErrorData,
     )
+    from .createticketerror import CreateTicketError, CreateTicketErrorData
     from .feeplanagreementerror import FeePlanAgreementError, FeePlanAgreementErrorData
     from .fileuploadvalidationerror import (
         File,
@@ -42,6 +43,8 @@ if TYPE_CHECKING:
         MicroDepositValidationError,
         MicroDepositValidationErrorData,
     )
+    from .mooverror import MoovError
+    from .no_response_error import NoResponseError
     from .onboardinginviteerror import OnboardingInviteError, OnboardingInviteErrorData
     from .patchsweepconfigerror import PatchSweepConfigError, PatchSweepConfigErrorData
     from .refundvalidationerror import RefundValidationError, RefundValidationErrorData
@@ -52,6 +55,7 @@ if TYPE_CHECKING:
         RepresentativeValidationErrorData,
     )
     from .requestcarderror import RequestCardError, RequestCardErrorData
+    from .responsevalidationerror import ResponseValidationError
     from .reversalvalidationerror import (
         ReversalValidationError,
         ReversalValidationErrorData,
@@ -84,6 +88,7 @@ if TYPE_CHECKING:
         UpdatePaymentLinkError,
         UpdatePaymentLinkErrorData,
     )
+    from .updateticketerror import UpdateTicketError, UpdateTicketErrorData
     from .updateunderwritingerror import (
         UpdateUnderwritingError,
         UpdateUnderwritingErrorData,
@@ -117,6 +122,8 @@ __all__ = [
     "CreatePaymentLinkErrorData",
     "CreateSweepConfigError",
     "CreateSweepConfigErrorData",
+    "CreateTicketError",
+    "CreateTicketErrorData",
     "Error",
     "ErrorTypedDict",
     "FeePlanAgreementError",
@@ -135,6 +142,8 @@ __all__ = [
     "LinkCardErrorData",
     "MicroDepositValidationError",
     "MicroDepositValidationErrorData",
+    "MoovError",
+    "NoResponseError",
     "OnboardingInviteError",
     "OnboardingInviteErrorData",
     "PatchSweepConfigError",
@@ -145,6 +154,7 @@ __all__ = [
     "RepresentativeValidationErrorData",
     "RequestCardError",
     "RequestCardErrorData",
+    "ResponseValidationError",
     "ReversalValidationError",
     "ReversalValidationErrorData",
     "RevokeTokenRequestError",
@@ -167,6 +177,8 @@ __all__ = [
     "UpdateIssuedCardErrorData",
     "UpdatePaymentLinkError",
     "UpdatePaymentLinkErrorData",
+    "UpdateTicketError",
+    "UpdateTicketErrorData",
     "UpdateUnderwritingError",
     "UpdateUnderwritingErrorData",
     "UpdateUnderwritingErrorError",
@@ -197,6 +209,8 @@ _dynamic_imports: dict[str, str] = {
     "CreatePaymentLinkErrorData": ".createpaymentlinkerror",
     "CreateSweepConfigError": ".createsweepconfigerror",
     "CreateSweepConfigErrorData": ".createsweepconfigerror",
+    "CreateTicketError": ".createticketerror",
+    "CreateTicketErrorData": ".createticketerror",
     "FeePlanAgreementError": ".feeplanagreementerror",
     "FeePlanAgreementErrorData": ".feeplanagreementerror",
     "File": ".fileuploadvalidationerror",
@@ -213,6 +227,8 @@ _dynamic_imports: dict[str, str] = {
     "LinkCardErrorData": ".linkcarderror",
     "MicroDepositValidationError": ".microdepositvalidationerror",
     "MicroDepositValidationErrorData": ".microdepositvalidationerror",
+    "MoovError": ".mooverror",
+    "NoResponseError": ".no_response_error",
     "OnboardingInviteError": ".onboardinginviteerror",
     "OnboardingInviteErrorData": ".onboardinginviteerror",
     "PatchSweepConfigError": ".patchsweepconfigerror",
@@ -225,6 +241,7 @@ _dynamic_imports: dict[str, str] = {
     "RepresentativeValidationErrorData": ".representativevalidationerror",
     "RequestCardError": ".requestcarderror",
     "RequestCardErrorData": ".requestcarderror",
+    "ResponseValidationError": ".responsevalidationerror",
     "ReversalValidationError": ".reversalvalidationerror",
     "ReversalValidationErrorData": ".reversalvalidationerror",
     "RevokeTokenRequestError": ".revoketokenrequesterror",
@@ -247,6 +264,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateIssuedCardErrorData": ".updateissuedcarderror",
     "UpdatePaymentLinkError": ".updatepaymentlinkerror",
     "UpdatePaymentLinkErrorData": ".updatepaymentlinkerror",
+    "UpdateTicketError": ".updateticketerror",
+    "UpdateTicketErrorData": ".updateticketerror",
     "UpdateUnderwritingError": ".updateunderwritingerror",
     "UpdateUnderwritingErrorData": ".updateunderwritingerror",
     "UpdateUnderwritingErrorError": ".updateunderwritingerror",

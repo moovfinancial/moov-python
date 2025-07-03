@@ -1,0 +1,10 @@
+# CreateTicketError
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `title`                                                                                              | *Optional[str]*                                                                                      | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `body`                                                                                               | *Optional[str]*                                                                                      | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `contact`                                                                                            | [Optional[components.CreateTicketContactError]](../../models/components/createticketcontacterror.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
