@@ -6,6 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -135,16 +136,14 @@ class CardIssuing(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.RequestCardResponse(
-                result=utils.unmarshal_json_response(components.IssuedCard, http_res),
+                result=unmarshal_json_response(components.IssuedCard, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RequestCardErrorData, http_res
             )
             raise errors.RequestCardError(response_data, http_res)
@@ -288,16 +287,14 @@ class CardIssuing(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.RequestCardResponse(
-                result=utils.unmarshal_json_response(components.IssuedCard, http_res),
+                result=unmarshal_json_response(components.IssuedCard, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RequestCardErrorData, http_res
             )
             raise errors.RequestCardError(response_data, http_res)
@@ -403,9 +400,7 @@ class CardIssuing(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIssuedCardsResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.IssuedCard], http_res
-                ),
+                result=unmarshal_json_response(List[components.IssuedCard], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -510,9 +505,7 @@ class CardIssuing(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIssuedCardsResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.IssuedCard], http_res
-                ),
+                result=unmarshal_json_response(List[components.IssuedCard], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -611,7 +604,7 @@ class CardIssuing(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetIssuedCardResponse(
-                result=utils.unmarshal_json_response(components.IssuedCard, http_res),
+                result=unmarshal_json_response(components.IssuedCard, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -710,7 +703,7 @@ class CardIssuing(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetIssuedCardResponse(
-                result=utils.unmarshal_json_response(components.IssuedCard, http_res),
+                result=unmarshal_json_response(components.IssuedCard, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -850,12 +843,10 @@ class CardIssuing(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UpdateIssuedCardErrorData, http_res
             )
             raise errors.UpdateIssuedCardError(response_data, http_res)
@@ -996,12 +987,10 @@ class CardIssuing(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UpdateIssuedCardErrorData, http_res
             )
             raise errors.UpdateIssuedCardError(response_data, http_res)
@@ -1103,9 +1092,7 @@ class CardIssuing(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetFullIssuedCardResponse(
-                result=utils.unmarshal_json_response(
-                    components.FullIssuedCard, http_res
-                ),
+                result=unmarshal_json_response(components.FullIssuedCard, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1206,9 +1193,7 @@ class CardIssuing(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetFullIssuedCardResponse(
-                result=utils.unmarshal_json_response(
-                    components.FullIssuedCard, http_res
-                ),
+                result=unmarshal_json_response(components.FullIssuedCard, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):

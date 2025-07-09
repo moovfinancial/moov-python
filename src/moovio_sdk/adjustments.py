@@ -6,6 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import List, Mapping, Optional
 
 
@@ -91,9 +92,7 @@ class Adjustments(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListAdjustmentsResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.Adjustment], http_res
-                ),
+                result=unmarshal_json_response(List[components.Adjustment], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -192,9 +191,7 @@ class Adjustments(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListAdjustmentsResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.Adjustment], http_res
-                ),
+                result=unmarshal_json_response(List[components.Adjustment], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -293,7 +290,7 @@ class Adjustments(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetAdjustmentResponse(
-                result=utils.unmarshal_json_response(components.Adjustment, http_res),
+                result=unmarshal_json_response(components.Adjustment, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -392,7 +389,7 @@ class Adjustments(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetAdjustmentResponse(
-                result=utils.unmarshal_json_response(components.Adjustment, http_res),
+                result=unmarshal_json_response(components.Adjustment, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):

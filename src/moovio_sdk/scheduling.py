@@ -6,6 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -119,18 +120,14 @@ class Scheduling(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateScheduleResponse(
-                result=utils.unmarshal_json_response(
-                    components.ScheduleResponse, http_res
-                ),
+                result=unmarshal_json_response(components.ScheduleResponse, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.ScheduleValidationErrorData, http_res
             )
             raise errors.ScheduleValidationError(response_data, http_res)
@@ -258,18 +255,14 @@ class Scheduling(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateScheduleResponse(
-                result=utils.unmarshal_json_response(
-                    components.ScheduleResponse, http_res
-                ),
+                result=unmarshal_json_response(components.ScheduleResponse, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.ScheduleValidationErrorData, http_res
             )
             raise errors.ScheduleValidationError(response_data, http_res)
@@ -375,7 +368,7 @@ class Scheduling(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListSchedulesResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.ScheduleListResponse], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -482,7 +475,7 @@ class Scheduling(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListSchedulesResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.ScheduleListResponse], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -614,18 +607,14 @@ class Scheduling(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateScheduleResponse(
-                result=utils.unmarshal_json_response(
-                    components.ScheduleResponse, http_res
-                ),
+                result=unmarshal_json_response(components.ScheduleResponse, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.ScheduleValidationErrorData, http_res
             )
             raise errors.ScheduleValidationError(response_data, http_res)
@@ -756,18 +745,14 @@ class Scheduling(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateScheduleResponse(
-                result=utils.unmarshal_json_response(
-                    components.ScheduleResponse, http_res
-                ),
+                result=unmarshal_json_response(components.ScheduleResponse, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.ScheduleValidationErrorData, http_res
             )
             raise errors.ScheduleValidationError(response_data, http_res)
@@ -867,9 +852,7 @@ class Scheduling(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetSchedulesResponse(
-                result=utils.unmarshal_json_response(
-                    components.ScheduleResponse, http_res
-                ),
+                result=unmarshal_json_response(components.ScheduleResponse, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -968,9 +951,7 @@ class Scheduling(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetSchedulesResponse(
-                result=utils.unmarshal_json_response(
-                    components.ScheduleResponse, http_res
-                ),
+                result=unmarshal_json_response(components.ScheduleResponse, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1084,9 +1065,7 @@ class Scheduling(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1199,9 +1178,7 @@ class Scheduling(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1302,7 +1279,7 @@ class Scheduling(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetScheduledOccurrenceResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.OccurrencesResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -1406,7 +1383,7 @@ class Scheduling(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetScheduledOccurrenceResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.OccurrencesResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),

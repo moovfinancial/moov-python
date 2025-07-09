@@ -7,6 +7,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Dict, List, Mapping, Optional, Union
 
 
@@ -133,18 +134,14 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferOptionsForAccountResponse(
-                result=utils.unmarshal_json_response(
-                    components.TransferOptions, http_res
-                ),
+                result=unmarshal_json_response(components.TransferOptions, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.TransferOptionsValidationErrorData, http_res
             )
             raise errors.TransferOptionsValidationError(response_data, http_res)
@@ -285,18 +282,14 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferOptionsForAccountResponse(
-                result=utils.unmarshal_json_response(
-                    components.TransferOptions, http_res
-                ),
+                result=unmarshal_json_response(components.TransferOptions, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.TransferOptionsValidationErrorData, http_res
             )
             raise errors.TransferOptionsValidationError(response_data, http_res)
@@ -458,33 +451,27 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferResponse(
-                result=utils.unmarshal_json_response(
-                    components.CreatedTransfer, http_res
-                ),
+                result=unmarshal_json_response(components.CreatedTransfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "201", "application/json"):
             return operations.CreateTransferResponse(
-                result=utils.unmarshal_json_response(
-                    components.AsyncTransfer, http_res
-                ),
+                result=unmarshal_json_response(components.AsyncTransfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "202", "application/json"):
             return operations.CreateTransferResponse(
-                result=utils.unmarshal_json_response(components.Transfer, http_res),
+                result=unmarshal_json_response(components.Transfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json_response(errors.TransferData, http_res)
+            response_data = unmarshal_json_response(errors.TransferData, http_res)
             raise errors.Transfer(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.TransferValidationErrorData, http_res
             )
             raise errors.TransferValidationError(response_data, http_res)
@@ -646,33 +633,27 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferResponse(
-                result=utils.unmarshal_json_response(
-                    components.CreatedTransfer, http_res
-                ),
+                result=unmarshal_json_response(components.CreatedTransfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "201", "application/json"):
             return operations.CreateTransferResponse(
-                result=utils.unmarshal_json_response(
-                    components.AsyncTransfer, http_res
-                ),
+                result=unmarshal_json_response(components.AsyncTransfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "202", "application/json"):
             return operations.CreateTransferResponse(
-                result=utils.unmarshal_json_response(components.Transfer, http_res),
+                result=unmarshal_json_response(components.Transfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json_response(errors.TransferData, http_res)
+            response_data = unmarshal_json_response(errors.TransferData, http_res)
             raise errors.Transfer(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.TransferValidationErrorData, http_res
             )
             raise errors.TransferValidationError(response_data, http_res)
@@ -812,9 +793,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListTransfersResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.Transfer], http_res
-                ),
+                result=unmarshal_json_response(List[components.Transfer], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -953,9 +932,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListTransfersResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.Transfer], http_res
-                ),
+                result=unmarshal_json_response(List[components.Transfer], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -1057,7 +1034,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetTransferResponse(
-                result=utils.unmarshal_json_response(components.Transfer, http_res),
+                result=unmarshal_json_response(components.Transfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1159,7 +1136,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetTransferResponse(
-                result=utils.unmarshal_json_response(components.Transfer, http_res),
+                result=unmarshal_json_response(components.Transfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1183,6 +1160,7 @@ class Transfers(BaseSDK):
         transfer_id: str,
         account_id: str,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
+        foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1198,6 +1176,7 @@ class Transfers(BaseSDK):
         :param transfer_id: Identifier for the transfer.
         :param account_id:
         :param metadata:
+        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1218,6 +1197,7 @@ class Transfers(BaseSDK):
             account_id=account_id,
             patch_transfer=components.PatchTransfer(
                 metadata=metadata,
+                foreign_id=foreign_id,
             ),
         )
 
@@ -1268,7 +1248,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateTransferResponse(
-                result=utils.unmarshal_json_response(components.Transfer, http_res),
+                result=unmarshal_json_response(components.Transfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1292,6 +1272,7 @@ class Transfers(BaseSDK):
         transfer_id: str,
         account_id: str,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
+        foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1307,6 +1288,7 @@ class Transfers(BaseSDK):
         :param transfer_id: Identifier for the transfer.
         :param account_id:
         :param metadata:
+        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1327,6 +1309,7 @@ class Transfers(BaseSDK):
             account_id=account_id,
             patch_transfer=components.PatchTransfer(
                 metadata=metadata,
+                foreign_id=foreign_id,
             ),
         )
 
@@ -1377,7 +1360,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateTransferResponse(
-                result=utils.unmarshal_json_response(components.Transfer, http_res),
+                result=unmarshal_json_response(components.Transfer, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1487,13 +1470,11 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, ["200", "202"], "application/json"):
             return operations.CreateCancellationResponse(
-                result=utils.unmarshal_json_response(components.Cancellation, http_res),
+                result=unmarshal_json_response(components.Cancellation, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1602,13 +1583,11 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, ["200", "202"], "application/json"):
             return operations.CreateCancellationResponse(
-                result=utils.unmarshal_json_response(components.Cancellation, http_res),
+                result=unmarshal_json_response(components.Cancellation, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1709,7 +1688,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetCancellationResponse(
-                result=utils.unmarshal_json_response(components.Cancellation, http_res),
+                result=unmarshal_json_response(components.Cancellation, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1811,7 +1790,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetCancellationResponse(
-                result=utils.unmarshal_json_response(components.Cancellation, http_res),
+                result=unmarshal_json_response(components.Cancellation, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1942,30 +1921,28 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.InitiateRefundResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.CreateRefundResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "202", "application/json"):
             return operations.InitiateRefundResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.CardAcquiringRefund, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.CardAcquiringRefundData, http_res
             )
             raise errors.CardAcquiringRefund(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RefundValidationErrorData, http_res
             )
             raise errors.RefundValidationError(response_data, http_res)
@@ -2097,30 +2074,28 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.InitiateRefundResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.CreateRefundResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "202", "application/json"):
             return operations.InitiateRefundResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.CardAcquiringRefund, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.CardAcquiringRefundData, http_res
             )
             raise errors.CardAcquiringRefund(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RefundValidationErrorData, http_res
             )
             raise errors.RefundValidationError(response_data, http_res)
@@ -2220,7 +2195,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListRefundsResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.CardAcquiringRefund], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -2321,7 +2296,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListRefundsResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.CardAcquiringRefund], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -2425,7 +2400,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetRefundResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.CardAcquiringRefund, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -2529,7 +2504,7 @@ class Transfers(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetRefundResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.CardAcquiringRefund, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -2660,16 +2635,14 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, ["200", "202"], "application/json"):
             return operations.CreateReversalResponse(
-                result=utils.unmarshal_json_response(components.Reversal, http_res),
+                result=unmarshal_json_response(components.Reversal, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.ReversalValidationErrorData, http_res
             )
             raise errors.ReversalValidationError(response_data, http_res)
@@ -2799,16 +2772,14 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, ["200", "202"], "application/json"):
             return operations.CreateReversalResponse(
-                result=utils.unmarshal_json_response(components.Reversal, http_res),
+                result=unmarshal_json_response(components.Reversal, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.ReversalValidationErrorData, http_res
             )
             raise errors.ReversalValidationError(response_data, http_res)
@@ -2938,18 +2909,14 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferOptionsResponse(
-                result=utils.unmarshal_json_response(
-                    components.TransferOptions, http_res
-                ),
+                result=unmarshal_json_response(components.TransferOptions, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.TransferOptionsValidationErrorData, http_res
             )
             raise errors.TransferOptionsValidationError(response_data, http_res)
@@ -3079,18 +3046,14 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferOptionsResponse(
-                result=utils.unmarshal_json_response(
-                    components.TransferOptions, http_res
-                ),
+                result=unmarshal_json_response(components.TransferOptions, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.TransferOptionsValidationErrorData, http_res
             )
             raise errors.TransferOptionsValidationError(response_data, http_res)

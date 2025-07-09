@@ -7,6 +7,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import List, Mapping, Optional
 
 
@@ -107,7 +108,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIssuedCardAuthorizationsResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.IssuedCardAuthorization], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -223,7 +224,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIssuedCardAuthorizationsResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.IssuedCardAuthorization], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -324,7 +325,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetIssuedCardAuthorizationResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.IssuedCardAuthorization, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -425,7 +426,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetIssuedCardAuthorizationResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.IssuedCardAuthorization, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -532,7 +533,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIssuedCardAuthorizationEventsResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.IssuedCardAuthorizationEvent], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -639,7 +640,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIssuedCardAuthorizationEventsResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.IssuedCardAuthorizationEvent], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -752,7 +753,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIssuedCardTransactionsResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.IssuedCardTransaction], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -865,7 +866,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIssuedCardTransactionsResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.IssuedCardTransaction], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -966,7 +967,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetIssuedCardTransactionResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.IssuedCardTransaction, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -1067,7 +1068,7 @@ class IssuingTransactions(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetIssuedCardTransactionResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.IssuedCardTransaction, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),

@@ -6,6 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import BaseModel, OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Mapping, Optional, Union, cast
 
 
@@ -90,9 +91,7 @@ class Industries(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIndustriesResponse(
-                result=utils.unmarshal_json_response(
-                    components.EnrichedIndustries, http_res
-                ),
+                result=unmarshal_json_response(components.EnrichedIndustries, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -190,9 +189,7 @@ class Industries(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListIndustriesResponse(
-                result=utils.unmarshal_json_response(
-                    components.EnrichedIndustries, http_res
-                ),
+                result=unmarshal_json_response(components.EnrichedIndustries, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):

@@ -6,6 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional
 
 
@@ -103,12 +104,10 @@ class Authentication(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RevokeTokenRequestErrorData, http_res
             )
             raise errors.RevokeTokenRequestError(response_data, http_res)
@@ -220,12 +219,10 @@ class Authentication(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RevokeTokenRequestErrorData, http_res
             )
             raise errors.RevokeTokenRequestError(response_data, http_res)
@@ -335,16 +332,14 @@ class Authentication(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateAccessTokenResponse(
-                result=utils.unmarshal_json_response(components.AuthToken, http_res),
+                result=unmarshal_json_response(components.AuthToken, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.AuthTokenRequestErrorData, http_res
             )
             raise errors.AuthTokenRequestError(response_data, http_res)
@@ -454,16 +449,14 @@ class Authentication(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateAccessTokenResponse(
-                result=utils.unmarshal_json_response(components.AuthToken, http_res),
+                result=unmarshal_json_response(components.AuthToken, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.AuthTokenRequestErrorData, http_res
             )
             raise errors.AuthTokenRequestError(response_data, http_res)

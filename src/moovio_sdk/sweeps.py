@@ -6,6 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -128,16 +129,14 @@ class Sweeps(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateSweepConfigResponse(
-                result=utils.unmarshal_json_response(components.SweepConfig, http_res),
+                result=unmarshal_json_response(components.SweepConfig, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.CreateSweepConfigErrorData, http_res
             )
             raise errors.CreateSweepConfigError(response_data, http_res)
@@ -274,16 +273,14 @@ class Sweeps(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateSweepConfigResponse(
-                result=utils.unmarshal_json_response(components.SweepConfig, http_res),
+                result=unmarshal_json_response(components.SweepConfig, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.CreateSweepConfigErrorData, http_res
             )
             raise errors.CreateSweepConfigError(response_data, http_res)
@@ -380,9 +377,7 @@ class Sweeps(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListSweepConfigsResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.SweepConfig], http_res
-                ),
+                result=unmarshal_json_response(List[components.SweepConfig], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -478,9 +473,7 @@ class Sweeps(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListSweepConfigsResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.SweepConfig], http_res
-                ),
+                result=unmarshal_json_response(List[components.SweepConfig], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -579,7 +572,7 @@ class Sweeps(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetSweepConfigResponse(
-                result=utils.unmarshal_json_response(components.SweepConfig, http_res),
+                result=unmarshal_json_response(components.SweepConfig, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -678,7 +671,7 @@ class Sweeps(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetSweepConfigResponse(
-                result=utils.unmarshal_json_response(components.SweepConfig, http_res),
+                result=unmarshal_json_response(components.SweepConfig, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -835,16 +828,14 @@ class Sweeps(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateSweepConfigResponse(
-                result=utils.unmarshal_json_response(components.SweepConfig, http_res),
+                result=unmarshal_json_response(components.SweepConfig, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.PatchSweepConfigErrorData, http_res
             )
             raise errors.PatchSweepConfigError(response_data, http_res)
@@ -1002,16 +993,14 @@ class Sweeps(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateSweepConfigResponse(
-                result=utils.unmarshal_json_response(components.SweepConfig, http_res),
+                result=unmarshal_json_response(components.SweepConfig, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.PatchSweepConfigErrorData, http_res
             )
             raise errors.PatchSweepConfigError(response_data, http_res)
@@ -1123,7 +1112,7 @@ class Sweeps(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListSweepsResponse(
-                result=utils.unmarshal_json_response(List[components.Sweep], http_res),
+                result=unmarshal_json_response(List[components.Sweep], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -1234,7 +1223,7 @@ class Sweeps(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListSweepsResponse(
-                result=utils.unmarshal_json_response(List[components.Sweep], http_res),
+                result=unmarshal_json_response(List[components.Sweep], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -1336,7 +1325,7 @@ class Sweeps(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetSweepResponse(
-                result=utils.unmarshal_json_response(components.Sweep, http_res),
+                result=unmarshal_json_response(components.Sweep, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1438,7 +1427,7 @@ class Sweeps(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetSweepResponse(
-                result=utils.unmarshal_json_response(components.Sweep, http_res),
+                result=unmarshal_json_response(components.Sweep, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):

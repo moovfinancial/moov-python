@@ -6,6 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -153,18 +154,14 @@ class Representatives(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateRepresentativeResponse(
-                result=utils.unmarshal_json_response(
-                    components.Representative, http_res
-                ),
+                result=unmarshal_json_response(components.Representative, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RepresentativeValidationErrorData, http_res
             )
             raise errors.RepresentativeValidationError(response_data, http_res)
@@ -326,18 +323,14 @@ class Representatives(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateRepresentativeResponse(
-                result=utils.unmarshal_json_response(
-                    components.Representative, http_res
-                ),
+                result=unmarshal_json_response(components.Representative, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.RepresentativeValidationErrorData, http_res
             )
             raise errors.RepresentativeValidationError(response_data, http_res)
@@ -437,7 +430,7 @@ class Representatives(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListRepresentativesResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.Representative], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -538,7 +531,7 @@ class Representatives(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListRepresentativesResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.Representative], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -654,9 +647,7 @@ class Representatives(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -769,9 +760,7 @@ class Representatives(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -869,9 +858,7 @@ class Representatives(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetRepresentativeResponse(
-                result=utils.unmarshal_json_response(
-                    components.Representative, http_res
-                ),
+                result=unmarshal_json_response(components.Representative, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -970,9 +957,7 @@ class Representatives(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetRepresentativeResponse(
-                result=utils.unmarshal_json_response(
-                    components.Representative, http_res
-                ),
+                result=unmarshal_json_response(components.Representative, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1168,15 +1153,11 @@ class Representatives(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateRepresentativeResponse(
-                result=utils.unmarshal_json_response(
-                    components.Representative, http_res
-                ),
+                result=unmarshal_json_response(components.Representative, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1371,15 +1352,11 @@ class Representatives(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateRepresentativeResponse(
-                result=utils.unmarshal_json_response(
-                    components.Representative, http_res
-                ),
+                result=unmarshal_json_response(components.Representative, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

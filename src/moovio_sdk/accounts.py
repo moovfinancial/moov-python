@@ -6,6 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Dict, List, Mapping, Optional, Union
 
 
@@ -152,16 +153,14 @@ class Accounts(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateAccountResponse(
-                result=utils.unmarshal_json_response(components.Account, http_res),
+                result=unmarshal_json_response(components.Account, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.CreateAccountResponseBodyData, http_res
             )
             raise errors.CreateAccountResponseBody(response_data, http_res)
@@ -322,16 +321,14 @@ class Accounts(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateAccountResponse(
-                result=utils.unmarshal_json_response(components.Account, http_res),
+                result=unmarshal_json_response(components.Account, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.CreateAccountResponseBodyData, http_res
             )
             raise errors.CreateAccountResponseBody(response_data, http_res)
@@ -459,9 +456,7 @@ class Accounts(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListAccountsResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.Account], http_res
-                ),
+                result=unmarshal_json_response(List[components.Account], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -588,9 +583,7 @@ class Accounts(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListAccountsResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.Account], http_res
-                ),
+                result=unmarshal_json_response(List[components.Account], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -686,7 +679,7 @@ class Accounts(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetAccountResponse(
-                result=utils.unmarshal_json_response(components.Account, http_res),
+                result=unmarshal_json_response(components.Account, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -782,7 +775,7 @@ class Accounts(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetAccountResponse(
-                result=utils.unmarshal_json_response(components.Account, http_res),
+                result=unmarshal_json_response(components.Account, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -948,16 +941,14 @@ class Accounts(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateAccountResponse(
-                result=utils.unmarshal_json_response(components.Account, http_res),
+                result=unmarshal_json_response(components.Account, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UpdateAccountResponseBodyData, http_res
             )
             raise errors.UpdateAccountResponseBody(response_data, http_res)
@@ -1124,16 +1115,14 @@ class Accounts(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateAccountResponse(
-                result=utils.unmarshal_json_response(components.Account, http_res),
+                result=unmarshal_json_response(components.Account, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UpdateAccountResponseBodyData, http_res
             )
             raise errors.UpdateAccountResponseBody(response_data, http_res)
@@ -1247,9 +1236,7 @@ class Accounts(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1361,9 +1348,7 @@ class Accounts(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1458,9 +1443,7 @@ class Accounts(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetAccountCountriesResponse(
-                result=utils.unmarshal_json_response(
-                    components.AccountCountries, http_res
-                ),
+                result=unmarshal_json_response(components.AccountCountries, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1556,9 +1539,7 @@ class Accounts(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetAccountCountriesResponse(
-                result=utils.unmarshal_json_response(
-                    components.AccountCountries, http_res
-                ),
+                result=unmarshal_json_response(components.AccountCountries, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1681,18 +1662,14 @@ class Accounts(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.AssignAccountCountriesResponse(
-                result=utils.unmarshal_json_response(
-                    components.AccountCountries, http_res
-                ),
+                result=unmarshal_json_response(components.AccountCountries, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.AssignCountriesErrorData, http_res
             )
             raise errors.AssignCountriesError(response_data, http_res)
@@ -1816,18 +1793,14 @@ class Accounts(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.AssignAccountCountriesResponse(
-                result=utils.unmarshal_json_response(
-                    components.AccountCountries, http_res
-                ),
+                result=unmarshal_json_response(components.AccountCountries, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.AssignCountriesErrorData, http_res
             )
             raise errors.AssignCountriesError(response_data, http_res)
@@ -2122,7 +2095,7 @@ class Accounts(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetTermsOfServiceTokenResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.TermsOfServiceToken, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -2224,7 +2197,7 @@ class Accounts(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetTermsOfServiceTokenResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.TermsOfServiceToken, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),

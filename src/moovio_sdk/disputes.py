@@ -8,6 +8,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -145,15 +146,11 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListDisputesResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.Dispute], http_res
-                ),
+                result=unmarshal_json_response(List[components.Dispute], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -297,15 +294,11 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListDisputesResponse(
-                result=utils.unmarshal_json_response(
-                    List[components.Dispute], http_res
-                ),
+                result=unmarshal_json_response(List[components.Dispute], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -405,7 +398,7 @@ class Disputes(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetDisputeResponse(
-                result=utils.unmarshal_json_response(components.Dispute, http_res),
+                result=unmarshal_json_response(components.Dispute, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -506,7 +499,7 @@ class Disputes(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetDisputeResponse(
-                result=utils.unmarshal_json_response(components.Dispute, http_res),
+                result=unmarshal_json_response(components.Dispute, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -619,13 +612,11 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.AcceptDisputeResponse(
-                result=utils.unmarshal_json_response(components.Dispute, http_res),
+                result=unmarshal_json_response(components.Dispute, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -737,13 +728,11 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.AcceptDisputeResponse(
-                result=utils.unmarshal_json_response(components.Dispute, http_res),
+                result=unmarshal_json_response(components.Dispute, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -843,7 +832,7 @@ class Disputes(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListDisputeEvidenceResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.DisputeEvidenceResponse], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -946,7 +935,7 @@ class Disputes(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListDisputeEvidenceResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     List[components.DisputeEvidenceResponse], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -1077,18 +1066,16 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return operations.UploadDisputeEvidenceFileResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.EvidenceUploadResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.FileUploadValidationErrorData, http_res
             )
             raise errors.FileUploadValidationError(response_data, http_res)
@@ -1218,18 +1205,16 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return operations.UploadDisputeEvidenceFileResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.EvidenceUploadResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.FileUploadValidationErrorData, http_res
             )
             raise errors.FileUploadValidationError(response_data, http_res)
@@ -1358,15 +1343,13 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return operations.UploadDisputeEvidenceTextResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.EvidenceTextResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1493,15 +1476,13 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return operations.UploadDisputeEvidenceTextResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.EvidenceTextResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1616,13 +1597,11 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.SubmitDisputeEvidenceResponse(
-                result=utils.unmarshal_json_response(components.Dispute, http_res),
+                result=unmarshal_json_response(components.Dispute, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1737,13 +1716,11 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.SubmitDisputeEvidenceResponse(
-                result=utils.unmarshal_json_response(components.Dispute, http_res),
+                result=unmarshal_json_response(components.Dispute, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1846,7 +1823,7 @@ class Disputes(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetDisputeEvidenceResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.DisputeEvidenceResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -1952,7 +1929,7 @@ class Disputes(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetDisputeEvidenceResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.DisputeEvidenceResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
@@ -2080,15 +2057,13 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateDisputeEvidenceResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.DisputeEvidenceResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -2213,15 +2188,13 @@ class Disputes(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateDisputeEvidenceResponse(
-                result=utils.unmarshal_json_response(
+                result=unmarshal_json_response(
                     components.DisputeEvidenceResponse, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -2338,9 +2311,7 @@ class Disputes(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -2457,9 +2428,7 @@ class Disputes(BaseSDK):
                 headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, "409", "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

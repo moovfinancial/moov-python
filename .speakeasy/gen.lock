@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 1684a0f11f7760bfb4620038a1f6cdf8
+  docChecksum: 525918b1c136191399263f262a27e53d
   docVersion: latest
-  speakeasyVersion: 1.575.4
-  generationVersion: 2.648.7
-  releaseVersion: 0.13.1
-  configChecksum: 825c073fffe1245fa5924ab31086be3c
+  speakeasyVersion: 1.580.0
+  generationVersion: 2.654.2
+  releaseVersion: 0.13.2
+  configChecksum: 05e00fb232e4b25a568a5686d32ac971
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -40,7 +40,6 @@ features:
     uploadStreams: 1.0.0
 generatedFiles:
   - .gitattributes
-  - .python-version
   - .vscode/settings.json
   - USAGE.md
   - docs/models/components/account.md
@@ -1753,6 +1752,7 @@ generatedFiles:
   - src/moovio_sdk/utils/retries.py
   - src/moovio_sdk/utils/security.py
   - src/moovio_sdk/utils/serializers.py
+  - src/moovio_sdk/utils/unmarshal_json_response.py
   - src/moovio_sdk/utils/url.py
   - src/moovio_sdk/utils/values.py
   - src/moovio_sdk/wallet_transactions.py

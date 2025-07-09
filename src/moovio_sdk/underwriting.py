@@ -6,6 +6,7 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional, Union
 
 
@@ -90,7 +91,7 @@ class Underwriting(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetUnderwritingResponse(
-                result=utils.unmarshal_json_response(components.Underwriting, http_res),
+                result=unmarshal_json_response(components.Underwriting, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -188,7 +189,7 @@ class Underwriting(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetUnderwritingResponse(
-                result=utils.unmarshal_json_response(components.Underwriting, http_res),
+                result=unmarshal_json_response(components.Underwriting, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -349,16 +350,14 @@ class Underwriting(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.SaveUnderwritingResponse(
-                result=utils.unmarshal_json_response(components.Underwriting, http_res),
+                result=unmarshal_json_response(components.Underwriting, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UpsertUnderwritingErrorData, http_res
             )
             raise errors.UpsertUnderwritingError(response_data, http_res)
@@ -520,16 +519,14 @@ class Underwriting(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.SaveUnderwritingResponse(
-                result=utils.unmarshal_json_response(components.Underwriting, http_res),
+                result=unmarshal_json_response(components.Underwriting, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UpsertUnderwritingErrorData, http_res
             )
             raise errors.UpsertUnderwritingError(response_data, http_res)
@@ -681,16 +678,14 @@ class Underwriting(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpsertUnderwritingResponse(
-                result=utils.unmarshal_json_response(components.Underwriting, http_res),
+                result=unmarshal_json_response(components.Underwriting, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UpdateUnderwritingErrorData, http_res
             )
             raise errors.UpdateUnderwritingError(response_data, http_res)
@@ -842,16 +837,14 @@ class Underwriting(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.UpsertUnderwritingResponse(
-                result=utils.unmarshal_json_response(components.Underwriting, http_res),
+                result=unmarshal_json_response(components.Underwriting, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
-            response_data = utils.unmarshal_json_response(
-                errors.GenericErrorData, http_res
-            )
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
-            response_data = utils.unmarshal_json_response(
+            response_data = unmarshal_json_response(
                 errors.UpdateUnderwritingErrorData, http_res
             )
             raise errors.UpdateUnderwritingError(response_data, http_res)
