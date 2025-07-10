@@ -3,12 +3,7 @@
 from __future__ import annotations
 from moovio_sdk.models.components import ticketmessage as components_ticketmessage
 from moovio_sdk.types import BaseModel
-from moovio_sdk.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    PathParamMetadata,
-    QueryParamMetadata,
-)
+from moovio_sdk.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -49,8 +44,6 @@ class ListTicketMessagesGlobals(BaseModel):
 class ListTicketMessagesRequestTypedDict(TypedDict):
     account_id: str
     ticket_id: str
-    skip: NotRequired[int]
-    count: NotRequired[int]
 
 
 class ListTicketMessagesRequest(BaseModel):
@@ -65,16 +58,6 @@ class ListTicketMessagesRequest(BaseModel):
         pydantic.Field(alias="ticketID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
-
-    skip: Annotated[
-        Optional[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-
-    count: Annotated[
-        Optional[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
 
 
 class ListTicketMessagesResponseTypedDict(TypedDict):

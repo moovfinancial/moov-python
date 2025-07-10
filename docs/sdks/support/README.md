@@ -8,30 +8,30 @@
 * [create_ticket](#create_ticket) - Create a support ticket for a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 * [list_tickets](#list_tickets) - List all the support tickets created under a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 * [get_ticket](#get_ticket) - Retrieve a support ticket by ID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 * [update_ticket](#update_ticket) - Updates a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 * [list_ticket_messages](#list_ticket_messages) - List all the messages for a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ## create_ticket
 
 Create a support ticket for a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
 ### Example Usage
 
@@ -84,7 +84,7 @@ with Moov(
 List all the support tickets created under a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ### Example Usage
 
@@ -101,7 +101,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.support.list_tickets(account_id="8ef75c13-2a50-4438-b294-2a850eb4986d", skip=60, count=20)
+    res = moov.support.list_tickets(account_id="8ef75c13-2a50-4438-b294-2a850eb4986d", count=20)
 
     # Handle response
     print(res)
@@ -113,7 +113,7 @@ with Moov(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
-| `skip`                                                              | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 | 60                                                                  |
+| `cursor`                                                            | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |                                                                     |
 | `count`                                                             | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 | 20                                                                  |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
@@ -132,7 +132,7 @@ with Moov(
 Retrieve a support ticket by ID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ### Example Usage
 
@@ -179,7 +179,7 @@ with Moov(
 Updates a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
 ### Example Usage
 
@@ -229,7 +229,7 @@ with Moov(
 List all the messages for a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ### Example Usage
 
@@ -246,7 +246,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.support.list_ticket_messages(account_id="72444918-8529-4986-b10c-41817e45d09e", ticket_id="edeaab65-c54c-45b8-881b-19138f125fb1", skip=60, count=20)
+    res = moov.support.list_ticket_messages(account_id="72444918-8529-4986-b10c-41817e45d09e", ticket_id="edeaab65-c54c-45b8-881b-19138f125fb1")
 
     # Handle response
     print(res)
@@ -255,13 +255,11 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
-| `ticket_id`                                                         | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |                                                                     |
-| `skip`                                                              | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 | 60                                                                  |
-| `count`                                                             | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 | 20                                                                  |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `ticket_id`                                                         | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 

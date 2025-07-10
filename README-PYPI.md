@@ -993,23 +993,23 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 * [create_ticket](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/support/README.md#create_ticket) - Create a support ticket for a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 * [list_tickets](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/support/README.md#list_tickets) - List all the support tickets created under a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 * [get_ticket](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/support/README.md#get_ticket) - Retrieve a support ticket by ID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 * [update_ticket](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/support/README.md#update_ticket) - Updates a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.write` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 * [list_ticket_messages](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/support/README.md#list_ticket_messages) - List all the messages for a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/support.read` scope.
+you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
 ### [sweeps](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/sweeps/README.md)
 

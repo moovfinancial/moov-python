@@ -26,7 +26,7 @@ class Support(BaseSDK):
         r"""Create a support ticket for a Moov account.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.write` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
         :param account_id:
         :param title:
@@ -157,7 +157,7 @@ class Support(BaseSDK):
         r"""Create a support ticket for a Moov account.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.write` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
         :param account_id:
         :param title:
@@ -277,7 +277,7 @@ class Support(BaseSDK):
         self,
         *,
         account_id: str,
-        skip: Optional[int] = None,
+        cursor: Optional[str] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -287,10 +287,10 @@ class Support(BaseSDK):
         r"""List all the support tickets created under a Moov account.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.read` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
         :param account_id:
-        :param skip:
+        :param cursor:
         :param count:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -308,7 +308,7 @@ class Support(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListTicketsRequest(
-            skip=skip,
+            cursor=cursor,
             count=count,
             account_id=account_id,
         )
@@ -379,7 +379,7 @@ class Support(BaseSDK):
         self,
         *,
         account_id: str,
-        skip: Optional[int] = None,
+        cursor: Optional[str] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -389,10 +389,10 @@ class Support(BaseSDK):
         r"""List all the support tickets created under a Moov account.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.read` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
         :param account_id:
-        :param skip:
+        :param cursor:
         :param count:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -410,7 +410,7 @@ class Support(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListTicketsRequest(
-            skip=skip,
+            cursor=cursor,
             count=count,
             account_id=account_id,
         )
@@ -490,7 +490,7 @@ class Support(BaseSDK):
         r"""Retrieve a support ticket by ID.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.read` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
         :param account_id:
         :param ticket_id:
@@ -589,7 +589,7 @@ class Support(BaseSDK):
         r"""Retrieve a support ticket by ID.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.read` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
         :param account_id:
         :param ticket_id:
@@ -689,7 +689,7 @@ class Support(BaseSDK):
         r"""Updates a support ticket.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.write` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
         :param account_id:
         :param ticket_id:
@@ -817,7 +817,7 @@ class Support(BaseSDK):
         r"""Updates a support ticket.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.write` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
         :param account_id:
         :param ticket_id:
@@ -936,8 +936,6 @@ class Support(BaseSDK):
         *,
         account_id: str,
         ticket_id: str,
-        skip: Optional[int] = None,
-        count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -946,12 +944,10 @@ class Support(BaseSDK):
         r"""List all the messages for a support ticket.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.read` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
         :param account_id:
         :param ticket_id:
-        :param skip:
-        :param count:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -968,8 +964,6 @@ class Support(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListTicketMessagesRequest(
-            skip=skip,
-            count=count,
             account_id=account_id,
             ticket_id=ticket_id,
         )
@@ -1043,8 +1037,6 @@ class Support(BaseSDK):
         *,
         account_id: str,
         ticket_id: str,
-        skip: Optional[int] = None,
-        count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1053,12 +1045,10 @@ class Support(BaseSDK):
         r"""List all the messages for a support ticket.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/support.read` scope.
+        you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
         :param account_id:
         :param ticket_id:
-        :param skip:
-        :param count:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1075,8 +1065,6 @@ class Support(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListTicketMessagesRequest(
-            skip=skip,
-            count=count,
             account_id=account_id,
             ticket_id=ticket_id,
         )

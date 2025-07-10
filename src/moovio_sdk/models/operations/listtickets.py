@@ -48,7 +48,7 @@ class ListTicketsGlobals(BaseModel):
 
 class ListTicketsRequestTypedDict(TypedDict):
     account_id: str
-    skip: NotRequired[int]
+    cursor: NotRequired[str]
     count: NotRequired[int]
 
 
@@ -59,8 +59,8 @@ class ListTicketsRequest(BaseModel):
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
 
-    skip: Annotated[
-        Optional[int],
+    cursor: Annotated[
+        Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
 
