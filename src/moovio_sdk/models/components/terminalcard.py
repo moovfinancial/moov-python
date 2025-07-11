@@ -36,6 +36,10 @@ class TerminalCardTypedDict(TypedDict):
     r"""Country where the card was issued."""
     last_four_card_number: NotRequired[str]
     r"""Last four digits of the card number"""
+    application_id: NotRequired[str]
+    r"""Identifier for the point of sale terminal application."""
+    application_name: NotRequired[str]
+    r"""Name label for the point of sale terminal application."""
 
 
 class TerminalCard(BaseModel):
@@ -76,3 +80,13 @@ class TerminalCard(BaseModel):
         Optional[str], pydantic.Field(alias="lastFourCardNumber")
     ] = None
     r"""Last four digits of the card number"""
+
+    application_id: Annotated[Optional[str], pydantic.Field(alias="applicationID")] = (
+        None
+    )
+    r"""Identifier for the point of sale terminal application."""
+
+    application_name: Annotated[
+        Optional[str], pydantic.Field(alias="applicationName")
+    ] = None
+    r"""Name label for the point of sale terminal application."""

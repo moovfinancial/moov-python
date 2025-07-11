@@ -1,4 +1,4 @@
-# CreateTransferOptionsForAccountRequest
+# CreateTransferOptionsRequest
 
 
 ## Fields

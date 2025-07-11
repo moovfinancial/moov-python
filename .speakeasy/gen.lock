@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 81650e785eaee7a6cfc41b36de435f19
+  docChecksum: 07a9b652dcde386714743ccb19537611
   docVersion: latest
-  speakeasyVersion: 1.580.1
-  generationVersion: 2.656.3
-  releaseVersion: 0.13.3
-  configChecksum: a0e70b7e5926eada40fc6abd59fb5b5b
+  speakeasyVersion: 1.580.2
+  generationVersion: 2.656.5
+  releaseVersion: 0.13.4
+  configChecksum: eee06ceab663adcc8dc706cc9448fce6
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -642,10 +642,8 @@ generatedFiles:
   - docs/models/operations/createticketrequest.md
   - docs/models/operations/createticketresponse.md
   - docs/models/operations/createtransferglobals.md
-  - docs/models/operations/createtransferoptionsforaccountglobals.md
-  - docs/models/operations/createtransferoptionsforaccountrequest.md
-  - docs/models/operations/createtransferoptionsforaccountresponse.md
   - docs/models/operations/createtransferoptionsglobals.md
+  - docs/models/operations/createtransferoptionsrequest.md
   - docs/models/operations/createtransferoptionsresponse.md
   - docs/models/operations/createtransferrequest.md
   - docs/models/operations/createtransferresponse.md
@@ -1600,7 +1598,6 @@ generatedFiles:
   - src/moovio_sdk/models/operations/createticket.py
   - src/moovio_sdk/models/operations/createtransfer.py
   - src/moovio_sdk/models/operations/createtransferoptions.py
-  - src/moovio_sdk/models/operations/createtransferoptionsforaccount.py
   - src/moovio_sdk/models/operations/deletedisputeevidencefile.py
   - src/moovio_sdk/models/operations/deleterepresentative.py
   - src/moovio_sdk/models/operations/deleteterminalapplication.py
@@ -3231,6 +3228,8 @@ examples:
   createTransferOptions:
     speakeasy-default-create-transfer-options:
       parameters:
+        path:
+          accountID: "deafe3cf-31d4-4dcc-8176-3d6bf8bb4f04"
         header:
           x-moov-version: "v2024.01.00"
       requestBody:
