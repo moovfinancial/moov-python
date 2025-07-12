@@ -279,6 +279,7 @@ class Support(BaseSDK):
         account_id: str,
         cursor: Optional[str] = None,
         count: Optional[int] = None,
+        status: Optional[components.TicketStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -292,6 +293,7 @@ class Support(BaseSDK):
         :param account_id:
         :param cursor:
         :param count:
+        :param status:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -310,6 +312,7 @@ class Support(BaseSDK):
         request = operations.ListTicketsRequest(
             cursor=cursor,
             count=count,
+            status=status,
             account_id=account_id,
         )
 
@@ -357,7 +360,9 @@ class Support(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListTicketsResponse(
-                result=unmarshal_json_response(List[components.Ticket], http_res),
+                result=unmarshal_json_response(
+                    operations.ListTicketsResponseBody, http_res
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
@@ -381,6 +386,7 @@ class Support(BaseSDK):
         account_id: str,
         cursor: Optional[str] = None,
         count: Optional[int] = None,
+        status: Optional[components.TicketStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -394,6 +400,7 @@ class Support(BaseSDK):
         :param account_id:
         :param cursor:
         :param count:
+        :param status:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -412,6 +419,7 @@ class Support(BaseSDK):
         request = operations.ListTicketsRequest(
             cursor=cursor,
             count=count,
+            status=status,
             account_id=account_id,
         )
 
@@ -459,7 +467,9 @@ class Support(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListTicketsResponse(
-                result=unmarshal_json_response(List[components.Ticket], http_res),
+                result=unmarshal_json_response(
+                    operations.ListTicketsResponseBody, http_res
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "429"], "*"):

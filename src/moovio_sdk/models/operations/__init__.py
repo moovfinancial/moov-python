@@ -889,6 +889,8 @@ if TYPE_CHECKING:
         ListTicketsRequest,
         ListTicketsRequestTypedDict,
         ListTicketsResponse,
+        ListTicketsResponseBody,
+        ListTicketsResponseBodyTypedDict,
         ListTicketsResponseTypedDict,
     )
     from .listtransfers import (
@@ -1801,6 +1803,8 @@ __all__ = [
     "ListTicketsRequest",
     "ListTicketsRequestTypedDict",
     "ListTicketsResponse",
+    "ListTicketsResponseBody",
+    "ListTicketsResponseBodyTypedDict",
     "ListTicketsResponseTypedDict",
     "ListTransfersGlobals",
     "ListTransfersGlobalsTypedDict",
@@ -2651,6 +2655,8 @@ _dynamic_imports: dict[str, str] = {
     "ListTicketsRequest": ".listtickets",
     "ListTicketsRequestTypedDict": ".listtickets",
     "ListTicketsResponse": ".listtickets",
+    "ListTicketsResponseBody": ".listtickets",
+    "ListTicketsResponseBodyTypedDict": ".listtickets",
     "ListTicketsResponseTypedDict": ".listtickets",
     "ListTransfersGlobals": ".listtransfers",
     "ListTransfersGlobalsTypedDict": ".listtransfers",

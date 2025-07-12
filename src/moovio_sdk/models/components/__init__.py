@@ -528,6 +528,7 @@ if TYPE_CHECKING:
         IssuingVelocityLimitError,
         IssuingVelocityLimitErrorTypedDict,
     )
+    from .itemlistnextpage import ItemListNextPage, ItemListNextPageTypedDict
     from .jsonwebkey import JSONWebKey, JSONWebKeyTypedDict, Use
     from .linkaccountterminalapplication import (
         LinkAccountTerminalApplication,
@@ -1512,6 +1513,8 @@ __all__ = [
     "IssuingVelocityLimitError",
     "IssuingVelocityLimitErrorTypedDict",
     "IssuingVelocityLimitTypedDict",
+    "ItemListNextPage",
+    "ItemListNextPageTypedDict",
     "Itin",
     "ItinTypedDict",
     "JSONWebKey",
@@ -2411,6 +2414,8 @@ _dynamic_imports: dict[str, str] = {
     "IssuingVelocityLimitTypedDict": ".issuingvelocitylimit",
     "IssuingVelocityLimitError": ".issuingvelocitylimiterror",
     "IssuingVelocityLimitErrorTypedDict": ".issuingvelocitylimiterror",
+    "ItemListNextPage": ".itemlistnextpage",
+    "ItemListNextPageTypedDict": ".itemlistnextpage",
     "JSONWebKey": ".jsonwebkey",
     "JSONWebKeyTypedDict": ".jsonwebkey",
     "Use": ".jsonwebkey",
