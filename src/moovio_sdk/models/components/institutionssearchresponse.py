@@ -4,20 +4,51 @@ from __future__ import annotations
 from .achinstitution import ACHInstitution, ACHInstitutionTypedDict
 from .rtpinstitution import RTPInstitution, RTPInstitutionTypedDict
 from .wireinstitution import WireInstitution, WireInstitutionTypedDict
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, Nullable, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List
 from typing_extensions import TypedDict
 
 
 class InstitutionsSearchResponseTypedDict(TypedDict):
-    ach: List[ACHInstitutionTypedDict]
-    rtp: List[RTPInstitutionTypedDict]
-    wire: List[WireInstitutionTypedDict]
+    ach: Nullable[List[ACHInstitutionTypedDict]]
+    rtp: Nullable[List[RTPInstitutionTypedDict]]
+    wire: Nullable[List[WireInstitutionTypedDict]]
 
 
 class InstitutionsSearchResponse(BaseModel):
-    ach: List[ACHInstitution]
+    ach: Nullable[List[ACHInstitution]]
 
-    rtp: List[RTPInstitution]
+    rtp: Nullable[List[RTPInstitution]]
 
-    wire: List[WireInstitution]
+    wire: Nullable[List[WireInstitution]]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["ach", "rtp", "wire"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
