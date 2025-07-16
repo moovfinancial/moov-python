@@ -115,7 +115,7 @@ class AccountTerminalApplications(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return operations.LinkAccountTerminalApplicationResponse(
                 result=unmarshal_json_response(
-                    components.TerminalApplication, http_res
+                    components.AccountTerminalApplication, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -246,7 +246,7 @@ class AccountTerminalApplications(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return operations.LinkAccountTerminalApplicationResponse(
                 result=unmarshal_json_response(
-                    components.TerminalApplication, http_res
+                    components.AccountTerminalApplication, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -352,7 +352,7 @@ class AccountTerminalApplications(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListAccountTerminalApplicationsResponse(
                 result=unmarshal_json_response(
-                    List[components.TerminalApplication], http_res
+                    List[components.AccountTerminalApplication], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -450,7 +450,7 @@ class AccountTerminalApplications(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListAccountTerminalApplicationsResponse(
                 result=unmarshal_json_response(
-                    List[components.TerminalApplication], http_res
+                    List[components.AccountTerminalApplication], http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -551,7 +551,7 @@ class AccountTerminalApplications(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetAccountTerminalApplicationResponse(
                 result=unmarshal_json_response(
-                    components.TerminalApplication, http_res
+                    components.AccountTerminalApplication, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
@@ -652,7 +652,7 @@ class AccountTerminalApplications(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetAccountTerminalApplicationResponse(
                 result=unmarshal_json_response(
-                    components.TerminalApplication, http_res
+                    components.AccountTerminalApplication, http_res
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )

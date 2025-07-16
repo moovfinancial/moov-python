@@ -23,9 +23,9 @@ class TerminalApplicationTypedDict(TypedDict):
     package_name: NotRequired[str]
     r"""The app package name of the terminal application. Will be returned if platform is `android`."""
     sha256_digest: NotRequired[str]
-    r"""The app version of the terminal application Will be returned if platform is `android`."""
+    r"""A cryptographic hash of the signing key for the application. Will be returned if platform is `android`."""
     version_code: NotRequired[str]
-    r"""The app version of the terminal application Will be returned if platform is `android`."""
+    r"""The app version code of the terminal application. Will be returned if platform is `android`."""
 
 
 class TerminalApplication(BaseModel):
@@ -49,7 +49,7 @@ class TerminalApplication(BaseModel):
     r"""The app package name of the terminal application. Will be returned if platform is `android`."""
 
     sha256_digest: Annotated[Optional[str], pydantic.Field(alias="sha256Digest")] = None
-    r"""The app version of the terminal application Will be returned if platform is `android`."""
+    r"""A cryptographic hash of the signing key for the application. Will be returned if platform is `android`."""
 
     version_code: Annotated[Optional[str], pydantic.Field(alias="versionCode")] = None
-    r"""The app version of the terminal application Will be returned if platform is `android`."""
+    r"""The app version code of the terminal application. Will be returned if platform is `android`."""

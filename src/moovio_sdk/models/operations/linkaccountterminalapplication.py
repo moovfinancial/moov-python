@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import (
+    accountterminalapplication as components_accountterminalapplication,
     linkaccountterminalapplication as components_linkaccountterminalapplication,
-    terminalapplication as components_terminalapplication,
 )
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import (
@@ -69,10 +69,10 @@ class LinkAccountTerminalApplicationRequest(BaseModel):
 
 class LinkAccountTerminalApplicationResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
-    result: components_terminalapplication.TerminalApplicationTypedDict
+    result: components_accountterminalapplication.AccountTerminalApplicationTypedDict
 
 
 class LinkAccountTerminalApplicationResponse(BaseModel):
     headers: Dict[str, List[str]]
 
-    result: components_terminalapplication.TerminalApplication
+    result: components_accountterminalapplication.AccountTerminalApplication

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import (
-    terminalapplication as components_terminalapplication,
+    accountterminalapplication as components_accountterminalapplication,
 )
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
@@ -57,10 +57,12 @@ class ListAccountTerminalApplicationsRequest(BaseModel):
 
 class ListAccountTerminalApplicationsResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
-    result: List[components_terminalapplication.TerminalApplicationTypedDict]
+    result: List[
+        components_accountterminalapplication.AccountTerminalApplicationTypedDict
+    ]
 
 
 class ListAccountTerminalApplicationsResponse(BaseModel):
     headers: Dict[str, List[str]]
 
-    result: List[components_terminalapplication.TerminalApplication]
+    result: List[components_accountterminalapplication.AccountTerminalApplication]

@@ -11,6 +11,10 @@ if TYPE_CHECKING:
         AccountNameVerification,
         AccountNameVerificationTypedDict,
     )
+    from .accountterminalapplication import (
+        AccountTerminalApplication,
+        AccountTerminalApplicationTypedDict,
+    )
     from .accounttype import AccountType
     from .accountverificationstatus import AccountVerificationStatus
     from .achcreditsamedaypaymentmethod import (
@@ -829,6 +833,10 @@ if TYPE_CHECKING:
     from .terminalapplication import TerminalApplication, TerminalApplicationTypedDict
     from .terminalapplicationplatform import TerminalApplicationPlatform
     from .terminalapplicationstatus import TerminalApplicationStatus
+    from .terminalapplicationversion import (
+        TerminalApplicationVersion,
+        TerminalApplicationVersionTypedDict,
+    )
     from .terminalcard import TerminalCard, TerminalCardTypedDict
     from .terminalconfiguration import (
         TerminalConfiguration,
@@ -1083,6 +1091,8 @@ __all__ = [
     "AccountCountriesTypedDict",
     "AccountNameVerification",
     "AccountNameVerificationTypedDict",
+    "AccountTerminalApplication",
+    "AccountTerminalApplicationTypedDict",
     "AccountType",
     "AccountTypedDict",
     "AccountVerificationStatus",
@@ -1790,6 +1800,8 @@ __all__ = [
     "TerminalApplicationPlatform",
     "TerminalApplicationStatus",
     "TerminalApplicationTypedDict",
+    "TerminalApplicationVersion",
+    "TerminalApplicationVersionTypedDict",
     "TerminalCard",
     "TerminalCardTypedDict",
     "TerminalConfiguration",
@@ -1975,6 +1987,8 @@ _dynamic_imports: dict[str, str] = {
     "AccountCountriesTypedDict": ".accountcountries",
     "AccountNameVerification": ".accountnameverification",
     "AccountNameVerificationTypedDict": ".accountnameverification",
+    "AccountTerminalApplication": ".accountterminalapplication",
+    "AccountTerminalApplicationTypedDict": ".accountterminalapplication",
     "AccountType": ".accounttype",
     "AccountVerificationStatus": ".accountverificationstatus",
     "AchCreditSameDayPaymentMethod": ".achcreditsamedaypaymentmethod",
@@ -2689,6 +2703,8 @@ _dynamic_imports: dict[str, str] = {
     "TerminalApplicationTypedDict": ".terminalapplication",
     "TerminalApplicationPlatform": ".terminalapplicationplatform",
     "TerminalApplicationStatus": ".terminalapplicationstatus",
+    "TerminalApplicationVersion": ".terminalapplicationversion",
+    "TerminalApplicationVersionTypedDict": ".terminalapplicationversion",
     "TerminalCard": ".terminalcard",
     "TerminalCardTypedDict": ".terminalcard",
     "TerminalConfiguration": ".terminalconfiguration",

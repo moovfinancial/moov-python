@@ -2,16 +2,21 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import (
-    accountterminalapplication as components_accountterminalapplication,
+    terminalapplicationversion as components_terminalapplicationversion,
 )
 from moovio_sdk.types import BaseModel
-from moovio_sdk.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
+from moovio_sdk.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    RequestMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class GetAccountTerminalApplicationGlobalsTypedDict(TypedDict):
+class CreateTerminalApplicationVersionGlobalsTypedDict(TypedDict):
     x_moov_version: NotRequired[str]
     r"""Specify an API version.
 
@@ -25,7 +30,7 @@ class GetAccountTerminalApplicationGlobalsTypedDict(TypedDict):
     """
 
 
-class GetAccountTerminalApplicationGlobals(BaseModel):
+class CreateTerminalApplicationVersionGlobals(BaseModel):
     x_moov_version: Annotated[
         Optional[str],
         pydantic.Field(alias="x-moov-version"),
@@ -43,31 +48,32 @@ class GetAccountTerminalApplicationGlobals(BaseModel):
     """
 
 
-class GetAccountTerminalApplicationRequestTypedDict(TypedDict):
-    account_id: str
+class CreateTerminalApplicationVersionRequestTypedDict(TypedDict):
     terminal_application_id: str
+    terminal_application_version: (
+        components_terminalapplicationversion.TerminalApplicationVersionTypedDict
+    )
 
 
-class GetAccountTerminalApplicationRequest(BaseModel):
-    account_id: Annotated[
-        str,
-        pydantic.Field(alias="accountID"),
-        FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
-    ]
-
+class CreateTerminalApplicationVersionRequest(BaseModel):
     terminal_application_id: Annotated[
         str,
         pydantic.Field(alias="terminalApplicationID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
 
+    terminal_application_version: Annotated[
+        components_terminalapplicationversion.TerminalApplicationVersion,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
 
-class GetAccountTerminalApplicationResponseTypedDict(TypedDict):
+
+class CreateTerminalApplicationVersionResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
-    result: components_accountterminalapplication.AccountTerminalApplicationTypedDict
+    result: components_terminalapplicationversion.TerminalApplicationVersionTypedDict
 
 
-class GetAccountTerminalApplicationResponse(BaseModel):
+class CreateTerminalApplicationVersionResponse(BaseModel):
     headers: Dict[str, List[str]]
 
-    result: components_accountterminalapplication.AccountTerminalApplication
+    result: components_terminalapplicationversion.TerminalApplicationVersion

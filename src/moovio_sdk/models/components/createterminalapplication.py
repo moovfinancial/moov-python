@@ -18,9 +18,9 @@ class CreateTerminalApplicationTypedDict(TypedDict):
     package_name: NotRequired[str]
     r"""The app package name of the terminal application. Required if platform is `android`."""
     sha256_digest: NotRequired[str]
-    r"""The app version of the terminal application. Required if paltform is `android`."""
+    r"""The SHA-256 digest of the signing key for the application. Required if platform is `android`."""
     version_code: NotRequired[str]
-    r"""The app version of the terminal application. Required if platform is `android`."""
+    r"""The version code of the Android application. Required if platform is `android`."""
 
 
 class CreateTerminalApplication(BaseModel):
@@ -36,7 +36,7 @@ class CreateTerminalApplication(BaseModel):
     r"""The app package name of the terminal application. Required if platform is `android`."""
 
     sha256_digest: Annotated[Optional[str], pydantic.Field(alias="sha256Digest")] = None
-    r"""The app version of the terminal application. Required if paltform is `android`."""
+    r"""The SHA-256 digest of the signing key for the application. Required if platform is `android`."""
 
     version_code: Annotated[Optional[str], pydantic.Field(alias="versionCode")] = None
-    r"""The app version of the terminal application. Required if platform is `android`."""
+    r"""The version code of the Android application. Required if platform is `android`."""
