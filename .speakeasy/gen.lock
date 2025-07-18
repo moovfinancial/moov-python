@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 422c0b88e1dfc0c7b3fec79520c3d1ea
+  docChecksum: e48020f9b4b025da5684c327be9fefbf
   docVersion: latest
   speakeasyVersion: 1.582.0
   generationVersion: 2.657.1
-  releaseVersion: 0.13.7
-  configChecksum: 5d7bf195d36c930ba71770b38190fd59
+  releaseVersion: 0.13.8
+  configChecksum: 2cea8ede4bc7063cb9a6bf82fbc7b1aa
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -301,6 +301,7 @@ generatedFiles:
   - docs/models/components/itemlistnextpage.md
   - docs/models/components/itin.md
   - docs/models/components/jsonwebkey.md
+  - docs/models/components/kind.md
   - docs/models/components/linkaccountterminalapplication.md
   - docs/models/components/linkapplepay.md
   - docs/models/components/linkapplepaymentdata.md

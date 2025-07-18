@@ -731,7 +731,7 @@ if TYPE_CHECKING:
     )
     from .qrcode import QRCode, QRCodeTypedDict
     from .receiptkind import ReceiptKind
-    from .receiptrequest import ReceiptRequest, ReceiptRequestTypedDict
+    from .receiptrequest import Kind, ReceiptRequest, ReceiptRequestTypedDict
     from .receiptresponse import ReceiptResponse, ReceiptResponseTypedDict
     from .recur import Recur, RecurTypedDict
     from .refundcarddetails import RefundCardDetails, RefundCardDetailsTypedDict
@@ -1529,6 +1529,7 @@ __all__ = [
     "ItinTypedDict",
     "JSONWebKey",
     "JSONWebKeyTypedDict",
+    "Kind",
     "LinkAccountTerminalApplication",
     "LinkAccountTerminalApplicationTypedDict",
     "LinkApplePay",
@@ -2597,6 +2598,7 @@ _dynamic_imports: dict[str, str] = {
     "QRCode": ".qrcode",
     "QRCodeTypedDict": ".qrcode",
     "ReceiptKind": ".receiptkind",
+    "Kind": ".receiptrequest",
     "ReceiptRequest": ".receiptrequest",
     "ReceiptRequestTypedDict": ".receiptrequest",
     "ReceiptResponse": ".receiptresponse",
