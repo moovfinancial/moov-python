@@ -69,3 +69,29 @@ class RequirementID(str, Enum):
     REPRESENTATIVE_REP_UUID_IS_OWNER = "representative.{rep-uuid}.is-owner"
     REPRESENTATIVE_REP_UUID_OWNERSHIP = "representative.{rep-uuid}.ownership"
     DOCUMENT_DOC_UUID_ = "document.{doc-uuid}"
+    UNDERWRITING_BUSINESS_PRESENCE = "underwriting.businessPresence"
+    UNDERWRITING_CAPABILITY_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.{capability}.cardAcceptanceMethods"
+    )
+    UNDERWRITING_CAPABILITY_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.{capability}.currentlyAcceptsCards"
+    )
+    UNDERWRITING_CAPABILITY_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = (
+        "underwriting.{capability}.estimatedActivity.averageTransactionAmount"
+    )
+    UNDERWRITING_CAPABILITY_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = (
+        "underwriting.{capability}.estimatedActivity.maximumTransactionAmount"
+    )
+    UNDERWRITING_CAPABILITY_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
+        "underwriting.{capability}.estimatedActivity.monthlyVolumeRange"
+    )
+    UNDERWRITING_CAPABILITY_FULFILLMENT = "underwriting.{capability}.fulfillment"
+    UNDERWRITING_GEOGRAPHIC_REACH = "underwriting.geographicReach"
+    UNDERWRITING_PENDING_LITIGATION = "underwriting.pendingLitigation"
+    UNDERWRITING_DOCUMENTS_PROCESSING_STATEMENTS_PAST3_MONTHS = (
+        "underwriting.documents.processingStatementsPast3Months"
+    )
+    UNDERWRITING_CAPABILITY_REFUND_POLICY = "underwriting.{capability}.refundPolicy"
+    UNDERWRITING_VOLUME_SHARE_BY_CUSTOMER_TYPE = (
+        "underwriting.volumeShareByCustomerType"
+    )
