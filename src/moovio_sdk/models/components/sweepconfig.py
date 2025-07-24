@@ -19,11 +19,11 @@ class SweepConfigTypedDict(TypedDict):
     status: SweepConfigStatus
     push_payment_method: SweepConfigPaymentMethodTypedDict
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
     """
     pull_payment_method: SweepConfigPaymentMethodTypedDict
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
     """
     created_on: datetime
     updated_on: datetime
@@ -46,14 +46,14 @@ class SweepConfig(BaseModel):
         SweepConfigPaymentMethod, pydantic.Field(alias="pushPaymentMethod")
     ]
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
     """
 
     pull_payment_method: Annotated[
         SweepConfigPaymentMethod, pydantic.Field(alias="pullPaymentMethod")
     ]
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard or ach-credit-same-day. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
     """
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
