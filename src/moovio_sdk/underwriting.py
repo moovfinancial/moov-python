@@ -229,6 +229,7 @@ class Underwriting(BaseSDK):
         send_funds: Optional[
             Union[components.SendFunds, components.SendFundsTypedDict]
         ] = None,
+        submission_intent: Optional[components.SubmissionIntent] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -249,6 +250,7 @@ class Underwriting(BaseSDK):
         :param collect_funds:
         :param money_transfer:
         :param send_funds:
+        :param submission_intent:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -283,6 +285,7 @@ class Underwriting(BaseSDK):
                 send_funds=utils.get_pydantic_model(
                     send_funds, Optional[components.SendFunds]
                 ),
+                submission_intent=submission_intent,
             ),
         )
 
@@ -398,6 +401,7 @@ class Underwriting(BaseSDK):
         send_funds: Optional[
             Union[components.SendFunds, components.SendFundsTypedDict]
         ] = None,
+        submission_intent: Optional[components.SubmissionIntent] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -418,6 +422,7 @@ class Underwriting(BaseSDK):
         :param collect_funds:
         :param money_transfer:
         :param send_funds:
+        :param submission_intent:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -452,6 +457,7 @@ class Underwriting(BaseSDK):
                 send_funds=utils.get_pydantic_model(
                     send_funds, Optional[components.SendFunds]
                 ),
+                submission_intent=submission_intent,
             ),
         )
 

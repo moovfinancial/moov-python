@@ -814,6 +814,7 @@ if TYPE_CHECKING:
         SourceDestinationOptions,
         SourceDestinationOptionsTypedDict,
     )
+    from .submissionintent import SubmissionIntent
     from .sweep import Sweep, SweepTypedDict
     from .sweepconfig import SweepConfig, SweepConfigTypedDict
     from .sweepconfigpaymentmethod import (
@@ -1781,6 +1782,7 @@ __all__ = [
     "StatementDescriptor2TypedDict",
     "StatementDescriptorTypedDict",
     "Status",
+    "SubmissionIntent",
     "Sweep",
     "SweepConfig",
     "SweepConfigPaymentMethod",
@@ -2683,6 +2685,7 @@ _dynamic_imports: dict[str, str] = {
     "SettingsTypedDict": ".settings",
     "SourceDestinationOptions": ".sourcedestinationoptions",
     "SourceDestinationOptionsTypedDict": ".sourcedestinationoptions",
+    "SubmissionIntent": ".submissionintent",
     "Sweep": ".sweep",
     "SweepTypedDict": ".sweep",
     "SweepConfig": ".sweepconfig",

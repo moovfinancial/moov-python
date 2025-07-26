@@ -7,6 +7,7 @@ from .geographicreach import GeographicReach
 from .moneytransfer import MoneyTransfer, MoneyTransferTypedDict
 from .pendinglitigation import PendingLitigation
 from .sendfunds import SendFunds, SendFundsTypedDict
+from .submissionintent import SubmissionIntent
 from .volumesharebycustomertype import (
     VolumeShareByCustomerType,
     VolumeShareByCustomerTypeTypedDict,
@@ -25,6 +26,7 @@ class UpsertUnderwritingTypedDict(TypedDict):
     collect_funds: NotRequired[CollectFundsTypedDict]
     money_transfer: NotRequired[MoneyTransferTypedDict]
     send_funds: NotRequired[SendFundsTypedDict]
+    submission_intent: NotRequired[SubmissionIntent]
 
 
 class UpsertUnderwriting(BaseModel):
@@ -54,3 +56,7 @@ class UpsertUnderwriting(BaseModel):
     ] = None
 
     send_funds: Annotated[Optional[SendFunds], pydantic.Field(alias="sendFunds")] = None
+
+    submission_intent: Annotated[
+        Optional[SubmissionIntent], pydantic.Field(alias="submissionIntent")
+    ] = None
