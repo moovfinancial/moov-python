@@ -76,6 +76,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="linkCard" method="post" path="/accounts/{accountID}/cards" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -143,6 +144,7 @@ you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listCards" method="get" path="/accounts/{accountID}/cards" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -191,6 +193,7 @@ you'll need to specify the `/accounts/{accountID}/cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getCard" method="get" path="/accounts/{accountID}/cards/{cardID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -247,6 +250,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateCard" method="patch" path="/accounts/{accountID}/cards/{cardID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -316,6 +320,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="disableCard" method="delete" path="/accounts/{accountID}/cards/{cardID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

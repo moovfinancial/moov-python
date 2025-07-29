@@ -35,6 +35,7 @@ you'll need to specify the `/terminal-applications.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createTerminalApplication" method="post" path="/terminal-applications" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -87,6 +88,7 @@ you'll need to specify the `/terminal-applications.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listTerminalApplications" method="get" path="/terminal-applications" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -133,6 +135,7 @@ you'll need to specify the `/terminal-applications.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getTerminalApplication" method="get" path="/terminal-applications/{terminalApplicationID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -179,6 +182,7 @@ you'll need to specify the `/terminal-applications.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="deleteTerminalApplication" method="delete" path="/terminal-applications/{terminalApplicationID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -226,6 +230,7 @@ you'll need to specify the `/terminal-applications.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createTerminalApplicationVersion" method="post" path="/terminal-applications/{terminalApplicationID}/versions" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

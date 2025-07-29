@@ -33,6 +33,7 @@ you'll need to specify the `/accounts/{accountID}/files.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="uploadFile" method="post" path="/accounts/{accountID}/files" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -87,6 +88,7 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listFiles" method="get" path="/accounts/{accountID}/files" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -133,6 +135,7 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getFileDetails" method="get" path="/accounts/{accountID}/files/{fileID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

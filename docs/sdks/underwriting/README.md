@@ -35,6 +35,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getUnderwriting" method="get" path="/accounts/{accountID}/underwriting" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -83,6 +84,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="saveUnderwriting" method="post" path="/accounts/{accountID}/underwriting" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -141,6 +143,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="upsertUnderwriting" method="put" path="/accounts/{accountID}/underwriting" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

@@ -88,6 +88,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createTransferOptions" method="post" path="/accounts/{accountID}/transfer-options" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -144,6 +145,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createTransfer" method="post" path="/accounts/{accountID}/transfers" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -225,6 +227,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listTransfers" method="get" path="/accounts/{accountID}/transfers" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -286,6 +289,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getTransfer" method="get" path="/accounts/{accountID}/transfers/{transferID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -335,6 +339,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateTransfer" method="patch" path="/accounts/{accountID}/transfers/{transferID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -386,6 +391,7 @@ with Moov(
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createCancellation" method="post" path="/accounts/{accountID}/transfers/{transferID}/cancellations" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -434,6 +440,7 @@ with Moov(
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getCancellation" method="get" path="/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -485,6 +492,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="initiateRefund" method="post" path="/accounts/{accountID}/transfers/{transferID}/refunds" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -538,6 +546,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listRefunds" method="get" path="/accounts/{accountID}/transfers/{transferID}/refunds" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -585,6 +594,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getRefund" method="get" path="/accounts/{accountID}/transfers/{transferID}/refunds/{refundID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -635,6 +645,7 @@ to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createReversal" method="post" path="/accounts/{accountID}/transfers/{transferID}/reversals" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

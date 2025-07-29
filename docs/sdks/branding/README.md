@@ -31,6 +31,7 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createBrand" method="post" path="/accounts/{accountID}/branding" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -87,6 +88,7 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="upsertBrand" method="put" path="/accounts/{accountID}/branding" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -143,6 +145,7 @@ you'll need to specify the `/accounts/{accountID}/branding.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getBrand" method="get" path="/accounts/{accountID}/branding" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -189,6 +192,7 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateBrand" method="patch" path="/accounts/{accountID}/branding" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

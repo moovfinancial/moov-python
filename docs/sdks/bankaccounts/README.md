@@ -107,6 +107,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="linkBankAccount" method="post" path="/accounts/{accountID}/bank-accounts" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -163,6 +164,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listBankAccounts" method="get" path="/accounts/{accountID}/bank-accounts" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -211,6 +213,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getBankAccount" method="get" path="/accounts/{accountID}/bank-accounts/{bankAccountID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -258,6 +261,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="disableBankAccount" method="delete" path="/accounts/{accountID}/bank-accounts/{bankAccountID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -317,6 +321,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="initiateMicroDeposits" method="post" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/micro-deposits" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -365,6 +370,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="completeMicroDeposits" method="put" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/micro-deposits" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -427,6 +433,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getBankAccountVerification" method="get" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/verify" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -489,6 +496,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="initiateBankAccountVerification" method="post" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/verify" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -545,6 +553,7 @@ you'll need to specify the `/accounts/{accountID}/bank-accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="completeBankAccountVerification" method="put" path="/accounts/{accountID}/bank-accounts/{bankAccountID}/verify" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

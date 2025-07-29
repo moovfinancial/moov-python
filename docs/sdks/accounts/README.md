@@ -90,6 +90,7 @@ to specify the `/accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createAccount" method="post" path="/accounts" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -164,11 +165,11 @@ with Moov(
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| errors.GenericError              | 400, 409                         | application/json                 |
-| errors.CreateAccountResponseBody | 422                              | application/json                 |
-| errors.APIError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                | Status Code               | Content Type              |
+| ------------------------- | ------------------------- | ------------------------- |
+| errors.GenericError       | 400, 409                  | application/json          |
+| errors.CreateAccountError | 422                       | application/json          |
+| errors.APIError           | 4XX, 5XX                  | \*/\*                     |
 
 ## list
 
@@ -183,6 +184,7 @@ to specify the `/accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listAccounts" method="get" path="/accounts" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -238,6 +240,7 @@ to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getAccount" method="get" path="/accounts/{accountID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -292,6 +295,7 @@ to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateAccount" method="patch" path="/accounts/{accountID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -402,11 +406,11 @@ with Moov(
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| errors.GenericError              | 400, 409                         | application/json                 |
-| errors.UpdateAccountResponseBody | 422                              | application/json                 |
-| errors.APIError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| errors.GenericError      | 400, 409                 | application/json         |
+| errors.PatchAccountError | 422                      | application/json         |
+| errors.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## disconnect
 
@@ -419,6 +423,7 @@ you'll need to specify the `/accounts/{accountID}/profile.disconnect` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="disconnectAccount" method="delete" path="/accounts/{accountID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -466,6 +471,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getAccountCountries" method="get" path="/accounts/{accountID}/countries" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -514,6 +520,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="assignAccountCountries" method="put" path="/accounts/{accountID}/countries" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -565,6 +572,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getMerchantProcessingAgreement" method="get" path="/accounts/{accountID}/merchant-agreement" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -612,6 +620,7 @@ token patched to the account. Read more in our [documentation](https://docs.moov
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getTermsOfServiceToken" method="get" path="/tos-token" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

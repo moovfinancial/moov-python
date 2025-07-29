@@ -55,6 +55,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createRepresentative" method="post" path="/accounts/{accountID}/representatives" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -135,6 +136,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listRepresentatives" method="get" path="/accounts/{accountID}/representatives" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -181,6 +183,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="deleteRepresentative" method="delete" path="/accounts/{accountID}/representatives/{representativeID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -229,6 +232,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getRepresentative" method="get" path="/accounts/{accountID}/representatives/{representativeID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -289,6 +293,7 @@ you'll need to specify the `/accounts/{accountID}/representatives.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateRepresentative" method="patch" path="/accounts/{accountID}/representatives/{representativeID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

@@ -35,6 +35,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listCapabilities" method="get" path="/accounts/{accountID}/capabilities" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -81,6 +82,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="requestCapabilities" method="post" path="/accounts/{accountID}/capabilities" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -132,6 +134,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getCapability" method="get" path="/accounts/{accountID}/capabilities/{capabilityID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -179,6 +182,7 @@ you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="disableCapability" method="delete" path="/accounts/{accountID}/capabilities/{capabilityID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

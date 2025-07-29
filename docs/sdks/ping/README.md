@@ -19,6 +19,7 @@ you'll need to specify the `/ping.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="ping" method="get" path="/ping" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

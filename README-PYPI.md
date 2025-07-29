@@ -994,22 +994,37 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+
+If you're creating the ticket on behalf of another account, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
 * [list_tickets](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/support/README.md#list_tickets) - List all the support tickets created under a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+If you're listing another account's tickets, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 * [get_ticket](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/support/README.md#get_ticket) - Retrieve a support ticket by ID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+If you're retrieving another account's ticket, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 * [update_ticket](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/support/README.md#update_ticket) - Updates a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+
+If you're updating the ticket on behalf of another account, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
 * [list_ticket_messages](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/support/README.md#list_ticket_messages) - List all the messages for a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+If you're listing another account's messages, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 
 ### [sweeps](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/sweeps/README.md)
 
@@ -1439,8 +1454,8 @@ with Moov(
 * [`TerminalApplicationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/terminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 143 methods.*
 * [`Transfer`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transfer.py): Details of a Transfer. Status code `409`. Applicable to 1 of 143 methods.*
 * [`CardAcquiringRefund`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/cardacquiringrefund.py): Details of a card refund. Status code `409`. Applicable to 1 of 143 methods.*
-* [`CreateAccountResponseBody`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createaccountresponsebody.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 143 methods.*
-* [`UpdateAccountResponseBody`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updateaccountresponsebody.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 143 methods.*
+* [`CreateAccountError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 143 methods.*
+* [`PatchAccountError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/patchaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 143 methods.*
 * [`AssignCountriesError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/assigncountrieserror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 143 methods.*
 * [`LinkApplePayError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/linkapplepayerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 143 methods.*
 * [`BankAccountValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/bankaccountvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 143 methods.*

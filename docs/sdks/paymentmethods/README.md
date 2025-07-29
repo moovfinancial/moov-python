@@ -25,6 +25,7 @@ you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listPaymentMethods" method="get" path="/accounts/{accountID}/payment-methods" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -73,6 +74,7 @@ you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getPaymentMethod" method="get" path="/accounts/{accountID}/payment-methods/{paymentMethodID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

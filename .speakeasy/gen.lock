@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 9558e259c4d5fc8a2c42c71f8d1fb375
+  docChecksum: 733f1675a08b48527ea82b9089916438
   docVersion: latest
-  speakeasyVersion: 1.590.0
-  generationVersion: 2.666.0
-  releaseVersion: 0.13.12
-  configChecksum: 420552f33e8a5702784b344f74bfc8e4
+  speakeasyVersion: 1.592.1
+  generationVersion: 2.667.0
+  releaseVersion: 0.13.13
+  configChecksum: ce3d0f62400d9c9db05f8b9cf0e89dcd
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.19.4
+    core: 5.19.5
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     downloadStreams: 1.0.1
@@ -169,7 +169,6 @@ generatedFiles:
   - docs/models/components/contact.md
   - docs/models/components/countrieserrors.md
   - docs/models/components/createaccount.md
-  - docs/models/components/createaccounterror.md
   - docs/models/components/createaccountsettings.md
   - docs/models/components/createaccounttermsofservice.md
   - docs/models/components/createaccounttype.md
@@ -344,7 +343,6 @@ generatedFiles:
   - docs/models/components/partnerpricingagreement.md
   - docs/models/components/patchaccount.md
   - docs/models/components/patchaccountcustomersupport.md
-  - docs/models/components/patchaccounterror.md
   - docs/models/components/patchaccounttermsofservice.md
   - docs/models/components/patchbusiness.md
   - docs/models/components/patchindividual.md
@@ -557,7 +555,7 @@ generatedFiles:
   - docs/models/errors/bankaccountvalidationerror.md
   - docs/models/errors/brandvalidationerror.md
   - docs/models/errors/cardacquiringrefund.md
-  - docs/models/errors/createaccountresponsebody.md
+  - docs/models/errors/createaccounterror.md
   - docs/models/errors/createpaymentlinkerror.md
   - docs/models/errors/createsweepconfigerror.md
   - docs/models/errors/createticketerror.md
@@ -571,6 +569,7 @@ generatedFiles:
   - docs/models/errors/linkcarderror.md
   - docs/models/errors/microdepositvalidationerror.md
   - docs/models/errors/onboardinginviteerror.md
+  - docs/models/errors/patchaccounterror.md
   - docs/models/errors/patchsweepconfigerror.md
   - docs/models/errors/refundvalidationerror.md
   - docs/models/errors/representativevalidationerror.md
@@ -582,7 +581,6 @@ generatedFiles:
   - docs/models/errors/transfer.md
   - docs/models/errors/transferoptionsvalidationerror.md
   - docs/models/errors/transfervalidationerror.md
-  - docs/models/errors/updateaccountresponsebody.md
   - docs/models/errors/updatecarderror.md
   - docs/models/errors/updateissuedcarderror.md
   - docs/models/errors/updatepaymentlinkerror.md
@@ -1206,7 +1204,6 @@ generatedFiles:
   - src/moovio_sdk/models/components/contact.py
   - src/moovio_sdk/models/components/countrieserrors.py
   - src/moovio_sdk/models/components/createaccount.py
-  - src/moovio_sdk/models/components/createaccounterror.py
   - src/moovio_sdk/models/components/createaccountsettings.py
   - src/moovio_sdk/models/components/createaccounttype.py
   - src/moovio_sdk/models/components/createapplepaysession.py
@@ -1361,7 +1358,6 @@ generatedFiles:
   - src/moovio_sdk/models/components/partnerpricing.py
   - src/moovio_sdk/models/components/partnerpricingagreement.py
   - src/moovio_sdk/models/components/patchaccount.py
-  - src/moovio_sdk/models/components/patchaccounterror.py
   - src/moovio_sdk/models/components/patchbusiness.py
   - src/moovio_sdk/models/components/patchindividual.py
   - src/moovio_sdk/models/components/patchprofile.py
@@ -1553,7 +1549,7 @@ generatedFiles:
   - src/moovio_sdk/models/errors/bankaccountvalidationerror.py
   - src/moovio_sdk/models/errors/brandvalidationerror.py
   - src/moovio_sdk/models/errors/cardacquiringrefund.py
-  - src/moovio_sdk/models/errors/createaccount.py
+  - src/moovio_sdk/models/errors/createaccounterror.py
   - src/moovio_sdk/models/errors/createpaymentlinkerror.py
   - src/moovio_sdk/models/errors/createsweepconfigerror.py
   - src/moovio_sdk/models/errors/createticketerror.py
@@ -1567,6 +1563,7 @@ generatedFiles:
   - src/moovio_sdk/models/errors/mooverror.py
   - src/moovio_sdk/models/errors/no_response_error.py
   - src/moovio_sdk/models/errors/onboardinginviteerror.py
+  - src/moovio_sdk/models/errors/patchaccounterror.py
   - src/moovio_sdk/models/errors/patchsweepconfigerror.py
   - src/moovio_sdk/models/errors/refundvalidationerror.py
   - src/moovio_sdk/models/errors/representativevalidationerror.py
@@ -1579,7 +1576,6 @@ generatedFiles:
   - src/moovio_sdk/models/errors/transfer.py
   - src/moovio_sdk/models/errors/transferoptionsvalidationerror.py
   - src/moovio_sdk/models/errors/transfervalidationerror.py
-  - src/moovio_sdk/models/errors/updateaccount.py
   - src/moovio_sdk/models/errors/updatecarderror.py
   - src/moovio_sdk/models/errors/updateissuedcarderror.py
   - src/moovio_sdk/models/errors/updatepaymentlinkerror.py
@@ -1782,7 +1778,7 @@ examples:
         "400":
           application/json: {"error": "<value>"}
         "422":
-          application/json: {"error": {"capabilities": {"0": "first element failed validation..."}}}
+          application/json: {"capabilities": {"0": "first element failed validation..."}}
   listAccounts:
     speakeasy-default-list-accounts:
       parameters:
@@ -1820,7 +1816,7 @@ examples:
         "400":
           application/json: {"error": "<value>"}
         "422":
-          application/json: {"error": {}}
+          application/json: {}
   disconnectAccount:
     speakeasy-default-disconnect-account:
       parameters:

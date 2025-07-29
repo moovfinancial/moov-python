@@ -39,6 +39,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createSchedule" method="post" path="/accounts/{accountID}/schedules" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -187,6 +188,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listSchedules" method="get" path="/accounts/{accountID}/schedules" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -236,6 +238,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateSchedule" method="put" path="/accounts/{accountID}/schedules/{scheduleID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -417,6 +420,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getSchedules" method="get" path="/accounts/{accountID}/schedules/{scheduleID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -464,6 +468,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="cancelSchedule" method="delete" path="/accounts/{accountID}/schedules/{scheduleID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -512,6 +517,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getScheduledOccurrence" method="get" path="/accounts/{accountID}/schedules/{scheduleID}/occurrences/{occurrenceFilter}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

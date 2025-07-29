@@ -41,6 +41,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createPaymentLink" method="post" path="/accounts/{accountID}/payment-links" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -119,6 +120,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listPaymentLinks" method="get" path="/accounts/{accountID}/payment-links" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -165,6 +167,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getPaymentLink" method="get" path="/accounts/{accountID}/payment-links/{paymentLinkCode}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -212,6 +215,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updatePaymentLink" method="patch" path="/accounts/{accountID}/payment-links/{paymentLinkCode}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -285,6 +289,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="disablePaymentLink" method="delete" path="/accounts/{accountID}/payment-links/{paymentLinkCode}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -334,6 +339,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getPaymentLinkQRCode" method="get" path="/accounts/{accountID}/payment-links/{paymentLinkCode}/qrcode" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

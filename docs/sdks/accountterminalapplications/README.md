@@ -31,6 +31,7 @@ you'll need to specify the `/accounts/{accountID}/terminal-applications.write` s
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="linkAccountTerminalApplication" method="post" path="/accounts/{accountID}/terminal-applications" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -80,6 +81,7 @@ you'll need to specify the `/accounts/{accountID}/terminal-applications.read` sc
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listAccountTerminalApplications" method="get" path="/accounts/{accountID}/terminal-applications" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -126,6 +128,7 @@ you'll need to specify the `/accounts/{accountID}/terminal-applications.read` sc
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getAccountTerminalApplication" method="get" path="/accounts/{accountID}/terminal-applications/{terminalApplicationID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -173,6 +176,7 @@ you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` s
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getTerminalConfiguration" method="get" path="/accounts/{accountID}/terminal-applications/{terminalApplicationID}/configuration" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

@@ -31,6 +31,7 @@ you'll need to specify the `/accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createOnboardingInvite" method="post" path="/onboarding-invites" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -97,6 +98,7 @@ you'll need to specify the `/accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listOnboardingInvites" method="get" path="/onboarding-invites" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -143,6 +145,7 @@ you'll need to specify the `/accounts.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getOnboardingInvite" method="get" path="/onboarding-invites/{code}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -189,6 +192,7 @@ you'll need to specify the `/accounts.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="revokeOnboardingInvite" method="delete" path="/onboarding-invites/{code}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

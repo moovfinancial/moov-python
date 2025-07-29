@@ -20,6 +20,7 @@ you'll need to specify the `/ping.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="testEndToEndToken" method="post" path="/debug/end-to-end-token" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -64,6 +65,7 @@ Generates a public key used to create a JWE token for passing secure authenticat
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="generateEndToEndKey" method="post" path="/end-to-end-keys" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

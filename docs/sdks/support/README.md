@@ -9,22 +9,37 @@
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+
+If you're creating the ticket on behalf of another account, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
 * [list_tickets](#list_tickets) - List all the support tickets created under a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+If you're listing another account's tickets, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 * [get_ticket](#get_ticket) - Retrieve a support ticket by ID.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+If you're retrieving another account's ticket, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 * [update_ticket](#update_ticket) - Updates a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+
+If you're updating the ticket on behalf of another account, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
 * [list_ticket_messages](#list_ticket_messages) - List all the messages for a support ticket.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+If you're listing another account's messages, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 
 ## create_ticket
 
@@ -33,8 +48,12 @@ Create a support ticket for a Moov account.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
+If you're creating the ticket on behalf of another account, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
+
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createTicket" method="post" path="/accounts/{accountID}/tickets" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -86,8 +105,12 @@ List all the support tickets created under a Moov account.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
+If you're listing another account's tickets, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listTickets" method="get" path="/accounts/{accountID}/tickets" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -135,8 +158,12 @@ Retrieve a support ticket by ID.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
+If you're retrieving another account's ticket, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getTicket" method="get" path="/accounts/{accountID}/tickets/{ticketID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -182,8 +209,12 @@ Updates a support ticket.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
+If you're updating the ticket on behalf of another account, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
+
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateTicket" method="patch" path="/accounts/{accountID}/tickets/{ticketID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -232,8 +263,12 @@ List all the messages for a support ticket.
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
+If you're listing another account's messages, then you'll need to
+specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listTicketMessages" method="get" path="/accounts/{accountID}/tickets/{ticketID}/messages" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

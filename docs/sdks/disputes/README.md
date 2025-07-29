@@ -86,6 +86,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listDisputes" method="get" path="/accounts/{accountID}/disputes" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -147,6 +148,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getDispute" method="get" path="/accounts/{accountID}/disputes/{disputeID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -196,6 +198,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="acceptDispute" method="post" path="/accounts/{accountID}/disputes/{disputeID}/accept" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -246,6 +249,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listDisputeEvidence" method="get" path="/accounts/{accountID}/disputes/{disputeID}/evidence" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -295,6 +299,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="uploadDisputeEvidenceFile" method="post" path="/accounts/{accountID}/disputes/{disputeID}/evidence-file" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -351,6 +356,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="uploadDisputeEvidenceText" method="post" path="/accounts/{accountID}/disputes/{disputeID}/evidence-text" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -406,6 +412,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="submitDisputeEvidence" method="post" path="/accounts/{accountID}/disputes/{disputeID}/evidence/submit" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -456,6 +463,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getDisputeEvidence" method="get" path="/accounts/{accountID}/disputes/{disputeID}/evidence/{evidenceID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -506,6 +514,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateDisputeEvidence" method="patch" path="/accounts/{accountID}/disputes/{disputeID}/evidence/{evidenceID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -559,6 +568,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="deleteDisputeEvidenceFile" method="delete" path="/accounts/{accountID}/disputes/{disputeID}/evidence/{evidenceID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -610,6 +620,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getDisputeEvidenceData" method="get" path="/accounts/{accountID}/disputes/{disputeID}/evidence/{evidenceID}/data" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

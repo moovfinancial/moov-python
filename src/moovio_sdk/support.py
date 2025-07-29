@@ -28,6 +28,9 @@ class Support(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
+        If you're creating the ticket on behalf of another account, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
+
         :param account_id:
         :param title:
         :param body:
@@ -158,6 +161,9 @@ class Support(BaseSDK):
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+
+        If you're creating the ticket on behalf of another account, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
 
         :param account_id:
         :param title:
@@ -290,6 +296,9 @@ class Support(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
+        If you're listing another account's tickets, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+
         :param account_id:
         :param cursor:
         :param count:
@@ -397,6 +406,9 @@ class Support(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
+        If you're listing another account's tickets, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+
         :param account_id:
         :param cursor:
         :param count:
@@ -502,6 +514,9 @@ class Support(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
+        If you're retrieving another account's ticket, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+
         :param account_id:
         :param ticket_id:
         :param retries: Override the default retry configuration for this method
@@ -600,6 +615,9 @@ class Support(BaseSDK):
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+        If you're retrieving another account's ticket, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 
         :param account_id:
         :param ticket_id:
@@ -700,6 +718,9 @@ class Support(BaseSDK):
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
+
+        If you're updating the ticket on behalf of another account, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
 
         :param account_id:
         :param ticket_id:
@@ -829,6 +850,9 @@ class Support(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.write` scope.
 
+        If you're updating the ticket on behalf of another account, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.write` and `/accounts/{accountID}/profile.read` scopes.
+
         :param account_id:
         :param ticket_id:
         :param status:
@@ -956,6 +980,9 @@ class Support(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
 
+        If you're listing another account's messages, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
+
         :param account_id:
         :param ticket_id:
         :param retries: Override the default retry configuration for this method
@@ -1056,6 +1083,9 @@ class Support(BaseSDK):
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/tickets.read` scope.
+
+        If you're listing another account's messages, then you'll need to
+        specify the `/accounts/{partnerAccountID}/tickets.read` and `/accounts/{accountID}/profile.read` scopes.
 
         :param account_id:
         :param ticket_id:

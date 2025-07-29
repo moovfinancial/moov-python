@@ -19,6 +19,7 @@ you'll need to specify the `/profile-enrichment.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getEnrichmentAddress" method="get" path="/enrichment/address" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

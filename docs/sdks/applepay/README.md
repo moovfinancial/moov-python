@@ -52,6 +52,7 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="registerApplePayMerchantDomains" method="post" path="/accounts/{accountID}/apple-pay/domains" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -106,6 +107,7 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateApplePayMerchantDomains" method="patch" path="/accounts/{accountID}/apple-pay/domains" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -161,6 +163,7 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getApplePayMerchantDomains" method="get" path="/accounts/{accountID}/apple-pay/domains" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -210,6 +213,7 @@ you'll need to specify the `/accounts/{accountID}/apple-pay.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createApplePaySession" method="post" path="/accounts/{accountID}/apple-pay/sessions" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -262,6 +266,7 @@ you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="linkApplePayToken" method="post" path="/accounts/{accountID}/apple-pay/tokens" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

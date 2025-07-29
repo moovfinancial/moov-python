@@ -18,6 +18,7 @@ Allows clients to notify the authorization server that a previously obtained ref
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="revokeAccessToken" method="post" path="/oauth2/revoke" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -66,6 +67,7 @@ Create or refresh an access token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createAccessToken" method="post" path="/oauth2/token" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

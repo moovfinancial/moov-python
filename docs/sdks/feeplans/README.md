@@ -44,6 +44,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listFeePlanAgreements" method="get" path="/accounts/{accountID}/fee-plan-agreements" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -94,6 +95,7 @@ you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createFeePlanAgreements" method="post" path="/accounts/{accountID}/fee-plan-agreements" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -144,6 +146,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listFeePlans" method="get" path="/accounts/{accountID}/fee-plans" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -191,6 +194,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="retrieveFees" method="get" path="/accounts/{accountID}/fees" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -243,6 +247,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listFeesFetch" method="post" path="/accounts/{accountID}/fees/.fetch" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -290,6 +295,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listPartnerPricing" method="get" path="/accounts/{accountID}/partner-pricing" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -337,6 +343,7 @@ you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listPartnerPricingAgreements" method="get" path="/accounts/{accountID}/partner-pricing-agreements" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     )
     from .brandvalidationerror import BrandValidationError, BrandValidationErrorData
     from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundData
-    from .createaccount import CreateAccountResponseBody, CreateAccountResponseBodyData
+    from .createaccounterror import CreateAccountError, CreateAccountErrorData
     from .createpaymentlinkerror import (
         CreatePaymentLinkError,
         CreatePaymentLinkErrorData,
@@ -46,6 +46,7 @@ if TYPE_CHECKING:
     from .mooverror import MoovError
     from .no_response_error import NoResponseError
     from .onboardinginviteerror import OnboardingInviteError, OnboardingInviteErrorData
+    from .patchaccounterror import PatchAccountError, PatchAccountErrorData
     from .patchsweepconfigerror import PatchSweepConfigError, PatchSweepConfigErrorData
     from .refundvalidationerror import RefundValidationError, RefundValidationErrorData
     from .representativevalidationerror import (
@@ -81,7 +82,6 @@ if TYPE_CHECKING:
         TransferValidationError,
         TransferValidationErrorData,
     )
-    from .updateaccount import UpdateAccountResponseBody, UpdateAccountResponseBodyData
     from .updatecarderror import UpdateCardError, UpdateCardErrorData
     from .updateissuedcarderror import UpdateIssuedCardError, UpdateIssuedCardErrorData
     from .updatepaymentlinkerror import (
@@ -116,8 +116,8 @@ __all__ = [
     "BrandValidationErrorData",
     "CardAcquiringRefund",
     "CardAcquiringRefundData",
-    "CreateAccountResponseBody",
-    "CreateAccountResponseBodyData",
+    "CreateAccountError",
+    "CreateAccountErrorData",
     "CreatePaymentLinkError",
     "CreatePaymentLinkErrorData",
     "CreateSweepConfigError",
@@ -146,6 +146,8 @@ __all__ = [
     "NoResponseError",
     "OnboardingInviteError",
     "OnboardingInviteErrorData",
+    "PatchAccountError",
+    "PatchAccountErrorData",
     "PatchSweepConfigError",
     "PatchSweepConfigErrorData",
     "RefundValidationError",
@@ -169,8 +171,6 @@ __all__ = [
     "TransferOptionsValidationErrorData",
     "TransferValidationError",
     "TransferValidationErrorData",
-    "UpdateAccountResponseBody",
-    "UpdateAccountResponseBodyData",
     "UpdateCardError",
     "UpdateCardErrorData",
     "UpdateIssuedCardError",
@@ -203,8 +203,8 @@ _dynamic_imports: dict[str, str] = {
     "BrandValidationErrorData": ".brandvalidationerror",
     "CardAcquiringRefund": ".cardacquiringrefund",
     "CardAcquiringRefundData": ".cardacquiringrefund",
-    "CreateAccountResponseBody": ".createaccount",
-    "CreateAccountResponseBodyData": ".createaccount",
+    "CreateAccountError": ".createaccounterror",
+    "CreateAccountErrorData": ".createaccounterror",
     "CreatePaymentLinkError": ".createpaymentlinkerror",
     "CreatePaymentLinkErrorData": ".createpaymentlinkerror",
     "CreateSweepConfigError": ".createsweepconfigerror",
@@ -231,6 +231,8 @@ _dynamic_imports: dict[str, str] = {
     "NoResponseError": ".no_response_error",
     "OnboardingInviteError": ".onboardinginviteerror",
     "OnboardingInviteErrorData": ".onboardinginviteerror",
+    "PatchAccountError": ".patchaccounterror",
+    "PatchAccountErrorData": ".patchaccounterror",
     "PatchSweepConfigError": ".patchsweepconfigerror",
     "PatchSweepConfigErrorData": ".patchsweepconfigerror",
     "RefundValidationError": ".refundvalidationerror",
@@ -256,8 +258,6 @@ _dynamic_imports: dict[str, str] = {
     "TransferOptionsValidationErrorData": ".transferoptionsvalidationerror",
     "TransferValidationError": ".transfervalidationerror",
     "TransferValidationErrorData": ".transfervalidationerror",
-    "UpdateAccountResponseBody": ".updateaccount",
-    "UpdateAccountResponseBodyData": ".updateaccount",
     "UpdateCardError": ".updatecarderror",
     "UpdateCardErrorData": ".updatecarderror",
     "UpdateIssuedCardError": ".updateissuedcarderror",

@@ -23,6 +23,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listAdjustments" method="get" path="/accounts/{accountID}/adjustments" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -70,6 +71,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getAdjustment" method="get" path="/accounts/{accountID}/adjustments/{adjustmentID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

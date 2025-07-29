@@ -31,6 +31,7 @@ you'll need to specify the `/institutions.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="searchInstitutions" method="get" path="/institutions" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -79,6 +80,7 @@ you'll need to specify the `/fed.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listInstitutions" method="get" path="/institutions/ach/search" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

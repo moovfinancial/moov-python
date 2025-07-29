@@ -239,7 +239,6 @@ if TYPE_CHECKING:
         CreateAccountTermsOfServiceTypedDict,
         CreateAccountTypedDict,
     )
-    from .createaccounterror import CreateAccountError, CreateAccountErrorTypedDict
     from .createaccountsettings import (
         AchPayment,
         AchPaymentTypedDict,
@@ -633,7 +632,6 @@ if TYPE_CHECKING:
         PatchAccountTermsOfServiceTypedDict,
         PatchAccountTypedDict,
     )
-    from .patchaccounterror import PatchAccountError, PatchAccountErrorTypedDict
     from .patchbusiness import PatchBusiness, PatchBusinessTypedDict
     from .patchindividual import PatchIndividual, PatchIndividualTypedDict
     from .patchprofile import PatchProfile, PatchProfileTypedDict
@@ -1290,8 +1288,6 @@ __all__ = [
     "CountriesErrors",
     "CountriesErrorsTypedDict",
     "CreateAccount",
-    "CreateAccountError",
-    "CreateAccountErrorTypedDict",
     "CreateAccountSettings",
     "CreateAccountSettingsTypedDict",
     "CreateAccountTermsOfService",
@@ -1608,8 +1604,6 @@ __all__ = [
     "PatchAccount",
     "PatchAccountCustomerSupport",
     "PatchAccountCustomerSupportTypedDict",
-    "PatchAccountError",
-    "PatchAccountErrorTypedDict",
     "PatchAccountTermsOfService",
     "PatchAccountTermsOfServiceTypedDict",
     "PatchAccountTypedDict",
@@ -2198,8 +2192,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateAccountTermsOfService": ".createaccount",
     "CreateAccountTermsOfServiceTypedDict": ".createaccount",
     "CreateAccountTypedDict": ".createaccount",
-    "CreateAccountError": ".createaccounterror",
-    "CreateAccountErrorTypedDict": ".createaccounterror",
     "AchPayment": ".createaccountsettings",
     "AchPaymentTypedDict": ".createaccountsettings",
     "CardPayment": ".createaccountsettings",
@@ -2514,8 +2506,6 @@ _dynamic_imports: dict[str, str] = {
     "PatchAccountTermsOfService": ".patchaccount",
     "PatchAccountTermsOfServiceTypedDict": ".patchaccount",
     "PatchAccountTypedDict": ".patchaccount",
-    "PatchAccountError": ".patchaccounterror",
-    "PatchAccountErrorTypedDict": ".patchaccounterror",
     "PatchBusiness": ".patchbusiness",
     "PatchBusinessTypedDict": ".patchbusiness",
     "PatchIndividual": ".patchindividual",

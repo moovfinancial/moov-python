@@ -39,6 +39,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createSweepConfig" method="post" path="/accounts/{accountID}/sweep-configs" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -93,6 +94,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listSweepConfigs" method="get" path="/accounts/{accountID}/sweep-configs" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -139,6 +141,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getSweepConfig" method="get" path="/accounts/{accountID}/sweep-configs/{sweepConfigID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -186,6 +189,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="updateSweepConfig" method="patch" path="/accounts/{accountID}/sweep-configs/{sweepConfigID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -240,6 +244,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listSweeps" method="get" path="/accounts/{accountID}/wallets/{walletID}/sweeps" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -291,6 +296,7 @@ you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getSweep" method="get" path="/accounts/{accountID}/wallets/{walletID}/sweeps/{sweepID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

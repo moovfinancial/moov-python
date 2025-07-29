@@ -23,6 +23,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="createReceipts" method="post" path="/receipts" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -70,6 +71,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listReceipts" method="get" path="/receipts" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components

@@ -35,6 +35,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listIssuedCardAuthorizations" method="get" path="/issuing/{accountID}/authorizations" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -87,6 +88,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getIssuedCardAuthorization" method="get" path="/issuing/{accountID}/authorizations/{authorizationID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -134,6 +136,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listIssuedCardAuthorizationEvents" method="get" path="/issuing/{accountID}/authorizations/{authorizationID}/events" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -183,6 +186,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listIssuedCardTransactions" method="get" path="/issuing/{accountID}/card-transactions" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -234,6 +238,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getIssuedCardTransaction" method="get" path="/issuing/{accountID}/card-transactions/{cardTransactionID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
