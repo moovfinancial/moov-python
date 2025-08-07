@@ -3,10 +3,10 @@ id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
   docChecksum: de859895a9dade4eed2d78c14a7bebef
   docVersion: latest
-  speakeasyVersion: 1.598.0
-  generationVersion: 2.674.1
-  releaseVersion: 0.13.15
-  configChecksum: 8ad3cc59d9adf7ce3b44c4fab46a8dda
+  speakeasyVersion: 1.598.3
+  generationVersion: 2.674.3
+  releaseVersion: 0.13.16
+  configChecksum: f33f04ba2c38b87698fee79c5e6a8132
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.19.6
+    core: 5.19.7
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     downloadStreams: 1.0.1
