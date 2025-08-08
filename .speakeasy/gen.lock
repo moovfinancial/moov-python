@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: de859895a9dade4eed2d78c14a7bebef
+  docChecksum: ff02dd66e55d4317f6fc5e5eb81d45f0
   docVersion: latest
-  speakeasyVersion: 1.598.3
-  generationVersion: 2.674.3
-  releaseVersion: 0.13.16
-  configChecksum: f33f04ba2c38b87698fee79c5e6a8132
+  speakeasyVersion: 1.599.0
+  generationVersion: 2.675.0
+  releaseVersion: 0.13.17
+  configChecksum: 584f19950fe0c58192dd46385ea83e5f
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -514,7 +514,7 @@ generatedFiles:
   - docs/models/components/wallettransactiontype.md
   - docs/models/components/webhookdata.md
   - docs/models/components/webhookdataaccountcreated.md
-  - docs/models/components/webhookdataaccountdeleted.md
+  - docs/models/components/webhookdataaccountdisconnected.md
   - docs/models/components/webhookdataaccountupdated.md
   - docs/models/components/webhookdatabalanceupdated.md
   - docs/models/components/webhookdatabankaccountcreated.md
@@ -1506,7 +1506,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/wallettransactiontype.py
   - src/moovio_sdk/models/components/webhookdata.py
   - src/moovio_sdk/models/components/webhookdataaccountcreated.py
-  - src/moovio_sdk/models/components/webhookdataaccountdeleted.py
+  - src/moovio_sdk/models/components/webhookdataaccountdisconnected.py
   - src/moovio_sdk/models/components/webhookdataaccountupdated.py
   - src/moovio_sdk/models/components/webhookdatabalanceupdated.py
   - src/moovio_sdk/models/components/webhookdatabankaccountcreated.py

@@ -5,9 +5,9 @@ from .webhookdataaccountcreated import (
     WebhookDataAccountCreated,
     WebhookDataAccountCreatedTypedDict,
 )
-from .webhookdataaccountdeleted import (
-    WebhookDataAccountDeleted,
-    WebhookDataAccountDeletedTypedDict,
+from .webhookdataaccountdisconnected import (
+    WebhookDataAccountDisconnected,
+    WebhookDataAccountDisconnectedTypedDict,
 )
 from .webhookdataaccountupdated import (
     WebhookDataAccountUpdated,
@@ -126,7 +126,7 @@ WebhookDataTypedDict = TypeAliasType(
     Union[
         WebhookDataRepresentativeCreatedTypedDict,
         WebhookDataAccountUpdatedTypedDict,
-        WebhookDataAccountDeletedTypedDict,
+        WebhookDataAccountDisconnectedTypedDict,
         WebhookDataBalanceUpdatedTypedDict,
         WebhookDataBankAccountCreatedTypedDict,
         WebhookDataTerminalApplicationUpdatedTypedDict,
@@ -163,7 +163,7 @@ WebhookData = TypeAliasType(
     Union[
         WebhookDataRepresentativeCreated,
         WebhookDataAccountUpdated,
-        WebhookDataAccountDeleted,
+        WebhookDataAccountDisconnected,
         WebhookDataBalanceUpdated,
         WebhookDataBankAccountCreated,
         WebhookDataTerminalApplicationUpdated,

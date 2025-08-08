@@ -10,7 +10,7 @@ class WebhookEventType(str, Enum):
     WILDCARD_ = "*"
     ACCOUNT_CREATED = "account.created"
     ACCOUNT_UPDATED = "account.updated"
-    ACCOUNT_DELETED = "account.deleted"
+    ACCOUNT_DISCONNECTED = "account.disconnected"
     BALANCE_UPDATED = "balance.updated"
     BANK_ACCOUNT_CREATED = "bankAccount.created"
     BANK_ACCOUNT_UPDATED = "bankAccount.updated"

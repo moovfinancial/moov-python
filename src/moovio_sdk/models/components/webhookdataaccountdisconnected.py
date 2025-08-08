@@ -7,12 +7,12 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class WebhookDataAccountDeletedTypedDict(TypedDict):
+class WebhookDataAccountDisconnectedTypedDict(TypedDict):
     account_id: str
     foreign_id: NotRequired[str]
 
 
-class WebhookDataAccountDeleted(BaseModel):
+class WebhookDataAccountDisconnected(BaseModel):
     account_id: Annotated[str, pydantic.Field(alias="accountID")]
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None

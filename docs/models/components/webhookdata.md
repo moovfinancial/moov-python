@@ -17,10 +17,10 @@ value: components.WebhookDataAccountCreated = /* values here */
 value: components.WebhookDataAccountUpdated = /* values here */
 ```
 
-### `components.WebhookDataAccountDeleted`
+### `components.WebhookDataAccountDisconnected`
 
 ```python
-value: components.WebhookDataAccountDeleted = /* values here */
+value: components.WebhookDataAccountDisconnected = /* values here */
 ```
 
 ### `components.WebhookDataBalanceUpdated`

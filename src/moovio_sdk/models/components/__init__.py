@@ -947,9 +947,9 @@ if TYPE_CHECKING:
         WebhookDataAccountCreated,
         WebhookDataAccountCreatedTypedDict,
     )
-    from .webhookdataaccountdeleted import (
-        WebhookDataAccountDeleted,
-        WebhookDataAccountDeletedTypedDict,
+    from .webhookdataaccountdisconnected import (
+        WebhookDataAccountDisconnected,
+        WebhookDataAccountDisconnectedTypedDict,
     )
     from .webhookdataaccountupdated import (
         WebhookDataAccountUpdated,
@@ -1907,8 +1907,8 @@ __all__ = [
     "WebhookData",
     "WebhookDataAccountCreated",
     "WebhookDataAccountCreatedTypedDict",
-    "WebhookDataAccountDeleted",
-    "WebhookDataAccountDeletedTypedDict",
+    "WebhookDataAccountDisconnected",
+    "WebhookDataAccountDisconnectedTypedDict",
     "WebhookDataAccountUpdated",
     "WebhookDataAccountUpdatedTypedDict",
     "WebhookDataBalanceUpdated",
@@ -2815,8 +2815,8 @@ _dynamic_imports: dict[str, str] = {
     "WebhookDataTypedDict": ".webhookdata",
     "WebhookDataAccountCreated": ".webhookdataaccountcreated",
     "WebhookDataAccountCreatedTypedDict": ".webhookdataaccountcreated",
-    "WebhookDataAccountDeleted": ".webhookdataaccountdeleted",
-    "WebhookDataAccountDeletedTypedDict": ".webhookdataaccountdeleted",
+    "WebhookDataAccountDisconnected": ".webhookdataaccountdisconnected",
+    "WebhookDataAccountDisconnectedTypedDict": ".webhookdataaccountdisconnected",
     "WebhookDataAccountUpdated": ".webhookdataaccountupdated",
     "WebhookDataAccountUpdatedTypedDict": ".webhookdataaccountupdated",
     "WebhookDataBalanceUpdated": ".webhookdatabalanceupdated",
