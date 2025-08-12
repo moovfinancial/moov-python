@@ -11,3 +11,4 @@ class PrimaryRegulator(str, Enum):
     FDIC = "FDIC"
     NCUA = "NCUA"
     FRB = "FRB"
+    STATE_CU_REGULATOR = "state-cu-regulator"
