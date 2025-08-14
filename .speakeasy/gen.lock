@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 1e8d979e777b083c248ff9a2dbf03e28
+  docChecksum: ea05a43791ad4269509c8393b48539e9
   docVersion: latest
-  speakeasyVersion: 1.603.0
-  generationVersion: 2.681.1
-  releaseVersion: 0.13.19
-  configChecksum: de34bde2f6e19a5b740fd5a3cd698204
+  speakeasyVersion: 1.603.2
+  generationVersion: 2.681.8
+  releaseVersion: 0.13.20
+  configChecksum: cd0a2aa2d4075bc5627bff8cfe691d88
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -120,7 +120,6 @@ generatedFiles:
   - docs/models/components/calltoaction.md
   - docs/models/components/cancellation.md
   - docs/models/components/cancellationstatus.md
-  - docs/models/components/capabilitieserror.md
   - docs/models/components/capability.md
   - docs/models/components/capabilityid.md
   - docs/models/components/capabilityrequirement.md
@@ -167,7 +166,6 @@ generatedFiles:
   - docs/models/components/completedmicrodeposits.md
   - docs/models/components/completemicrodeposits.md
   - docs/models/components/contact.md
-  - docs/models/components/countrieserrors.md
   - docs/models/components/createaccount.md
   - docs/models/components/createaccountsettings.md
   - docs/models/components/createaccounttermsofservice.md
@@ -1159,7 +1157,6 @@ generatedFiles:
   - src/moovio_sdk/models/components/calltoaction.py
   - src/moovio_sdk/models/components/cancellation.py
   - src/moovio_sdk/models/components/cancellationstatus.py
-  - src/moovio_sdk/models/components/capabilitieserror.py
   - src/moovio_sdk/models/components/capability.py
   - src/moovio_sdk/models/components/capabilityid.py
   - src/moovio_sdk/models/components/capabilityrequirement.py
@@ -1202,7 +1199,6 @@ generatedFiles:
   - src/moovio_sdk/models/components/completedmicrodeposits.py
   - src/moovio_sdk/models/components/completemicrodeposits.py
   - src/moovio_sdk/models/components/contact.py
-  - src/moovio_sdk/models/components/countrieserrors.py
   - src/moovio_sdk/models/components/createaccount.py
   - src/moovio_sdk/models/components/createaccountsettings.py
   - src/moovio_sdk/models/components/createaccounttype.py
@@ -1852,7 +1848,7 @@ examples:
         "400":
           application/json: {"error": "<value>"}
         "422":
-          application/json: {"error": {"countries": {"key": "<value>", "key1": "<value>"}}}
+          application/json: {"countries": {"key": "<value>"}}
   getMerchantProcessingAgreement:
     speakeasy-default-get-merchant-processing-agreement:
       parameters:

@@ -57,6 +57,8 @@ class UpsertUnderwritingErrorData(BaseModel):
         Optional[str], pydantic.Field(alias="averageMonthlyTransactionVolume")
     ] = None
 
+    error: Optional[str] = None
+
     average_transaction_size: Annotated[
         Optional[str], pydantic.Field(alias="averageTransactionSize")
     ] = None

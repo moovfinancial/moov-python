@@ -34,6 +34,8 @@ class PatchAccountErrorData(BaseModel):
 
     settings: Optional[components_createaccountsettings.CreateAccountSettings] = None
 
+    error: Optional[str] = None
+
 
 class PatchAccountError(MoovError):
     data: PatchAccountErrorData

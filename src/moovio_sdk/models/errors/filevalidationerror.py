@@ -14,6 +14,8 @@ class FileValidationErrorData(BaseModel):
 
     file: Optional[str] = None
 
+    file_name: Annotated[Optional[str], pydantic.Field(alias="FileName")] = None
+
     file_purpose: Annotated[Optional[str], pydantic.Field(alias="filePurpose")] = None
 
     metadata: Optional[str] = None

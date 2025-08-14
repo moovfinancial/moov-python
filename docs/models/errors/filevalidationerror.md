@@ -7,5 +7,6 @@
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `error`            | *Optional[str]*    | :heavy_minus_sign: | N/A                |
 | `file`             | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| `file_name`        | *Optional[str]*    | :heavy_minus_sign: | N/A                |
 | `file_purpose`     | *Optional[str]*    | :heavy_minus_sign: | N/A                |
 | `metadata`         | *Optional[str]*    | :heavy_minus_sign: | N/A                |

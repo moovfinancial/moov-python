@@ -2,16 +2,15 @@
 
 from __future__ import annotations
 import httpx
-from moovio_sdk.models.components import (
-    capabilitieserror as components_capabilitieserror,
-)
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
-from typing import Optional
+from typing import Dict, Optional
 
 
 class AddCapabilitiesErrorData(BaseModel):
-    error: Optional[components_capabilitieserror.CapabilitiesError] = None
+    error: Optional[str] = None
+
+    capabilities: Optional[Dict[str, str]] = None
 
 
 class AddCapabilitiesError(MoovError):

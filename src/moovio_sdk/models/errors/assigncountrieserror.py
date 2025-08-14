@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 import httpx
-from moovio_sdk.models.components import countrieserrors as components_countrieserrors
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
-from typing import Optional
+from typing import Dict, Optional
 
 
 class AssignCountriesErrorData(BaseModel):
-    error: components_countrieserrors.CountriesErrors
+    countries: Dict[str, str]
 
 
 class AssignCountriesError(MoovError):

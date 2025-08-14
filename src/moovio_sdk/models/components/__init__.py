@@ -137,7 +137,6 @@ if TYPE_CHECKING:
     from .calltoaction import CallToAction
     from .cancellation import Cancellation, CancellationTypedDict
     from .cancellationstatus import CancellationStatus
-    from .capabilitieserror import CapabilitiesError, CapabilitiesErrorTypedDict
     from .capability import Capability, CapabilityTypedDict
     from .capabilityid import CapabilityID
     from .capabilityrequirement import (
@@ -233,7 +232,6 @@ if TYPE_CHECKING:
         CompleteMicroDepositsTypedDict,
     )
     from .contact import Contact, ContactTypedDict
-    from .countrieserrors import CountriesErrors, CountriesErrorsTypedDict
     from .createaccount import (
         CreateAccount,
         CreateAccountTermsOfService,
@@ -1205,8 +1203,6 @@ __all__ = [
     "Cancellation",
     "CancellationStatus",
     "CancellationTypedDict",
-    "CapabilitiesError",
-    "CapabilitiesErrorTypedDict",
     "Capability",
     "CapabilityID",
     "CapabilityRequirement",
@@ -1286,8 +1282,6 @@ __all__ = [
     "CompletedMicroDepositsTypedDict",
     "Contact",
     "ContactTypedDict",
-    "CountriesErrors",
-    "CountriesErrorsTypedDict",
     "CreateAccount",
     "CreateAccountSettings",
     "CreateAccountSettingsTypedDict",
@@ -2110,8 +2104,6 @@ _dynamic_imports: dict[str, str] = {
     "Cancellation": ".cancellation",
     "CancellationTypedDict": ".cancellation",
     "CancellationStatus": ".cancellationstatus",
-    "CapabilitiesError": ".capabilitieserror",
-    "CapabilitiesErrorTypedDict": ".capabilitieserror",
     "Capability": ".capability",
     "CapabilityTypedDict": ".capability",
     "CapabilityID": ".capabilityid",
@@ -2187,8 +2179,6 @@ _dynamic_imports: dict[str, str] = {
     "CompleteMicroDepositsTypedDict": ".completemicrodeposits",
     "Contact": ".contact",
     "ContactTypedDict": ".contact",
-    "CountriesErrors": ".countrieserrors",
-    "CountriesErrorsTypedDict": ".countrieserrors",
     "CreateAccount": ".createaccount",
     "CreateAccountTermsOfService": ".createaccount",
     "CreateAccountTermsOfServiceTypedDict": ".createaccount",
