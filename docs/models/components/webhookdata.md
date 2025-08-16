@@ -161,6 +161,24 @@ value: components.WebhookDataTerminalApplicationCreated = /* values here */
 value: components.WebhookDataTerminalApplicationUpdated = /* values here */
 ```
 
+### `components.WebhookDataTicketCreated`
+
+```python
+value: components.WebhookDataTicketCreated = /* values here */
+```
+
+### `components.WebhookDataTicketUpdated`
+
+```python
+value: components.WebhookDataTicketUpdated = /* values here */
+```
+
+### `components.WebhookDataTicketMessageAdded`
+
+```python
+value: components.WebhookDataTicketMessageAdded = /* values here */
+```
+
 ### `components.WebhookDataTransferCreated`
 
 ```python

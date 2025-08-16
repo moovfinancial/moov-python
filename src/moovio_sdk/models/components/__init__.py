@@ -1045,6 +1045,18 @@ if TYPE_CHECKING:
         WebhookDataTerminalApplicationUpdated,
         WebhookDataTerminalApplicationUpdatedTypedDict,
     )
+    from .webhookdataticketcreated import (
+        WebhookDataTicketCreated,
+        WebhookDataTicketCreatedTypedDict,
+    )
+    from .webhookdataticketmessageadded import (
+        WebhookDataTicketMessageAdded,
+        WebhookDataTicketMessageAddedTypedDict,
+    )
+    from .webhookdataticketupdated import (
+        WebhookDataTicketUpdated,
+        WebhookDataTicketUpdatedTypedDict,
+    )
     from .webhookdatatransfercreated import (
         WebhookDataTransferCreated,
         WebhookDataTransferCreatedTypedDict,
@@ -1951,6 +1963,12 @@ __all__ = [
     "WebhookDataTerminalApplicationCreatedTypedDict",
     "WebhookDataTerminalApplicationUpdated",
     "WebhookDataTerminalApplicationUpdatedTypedDict",
+    "WebhookDataTicketCreated",
+    "WebhookDataTicketCreatedTypedDict",
+    "WebhookDataTicketMessageAdded",
+    "WebhookDataTicketMessageAddedTypedDict",
+    "WebhookDataTicketUpdated",
+    "WebhookDataTicketUpdatedTypedDict",
     "WebhookDataTransferCreated",
     "WebhookDataTransferCreatedTypedDict",
     "WebhookDataTransferStatus",
@@ -2855,6 +2873,12 @@ _dynamic_imports: dict[str, str] = {
     "WebhookDataTerminalApplicationCreatedTypedDict": ".webhookdataterminalapplicationcreated",
     "WebhookDataTerminalApplicationUpdated": ".webhookdataterminalapplicationupdated",
     "WebhookDataTerminalApplicationUpdatedTypedDict": ".webhookdataterminalapplicationupdated",
+    "WebhookDataTicketCreated": ".webhookdataticketcreated",
+    "WebhookDataTicketCreatedTypedDict": ".webhookdataticketcreated",
+    "WebhookDataTicketMessageAdded": ".webhookdataticketmessageadded",
+    "WebhookDataTicketMessageAddedTypedDict": ".webhookdataticketmessageadded",
+    "WebhookDataTicketUpdated": ".webhookdataticketupdated",
+    "WebhookDataTicketUpdatedTypedDict": ".webhookdataticketupdated",
     "WebhookDataTransferCreated": ".webhookdatatransfercreated",
     "WebhookDataTransferCreatedTypedDict": ".webhookdatatransfercreated",
     "WebhookDataTransferStatus": ".webhookdatatransferstatus",

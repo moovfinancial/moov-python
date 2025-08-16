@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: ea05a43791ad4269509c8393b48539e9
+  docChecksum: 9bfcf4de25d41aa9cb40f75c04d70c5f
   docVersion: latest
-  speakeasyVersion: 1.604.1
-  generationVersion: 2.683.1
-  releaseVersion: 0.13.21
-  configChecksum: 71a62c87626123c0c3dd5ad622946879
+  speakeasyVersion: 1.605.0
+  generationVersion: 2.684.0
+  releaseVersion: 0.13.22
+  configChecksum: 67e61ab4b811faa9caadefae235d7248
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -537,6 +537,9 @@ generatedFiles:
   - docs/models/components/webhookdatasweepupdated.md
   - docs/models/components/webhookdataterminalapplicationcreated.md
   - docs/models/components/webhookdataterminalapplicationupdated.md
+  - docs/models/components/webhookdataticketcreated.md
+  - docs/models/components/webhookdataticketmessageadded.md
+  - docs/models/components/webhookdataticketupdated.md
   - docs/models/components/webhookdatatransfercreated.md
   - docs/models/components/webhookdatatransferstatus.md
   - docs/models/components/webhookdatatransferupdated.md
@@ -1527,6 +1530,9 @@ generatedFiles:
   - src/moovio_sdk/models/components/webhookdatasweepupdated.py
   - src/moovio_sdk/models/components/webhookdataterminalapplicationcreated.py
   - src/moovio_sdk/models/components/webhookdataterminalapplicationupdated.py
+  - src/moovio_sdk/models/components/webhookdataticketcreated.py
+  - src/moovio_sdk/models/components/webhookdataticketmessageadded.py
+  - src/moovio_sdk/models/components/webhookdataticketupdated.py
   - src/moovio_sdk/models/components/webhookdatatransfercreated.py
   - src/moovio_sdk/models/components/webhookdatatransferstatus.py
   - src/moovio_sdk/models/components/webhookdatatransferupdated.py
