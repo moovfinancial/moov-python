@@ -51,6 +51,7 @@ class CreateScheduleGlobals(BaseModel):
 
 class CreateScheduleRequestTypedDict(TypedDict):
     account_id: str
+    r"""Account ID of the account that will run the transfer."""
     upsert_schedule: components_upsertschedule.UpsertScheduleTypedDict
 
 
@@ -60,6 +61,7 @@ class CreateScheduleRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""Account ID of the account that will run the transfer."""
 
     upsert_schedule: Annotated[
         components_upsertschedule.UpsertSchedule,

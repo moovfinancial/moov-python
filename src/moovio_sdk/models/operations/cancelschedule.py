@@ -42,6 +42,7 @@ class CancelScheduleGlobals(BaseModel):
 
 class CancelScheduleRequestTypedDict(TypedDict):
     account_id: str
+    r"""Your Moov account ID as the partner running the transfers."""
     schedule_id: str
 
 
@@ -51,6 +52,7 @@ class CancelScheduleRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""Your Moov account ID as the partner running the transfers."""
 
     schedule_id: Annotated[
         str,

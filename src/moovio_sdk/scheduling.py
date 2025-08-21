@@ -30,7 +30,7 @@ class Scheduling(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: Account ID of the account that will run the transfer.
         :param description: Simple description of what the schedule is.
         :param occurrences:
         :param recur: Defines configuration for recurring transfers.
@@ -165,7 +165,7 @@ class Scheduling(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: Account ID of the account that will run the transfer.
         :param description: Simple description of what the schedule is.
         :param occurrences:
         :param recur: Defines configuration for recurring transfers.
@@ -515,7 +515,7 @@ class Scheduling(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: Account ID of the account that will run the transfer.
         :param schedule_id:
         :param description: Simple description of what the schedule is.
         :param occurrences:
@@ -653,7 +653,7 @@ class Scheduling(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: Account ID of the account that will run the transfer.
         :param schedule_id:
         :param description: Simple description of what the schedule is.
         :param occurrences:
@@ -984,7 +984,7 @@ class Scheduling(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: Your Moov account ID as the partner running the transfers.
         :param schedule_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1097,7 +1097,7 @@ class Scheduling(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: Your Moov account ID as the partner running the transfers.
         :param schedule_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
