@@ -352,8 +352,7 @@ class Accounts(BaseSDK):
         *,
         name: Optional[str] = None,
         email: Optional[str] = None,
-        type_: Optional[components.AccountType] = None,
-        include_guest: Optional[bool] = None,
+        type_: Optional[components.CreateAccountType] = None,
         foreign_id: Optional[str] = None,
         include_disconnected: Optional[bool] = None,
         capability: Optional[components.CapabilityID] = None,
@@ -376,8 +375,7 @@ class Accounts(BaseSDK):
 
         :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>
         :param email: Filter connected accounts by email address.    Provide the full email address to filter by email.
-        :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
-        :param include_guest: Filter accounts with AccountType guest.      If true, the response will include guest accounts.
+        :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).    Filtering by `type=guest` is not currently supported.
         :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
         :param include_disconnected: Filter disconnected accounts.  If true, the response will include disconnected accounts.
         :param capability: Filter connected accounts by the capability.
@@ -403,7 +401,6 @@ class Accounts(BaseSDK):
             name=name,
             email=email,
             type=type_,
-            include_guest=include_guest,
             foreign_id=foreign_id,
             include_disconnected=include_disconnected,
             capability=capability,
@@ -479,8 +476,7 @@ class Accounts(BaseSDK):
         *,
         name: Optional[str] = None,
         email: Optional[str] = None,
-        type_: Optional[components.AccountType] = None,
-        include_guest: Optional[bool] = None,
+        type_: Optional[components.CreateAccountType] = None,
         foreign_id: Optional[str] = None,
         include_disconnected: Optional[bool] = None,
         capability: Optional[components.CapabilityID] = None,
@@ -503,8 +499,7 @@ class Accounts(BaseSDK):
 
         :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>
         :param email: Filter connected accounts by email address.    Provide the full email address to filter by email.
-        :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
-        :param include_guest: Filter accounts with AccountType guest.      If true, the response will include guest accounts.
+        :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).    Filtering by `type=guest` is not currently supported.
         :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
         :param include_disconnected: Filter disconnected accounts.  If true, the response will include disconnected accounts.
         :param capability: Filter connected accounts by the capability.
@@ -530,7 +525,6 @@ class Accounts(BaseSDK):
             name=name,
             email=email,
             type=type_,
-            include_guest=include_guest,
             foreign_id=foreign_id,
             include_disconnected=include_disconnected,
             capability=capability,

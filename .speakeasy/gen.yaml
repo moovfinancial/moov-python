@@ -21,10 +21,13 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 0.13.24
+  version: 0.14.0
   additionalDependencies:
     dev: {}
     main: {}
+  allowedRedefinedBuiltins:
+    - id
+    - object
   authors:
     - Speakeasy
     - Moov

@@ -3,9 +3,9 @@
 from __future__ import annotations
 from moovio_sdk.models.components import (
     account as components_account,
-    accounttype as components_accounttype,
     capabilityid as components_capabilityid,
     capabilitystatus as components_capabilitystatus,
+    createaccounttype as components_createaccounttype,
 )
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
@@ -62,17 +62,14 @@ class ListAccountsRequestTypedDict(TypedDict):
 
     Provide the full email address to filter by email.
     """
-    type: NotRequired[components_accounttype.AccountType]
+    type: NotRequired[components_createaccounttype.CreateAccountType]
     r"""Filter connected accounts by AccountType.
 
     If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
     be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
     the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
-    """
-    include_guest: NotRequired[bool]
-    r"""Filter accounts with AccountType guest.
 
-    If true, the response will include guest accounts.
+    Filtering by `type=guest` is not currently supported.
     """
     foreign_id: NotRequired[str]
     r"""Serves as an optional alias from a foreign/external system which can be used to reference this resource."""
@@ -114,7 +111,7 @@ class ListAccountsRequest(BaseModel):
     """
 
     type: Annotated[
-        Optional[components_accounttype.AccountType],
+        Optional[components_createaccounttype.CreateAccountType],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""Filter connected accounts by AccountType.
@@ -122,16 +119,8 @@ class ListAccountsRequest(BaseModel):
     If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
     be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
     the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
-    """
 
-    include_guest: Annotated[
-        Optional[bool],
-        pydantic.Field(alias="includeGuest"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-    r"""Filter accounts with AccountType guest.
-
-    If true, the response will include guest accounts.
+    Filtering by `type=guest` is not currently supported.
     """
 
     foreign_id: Annotated[
