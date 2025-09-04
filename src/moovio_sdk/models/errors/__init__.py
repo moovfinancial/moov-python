@@ -31,6 +31,7 @@ if TYPE_CHECKING:
         CreateSweepConfigErrorData,
     )
     from .createticketerror import CreateTicketError, CreateTicketErrorData
+    from .createwalleterror import CreateWalletError, CreateWalletErrorData
     from .feeplanagreementerror import FeePlanAgreementError, FeePlanAgreementErrorData
     from .fileuploadvalidationerror import (
         File,
@@ -50,6 +51,7 @@ if TYPE_CHECKING:
     from .onboardinginviteerror import OnboardingInviteError, OnboardingInviteErrorData
     from .patchaccounterror import PatchAccountError, PatchAccountErrorData
     from .patchsweepconfigerror import PatchSweepConfigError, PatchSweepConfigErrorData
+    from .patchwalleterror import PatchWalletError, PatchWalletErrorData
     from .refundvalidationerror import RefundValidationError, RefundValidationErrorData
     from .representativevalidationerror import (
         Error,
@@ -126,6 +128,8 @@ __all__ = [
     "CreateSweepConfigErrorData",
     "CreateTicketError",
     "CreateTicketErrorData",
+    "CreateWalletError",
+    "CreateWalletErrorData",
     "Error",
     "ErrorTypedDict",
     "FeePlanAgreementError",
@@ -152,6 +156,8 @@ __all__ = [
     "PatchAccountErrorData",
     "PatchSweepConfigError",
     "PatchSweepConfigErrorData",
+    "PatchWalletError",
+    "PatchWalletErrorData",
     "RefundValidationError",
     "RefundValidationErrorData",
     "RepresentativeValidationError",
@@ -213,6 +219,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateSweepConfigErrorData": ".createsweepconfigerror",
     "CreateTicketError": ".createticketerror",
     "CreateTicketErrorData": ".createticketerror",
+    "CreateWalletError": ".createwalleterror",
+    "CreateWalletErrorData": ".createwalleterror",
     "FeePlanAgreementError": ".feeplanagreementerror",
     "FeePlanAgreementErrorData": ".feeplanagreementerror",
     "File": ".fileuploadvalidationerror",
@@ -236,6 +244,8 @@ _dynamic_imports: dict[str, str] = {
     "PatchAccountErrorData": ".patchaccounterror",
     "PatchSweepConfigError": ".patchsweepconfigerror",
     "PatchSweepConfigErrorData": ".patchsweepconfigerror",
+    "PatchWalletError": ".patchwalleterror",
+    "PatchWalletErrorData": ".patchwalleterror",
     "RefundValidationError": ".refundvalidationerror",
     "RefundValidationErrorData": ".refundvalidationerror",
     "Error": ".representativevalidationerror",

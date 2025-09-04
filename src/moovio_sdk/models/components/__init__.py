@@ -356,6 +356,7 @@ if TYPE_CHECKING:
         CreateTransferSourceCard,
         CreateTransferSourceCardTypedDict,
     )
+    from .createwallet import CreateWallet, CreateWalletTypedDict
     from .customersupport import CustomerSupport, CustomerSupportTypedDict
     from .customersupporterror import (
         CustomerSupportError,
@@ -653,6 +654,7 @@ if TYPE_CHECKING:
         Status,
     )
     from .patchtransfer import PatchTransfer, PatchTransferTypedDict
+    from .patchwallet import PatchWallet, PatchWalletTypedDict
     from .paymentdetailserror import PaymentDetailsError, PaymentDetailsErrorTypedDict
     from .paymentlink import PaymentLink, PaymentLinkTypedDict
     from .paymentlinkcustomeroptions import (
@@ -937,10 +939,12 @@ if TYPE_CHECKING:
         WalletAvailableBalance,
         WalletAvailableBalanceTypedDict,
     )
+    from .walletstatus import WalletStatus
     from .wallettransaction import WalletTransaction, WalletTransactionTypedDict
     from .wallettransactionsourcetype import WalletTransactionSourceType
     from .wallettransactionstatus import WalletTransactionStatus
     from .wallettransactiontype import WalletTransactionType
+    from .wallettype import WalletType
     from .webhookdata import WebhookData, WebhookDataTypedDict
     from .webhookdataaccountcreated import (
         WebhookDataAccountCreated,
@@ -1067,9 +1071,17 @@ if TYPE_CHECKING:
         WebhookDataTransferUpdated,
         WebhookDataTransferUpdatedTypedDict,
     )
+    from .webhookdatawalletcreated import (
+        WebhookDataWalletCreated,
+        WebhookDataWalletCreatedTypedDict,
+    )
     from .webhookdatawallettransactionupdated import (
         WebhookDataWalletTransactionUpdated,
         WebhookDataWalletTransactionUpdatedTypedDict,
+    )
+    from .webhookdatawalletupdated import (
+        WebhookDataWalletUpdated,
+        WebhookDataWalletUpdatedTypedDict,
     )
     from .webhookevent import WebhookEvent, WebhookEventTypedDict
     from .webhookeventtype import WebhookEventType
@@ -1374,6 +1386,8 @@ __all__ = [
     "CreateTransferSourceCardTypedDict",
     "CreateTransferSourceTypedDict",
     "CreateTransferTypedDict",
+    "CreateWallet",
+    "CreateWalletTypedDict",
     "CreatedTransfer",
     "CreatedTransferTypedDict",
     "CustomerSupport",
@@ -1625,6 +1639,8 @@ __all__ = [
     "PatchSweepConfigTypedDict",
     "PatchTransfer",
     "PatchTransferTypedDict",
+    "PatchWallet",
+    "PatchWalletTypedDict",
     "PaymentDetailsError",
     "PaymentDetailsErrorTypedDict",
     "PaymentLink",
@@ -1905,11 +1921,13 @@ __all__ = [
     "Wallet",
     "WalletAvailableBalance",
     "WalletAvailableBalanceTypedDict",
+    "WalletStatus",
     "WalletTransaction",
     "WalletTransactionSourceType",
     "WalletTransactionStatus",
     "WalletTransactionType",
     "WalletTransactionTypedDict",
+    "WalletType",
     "WalletTypedDict",
     "WebhookData",
     "WebhookDataAccountCreated",
@@ -1976,8 +1994,12 @@ __all__ = [
     "WebhookDataTransferUpdated",
     "WebhookDataTransferUpdatedTypedDict",
     "WebhookDataTypedDict",
+    "WebhookDataWalletCreated",
+    "WebhookDataWalletCreatedTypedDict",
     "WebhookDataWalletTransactionUpdated",
     "WebhookDataWalletTransactionUpdatedTypedDict",
+    "WebhookDataWalletUpdated",
+    "WebhookDataWalletUpdatedTypedDict",
     "WebhookEvent",
     "WebhookEventType",
     "WebhookEventTypedDict",
@@ -2285,6 +2307,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateTransferSourceACHTypedDict": ".createtransfersourceach",
     "CreateTransferSourceCard": ".createtransfersourcecard",
     "CreateTransferSourceCardTypedDict": ".createtransfersourcecard",
+    "CreateWallet": ".createwallet",
+    "CreateWalletTypedDict": ".createwallet",
     "CustomerSupport": ".customersupport",
     "CustomerSupportTypedDict": ".customersupport",
     "CustomerSupportError": ".customersupporterror",
@@ -2539,6 +2563,8 @@ _dynamic_imports: dict[str, str] = {
     "Status": ".patchsweepconfig",
     "PatchTransfer": ".patchtransfer",
     "PatchTransferTypedDict": ".patchtransfer",
+    "PatchWallet": ".patchwallet",
+    "PatchWalletTypedDict": ".patchwallet",
     "PaymentDetailsError": ".paymentdetailserror",
     "PaymentDetailsErrorTypedDict": ".paymentdetailserror",
     "PaymentLink": ".paymentlink",
@@ -2815,11 +2841,13 @@ _dynamic_imports: dict[str, str] = {
     "WalletTypedDict": ".wallet",
     "WalletAvailableBalance": ".walletavailablebalance",
     "WalletAvailableBalanceTypedDict": ".walletavailablebalance",
+    "WalletStatus": ".walletstatus",
     "WalletTransaction": ".wallettransaction",
     "WalletTransactionTypedDict": ".wallettransaction",
     "WalletTransactionSourceType": ".wallettransactionsourcetype",
     "WalletTransactionStatus": ".wallettransactionstatus",
     "WalletTransactionType": ".wallettransactiontype",
+    "WalletType": ".wallettype",
     "WebhookData": ".webhookdata",
     "WebhookDataTypedDict": ".webhookdata",
     "WebhookDataAccountCreated": ".webhookdataaccountcreated",
@@ -2885,8 +2913,12 @@ _dynamic_imports: dict[str, str] = {
     "WebhookDataTransferStatus": ".webhookdatatransferstatus",
     "WebhookDataTransferUpdated": ".webhookdatatransferupdated",
     "WebhookDataTransferUpdatedTypedDict": ".webhookdatatransferupdated",
+    "WebhookDataWalletCreated": ".webhookdatawalletcreated",
+    "WebhookDataWalletCreatedTypedDict": ".webhookdatawalletcreated",
     "WebhookDataWalletTransactionUpdated": ".webhookdatawallettransactionupdated",
     "WebhookDataWalletTransactionUpdatedTypedDict": ".webhookdatawallettransactionupdated",
+    "WebhookDataWalletUpdated": ".webhookdatawalletupdated",
+    "WebhookDataWalletUpdatedTypedDict": ".webhookdatawalletupdated",
     "WebhookEvent": ".webhookevent",
     "WebhookEventTypedDict": ".webhookevent",
     "WebhookEventType": ".webhookeventtype",

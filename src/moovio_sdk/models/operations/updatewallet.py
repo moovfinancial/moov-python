@@ -2,23 +2,22 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import (
+    patchwallet as components_patchwallet,
     wallet as components_wallet,
-    walletstatus as components_walletstatus,
-    wallettype as components_wallettype,
 )
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import (
     FieldMetadata,
     HeaderMetadata,
     PathParamMetadata,
-    QueryParamMetadata,
+    RequestMetadata,
 )
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class ListWalletsGlobalsTypedDict(TypedDict):
+class UpdateWalletGlobalsTypedDict(TypedDict):
     x_moov_version: NotRequired[str]
     r"""Specify an API version.
 
@@ -32,7 +31,7 @@ class ListWalletsGlobalsTypedDict(TypedDict):
     """
 
 
-class ListWalletsGlobals(BaseModel):
+class UpdateWalletGlobals(BaseModel):
     x_moov_version: Annotated[
         Optional[str],
         pydantic.Field(alias="x-moov-version"),
@@ -50,53 +49,41 @@ class ListWalletsGlobals(BaseModel):
     """
 
 
-class ListWalletsRequestTypedDict(TypedDict):
+class UpdateWalletRequestTypedDict(TypedDict):
+    wallet_id: str
+    r"""Identifier for the wallet."""
     account_id: str
-    status: NotRequired[components_walletstatus.WalletStatus]
-    r"""Optional parameter for filtering wallets by status."""
-    wallet_type: NotRequired[components_wallettype.WalletType]
-    r"""Optional parameter for filtering wallets by type."""
-    skip: NotRequired[int]
-    count: NotRequired[int]
+    r"""The Moov account ID the wallet belongs to."""
+    patch_wallet: components_patchwallet.PatchWalletTypedDict
 
 
-class ListWalletsRequest(BaseModel):
+class UpdateWalletRequest(BaseModel):
+    wallet_id: Annotated[
+        str,
+        pydantic.Field(alias="walletID"),
+        FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
+    ]
+    r"""Identifier for the wallet."""
+
     account_id: Annotated[
         str,
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The Moov account ID the wallet belongs to."""
 
-    status: Annotated[
-        Optional[components_walletstatus.WalletStatus],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-    r"""Optional parameter for filtering wallets by status."""
-
-    wallet_type: Annotated[
-        Optional[components_wallettype.WalletType],
-        pydantic.Field(alias="walletType"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-    r"""Optional parameter for filtering wallets by type."""
-
-    skip: Annotated[
-        Optional[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-
-    count: Annotated[
-        Optional[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
+    patch_wallet: Annotated[
+        components_patchwallet.PatchWallet,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
 
 
-class ListWalletsResponseTypedDict(TypedDict):
+class UpdateWalletResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
-    result: List[components_wallet.WalletTypedDict]
+    result: components_wallet.WalletTypedDict
 
 
-class ListWalletsResponse(BaseModel):
+class UpdateWalletResponse(BaseModel):
     headers: Dict[str, List[str]]
 
-    result: List[components_wallet.Wallet]
+    result: components_wallet.Wallet

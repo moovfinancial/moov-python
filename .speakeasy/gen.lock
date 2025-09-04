@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: e43952837cc56c9a1881f5a4817b3eb7
+  docChecksum: 5a72644e08f436a5d8fbf67d8eb7e6ba
   docVersion: latest
-  speakeasyVersion: 1.606.8
-  generationVersion: 2.687.13
-  releaseVersion: 0.14.0
-  configChecksum: aacec52d6388f84aa3764b0bb6d63cc3
+  speakeasyVersion: 1.609.0
+  generationVersion: 2.692.0
+  releaseVersion: 0.14.1
+  configChecksum: 94cab8fd9376a0626ffae898fd679680
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.20.1
+    core: 5.20.3
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     downloadStreams: 1.0.1
@@ -207,6 +207,7 @@ generatedFiles:
   - docs/models/components/createtransfersource.md
   - docs/models/components/createtransfersourceach.md
   - docs/models/components/createtransfersourcecard.md
+  - docs/models/components/createwallet.md
   - docs/models/components/customersupport.md
   - docs/models/components/customersupporterror.md
   - docs/models/components/debitholdperiod.md
@@ -347,6 +348,7 @@ generatedFiles:
   - docs/models/components/patchprofile.md
   - docs/models/components/patchsweepconfig.md
   - docs/models/components/patchtransfer.md
+  - docs/models/components/patchwallet.md
   - docs/models/components/paymentdetailserror.md
   - docs/models/components/paymentlink.md
   - docs/models/components/paymentlinkcustomeroptions.md
@@ -506,10 +508,12 @@ generatedFiles:
   - docs/models/components/volumesharebycustomertypeerror.md
   - docs/models/components/wallet.md
   - docs/models/components/walletavailablebalance.md
+  - docs/models/components/walletstatus.md
   - docs/models/components/wallettransaction.md
   - docs/models/components/wallettransactionsourcetype.md
   - docs/models/components/wallettransactionstatus.md
   - docs/models/components/wallettransactiontype.md
+  - docs/models/components/wallettype.md
   - docs/models/components/webhookdata.md
   - docs/models/components/webhookdataaccountcreated.md
   - docs/models/components/webhookdataaccountdisconnected.md
@@ -543,7 +547,9 @@ generatedFiles:
   - docs/models/components/webhookdatatransfercreated.md
   - docs/models/components/webhookdatatransferstatus.md
   - docs/models/components/webhookdatatransferupdated.md
+  - docs/models/components/webhookdatawalletcreated.md
   - docs/models/components/webhookdatawallettransactionupdated.md
+  - docs/models/components/webhookdatawalletupdated.md
   - docs/models/components/webhookevent.md
   - docs/models/components/webhookeventtype.md
   - docs/models/components/webhooktransferpaymentmethoddetails.md
@@ -560,6 +566,7 @@ generatedFiles:
   - docs/models/errors/createpaymentlinkerror.md
   - docs/models/errors/createsweepconfigerror.md
   - docs/models/errors/createticketerror.md
+  - docs/models/errors/createwalleterror.md
   - docs/models/errors/error.md
   - docs/models/errors/feeplanagreementerror.md
   - docs/models/errors/file.md
@@ -572,6 +579,7 @@ generatedFiles:
   - docs/models/errors/onboardinginviteerror.md
   - docs/models/errors/patchaccounterror.md
   - docs/models/errors/patchsweepconfigerror.md
+  - docs/models/errors/patchwalleterror.md
   - docs/models/errors/refundvalidationerror.md
   - docs/models/errors/representativevalidationerror.md
   - docs/models/errors/requestcarderror.md
@@ -655,6 +663,9 @@ generatedFiles:
   - docs/models/operations/createtransferrequest.md
   - docs/models/operations/createtransferresponse.md
   - docs/models/operations/createtransferresponseresult.md
+  - docs/models/operations/createwalletglobals.md
+  - docs/models/operations/createwalletrequest.md
+  - docs/models/operations/createwalletresponse.md
   - docs/models/operations/deletedisputeevidencefileglobals.md
   - docs/models/operations/deletedisputeevidencefilerequest.md
   - docs/models/operations/deletedisputeevidencefileresponse.md
@@ -1003,6 +1014,9 @@ generatedFiles:
   - docs/models/operations/updatetransferglobals.md
   - docs/models/operations/updatetransferrequest.md
   - docs/models/operations/updatetransferresponse.md
+  - docs/models/operations/updatewalletglobals.md
+  - docs/models/operations/updatewalletrequest.md
+  - docs/models/operations/updatewalletresponse.md
   - docs/models/operations/uploaddisputeevidencefileglobals.md
   - docs/models/operations/uploaddisputeevidencefilerequest.md
   - docs/models/operations/uploaddisputeevidencefileresponse.md
@@ -1236,6 +1250,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/createtransfersource.py
   - src/moovio_sdk/models/components/createtransfersourceach.py
   - src/moovio_sdk/models/components/createtransfersourcecard.py
+  - src/moovio_sdk/models/components/createwallet.py
   - src/moovio_sdk/models/components/customersupport.py
   - src/moovio_sdk/models/components/customersupporterror.py
   - src/moovio_sdk/models/components/debitholdperiod.py
@@ -1362,6 +1377,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/patchprofile.py
   - src/moovio_sdk/models/components/patchsweepconfig.py
   - src/moovio_sdk/models/components/patchtransfer.py
+  - src/moovio_sdk/models/components/patchwallet.py
   - src/moovio_sdk/models/components/paymentdetailserror.py
   - src/moovio_sdk/models/components/paymentlink.py
   - src/moovio_sdk/models/components/paymentlinkcustomeroptions.py
@@ -1499,10 +1515,12 @@ generatedFiles:
   - src/moovio_sdk/models/components/volumesharebycustomertypeerror.py
   - src/moovio_sdk/models/components/wallet.py
   - src/moovio_sdk/models/components/walletavailablebalance.py
+  - src/moovio_sdk/models/components/walletstatus.py
   - src/moovio_sdk/models/components/wallettransaction.py
   - src/moovio_sdk/models/components/wallettransactionsourcetype.py
   - src/moovio_sdk/models/components/wallettransactionstatus.py
   - src/moovio_sdk/models/components/wallettransactiontype.py
+  - src/moovio_sdk/models/components/wallettype.py
   - src/moovio_sdk/models/components/webhookdata.py
   - src/moovio_sdk/models/components/webhookdataaccountcreated.py
   - src/moovio_sdk/models/components/webhookdataaccountdisconnected.py
@@ -1536,7 +1554,9 @@ generatedFiles:
   - src/moovio_sdk/models/components/webhookdatatransfercreated.py
   - src/moovio_sdk/models/components/webhookdatatransferstatus.py
   - src/moovio_sdk/models/components/webhookdatatransferupdated.py
+  - src/moovio_sdk/models/components/webhookdatawalletcreated.py
   - src/moovio_sdk/models/components/webhookdatawallettransactionupdated.py
+  - src/moovio_sdk/models/components/webhookdatawalletupdated.py
   - src/moovio_sdk/models/components/webhookevent.py
   - src/moovio_sdk/models/components/webhookeventtype.py
   - src/moovio_sdk/models/components/webhooktransferpaymentmethoddetails.py
@@ -1555,6 +1575,7 @@ generatedFiles:
   - src/moovio_sdk/models/errors/createpaymentlinkerror.py
   - src/moovio_sdk/models/errors/createsweepconfigerror.py
   - src/moovio_sdk/models/errors/createticketerror.py
+  - src/moovio_sdk/models/errors/createwalleterror.py
   - src/moovio_sdk/models/errors/feeplanagreementerror.py
   - src/moovio_sdk/models/errors/fileuploadvalidationerror.py
   - src/moovio_sdk/models/errors/filevalidationerror.py
@@ -1567,6 +1588,7 @@ generatedFiles:
   - src/moovio_sdk/models/errors/onboardinginviteerror.py
   - src/moovio_sdk/models/errors/patchaccounterror.py
   - src/moovio_sdk/models/errors/patchsweepconfigerror.py
+  - src/moovio_sdk/models/errors/patchwalleterror.py
   - src/moovio_sdk/models/errors/refundvalidationerror.py
   - src/moovio_sdk/models/errors/representativevalidationerror.py
   - src/moovio_sdk/models/errors/requestcarderror.py
@@ -1610,6 +1632,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/createticket.py
   - src/moovio_sdk/models/operations/createtransfer.py
   - src/moovio_sdk/models/operations/createtransferoptions.py
+  - src/moovio_sdk/models/operations/createwallet.py
   - src/moovio_sdk/models/operations/deletedisputeevidencefile.py
   - src/moovio_sdk/models/operations/deleterepresentative.py
   - src/moovio_sdk/models/operations/deleteterminalapplication.py
@@ -1725,6 +1748,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/updatesweepconfig.py
   - src/moovio_sdk/models/operations/updateticket.py
   - src/moovio_sdk/models/operations/updatetransfer.py
+  - src/moovio_sdk/models/operations/updatewallet.py
   - src/moovio_sdk/models/operations/uploaddisputeevidencefile.py
   - src/moovio_sdk/models/operations/uploaddisputeevidencetext.py
   - src/moovio_sdk/models/operations/uploadfile.py
@@ -3293,11 +3317,14 @@ examples:
       parameters:
         path:
           accountID: "25221c3c-8e3f-40db-8570-66d17b51014d"
+        query:
+          skip: 60
+          count: 20
         header:
           x-moov-version: "v2024.01.00"
       responses:
         "200":
-          application/json: [{"walletID": "4db4c1c0-d682-4bf9-9b5c-952207d1d15d", "availableBalance": {"currency": "USD", "value": 1204, "valueDecimal": "<value>"}}]
+          application/json: [{"walletID": "4db4c1c0-d682-4bf9-9b5c-952207d1d15d", "availableBalance": {"currency": "USD", "value": 1204, "valueDecimal": "<value>"}, "partnerAccountID": "25221c3c-8e3f-40db-8570-66d17b51014d", "name": "<value>", "status": "active", "walletType": "general", "description": "likewise beyond hydrant drat that jeopardise whose disadvantage", "createdOn": "2024-01-20T06:32:10.729Z"}]
   getWallet:
     "":
       parameters:
@@ -3318,7 +3345,7 @@ examples:
           x-moov-version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"walletID": "15598b8b-1d91-4c43-ab38-0c32a9725a71", "availableBalance": {"currency": "USD", "value": 1204, "valueDecimal": "<value>"}}
+          application/json: {"walletID": "15598b8b-1d91-4c43-ab38-0c32a9725a71", "availableBalance": {"currency": "USD", "value": 1204, "valueDecimal": "<value>"}, "partnerAccountID": "d04dfd44-8194-422f-a666-08d30c183f9a", "name": "<value>", "status": "active", "walletType": "default", "description": "underneath besides questioningly than misreport ew fooey over", "metadata": {"optional": "metadata"}, "createdOn": "2024-06-02T05:23:07.110Z"}
   listWalletTransactions:
     "":
       parameters:
@@ -3826,8 +3853,39 @@ examples:
           application/json: {"error": "<value>"}
         "422":
           application/json: {}
+  createWallet:
+    speakeasy-default-create-wallet:
+      parameters:
+        path:
+          accountID: "b4b3f37c-b73e-4271-b8ec-108a8593c9b9"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        application/json: {"name": "My wallet", "description": "A general wallet used for my payments", "metadata": {"optional": "metadata"}}
+      responses:
+        "200":
+          application/json: {"walletID": "8e7812bc-9001-4db2-a813-7d49ac539d80", "availableBalance": {"currency": "USD", "value": 1204, "valueDecimal": "<value>"}, "partnerAccountID": "e99f00ad-84a0-4edc-bf6e-89cf20a2a941", "name": "<value>", "status": "active", "walletType": "general", "description": "entrench deceivingly marketplace gee from about whose fedora bookend", "metadata": {"optional": "metadata"}, "createdOn": "2023-10-20T10:51:45.704Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  updateWallet:
+    speakeasy-default-update-wallet:
+      parameters:
+        path:
+          walletID: "9f1c6e07-aae8-40e6-b290-502bb1bc486e"
+          accountID: "e4aad2fb-201d-4390-b4d3-6de7716152e1"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        application/json: {"name": "My second wallet", "description": "My new description", "metadata": {"optional": "metadata"}}
+      responses:
+        "200":
+          application/json: {"walletID": "87eeefeb-1e32-4720-aa2a-c8bb6c52010b", "availableBalance": {"currency": "USD", "value": 1204, "valueDecimal": "<value>"}, "partnerAccountID": "5c6a2a05-6027-4f50-9e77-6786f662fda5", "name": "<value>", "status": "active", "walletType": "general", "description": "smug instead hmph snuggle yahoo supposing culminate", "metadata": {"optional": "metadata"}, "createdOn": "2025-01-12T01:09:15.232Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## SDK Changes Detected:
-  * `moov.accounts.list()`:  `request` **Changed** **Breaking** :warning:
+releaseNotes: "## Python SDK Changes Detected:\n* `moov.wallets.create()`: **Added**\n* `moov.wallets.update()`: **Added**\n* `moov.wallets.list()`: \n  *  `request` **Changed**\n  *  `response.[]` **Changed**\n* `moov.wallets.get()`:  `response` **Changed**\n"

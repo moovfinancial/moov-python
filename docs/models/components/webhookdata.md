@@ -191,6 +191,18 @@ value: components.WebhookDataTransferCreated = /* values here */
 value: components.WebhookDataTransferUpdated = /* values here */
 ```
 
+### `components.WebhookDataWalletCreated`
+
+```python
+value: components.WebhookDataWalletCreated = /* values here */
+```
+
+### `components.WebhookDataWalletUpdated`
+
+```python
+value: components.WebhookDataWalletUpdated = /* values here */
+```
+
 ### `components.WebhookDataWalletTransactionUpdated`
 
 ```python

@@ -2,23 +2,22 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import (
+    createwallet as components_createwallet,
     wallet as components_wallet,
-    walletstatus as components_walletstatus,
-    wallettype as components_wallettype,
 )
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import (
     FieldMetadata,
     HeaderMetadata,
     PathParamMetadata,
-    QueryParamMetadata,
+    RequestMetadata,
 )
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class ListWalletsGlobalsTypedDict(TypedDict):
+class CreateWalletGlobalsTypedDict(TypedDict):
     x_moov_version: NotRequired[str]
     r"""Specify an API version.
 
@@ -32,7 +31,7 @@ class ListWalletsGlobalsTypedDict(TypedDict):
     """
 
 
-class ListWalletsGlobals(BaseModel):
+class CreateWalletGlobals(BaseModel):
     x_moov_version: Annotated[
         Optional[str],
         pydantic.Field(alias="x-moov-version"),
@@ -50,53 +49,32 @@ class ListWalletsGlobals(BaseModel):
     """
 
 
-class ListWalletsRequestTypedDict(TypedDict):
+class CreateWalletRequestTypedDict(TypedDict):
     account_id: str
-    status: NotRequired[components_walletstatus.WalletStatus]
-    r"""Optional parameter for filtering wallets by status."""
-    wallet_type: NotRequired[components_wallettype.WalletType]
-    r"""Optional parameter for filtering wallets by type."""
-    skip: NotRequired[int]
-    count: NotRequired[int]
+    r"""The Moov account ID the wallet belongs to."""
+    create_wallet: components_createwallet.CreateWalletTypedDict
 
 
-class ListWalletsRequest(BaseModel):
+class CreateWalletRequest(BaseModel):
     account_id: Annotated[
         str,
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The Moov account ID the wallet belongs to."""
 
-    status: Annotated[
-        Optional[components_walletstatus.WalletStatus],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-    r"""Optional parameter for filtering wallets by status."""
-
-    wallet_type: Annotated[
-        Optional[components_wallettype.WalletType],
-        pydantic.Field(alias="walletType"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-    r"""Optional parameter for filtering wallets by type."""
-
-    skip: Annotated[
-        Optional[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-
-    count: Annotated[
-        Optional[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
+    create_wallet: Annotated[
+        components_createwallet.CreateWallet,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
 
 
-class ListWalletsResponseTypedDict(TypedDict):
+class CreateWalletResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
-    result: List[components_wallet.WalletTypedDict]
+    result: components_wallet.WalletTypedDict
 
 
-class ListWalletsResponse(BaseModel):
+class CreateWalletResponse(BaseModel):
     headers: Dict[str, List[str]]
 
-    result: List[components_wallet.Wallet]
+    result: components_wallet.Wallet
