@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .disbursementpaymentmethodtype import DisbursementPaymentMethodType
-from .payoutrecipientupdate import PayoutRecipientUpdate, PayoutRecipientUpdateTypedDict
+from .payoutrecipient import PayoutRecipient, PayoutRecipientTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
 from typing import List, Optional
@@ -12,8 +12,9 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class PaymentLinkPayoutDetailsUpdateTypedDict(TypedDict):
     allowed_methods: NotRequired[List[DisbursementPaymentMethodType]]
     r"""A list of payment methods that should be supported for this payment link."""
-    recipient: NotRequired[PayoutRecipientUpdateTypedDict]
+    recipient: NotRequired[PayoutRecipientTypedDict]
     r"""Specify the intended recipient of the payout.
+    Either `email` or `phone` must be specified, but not both.
 
     This information will be used to authenticate the end user when they follow the payment link.
     """
@@ -26,8 +27,9 @@ class PaymentLinkPayoutDetailsUpdate(BaseModel):
     ] = None
     r"""A list of payment methods that should be supported for this payment link."""
 
-    recipient: Optional[PayoutRecipientUpdate] = None
+    recipient: Optional[PayoutRecipient] = None
     r"""Specify the intended recipient of the payout.
+    Either `email` or `phone` must be specified, but not both.
 
     This information will be used to authenticate the end user when they follow the payment link.
     """

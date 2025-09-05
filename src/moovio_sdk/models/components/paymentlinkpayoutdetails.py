@@ -14,6 +14,7 @@ class PaymentLinkPayoutDetailsTypedDict(TypedDict):
     r"""A list of payment methods that should be supported for this payment link."""
     recipient: PayoutRecipientTypedDict
     r"""Specify the intended recipient of the payout.
+    Either `email` or `phone` must be specified, but not both.
 
     This information will be used to authenticate the end user when they follow the payment link.
     """
@@ -27,6 +28,7 @@ class PaymentLinkPayoutDetails(BaseModel):
 
     recipient: PayoutRecipient
     r"""Specify the intended recipient of the payout.
+    Either `email` or `phone` must be specified, but not both.
 
     This information will be used to authenticate the end user when they follow the payment link.
     """

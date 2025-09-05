@@ -70,28 +70,136 @@ class RequirementID(str, Enum):
     REPRESENTATIVE_REP_UUID_OWNERSHIP = "representative.{rep-uuid}.ownership"
     DOCUMENT_DOC_UUID_ = "document.{doc-uuid}"
     UNDERWRITING_BUSINESS_PRESENCE = "underwriting.businessPresence"
-    UNDERWRITING_CAPABILITY_CARD_ACCEPTANCE_METHODS = (
-        "underwriting.{capability}.cardAcceptanceMethods"
-    )
-    UNDERWRITING_CAPABILITY_CURRENTLY_ACCEPTS_CARDS = (
-        "underwriting.{capability}.currentlyAcceptsCards"
-    )
-    UNDERWRITING_CAPABILITY_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = (
-        "underwriting.{capability}.estimatedActivity.averageTransactionAmount"
-    )
-    UNDERWRITING_CAPABILITY_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = (
-        "underwriting.{capability}.estimatedActivity.maximumTransactionAmount"
-    )
-    UNDERWRITING_CAPABILITY_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
-        "underwriting.{capability}.estimatedActivity.monthlyVolumeRange"
-    )
-    UNDERWRITING_CAPABILITY_FULFILLMENT = "underwriting.{capability}.fulfillment"
     UNDERWRITING_GEOGRAPHIC_REACH = "underwriting.geographicReach"
+    UNDERWRITING_VOLUME_SHARE_BY_CUSTOMER_TYPE = (
+        "underwriting.volumeShareByCustomerType"
+    )
     UNDERWRITING_PENDING_LITIGATION = "underwriting.pendingLitigation"
     UNDERWRITING_DOCUMENTS_PROCESSING_STATEMENTS_PAST3_MONTHS = (
         "underwriting.documents.processingStatementsPast3Months"
     )
-    UNDERWRITING_CAPABILITY_REFUND_POLICY = "underwriting.{capability}.refundPolicy"
-    UNDERWRITING_VOLUME_SHARE_BY_CUSTOMER_TYPE = (
-        "underwriting.volumeShareByCustomerType"
+    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.collectFunds.cardPayments.cardAcceptanceMethods"
+    )
+    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.collectFunds.cardPayments.currentlyAcceptsCards"
+    )
+    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = "underwriting.collectFunds.cardPayments.estimatedActivity.averageTransactionAmount"
+    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = "underwriting.collectFunds.cardPayments.estimatedActivity.maximumTransactionAmount"
+    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
+        "underwriting.collectFunds.cardPayments.estimatedActivity.monthlyVolumeRange"
+    )
+    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_FULFILLMENT = (
+        "underwriting.collectFunds.cardPayments.fulfillment"
+    )
+    UNDERWRITING_COLLECT_FUNDS_CARD_PAYMENTS_REFUND_POLICY = (
+        "underwriting.collectFunds.cardPayments.refundPolicy"
+    )
+    UNDERWRITING_COLLECT_FUNDS_ACH_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.collectFunds.ach.cardAcceptanceMethods"
+    )
+    UNDERWRITING_COLLECT_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.collectFunds.ach.currentlyAcceptsCards"
+    )
+    UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = (
+        "underwriting.collectFunds.ach.estimatedActivity.averageTransactionAmount"
+    )
+    UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = (
+        "underwriting.collectFunds.ach.estimatedActivity.maximumTransactionAmount"
+    )
+    UNDERWRITING_COLLECT_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
+        "underwriting.collectFunds.ach.estimatedActivity.monthlyVolumeRange"
+    )
+    UNDERWRITING_COLLECT_FUNDS_ACH_FULFILLMENT = (
+        "underwriting.collectFunds.ach.fulfillment"
+    )
+    UNDERWRITING_COLLECT_FUNDS_ACH_REFUND_POLICY = (
+        "underwriting.collectFunds.ach.refundPolicy"
+    )
+    UNDERWRITING_SEND_FUNDS_ACH_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.sendFunds.ach.cardAcceptanceMethods"
+    )
+    UNDERWRITING_SEND_FUNDS_ACH_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.sendFunds.ach.currentlyAcceptsCards"
+    )
+    UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = (
+        "underwriting.sendFunds.ach.estimatedActivity.averageTransactionAmount"
+    )
+    UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = (
+        "underwriting.sendFunds.ach.estimatedActivity.maximumTransactionAmount"
+    )
+    UNDERWRITING_SEND_FUNDS_ACH_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
+        "underwriting.sendFunds.ach.estimatedActivity.monthlyVolumeRange"
+    )
+    UNDERWRITING_SEND_FUNDS_ACH_FULFILLMENT = "underwriting.sendFunds.ach.fulfillment"
+    UNDERWRITING_SEND_FUNDS_ACH_REFUND_POLICY = (
+        "underwriting.sendFunds.ach.refundPolicy"
+    )
+    UNDERWRITING_SEND_FUNDS_RTP_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.sendFunds.rtp.cardAcceptanceMethods"
+    )
+    UNDERWRITING_SEND_FUNDS_RTP_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.sendFunds.rtp.currentlyAcceptsCards"
+    )
+    UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = (
+        "underwriting.sendFunds.rtp.estimatedActivity.averageTransactionAmount"
+    )
+    UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = (
+        "underwriting.sendFunds.rtp.estimatedActivity.maximumTransactionAmount"
+    )
+    UNDERWRITING_SEND_FUNDS_RTP_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
+        "underwriting.sendFunds.rtp.estimatedActivity.monthlyVolumeRange"
+    )
+    UNDERWRITING_SEND_FUNDS_RTP_FULFILLMENT = "underwriting.sendFunds.rtp.fulfillment"
+    UNDERWRITING_SEND_FUNDS_RTP_REFUND_POLICY = (
+        "underwriting.sendFunds.rtp.refundPolicy"
+    )
+    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.sendFunds.pushToCard.cardAcceptanceMethods"
+    )
+    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.sendFunds.pushToCard.currentlyAcceptsCards"
+    )
+    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = "underwriting.sendFunds.pushToCard.estimatedActivity.averageTransactionAmount"
+    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = "underwriting.sendFunds.pushToCard.estimatedActivity.maximumTransactionAmount"
+    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
+        "underwriting.sendFunds.pushToCard.estimatedActivity.monthlyVolumeRange"
+    )
+    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_FULFILLMENT = (
+        "underwriting.sendFunds.pushToCard.fulfillment"
+    )
+    UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_REFUND_POLICY = (
+        "underwriting.sendFunds.pushToCard.refundPolicy"
+    )
+    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.moneyTransfer.pullFromCard.cardAcceptanceMethods"
+    )
+    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.moneyTransfer.pullFromCard.currentlyAcceptsCards"
+    )
+    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = "underwriting.moneyTransfer.pullFromCard.estimatedActivity.averageTransactionAmount"
+    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = "underwriting.moneyTransfer.pullFromCard.estimatedActivity.maximumTransactionAmount"
+    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = "underwriting.moneyTransfer.pullFromCard.estimatedActivity.monthlyVolumeRange"
+    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_FULFILLMENT = (
+        "underwriting.moneyTransfer.pullFromCard.fulfillment"
+    )
+    UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_REFUND_POLICY = (
+        "underwriting.moneyTransfer.pullFromCard.refundPolicy"
+    )
+    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.moneyTransfer.pushToCard.cardAcceptanceMethods"
+    )
+    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.moneyTransfer.pushToCard.currentlyAcceptsCards"
+    )
+    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = "underwriting.moneyTransfer.pushToCard.estimatedActivity.averageTransactionAmount"
+    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = "underwriting.moneyTransfer.pushToCard.estimatedActivity.maximumTransactionAmount"
+    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
+        "underwriting.moneyTransfer.pushToCard.estimatedActivity.monthlyVolumeRange"
+    )
+    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_FULFILLMENT = (
+        "underwriting.moneyTransfer.pushToCard.fulfillment"
+    )
+    UNDERWRITING_MONEY_TRANSFER_PUSH_TO_CARD_REFUND_POLICY = (
+        "underwriting.moneyTransfer.pushToCard.refundPolicy"
     )

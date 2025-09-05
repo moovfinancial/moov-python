@@ -703,10 +703,6 @@ if TYPE_CHECKING:
         PayoutRecipientError,
         PayoutRecipientErrorTypedDict,
     )
-    from .payoutrecipientupdate import (
-        PayoutRecipientUpdate,
-        PayoutRecipientUpdateTypedDict,
-    )
     from .pendinglitigation import PendingLitigation
     from .phonenumber import PhoneNumber, PhoneNumberTypedDict
     from .phonenumbererror import PhoneNumberError, PhoneNumberErrorTypedDict
@@ -1675,8 +1671,6 @@ __all__ = [
     "PayoutRecipientError",
     "PayoutRecipientErrorTypedDict",
     "PayoutRecipientTypedDict",
-    "PayoutRecipientUpdate",
-    "PayoutRecipientUpdateTypedDict",
     "PendingLitigation",
     "Phone",
     "PhoneNumber",
@@ -2599,8 +2593,6 @@ _dynamic_imports: dict[str, str] = {
     "PayoutRecipientTypedDict": ".payoutrecipient",
     "PayoutRecipientError": ".payoutrecipienterror",
     "PayoutRecipientErrorTypedDict": ".payoutrecipienterror",
-    "PayoutRecipientUpdate": ".payoutrecipientupdate",
-    "PayoutRecipientUpdateTypedDict": ".payoutrecipientupdate",
     "PendingLitigation": ".pendinglitigation",
     "PhoneNumber": ".phonenumber",
     "PhoneNumberTypedDict": ".phonenumber",

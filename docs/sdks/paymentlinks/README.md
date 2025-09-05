@@ -75,6 +75,10 @@ with Moov(
         ],
         "recipient": {
             "email": "jordan.lee@classbooker.dev",
+            "phone": {
+                "number": "8185551212",
+                "country_code": "1",
+            },
         },
     })
 
@@ -246,6 +250,10 @@ with Moov(
     }, payout={
         "recipient": {
             "email": "jordan.lee@classbooker.dev",
+            "phone": {
+                "number": "8185551212",
+                "country_code": "1",
+            },
         },
     })
 
