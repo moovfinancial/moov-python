@@ -12,3 +12,4 @@ class WalletTransactionSourceType(str, Enum):
     SWEEP = "sweep"
     ADJUSTMENT = "adjustment"
     FEE = "fee"
+    RESIDUAL = "residual"

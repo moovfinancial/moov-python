@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 3a6d10543306fd1e4273cd818e371997
+  docChecksum: 3ccc3cdd02f56987d2561611c54e6308
   docVersion: latest
-  speakeasyVersion: 1.609.0
-  generationVersion: 2.692.0
-  releaseVersion: 0.14.2
-  configChecksum: bda4ad0b5d3028d41f96a8542858aae2
+  speakeasyVersion: 1.613.0
+  generationVersion: 2.696.0
+  releaseVersion: 0.14.3
+  configChecksum: 6457672f446167057620fe9ea5025c93
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -3886,4 +3886,6 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes Detected:\n* `moov.payment_links.create()`: \n  *  `request.payout.recipient` **Changed**\n  *  `response.payout.recipient` **Changed**\n  *  `error.payout.recipient.phone` **Added**\n* `moov.payment_links.list()`:  `response.[].payout.recipient` **Changed**\n* `moov.payment_links.get()`:  `response.payout.recipient` **Changed**\n* `moov.payment_links.update()`: \n  *  `request.payout.recipient.phone` **Added**\n  *  `response.payout.recipient` **Changed**\n  *  `error.payout.recipient.phone` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes Detected:
+  * `moov.wallet_transactions.list()`:  `request` **Changed**
