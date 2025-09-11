@@ -2,10 +2,12 @@
 
 import httpx
 from typing import Optional
+from dataclasses import dataclass
 
 from moovio_sdk.models.errors import MoovError
 
 
+@dataclass(frozen=True)
 class ResponseValidationError(MoovError):
     """Error raised when there is a type mismatch between the response data and the expected Pydantic model."""
 
