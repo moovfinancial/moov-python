@@ -8,7 +8,9 @@ from moovio_sdk.models.components import (
 )
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
+import pydantic
 from typing import Optional
+from typing_extensions import Annotated
 
 
 class CreateTicketErrorData(BaseModel):
@@ -16,9 +18,13 @@ class CreateTicketErrorData(BaseModel):
 
     body: Optional[str] = None
 
+    author: Optional[str] = None
+
     contact: Optional[components_createticketcontacterror.CreateTicketContactError] = (
         None
     )
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
 
 
 @dataclass(frozen=True)

@@ -20,6 +20,7 @@ class TicketTypedDict(TypedDict):
     updated_on: datetime
     latest_message_on: NotRequired[datetime]
     closed_on: NotRequired[datetime]
+    foreign_id: NotRequired[str]
 
 
 class Ticket(BaseModel):
@@ -42,3 +43,5 @@ class Ticket(BaseModel):
     ] = None
 
     closed_on: Annotated[Optional[datetime], pydantic.Field(alias="closedOn")] = None
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None

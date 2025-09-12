@@ -4,13 +4,15 @@ from __future__ import annotations
 from .ticketstatus import TicketStatus
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class WebhookDataTicketUpdatedTypedDict(TypedDict):
     account_id: str
     ticket_id: str
     status: TicketStatus
+    foreign_id: NotRequired[str]
 
 
 class WebhookDataTicketUpdated(BaseModel):
@@ -19,3 +21,5 @@ class WebhookDataTicketUpdated(BaseModel):
     ticket_id: Annotated[str, pydantic.Field(alias="ticketID")]
 
     status: TicketStatus
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None

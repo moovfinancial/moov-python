@@ -18,6 +18,8 @@ class Support(BaseSDK):
         title: str,
         body: str,
         contact: Union[components.TicketContact, components.TicketContactTypedDict],
+        author: Optional[str] = None,
+        foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -35,6 +37,8 @@ class Support(BaseSDK):
         :param title:
         :param body:
         :param contact:
+        :param author:
+        :param foreign_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -55,7 +59,9 @@ class Support(BaseSDK):
             create_ticket=components.CreateTicket(
                 title=title,
                 body=body,
+                author=author,
                 contact=utils.get_pydantic_model(contact, components.TicketContact),
+                foreign_id=foreign_id,
             ),
         )
 
@@ -152,6 +158,8 @@ class Support(BaseSDK):
         title: str,
         body: str,
         contact: Union[components.TicketContact, components.TicketContactTypedDict],
+        author: Optional[str] = None,
+        foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -169,6 +177,8 @@ class Support(BaseSDK):
         :param title:
         :param body:
         :param contact:
+        :param author:
+        :param foreign_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -189,7 +199,9 @@ class Support(BaseSDK):
             create_ticket=components.CreateTicket(
                 title=title,
                 body=body,
+                author=author,
                 contact=utils.get_pydantic_model(contact, components.TicketContact),
+                foreign_id=foreign_id,
             ),
         )
 
@@ -286,6 +298,7 @@ class Support(BaseSDK):
         cursor: Optional[str] = None,
         count: Optional[int] = None,
         status: Optional[components.TicketStatus] = None,
+        foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -303,6 +316,7 @@ class Support(BaseSDK):
         :param cursor:
         :param count:
         :param status:
+        :param foreign_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -322,6 +336,7 @@ class Support(BaseSDK):
             cursor=cursor,
             count=count,
             status=status,
+            foreign_id=foreign_id,
             account_id=account_id,
         )
 
@@ -396,6 +411,7 @@ class Support(BaseSDK):
         cursor: Optional[str] = None,
         count: Optional[int] = None,
         status: Optional[components.TicketStatus] = None,
+        foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -413,6 +429,7 @@ class Support(BaseSDK):
         :param cursor:
         :param count:
         :param status:
+        :param foreign_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -432,6 +449,7 @@ class Support(BaseSDK):
             cursor=cursor,
             count=count,
             status=status,
+            foreign_id=foreign_id,
             account_id=account_id,
         )
 

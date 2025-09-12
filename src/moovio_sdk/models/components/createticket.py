@@ -3,7 +3,9 @@
 from __future__ import annotations
 from .ticketcontact import TicketContact, TicketContactTypedDict
 from moovio_sdk.types import BaseModel
-from typing_extensions import TypedDict
+import pydantic
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CreateTicketTypedDict(TypedDict):
@@ -12,6 +14,8 @@ class CreateTicketTypedDict(TypedDict):
     title: str
     body: str
     contact: TicketContactTypedDict
+    author: NotRequired[str]
+    foreign_id: NotRequired[str]
 
 
 class CreateTicket(BaseModel):
@@ -22,3 +26,7 @@ class CreateTicket(BaseModel):
     body: str
 
     contact: TicketContact
+
+    author: Optional[str] = None
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None

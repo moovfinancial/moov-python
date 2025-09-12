@@ -55,6 +55,7 @@ class ListTicketsRequestTypedDict(TypedDict):
     cursor: NotRequired[str]
     count: NotRequired[int]
     status: NotRequired[components_ticketstatus.TicketStatus]
+    foreign_id: NotRequired[str]
 
 
 class ListTicketsRequest(BaseModel):
@@ -76,6 +77,12 @@ class ListTicketsRequest(BaseModel):
 
     status: Annotated[
         Optional[components_ticketstatus.TicketStatus],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+
+    foreign_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="foreignID"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
 
