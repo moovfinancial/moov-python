@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 9c8f4048149f57afc572f0a9eea04fe5
+  docChecksum: b38c95dc3134c77696632858228f53b6
   docVersion: latest
   speakeasyVersion: 1.615.2
   generationVersion: 2.698.4
-  releaseVersion: 0.14.5
-  configChecksum: df8e461a35d0d1e1831a01e14ccf9c58
+  releaseVersion: 0.14.6
+  configChecksum: 37ee0edd03570720c1eb5474c83aed94
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -3886,4 +3886,3 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes Detected:\n* `moov.support.create_ticket()`: \n  *  `request` **Changed**\n  *  `response.foreign_id` **Added**\n  *  `error` **Changed**\n* `moov.support.list_tickets()`: \n  *  `request.foreign_id` **Added**\n  *  `response.items.[].foreign_id` **Added**\n* `moov.support.get_ticket()`:  `response.foreign_id` **Added**\n* `moov.support.update_ticket()`:  `response.foreign_id` **Added**\n"
