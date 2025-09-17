@@ -56,6 +56,8 @@ class ListAccountsRequestTypedDict(TypedDict):
     <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
     <li>Business Profile `legalBusinessName`</li>
     </ul>
+
+    Filtering by Guest Profile `name` is not currently supported.
     """
     email: NotRequired[str]
     r"""Filter connected accounts by email address.
@@ -99,6 +101,8 @@ class ListAccountsRequest(BaseModel):
     <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
     <li>Business Profile `legalBusinessName`</li>
     </ul>
+
+    Filtering by Guest Profile `name` is not currently supported.
     """
 
     email: Annotated[

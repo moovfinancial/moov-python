@@ -10,7 +10,7 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class ProfileTypedDict(TypedDict):
-    r"""Describes a Moov account profile. A profile will have a business or an individual, depending on the account's type."""
+    r"""Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type."""
 
     individual: NotRequired[IndividualProfileTypedDict]
     r"""Describes an individual."""
@@ -21,7 +21,7 @@ class ProfileTypedDict(TypedDict):
 
 
 class Profile(BaseModel):
-    r"""Describes a Moov account profile. A profile will have a business or an individual, depending on the account's type."""
+    r"""Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type."""
 
     individual: Optional[IndividualProfile] = None
     r"""Describes an individual."""

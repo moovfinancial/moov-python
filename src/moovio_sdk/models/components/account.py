@@ -25,7 +25,7 @@ class AccountTypedDict(TypedDict):
     r"""The type of entity represented by this account."""
     display_name: str
     profile: ProfileTypedDict
-    r"""Describes a Moov account profile. A profile will have a business or an individual, depending on the account's type."""
+    r"""Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type."""
     verification: VerificationTypedDict
     r"""Describes identity verification status and relevant identity verification documents."""
     created_on: datetime
@@ -59,7 +59,7 @@ class Account(BaseModel):
     display_name: Annotated[str, pydantic.Field(alias="displayName")]
 
     profile: Profile
-    r"""Describes a Moov account profile. A profile will have a business or an individual, depending on the account's type."""
+    r"""Describes a Moov account profile. A profile will have a business, individual, or guest depending on the account's type."""
 
     verification: Verification
     r"""Describes identity verification status and relevant identity verification documents."""

@@ -368,12 +368,12 @@ class Accounts(BaseSDK):
 
         All supported query parameters are optional. If none are provided the response will include all connected accounts.
         Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and
-        return results based on relevance.
+        return results based on relevance. Accounts with AccountType `guest` will not be included in the response.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts.read` scope.
 
-        :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>
+        :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>  Filtering by Guest Profile `name` is not currently supported.
         :param email: Filter connected accounts by email address.    Provide the full email address to filter by email.
         :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).    Filtering by `type=guest` is not currently supported.
         :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
@@ -492,12 +492,12 @@ class Accounts(BaseSDK):
 
         All supported query parameters are optional. If none are provided the response will include all connected accounts.
         Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and
-        return results based on relevance.
+        return results based on relevance. Accounts with AccountType `guest` will not be included in the response.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts.read` scope.
 
-        :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>
+        :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>  Filtering by Guest Profile `name` is not currently supported.
         :param email: Filter connected accounts by email address.    Provide the full email address to filter by email.
         :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).    Filtering by `type=guest` is not currently supported.
         :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
