@@ -1,0 +1,16 @@
+# ACHFees
+
+A detailed breakdown of ACH fees.
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `standard_credit`                                                                    | [components.BillingCountAndAmount](../../models/components/billingcountandamount.md) | :heavy_check_mark:                                                                   | Fees for standard credit transfers.                                                  |
+| `same_day_credit`                                                                    | [components.BillingCountAndAmount](../../models/components/billingcountandamount.md) | :heavy_check_mark:                                                                   | Fees for same-day credit transfers.                                                  |
+| `debits`                                                                             | [components.BillingCountAndAmount](../../models/components/billingcountandamount.md) | :heavy_check_mark:                                                                   | Fees for debit transfers.                                                            |
+| `return_`                                                                            | [components.BillingCountAndAmount](../../models/components/billingcountandamount.md) | :heavy_check_mark:                                                                   | Fees for authorized returns.                                                         |
+| `unauthorized_return`                                                                | [components.BillingCountAndAmount](../../models/components/billingcountandamount.md) | :heavy_check_mark:                                                                   | Fees for unauthorized returns.                                                       |
+| `notice_of_change`                                                                   | [components.BillingCountAndAmount](../../models/components/billingcountandamount.md) | :heavy_check_mark:                                                                   | Fees for notices of change.                                                          |
+| `total`                                                                              | [components.BillingCountAndAmount](../../models/components/billingcountandamount.md) | :heavy_check_mark:                                                                   | Total ACH fees.                                                                      |

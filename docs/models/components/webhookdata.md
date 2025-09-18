@@ -209,3 +209,9 @@ value: components.WebhookDataWalletUpdated = /* values here */
 value: components.WebhookDataWalletTransactionUpdated = /* values here */
 ```
 
+### `components.WebhookBillingStatementCreated`
+
+```python
+value: components.WebhookBillingStatementCreated = /* values here */
+```
+

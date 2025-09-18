@@ -40,6 +40,7 @@ if TYPE_CHECKING:
         AchDebitFundPaymentMethodTypedDict,
     )
     from .achexception import ACHException, ACHExceptionTypedDict
+    from .achfees import ACHFees, ACHFeesTypedDict
     from .achinstitution import ACHInstitution, ACHInstitutionTypedDict
     from .achlocation import AchLocation, AchLocationTypedDict
     from .achparticipant import (
@@ -118,6 +119,28 @@ if TYPE_CHECKING:
     from .bankaccountwaitfor import BankAccountWaitFor
     from .basicpaymentmethod import BasicPaymentMethod, BasicPaymentMethodTypedDict
     from .billablefee import BillableFee, BillableFeeTypedDict
+    from .billingcountandamount import (
+        BillingCountAndAmount,
+        BillingCountAndAmountTypedDict,
+    )
+    from .billinginterchangeprogramfee import (
+        BillingInterchangeProgramFee,
+        BillingInterchangeProgramFeeTypedDict,
+    )
+    from .billingsummary import (
+        BillingSummary,
+        BillingSummaryTypedDict,
+        CardAcquiring,
+        CardAcquiringTypedDict,
+    )
+    from .billingsummarydetails import (
+        BillingSummaryDetails,
+        BillingSummaryDetailsTypedDict,
+    )
+    from .billingsummaryinterchange import (
+        BillingSummaryInterchange,
+        BillingSummaryInterchangeTypedDict,
+    )
     from .birthdate import BirthDate, BirthDateTypedDict
     from .birthdateerror import BirthDateError, BirthDateErrorTypedDict
     from .birthdateupdate import BirthDateUpdate, BirthDateUpdateTypedDict
@@ -159,10 +182,12 @@ if TYPE_CHECKING:
         CardAcquiringDispute,
         CardAcquiringDisputeTypedDict,
     )
+    from .cardacquiringfees import CardAcquiringFees, CardAcquiringFeesTypedDict
     from .cardacquiringmodel import CardAcquiringModel
     from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundTypedDict
     from .cardaddress import CardAddress, CardAddressTypedDict
     from .cardbrand import CardBrand
+    from .cardbrandfees import CardBrandFees, CardBrandFeesTypedDict
     from .cardexpiration import CardExpiration, CardExpirationTypedDict
     from .cardexpirationerror import CardExpirationError, CardExpirationErrorTypedDict
     from .cardissuingnetwork import CardIssuingNetwork
@@ -495,6 +520,7 @@ if TYPE_CHECKING:
     from .individualprofile import IndividualProfile, IndividualProfileTypedDict
     from .industrycodes import IndustryCodes, IndustryCodesTypedDict
     from .industrytaxonomy import IndustryTaxonomy, IndustryTaxonomyTypedDict
+    from .instantpaymentfees import InstantPaymentFees, InstantPaymentFeesTypedDict
     from .institutionssearchresponse import (
         InstitutionsSearchResponse,
         InstitutionsSearchResponseTypedDict,
@@ -616,6 +642,7 @@ if TYPE_CHECKING:
         OnboardingPartnerAccount,
         OnboardingPartnerAccountTypedDict,
     )
+    from .othercardfees import OtherCardFees, OtherCardFeesTypedDict
     from .partialscheduleaccount import (
         PartialScheduleAccount,
         PartialScheduleAccountTypedDict,
@@ -713,6 +740,7 @@ if TYPE_CHECKING:
     )
     from .plaidlinkpayload import PlaidLinkPayload, PlaidLinkPayloadTypedDict
     from .plaidpayload import PlaidPayload, PlaidPayloadTypedDict
+    from .platformfees import PlatformFees, PlatformFeesTypedDict
     from .primaryregulator import PrimaryRegulator
     from .profile import Profile, ProfileTypedDict
     from .pullfromcardpaymentmethod import (
@@ -810,6 +838,7 @@ if TYPE_CHECKING:
         SourceDestinationOptions,
         SourceDestinationOptionsTypedDict,
     )
+    from .statement import Statement, StatementTypedDict
     from .submissionintent import SubmissionIntent
     from .sweep import Sweep, SweepTypedDict
     from .sweepconfig import SweepConfig, SweepConfigTypedDict
@@ -941,6 +970,10 @@ if TYPE_CHECKING:
     from .wallettransactionstatus import WalletTransactionStatus
     from .wallettransactiontype import WalletTransactionType
     from .wallettype import WalletType
+    from .webhookbillingstatementcreated import (
+        WebhookBillingStatementCreated,
+        WebhookBillingStatementCreatedTypedDict,
+    )
     from .webhookdata import WebhookData, WebhookDataTypedDict
     from .webhookdataaccountcreated import (
         WebhookDataAccountCreated,
@@ -1091,6 +1124,8 @@ if TYPE_CHECKING:
 __all__ = [
     "ACHException",
     "ACHExceptionTypedDict",
+    "ACHFees",
+    "ACHFeesTypedDict",
     "ACHInstitution",
     "ACHInstitutionTypedDict",
     "ACHPaymentDetails",
@@ -1200,6 +1235,16 @@ __all__ = [
     "BasicPaymentMethodTypedDict",
     "BillableFee",
     "BillableFeeTypedDict",
+    "BillingCountAndAmount",
+    "BillingCountAndAmountTypedDict",
+    "BillingInterchangeProgramFee",
+    "BillingInterchangeProgramFeeTypedDict",
+    "BillingSummary",
+    "BillingSummaryDetails",
+    "BillingSummaryDetailsTypedDict",
+    "BillingSummaryInterchange",
+    "BillingSummaryInterchangeTypedDict",
+    "BillingSummaryTypedDict",
     "BirthDate",
     "BirthDateError",
     "BirthDateErrorTypedDict",
@@ -1237,14 +1282,20 @@ __all__ = [
     "CardAcceptanceMethodsTypedDict",
     "CardAccountUpdater",
     "CardAccountUpdaterTypedDict",
+    "CardAcquiring",
     "CardAcquiringDispute",
     "CardAcquiringDisputeTypedDict",
+    "CardAcquiringFees",
+    "CardAcquiringFeesTypedDict",
     "CardAcquiringModel",
     "CardAcquiringRefund",
     "CardAcquiringRefundTypedDict",
+    "CardAcquiringTypedDict",
     "CardAddress",
     "CardAddressTypedDict",
     "CardBrand",
+    "CardBrandFees",
+    "CardBrandFeesTypedDict",
     "CardDetails",
     "CardDetailsTypedDict",
     "CardExpiration",
@@ -1512,6 +1563,8 @@ __all__ = [
     "IndustryCodesTypedDict",
     "IndustryTaxonomy",
     "IndustryTaxonomyTypedDict",
+    "InstantPaymentFees",
+    "InstantPaymentFeesTypedDict",
     "InstitutionsSearchResponse",
     "InstitutionsSearchResponseTypedDict",
     "IssuedCard",
@@ -1613,6 +1666,8 @@ __all__ = [
     "OnboardingInviteTypedDict",
     "OnboardingPartnerAccount",
     "OnboardingPartnerAccountTypedDict",
+    "OtherCardFees",
+    "OtherCardFeesTypedDict",
     "PartialScheduleAccount",
     "PartialScheduleAccountTypedDict",
     "PartnerPricing",
@@ -1686,6 +1741,8 @@ __all__ = [
     "PlaidLinkPayloadTypedDict",
     "PlaidPayload",
     "PlaidPayloadTypedDict",
+    "PlatformFees",
+    "PlatformFeesTypedDict",
     "PrimaryRegulator",
     "Profile",
     "ProfileTypedDict",
@@ -1789,10 +1846,12 @@ __all__ = [
     "SourceDestinationOptionsTypedDict",
     "Ssn",
     "SsnTypedDict",
+    "Statement",
     "StatementDescriptor",
     "StatementDescriptor2",
     "StatementDescriptor2TypedDict",
     "StatementDescriptorTypedDict",
+    "StatementTypedDict",
     "Status",
     "SubmissionIntent",
     "Sweep",
@@ -1923,6 +1982,8 @@ __all__ = [
     "WalletTransactionTypedDict",
     "WalletType",
     "WalletTypedDict",
+    "WebhookBillingStatementCreated",
+    "WebhookBillingStatementCreatedTypedDict",
     "WebhookData",
     "WebhookDataAccountCreated",
     "WebhookDataAccountCreatedTypedDict",
@@ -2032,6 +2093,8 @@ _dynamic_imports: dict[str, str] = {
     "AchDebitFundPaymentMethodTypedDict": ".achdebitfundpaymentmethod",
     "ACHException": ".achexception",
     "ACHExceptionTypedDict": ".achexception",
+    "ACHFees": ".achfees",
+    "ACHFeesTypedDict": ".achfees",
     "ACHInstitution": ".achinstitution",
     "ACHInstitutionTypedDict": ".achinstitution",
     "AchLocation": ".achlocation",
@@ -2115,6 +2178,18 @@ _dynamic_imports: dict[str, str] = {
     "BasicPaymentMethodTypedDict": ".basicpaymentmethod",
     "BillableFee": ".billablefee",
     "BillableFeeTypedDict": ".billablefee",
+    "BillingCountAndAmount": ".billingcountandamount",
+    "BillingCountAndAmountTypedDict": ".billingcountandamount",
+    "BillingInterchangeProgramFee": ".billinginterchangeprogramfee",
+    "BillingInterchangeProgramFeeTypedDict": ".billinginterchangeprogramfee",
+    "BillingSummary": ".billingsummary",
+    "BillingSummaryTypedDict": ".billingsummary",
+    "CardAcquiring": ".billingsummary",
+    "CardAcquiringTypedDict": ".billingsummary",
+    "BillingSummaryDetails": ".billingsummarydetails",
+    "BillingSummaryDetailsTypedDict": ".billingsummarydetails",
+    "BillingSummaryInterchange": ".billingsummaryinterchange",
+    "BillingSummaryInterchangeTypedDict": ".billingsummaryinterchange",
     "BirthDate": ".birthdate",
     "BirthDateTypedDict": ".birthdate",
     "BirthDateError": ".birthdateerror",
@@ -2155,12 +2230,16 @@ _dynamic_imports: dict[str, str] = {
     "CardAccountUpdaterTypedDict": ".cardaccountupdater",
     "CardAcquiringDispute": ".cardacquiringdispute",
     "CardAcquiringDisputeTypedDict": ".cardacquiringdispute",
+    "CardAcquiringFees": ".cardacquiringfees",
+    "CardAcquiringFeesTypedDict": ".cardacquiringfees",
     "CardAcquiringModel": ".cardacquiringmodel",
     "CardAcquiringRefund": ".cardacquiringrefund",
     "CardAcquiringRefundTypedDict": ".cardacquiringrefund",
     "CardAddress": ".cardaddress",
     "CardAddressTypedDict": ".cardaddress",
     "CardBrand": ".cardbrand",
+    "CardBrandFees": ".cardbrandfees",
+    "CardBrandFeesTypedDict": ".cardbrandfees",
     "CardExpiration": ".cardexpiration",
     "CardExpirationTypedDict": ".cardexpiration",
     "CardExpirationError": ".cardexpirationerror",
@@ -2425,6 +2504,8 @@ _dynamic_imports: dict[str, str] = {
     "IndustryCodesTypedDict": ".industrycodes",
     "IndustryTaxonomy": ".industrytaxonomy",
     "IndustryTaxonomyTypedDict": ".industrytaxonomy",
+    "InstantPaymentFees": ".instantpaymentfees",
+    "InstantPaymentFeesTypedDict": ".instantpaymentfees",
     "InstitutionsSearchResponse": ".institutionssearchresponse",
     "InstitutionsSearchResponseTypedDict": ".institutionssearchresponse",
     "IssuedCard": ".issuedcard",
@@ -2522,6 +2603,8 @@ _dynamic_imports: dict[str, str] = {
     "OnboardingInviteRequestTypedDict": ".onboardinginviterequest",
     "OnboardingPartnerAccount": ".onboardingpartneraccount",
     "OnboardingPartnerAccountTypedDict": ".onboardingpartneraccount",
+    "OtherCardFees": ".othercardfees",
+    "OtherCardFeesTypedDict": ".othercardfees",
     "PartialScheduleAccount": ".partialscheduleaccount",
     "PartialScheduleAccountTypedDict": ".partialscheduleaccount",
     "PartnerPricing": ".partnerpricing",
@@ -2606,6 +2689,8 @@ _dynamic_imports: dict[str, str] = {
     "PlaidLinkPayloadTypedDict": ".plaidlinkpayload",
     "PlaidPayload": ".plaidpayload",
     "PlaidPayloadTypedDict": ".plaidpayload",
+    "PlatformFees": ".platformfees",
+    "PlatformFeesTypedDict": ".platformfees",
     "PrimaryRegulator": ".primaryregulator",
     "Profile": ".profile",
     "ProfileTypedDict": ".profile",
@@ -2703,6 +2788,8 @@ _dynamic_imports: dict[str, str] = {
     "SettingsTypedDict": ".settings",
     "SourceDestinationOptions": ".sourcedestinationoptions",
     "SourceDestinationOptionsTypedDict": ".sourcedestinationoptions",
+    "Statement": ".statement",
+    "StatementTypedDict": ".statement",
     "SubmissionIntent": ".submissionintent",
     "Sweep": ".sweep",
     "SweepTypedDict": ".sweep",
@@ -2840,6 +2927,8 @@ _dynamic_imports: dict[str, str] = {
     "WalletTransactionStatus": ".wallettransactionstatus",
     "WalletTransactionType": ".wallettransactiontype",
     "WalletType": ".wallettype",
+    "WebhookBillingStatementCreated": ".webhookbillingstatementcreated",
+    "WebhookBillingStatementCreatedTypedDict": ".webhookbillingstatementcreated",
     "WebhookData": ".webhookdata",
     "WebhookDataTypedDict": ".webhookdata",
     "WebhookDataAccountCreated": ".webhookdataaccountcreated",
