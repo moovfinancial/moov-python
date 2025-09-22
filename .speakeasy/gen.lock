@@ -3,10 +3,10 @@ id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
   docChecksum: f65286a3880ae0dc0c2695a817d66800
   docVersion: latest
-  speakeasyVersion: 1.620.0
-  generationVersion: 2.706.1
-  releaseVersion: 0.15.0
-  configChecksum: 66df27eeb596d932b48a1476a26e2804
+  speakeasyVersion: 1.622.1
+  generationVersion: 2.709.0
+  releaseVersion: 0.15.1
+  configChecksum: 311d95ba550f3878c3a230afed585015
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -3952,7 +3952,3 @@ examples:
           application/pdf: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes Detected:
-  * `moov.statements.list()`: **Added**
-  * `moov.statements.get()`: **Added**
