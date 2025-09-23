@@ -5,24 +5,24 @@ from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
+import pydantic
 from typing import Optional
+from typing_extensions import Annotated
 
 
-class CreateWalletErrorData(BaseModel):
-    name: Optional[str] = None
-
-    description: Optional[str] = None
-
+class PatchTransferValidationErrorData(BaseModel):
     metadata: Optional[str] = None
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
 
 
 @dataclass(frozen=True)
-class CreateWalletError(MoovError):
-    data: CreateWalletErrorData = field(hash=False)
+class PatchTransferValidationError(MoovError):
+    data: PatchTransferValidationErrorData = field(hash=False)
 
     def __init__(
         self,
-        data: CreateWalletErrorData,
+        data: PatchTransferValidationErrorData,
         raw_response: httpx.Response,
         body: Optional[str] = None,
     ):

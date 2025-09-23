@@ -11,8 +11,6 @@ from typing_extensions import Annotated
 
 
 class TransferValidationErrorData(BaseModel):
-    transfer: Annotated[Optional[str], pydantic.Field(alias="Transfer")] = None
-
     amount: Optional[str] = None
 
     source: Optional[str] = None
@@ -37,8 +35,11 @@ class TransferValidationErrorData(BaseModel):
 
     metadata: Optional[str] = None
 
-    error: Optional[str] = None
-    r"""Used for generic errors when invalid request data isn't attributed to a single request field."""
+    sales_tax_amount: Annotated[
+        Optional[str], pydantic.Field(alias="salesTaxAmount")
+    ] = None
+
+    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
 
 
 @dataclass(frozen=True)

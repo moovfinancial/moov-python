@@ -31,7 +31,10 @@ if TYPE_CHECKING:
         CreateSweepConfigErrorData,
     )
     from .createticketerror import CreateTicketError, CreateTicketErrorData
-    from .createwalleterror import CreateWalletError, CreateWalletErrorData
+    from .createwalletvalidationerror import (
+        CreateWalletValidationError,
+        CreateWalletValidationErrorData,
+    )
     from .feeplanagreementerror import FeePlanAgreementError, FeePlanAgreementErrorData
     from .fileuploadvalidationerror import (
         File,
@@ -43,6 +46,18 @@ if TYPE_CHECKING:
     from .genericerror import GenericError, GenericErrorData
     from .linkapplepayerror import LinkApplePayError, LinkApplePayErrorData
     from .linkcarderror import LinkCardError, LinkCardErrorData
+    from .listtransfersvalidationerror import (
+        ListTransfersValidationError,
+        ListTransfersValidationErrorData,
+    )
+    from .listwalletsvalidationerror import (
+        ListWalletsValidationError,
+        ListWalletsValidationErrorData,
+    )
+    from .listwallettransactionsvalidationerror import (
+        ListWalletTransactionsValidationError,
+        ListWalletTransactionsValidationErrorData,
+    )
     from .microdepositvalidationerror import (
         MicroDepositValidationError,
         MicroDepositValidationErrorData,
@@ -51,7 +66,14 @@ if TYPE_CHECKING:
     from .onboardinginviteerror import OnboardingInviteError, OnboardingInviteErrorData
     from .patchaccounterror import PatchAccountError, PatchAccountErrorData
     from .patchsweepconfigerror import PatchSweepConfigError, PatchSweepConfigErrorData
-    from .patchwalleterror import PatchWalletError, PatchWalletErrorData
+    from .patchtransfervalidationerror import (
+        PatchTransferValidationError,
+        PatchTransferValidationErrorData,
+    )
+    from .patchwalletvalidationerror import (
+        PatchWalletValidationError,
+        PatchWalletValidationErrorData,
+    )
     from .refundvalidationerror import RefundValidationError, RefundValidationErrorData
     from .representativevalidationerror import (
         Error,
@@ -128,8 +150,8 @@ __all__ = [
     "CreateSweepConfigErrorData",
     "CreateTicketError",
     "CreateTicketErrorData",
-    "CreateWalletError",
-    "CreateWalletErrorData",
+    "CreateWalletValidationError",
+    "CreateWalletValidationErrorData",
     "Error",
     "ErrorTypedDict",
     "FeePlanAgreementError",
@@ -146,6 +168,12 @@ __all__ = [
     "LinkApplePayErrorData",
     "LinkCardError",
     "LinkCardErrorData",
+    "ListTransfersValidationError",
+    "ListTransfersValidationErrorData",
+    "ListWalletTransactionsValidationError",
+    "ListWalletTransactionsValidationErrorData",
+    "ListWalletsValidationError",
+    "ListWalletsValidationErrorData",
     "MicroDepositValidationError",
     "MicroDepositValidationErrorData",
     "MoovError",
@@ -156,8 +184,10 @@ __all__ = [
     "PatchAccountErrorData",
     "PatchSweepConfigError",
     "PatchSweepConfigErrorData",
-    "PatchWalletError",
-    "PatchWalletErrorData",
+    "PatchTransferValidationError",
+    "PatchTransferValidationErrorData",
+    "PatchWalletValidationError",
+    "PatchWalletValidationErrorData",
     "RefundValidationError",
     "RefundValidationErrorData",
     "RepresentativeValidationError",
@@ -219,8 +249,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateSweepConfigErrorData": ".createsweepconfigerror",
     "CreateTicketError": ".createticketerror",
     "CreateTicketErrorData": ".createticketerror",
-    "CreateWalletError": ".createwalleterror",
-    "CreateWalletErrorData": ".createwalleterror",
+    "CreateWalletValidationError": ".createwalletvalidationerror",
+    "CreateWalletValidationErrorData": ".createwalletvalidationerror",
     "FeePlanAgreementError": ".feeplanagreementerror",
     "FeePlanAgreementErrorData": ".feeplanagreementerror",
     "File": ".fileuploadvalidationerror",
@@ -235,6 +265,12 @@ _dynamic_imports: dict[str, str] = {
     "LinkApplePayErrorData": ".linkapplepayerror",
     "LinkCardError": ".linkcarderror",
     "LinkCardErrorData": ".linkcarderror",
+    "ListTransfersValidationError": ".listtransfersvalidationerror",
+    "ListTransfersValidationErrorData": ".listtransfersvalidationerror",
+    "ListWalletsValidationError": ".listwalletsvalidationerror",
+    "ListWalletsValidationErrorData": ".listwalletsvalidationerror",
+    "ListWalletTransactionsValidationError": ".listwallettransactionsvalidationerror",
+    "ListWalletTransactionsValidationErrorData": ".listwallettransactionsvalidationerror",
     "MicroDepositValidationError": ".microdepositvalidationerror",
     "MicroDepositValidationErrorData": ".microdepositvalidationerror",
     "NoResponseError": ".no_response_error",
@@ -244,8 +280,10 @@ _dynamic_imports: dict[str, str] = {
     "PatchAccountErrorData": ".patchaccounterror",
     "PatchSweepConfigError": ".patchsweepconfigerror",
     "PatchSweepConfigErrorData": ".patchsweepconfigerror",
-    "PatchWalletError": ".patchwalleterror",
-    "PatchWalletErrorData": ".patchwalleterror",
+    "PatchTransferValidationError": ".patchtransfervalidationerror",
+    "PatchTransferValidationErrorData": ".patchtransfervalidationerror",
+    "PatchWalletValidationError": ".patchwalletvalidationerror",
+    "PatchWalletValidationErrorData": ".patchwalletvalidationerror",
     "RefundValidationError": ".refundvalidationerror",
     "RefundValidationErrorData": ".refundvalidationerror",
     "Error": ".representativevalidationerror",

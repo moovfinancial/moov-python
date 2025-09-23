@@ -8,10 +8,8 @@ from moovio_sdk.types import BaseModel
 from typing import Optional
 
 
-class PatchWalletErrorData(BaseModel):
+class CreateWalletValidationErrorData(BaseModel):
     name: Optional[str] = None
-
-    status: Optional[str] = None
 
     description: Optional[str] = None
 
@@ -19,12 +17,12 @@ class PatchWalletErrorData(BaseModel):
 
 
 @dataclass(frozen=True)
-class PatchWalletError(MoovError):
-    data: PatchWalletErrorData = field(hash=False)
+class CreateWalletValidationError(MoovError):
+    data: CreateWalletValidationErrorData = field(hash=False)
 
     def __init__(
         self,
-        data: PatchWalletErrorData,
+        data: CreateWalletValidationErrorData,
         raw_response: httpx.Response,
         body: Optional[str] = None,
     ):

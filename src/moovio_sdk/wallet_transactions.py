@@ -8,7 +8,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import List, Mapping, Optional
+from typing import Any, List, Mapping, Optional
 
 
 class WalletTransactions(BaseSDK):
@@ -125,10 +125,11 @@ class WalletTransactions(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            error_status_codes=["401", "403", "422", "429", "4XX", "500", "504", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListWalletTransactionsResponse(
                 result=unmarshal_json_response(
@@ -136,6 +137,11 @@ class WalletTransactions(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListWalletTransactionsValidationErrorData, http_res
+            )
+            raise errors.ListWalletTransactionsValidationError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
@@ -264,10 +270,11 @@ class WalletTransactions(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            error_status_codes=["401", "403", "422", "429", "4XX", "500", "504", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.ListWalletTransactionsResponse(
                 result=unmarshal_json_response(
@@ -275,6 +282,11 @@ class WalletTransactions(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ListWalletTransactionsValidationErrorData, http_res
+            )
+            raise errors.ListWalletTransactionsValidationError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
