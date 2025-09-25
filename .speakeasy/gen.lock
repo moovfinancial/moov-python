@@ -3,10 +3,10 @@ id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
   docChecksum: 85feb4e8f3a7f1bfc249837668d45129
   docVersion: latest
-  speakeasyVersion: 1.622.1
-  generationVersion: 2.709.0
-  releaseVersion: 0.15.2
-  configChecksum: 7d18085989b68cea928e794d1fc1268f
+  speakeasyVersion: 1.628.4
+  generationVersion: 2.716.5
+  releaseVersion: 0.16.0
+  configChecksum: 9a7264aebfccd5a301d6644b0cf5b7a5
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.20.4
+    core: 5.22.0
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -37,7 +37,7 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
-    unions: 3.0.4
+    unions: 3.0.5
     uploadStreams: 1.0.0
 generatedFiles:
   - .gitattributes
@@ -3968,10 +3968,3 @@ examples:
           application/pdf: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes Detected:
-  * `moov.transfers.create()`:  `error` **Changed** **Breaking** :warning:
-  * `moov.transfers.list()`:  `error.status[422]` **Added**
-  * `moov.transfers.update()`:  `error.status[422]` **Added**
-  * `moov.wallets.list()`:  `error.status[422]` **Added**
-  * `moov.wallet_transactions.list()`:  `error.status[422]` **Added**
