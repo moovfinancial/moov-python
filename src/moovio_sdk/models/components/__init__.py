@@ -444,6 +444,8 @@ if TYPE_CHECKING:
         EvidenceUploadResponseTypedDict,
     )
     from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
+    from .fednowinstitution import FedNowInstitution, FedNowInstitutionTypedDict
+    from .fednowservices import FedNowServices, FedNowServicesTypedDict
     from .feecategory import FeeCategory
     from .feemodel import FeeModel
     from .feeplan import FeePlan, FeePlanTypedDict
@@ -1492,6 +1494,10 @@ __all__ = [
     "EvidenceUploadResponseTypedDict",
     "FacilitatorFee",
     "FacilitatorFeeTypedDict",
+    "FedNowInstitution",
+    "FedNowInstitutionTypedDict",
+    "FedNowServices",
+    "FedNowServicesTypedDict",
     "FeeCategory",
     "FeeModel",
     "FeePlan",
@@ -2431,6 +2437,10 @@ _dynamic_imports: dict[str, str] = {
     "EvidenceUploadResponseTypedDict": ".evidenceuploadresponse",
     "FacilitatorFee": ".facilitatorfee",
     "FacilitatorFeeTypedDict": ".facilitatorfee",
+    "FedNowInstitution": ".fednowinstitution",
+    "FedNowInstitutionTypedDict": ".fednowinstitution",
+    "FedNowServices": ".fednowservices",
+    "FedNowServicesTypedDict": ".fednowservices",
     "FeeCategory": ".feecategory",
     "FeeModel": ".feemodel",
     "FeePlan": ".feeplan",

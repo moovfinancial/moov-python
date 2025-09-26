@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 85feb4e8f3a7f1bfc249837668d45129
+  docChecksum: 7dc79326b3050538f6425d6826bc535d
   docVersion: latest
-  speakeasyVersion: 1.628.4
-  generationVersion: 2.716.5
-  releaseVersion: 0.16.0
-  configChecksum: 9a7264aebfccd5a301d6644b0cf5b7a5
+  speakeasyVersion: 1.629.0
+  generationVersion: 2.716.9
+  releaseVersion: 0.16.1
+  configChecksum: 354908108056a8e82e716eb803a68a2d
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -250,6 +250,8 @@ generatedFiles:
   - docs/models/components/evidencetype.md
   - docs/models/components/evidenceuploadresponse.md
   - docs/models/components/facilitatorfee.md
+  - docs/models/components/fednowinstitution.md
+  - docs/models/components/fednowservices.md
   - docs/models/components/feecategory.md
   - docs/models/components/feemodel.md
   - docs/models/components/feeplan.md
@@ -1314,6 +1316,8 @@ generatedFiles:
   - src/moovio_sdk/models/components/evidencetype.py
   - src/moovio_sdk/models/components/evidenceuploadresponse.py
   - src/moovio_sdk/models/components/facilitatorfee.py
+  - src/moovio_sdk/models/components/fednowinstitution.py
+  - src/moovio_sdk/models/components/fednowservices.py
   - src/moovio_sdk/models/components/feecategory.py
   - src/moovio_sdk/models/components/feemodel.py
   - src/moovio_sdk/models/components/feeplan.py
@@ -3786,7 +3790,7 @@ examples:
           x-moov-version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"ach": [{"name": "First Citizens", "routingNumber": "123456789", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "contact": {"phone": {"number": "8185551212", "countryCode": "1"}}}], "rtp": [], "wire": [{"name": "First Citizens", "routingNumber": "123456789", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "services": {"fundsTransferStatus": true, "fundsSettlementOnlyStatus": false, "bookEntrySecuritiesTransferStatus": false}}]}
+          application/json: {"ach": [{"name": "First Citizens", "routingNumber": "123456789", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "contact": {"phone": {"number": "8185551212", "countryCode": "1"}}}], "rtp": [], "wire": [{"name": "First Citizens", "routingNumber": "123456789", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "services": {"fundsTransferStatus": true, "fundsSettlementOnlyStatus": false, "bookEntrySecuritiesTransferStatus": false}}], "fednow": []}
   createTransferOptionsForAccount:
     speakeasy-default-create-transfer-options-for-account:
       parameters:
@@ -3968,3 +3972,6 @@ examples:
           application/pdf: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Python SDK Changes Detected:
+  * `moov.institutions.search_institutions()`:  `response.fednow` **Added**

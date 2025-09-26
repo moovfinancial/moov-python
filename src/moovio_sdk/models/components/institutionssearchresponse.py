@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .achinstitution import ACHInstitution, ACHInstitutionTypedDict
+from .fednowinstitution import FedNowInstitution, FedNowInstitutionTypedDict
 from .rtpinstitution import RTPInstitution, RTPInstitutionTypedDict
 from .wireinstitution import WireInstitution, WireInstitutionTypedDict
 from moovio_sdk.types import BaseModel, Nullable, UNSET_SENTINEL
@@ -14,6 +15,7 @@ class InstitutionsSearchResponseTypedDict(TypedDict):
     ach: Nullable[List[ACHInstitutionTypedDict]]
     rtp: Nullable[List[RTPInstitutionTypedDict]]
     wire: Nullable[List[WireInstitutionTypedDict]]
+    fednow: Nullable[List[FedNowInstitutionTypedDict]]
 
 
 class InstitutionsSearchResponse(BaseModel):
@@ -23,10 +25,12 @@ class InstitutionsSearchResponse(BaseModel):
 
     wire: Nullable[List[WireInstitution]]
 
+    fednow: Nullable[List[FedNowInstitution]]
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
-        nullable_fields = ["ach", "rtp", "wire"]
+        nullable_fields = ["ach", "rtp", "wire", "fednow"]
         null_default_fields = []
 
         serialized = handler(self)
