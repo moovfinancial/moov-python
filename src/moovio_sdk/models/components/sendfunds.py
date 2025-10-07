@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .sendfundsach import SendFundsAch, SendFundsAchTypedDict
+from .sendfundsinstantbank import SendFundsInstantBank, SendFundsInstantBankTypedDict
 from .sendfundspushtocard import SendFundsPushToCard, SendFundsPushToCardTypedDict
 from .sendfundsrtp import SendFundsRtp, SendFundsRtpTypedDict
 from moovio_sdk.types import BaseModel
@@ -14,6 +15,7 @@ class SendFundsTypedDict(TypedDict):
     ach: NotRequired[SendFundsAchTypedDict]
     push_to_card: NotRequired[SendFundsPushToCardTypedDict]
     rtp: NotRequired[SendFundsRtpTypedDict]
+    instant_bank: NotRequired[SendFundsInstantBankTypedDict]
 
 
 class SendFunds(BaseModel):
@@ -24,3 +26,7 @@ class SendFunds(BaseModel):
     ] = None
 
     rtp: Optional[SendFundsRtp] = None
+
+    instant_bank: Annotated[
+        Optional[SendFundsInstantBank], pydantic.Field(alias="instantBank")
+    ] = None

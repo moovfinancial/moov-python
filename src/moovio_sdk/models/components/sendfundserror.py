@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .sendfundsacherror import SendFundsAchError, SendFundsAchErrorTypedDict
+from .sendfundsinstantbankerror import (
+    SendFundsInstantBankError,
+    SendFundsInstantBankErrorTypedDict,
+)
 from .sendfundspushtocarderror import (
     SendFundsPushToCardError,
     SendFundsPushToCardErrorTypedDict,
@@ -17,6 +21,7 @@ class SendFundsErrorTypedDict(TypedDict):
     ach: NotRequired[SendFundsAchErrorTypedDict]
     push_to_card: NotRequired[SendFundsPushToCardErrorTypedDict]
     rtp: NotRequired[SendFundsRtpErrorTypedDict]
+    instant_bank: NotRequired[SendFundsInstantBankErrorTypedDict]
 
 
 class SendFundsError(BaseModel):
@@ -27,3 +32,7 @@ class SendFundsError(BaseModel):
     ] = None
 
     rtp: Optional[SendFundsRtpError] = None
+
+    instant_bank: Annotated[
+        Optional[SendFundsInstantBankError], pydantic.Field(alias="instantBank")
+    ] = None

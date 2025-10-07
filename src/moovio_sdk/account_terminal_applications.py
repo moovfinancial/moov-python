@@ -89,7 +89,7 @@ class AccountTerminalApplications(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="linkAccountTerminalApplication",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -220,7 +220,7 @@ class AccountTerminalApplications(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="linkAccountTerminalApplication",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -339,7 +339,7 @@ class AccountTerminalApplications(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listAccountTerminalApplications",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -437,7 +437,7 @@ class AccountTerminalApplications(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="listAccountTerminalApplications",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -538,7 +538,7 @@ class AccountTerminalApplications(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getAccountTerminalApplication",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -639,7 +639,7 @@ class AccountTerminalApplications(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getAccountTerminalApplication",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -740,7 +740,7 @@ class AccountTerminalApplications(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTerminalConfiguration",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
@@ -841,7 +841,7 @@ class AccountTerminalApplications(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTerminalConfiguration",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),

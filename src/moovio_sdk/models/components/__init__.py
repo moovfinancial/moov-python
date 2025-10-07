@@ -512,6 +512,7 @@ if TYPE_CHECKING:
     )
     from .granttype import GrantType
     from .guestprofile import GuestProfile, GuestProfileTypedDict
+    from .imagemetadata import ImageMetadata, ImageMetadataTypedDict
     from .incurredfee import IncurredFee, IncurredFeeTypedDict
     from .individualname import IndividualName, IndividualNameTypedDict
     from .individualnameerror import IndividualNameError, IndividualNameErrorTypedDict
@@ -827,6 +828,14 @@ if TYPE_CHECKING:
     from .sendfundsach import SendFundsAch, SendFundsAchTypedDict
     from .sendfundsacherror import SendFundsAchError, SendFundsAchErrorTypedDict
     from .sendfundserror import SendFundsError, SendFundsErrorTypedDict
+    from .sendfundsinstantbank import (
+        SendFundsInstantBank,
+        SendFundsInstantBankTypedDict,
+    )
+    from .sendfundsinstantbankerror import (
+        SendFundsInstantBankError,
+        SendFundsInstantBankErrorTypedDict,
+    )
     from .sendfundspushtocard import SendFundsPushToCard, SendFundsPushToCardTypedDict
     from .sendfundspushtocarderror import (
         SendFundsPushToCardError,
@@ -1555,6 +1564,8 @@ __all__ = [
     "GrantType",
     "GuestProfile",
     "GuestProfileTypedDict",
+    "ImageMetadata",
+    "ImageMetadataTypedDict",
     "IncurredFee",
     "IncurredFeeTypedDict",
     "IndividualName",
@@ -1835,6 +1846,10 @@ __all__ = [
     "SendFundsAchTypedDict",
     "SendFundsError",
     "SendFundsErrorTypedDict",
+    "SendFundsInstantBank",
+    "SendFundsInstantBankError",
+    "SendFundsInstantBankErrorTypedDict",
+    "SendFundsInstantBankTypedDict",
     "SendFundsPushToCard",
     "SendFundsPushToCardError",
     "SendFundsPushToCardErrorTypedDict",
@@ -2500,6 +2515,8 @@ _dynamic_imports: dict[str, str] = {
     "GrantType": ".granttype",
     "GuestProfile": ".guestprofile",
     "GuestProfileTypedDict": ".guestprofile",
+    "ImageMetadata": ".imagemetadata",
+    "ImageMetadataTypedDict": ".imagemetadata",
     "IncurredFee": ".incurredfee",
     "IncurredFeeTypedDict": ".incurredfee",
     "IndividualName": ".individualname",
@@ -2784,6 +2801,10 @@ _dynamic_imports: dict[str, str] = {
     "SendFundsAchErrorTypedDict": ".sendfundsacherror",
     "SendFundsError": ".sendfundserror",
     "SendFundsErrorTypedDict": ".sendfundserror",
+    "SendFundsInstantBank": ".sendfundsinstantbank",
+    "SendFundsInstantBankTypedDict": ".sendfundsinstantbank",
+    "SendFundsInstantBankError": ".sendfundsinstantbankerror",
+    "SendFundsInstantBankErrorTypedDict": ".sendfundsinstantbankerror",
     "SendFundsPushToCard": ".sendfundspushtocard",
     "SendFundsPushToCardTypedDict": ".sendfundspushtocard",
     "SendFundsPushToCardError": ".sendfundspushtocarderror",

@@ -33,6 +33,7 @@ if TYPE_CHECKING:
     from moovio_sdk.enriched_profile import EnrichedProfile
     from moovio_sdk.fee_plans import FeePlans
     from moovio_sdk.files import Files
+    from moovio_sdk.images import Images
     from moovio_sdk.industries import Industries
     from moovio_sdk.institutions import Institutions
     from moovio_sdk.issuing_transactions import IssuingTransactions
@@ -70,6 +71,7 @@ class Moov(BaseSDK):
     disputes: "Disputes"
     fee_plans: "FeePlans"
     files: "Files"
+    images: "Images"
     payment_links: "PaymentLinks"
     payment_methods: "PaymentMethods"
     representatives: "Representatives"
@@ -106,6 +108,7 @@ class Moov(BaseSDK):
         "disputes": ("moovio_sdk.disputes", "Disputes"),
         "fee_plans": ("moovio_sdk.fee_plans", "FeePlans"),
         "files": ("moovio_sdk.files", "Files"),
+        "images": ("moovio_sdk.images", "Images"),
         "payment_links": ("moovio_sdk.payment_links", "PaymentLinks"),
         "payment_methods": ("moovio_sdk.payment_methods", "PaymentMethods"),
         "representatives": ("moovio_sdk.representatives", "Representatives"),

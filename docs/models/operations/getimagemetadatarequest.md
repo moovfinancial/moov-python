@@ -1,0 +1,9 @@
+# GetImageMetadataRequest
+
+
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `account_id`       | *str*              | :heavy_check_mark: | N/A                |
+| `image_id`         | *str*              | :heavy_check_mark: | N/A                |
