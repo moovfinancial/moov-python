@@ -1,0 +1,9 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Overlay to modify the OAS before using it for SDK generation
+  version: 0.0.0
+actions:
+  - description: Remove empty 304 response (temporary)
+    target: $.paths..[?@.operationId == "getPublicImage"].responses['304']
+    remove: true
