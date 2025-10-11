@@ -14,7 +14,7 @@ class FeePlanAgreementErrorData(BaseModel):
     plan_id: Annotated[Optional[str], pydantic.Field(alias="planID")] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class FeePlanAgreementError(MoovError):
     data: FeePlanAgreementErrorData = field(hash=False)
 

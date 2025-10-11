@@ -60,7 +60,7 @@ class RepresentativeValidationErrorData(BaseModel):
     error: Error
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class RepresentativeValidationError(MoovError):
     data: RepresentativeValidationErrorData = field(hash=False)
 

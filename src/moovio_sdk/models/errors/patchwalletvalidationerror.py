@@ -18,7 +18,7 @@ class PatchWalletValidationErrorData(BaseModel):
     metadata: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class PatchWalletValidationError(MoovError):
     data: PatchWalletValidationErrorData = field(hash=False)
 

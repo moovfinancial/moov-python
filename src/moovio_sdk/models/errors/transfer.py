@@ -116,7 +116,7 @@ class TransferData(BaseModel):
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class Transfer(MoovError):
     r"""Details of a Transfer."""
 

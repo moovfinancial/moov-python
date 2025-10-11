@@ -14,7 +14,7 @@ class AddCapabilitiesErrorData(BaseModel):
     capabilities: Optional[Dict[str, str]] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class AddCapabilitiesError(MoovError):
     data: AddCapabilitiesErrorData = field(hash=False)
 

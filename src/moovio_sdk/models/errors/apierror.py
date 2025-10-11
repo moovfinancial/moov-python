@@ -9,7 +9,7 @@ from moovio_sdk.models.errors import MoovError
 MAX_MESSAGE_LEN = 10_000
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class APIError(MoovError):
     """The fallback error class if no more specific error class is matched."""
 

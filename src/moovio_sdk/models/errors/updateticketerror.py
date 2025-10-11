@@ -12,7 +12,7 @@ class UpdateTicketErrorData(BaseModel):
     status: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class UpdateTicketError(MoovError):
     data: UpdateTicketErrorData = field(hash=False)
 

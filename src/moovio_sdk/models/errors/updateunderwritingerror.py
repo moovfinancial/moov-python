@@ -62,7 +62,7 @@ class UpdateUnderwritingErrorData(BaseModel):
     error: UpdateUnderwritingErrorError
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class UpdateUnderwritingError(MoovError):
     data: UpdateUnderwritingErrorData = field(hash=False)
 

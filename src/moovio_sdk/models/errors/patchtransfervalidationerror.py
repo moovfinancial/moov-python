@@ -16,7 +16,7 @@ class PatchTransferValidationErrorData(BaseModel):
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class PatchTransferValidationError(MoovError):
     data: PatchTransferValidationErrorData = field(hash=False)
 

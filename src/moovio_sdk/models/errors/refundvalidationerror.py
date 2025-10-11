@@ -15,7 +15,7 @@ class RefundValidationErrorData(BaseModel):
     r"""Used for generic errors when invalid request data isn't attributed to a single request field."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class RefundValidationError(MoovError):
     data: RefundValidationErrorData = field(hash=False)
 

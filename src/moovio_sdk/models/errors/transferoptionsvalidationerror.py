@@ -16,7 +16,7 @@ class TransferOptionsValidationErrorData(BaseModel):
     destination: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class TransferOptionsValidationError(MoovError):
     data: TransferOptionsValidationErrorData = field(hash=False)
 

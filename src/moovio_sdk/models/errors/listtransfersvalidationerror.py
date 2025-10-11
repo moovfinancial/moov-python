@@ -40,7 +40,7 @@ class ListTransfersValidationErrorData(BaseModel):
     disputed: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ListTransfersValidationError(MoovError):
     data: ListTransfersValidationErrorData = field(hash=False)
 

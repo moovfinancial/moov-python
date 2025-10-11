@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 8b84f34ed26546d6a00aa920c63f1097
+  docChecksum: 1b71d8ceece8928345358da99e9e10e8
   docVersion: latest
-  speakeasyVersion: 1.636.0
-  generationVersion: 2.723.2
-  releaseVersion: 0.17.0
-  configChecksum: baaa6ea8856577fc5ba9ddf109619760
+  speakeasyVersion: 1.636.3
+  generationVersion: 2.723.11
+  releaseVersion: 0.17.1
+  configChecksum: 4fb1320c1591467b186c400e3e7d2458
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -4039,4 +4039,3 @@ examples:
           image/jpeg: "x-file: example.file"
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes Detected:\n* `moov.images.list()`: **Added**\n* `moov.images.get_metadata()`: **Added**\n* `moov.images.delete()`: **Added**\n* `moov.images.get_public()`: **Added**\n* `moov.accounts.list()`:  `request.capability` **Changed**\n* `moov.capabilities.get()`:  `request.capability_id` **Changed**\n* `moov.capabilities.disable()`:  `request.capability_id` **Changed**\n* `moov.underwriting.get()`:  `response.send_funds.instant_bank` **Added**\n* `moov.underwriting.save()`: \n  *  `request.send_funds.instant_bank` **Added**\n  *  `response.send_funds.instant_bank` **Added**\n  *  `error.send_funds.instant_bank` **Added**\n* `moov.underwriting.upsert()`:  `response.send_funds.instant_bank` **Added**\n"

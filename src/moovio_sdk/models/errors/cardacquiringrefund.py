@@ -34,7 +34,7 @@ class CardAcquiringRefundData(BaseModel):
     ] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class CardAcquiringRefund(MoovError):
     r"""Details of a card refund."""
 

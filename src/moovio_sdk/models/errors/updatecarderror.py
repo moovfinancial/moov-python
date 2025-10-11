@@ -35,7 +35,7 @@ class UpdateCardErrorData(BaseModel):
     holder_name: Annotated[Optional[str], pydantic.Field(alias="holderName")] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class UpdateCardError(MoovError):
     data: UpdateCardErrorData = field(hash=False)
 

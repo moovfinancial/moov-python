@@ -14,7 +14,7 @@ class RevokeTokenRequestErrorData(BaseModel):
     token_type_hint: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class RevokeTokenRequestError(MoovError):
     data: RevokeTokenRequestErrorData = field(hash=False)
 

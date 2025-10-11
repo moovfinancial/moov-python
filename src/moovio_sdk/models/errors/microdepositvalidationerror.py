@@ -12,7 +12,7 @@ class MicroDepositValidationErrorData(BaseModel):
     amounts: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class MicroDepositValidationError(MoovError):
     data: MicroDepositValidationErrorData = field(hash=False)
 

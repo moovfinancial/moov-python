@@ -27,7 +27,7 @@ class CreateTicketErrorData(BaseModel):
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class CreateTicketError(MoovError):
     data: CreateTicketErrorData = field(hash=False)
 

@@ -40,7 +40,7 @@ class CreateAccountErrorData(BaseModel):
     capabilities: Optional[Dict[str, str]] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class CreateAccountError(MoovError):
     data: CreateAccountErrorData = field(hash=False)
 

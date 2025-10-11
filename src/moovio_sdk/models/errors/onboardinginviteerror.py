@@ -26,7 +26,7 @@ class OnboardingInviteErrorData(BaseModel):
     ] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class OnboardingInviteError(MoovError):
     data: OnboardingInviteErrorData = field(hash=False)
 

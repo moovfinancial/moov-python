@@ -42,7 +42,7 @@ class TransferValidationErrorData(BaseModel):
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class TransferValidationError(MoovError):
     data: TransferValidationErrorData = field(hash=False)
 

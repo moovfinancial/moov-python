@@ -30,7 +30,7 @@ class PatchSweepConfigErrorData(BaseModel):
     ] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class PatchSweepConfigError(MoovError):
     data: PatchSweepConfigErrorData = field(hash=False)
 

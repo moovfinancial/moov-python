@@ -15,7 +15,7 @@ class BrandValidationErrorData(BaseModel):
     colors: Optional[components_colorsvalidationerror.ColorsValidationError] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class BrandValidationError(MoovError):
     data: BrandValidationErrorData = field(hash=False)
 

@@ -12,7 +12,7 @@ class ReversalValidationErrorData(BaseModel):
     amount: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ReversalValidationError(MoovError):
     data: ReversalValidationErrorData = field(hash=False)
 

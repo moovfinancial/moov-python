@@ -34,7 +34,7 @@ class RequestCardErrorData(BaseModel):
     controls: Optional[components_issuingcontrolserror.IssuingControlsError] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class RequestCardError(MoovError):
     data: RequestCardErrorData = field(hash=False)
 

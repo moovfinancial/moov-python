@@ -16,7 +16,7 @@ class ScheduleValidationErrorData(BaseModel):
     description: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ScheduleValidationError(MoovError):
     data: ScheduleValidationErrorData = field(hash=False)
 

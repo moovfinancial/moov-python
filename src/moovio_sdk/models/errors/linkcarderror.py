@@ -39,7 +39,7 @@ class LinkCardErrorData(BaseModel):
     verify_name: Annotated[Optional[str], pydantic.Field(alias="verifyName")] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class LinkCardError(MoovError):
     data: LinkCardErrorData = field(hash=False)
 

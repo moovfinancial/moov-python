@@ -24,7 +24,7 @@ class UpdateIssuedCardErrorData(BaseModel):
     ] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class UpdateIssuedCardError(MoovError):
     data: UpdateIssuedCardErrorData = field(hash=False)
 

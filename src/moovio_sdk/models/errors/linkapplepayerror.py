@@ -28,7 +28,7 @@ class LinkApplePayErrorData(BaseModel):
     r"""Describes an error within the `token.transactionIdentifier` request field."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class LinkApplePayError(MoovError):
     data: LinkApplePayErrorData = field(hash=False)
 

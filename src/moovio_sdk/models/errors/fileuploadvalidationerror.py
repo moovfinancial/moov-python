@@ -27,7 +27,7 @@ class FileUploadValidationErrorData(BaseModel):
     file: Optional[File] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class FileUploadValidationError(MoovError):
     data: FileUploadValidationErrorData = field(hash=False)
 

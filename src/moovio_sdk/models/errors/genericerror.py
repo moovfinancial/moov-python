@@ -12,7 +12,7 @@ class GenericErrorData(BaseModel):
     error: str
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class GenericError(MoovError):
     data: GenericErrorData = field(hash=False)
 

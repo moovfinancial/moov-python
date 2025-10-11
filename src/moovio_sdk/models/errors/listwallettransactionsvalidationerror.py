@@ -52,7 +52,7 @@ class ListWalletTransactionsValidationErrorData(BaseModel):
     count: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ListWalletTransactionsValidationError(MoovError):
     data: ListWalletTransactionsValidationErrorData = field(hash=False)
 

@@ -16,7 +16,7 @@ class CreateWalletValidationErrorData(BaseModel):
     metadata: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class CreateWalletValidationError(MoovError):
     data: CreateWalletValidationErrorData = field(hash=False)
 

@@ -20,7 +20,7 @@ class ListWalletsValidationErrorData(BaseModel):
     count: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ListWalletsValidationError(MoovError):
     data: ListWalletsValidationErrorData = field(hash=False)
 

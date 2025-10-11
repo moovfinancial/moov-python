@@ -16,7 +16,7 @@ class AccountTerminalApplicationErrorData(BaseModel):
     ] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class AccountTerminalApplicationError(MoovError):
     data: AccountTerminalApplicationErrorData = field(hash=False)
 

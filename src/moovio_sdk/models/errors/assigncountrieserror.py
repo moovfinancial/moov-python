@@ -12,7 +12,7 @@ class AssignCountriesErrorData(BaseModel):
     countries: Dict[str, str]
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class AssignCountriesError(MoovError):
     data: AssignCountriesErrorData = field(hash=False)
 

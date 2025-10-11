@@ -22,7 +22,7 @@ class TerminalApplicationErrorData(BaseModel):
     version_code: Annotated[Optional[str], pydantic.Field(alias="versionCode")] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class TerminalApplicationError(MoovError):
     data: TerminalApplicationErrorData = field(hash=False)
 

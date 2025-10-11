@@ -83,7 +83,7 @@ class UpsertUnderwritingErrorData(BaseModel):
     ] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class UpsertUnderwritingError(MoovError):
     data: UpsertUnderwritingErrorData = field(hash=False)
 

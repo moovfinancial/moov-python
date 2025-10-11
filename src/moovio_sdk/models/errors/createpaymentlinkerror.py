@@ -38,7 +38,7 @@ class CreatePaymentLinkErrorData(BaseModel):
     payout: Optional[components_payoutdetailserror.PayoutDetailsError] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class CreatePaymentLinkError(MoovError):
     data: CreatePaymentLinkErrorData = field(hash=False)
 

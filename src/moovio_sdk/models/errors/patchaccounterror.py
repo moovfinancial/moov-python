@@ -38,7 +38,7 @@ class PatchAccountErrorData(BaseModel):
     error: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class PatchAccountError(MoovError):
     data: PatchAccountErrorData = field(hash=False)
 

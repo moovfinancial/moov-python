@@ -22,7 +22,7 @@ class BankAccountValidationErrorData(BaseModel):
     error: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class BankAccountValidationError(MoovError):
     data: BankAccountValidationErrorData = field(hash=False)
 

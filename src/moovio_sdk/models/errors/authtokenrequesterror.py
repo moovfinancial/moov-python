@@ -14,7 +14,7 @@ class AuthTokenRequestErrorData(BaseModel):
     refresh_token: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class AuthTokenRequestError(MoovError):
     data: AuthTokenRequestErrorData = field(hash=False)
 

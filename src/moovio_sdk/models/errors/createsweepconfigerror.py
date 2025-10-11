@@ -32,7 +32,7 @@ class CreateSweepConfigErrorData(BaseModel):
     ] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class CreateSweepConfigError(MoovError):
     data: CreateSweepConfigErrorData = field(hash=False)
 
