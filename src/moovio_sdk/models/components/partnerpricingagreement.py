@@ -27,8 +27,11 @@ class PartnerPricingAgreementTypedDict(TypedDict):
     r"""The minimum spending amount that must be met in the billing period. If actual usage is below the minimum amount, account is charged the difference."""
     monthly_platform_fee: MonthlyPlatformFeeTypedDict
     r"""Fixed recurring amount paid in the billing period regardless of usage."""
-    revenue_share: int
-    r"""The integer percentage value of the revenue split for partner."""
+    revenue_share: str
+    r"""The decimal-formatted numerical string of the revenue split for partner.
+
+    For example, 2.25% is '2.25'.
+    """
     account_id: NotRequired[str]
     description: NotRequired[str]
     r"""The description of the agreement."""
@@ -63,8 +66,11 @@ class PartnerPricingAgreement(BaseModel):
     ]
     r"""Fixed recurring amount paid in the billing period regardless of usage."""
 
-    revenue_share: Annotated[int, pydantic.Field(alias="revenueShare")]
-    r"""The integer percentage value of the revenue split for partner."""
+    revenue_share: Annotated[str, pydantic.Field(alias="revenueShare")]
+    r"""The decimal-formatted numerical string of the revenue split for partner.
+
+    For example, 2.25% is '2.25'.
+    """
 
     account_id: Annotated[Optional[str], pydantic.Field(alias="accountID")] = None
 

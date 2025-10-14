@@ -962,6 +962,7 @@ if TYPE_CHECKING:
         VolumeByCustomerTypeError,
         VolumeByCustomerTypeErrorTypedDict,
     )
+    from .volumerange import VolumeRange, VolumeRangeTypedDict
     from .volumesharebycustomertype import (
         VolumeShareByCustomerType,
         VolumeShareByCustomerTypeTypedDict,
@@ -1988,6 +1989,8 @@ __all__ = [
     "VolumeByCustomerTypeError",
     "VolumeByCustomerTypeErrorTypedDict",
     "VolumeByCustomerTypeTypedDict",
+    "VolumeRange",
+    "VolumeRangeTypedDict",
     "VolumeShareByCustomerType",
     "VolumeShareByCustomerTypeError",
     "VolumeShareByCustomerTypeErrorTypedDict",
@@ -2943,6 +2946,8 @@ _dynamic_imports: dict[str, str] = {
     "VolumeByCustomerTypeTypedDict": ".volumebycustomertype",
     "VolumeByCustomerTypeError": ".volumebycustomertypeerror",
     "VolumeByCustomerTypeErrorTypedDict": ".volumebycustomertypeerror",
+    "VolumeRange": ".volumerange",
+    "VolumeRangeTypedDict": ".volumerange",
     "VolumeShareByCustomerType": ".volumesharebycustomertype",
     "VolumeShareByCustomerTypeTypedDict": ".volumesharebycustomertype",
     "VolumeShareByCustomerTypeError": ".volumesharebycustomertypeerror",

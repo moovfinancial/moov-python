@@ -2,15 +2,18 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+from .volumerange import VolumeRange, VolumeRangeTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class FeePropertiesTypedDict(TypedDict):
     r"""Defines the specific parameters used for fee calculation."""
 
+    volume_ranges: List[VolumeRangeTypedDict]
+    r"""Defines the volume ranges for tiered pricing models."""
     fixed_amount: NotRequired[AmountDecimalTypedDict]
     r"""A fixed fee that is applied to the amount of each transaction in the `fixed` and `blended` fee models."""
     variable_rate: NotRequired[str]
@@ -26,6 +29,9 @@ class FeePropertiesTypedDict(TypedDict):
 
 class FeeProperties(BaseModel):
     r"""Defines the specific parameters used for fee calculation."""
+
+    volume_ranges: Annotated[List[VolumeRange], pydantic.Field(alias="volumeRanges")]
+    r"""Defines the volume ranges for tiered pricing models."""
 
     fixed_amount: Annotated[
         Optional[AmountDecimal], pydantic.Field(alias="fixedAmount")

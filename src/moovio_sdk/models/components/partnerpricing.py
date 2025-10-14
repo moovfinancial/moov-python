@@ -15,9 +15,12 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class PartnerPricingTypedDict(TypedDict):
     plan_id: str
     name: str
-    r"""The name of the fee plan."""
-    revenue_share: int
-    r"""The integer percentage value of the revenue split for partner."""
+    r"""The name of the partner pricing plan."""
+    revenue_share: str
+    r"""The decimal-formatted numerical string of the revenue split for partner.
+
+    For example, 2.25% is '2.25'.
+    """
     card_acquiring_model: CardAcquiringModel
     r"""Specifies the card processing pricing model"""
     billable_fees: List[BillableFeeTypedDict]
@@ -34,10 +37,13 @@ class PartnerPricing(BaseModel):
     plan_id: Annotated[str, pydantic.Field(alias="planID")]
 
     name: str
-    r"""The name of the fee plan."""
+    r"""The name of the partner pricing plan."""
 
-    revenue_share: Annotated[int, pydantic.Field(alias="revenueShare")]
-    r"""The integer percentage value of the revenue split for partner."""
+    revenue_share: Annotated[str, pydantic.Field(alias="revenueShare")]
+    r"""The decimal-formatted numerical string of the revenue split for partner.
+
+    For example, 2.25% is '2.25'.
+    """
 
     card_acquiring_model: Annotated[
         CardAcquiringModel, pydantic.Field(alias="cardAcquiringModel")
