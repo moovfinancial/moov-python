@@ -74,6 +74,10 @@ if TYPE_CHECKING:
         PatchWalletValidationError,
         PatchWalletValidationErrorData,
     )
+    from .productrequestvalidationerror import (
+        ProductRequestValidationError,
+        ProductRequestValidationErrorData,
+    )
     from .refundvalidationerror import RefundValidationError, RefundValidationErrorData
     from .representativevalidationerror import (
         Error,
@@ -188,6 +192,8 @@ __all__ = [
     "PatchTransferValidationErrorData",
     "PatchWalletValidationError",
     "PatchWalletValidationErrorData",
+    "ProductRequestValidationError",
+    "ProductRequestValidationErrorData",
     "RefundValidationError",
     "RefundValidationErrorData",
     "RepresentativeValidationError",
@@ -284,6 +290,8 @@ _dynamic_imports: dict[str, str] = {
     "PatchTransferValidationErrorData": ".patchtransfervalidationerror",
     "PatchWalletValidationError": ".patchwalletvalidationerror",
     "PatchWalletValidationErrorData": ".patchwalletvalidationerror",
+    "ProductRequestValidationError": ".productrequestvalidationerror",
+    "ProductRequestValidationErrorData": ".productrequestvalidationerror",
     "RefundValidationError": ".refundvalidationerror",
     "RefundValidationErrorData": ".refundvalidationerror",
     "Error": ".representativevalidationerror",

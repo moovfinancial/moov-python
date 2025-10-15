@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 97dd6bcdb21248b780f510d9de16d230
+  docChecksum: 7c478e4643d2b5befcfb1141617ee41d
   docVersion: latest
   speakeasyVersion: 1.636.3
   generationVersion: 2.723.11
-  releaseVersion: 0.17.2
-  configChecksum: 55d78cf2a48aed2d5f3a4e178b879bd2
+  releaseVersion: 0.17.3
+  configChecksum: db34a4f2317d74fdccc1a17865d2adde
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -79,6 +79,7 @@ generatedFiles:
   - docs/models/components/adjustment.md
   - docs/models/components/amount.md
   - docs/models/components/amountdecimal.md
+  - docs/models/components/amountdecimalvalidationerror.md
   - docs/models/components/amountupdate.md
   - docs/models/components/amountvalidationerror.md
   - docs/models/components/applebillingcontact.md
@@ -88,6 +89,8 @@ generatedFiles:
   - docs/models/components/applepaypaymentmethodpaymentmethodtype.md
   - docs/models/components/applepayresponse.md
   - docs/models/components/applicationscope.md
+  - docs/models/components/assignproductimage.md
+  - docs/models/components/assignproductimagevalidationerror.md
   - docs/models/components/asynccreatedrefund.md
   - docs/models/components/asynctransfer.md
   - docs/models/components/authorizeduser.md
@@ -199,6 +202,8 @@ generatedFiles:
   - docs/models/components/createindividualerrorssn.md
   - docs/models/components/createindividualprofile.md
   - docs/models/components/createpaymentlink.md
+  - docs/models/components/createproductoption.md
+  - docs/models/components/createproductoptiongroup.md
   - docs/models/components/createprofile.md
   - docs/models/components/createprofileerror.md
   - docs/models/components/createrefund.md
@@ -392,6 +397,13 @@ generatedFiles:
   - docs/models/components/plaidpayload.md
   - docs/models/components/platformfees.md
   - docs/models/components/primaryregulator.md
+  - docs/models/components/product.md
+  - docs/models/components/productimagemetadata.md
+  - docs/models/components/productoption.md
+  - docs/models/components/productoptiongroup.md
+  - docs/models/components/productoptiongroupvalidationerror.md
+  - docs/models/components/productoptionvalidationerror.md
+  - docs/models/components/productrequest.md
   - docs/models/components/profile.md
   - docs/models/components/pullfromcardpaymentmethod.md
   - docs/models/components/pullfromcardpaymentmethodpaymentmethodtype.md
@@ -604,6 +616,7 @@ generatedFiles:
   - docs/models/errors/patchsweepconfigerror.md
   - docs/models/errors/patchtransfervalidationerror.md
   - docs/models/errors/patchwalletvalidationerror.md
+  - docs/models/errors/productrequestvalidationerror.md
   - docs/models/errors/refundvalidationerror.md
   - docs/models/errors/representativevalidationerror.md
   - docs/models/errors/requestcarderror.md
@@ -658,6 +671,9 @@ generatedFiles:
   - docs/models/operations/createpaymentlinkglobals.md
   - docs/models/operations/createpaymentlinkrequest.md
   - docs/models/operations/createpaymentlinkresponse.md
+  - docs/models/operations/createproductglobals.md
+  - docs/models/operations/createproductrequest.md
+  - docs/models/operations/createproductresponse.md
   - docs/models/operations/createreceiptsglobals.md
   - docs/models/operations/createreceiptsresponse.md
   - docs/models/operations/createrepresentativeglobals.md
@@ -714,6 +730,9 @@ generatedFiles:
   - docs/models/operations/disablepaymentlinkglobals.md
   - docs/models/operations/disablepaymentlinkrequest.md
   - docs/models/operations/disablepaymentlinkresponse.md
+  - docs/models/operations/disableproductglobals.md
+  - docs/models/operations/disableproductrequest.md
+  - docs/models/operations/disableproductresponse.md
   - docs/models/operations/disconnectaccountglobals.md
   - docs/models/operations/disconnectaccountrequest.md
   - docs/models/operations/disconnectaccountresponse.md
@@ -806,6 +825,9 @@ generatedFiles:
   - docs/models/operations/getpaymentmethodglobals.md
   - docs/models/operations/getpaymentmethodrequest.md
   - docs/models/operations/getpaymentmethodresponse.md
+  - docs/models/operations/getproductglobals.md
+  - docs/models/operations/getproductrequest.md
+  - docs/models/operations/getproductresponse.md
   - docs/models/operations/getpublicimagerequest.md
   - docs/models/operations/getpublicimageresponse.md
   - docs/models/operations/getpublicimageresponseresult.md
@@ -950,6 +972,9 @@ generatedFiles:
   - docs/models/operations/listpaymentmethodsglobals.md
   - docs/models/operations/listpaymentmethodsrequest.md
   - docs/models/operations/listpaymentmethodsresponse.md
+  - docs/models/operations/listproductsglobals.md
+  - docs/models/operations/listproductsrequest.md
+  - docs/models/operations/listproductsresponse.md
   - docs/models/operations/listreceiptsglobals.md
   - docs/models/operations/listreceiptsrequest.md
   - docs/models/operations/listreceiptsresponse.md
@@ -1042,6 +1067,9 @@ generatedFiles:
   - docs/models/operations/updatepaymentlinkglobals.md
   - docs/models/operations/updatepaymentlinkrequest.md
   - docs/models/operations/updatepaymentlinkresponse.md
+  - docs/models/operations/updateproductglobals.md
+  - docs/models/operations/updateproductrequest.md
+  - docs/models/operations/updateproductresponse.md
   - docs/models/operations/updaterepresentativeglobals.md
   - docs/models/operations/updaterepresentativerequest.md
   - docs/models/operations/updaterepresentativeresponse.md
@@ -1101,6 +1129,7 @@ generatedFiles:
   - docs/sdks/paymentlinks/README.md
   - docs/sdks/paymentmethods/README.md
   - docs/sdks/ping/README.md
+  - docs/sdks/products/README.md
   - docs/sdks/receipts/README.md
   - docs/sdks/representatives/README.md
   - docs/sdks/scheduling/README.md
@@ -1178,6 +1207,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/adjustment.py
   - src/moovio_sdk/models/components/amount.py
   - src/moovio_sdk/models/components/amountdecimal.py
+  - src/moovio_sdk/models/components/amountdecimalvalidationerror.py
   - src/moovio_sdk/models/components/amountupdate.py
   - src/moovio_sdk/models/components/amountvalidationerror.py
   - src/moovio_sdk/models/components/applebillingcontact.py
@@ -1186,6 +1216,8 @@ generatedFiles:
   - src/moovio_sdk/models/components/applepaypaymentmethod.py
   - src/moovio_sdk/models/components/applepayresponse.py
   - src/moovio_sdk/models/components/applicationscope.py
+  - src/moovio_sdk/models/components/assignproductimage.py
+  - src/moovio_sdk/models/components/assignproductimagevalidationerror.py
   - src/moovio_sdk/models/components/asynccreatedrefund.py
   - src/moovio_sdk/models/components/asynctransfer.py
   - src/moovio_sdk/models/components/authorizeduser.py
@@ -1285,6 +1317,8 @@ generatedFiles:
   - src/moovio_sdk/models/components/createindividualerror.py
   - src/moovio_sdk/models/components/createindividualprofile.py
   - src/moovio_sdk/models/components/createpaymentlink.py
+  - src/moovio_sdk/models/components/createproductoption.py
+  - src/moovio_sdk/models/components/createproductoptiongroup.py
   - src/moovio_sdk/models/components/createprofile.py
   - src/moovio_sdk/models/components/createprofileerror.py
   - src/moovio_sdk/models/components/createrefund.py
@@ -1463,6 +1497,13 @@ generatedFiles:
   - src/moovio_sdk/models/components/plaidpayload.py
   - src/moovio_sdk/models/components/platformfees.py
   - src/moovio_sdk/models/components/primaryregulator.py
+  - src/moovio_sdk/models/components/product.py
+  - src/moovio_sdk/models/components/productimagemetadata.py
+  - src/moovio_sdk/models/components/productoption.py
+  - src/moovio_sdk/models/components/productoptiongroup.py
+  - src/moovio_sdk/models/components/productoptiongroupvalidationerror.py
+  - src/moovio_sdk/models/components/productoptionvalidationerror.py
+  - src/moovio_sdk/models/components/productrequest.py
   - src/moovio_sdk/models/components/profile.py
   - src/moovio_sdk/models/components/pullfromcardpaymentmethod.py
   - src/moovio_sdk/models/components/pushtocardpaymentmethod.py
@@ -1656,6 +1697,7 @@ generatedFiles:
   - src/moovio_sdk/models/errors/patchsweepconfigerror.py
   - src/moovio_sdk/models/errors/patchtransfervalidationerror.py
   - src/moovio_sdk/models/errors/patchwalletvalidationerror.py
+  - src/moovio_sdk/models/errors/productrequestvalidationerror.py
   - src/moovio_sdk/models/errors/refundvalidationerror.py
   - src/moovio_sdk/models/errors/representativevalidationerror.py
   - src/moovio_sdk/models/errors/requestcarderror.py
@@ -1689,6 +1731,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/createfeeplanagreements.py
   - src/moovio_sdk/models/operations/createonboardinginvite.py
   - src/moovio_sdk/models/operations/createpaymentlink.py
+  - src/moovio_sdk/models/operations/createproduct.py
   - src/moovio_sdk/models/operations/createreceipts.py
   - src/moovio_sdk/models/operations/createrepresentative.py
   - src/moovio_sdk/models/operations/createreversal.py
@@ -1708,6 +1751,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/disablecapability.py
   - src/moovio_sdk/models/operations/disablecard.py
   - src/moovio_sdk/models/operations/disablepaymentlink.py
+  - src/moovio_sdk/models/operations/disableproduct.py
   - src/moovio_sdk/models/operations/disconnectaccount.py
   - src/moovio_sdk/models/operations/generateendtoendkey.py
   - src/moovio_sdk/models/operations/getaccount.py
@@ -1738,6 +1782,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/getpaymentlink.py
   - src/moovio_sdk/models/operations/getpaymentlinkqrcode.py
   - src/moovio_sdk/models/operations/getpaymentmethod.py
+  - src/moovio_sdk/models/operations/getproduct.py
   - src/moovio_sdk/models/operations/getpublicimage.py
   - src/moovio_sdk/models/operations/getrefund.py
   - src/moovio_sdk/models/operations/getrepresentative.py
@@ -1785,6 +1830,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/listpartnerpricingagreements.py
   - src/moovio_sdk/models/operations/listpaymentlinks.py
   - src/moovio_sdk/models/operations/listpaymentmethods.py
+  - src/moovio_sdk/models/operations/listproducts.py
   - src/moovio_sdk/models/operations/listreceipts.py
   - src/moovio_sdk/models/operations/listrefunds.py
   - src/moovio_sdk/models/operations/listrepresentatives.py
@@ -1816,6 +1862,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/updatedisputeevidence.py
   - src/moovio_sdk/models/operations/updateissuedcard.py
   - src/moovio_sdk/models/operations/updatepaymentlink.py
+  - src/moovio_sdk/models/operations/updateproduct.py
   - src/moovio_sdk/models/operations/updaterepresentative.py
   - src/moovio_sdk/models/operations/updateschedule.py
   - src/moovio_sdk/models/operations/updatesweepconfig.py
@@ -1831,6 +1878,7 @@ generatedFiles:
   - src/moovio_sdk/payment_links.py
   - src/moovio_sdk/payment_methods.py
   - src/moovio_sdk/ping.py
+  - src/moovio_sdk/products.py
   - src/moovio_sdk/py.typed
   - src/moovio_sdk/receipts.py
   - src/moovio_sdk/representatives.py
@@ -4039,12 +4087,80 @@ examples:
           image/webp: "x-file: example.file"
           image/png: "x-file: example.file"
           image/jpeg: "x-file: example.file"
+  listProducts:
+    speakeasy-default-list-products:
+      parameters:
+        path:
+          accountID: "cd696219-4308-446c-b0d8-1759254995c2"
+        query:
+          skip: 60
+          count: 20
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: [{"productID": "1e229a22-6396-4efa-beac-d18ff5c58ab7", "title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 29985, "maxSelect": 247517, "options": [{"name": "<value>", "priceModifier": "-14.89", "images": [{"imageID": "47269bb9-c8c6-4c76-8933-0d6ce87d2946", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}]}]}], "images": [{"imageID": "47269bb9-c8c6-4c76-8933-0d6ce87d2946", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}], "createdOn": "2023-01-22T10:49:40.225Z", "updatedOn": "2023-11-19T10:02:46.267Z"}]
+  createProduct:
+    speakeasy-default-create-product:
+      parameters:
+        path:
+          accountID: "27cd3181-7c1c-4d81-b020-e7d55c33941f"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        application/json: {"title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 798807, "maxSelect": 321505, "options": [{"name": "<value>", "priceModifier": "-14.89"}]}]}
+      responses:
+        "201":
+          application/json: {"productID": "c7657b6a-06b3-4972-805a-6c4111175af2", "title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 659263, "maxSelect": 854821, "options": [{"name": "<value>", "priceModifier": "-14.89", "images": [{"imageID": "ee6b4549-0292-47f9-a2bc-ea0a521ac908", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}]}]}], "images": [{"imageID": "ee6b4549-0292-47f9-a2bc-ea0a521ac908", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}], "createdOn": "2023-01-19T08:35:48.193Z", "updatedOn": "2024-02-14T05:19:14.970Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  getProduct:
+    speakeasy-default-get-product:
+      parameters:
+        path:
+          accountID: "a749d848-5ebc-42a4-9ae6-555804317835"
+          productID: "dd0b4873-5cf5-4aa8-aa86-e31d86f7e38a"
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: {"productID": "3c2445e7-f0c4-45d5-bd2a-88bcdc056c20", "title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 197351, "maxSelect": 515143, "options": []}], "images": [{"imageID": "33c05564-9e61-48d6-b69e-269a48a62a9e", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}], "createdOn": "2024-11-12T09:31:50.113Z", "updatedOn": "2025-11-08T13:39:00.825Z"}
+  updateProduct:
+    speakeasy-default-update-product:
+      parameters:
+        path:
+          accountID: "7a7b55ed-d90d-4e83-a8f6-f146eaebd0cc"
+          productID: "fa407877-3b46-4484-814e-65b147d76a9e"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        application/json: {"title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 328576, "maxSelect": 430951, "options": []}]}
+      responses:
+        "200":
+          application/json: {"productID": "c0c48b06-a2e8-4b60-8ff4-13050279bce9", "title": "<value>", "basePrice": {"currency": "USD", "valueDecimal": "12.987654321"}, "optionGroups": [{"name": "<value>", "minSelect": 918880, "maxSelect": 680367, "options": [{"name": "<value>", "priceModifier": "-14.89", "images": [{"imageID": "b76b32e6-bc87-46f5-bdcb-e1737416539d", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}]}]}], "images": [{"imageID": "b76b32e6-bc87-46f5-bdcb-e1737416539d", "link": "https://api.moov.io/images/q7lKWleAy9fUNhEGezQ1g"}], "createdOn": "2025-06-13T16:49:57.138Z", "updatedOn": "2023-11-04T10:58:23.378Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  disableProduct:
+    speakeasy-default-disable-product:
+      parameters:
+        path:
+          accountID: "9fbe72c0-abba-4bb7-b1d0-d15ee702fe62"
+          productID: "1e11a7dc-4e86-41ed-b256-55c22f3bfd38"
+        header:
+          x-moov-version: "v2024.01.00"
+      responses:
+        "400":
+          application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Python SDK Changes Detected:
-  * `moov.fee_plans.list_partner_pricing()`:  `response.[]` **Changed** **Breaking** :warning:
-  * `moov.fee_plans.list_partner_pricing_agreements()`:  `response.[]` **Changed** **Breaking** :warning:
-  * `moov.fee_plans.list_fee_plan_agreements()`:  `response.[].billable_fees.[].fee_properties.volume_ranges` **Added**
-  * `moov.fee_plans.create_fee_plan_agreements()`:  `response.billable_fees.[].fee_properties.volume_ranges` **Added**
-  * `moov.fee_plans.list_fee_plans()`:  `response.[].billable_fees.[].fee_properties.volume_ranges` **Added**
+  * `moov.products.list()`: **Added**
+  * `moov.products.create()`: **Added**
+  * `moov.products.get()`: **Added**
+  * `moov.products.update()`: **Added**
+  * `moov.products.disable()`: **Added**

@@ -69,6 +69,10 @@ if TYPE_CHECKING:
     from .adjustment import Adjustment, AdjustmentTypedDict
     from .amount import Amount, AmountTypedDict
     from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+    from .amountdecimalvalidationerror import (
+        AmountDecimalValidationError,
+        AmountDecimalValidationErrorTypedDict,
+    )
     from .amountupdate import AmountUpdate, AmountUpdateTypedDict
     from .amountvalidationerror import (
         AmountValidationError,
@@ -87,6 +91,11 @@ if TYPE_CHECKING:
     )
     from .applepayresponse import ApplePayResponse, ApplePayResponseTypedDict
     from .applicationscope import ApplicationScope
+    from .assignproductimage import AssignProductImage, AssignProductImageTypedDict
+    from .assignproductimagevalidationerror import (
+        AssignProductImageValidationError,
+        AssignProductImageValidationErrorTypedDict,
+    )
     from .asynccreatedrefund import AsyncCreatedRefund, AsyncCreatedRefundTypedDict
     from .asynctransfer import AsyncTransfer, AsyncTransferTypedDict
     from .authorizeduser import AuthorizedUser, AuthorizedUserTypedDict
@@ -330,6 +339,11 @@ if TYPE_CHECKING:
         CreateIndividualProfileTypedDict,
     )
     from .createpaymentlink import CreatePaymentLink, CreatePaymentLinkTypedDict
+    from .createproductoption import CreateProductOption, CreateProductOptionTypedDict
+    from .createproductoptiongroup import (
+        CreateProductOptionGroup,
+        CreateProductOptionGroupTypedDict,
+    )
     from .createprofile import CreateProfile, CreateProfileTypedDict
     from .createprofileerror import CreateProfileError, CreateProfileErrorTypedDict
     from .createrefund import CreateRefund, CreateRefundTypedDict
@@ -745,6 +759,22 @@ if TYPE_CHECKING:
     from .plaidpayload import PlaidPayload, PlaidPayloadTypedDict
     from .platformfees import PlatformFees, PlatformFeesTypedDict
     from .primaryregulator import PrimaryRegulator
+    from .product import Product, ProductTypedDict
+    from .productimagemetadata import (
+        ProductImageMetadata,
+        ProductImageMetadataTypedDict,
+    )
+    from .productoption import ProductOption, ProductOptionTypedDict
+    from .productoptiongroup import ProductOptionGroup, ProductOptionGroupTypedDict
+    from .productoptiongroupvalidationerror import (
+        ProductOptionGroupValidationError,
+        ProductOptionGroupValidationErrorTypedDict,
+    )
+    from .productoptionvalidationerror import (
+        ProductOptionValidationError,
+        ProductOptionValidationErrorTypedDict,
+    )
+    from .productrequest import ProductRequest, ProductRequestTypedDict
     from .profile import Profile, ProfileTypedDict
     from .pullfromcardpaymentmethod import (
         PullFromCardPaymentMethod,
@@ -1197,6 +1227,8 @@ __all__ = [
     "Amount",
     "AmountDecimal",
     "AmountDecimalTypedDict",
+    "AmountDecimalValidationError",
+    "AmountDecimalValidationErrorTypedDict",
     "AmountTypedDict",
     "AmountUpdate",
     "AmountUpdateTypedDict",
@@ -1214,6 +1246,10 @@ __all__ = [
     "ApplePayResponse",
     "ApplePayResponseTypedDict",
     "ApplicationScope",
+    "AssignProductImage",
+    "AssignProductImageTypedDict",
+    "AssignProductImageValidationError",
+    "AssignProductImageValidationErrorTypedDict",
     "AsyncCreatedRefund",
     "AsyncCreatedRefundTypedDict",
     "AsyncTransfer",
@@ -1409,6 +1445,10 @@ __all__ = [
     "CreateIndividualProfileTypedDict",
     "CreatePaymentLink",
     "CreatePaymentLinkTypedDict",
+    "CreateProductOption",
+    "CreateProductOptionGroup",
+    "CreateProductOptionGroupTypedDict",
+    "CreateProductOptionTypedDict",
     "CreateProfile",
     "CreateProfileError",
     "CreateProfileErrorTypedDict",
@@ -1762,6 +1802,20 @@ __all__ = [
     "PlatformFees",
     "PlatformFeesTypedDict",
     "PrimaryRegulator",
+    "Product",
+    "ProductImageMetadata",
+    "ProductImageMetadataTypedDict",
+    "ProductOption",
+    "ProductOptionGroup",
+    "ProductOptionGroupTypedDict",
+    "ProductOptionGroupValidationError",
+    "ProductOptionGroupValidationErrorTypedDict",
+    "ProductOptionTypedDict",
+    "ProductOptionValidationError",
+    "ProductOptionValidationErrorTypedDict",
+    "ProductRequest",
+    "ProductRequestTypedDict",
+    "ProductTypedDict",
     "Profile",
     "ProfileTypedDict",
     "PullFromCardPaymentMethod",
@@ -2153,6 +2207,8 @@ _dynamic_imports: dict[str, str] = {
     "AmountTypedDict": ".amount",
     "AmountDecimal": ".amountdecimal",
     "AmountDecimalTypedDict": ".amountdecimal",
+    "AmountDecimalValidationError": ".amountdecimalvalidationerror",
+    "AmountDecimalValidationErrorTypedDict": ".amountdecimalvalidationerror",
     "AmountUpdate": ".amountupdate",
     "AmountUpdateTypedDict": ".amountupdate",
     "AmountValidationError": ".amountvalidationerror",
@@ -2169,6 +2225,10 @@ _dynamic_imports: dict[str, str] = {
     "ApplePayResponse": ".applepayresponse",
     "ApplePayResponseTypedDict": ".applepayresponse",
     "ApplicationScope": ".applicationscope",
+    "AssignProductImage": ".assignproductimage",
+    "AssignProductImageTypedDict": ".assignproductimage",
+    "AssignProductImageValidationError": ".assignproductimagevalidationerror",
+    "AssignProductImageValidationErrorTypedDict": ".assignproductimagevalidationerror",
     "AsyncCreatedRefund": ".asynccreatedrefund",
     "AsyncCreatedRefundTypedDict": ".asynccreatedrefund",
     "AsyncTransfer": ".asynctransfer",
@@ -2368,6 +2428,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateIndividualProfileTypedDict": ".createindividualprofile",
     "CreatePaymentLink": ".createpaymentlink",
     "CreatePaymentLinkTypedDict": ".createpaymentlink",
+    "CreateProductOption": ".createproductoption",
+    "CreateProductOptionTypedDict": ".createproductoption",
+    "CreateProductOptionGroup": ".createproductoptiongroup",
+    "CreateProductOptionGroupTypedDict": ".createproductoptiongroup",
     "CreateProfile": ".createprofile",
     "CreateProfileTypedDict": ".createprofile",
     "CreateProfileError": ".createprofileerror",
@@ -2722,6 +2786,20 @@ _dynamic_imports: dict[str, str] = {
     "PlatformFees": ".platformfees",
     "PlatformFeesTypedDict": ".platformfees",
     "PrimaryRegulator": ".primaryregulator",
+    "Product": ".product",
+    "ProductTypedDict": ".product",
+    "ProductImageMetadata": ".productimagemetadata",
+    "ProductImageMetadataTypedDict": ".productimagemetadata",
+    "ProductOption": ".productoption",
+    "ProductOptionTypedDict": ".productoption",
+    "ProductOptionGroup": ".productoptiongroup",
+    "ProductOptionGroupTypedDict": ".productoptiongroup",
+    "ProductOptionGroupValidationError": ".productoptiongroupvalidationerror",
+    "ProductOptionGroupValidationErrorTypedDict": ".productoptiongroupvalidationerror",
+    "ProductOptionValidationError": ".productoptionvalidationerror",
+    "ProductOptionValidationErrorTypedDict": ".productoptionvalidationerror",
+    "ProductRequest": ".productrequest",
+    "ProductRequestTypedDict": ".productrequest",
     "Profile": ".profile",
     "ProfileTypedDict": ".profile",
     "PullFromCardPaymentMethod": ".pullfromcardpaymentmethod",
