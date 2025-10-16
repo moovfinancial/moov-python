@@ -99,7 +99,10 @@ with Moov(
                 {
                     "name": "Strawberry puree",
                     "description": "Fresh and fruity.",
-                    "price_modifier": "0.99",
+                    "price_modifier": {
+                        "currency": "USD",
+                        "value_decimal": "0.99",
+                    },
                     "images": [
                         {
                             "image_id": "d359808d-9896-4414-8d17-dac43f35842d",
@@ -108,11 +111,17 @@ with Moov(
                 },
                 {
                     "name": "Passionfruit syrup",
-                    "price_modifier": "0.49",
+                    "price_modifier": {
+                        "currency": "USD",
+                        "value_decimal": "0.49",
+                    },
                 },
                 {
                     "name": "Cherry syrup",
-                    "price_modifier": "0.49",
+                    "price_modifier": {
+                        "currency": "USD",
+                        "value_decimal": "0.49",
+                    },
                 },
             ],
         },
@@ -127,7 +136,10 @@ with Moov(
                 },
                 {
                     "name": "Honey",
-                    "price_modifier": "0.99",
+                    "price_modifier": {
+                        "currency": "USD",
+                        "value_decimal": "0.99",
+                    },
                 },
                 {
                     "name": "Stevia",
