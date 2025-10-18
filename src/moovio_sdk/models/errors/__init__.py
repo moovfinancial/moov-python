@@ -44,6 +44,10 @@ if TYPE_CHECKING:
     )
     from .filevalidationerror import FileValidationError, FileValidationErrorData
     from .genericerror import GenericError, GenericErrorData
+    from .imagerequestvalidationerror import (
+        ImageRequestValidationError,
+        ImageRequestValidationErrorData,
+    )
     from .linkapplepayerror import LinkApplePayError, LinkApplePayErrorData
     from .linkcarderror import LinkCardError, LinkCardErrorData
     from .listtransfersvalidationerror import (
@@ -168,6 +172,8 @@ __all__ = [
     "FileValidationErrorData",
     "GenericError",
     "GenericErrorData",
+    "ImageRequestValidationError",
+    "ImageRequestValidationErrorData",
     "LinkApplePayError",
     "LinkApplePayErrorData",
     "LinkCardError",
@@ -267,6 +273,8 @@ _dynamic_imports: dict[str, str] = {
     "FileValidationErrorData": ".filevalidationerror",
     "GenericError": ".genericerror",
     "GenericErrorData": ".genericerror",
+    "ImageRequestValidationError": ".imagerequestvalidationerror",
+    "ImageRequestValidationErrorData": ".imagerequestvalidationerror",
     "LinkApplePayError": ".linkapplepayerror",
     "LinkApplePayErrorData": ".linkapplepayerror",
     "LinkCardError": ".linkcarderror",

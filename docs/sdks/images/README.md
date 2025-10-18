@@ -6,7 +6,14 @@
 ### Available Operations
 
 * [list](#list) - List metadata for all images in the specified account.
+* [upload](#upload) -   Upload a new PNG, JPEG, or WebP image with optional metadata. 
+  Duplicate images, and requests larger than 16MB will be rejected.
 * [get_metadata](#get_metadata) - Retrieve metadata for a specific image by its ID.
+* [update](#update) - Update an existing image and/or its metadata.
+
+Duplicate images, and requests larger than 16MB will be rejected. Omit any
+form parts you do not wish to update. Existing metadata can be cleared by
+sending `null` for the `metadata` form part.
 * [delete](#delete) - Permanently delete an image by its ID.
 * [get_public](#get_public) - Get an image by its public ID.
 
@@ -54,6 +61,58 @@ with Moov(
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
+## upload
+
+  Upload a new PNG, JPEG, or WebP image with optional metadata. 
+  Duplicate images, and requests larger than 16MB will be rejected.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="uploadImage" method="post" path="/accounts/{accountID}/images" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="v2024.01.00",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.images.upload(account_id="c0971a52-1f1c-4511-876a-f45c4cfd6154", image={
+        "file_name": "example.file",
+        "content": open("example.file", "rb"),
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `account_id`                                                                                 | *str*                                                                                        | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `image`                                                                                      | [components.Image](../../models/components/image.md)                                         | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `metadata`                                                                                   | [Optional[components.ImageMetadataRequest]](../../models/components/imagemetadatarequest.md) | :heavy_minus_sign:                                                                           | Optional, json-encoded metadata to associate with the uploaded image.                        |
+| `retries`                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                             | :heavy_minus_sign:                                                                           | Configuration to override the default retry behavior of the client.                          |
+
+### Response
+
+**[operations.UploadImageResponse](../../models/operations/uploadimageresponse.md)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.GenericError                | 400, 409                           | application/json                   |
+| errors.ImageRequestValidationError | 422                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
+
 ## get_metadata
 
 Retrieve metadata for a specific image by its ID.
@@ -98,6 +157,59 @@ with Moov(
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## update
+
+Update an existing image and/or its metadata.
+
+Duplicate images, and requests larger than 16MB will be rejected. Omit any
+form parts you do not wish to update. Existing metadata can be cleared by
+sending `null` for the `metadata` form part.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="updateImage" method="patch" path="/accounts/{accountID}/images/{imageID}" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="v2024.01.00",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.images.update(account_id="310f4f19-45cf-4429-9aae-8e93827ecb0d", image_id="8ef109f8-5a61-4355-b2e4-b8ac2f6f6f47")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                            | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `account_id`                                                                                                                         | *str*                                                                                                                                | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
+| `image_id`                                                                                                                           | *str*                                                                                                                                | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
+| `image`                                                                                                                              | [Optional[components.ImageUpdateRequestMultiPartImage]](../../models/components/imageupdaterequestmultipartimage.md)                 | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |
+| `metadata`                                                                                                                           | [OptionalNullable[components.Metadata]](../../models/components/metadata.md)                                                         | :heavy_minus_sign:                                                                                                                   | JSON-encoded metadata to update for the image.<br/><br/>Omit this field if not updating metadata, or send `null` to clear existing metadata. |
+| `retries`                                                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                     | :heavy_minus_sign:                                                                                                                   | Configuration to override the default retry behavior of the client.                                                                  |
+
+### Response
+
+**[operations.UpdateImageResponse](../../models/operations/updateimageresponse.md)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.GenericError                | 400, 409                           | application/json                   |
+| errors.ImageRequestValidationError | 422                                | application/json                   |
+| errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 
 ## delete
 

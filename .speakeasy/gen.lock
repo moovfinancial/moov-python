@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: be2dd72356c3062497ec53549a611664
+  docChecksum: b55145eb942f8c4bc952a01640d91678
   docVersion: latest
-  speakeasyVersion: 1.636.3
-  generationVersion: 2.723.11
-  releaseVersion: 0.17.4
-  configChecksum: 1594d23ce495d294de91337018bd4bdb
+  speakeasyVersion: 1.637.0
+  generationVersion: 2.727.4
+  releaseVersion: 0.18.0
+  configChecksum: d96460b4173d21c93d5b58da83c6c046
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.22.1
+    core: 5.23.0
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -290,7 +290,13 @@ generatedFiles:
   - docs/models/components/governmentiderrorssn.md
   - docs/models/components/granttype.md
   - docs/models/components/guestprofile.md
+  - docs/models/components/image.md
   - docs/models/components/imagemetadata.md
+  - docs/models/components/imagemetadatarequest.md
+  - docs/models/components/imagemetadatavalidationerror.md
+  - docs/models/components/imageupdaterequestmultipart.md
+  - docs/models/components/imageupdaterequestmultipartimage.md
+  - docs/models/components/imageuploadrequestmultipart.md
   - docs/models/components/incurredfee.md
   - docs/models/components/individualname.md
   - docs/models/components/individualnameerror.md
@@ -333,6 +339,7 @@ generatedFiles:
   - docs/models/components/manual.md
   - docs/models/components/manualtermsofservice.md
   - docs/models/components/manualtermsofserviceupdate.md
+  - docs/models/components/metadata.md
   - docs/models/components/microdepositstatus.md
   - docs/models/components/minimumcommitment.md
   - docs/models/components/mode.md
@@ -605,6 +612,7 @@ generatedFiles:
   - docs/models/errors/fileuploadvalidationerror.md
   - docs/models/errors/filevalidationerror.md
   - docs/models/errors/genericerror.md
+  - docs/models/errors/imagerequestvalidationerror.md
   - docs/models/errors/linkapplepayerror.md
   - docs/models/errors/linkcarderror.md
   - docs/models/errors/listtransfersvalidationerror.md
@@ -1061,6 +1069,9 @@ generatedFiles:
   - docs/models/operations/updatedisputeevidenceglobals.md
   - docs/models/operations/updatedisputeevidencerequest.md
   - docs/models/operations/updatedisputeevidenceresponse.md
+  - docs/models/operations/updateimageglobals.md
+  - docs/models/operations/updateimagerequest.md
+  - docs/models/operations/updateimageresponse.md
   - docs/models/operations/updateissuedcardglobals.md
   - docs/models/operations/updateissuedcardrequest.md
   - docs/models/operations/updateissuedcardresponse.md
@@ -1097,6 +1108,9 @@ generatedFiles:
   - docs/models/operations/uploadfileglobals.md
   - docs/models/operations/uploadfilerequest.md
   - docs/models/operations/uploadfileresponse.md
+  - docs/models/operations/uploadimageglobals.md
+  - docs/models/operations/uploadimagerequest.md
+  - docs/models/operations/uploadimageresponse.md
   - docs/models/operations/upsertbrandglobals.md
   - docs/models/operations/upsertbrandrequest.md
   - docs/models/operations/upsertbrandresponse.md
@@ -1399,6 +1413,10 @@ generatedFiles:
   - src/moovio_sdk/models/components/granttype.py
   - src/moovio_sdk/models/components/guestprofile.py
   - src/moovio_sdk/models/components/imagemetadata.py
+  - src/moovio_sdk/models/components/imagemetadatarequest.py
+  - src/moovio_sdk/models/components/imagemetadatavalidationerror.py
+  - src/moovio_sdk/models/components/imageupdaterequestmultipart.py
+  - src/moovio_sdk/models/components/imageuploadrequestmultipart.py
   - src/moovio_sdk/models/components/incurredfee.py
   - src/moovio_sdk/models/components/individualname.py
   - src/moovio_sdk/models/components/individualnameerror.py
@@ -1684,6 +1702,7 @@ generatedFiles:
   - src/moovio_sdk/models/errors/fileuploadvalidationerror.py
   - src/moovio_sdk/models/errors/filevalidationerror.py
   - src/moovio_sdk/models/errors/genericerror.py
+  - src/moovio_sdk/models/errors/imagerequestvalidationerror.py
   - src/moovio_sdk/models/errors/linkapplepayerror.py
   - src/moovio_sdk/models/errors/linkcarderror.py
   - src/moovio_sdk/models/errors/listtransfersvalidationerror.py
@@ -1860,6 +1879,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/updatebrand.py
   - src/moovio_sdk/models/operations/updatecard.py
   - src/moovio_sdk/models/operations/updatedisputeevidence.py
+  - src/moovio_sdk/models/operations/updateimage.py
   - src/moovio_sdk/models/operations/updateissuedcard.py
   - src/moovio_sdk/models/operations/updatepaymentlink.py
   - src/moovio_sdk/models/operations/updateproduct.py
@@ -1872,6 +1892,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/uploaddisputeevidencefile.py
   - src/moovio_sdk/models/operations/uploaddisputeevidencetext.py
   - src/moovio_sdk/models/operations/uploadfile.py
+  - src/moovio_sdk/models/operations/uploadimage.py
   - src/moovio_sdk/models/operations/upsertbrand.py
   - src/moovio_sdk/models/operations/upsertunderwriting.py
   - src/moovio_sdk/onboarding.py
@@ -4155,6 +4176,42 @@ examples:
       responses:
         "400":
           application/json: {"error": "<value>"}
+  uploadImage:
+    speakeasy-default-upload-image:
+      parameters:
+        path:
+          accountID: "c0971a52-1f1c-4511-876a-f45c4cfd6154"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        multipart/form-data: {"image": "x-file: example.file"}
+      responses:
+        "201":
+          application/json: {"imageID": "533aadc1-0389-4da9-9c87-92bd49469db5", "link": "https://api.moov.io/images/qJRAaAwwF5hmfeAFdHjIb", "createdOn": "2023-03-14T15:49:36.140Z", "updatedOn": "2024-08-18T16:45:51.667Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
+  updateImage:
+    speakeasy-default-update-image:
+      parameters:
+        path:
+          accountID: "310f4f19-45cf-4429-9aae-8e93827ecb0d"
+          imageID: "8ef109f8-5a61-4355-b2e4-b8ac2f6f6f47"
+        header:
+          x-moov-version: "v2024.01.00"
+      requestBody:
+        multipart/form-data: {}
+      responses:
+        "200":
+          application/json: {"imageID": "37d44505-cb7b-46de-8995-9c6633aaa305", "link": "https://api.moov.io/images/qJRAaAwwF5hmfeAFdHjIb", "createdOn": "2023-07-27T04:09:13.260Z", "updatedOn": "2025-11-20T16:38:12.638Z"}
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes Detected:\n* `moov.products.list()`:  `response.[].option_groups.[].options.[].price_modifier` **Changed** **Breaking** :warning:\n* `moov.products.create()`: \n  *  `request.option_groups.[].options.[].price_modifier` **Changed** **Breaking** :warning:\n  *  `response.option_groups.[].options.[].price_modifier` **Changed** **Breaking** :warning:\n  *  `error.option_groups.{}.options.{}.price_modifier` **Changed** **Breaking** :warning:\n* `moov.products.get()`:  `response.option_groups.[].options.[].price_modifier` **Changed** **Breaking** :warning:\n* `moov.products.update()`: \n  *  `request.option_groups.[].options.[].price_modifier` **Changed** **Breaking** :warning:\n  *  `response.option_groups.[].options.[].price_modifier` **Changed** **Breaking** :warning:\n  *  `error.option_groups.{}.options.{}.price_modifier` **Changed** **Breaking** :warning:\n"
+releaseNotes: |
+  ## Python SDK Changes Detected:
+  * `moov.images.upload()`: **Added**
+  * `moov.images.update()`: **Added**

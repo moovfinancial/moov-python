@@ -1,0 +1,11 @@
+# ImageUpdateRequestMultiPart
+
+Multipart request body for updating an image and/or its metadata.
+
+
+## Fields
+
+| Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `image`                                                                                                                              | [Optional[components.ImageUpdateRequestMultiPartImage]](../../models/components/imageupdaterequestmultipartimage.md)                 | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |
+| `metadata`                                                                                                                           | [OptionalNullable[components.Metadata]](../../models/components/metadata.md)                                                         | :heavy_minus_sign:                                                                                                                   | JSON-encoded metadata to update for the image.<br/><br/>Omit this field if not updating metadata, or send `null` to clear existing metadata. |

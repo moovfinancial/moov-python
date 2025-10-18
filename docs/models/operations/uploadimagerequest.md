@@ -1,0 +1,9 @@
+# UploadImageRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `account_id`                                                                                     | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `image_upload_request_multi_part`                                                                | [components.ImageUploadRequestMultiPart](../../models/components/imageuploadrequestmultipart.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

@@ -1,0 +1,10 @@
+# UpdateImageRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `account_id`                                                                                     | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `image_id`                                                                                       | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `image_update_request_multi_part`                                                                | [components.ImageUpdateRequestMultiPart](../../models/components/imageupdaterequestmultipart.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

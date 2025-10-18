@@ -527,6 +527,28 @@ if TYPE_CHECKING:
     from .granttype import GrantType
     from .guestprofile import GuestProfile, GuestProfileTypedDict
     from .imagemetadata import ImageMetadata, ImageMetadataTypedDict
+    from .imagemetadatarequest import (
+        ImageMetadataRequest,
+        ImageMetadataRequestTypedDict,
+    )
+    from .imagemetadatavalidationerror import (
+        ImageMetadataValidationError,
+        ImageMetadataValidationErrorTypedDict,
+    )
+    from .imageupdaterequestmultipart import (
+        ImageUpdateRequestMultiPart,
+        ImageUpdateRequestMultiPartImage,
+        ImageUpdateRequestMultiPartImageTypedDict,
+        ImageUpdateRequestMultiPartTypedDict,
+        Metadata,
+        MetadataTypedDict,
+    )
+    from .imageuploadrequestmultipart import (
+        Image,
+        ImageTypedDict,
+        ImageUploadRequestMultiPart,
+        ImageUploadRequestMultiPartTypedDict,
+    )
     from .incurredfee import IncurredFee, IncurredFeeTypedDict
     from .individualname import IndividualName, IndividualNameTypedDict
     from .individualnameerror import IndividualNameError, IndividualNameErrorTypedDict
@@ -1605,8 +1627,20 @@ __all__ = [
     "GrantType",
     "GuestProfile",
     "GuestProfileTypedDict",
+    "Image",
     "ImageMetadata",
+    "ImageMetadataRequest",
+    "ImageMetadataRequestTypedDict",
     "ImageMetadataTypedDict",
+    "ImageMetadataValidationError",
+    "ImageMetadataValidationErrorTypedDict",
+    "ImageTypedDict",
+    "ImageUpdateRequestMultiPart",
+    "ImageUpdateRequestMultiPartImage",
+    "ImageUpdateRequestMultiPartImageTypedDict",
+    "ImageUpdateRequestMultiPartTypedDict",
+    "ImageUploadRequestMultiPart",
+    "ImageUploadRequestMultiPartTypedDict",
     "IncurredFee",
     "IncurredFeeTypedDict",
     "IndividualName",
@@ -1685,6 +1719,8 @@ __all__ = [
     "ManualTermsOfServiceUpdate",
     "ManualTermsOfServiceUpdateTypedDict",
     "ManualTypedDict",
+    "Metadata",
+    "MetadataTypedDict",
     "MicroDepositStatus",
     "MinimumCommitment",
     "MinimumCommitmentTypedDict",
@@ -2584,6 +2620,20 @@ _dynamic_imports: dict[str, str] = {
     "GuestProfileTypedDict": ".guestprofile",
     "ImageMetadata": ".imagemetadata",
     "ImageMetadataTypedDict": ".imagemetadata",
+    "ImageMetadataRequest": ".imagemetadatarequest",
+    "ImageMetadataRequestTypedDict": ".imagemetadatarequest",
+    "ImageMetadataValidationError": ".imagemetadatavalidationerror",
+    "ImageMetadataValidationErrorTypedDict": ".imagemetadatavalidationerror",
+    "ImageUpdateRequestMultiPart": ".imageupdaterequestmultipart",
+    "ImageUpdateRequestMultiPartImage": ".imageupdaterequestmultipart",
+    "ImageUpdateRequestMultiPartImageTypedDict": ".imageupdaterequestmultipart",
+    "ImageUpdateRequestMultiPartTypedDict": ".imageupdaterequestmultipart",
+    "Metadata": ".imageupdaterequestmultipart",
+    "MetadataTypedDict": ".imageupdaterequestmultipart",
+    "Image": ".imageuploadrequestmultipart",
+    "ImageTypedDict": ".imageuploadrequestmultipart",
+    "ImageUploadRequestMultiPart": ".imageuploadrequestmultipart",
+    "ImageUploadRequestMultiPartTypedDict": ".imageuploadrequestmultipart",
     "IncurredFee": ".incurredfee",
     "IncurredFeeTypedDict": ".incurredfee",
     "IndividualName": ".individualname",
