@@ -12,6 +12,6 @@ class GeneratedByBankAccountIDTypedDict(TypedDict):
 
 
 class GeneratedByBankAccountID(BaseModel):
-    bank_account_id: Annotated[Optional[str], pydantic.Field(alias="BankAccountID")] = (
+    bank_account_id: Annotated[Optional[str], pydantic.Field(alias="bankAccountID")] = (
         None
     )

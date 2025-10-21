@@ -12,4 +12,4 @@ class GeneratedByDisputeIDTypedDict(TypedDict):
 
 
 class GeneratedByDisputeID(BaseModel):
-    dispute_id: Annotated[Optional[str], pydantic.Field(alias="DisputeID")] = None
+    dispute_id: Annotated[Optional[str], pydantic.Field(alias="disputeID")] = None

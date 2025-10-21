@@ -12,4 +12,4 @@ class GeneratedByAccountIDTypedDict(TypedDict):
 
 
 class GeneratedByAccountID(BaseModel):
-    account_id: Annotated[Optional[str], pydantic.Field(alias="AccountID")] = None
+    account_id: Annotated[Optional[str], pydantic.Field(alias="accountID")] = None

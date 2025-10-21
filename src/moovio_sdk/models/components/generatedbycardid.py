@@ -12,4 +12,4 @@ class GeneratedByCardIDTypedDict(TypedDict):
 
 
 class GeneratedByCardID(BaseModel):
-    card_id: Annotated[Optional[str], pydantic.Field(alias="CardID")] = None
+    card_id: Annotated[Optional[str], pydantic.Field(alias="cardID")] = None
