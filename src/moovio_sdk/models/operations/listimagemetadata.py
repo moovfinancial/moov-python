@@ -3,7 +3,12 @@
 from __future__ import annotations
 from moovio_sdk.models.components import imagemetadata as components_imagemetadata
 from moovio_sdk.types import BaseModel
-from moovio_sdk.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
+from moovio_sdk.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -43,6 +48,8 @@ class ListImageMetadataGlobals(BaseModel):
 
 class ListImageMetadataRequestTypedDict(TypedDict):
     account_id: str
+    skip: NotRequired[int]
+    count: NotRequired[int]
 
 
 class ListImageMetadataRequest(BaseModel):
@@ -51,6 +58,16 @@ class ListImageMetadataRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+
+    skip: Annotated[
+        Optional[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+
+    count: Annotated[
+        Optional[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
 
 
 class ListImageMetadataResponseTypedDict(TypedDict):

@@ -22,6 +22,8 @@ class Images(BaseSDK):
         self,
         *,
         account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -30,6 +32,8 @@ class Images(BaseSDK):
         r"""List metadata for all images in the specified account.
 
         :param account_id:
+        :param skip:
+        :param count:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -47,6 +51,8 @@ class Images(BaseSDK):
 
         request = operations.ListImageMetadataRequest(
             account_id=account_id,
+            skip=skip,
+            count=count,
         )
 
         req = self._build_request(
@@ -117,6 +123,8 @@ class Images(BaseSDK):
         self,
         *,
         account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -125,6 +133,8 @@ class Images(BaseSDK):
         r"""List metadata for all images in the specified account.
 
         :param account_id:
+        :param skip:
+        :param count:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -142,6 +152,8 @@ class Images(BaseSDK):
 
         request = operations.ListImageMetadataRequest(
             account_id=account_id,
+            skip=skip,
+            count=count,
         )
 
         req = self._build_request_async(
@@ -1261,7 +1273,7 @@ class Images(BaseSDK):
                 security_source=None,
             ),
             request=req,
-            error_status_codes=["404", "429", "4XX", "500", "502", "504", "5XX"],
+            error_status_codes=["404", "429", "4XX", "500", "502", "503", "504", "5XX"],
             stream=True,
             retry_config=retry_config,
         )
@@ -1281,7 +1293,7 @@ class Images(BaseSDK):
         if utils.match_response(http_res, ["404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, ["500", "502", "504"], "*"):
+        if utils.match_response(http_res, ["500", "502", "503", "504"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1367,7 +1379,7 @@ class Images(BaseSDK):
                 security_source=None,
             ),
             request=req,
-            error_status_codes=["404", "429", "4XX", "500", "502", "504", "5XX"],
+            error_status_codes=["404", "429", "4XX", "500", "502", "503", "504", "5XX"],
             stream=True,
             retry_config=retry_config,
         )
@@ -1387,7 +1399,7 @@ class Images(BaseSDK):
         if utils.match_response(http_res, ["404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, ["500", "502", "504"], "*"):
+        if utils.match_response(http_res, ["500", "502", "503", "504"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
