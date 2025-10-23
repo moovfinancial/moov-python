@@ -9,12 +9,13 @@
 * [upload](#upload) -   Upload a new PNG, JPEG, or WebP image with optional metadata. 
   Duplicate images, and requests larger than 16MB will be rejected.
 * [get_metadata](#get_metadata) - Retrieve metadata for a specific image by its ID.
-* [update](#update) - Update an existing image and/or its metadata.
+* [update](#update) - Replace an existing image and, optionally, its metadata.
 
-Duplicate images, and requests larger than 16MB will be rejected. Omit any
-form parts you do not wish to update. Existing metadata can be cleared by
-sending `null` for the `metadata` form part.
+This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
+the metadata form section to keep existing metadata, or send `null` to clear it. 
+Duplicate images, and requests larger than 16MB will be rejected.
 * [delete](#delete) - Permanently delete an image by its ID.
+* [update_metadata](#update_metadata) - Replace the metadata for an existing image.
 * [get_public](#get_public) - Get an image by its public ID.
 
 ## list
@@ -162,15 +163,15 @@ with Moov(
 
 ## update
 
-Update an existing image and/or its metadata.
+Replace an existing image and, optionally, its metadata.
 
-Duplicate images, and requests larger than 16MB will be rejected. Omit any
-form parts you do not wish to update. Existing metadata can be cleared by
-sending `null` for the `metadata` form part.
+This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
+the metadata form section to keep existing metadata, or send `null` to clear it. 
+Duplicate images, and requests larger than 16MB will be rejected.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="updateImage" method="patch" path="/accounts/{accountID}/images/{imageID}" -->
+<!-- UsageSnippet language="python" operationID="updateImage" method="put" path="/accounts/{accountID}/images/{imageID}" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -184,7 +185,10 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.images.update(account_id="310f4f19-45cf-4429-9aae-8e93827ecb0d", image_id="8ef109f8-5a61-4355-b2e4-b8ac2f6f6f47")
+    res = moov.images.update(account_id="310f4f19-45cf-4429-9aae-8e93827ecb0d", image_id="8ef109f8-5a61-4355-b2e4-b8ac2f6f6f47", image={
+        "file_name": "example.file",
+        "content": open("example.file", "rb"),
+    })
 
     # Handle response
     print(res)
@@ -197,7 +201,7 @@ with Moov(
 | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `account_id`                                                                                                                         | *str*                                                                                                                                | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
 | `image_id`                                                                                                                           | *str*                                                                                                                                | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
-| `image`                                                                                                                              | [Optional[components.ImageUpdateRequestMultiPartImage]](../../models/components/imageupdaterequestmultipartimage.md)                 | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |
+| `image`                                                                                                                              | [components.ImageUpdateRequestMultiPartImage](../../models/components/imageupdaterequestmultipartimage.md)                           | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
 | `metadata`                                                                                                                           | [OptionalNullable[components.Metadata]](../../models/components/metadata.md)                                                         | :heavy_minus_sign:                                                                                                                   | JSON-encoded metadata to update for the image.<br/><br/>Omit this field if not updating metadata, or send `null` to clear existing metadata. |
 | `retries`                                                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                     | :heavy_minus_sign:                                                                                                                   | Configuration to override the default retry behavior of the client.                                                                  |
 
@@ -258,6 +262,54 @@ with Moov(
 | ------------------- | ------------------- | ------------------- |
 | errors.GenericError | 400, 409            | application/json    |
 | errors.APIError     | 4XX, 5XX            | \*/\*               |
+
+## update_metadata
+
+Replace the metadata for an existing image.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="updateImageMetadata" method="put" path="/accounts/{accountID}/images/{imageID}/metadata" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="v2024.01.00",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.images.update_metadata(account_id="58c3c937-e648-49c5-88be-6225cca35af1", image_id="d957e703-ecd4-48ac-9c14-c0ecf1b496f0")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `image_id`                                                          | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `alt_text`                                                          | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Alternative text for the image.                                     |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.UpdateImageMetadataResponse](../../models/operations/updateimagemetadataresponse.md)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.GenericError                 | 400, 409                            | application/json                    |
+| errors.ImageMetadataValidationError | 422                                 | application/json                    |
+| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
 
 ## get_public
 

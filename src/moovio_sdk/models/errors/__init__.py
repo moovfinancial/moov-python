@@ -44,6 +44,10 @@ if TYPE_CHECKING:
     )
     from .filevalidationerror import FileValidationError, FileValidationErrorData
     from .genericerror import GenericError, GenericErrorData
+    from .imagemetadatavalidationerror import (
+        ImageMetadataValidationError,
+        ImageMetadataValidationErrorData,
+    )
     from .imagerequestvalidationerror import (
         ImageRequestValidationError,
         ImageRequestValidationErrorData,
@@ -172,6 +176,8 @@ __all__ = [
     "FileValidationErrorData",
     "GenericError",
     "GenericErrorData",
+    "ImageMetadataValidationError",
+    "ImageMetadataValidationErrorData",
     "ImageRequestValidationError",
     "ImageRequestValidationErrorData",
     "LinkApplePayError",
@@ -273,6 +279,8 @@ _dynamic_imports: dict[str, str] = {
     "FileValidationErrorData": ".filevalidationerror",
     "GenericError": ".genericerror",
     "GenericErrorData": ".genericerror",
+    "ImageMetadataValidationError": ".imagemetadatavalidationerror",
+    "ImageMetadataValidationErrorData": ".imagemetadatavalidationerror",
     "ImageRequestValidationError": ".imagerequestvalidationerror",
     "ImageRequestValidationErrorData": ".imagerequestvalidationerror",
     "LinkApplePayError": ".linkapplepayerror",

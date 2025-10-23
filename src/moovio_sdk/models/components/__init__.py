@@ -490,23 +490,6 @@ if TYPE_CHECKING:
     from .fulfillmenttimeframe import FulfillmentTimeframe
     from .fullissuedcard import FullIssuedCard, FullIssuedCardTypedDict
     from .generatedby import GeneratedBy, GeneratedByTypedDict
-    from .generatedbyaccountid import (
-        GeneratedByAccountID,
-        GeneratedByAccountIDTypedDict,
-    )
-    from .generatedbybankaccountid import (
-        GeneratedByBankAccountID,
-        GeneratedByBankAccountIDTypedDict,
-    )
-    from .generatedbycardid import GeneratedByCardID, GeneratedByCardIDTypedDict
-    from .generatedbydisputeid import (
-        GeneratedByDisputeID,
-        GeneratedByDisputeIDTypedDict,
-    )
-    from .generatedbytransferid import (
-        GeneratedByTransferID,
-        GeneratedByTransferIDTypedDict,
-    )
     from .geographicreach import GeographicReach
     from .governmentid import (
         GovernmentID,
@@ -1604,16 +1587,6 @@ __all__ = [
     "FullIssuedCard",
     "FullIssuedCardTypedDict",
     "GeneratedBy",
-    "GeneratedByAccountID",
-    "GeneratedByAccountIDTypedDict",
-    "GeneratedByBankAccountID",
-    "GeneratedByBankAccountIDTypedDict",
-    "GeneratedByCardID",
-    "GeneratedByCardIDTypedDict",
-    "GeneratedByDisputeID",
-    "GeneratedByDisputeIDTypedDict",
-    "GeneratedByTransferID",
-    "GeneratedByTransferIDTypedDict",
     "GeneratedByTypedDict",
     "GeographicReach",
     "GovernmentID",
@@ -2592,16 +2565,6 @@ _dynamic_imports: dict[str, str] = {
     "FullIssuedCardTypedDict": ".fullissuedcard",
     "GeneratedBy": ".generatedby",
     "GeneratedByTypedDict": ".generatedby",
-    "GeneratedByAccountID": ".generatedbyaccountid",
-    "GeneratedByAccountIDTypedDict": ".generatedbyaccountid",
-    "GeneratedByBankAccountID": ".generatedbybankaccountid",
-    "GeneratedByBankAccountIDTypedDict": ".generatedbybankaccountid",
-    "GeneratedByCardID": ".generatedbycardid",
-    "GeneratedByCardIDTypedDict": ".generatedbycardid",
-    "GeneratedByDisputeID": ".generatedbydisputeid",
-    "GeneratedByDisputeIDTypedDict": ".generatedbydisputeid",
-    "GeneratedByTransferID": ".generatedbytransferid",
-    "GeneratedByTransferIDTypedDict": ".generatedbytransferid",
     "GeographicReach": ".geographicreach",
     "GovernmentID": ".governmentid",
     "GovernmentIDTypedDict": ".governmentid",

@@ -1,8 +1,8 @@
-# GeneratedByBankAccountID
+# ImageMetadataValidationError
 
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `bank_account_id`  | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| `alt_text`         | *Optional[str]*    | :heavy_minus_sign: | N/A                |

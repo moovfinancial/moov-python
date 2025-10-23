@@ -2,16 +2,22 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import (
-    terminalapplication as components_terminalapplication,
+    imagemetadata as components_imagemetadata,
+    imagemetadatarequest as components_imagemetadatarequest,
 )
 from moovio_sdk.types import BaseModel
-from moovio_sdk.utils import FieldMetadata, HeaderMetadata
+from moovio_sdk.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    RequestMetadata,
+)
 import pydantic
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class CreateTerminalApplicationGlobalsTypedDict(TypedDict):
+class UpdateImageMetadataGlobalsTypedDict(TypedDict):
     x_moov_version: NotRequired[str]
     r"""Specify an API version.
 
@@ -25,7 +31,7 @@ class CreateTerminalApplicationGlobalsTypedDict(TypedDict):
     """
 
 
-class CreateTerminalApplicationGlobals(BaseModel):
+class UpdateImageMetadataGlobals(BaseModel):
     x_moov_version: Annotated[
         Optional[str],
         pydantic.Field(alias="X-Moov-Version"),
@@ -43,12 +49,39 @@ class CreateTerminalApplicationGlobals(BaseModel):
     """
 
 
-class CreateTerminalApplicationResponseTypedDict(TypedDict):
+class UpdateImageMetadataRequestTypedDict(TypedDict):
+    account_id: str
+    image_id: str
+    image_metadata_request: (
+        components_imagemetadatarequest.ImageMetadataRequestTypedDict
+    )
+
+
+class UpdateImageMetadataRequest(BaseModel):
+    account_id: Annotated[
+        str,
+        pydantic.Field(alias="accountID"),
+        FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
+    ]
+
+    image_id: Annotated[
+        str,
+        pydantic.Field(alias="imageID"),
+        FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
+    ]
+
+    image_metadata_request: Annotated[
+        components_imagemetadatarequest.ImageMetadataRequest,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
+
+
+class UpdateImageMetadataResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
-    result: components_terminalapplication.TerminalApplicationTypedDict
+    result: components_imagemetadata.ImageMetadataTypedDict
 
 
-class CreateTerminalApplicationResponse(BaseModel):
+class UpdateImageMetadataResponse(BaseModel):
     headers: Dict[str, List[str]]
 
-    result: components_terminalapplication.TerminalApplication
+    result: components_imagemetadata.ImageMetadata

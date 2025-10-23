@@ -29,7 +29,7 @@ class TestEndToEndTokenGlobals(BaseModel):
 
     x_moov_version: Annotated[
         Optional[str],
-        pydantic.Field(alias="x-moov-version"),
+        pydantic.Field(alias="X-Moov-Version"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = "v2024.01.00"
     r"""Specify an API version.

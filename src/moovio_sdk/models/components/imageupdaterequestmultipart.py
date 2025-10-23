@@ -63,7 +63,7 @@ class Metadata(BaseModel):
 class ImageUpdateRequestMultiPartTypedDict(TypedDict):
     r"""Multipart request body for updating an image and/or its metadata."""
 
-    image: NotRequired[ImageUpdateRequestMultiPartImageTypedDict]
+    image: ImageUpdateRequestMultiPartImageTypedDict
     metadata: NotRequired[Nullable[MetadataTypedDict]]
     r"""JSON-encoded metadata to update for the image.
 
@@ -75,9 +75,9 @@ class ImageUpdateRequestMultiPart(BaseModel):
     r"""Multipart request body for updating an image and/or its metadata."""
 
     image: Annotated[
-        Optional[ImageUpdateRequestMultiPartImage],
+        ImageUpdateRequestMultiPartImage,
         FieldMetadata(multipart=MultipartFormMetadata(file=True)),
-    ] = None
+    ]
 
     metadata: Annotated[
         OptionalNullable[Metadata],
@@ -90,7 +90,7 @@ class ImageUpdateRequestMultiPart(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["image", "metadata"]
+        optional_fields = ["metadata"]
         nullable_fields = ["metadata"]
         null_default_fields = []
 
