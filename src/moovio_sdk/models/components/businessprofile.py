@@ -32,6 +32,8 @@ class BusinessProfileTypedDict(TypedDict):
     r"""Indicates whether a tax ID has been provided for this business."""
     representatives: NotRequired[List[RepresentativeTypedDict]]
     industry_codes: NotRequired[IndustryCodesTypedDict]
+    industry: NotRequired[str]
+    r"""Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values."""
     primary_regulator: NotRequired[PrimaryRegulator]
     r"""If the business is a financial institution, this field describes its primary regulator."""
 
@@ -74,6 +76,9 @@ class BusinessProfile(BaseModel):
     industry_codes: Annotated[
         Optional[IndustryCodes], pydantic.Field(alias="industryCodes")
     ] = None
+
+    industry: Optional[str] = None
+    r"""Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values."""
 
     primary_regulator: Annotated[
         Optional[PrimaryRegulator], pydantic.Field(alias="primaryRegulator")

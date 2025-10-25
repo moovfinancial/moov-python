@@ -10,7 +10,7 @@ class IndustryTaxonomyTypedDict(TypedDict):
     r"""A structured industry taxonomy entry with category and mapped to a default MCC code."""
 
     industry: str
-    r"""URL-safe identifier for the industry"""
+    r"""Classification identifier for the industry."""
     display_name: str
     r"""Display name of the industry"""
     category: str
@@ -25,7 +25,7 @@ class IndustryTaxonomy(BaseModel):
     r"""A structured industry taxonomy entry with category and mapped to a default MCC code."""
 
     industry: str
-    r"""URL-safe identifier for the industry"""
+    r"""Classification identifier for the industry."""
 
     display_name: Annotated[str, pydantic.Field(alias="displayName")]
     r"""Display name of the industry"""

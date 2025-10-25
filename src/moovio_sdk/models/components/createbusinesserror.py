@@ -50,6 +50,8 @@ class CreateBusinessErrorTypedDict(TypedDict):
     description: NotRequired[str]
     tax_id: NotRequired[CreateBusinessErrorTaxIDTypedDict]
     industry_codes: NotRequired[CreateBusinessErrorIndustryCodesTypedDict]
+    industry: NotRequired[str]
+    r"""Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values."""
     primary_regulator: NotRequired[str]
 
 
@@ -82,6 +84,9 @@ class CreateBusinessError(BaseModel):
         Optional[CreateBusinessErrorIndustryCodes],
         pydantic.Field(alias="industryCodes"),
     ] = None
+
+    industry: Optional[str] = None
+    r"""Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values."""
 
     primary_regulator: Annotated[
         Optional[str], pydantic.Field(alias="primaryRegulator")

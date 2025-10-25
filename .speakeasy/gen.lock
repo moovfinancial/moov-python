@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 15d423921ff62e57ac1df293d5bb5702
+  docChecksum: 8b29f661a9305925db4740234c358359
   docVersion: latest
-  speakeasyVersion: 1.638.1
-  generationVersion: 2.729.2
-  releaseVersion: 0.18.3
-  configChecksum: a5574b93b3403ec9def3858e5944412e
+  speakeasyVersion: 1.639.3
+  generationVersion: 2.730.5
+  releaseVersion: 0.18.4
+  configChecksum: 8721473bc414760e5523524ef309470a
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -1944,7 +1944,7 @@ examples:
         "400":
           application/json: {"error": "<value>"}
         "422":
-          application/json: {"capabilities": {"0": "first element failed validation..."}}
+          application/json: {"profile": {"business": {"industry": "electronics-appliances"}}, "capabilities": {"0": "first element failed validation..."}}
   listAccounts:
     speakeasy-default-list-accounts:
       parameters:
@@ -1978,14 +1978,14 @@ examples:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       requestBody:
-        application/json: {"profile": {"individual": {"name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "birthDate": {"day": 9, "month": 11, "year": 1989}}, "business": {"businessType": "llc", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "taxID": {"ein": {"number": "12-3456789"}}, "industryCodes": {"naics": "713940", "sic": "7991", "mcc": "7997"}}}, "metadata": {"optional": "metadata"}, "termsOfService": {"token": "kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"}, "customerSupport": {"phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}}}
+        application/json: {"profile": {"individual": {"name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "birthDate": {"day": 9, "month": 11, "year": 1989}}, "business": {"businessType": "llc", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "taxID": {"ein": {"number": "12-3456789"}}, "industryCodes": {"naics": "713940", "sic": "7991", "mcc": "7997"}, "industry": "electronics-appliances"}}, "metadata": {"optional": "metadata"}, "termsOfService": {"token": "kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4"}, "customerSupport": {"phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}}}
       responses:
         "200":
           application/json: {"accountID": "53ca67ea-6fd3-423f-9544-ce2404159d33", "mode": "sandbox", "accountType": "business", "displayName": "Whole Body Fitness LLC", "profile": {"business": {"legalBusinessName": "Whole Body Fitness LLC", "ownersProvided": false}}, "verification": {"verificationStatus": "unverified", "status": "unverified"}, "settings": {"cardPayment": {"statementDescriptor": "Whole Body Fitness LLC"}, "achPayment": {"companyName": "Whole Body Fitne"}}, "createdOn": "2024-12-16T17:55:20.557151867Z", "updatedOn": "2024-12-16T17:55:20.557151867Z"}
         "400":
           application/json: {"error": "<value>"}
         "422":
-          application/json: {}
+          application/json: {"profile": {"business": {"industry": "electronics-appliances"}}}
   disconnectAccount:
     speakeasy-default-disconnect-account:
       parameters:
@@ -4388,9 +4388,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes Detected:
-  * `moov.fee_plans.retrieve_fees()`:  `response.[].generated_by` **Changed** **Breaking** :warning:
-  * `moov.fee_plans.list_fees_fetch()`:  `response.[].generated_by` **Changed** **Breaking** :warning:
-  * `moov.images.update()`:  `request.image` **Changed** **Breaking** :warning:
-  * `moov.images.update_metadata()`: **Added**
+releaseNotes: "## Python SDK Changes Detected:\n* `moov.accounts.create()`: \n  *  `request.profile.business.industry` **Added**\n  *  `response.profile.business.industry` **Added**\n  *  `error.profile.business.industry` **Added**\n* `moov.accounts.list()`:  `response.[].profile.business.industry` **Added**\n* `moov.accounts.get()`:  `response.profile.business.industry` **Added**\n* `moov.accounts.update()`: \n  *  `request.profile.business.industry` **Added**\n  *  `response.profile.business.industry` **Added**\n  *  `error.profile.business.industry` **Added**\n* `moov.onboarding.create_invite()`: \n  *  `request.prefill.profile.business.industry` **Added**\n  *  `response.prefill.profile.business.industry` **Added**\n* `moov.onboarding.list_invites()`:  `response.[].prefill.profile.business.industry` **Added**\n* `moov.onboarding.get_invite()`:  `response.prefill.profile.business.industry` **Added**\n"

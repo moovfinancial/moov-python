@@ -28,6 +28,8 @@ class CreateBusinessProfileTypedDict(TypedDict):
     tax_id: NotRequired[TaxIDTypedDict]
     r"""An EIN (employer identification number) for the business. For sole proprietors, an SSN can be used as the EIN."""
     industry_codes: NotRequired[IndustryCodesTypedDict]
+    industry: NotRequired[str]
+    r"""Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values."""
     primary_regulator: NotRequired[PrimaryRegulator]
     r"""If the business is a financial institution, this field describes its primary regulator."""
 
@@ -62,6 +64,9 @@ class CreateBusinessProfile(BaseModel):
     industry_codes: Annotated[
         Optional[IndustryCodes], pydantic.Field(alias="industryCodes")
     ] = None
+
+    industry: Optional[str] = None
+    r"""Classification identifier for the industry. Use the [GET industries](https://docs.moov.io/api/enrichment/form-shortening/industries/get/) endpoint to retrieve an array of valid industry details for a merchant, inducing all industry field values."""
 
     primary_regulator: Annotated[
         Optional[PrimaryRegulator], pydantic.Field(alias="primaryRegulator")
