@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 8b29f661a9305925db4740234c358359
+  docChecksum: ba6386a2f64d05bb13267270cfa0a2e8
   docVersion: latest
-  speakeasyVersion: 1.639.3
+  speakeasyVersion: 1.640.0
   generationVersion: 2.730.5
-  releaseVersion: 0.18.4
-  configChecksum: 8721473bc414760e5523524ef309470a
+  releaseVersion: 0.18.5
+  configChecksum: 10210fb5cefd7f6434edafc6d4da54ce
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -4388,4 +4388,3 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes Detected:\n* `moov.accounts.create()`: \n  *  `request.profile.business.industry` **Added**\n  *  `response.profile.business.industry` **Added**\n  *  `error.profile.business.industry` **Added**\n* `moov.accounts.list()`:  `response.[].profile.business.industry` **Added**\n* `moov.accounts.get()`:  `response.profile.business.industry` **Added**\n* `moov.accounts.update()`: \n  *  `request.profile.business.industry` **Added**\n  *  `response.profile.business.industry` **Added**\n  *  `error.profile.business.industry` **Added**\n* `moov.onboarding.create_invite()`: \n  *  `request.prefill.profile.business.industry` **Added**\n  *  `response.prefill.profile.business.industry` **Added**\n* `moov.onboarding.list_invites()`:  `response.[].prefill.profile.business.industry` **Added**\n* `moov.onboarding.get_invite()`:  `response.prefill.profile.business.industry` **Added**\n"

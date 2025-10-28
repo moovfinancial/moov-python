@@ -46,6 +46,7 @@ class WalletTransactionTypedDict(TypedDict):
     available_balance_decimal: NotRequired[str]
     r"""The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521."""
     sweep_id: NotRequired[str]
+    r"""ID of the sweep this transaction accrued in."""
 
 
 class WalletTransaction(BaseModel):
@@ -112,3 +113,4 @@ class WalletTransaction(BaseModel):
     r"""The wallet's total available balance after recording a completed transaction. Same as `availableBalance`, but a decimal-formatted numerical string that represents up to 9 decimal place precision. In USD for example, 12.987654321 is $12.987654321 and 0.9987634521 is $0.9987634521."""
 
     sweep_id: Annotated[Optional[str], pydantic.Field(alias="sweepID")] = None
+    r"""ID of the sweep this transaction accrued in."""

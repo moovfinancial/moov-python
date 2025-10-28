@@ -98,6 +98,7 @@ class TransferData(BaseModel):
     )
 
     sweep_id: Annotated[Optional[str], pydantic.Field(alias="sweepID")] = None
+    r"""ID of the sweep that created this transfer."""
 
     schedule_id: Annotated[Optional[str], pydantic.Field(alias="scheduleID")] = None
 

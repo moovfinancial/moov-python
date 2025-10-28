@@ -53,6 +53,7 @@ class TransferTypedDict(TypedDict):
     disputed_amount: NotRequired[AmountTypedDict]
     disputes: NotRequired[List[CardAcquiringDisputeTypedDict]]
     sweep_id: NotRequired[str]
+    r"""ID of the sweep that created this transfer."""
     schedule_id: NotRequired[str]
     occurrence_id: NotRequired[str]
     payment_link_code: NotRequired[str]
@@ -133,6 +134,7 @@ class Transfer(BaseModel):
     disputes: Optional[List[CardAcquiringDispute]] = None
 
     sweep_id: Annotated[Optional[str], pydantic.Field(alias="sweepID")] = None
+    r"""ID of the sweep that created this transfer."""
 
     schedule_id: Annotated[Optional[str], pydantic.Field(alias="scheduleID")] = None
 
