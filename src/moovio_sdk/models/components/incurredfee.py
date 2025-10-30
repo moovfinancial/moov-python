@@ -21,6 +21,7 @@ class IncurredFeeTypedDict(TypedDict):
     amount: NotRequired[AmountDecimalTypedDict]
     generated_by: NotRequired[GeneratedByTypedDict]
     r"""The entity that generated the fee."""
+    fee_group: NotRequired[str]
 
 
 class IncurredFee(BaseModel):
@@ -42,3 +43,5 @@ class IncurredFee(BaseModel):
         Optional[GeneratedBy], pydantic.Field(alias="generatedBy")
     ] = None
     r"""The entity that generated the fee."""
+
+    fee_group: Annotated[Optional[str], pydantic.Field(alias="feeGroup")] = None

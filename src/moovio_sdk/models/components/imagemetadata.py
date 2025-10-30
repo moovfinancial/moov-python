@@ -12,6 +12,8 @@ class ImageMetadataTypedDict(TypedDict):
     r"""Metadata about an uploaded image."""
 
     image_id: str
+    public_id: str
+    r"""The ID used to get an image with the public endpoint."""
     link: str
     r"""A public URL to access the image. An optional `size={width}x{height}`
     query parameter can be provided to resize the image.
@@ -26,6 +28,9 @@ class ImageMetadata(BaseModel):
     r"""Metadata about an uploaded image."""
 
     image_id: Annotated[str, pydantic.Field(alias="imageID")]
+
+    public_id: Annotated[str, pydantic.Field(alias="publicID")]
+    r"""The ID used to get an image with the public endpoint."""
 
     link: str
     r"""A public URL to access the image. An optional `size={width}x{height}`
