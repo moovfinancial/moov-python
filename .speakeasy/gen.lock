@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 57a667003d034e46492d77b662627e3d
+  docChecksum: 988822f090d78089d70cf526cbe5f803
   docVersion: latest
-  speakeasyVersion: 1.642.2
-  generationVersion: 2.731.6
-  releaseVersion: 0.18.6
-  configChecksum: 43f2f811e64c121024c7815fa670f763
+  speakeasyVersion: 1.645.1
+  generationVersion: 2.735.1
+  releaseVersion: 0.19.0
+  configChecksum: d67ef8c399cac6d3a55fa386192ee272
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.23.0
+    core: 5.23.2
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -26,7 +26,7 @@ features:
     flattening: 3.1.1
     globalSecurity: 3.0.4
     globalSecurityCallbacks: 1.0.0
-    globalServerURLs: 3.1.1
+    globalServerURLs: 3.2.0
     globals: 3.0.0
     hiddenGlobals: 1.0.0
     includes: 3.0.0
@@ -432,6 +432,7 @@ generatedFiles:
   - docs/models/components/requirementerror.md
   - docs/models/components/requirementerrorcode.md
   - docs/models/components/requirementid.md
+  - docs/models/components/residual.md
   - docs/models/components/responsibilities.md
   - docs/models/components/returnpolicytype.md
   - docs/models/components/reversal.md
@@ -841,6 +842,9 @@ generatedFiles:
   - docs/models/operations/getrepresentativeglobals.md
   - docs/models/operations/getrepresentativerequest.md
   - docs/models/operations/getrepresentativeresponse.md
+  - docs/models/operations/getresidualglobals.md
+  - docs/models/operations/getresidualrequest.md
+  - docs/models/operations/getresidualresponse.md
   - docs/models/operations/getscheduledoccurrenceglobals.md
   - docs/models/operations/getscheduledoccurrencerequest.md
   - docs/models/operations/getscheduledoccurrenceresponse.md
@@ -988,6 +992,12 @@ generatedFiles:
   - docs/models/operations/listrepresentativesglobals.md
   - docs/models/operations/listrepresentativesrequest.md
   - docs/models/operations/listrepresentativesresponse.md
+  - docs/models/operations/listresidualfeesglobals.md
+  - docs/models/operations/listresidualfeesrequest.md
+  - docs/models/operations/listresidualfeesresponse.md
+  - docs/models/operations/listresidualsglobals.md
+  - docs/models/operations/listresidualsrequest.md
+  - docs/models/operations/listresidualsresponse.md
   - docs/models/operations/listschedulesglobals.md
   - docs/models/operations/listschedulesrequest.md
   - docs/models/operations/listschedulesresponse.md
@@ -1536,6 +1546,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/requirementerror.py
   - src/moovio_sdk/models/components/requirementerrorcode.py
   - src/moovio_sdk/models/components/requirementid.py
+  - src/moovio_sdk/models/components/residual.py
   - src/moovio_sdk/models/components/returnpolicytype.py
   - src/moovio_sdk/models/components/reversal.py
   - src/moovio_sdk/models/components/reversedwithcancellation.py
@@ -1800,6 +1811,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/getpublicimage.py
   - src/moovio_sdk/models/operations/getrefund.py
   - src/moovio_sdk/models/operations/getrepresentative.py
+  - src/moovio_sdk/models/operations/getresidual.py
   - src/moovio_sdk/models/operations/getscheduledoccurrence.py
   - src/moovio_sdk/models/operations/getschedules.py
   - src/moovio_sdk/models/operations/getstatement.py
@@ -1848,6 +1860,8 @@ generatedFiles:
   - src/moovio_sdk/models/operations/listreceipts.py
   - src/moovio_sdk/models/operations/listrefunds.py
   - src/moovio_sdk/models/operations/listrepresentatives.py
+  - src/moovio_sdk/models/operations/listresidualfees.py
+  - src/moovio_sdk/models/operations/listresiduals.py
   - src/moovio_sdk/models/operations/listschedules.py
   - src/moovio_sdk/models/operations/liststatements.py
   - src/moovio_sdk/models/operations/listsweepconfigs.py
@@ -4386,14 +4400,48 @@ examples:
           application/json: {"error": "<value>"}
         "422":
           application/json: {}
+  listResiduals:
+    speakeasy-default-list-residuals:
+      parameters:
+        path:
+          accountID: "8b40b967-ae12-4851-8be2-7b0c39978ce7"
+        query:
+          skip: 60
+          count: 20
+        header:
+          X-Moov-Version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: [{"residualID": "e0bcab02-96d4-4555-9535-fff6f9fac05c", "partnerAccountID": "59fad78d-485c-4aa0-95e0-b6723b4489a3", "periodStart": "2025-08-23T18:39:55.611Z", "periodEnd": "2024-06-17T17:54:17.689Z", "merchantFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerCost": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}, "revenueShare": "2.25", "residualAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "moovShare": {"currency": "USD", "valueDecimal": "12.987654321"}, "createdOn": "2023-11-11T13:56:49.759Z", "updatedOn": "2024-07-25T04:59:02.000Z"}]
+  getResidual:
+    speakeasy-default-get-residual:
+      parameters:
+        path:
+          accountID: "4c308842-45d1-49c1-98be-7299848b1e20"
+          residualID: "5f30e43d-1fa8-4834-8788-05a3c27a40d4"
+        header:
+          X-Moov-Version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: {"residualID": "6969e439-dfcd-42de-bfb2-5c66b1163e3a", "partnerAccountID": "35af6ebf-647d-4b63-b996-dc1bfb4ac6d2", "periodStart": "2025-10-12T20:03:24.360Z", "periodEnd": "2024-10-08T00:08:30.005Z", "merchantFees": {"currency": "USD", "valueDecimal": "12.987654321"}, "partnerCost": {"currency": "USD", "valueDecimal": "12.987654321"}, "netIncome": {"currency": "USD", "valueDecimal": "12.987654321"}, "revenueShare": "2.25", "residualAmount": {"currency": "USD", "valueDecimal": "12.987654321"}, "moovShare": {"currency": "USD", "valueDecimal": "12.987654321"}, "createdOn": "2025-05-15T10:09:57.129Z", "updatedOn": "2023-05-10T01:27:08.185Z"}
+  listResidualFees:
+    speakeasy-default-list-residual-fees:
+      parameters:
+        path:
+          accountID: "6b95293f-c3e7-42b5-98b7-fd9cc8d49685"
+          residualID: "8ecb1a63-25e0-41e7-a9c7-bb8a1cf63d1c"
+        query:
+          skip: 60
+          count: 20
+        header:
+          X-Moov-Version: "v2024.01.00"
+      responses:
+        "200":
+          application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Python SDK Changes Detected:
-  * `moov.fee_plans.retrieve_fees()`:  `response.[].fee_group` **Added**
-  * `moov.fee_plans.list_fees_fetch()`:  `response.[].fee_group` **Added**
-  * `moov.images.list()`:  `response.[].public_id` **Added**
-  * `moov.images.upload()`:  `response.public_id` **Added**
-  * `moov.images.get_metadata()`:  `response.public_id` **Added**
-  * `moov.images.update()`:  `response.public_id` **Added**
-  * `moov.images.update_metadata()`:  `response.public_id` **Added**
+  * `moov.fee_plans.list_residuals()`: **Added**
+  * `moov.fee_plans.get_residual()`: **Added**
+  * `moov.fee_plans.list_residual_fees()`: **Added**

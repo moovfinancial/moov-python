@@ -817,6 +817,7 @@ if TYPE_CHECKING:
     from .requirementerror import RequirementError, RequirementErrorTypedDict
     from .requirementerrorcode import RequirementErrorCode
     from .requirementid import RequirementID
+    from .residual import Residual, ResidualTypedDict
     from .returnpolicytype import ReturnPolicyType
     from .reversal import Reversal, ReversalTypedDict
     from .reversedwithcancellation import (
@@ -1878,6 +1879,8 @@ __all__ = [
     "RequirementErrorCode",
     "RequirementErrorTypedDict",
     "RequirementID",
+    "Residual",
+    "ResidualTypedDict",
     "Responsibilities",
     "ResponsibilitiesTypedDict",
     "ReturnPolicyType",
@@ -2850,6 +2853,8 @@ _dynamic_imports: dict[str, str] = {
     "RequirementErrorTypedDict": ".requirementerror",
     "RequirementErrorCode": ".requirementerrorcode",
     "RequirementID": ".requirementid",
+    "Residual": ".residual",
+    "ResidualTypedDict": ".residual",
     "ReturnPolicyType": ".returnpolicytype",
     "Reversal": ".reversal",
     "ReversalTypedDict": ".reversal",
