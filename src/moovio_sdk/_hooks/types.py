@@ -2,7 +2,6 @@
 
 from abc import ABC, abstractmethod
 import httpx
-from moovio_sdk.httpclient import HttpClient
 from moovio_sdk.sdkconfiguration import SDKConfiguration
 from typing import Any, Callable, List, Optional, Tuple, Union
 
@@ -64,7 +63,7 @@ class AfterErrorContext(HookContext):
 
 class SDKInitHook(ABC):
     @abstractmethod
-    def sdk_init(self, base_url: str, client: HttpClient) -> Tuple[str, HttpClient]:
+    def sdk_init(self, config: SDKConfiguration) -> SDKConfiguration:
         pass
 
 
