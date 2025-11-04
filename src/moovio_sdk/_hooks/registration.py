@@ -15,4 +15,3 @@ def init_hooks(hooks: Hooks):
 
     version_hook = MoovVersionHook()
     hooks.register_sdk_init_hook(version_hook)
-    hooks.register_before_request_hook(version_hook)
