@@ -5,8 +5,8 @@ management:
   docVersion: latest
   speakeasyVersion: 1.648.1
   generationVersion: 2.739.1
-  releaseVersion: 0.19.3
-  configChecksum: 51a1c6b7ca0d8a8d8cd38fbf4a15a8f5
+  releaseVersion: 0.19.4
+  configChecksum: 3bcacb8e40150b7239ddb339cd895c1a
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
