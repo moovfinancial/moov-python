@@ -16,6 +16,5 @@ class MoovVersionHook(SDKInitHook, BeforeRequestHook):
         self, hook_ctx: BeforeRequestContext, request: httpx.Request
     ) -> Union[httpx.Request, Exception]:
         """Adds the X-Moov-Version header to each request"""
-        print(f"Globals: {hook_ctx.config.globals}")
         request.headers["X-Moov-Version"] = str(hook_ctx.config.globals.x_moov_version)
         return request
