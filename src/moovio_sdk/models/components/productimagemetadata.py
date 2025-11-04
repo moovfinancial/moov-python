@@ -12,6 +12,8 @@ class ProductImageMetadataTypedDict(TypedDict):
     r"""Unique identifier for a product or product option image resource."""
     link: str
     r"""The image's public URL."""
+    public_id: str
+    r"""The public ID used to access the image."""
     alt_text: NotRequired[str]
     r"""Alternative text for the image."""
 
@@ -22,6 +24,9 @@ class ProductImageMetadata(BaseModel):
 
     link: str
     r"""The image's public URL."""
+
+    public_id: Annotated[str, pydantic.Field(alias="publicID")]
+    r"""The public ID used to access the image."""
 
     alt_text: Annotated[Optional[str], pydantic.Field(alias="altText")] = None
     r"""Alternative text for the image."""
