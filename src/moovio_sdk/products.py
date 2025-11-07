@@ -238,7 +238,11 @@ class Products(BaseSDK):
         :param account_id:
         :param title:
         :param base_price: A product's starting price, before applying modifiers.
-        :param description: A detailed description of the product.  - Must be valid UTF-8 text - Supports Markdown for formatting - HTML is not permitted and will be rejected
+        :param description: A detailed description of the product.
+
+            - Must be valid UTF-8 text
+            - Supports Markdown for formatting
+            - HTML is not permitted and will be rejected
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param retries: Override the default retry configuration for this method
@@ -388,7 +392,11 @@ class Products(BaseSDK):
         :param account_id:
         :param title:
         :param base_price: A product's starting price, before applying modifiers.
-        :param description: A detailed description of the product.  - Must be valid UTF-8 text - Supports Markdown for formatting - HTML is not permitted and will be rejected
+        :param description: A detailed description of the product.
+
+            - Must be valid UTF-8 text
+            - Supports Markdown for formatting
+            - HTML is not permitted and will be rejected
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param retries: Override the default retry configuration for this method
@@ -732,7 +740,11 @@ class Products(BaseSDK):
         :param product_id:
         :param title:
         :param base_price: A product's starting price, before applying modifiers.
-        :param description: A detailed description of the product.  - Must be valid UTF-8 text - Supports Markdown for formatting - HTML is not permitted and will be rejected
+        :param description: A detailed description of the product.
+
+            - Must be valid UTF-8 text
+            - Supports Markdown for formatting
+            - HTML is not permitted and will be rejected
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param retries: Override the default retry configuration for this method
@@ -885,7 +897,11 @@ class Products(BaseSDK):
         :param product_id:
         :param title:
         :param base_price: A product's starting price, before applying modifiers.
-        :param description: A detailed description of the product.  - Must be valid UTF-8 text - Supports Markdown for formatting - HTML is not permitted and will be rejected
+        :param description: A detailed description of the product.
+
+            - Must be valid UTF-8 text
+            - Supports Markdown for formatting
+            - HTML is not permitted and will be rejected
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param retries: Override the default retry configuration for this method

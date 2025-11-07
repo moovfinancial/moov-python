@@ -3,6 +3,9 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
+from moovio_sdk.models.components import (
+    transferlineitemsvalidationerror as components_transferlineitemsvalidationerror,
+)
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -40,6 +43,13 @@ class TransferValidationErrorData(BaseModel):
     ] = None
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
+
+    line_items: Annotated[
+        Optional[
+            components_transferlineitemsvalidationerror.TransferLineItemsValidationError
+        ],
+        pydantic.Field(alias="lineItems"),
+    ] = None
 
 
 @dataclass(unsafe_hash=True)

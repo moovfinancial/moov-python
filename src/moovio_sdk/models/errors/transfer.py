@@ -14,6 +14,7 @@ from moovio_sdk.models.components import (
     moovfeedetails as components_moovfeedetails,
     transferdestination as components_transferdestination,
     transferfailurereason as components_transferfailurereason,
+    transferlineitems as components_transferlineitems,
     transfersource as components_transfersource,
     transferstatus as components_transferstatus,
 )
@@ -115,6 +116,14 @@ class TransferData(BaseModel):
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
+
+    line_items: Annotated[
+        Optional[components_transferlineitems.TransferLineItems],
+        pydantic.Field(alias="lineItems"),
+    ] = None
+    r"""An optional collection of line items for a transfer.
+    When line items are provided, their total plus sales tax must equal the transfer amount.
+    """
 
 
 @dataclass(unsafe_hash=True)

@@ -746,7 +746,12 @@ class CardIssuing(BaseSDK):
 
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
-        :param state: The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.  - `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation. - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process. - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires. - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+        :param state: The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+
+            - `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
+            - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
+            - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
+            - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
         :param memo:
         :param authorized_user: Fields for identifying an authorized individual.
         :param retries: Override the default retry configuration for this method
@@ -890,7 +895,12 @@ class CardIssuing(BaseSDK):
 
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
-        :param state: The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.  - `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation. - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process. - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires. - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
+        :param state: The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+
+            - `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
+            - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
+            - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
+            - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
         :param memo:
         :param authorized_user: Fields for identifying an authorized individual.
         :param retries: Override the default retry configuration for this method

@@ -49,6 +49,12 @@ class PaymentLinks(BaseSDK):
                 components.PaymentLinkPayoutDetailsTypedDict,
             ]
         ] = None,
+        line_items: Optional[
+            Union[
+                components.PaymentLinkLineItems,
+                components.PaymentLinkLineItemsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -64,11 +70,15 @@ class PaymentLinks(BaseSDK):
         :param merchant_payment_method_id: The merchant's preferred payment method ID. Must be a wallet payment method.
         :param amount:
         :param display: Customizable display options for a payment link.
-        :param max_uses: An optional limit on the number of times this payment link can be used.   **For payouts, `maxUses` is always 1.**
+        :param max_uses: An optional limit on the number of times this payment link can be used.
+
+            **For payouts, `maxUses` is always 1.**
         :param expires_on: An optional expiration date for this payment link.
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
+        :param line_items: An optional collection of line items for a payment link.
+            When line items are provided, their total plus sales tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -103,6 +113,9 @@ class PaymentLinks(BaseSDK):
                 ),
                 payout=utils.get_pydantic_model(
                     payout, Optional[components.PaymentLinkPayoutDetails]
+                ),
+                line_items=utils.get_pydantic_model(
+                    line_items, Optional[components.PaymentLinkLineItems]
                 ),
             ),
         )
@@ -228,6 +241,12 @@ class PaymentLinks(BaseSDK):
                 components.PaymentLinkPayoutDetailsTypedDict,
             ]
         ] = None,
+        line_items: Optional[
+            Union[
+                components.PaymentLinkLineItems,
+                components.PaymentLinkLineItemsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -243,11 +262,15 @@ class PaymentLinks(BaseSDK):
         :param merchant_payment_method_id: The merchant's preferred payment method ID. Must be a wallet payment method.
         :param amount:
         :param display: Customizable display options for a payment link.
-        :param max_uses: An optional limit on the number of times this payment link can be used.   **For payouts, `maxUses` is always 1.**
+        :param max_uses: An optional limit on the number of times this payment link can be used.
+
+            **For payouts, `maxUses` is always 1.**
         :param expires_on: An optional expiration date for this payment link.
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
+        :param line_items: An optional collection of line items for a payment link.
+            When line items are provided, their total plus sales tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -282,6 +305,9 @@ class PaymentLinks(BaseSDK):
                 ),
                 payout=utils.get_pydantic_model(
                     payout, Optional[components.PaymentLinkPayoutDetails]
+                ),
+                line_items=utils.get_pydantic_model(
+                    line_items, Optional[components.PaymentLinkLineItems]
                 ),
             ),
         )
@@ -799,6 +825,12 @@ class PaymentLinks(BaseSDK):
                 components.PaymentLinkPayoutDetailsUpdateTypedDict,
             ]
         ] = None,
+        line_items: Optional[
+            Union[
+                components.PaymentLinkLineItemsUpdate,
+                components.PaymentLinkLineItemsUpdateTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -817,6 +849,8 @@ class PaymentLinks(BaseSDK):
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
+        :param line_items: An optional collection of line items for a payment link.
+            When line items are provided, their total plus sales tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -851,6 +885,9 @@ class PaymentLinks(BaseSDK):
                 ),
                 payout=utils.get_pydantic_model(
                     payout, Optional[components.PaymentLinkPayoutDetailsUpdate]
+                ),
+                line_items=utils.get_pydantic_model(
+                    line_items, Optional[components.PaymentLinkLineItemsUpdate]
                 ),
             ),
         )
@@ -978,6 +1015,12 @@ class PaymentLinks(BaseSDK):
                 components.PaymentLinkPayoutDetailsUpdateTypedDict,
             ]
         ] = None,
+        line_items: Optional[
+            Union[
+                components.PaymentLinkLineItemsUpdate,
+                components.PaymentLinkLineItemsUpdateTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -996,6 +1039,8 @@ class PaymentLinks(BaseSDK):
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
+        :param line_items: An optional collection of line items for a payment link.
+            When line items are provided, their total plus sales tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1030,6 +1075,9 @@ class PaymentLinks(BaseSDK):
                 ),
                 payout=utils.get_pydantic_model(
                     payout, Optional[components.PaymentLinkPayoutDetailsUpdate]
+                ),
+                line_items=utils.get_pydantic_model(
+                    line_items, Optional[components.PaymentLinkLineItemsUpdate]
                 ),
             ),
         )

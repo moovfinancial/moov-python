@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 091c80fff96980062881a25161569020
+  docChecksum: ffc9e23d367f79746fdbea008ca5c4fd
   docVersion: latest
-  speakeasyVersion: 1.648.1
-  generationVersion: 2.739.1
-  releaseVersion: 0.19.4
-  configChecksum: 3bcacb8e40150b7239ddb339cd895c1a
+  speakeasyVersion: 1.650.0
+  generationVersion: 2.743.2
+  releaseVersion: 0.19.5
+  configChecksum: ff86eda4257ec8d50192eecb9629a0bb
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.23.4
+    core: 5.23.5
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -376,6 +376,13 @@ generatedFiles:
   - docs/models/components/paymentlinkcustomeroptions.md
   - docs/models/components/paymentlinkdisplayoptions.md
   - docs/models/components/paymentlinkdisplayoptionsupdate.md
+  - docs/models/components/paymentlinklineitem.md
+  - docs/models/components/paymentlinklineitemoption.md
+  - docs/models/components/paymentlinklineitemoptionvalidationerror.md
+  - docs/models/components/paymentlinklineitems.md
+  - docs/models/components/paymentlinklineitemsupdate.md
+  - docs/models/components/paymentlinklineitemsvalidationerror.md
+  - docs/models/components/paymentlinklineitemvalidationerror.md
   - docs/models/components/paymentlinkpaymentdetails.md
   - docs/models/components/paymentlinkpaymentdetailsupdate.md
   - docs/models/components/paymentlinkpayoutdetails.md
@@ -502,6 +509,12 @@ generatedFiles:
   - docs/models/components/transferaccount.md
   - docs/models/components/transferdestination.md
   - docs/models/components/transferfailurereason.md
+  - docs/models/components/transferlineitem.md
+  - docs/models/components/transferlineitemoption.md
+  - docs/models/components/transferlineitemoptionvalidationerror.md
+  - docs/models/components/transferlineitems.md
+  - docs/models/components/transferlineitemsvalidationerror.md
+  - docs/models/components/transferlineitemvalidationerror.md
   - docs/models/components/transferoptions.md
   - docs/models/components/transferparty.md
   - docs/models/components/transfersource.md
@@ -1497,6 +1510,13 @@ generatedFiles:
   - src/moovio_sdk/models/components/paymentlinkcustomeroptions.py
   - src/moovio_sdk/models/components/paymentlinkdisplayoptions.py
   - src/moovio_sdk/models/components/paymentlinkdisplayoptionsupdate.py
+  - src/moovio_sdk/models/components/paymentlinklineitem.py
+  - src/moovio_sdk/models/components/paymentlinklineitemoption.py
+  - src/moovio_sdk/models/components/paymentlinklineitemoptionvalidationerror.py
+  - src/moovio_sdk/models/components/paymentlinklineitems.py
+  - src/moovio_sdk/models/components/paymentlinklineitemsupdate.py
+  - src/moovio_sdk/models/components/paymentlinklineitemsvalidationerror.py
+  - src/moovio_sdk/models/components/paymentlinklineitemvalidationerror.py
   - src/moovio_sdk/models/components/paymentlinkpaymentdetails.py
   - src/moovio_sdk/models/components/paymentlinkpaymentdetailsupdate.py
   - src/moovio_sdk/models/components/paymentlinkpayoutdetails.py
@@ -1608,6 +1628,12 @@ generatedFiles:
   - src/moovio_sdk/models/components/transferaccount.py
   - src/moovio_sdk/models/components/transferdestination.py
   - src/moovio_sdk/models/components/transferfailurereason.py
+  - src/moovio_sdk/models/components/transferlineitem.py
+  - src/moovio_sdk/models/components/transferlineitemoption.py
+  - src/moovio_sdk/models/components/transferlineitemoptionvalidationerror.py
+  - src/moovio_sdk/models/components/transferlineitems.py
+  - src/moovio_sdk/models/components/transferlineitemsvalidationerror.py
+  - src/moovio_sdk/models/components/transferlineitemvalidationerror.py
   - src/moovio_sdk/models/components/transferoptions.py
   - src/moovio_sdk/models/components/transferparty.py
   - src/moovio_sdk/models/components/transfersource.py
@@ -4440,3 +4466,4 @@ examples:
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Python SDK Changes Detected:\n* `moov.payment_links.create()`: \n  *  `request.line_items` **Added**\n  *  `response.line_items` **Added**\n  *  `error.line_items` **Added**\n* `moov.payment_links.list()`:  `response.[].line_items` **Added**\n* `moov.payment_links.get()`:  `response.line_items` **Added**\n* `moov.payment_links.update()`: \n  *  `request.line_items` **Added**\n  *  `response.line_items` **Added**\n  *  `error.line_items` **Added**\n* `moov.transfers.create()`: \n  *  `request.line_items` **Added**\n  *  `response.line_items` **Added**\n  *  `error.line_items` **Added**\n* `moov.transfers.list()`:  `response.[].line_items` **Added**\n* `moov.transfers.get()`:  `response.line_items` **Added**\n* `moov.transfers.update()`:  `response.line_items` **Added**\n"

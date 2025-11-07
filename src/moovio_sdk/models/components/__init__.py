@@ -718,6 +718,31 @@ if TYPE_CHECKING:
         PaymentLinkDisplayOptionsUpdate,
         PaymentLinkDisplayOptionsUpdateTypedDict,
     )
+    from .paymentlinklineitem import PaymentLinkLineItem, PaymentLinkLineItemTypedDict
+    from .paymentlinklineitemoption import (
+        PaymentLinkLineItemOption,
+        PaymentLinkLineItemOptionTypedDict,
+    )
+    from .paymentlinklineitemoptionvalidationerror import (
+        PaymentLinkLineItemOptionValidationError,
+        PaymentLinkLineItemOptionValidationErrorTypedDict,
+    )
+    from .paymentlinklineitems import (
+        PaymentLinkLineItems,
+        PaymentLinkLineItemsTypedDict,
+    )
+    from .paymentlinklineitemsupdate import (
+        PaymentLinkLineItemsUpdate,
+        PaymentLinkLineItemsUpdateTypedDict,
+    )
+    from .paymentlinklineitemsvalidationerror import (
+        PaymentLinkLineItemsValidationError,
+        PaymentLinkLineItemsValidationErrorTypedDict,
+    )
+    from .paymentlinklineitemvalidationerror import (
+        PaymentLinkLineItemValidationError,
+        PaymentLinkLineItemValidationErrorTypedDict,
+    )
     from .paymentlinkpaymentdetails import (
         PaymentLinkPaymentDetails,
         PaymentLinkPaymentDetailsTypedDict,
@@ -937,6 +962,24 @@ if TYPE_CHECKING:
     from .transferaccount import TransferAccount, TransferAccountTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferfailurereason import TransferFailureReason
+    from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
+    from .transferlineitemoption import (
+        TransferLineItemOption,
+        TransferLineItemOptionTypedDict,
+    )
+    from .transferlineitemoptionvalidationerror import (
+        TransferLineItemOptionValidationError,
+        TransferLineItemOptionValidationErrorTypedDict,
+    )
+    from .transferlineitems import TransferLineItems, TransferLineItemsTypedDict
+    from .transferlineitemsvalidationerror import (
+        TransferLineItemsValidationError,
+        TransferLineItemsValidationErrorTypedDict,
+    )
+    from .transferlineitemvalidationerror import (
+        TransferLineItemValidationError,
+        TransferLineItemValidationErrorTypedDict,
+    )
     from .transferoptions import TransferOptions, TransferOptionsTypedDict
     from .transferparty import TransferParty
     from .transfersource import TransferSource, TransferSourceTypedDict
@@ -1769,6 +1812,20 @@ __all__ = [
     "PaymentLinkDisplayOptionsTypedDict",
     "PaymentLinkDisplayOptionsUpdate",
     "PaymentLinkDisplayOptionsUpdateTypedDict",
+    "PaymentLinkLineItem",
+    "PaymentLinkLineItemOption",
+    "PaymentLinkLineItemOptionTypedDict",
+    "PaymentLinkLineItemOptionValidationError",
+    "PaymentLinkLineItemOptionValidationErrorTypedDict",
+    "PaymentLinkLineItemTypedDict",
+    "PaymentLinkLineItemValidationError",
+    "PaymentLinkLineItemValidationErrorTypedDict",
+    "PaymentLinkLineItems",
+    "PaymentLinkLineItemsTypedDict",
+    "PaymentLinkLineItemsUpdate",
+    "PaymentLinkLineItemsUpdateTypedDict",
+    "PaymentLinkLineItemsValidationError",
+    "PaymentLinkLineItemsValidationErrorTypedDict",
     "PaymentLinkPaymentDetails",
     "PaymentLinkPaymentDetailsTypedDict",
     "PaymentLinkPaymentDetailsUpdate",
@@ -1992,6 +2049,18 @@ __all__ = [
     "TransferDestination",
     "TransferDestinationTypedDict",
     "TransferFailureReason",
+    "TransferLineItem",
+    "TransferLineItemOption",
+    "TransferLineItemOptionTypedDict",
+    "TransferLineItemOptionValidationError",
+    "TransferLineItemOptionValidationErrorTypedDict",
+    "TransferLineItemTypedDict",
+    "TransferLineItemValidationError",
+    "TransferLineItemValidationErrorTypedDict",
+    "TransferLineItems",
+    "TransferLineItemsTypedDict",
+    "TransferLineItemsValidationError",
+    "TransferLineItemsValidationErrorTypedDict",
     "TransferOptions",
     "TransferOptionsTypedDict",
     "TransferParty",
@@ -2762,6 +2831,20 @@ _dynamic_imports: dict[str, str] = {
     "PaymentLinkDisplayOptionsTypedDict": ".paymentlinkdisplayoptions",
     "PaymentLinkDisplayOptionsUpdate": ".paymentlinkdisplayoptionsupdate",
     "PaymentLinkDisplayOptionsUpdateTypedDict": ".paymentlinkdisplayoptionsupdate",
+    "PaymentLinkLineItem": ".paymentlinklineitem",
+    "PaymentLinkLineItemTypedDict": ".paymentlinklineitem",
+    "PaymentLinkLineItemOption": ".paymentlinklineitemoption",
+    "PaymentLinkLineItemOptionTypedDict": ".paymentlinklineitemoption",
+    "PaymentLinkLineItemOptionValidationError": ".paymentlinklineitemoptionvalidationerror",
+    "PaymentLinkLineItemOptionValidationErrorTypedDict": ".paymentlinklineitemoptionvalidationerror",
+    "PaymentLinkLineItems": ".paymentlinklineitems",
+    "PaymentLinkLineItemsTypedDict": ".paymentlinklineitems",
+    "PaymentLinkLineItemsUpdate": ".paymentlinklineitemsupdate",
+    "PaymentLinkLineItemsUpdateTypedDict": ".paymentlinklineitemsupdate",
+    "PaymentLinkLineItemsValidationError": ".paymentlinklineitemsvalidationerror",
+    "PaymentLinkLineItemsValidationErrorTypedDict": ".paymentlinklineitemsvalidationerror",
+    "PaymentLinkLineItemValidationError": ".paymentlinklineitemvalidationerror",
+    "PaymentLinkLineItemValidationErrorTypedDict": ".paymentlinklineitemvalidationerror",
     "PaymentLinkPaymentDetails": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetailsTypedDict": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetailsUpdate": ".paymentlinkpaymentdetailsupdate",
@@ -2975,6 +3058,18 @@ _dynamic_imports: dict[str, str] = {
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferFailureReason": ".transferfailurereason",
+    "TransferLineItem": ".transferlineitem",
+    "TransferLineItemTypedDict": ".transferlineitem",
+    "TransferLineItemOption": ".transferlineitemoption",
+    "TransferLineItemOptionTypedDict": ".transferlineitemoption",
+    "TransferLineItemOptionValidationError": ".transferlineitemoptionvalidationerror",
+    "TransferLineItemOptionValidationErrorTypedDict": ".transferlineitemoptionvalidationerror",
+    "TransferLineItems": ".transferlineitems",
+    "TransferLineItemsTypedDict": ".transferlineitems",
+    "TransferLineItemsValidationError": ".transferlineitemsvalidationerror",
+    "TransferLineItemsValidationErrorTypedDict": ".transferlineitemsvalidationerror",
+    "TransferLineItemValidationError": ".transferlineitemvalidationerror",
+    "TransferLineItemValidationErrorTypedDict": ".transferlineitemvalidationerror",
     "TransferOptions": ".transferoptions",
     "TransferOptionsTypedDict": ".transferoptions",
     "TransferParty": ".transferparty",

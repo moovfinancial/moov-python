@@ -32,8 +32,10 @@ class Onboarding(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts.write` scope.
 
-        :param scopes: List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this   account. These values are used to determine what can be done with the account onboarded.
-        :param capabilities: List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this   account. These values are used to determine what information to collect from the user during onboarding.
+        :param scopes: List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
+            account. These values are used to determine what can be done with the account onboarded.
+        :param capabilities: List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+            account. These values are used to determine what information to collect from the user during onboarding.
         :param fee_plan_codes: List of fee plan codes to assign the account created by the invitee.
         :param return_url: Optional URL to redirect the user to after they complete the onboarding process.
         :param terms_of_service_url: Optional URL to your organization's terms of service.
@@ -171,8 +173,10 @@ class Onboarding(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts.write` scope.
 
-        :param scopes: List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this   account. These values are used to determine what can be done with the account onboarded.
-        :param capabilities: List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this   account. These values are used to determine what information to collect from the user during onboarding.
+        :param scopes: List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
+            account. These values are used to determine what can be done with the account onboarded.
+        :param capabilities: List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+            account. These values are used to determine what information to collect from the user during onboarding.
         :param fee_plan_codes: List of fee plan codes to assign the account created by the invitee.
         :param return_url: Optional URL to redirect the user to after they complete the onboarding process.
         :param terms_of_service_url: Optional URL to your organization's terms of service.

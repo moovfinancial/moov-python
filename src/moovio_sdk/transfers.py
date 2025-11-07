@@ -331,6 +331,9 @@ class Transfers(BaseSDK):
             Union[components.Amount, components.AmountTypedDict]
         ] = None,
         foreign_id: Optional[str] = None,
+        line_items: Optional[
+            Union[components.TransferLineItems, components.TransferLineItemsTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -348,12 +351,15 @@ class Transfers(BaseSDK):
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
-        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
+            asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
+        :param line_items: An optional collection of line items for a transfer.
+            When line items are provided, their total plus sales tax must equal the transfer amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -390,6 +396,9 @@ class Transfers(BaseSDK):
                     sales_tax_amount, Optional[components.Amount]
                 ),
                 foreign_id=foreign_id,
+                line_items=utils.get_pydantic_model(
+                    line_items, Optional[components.TransferLineItems]
+                ),
             ),
         )
 
@@ -513,6 +522,9 @@ class Transfers(BaseSDK):
             Union[components.Amount, components.AmountTypedDict]
         ] = None,
         foreign_id: Optional[str] = None,
+        line_items: Optional[
+            Union[components.TransferLineItems, components.TransferLineItemsTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -530,12 +542,15 @@ class Transfers(BaseSDK):
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
-        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
+            asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
+        :param line_items: An optional collection of line items for a transfer.
+            When line items are provided, their total plus sales tax must equal the transfer amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -572,6 +587,9 @@ class Transfers(BaseSDK):
                     sales_tax_amount, Optional[components.Amount]
                 ),
                 foreign_id=foreign_id,
+                line_items=utils.get_pydantic_model(
+                    line_items, Optional[components.TransferLineItems]
+                ),
             ),
         )
 
@@ -1876,7 +1894,8 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate refunds from being created.
         :param account_id: The merchant's Moov account ID.
         :param transfer_id: Identifier for the transfer.
-        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
+            asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2029,7 +2048,8 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate refunds from being created.
         :param account_id: The merchant's Moov account ID.
         :param transfer_id: Identifier for the transfer.
-        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an  asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+        :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
+            asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

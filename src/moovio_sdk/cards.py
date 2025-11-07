@@ -58,8 +58,13 @@ class Cards(BaseSDK):
         :param card_cvv:
         :param expiration: The expiration date of the card or token.
         :param billing_address:
-        :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.  When this header is set to `payment-method`, the response will include any payment methods that were created for the newly  linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
-        :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.  This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our  [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+        :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
+
+            When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
+            linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
+        :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
+            This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our
+            [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
         :param holder_name:
         :param card_on_file:
         :param merchant_account_id:
@@ -230,8 +235,13 @@ class Cards(BaseSDK):
         :param card_cvv:
         :param expiration: The expiration date of the card or token.
         :param billing_address:
-        :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.  When this header is set to `payment-method`, the response will include any payment methods that were created for the newly  linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
-        :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.  This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our  [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+        :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
+
+            When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
+            linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
+        :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
+            This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our
+            [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
         :param holder_name:
         :param card_on_file:
         :param merchant_account_id:
@@ -796,7 +806,9 @@ class Cards(BaseSDK):
 
         :param account_id:
         :param card_id:
-        :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.  This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our  [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+        :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
+            This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our
+            [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
         :param billing_address:
         :param expiration:
         :param card_cvv:
@@ -969,7 +981,9 @@ class Cards(BaseSDK):
 
         :param account_id:
         :param card_id:
-        :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.  This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our  [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
+        :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
+            This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our
+            [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
         :param billing_address:
         :param expiration:
         :param card_cvv:

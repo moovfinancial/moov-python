@@ -735,7 +735,9 @@ class Wallets(BaseSDK):
         :param wallet_id: Identifier for the wallet.
         :param account_id: The Moov account ID the wallet belongs to.
         :param name:
-        :param status: Status of a wallet.   - `active`: The wallet is available for use and has an enabled payment method.   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+        :param status: Status of a wallet.
+            - `active`: The wallet is available for use and has an enabled payment method.
+            - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
         :param description:
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param retries: Override the default retry configuration for this method
@@ -874,7 +876,9 @@ class Wallets(BaseSDK):
         :param wallet_id: Identifier for the wallet.
         :param account_id: The Moov account ID the wallet belongs to.
         :param name:
-        :param status: Status of a wallet.   - `active`: The wallet is available for use and has an enabled payment method.   - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
+        :param status: Status of a wallet.
+            - `active`: The wallet is available for use and has an enabled payment method.
+            - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
         :param description:
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param retries: Override the default retry configuration for this method

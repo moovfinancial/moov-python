@@ -481,7 +481,9 @@ class Capabilities(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
         :param account_id:
-        :param capability_id: Moov account capabilities.  The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+        :param capability_id: Moov account capabilities.
+
+            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -580,7 +582,9 @@ class Capabilities(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
 
         :param account_id:
-        :param capability_id: Moov account capabilities.  The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+        :param capability_id: Moov account capabilities.
+
+            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -679,7 +683,9 @@ class Capabilities(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
         :param account_id:
-        :param capability_id: Moov account capabilities.  The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+        :param capability_id: Moov account capabilities.
+
+            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -792,7 +798,9 @@ class Capabilities(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
         :param account_id:
-        :param capability_id: Moov account capabilities.  The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+        :param capability_id: Moov account capabilities.
+
+            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

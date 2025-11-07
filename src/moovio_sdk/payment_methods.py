@@ -29,7 +29,10 @@ class PaymentMethods(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
         :param account_id:
-        :param source_id: Optional parameter to filter the account's payment methods by source ID.   A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/),  or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+        :param source_id: Optional parameter to filter the account's payment methods by source ID.
+
+            A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/),
+            or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
         :param payment_method_type: Optional parameter to filter the account's payment methods by payment method type.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -134,7 +137,10 @@ class PaymentMethods(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/payment-methods.read` scope.
 
         :param account_id:
-        :param source_id: Optional parameter to filter the account's payment methods by source ID.   A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/),  or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
+        :param source_id: Optional parameter to filter the account's payment methods by source ID.
+
+            A source ID can be a [walletID](https://docs.moov.io/api/sources/wallets/list/), [cardID](https://docs.moov.io/api/sources/cards/list/),
+            or [bankAccountID](https://docs.moov.io/api/sources/bank-accounts/list/).
         :param payment_method_type: Optional parameter to filter the account's payment methods by payment method type.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

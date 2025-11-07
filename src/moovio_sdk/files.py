@@ -37,7 +37,9 @@ class Files(BaseSDK):
         :param account_id:
         :param file: The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
         :param file_purpose: The file's purpose.
-        :param metadata: Additional metadata to be stored with the file, formatted as a JSON string.  Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+        :param metadata: Additional metadata to be stored with the file, formatted as a JSON string.
+
+            Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -180,7 +182,9 @@ class Files(BaseSDK):
         :param account_id:
         :param file: The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
         :param file_purpose: The file's purpose.
-        :param metadata: Additional metadata to be stored with the file, formatted as a JSON string.  Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+        :param metadata: Additional metadata to be stored with the file, formatted as a JSON string.
+
+            Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

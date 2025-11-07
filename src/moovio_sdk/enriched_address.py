@@ -47,7 +47,9 @@ class EnrichedAddress(BaseSDK):
         :param prefer_states: Display results with the listed states at the top.
         :param prefer_zipcodes: Display results with the listed zipcodes at the top.
         :param prefer_ratio: Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
-        :param prefer_geolocation: If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state    to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is    not set to `none`, you may see addresses from areas you do not wish to see.
+        :param prefer_geolocation: If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state
+            to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is
+            not set to `none`, you may see addresses from areas you do not wish to see.
         :param selected: Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
         :param source: Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
         :param retries: Override the default retry configuration for this method
@@ -181,7 +183,9 @@ class EnrichedAddress(BaseSDK):
         :param prefer_states: Display results with the listed states at the top.
         :param prefer_zipcodes: Display results with the listed zipcodes at the top.
         :param prefer_ratio: Specifies the percentage of address suggestions that should be preferred and will appear at the top of the results.
-        :param prefer_geolocation: If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state    to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is    not set to `none`, you may see addresses from areas you do not wish to see.
+        :param prefer_geolocation: If omitted or set to `city`, it uses the sender's IP address to determine location, then automatically adds the city and state
+            to the preferCities value. This parameter takes precedence over other `include` or `exclude` parameters meaning that if it is
+            not set to `none`, you may see addresses from areas you do not wish to see.
         :param selected: Useful for narrowing results with `addressLine2` suggestions such as `Apt` (denotes an apartment building with multiple residences).
         :param source: Include results from alternate data sources. Allowed values are `all` (non-postal addresses), or `postal` (postal addresses only).
         :param retries: Override the default retry configuration for this method

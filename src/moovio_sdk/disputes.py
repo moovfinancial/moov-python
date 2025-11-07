@@ -976,7 +976,12 @@ class Disputes(BaseSDK):
 
         :param account_id:
         :param dispute_id:
-        :param file: The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.  The `Content-Type` header for this form part must be one of the following:   - `image/jpeg`   - `image/tiff`   - `application/pdf`
+        :param file: The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
+
+            The `Content-Type` header for this form part must be one of the following:
+            - `image/jpeg`
+            - `image/tiff`
+            - `application/pdf`
         :param evidence_type:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1115,7 +1120,12 @@ class Disputes(BaseSDK):
 
         :param account_id:
         :param dispute_id:
-        :param file: The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.  The `Content-Type` header for this form part must be one of the following:   - `image/jpeg`   - `image/tiff`   - `application/pdf`
+        :param file: The file to upload as evidence. Valid types are [jpeg, tiff, pdf] with a limit of 4MB per file.
+
+            The `Content-Type` header for this form part must be one of the following:
+            - `image/jpeg`
+            - `image/tiff`
+            - `application/pdf`
         :param evidence_type:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

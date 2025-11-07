@@ -36,7 +36,10 @@ class BankAccounts(BaseSDK):
 
         :param account_id:
         :param link_bank_account:
-        :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.  When this header is set to `payment-method`, the response will include any payment methods that were created for the newly linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
+        :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
+
+            When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
+            linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -175,7 +178,10 @@ class BankAccounts(BaseSDK):
 
         :param account_id:
         :param link_bank_account:
-        :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.  When this header is set to `payment-method`, the response will include any payment methods that were created for the newly linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
+        :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
+
+            When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
+            linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1682,7 +1688,9 @@ class BankAccounts(BaseSDK):
 
         :param account_id:
         :param bank_account_id:
-        :param x_wait_for: Optional header to wait for certain events, such as the rail response, to occur before returning a response.  When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+        :param x_wait_for: Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+
+            When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1816,7 +1824,9 @@ class BankAccounts(BaseSDK):
 
         :param account_id:
         :param bank_account_id:
-        :param x_wait_for: Optional header to wait for certain events, such as the rail response, to occur before returning a response.  When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
+        :param x_wait_for: Optional header to wait for certain events, such as the rail response, to occur before returning a response.
+
+            When this header is set to `rail-response`, the endpoint will wait for a sent-credit or failed status from the payment rail.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

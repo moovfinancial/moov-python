@@ -1021,8 +1021,14 @@ class ApplePay(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
         :param account_id: ID of the Moov account representing the cardholder.
-        :param token: Contains the user's payment information as returned from Apple Pay.    Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)    for more information.
-        :param billing_contact: Billing contact information as returned from Apple Pay.      Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)    for more information.
+        :param token: Contains the user's payment information as returned from Apple Pay.
+
+            Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)
+            for more information.
+        :param billing_contact: Billing contact information as returned from Apple Pay.
+
+            Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)
+            for more information.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1162,8 +1168,14 @@ class ApplePay(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
         :param account_id: ID of the Moov account representing the cardholder.
-        :param token: Contains the user's payment information as returned from Apple Pay.    Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)    for more information.
-        :param billing_contact: Billing contact information as returned from Apple Pay.      Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)    for more information.
+        :param token: Contains the user's payment information as returned from Apple Pay.
+
+            Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymenttoken)
+            for more information.
+        :param billing_contact: Billing contact information as returned from Apple Pay.
+
+            Refer to [Apple's documentation](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentcontact)
+            for more information.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

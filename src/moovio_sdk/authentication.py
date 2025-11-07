@@ -256,7 +256,10 @@ class Authentication(BaseSDK):
     ) -> operations.CreateAccessTokenResponse:
         r"""Create or refresh an access token.
 
-        :param grant_type: The type of grant being requested.    - `client_credentials`: A grant type used by clients to obtain an access token   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
+        :param grant_type: The type of grant being requested.
+
+            - `client_credentials`: A grant type used by clients to obtain an access token
+            - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
         :param client_id: Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
         :param client_secret: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
         :param scope: A space delimited list of scopes. Required when `grant_type` is `client_credentials`.
@@ -373,7 +376,10 @@ class Authentication(BaseSDK):
     ) -> operations.CreateAccessTokenResponse:
         r"""Create or refresh an access token.
 
-        :param grant_type: The type of grant being requested.    - `client_credentials`: A grant type used by clients to obtain an access token   - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
+        :param grant_type: The type of grant being requested.
+
+            - `client_credentials`: A grant type used by clients to obtain an access token
+            - `refresh_token`: A grant type used by clients to obtain a new access token using a refresh token
         :param client_id: Client ID can be provided here in the body, or as the Username in HTTP Basic Auth.
         :param client_secret: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
         :param scope: A space delimited list of scopes. Required when `grant_type` is `client_credentials`.

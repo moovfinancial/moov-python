@@ -712,7 +712,9 @@ class Images(BaseSDK):
         :param account_id:
         :param image_id:
         :param image:
-        :param metadata: JSON-encoded metadata to update for the image.  Omit this field if not updating metadata, or send `null` to clear existing metadata.
+        :param metadata: JSON-encoded metadata to update for the image.
+
+            Omit this field if not updating metadata, or send `null` to clear existing metadata.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -857,7 +859,9 @@ class Images(BaseSDK):
         :param account_id:
         :param image_id:
         :param image:
-        :param metadata: JSON-encoded metadata to update for the image.  Omit this field if not updating metadata, or send `null` to clear existing metadata.
+        :param metadata: JSON-encoded metadata to update for the image.
+
+            Omit this field if not updating metadata, or send `null` to clear existing metadata.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1470,7 +1474,11 @@ class Images(BaseSDK):
 
         :param public_id:
         :param if_none_match:
-        :param size: Optional parameter to request a resized version of the image (WxH).  If either dimension is 0, the image will be scaled proportionally based on the non-zero dimension. Dimensions are capped at 2048 pixels. A default size of 400x400 will be used if this parameter is omitted.
+        :param size: Optional parameter to request a resized version of the image (WxH).
+
+            If either dimension is 0, the image will be scaled proportionally based on
+            the non-zero dimension. Dimensions are capped at 2048 pixels. A default size
+            of 400x400 will be used if this parameter is omitted.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1576,7 +1584,11 @@ class Images(BaseSDK):
 
         :param public_id:
         :param if_none_match:
-        :param size: Optional parameter to request a resized version of the image (WxH).  If either dimension is 0, the image will be scaled proportionally based on the non-zero dimension. Dimensions are capped at 2048 pixels. A default size of 400x400 will be used if this parameter is omitted.
+        :param size: Optional parameter to request a resized version of the image (WxH).
+
+            If either dimension is 0, the image will be scaled proportionally based on
+            the non-zero dimension. Dimensions are capped at 2048 pixels. A default size
+            of 400x400 will be used if this parameter is omitted.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

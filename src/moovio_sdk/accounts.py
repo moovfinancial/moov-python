@@ -58,7 +58,8 @@ class Accounts(BaseSDK):
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param terms_of_service:
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
-        :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account.
+        :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when
+            contacting a customer support team. This data is only allowed on a business account.
         :param settings: User provided settings to manage an account.
         :param capabilities:
         :param mode: The operating mode for an account.
@@ -226,7 +227,8 @@ class Accounts(BaseSDK):
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param terms_of_service:
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
-        :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when contacting a customer support team. This data is only allowed on a business account.
+        :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when
+            contacting a customer support team. This data is only allowed on a business account.
         :param settings: User provided settings to manage an account.
         :param capabilities:
         :param mode: The operating mode for an account.
@@ -373,11 +375,30 @@ class Accounts(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts.read` scope.
 
-        :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>  Filtering by Guest Profile `name` is not currently supported.
-        :param email: Filter connected accounts by email address.    Provide the full email address to filter by email.
-        :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).    Filtering by `type=guest` is not currently supported.
+        :param name: Filter connected accounts by name.
+
+            If provided, this query will attempt to find matches against the following Account and Profile fields:
+            <ul>
+            <li>Account `displayName`</li>
+            <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+            <li>Business Profile `legalBusinessName`</li>
+            </ul>
+
+            Filtering by Guest Profile `name` is not currently supported.
+        :param email: Filter connected accounts by email address.
+
+            Provide the full email address to filter by email.
+        :param type: Filter connected accounts by AccountType.
+
+            If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+            be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
+            the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+
+            Filtering by `type=guest` is not currently supported.
         :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
-        :param include_disconnected: Filter disconnected accounts.  If true, the response will include disconnected accounts.
+        :param include_disconnected: Filter disconnected accounts.
+
+            If true, the response will include disconnected accounts.
         :param capability: Filter connected accounts by the capability.
         :param capability_status: Filter connected accounts by the capability.
         :param skip:
@@ -497,11 +518,30 @@ class Accounts(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts.read` scope.
 
-        :param name: Filter connected accounts by name.  If provided, this query will attempt to find matches against the following Account and Profile fields: <ul>   <li>Account `displayName`</li>   <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>   <li>Business Profile `legalBusinessName`</li> </ul>  Filtering by Guest Profile `name` is not currently supported.
-        :param email: Filter connected accounts by email address.    Provide the full email address to filter by email.
-        :param type: Filter connected accounts by AccountType.    If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will   be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against   the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).    Filtering by `type=guest` is not currently supported.
+        :param name: Filter connected accounts by name.
+
+            If provided, this query will attempt to find matches against the following Account and Profile fields:
+            <ul>
+            <li>Account `displayName`</li>
+            <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+            <li>Business Profile `legalBusinessName`</li>
+            </ul>
+
+            Filtering by Guest Profile `name` is not currently supported.
+        :param email: Filter connected accounts by email address.
+
+            Provide the full email address to filter by email.
+        :param type: Filter connected accounts by AccountType.
+
+            If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+            be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
+            the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+
+            Filtering by `type=guest` is not currently supported.
         :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
-        :param include_disconnected: Filter disconnected accounts.  If true, the response will include disconnected accounts.
+        :param include_disconnected: Filter disconnected accounts.
+
+            If true, the response will include disconnected accounts.
         :param capability: Filter connected accounts by the capability.
         :param capability_status: Filter connected accounts by the capability.
         :param skip:
@@ -833,7 +873,8 @@ class Accounts(BaseSDK):
         to specify the `/accounts/{accountID}/profile.write` scope.
 
         :param account_id:
-        :param profile: Describes the fields available when patching a profile. Each object can be patched independent of patching the other fields.
+        :param profile: Describes the fields available when patching a profile.
+            Each object can be patched independent of patching the other fields.
         :param metadata:
         :param terms_of_service:
         :param foreign_id:
@@ -1007,7 +1048,8 @@ class Accounts(BaseSDK):
         to specify the `/accounts/{accountID}/profile.write` scope.
 
         :param account_id:
-        :param profile: Describes the fields available when patching a profile. Each object can be patched independent of patching the other fields.
+        :param profile: Describes the fields available when patching a profile.
+            Each object can be patched independent of patching the other fields.
         :param metadata:
         :param terms_of_service:
         :param foreign_id:
