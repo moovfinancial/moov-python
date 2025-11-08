@@ -11,6 +11,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class PayoutDetailsErrorTypedDict(TypedDict):
     allowed_methods: NotRequired[str]
     recipient: NotRequired[PayoutRecipientErrorTypedDict]
+    metadata: NotRequired[str]
 
 
 class PayoutDetailsError(BaseModel):
@@ -19,3 +20,5 @@ class PayoutDetailsError(BaseModel):
     ] = None
 
     recipient: Optional[PayoutRecipientError] = None
+
+    metadata: Optional[str] = None

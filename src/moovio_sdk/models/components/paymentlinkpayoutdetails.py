@@ -5,8 +5,8 @@ from .disbursementpaymentmethodtype import DisbursementPaymentMethodType
 from .payoutrecipient import PayoutRecipient, PayoutRecipientTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import List
-from typing_extensions import Annotated, TypedDict
+from typing import Dict, List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PaymentLinkPayoutDetailsTypedDict(TypedDict):
@@ -18,6 +18,8 @@ class PaymentLinkPayoutDetailsTypedDict(TypedDict):
 
     This information will be used to authenticate the end user when they follow the payment link.
     """
+    metadata: NotRequired[Dict[str, str]]
+    r"""Optional free-form metadata for the transfer."""
 
 
 class PaymentLinkPayoutDetails(BaseModel):
@@ -32,3 +34,6 @@ class PaymentLinkPayoutDetails(BaseModel):
 
     This information will be used to authenticate the end user when they follow the payment link.
     """
+
+    metadata: Optional[Dict[str, str]] = None
+    r"""Optional free-form metadata for the transfer."""

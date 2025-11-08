@@ -19,6 +19,7 @@ class PaymentDetailsErrorTypedDict(TypedDict):
     allowed_methods: NotRequired[str]
     card_details: NotRequired[CardPaymentDetailsErrorTypedDict]
     ach_details: NotRequired[ACHPaymentDetailsErrorTypedDict]
+    metadata: NotRequired[str]
 
 
 class PaymentDetailsError(BaseModel):
@@ -33,3 +34,5 @@ class PaymentDetailsError(BaseModel):
     ach_details: Annotated[
         Optional[ACHPaymentDetailsError], pydantic.Field(alias="achDetails")
     ] = None
+
+    metadata: Optional[str] = None

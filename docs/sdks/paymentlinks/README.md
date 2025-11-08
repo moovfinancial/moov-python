@@ -141,7 +141,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.payment_links.list(account_id="d1039e6d-21ee-4a29-8adf-1dd2a6625a0d")
+    res = moov.payment_links.list(account_id="d1039e6d-21ee-4a29-8adf-1dd2a6625a0d", skip=60, count=20)
 
     # Handle response
     print(res)
@@ -150,10 +150,14 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `account_id`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |                                                                                        |
+| `skip`                                                                                 | *Optional[int]*                                                                        | :heavy_minus_sign:                                                                     | N/A                                                                                    | 60                                                                                     |
+| `count`                                                                                | *Optional[int]*                                                                        | :heavy_minus_sign:                                                                     | N/A                                                                                    | 20                                                                                     |
+| `type`                                                                                 | [Optional[components.PaymentLinkType]](../../models/components/paymentlinktype.md)     | :heavy_minus_sign:                                                                     | N/A                                                                                    |                                                                                        |
+| `status`                                                                               | [Optional[components.PaymentLinkStatus]](../../models/components/paymentlinkstatus.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |                                                                                        |
+| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |                                                                                        |
 
 ### Response
 

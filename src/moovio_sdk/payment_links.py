@@ -406,6 +406,10 @@ class PaymentLinks(BaseSDK):
         self,
         *,
         account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
+        type_: Optional[components.PaymentLinkType] = None,
+        status: Optional[components.PaymentLinkStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -417,6 +421,10 @@ class PaymentLinks(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
         :param account_id:
+        :param skip:
+        :param count:
+        :param type:
+        :param status:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -433,6 +441,10 @@ class PaymentLinks(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPaymentLinksRequest(
+            skip=skip,
+            count=count,
+            type=type_,
+            status=status,
             account_id=account_id,
         )
 
@@ -502,6 +514,10 @@ class PaymentLinks(BaseSDK):
         self,
         *,
         account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
+        type_: Optional[components.PaymentLinkType] = None,
+        status: Optional[components.PaymentLinkStatus] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -513,6 +529,10 @@ class PaymentLinks(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
         :param account_id:
+        :param skip:
+        :param count:
+        :param type:
+        :param status:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -529,6 +549,10 @@ class PaymentLinks(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListPaymentLinksRequest(
+            skip=skip,
+            count=count,
+            type=type_,
+            status=status,
             account_id=account_id,
         )
 

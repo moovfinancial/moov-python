@@ -21,6 +21,7 @@ from .paymentlinkpayoutdetails import (
     PaymentLinkPayoutDetailsTypedDict,
 )
 from .paymentlinkstatus import PaymentLinkStatus
+from .paymentlinktype import PaymentLinkType
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -31,6 +32,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class PaymentLinkTypedDict(TypedDict):
     code: str
     r"""Unique code identifying this payment link."""
+    payment_link_type: PaymentLinkType
     mode: Mode
     r"""The operating mode for an account."""
     status: PaymentLinkStatus
@@ -72,6 +74,10 @@ class PaymentLinkTypedDict(TypedDict):
 class PaymentLink(BaseModel):
     code: str
     r"""Unique code identifying this payment link."""
+
+    payment_link_type: Annotated[
+        PaymentLinkType, pydantic.Field(alias="paymentLinkType")
+    ]
 
     mode: Mode
     r"""The operating mode for an account."""

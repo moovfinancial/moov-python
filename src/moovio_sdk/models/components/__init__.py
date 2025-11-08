@@ -760,6 +760,7 @@ if TYPE_CHECKING:
         PaymentLinkPayoutDetailsUpdateTypedDict,
     )
     from .paymentlinkstatus import PaymentLinkStatus
+    from .paymentlinktype import PaymentLinkType
     from .paymentmethod import PaymentMethod, PaymentMethodTypedDict
     from .paymentmethodsbankaccount import (
         PaymentMethodsBankAccount,
@@ -1835,6 +1836,7 @@ __all__ = [
     "PaymentLinkPayoutDetailsUpdate",
     "PaymentLinkPayoutDetailsUpdateTypedDict",
     "PaymentLinkStatus",
+    "PaymentLinkType",
     "PaymentLinkTypedDict",
     "PaymentMethod",
     "PaymentMethodType",
@@ -2854,6 +2856,7 @@ _dynamic_imports: dict[str, str] = {
     "PaymentLinkPayoutDetailsUpdate": ".paymentlinkpayoutdetailsupdate",
     "PaymentLinkPayoutDetailsUpdateTypedDict": ".paymentlinkpayoutdetailsupdate",
     "PaymentLinkStatus": ".paymentlinkstatus",
+    "PaymentLinkType": ".paymentlinktype",
     "PaymentMethod": ".paymentmethod",
     "PaymentMethodTypedDict": ".paymentmethod",
     "PaymentMethodsBankAccount": ".paymentmethodsbankaccount",

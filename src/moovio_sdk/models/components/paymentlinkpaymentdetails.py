@@ -6,7 +6,7 @@ from .cardpaymentdetails import CardPaymentDetails, CardPaymentDetailsTypedDict
 from .collectionpaymentmethodtype import CollectionPaymentMethodType
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -19,6 +19,8 @@ class PaymentLinkPaymentDetailsTypedDict(TypedDict):
     r"""Options for payment links used to collect a card payment."""
     ach_details: NotRequired[ACHPaymentDetailsTypedDict]
     r"""Options for payment links used to collect an ACH payment."""
+    metadata: NotRequired[Dict[str, str]]
+    r"""Optional free-form metadata for the transfer."""
 
 
 class PaymentLinkPaymentDetails(BaseModel):
@@ -38,3 +40,6 @@ class PaymentLinkPaymentDetails(BaseModel):
         Optional[ACHPaymentDetails], pydantic.Field(alias="achDetails")
     ] = None
     r"""Options for payment links used to collect an ACH payment."""
+
+    metadata: Optional[Dict[str, str]] = None
+    r"""Optional free-form metadata for the transfer."""
