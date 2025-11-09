@@ -29,6 +29,7 @@ class ListWalletsGlobalsTypedDict(TypedDict):
     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    When no version is specified, the API defaults to `v2024.01.00`.
     """
 
 
@@ -37,7 +38,7 @@ class ListWalletsGlobals(BaseModel):
         Optional[str],
         pydantic.Field(alias="X-Moov-Version"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = "v2024.01.00"
+    ] = None
     r"""Specify an API version.
 
     API versioning follows the format `vYYYY.QQ.BB`, where
@@ -47,6 +48,7 @@ class ListWalletsGlobals(BaseModel):
     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    When no version is specified, the API defaults to `v2024.01.00`.
     """
 
 
