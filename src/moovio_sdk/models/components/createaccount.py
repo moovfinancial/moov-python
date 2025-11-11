@@ -5,25 +5,13 @@ from .capabilityid import CapabilityID
 from .createaccounttype import CreateAccountType
 from .createprofile import CreateProfile, CreateProfileTypedDict
 from .customersupport import CustomerSupport, CustomerSupportTypedDict
-from .manualtermsofservice import ManualTermsOfService, ManualTermsOfServiceTypedDict
 from .mode import Mode
 from .settings import Settings, SettingsTypedDict
-from .termsofservicetoken import TermsOfServiceToken, TermsOfServiceTokenTypedDict
+from .termsofservicepayload import TermsOfServicePayload, TermsOfServicePayloadTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import Dict, List, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
-
-
-CreateAccountTermsOfServiceTypedDict = TypeAliasType(
-    "CreateAccountTermsOfServiceTypedDict",
-    Union[TermsOfServiceTokenTypedDict, ManualTermsOfServiceTypedDict],
-)
-
-
-CreateAccountTermsOfService = TypeAliasType(
-    "CreateAccountTermsOfService", Union[TermsOfServiceToken, ManualTermsOfService]
-)
+from typing import Dict, List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CreateAccountTypedDict(TypedDict):
@@ -31,7 +19,7 @@ class CreateAccountTypedDict(TypedDict):
     profile: CreateProfileTypedDict
     metadata: NotRequired[Dict[str, str]]
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
-    terms_of_service: NotRequired[CreateAccountTermsOfServiceTypedDict]
+    terms_of_service: NotRequired[TermsOfServicePayloadTypedDict]
     foreign_id: NotRequired[str]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     customer_support: NotRequired[CustomerSupportTypedDict]
@@ -54,7 +42,7 @@ class CreateAccount(BaseModel):
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
 
     terms_of_service: Annotated[
-        Optional[CreateAccountTermsOfService], pydantic.Field(alias="termsOfService")
+        Optional[TermsOfServicePayload], pydantic.Field(alias="termsOfService")
     ] = None
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None

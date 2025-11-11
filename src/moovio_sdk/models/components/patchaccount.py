@@ -3,15 +3,11 @@
 from __future__ import annotations
 from .addressupdate import AddressUpdate, AddressUpdateTypedDict
 from .createaccountsettings import CreateAccountSettings, CreateAccountSettingsTypedDict
-from .manualtermsofserviceupdate import (
-    ManualTermsOfServiceUpdate,
-    ManualTermsOfServiceUpdateTypedDict,
-)
 from .patchprofile import PatchProfile, PatchProfileTypedDict
 from .phonenumber import PhoneNumber, PhoneNumberTypedDict
-from .termsofservicetokenupdate import (
-    TermsOfServiceTokenUpdate,
-    TermsOfServiceTokenUpdateTypedDict,
+from .termsofservicepayloadupdate import (
+    TermsOfServicePayloadUpdate,
+    TermsOfServicePayloadUpdateTypedDict,
 )
 from moovio_sdk.types import (
     BaseModel,
@@ -22,20 +18,8 @@ from moovio_sdk.types import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Dict, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
-
-
-PatchAccountTermsOfServiceTypedDict = TypeAliasType(
-    "PatchAccountTermsOfServiceTypedDict",
-    Union[TermsOfServiceTokenUpdateTypedDict, ManualTermsOfServiceUpdateTypedDict],
-)
-
-
-PatchAccountTermsOfService = TypeAliasType(
-    "PatchAccountTermsOfService",
-    Union[TermsOfServiceTokenUpdate, ManualTermsOfServiceUpdate],
-)
+from typing import Dict, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PatchAccountCustomerSupportTypedDict(TypedDict):
@@ -71,7 +55,7 @@ class PatchAccountTypedDict(TypedDict):
     Each object can be patched independent of patching the other fields.
     """
     metadata: NotRequired[Nullable[Dict[str, str]]]
-    terms_of_service: NotRequired[PatchAccountTermsOfServiceTypedDict]
+    terms_of_service: NotRequired[TermsOfServicePayloadUpdateTypedDict]
     foreign_id: NotRequired[str]
     customer_support: NotRequired[Nullable[PatchAccountCustomerSupportTypedDict]]
     settings: NotRequired[CreateAccountSettingsTypedDict]
@@ -88,7 +72,7 @@ class PatchAccount(BaseModel):
     metadata: OptionalNullable[Dict[str, str]] = UNSET
 
     terms_of_service: Annotated[
-        Optional[PatchAccountTermsOfService], pydantic.Field(alias="termsOfService")
+        Optional[TermsOfServicePayloadUpdate], pydantic.Field(alias="termsOfService")
     ] = None
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None

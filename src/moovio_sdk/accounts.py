@@ -19,8 +19,8 @@ class Accounts(BaseSDK):
         metadata: Optional[Dict[str, str]] = None,
         terms_of_service: Optional[
             Union[
-                components.CreateAccountTermsOfService,
-                components.CreateAccountTermsOfServiceTypedDict,
+                components.TermsOfServicePayload,
+                components.TermsOfServicePayloadTypedDict,
             ]
         ] = None,
         foreign_id: Optional[str] = None,
@@ -83,7 +83,7 @@ class Accounts(BaseSDK):
             profile=utils.get_pydantic_model(profile, components.CreateProfile),
             metadata=metadata,
             terms_of_service=utils.get_pydantic_model(
-                terms_of_service, Optional[components.CreateAccountTermsOfService]
+                terms_of_service, Optional[components.TermsOfServicePayload]
             ),
             foreign_id=foreign_id,
             customer_support=utils.get_pydantic_model(
@@ -188,8 +188,8 @@ class Accounts(BaseSDK):
         metadata: Optional[Dict[str, str]] = None,
         terms_of_service: Optional[
             Union[
-                components.CreateAccountTermsOfService,
-                components.CreateAccountTermsOfServiceTypedDict,
+                components.TermsOfServicePayload,
+                components.TermsOfServicePayloadTypedDict,
             ]
         ] = None,
         foreign_id: Optional[str] = None,
@@ -252,7 +252,7 @@ class Accounts(BaseSDK):
             profile=utils.get_pydantic_model(profile, components.CreateProfile),
             metadata=metadata,
             terms_of_service=utils.get_pydantic_model(
-                terms_of_service, Optional[components.CreateAccountTermsOfService]
+                terms_of_service, Optional[components.TermsOfServicePayload]
             ),
             foreign_id=foreign_id,
             customer_support=utils.get_pydantic_model(
@@ -837,8 +837,8 @@ class Accounts(BaseSDK):
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
         terms_of_service: Optional[
             Union[
-                components.PatchAccountTermsOfService,
-                components.PatchAccountTermsOfServiceTypedDict,
+                components.TermsOfServicePayloadUpdate,
+                components.TermsOfServicePayloadUpdateTypedDict,
             ]
         ] = None,
         foreign_id: Optional[str] = None,
@@ -903,7 +903,7 @@ class Accounts(BaseSDK):
                 ),
                 metadata=metadata,
                 terms_of_service=utils.get_pydantic_model(
-                    terms_of_service, Optional[components.PatchAccountTermsOfService]
+                    terms_of_service, Optional[components.TermsOfServicePayloadUpdate]
                 ),
                 foreign_id=foreign_id,
                 customer_support=utils.get_pydantic_model(
@@ -1012,8 +1012,8 @@ class Accounts(BaseSDK):
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
         terms_of_service: Optional[
             Union[
-                components.PatchAccountTermsOfService,
-                components.PatchAccountTermsOfServiceTypedDict,
+                components.TermsOfServicePayloadUpdate,
+                components.TermsOfServicePayloadUpdateTypedDict,
             ]
         ] = None,
         foreign_id: Optional[str] = None,
@@ -1078,7 +1078,7 @@ class Accounts(BaseSDK):
                 ),
                 metadata=metadata,
                 terms_of_service=utils.get_pydantic_model(
-                    terms_of_service, Optional[components.PatchAccountTermsOfService]
+                    terms_of_service, Optional[components.TermsOfServicePayloadUpdate]
                 ),
                 foreign_id=foreign_id,
                 customer_support=utils.get_pydantic_model(

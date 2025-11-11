@@ -267,12 +267,7 @@ if TYPE_CHECKING:
         CompleteMicroDepositsTypedDict,
     )
     from .contact import Contact, ContactTypedDict
-    from .createaccount import (
-        CreateAccount,
-        CreateAccountTermsOfService,
-        CreateAccountTermsOfServiceTypedDict,
-        CreateAccountTypedDict,
-    )
+    from .createaccount import CreateAccount, CreateAccountTypedDict
     from .createaccountsettings import (
         AchPayment,
         AchPaymentTypedDict,
@@ -678,8 +673,6 @@ if TYPE_CHECKING:
         PatchAccount,
         PatchAccountCustomerSupport,
         PatchAccountCustomerSupportTypedDict,
-        PatchAccountTermsOfService,
-        PatchAccountTermsOfServiceTypedDict,
         PatchAccountTypedDict,
     )
     from .patchbusiness import PatchBusiness, PatchBusinessTypedDict
@@ -947,6 +940,14 @@ if TYPE_CHECKING:
         ManualTypedDict,
         TermsOfServiceError,
         TermsOfServiceErrorTypedDict,
+    )
+    from .termsofservicepayload import (
+        TermsOfServicePayload,
+        TermsOfServicePayloadTypedDict,
+    )
+    from .termsofservicepayloadupdate import (
+        TermsOfServicePayloadUpdate,
+        TermsOfServicePayloadUpdateTypedDict,
     )
     from .termsofservicetoken import TermsOfServiceToken, TermsOfServiceTokenTypedDict
     from .termsofservicetokenupdate import (
@@ -1455,8 +1456,6 @@ __all__ = [
     "CreateAccount",
     "CreateAccountSettings",
     "CreateAccountSettingsTypedDict",
-    "CreateAccountTermsOfService",
-    "CreateAccountTermsOfServiceTypedDict",
     "CreateAccountType",
     "CreateAccountTypedDict",
     "CreateApplePaySession",
@@ -1789,8 +1788,6 @@ __all__ = [
     "PatchAccount",
     "PatchAccountCustomerSupport",
     "PatchAccountCustomerSupportTypedDict",
-    "PatchAccountTermsOfService",
-    "PatchAccountTermsOfServiceTypedDict",
     "PatchAccountTypedDict",
     "PatchBusiness",
     "PatchBusinessTypedDict",
@@ -2030,6 +2027,10 @@ __all__ = [
     "TermsOfService",
     "TermsOfServiceError",
     "TermsOfServiceErrorTypedDict",
+    "TermsOfServicePayload",
+    "TermsOfServicePayloadTypedDict",
+    "TermsOfServicePayloadUpdate",
+    "TermsOfServicePayloadUpdateTypedDict",
     "TermsOfServiceToken",
     "TermsOfServiceTokenTypedDict",
     "TermsOfServiceTokenUpdate",
@@ -2461,8 +2462,6 @@ _dynamic_imports: dict[str, str] = {
     "Contact": ".contact",
     "ContactTypedDict": ".contact",
     "CreateAccount": ".createaccount",
-    "CreateAccountTermsOfService": ".createaccount",
-    "CreateAccountTermsOfServiceTypedDict": ".createaccount",
     "CreateAccountTypedDict": ".createaccount",
     "AchPayment": ".createaccountsettings",
     "AchPaymentTypedDict": ".createaccountsettings",
@@ -2795,8 +2794,6 @@ _dynamic_imports: dict[str, str] = {
     "PatchAccount": ".patchaccount",
     "PatchAccountCustomerSupport": ".patchaccount",
     "PatchAccountCustomerSupportTypedDict": ".patchaccount",
-    "PatchAccountTermsOfService": ".patchaccount",
-    "PatchAccountTermsOfServiceTypedDict": ".patchaccount",
     "PatchAccountTypedDict": ".patchaccount",
     "PatchBusiness": ".patchbusiness",
     "PatchBusinessTypedDict": ".patchbusiness",
@@ -3041,6 +3038,10 @@ _dynamic_imports: dict[str, str] = {
     "ManualTypedDict": ".termsofserviceerror",
     "TermsOfServiceError": ".termsofserviceerror",
     "TermsOfServiceErrorTypedDict": ".termsofserviceerror",
+    "TermsOfServicePayload": ".termsofservicepayload",
+    "TermsOfServicePayloadTypedDict": ".termsofservicepayload",
+    "TermsOfServicePayloadUpdate": ".termsofservicepayloadupdate",
+    "TermsOfServicePayloadUpdateTypedDict": ".termsofservicepayloadupdate",
     "TermsOfServiceToken": ".termsofservicetoken",
     "TermsOfServiceTokenTypedDict": ".termsofservicetoken",
     "TermsOfServiceTokenUpdate": ".termsofservicetokenupdate",
