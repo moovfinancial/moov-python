@@ -17,6 +17,8 @@ class InstantPaymentFeesTypedDict(TypedDict):
     r"""Fees for push-to-card transactions."""
     pull_from_card_transaction: BillingCountAndAmountTypedDict
     r"""Fees for pull-from-card transactions."""
+    instant_verification: BillingCountAndAmountTypedDict
+    r"""Fees for instant payment verifications."""
     total: BillingCountAndAmountTypedDict
     r"""Total instant payment fees."""
     rtp_decline: NotRequired[BillingCountAndAmountTypedDict]
@@ -46,6 +48,11 @@ class InstantPaymentFees(BaseModel):
         BillingCountAndAmount, pydantic.Field(alias="pullFromCardTransaction")
     ]
     r"""Fees for pull-from-card transactions."""
+
+    instant_verification: Annotated[
+        BillingCountAndAmount, pydantic.Field(alias="instantVerification")
+    ]
+    r"""Fees for instant payment verifications."""
 
     total: BillingCountAndAmount
     r"""Total instant payment fees."""
