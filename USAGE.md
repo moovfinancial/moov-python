@@ -21,9 +21,6 @@ with Moov(
     ), metadata={
         "optional": "metadata",
     }, terms_of_service={
-        "token": {
-            "token": "kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4",
-        },
         "manual": {
             "accepted_date": parse_datetime("2025-07-27T08:57:17.388Z"),
             "accepted_ip": "172.217.2.46",
@@ -85,9 +82,6 @@ async def main():
         ), metadata={
             "optional": "metadata",
         }, terms_of_service={
-            "token": {
-                "token": "kgT1uxoMAk7QKuyJcmQE8nqW_HjpyuXBabiXPi6T83fUQoxsyWYPcYzuHQTqrt7YRp4gCwyDQvb6U5REM9Pgl2EloCe35t-eiMAbUWGo3Kerxme6aqNcKrP_6-v0MTXViOEJ96IBxPFTvMV7EROI2dq3u4e-x4BbGSCedAX-ViAQND6hcreCDXwrO6sHuzh5Xi2IzSqZHxaovnWEboaxuZKRJkA3dsFID6fzitMpm2qrOh4",
-            },
             "manual": {
                 "accepted_date": parse_datetime("2025-07-27T08:57:17.388Z"),
                 "accepted_ip": "172.217.2.46",

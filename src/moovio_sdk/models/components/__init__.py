@@ -950,10 +950,6 @@ if TYPE_CHECKING:
         TermsOfServicePayloadUpdateTypedDict,
     )
     from .termsofservicetoken import TermsOfServiceToken, TermsOfServiceTokenTypedDict
-    from .termsofservicetokenupdate import (
-        TermsOfServiceTokenUpdate,
-        TermsOfServiceTokenUpdateTypedDict,
-    )
     from .ticket import Ticket, TicketTypedDict
     from .ticketcontact import TicketContact, TicketContactTypedDict
     from .ticketmessage import TicketMessage, TicketMessageTypedDict
@@ -2033,8 +2029,6 @@ __all__ = [
     "TermsOfServicePayloadUpdateTypedDict",
     "TermsOfServiceToken",
     "TermsOfServiceTokenTypedDict",
-    "TermsOfServiceTokenUpdate",
-    "TermsOfServiceTokenUpdateTypedDict",
     "TermsOfServiceTypedDict",
     "Ticket",
     "TicketContact",
@@ -3044,8 +3038,6 @@ _dynamic_imports: dict[str, str] = {
     "TermsOfServicePayloadUpdateTypedDict": ".termsofservicepayloadupdate",
     "TermsOfServiceToken": ".termsofservicetoken",
     "TermsOfServiceTokenTypedDict": ".termsofservicetoken",
-    "TermsOfServiceTokenUpdate": ".termsofservicetokenupdate",
-    "TermsOfServiceTokenUpdateTypedDict": ".termsofservicetokenupdate",
     "Ticket": ".ticket",
     "TicketTypedDict": ".ticket",
     "TicketContact": ".ticketcontact",

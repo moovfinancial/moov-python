@@ -2,22 +2,19 @@
 
 from __future__ import annotations
 from .manualtermsofservice import ManualTermsOfService, ManualTermsOfServiceTypedDict
-from .termsofservicetoken import TermsOfServiceToken, TermsOfServiceTokenTypedDict
 from moovio_sdk.types import BaseModel
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
 class TermsOfServicePayloadTypedDict(TypedDict):
-    token: NotRequired[TermsOfServiceTokenTypedDict]
-    r"""An encrypted value used to record acceptance of Moov's Terms of Service."""
+    token: NotRequired[str]
     manual: NotRequired[ManualTermsOfServiceTypedDict]
     r"""Describes the acceptance of the Terms of Service. All data is required, and must be from the user."""
 
 
 class TermsOfServicePayload(BaseModel):
-    token: Optional[TermsOfServiceToken] = None
-    r"""An encrypted value used to record acceptance of Moov's Terms of Service."""
+    token: Optional[str] = None
 
     manual: Optional[ManualTermsOfService] = None
     r"""Describes the acceptance of the Terms of Service. All data is required, and must be from the user."""
