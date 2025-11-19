@@ -40,6 +40,8 @@ class PaymentLinkTypedDict(TypedDict):
     r"""The partner's Moov account ID."""
     merchant_account_id: str
     r"""The merchant's Moov account ID."""
+    owner_account_id: str
+    r"""The payment link's owner's Moov account ID."""
     merchant_payment_method_id: str
     r"""The merchant's preferred payment method ID. Must be a wallet payment method."""
     link: str
@@ -89,6 +91,9 @@ class PaymentLink(BaseModel):
 
     merchant_account_id: Annotated[str, pydantic.Field(alias="merchantAccountID")]
     r"""The merchant's Moov account ID."""
+
+    owner_account_id: Annotated[str, pydantic.Field(alias="ownerAccountID")]
+    r"""The payment link's owner's Moov account ID."""
 
     merchant_payment_method_id: Annotated[
         str, pydantic.Field(alias="merchantPaymentMethodID")
