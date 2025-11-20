@@ -537,6 +537,11 @@ if TYPE_CHECKING:
     from .individualprofile import IndividualProfile, IndividualProfileTypedDict
     from .industrycodes import IndustryCodes, IndustryCodesTypedDict
     from .industrytaxonomy import IndustryTaxonomy, IndustryTaxonomyTypedDict
+    from .instantbankcreditpaymentmethod import (
+        InstantBankCreditPaymentMethod,
+        InstantBankCreditPaymentMethodPaymentMethodType,
+        InstantBankCreditPaymentMethodTypedDict,
+    )
     from .instantpaymentfees import InstantPaymentFees, InstantPaymentFeesTypedDict
     from .institutionssearchresponse import (
         InstitutionsSearchResponse,
@@ -1668,6 +1673,9 @@ __all__ = [
     "IndustryCodesTypedDict",
     "IndustryTaxonomy",
     "IndustryTaxonomyTypedDict",
+    "InstantBankCreditPaymentMethod",
+    "InstantBankCreditPaymentMethodPaymentMethodType",
+    "InstantBankCreditPaymentMethodTypedDict",
     "InstantPaymentFees",
     "InstantPaymentFeesTypedDict",
     "InstitutionsSearchResponse",
@@ -2678,6 +2686,9 @@ _dynamic_imports: dict[str, str] = {
     "IndustryCodesTypedDict": ".industrycodes",
     "IndustryTaxonomy": ".industrytaxonomy",
     "IndustryTaxonomyTypedDict": ".industrytaxonomy",
+    "InstantBankCreditPaymentMethod": ".instantbankcreditpaymentmethod",
+    "InstantBankCreditPaymentMethodPaymentMethodType": ".instantbankcreditpaymentmethod",
+    "InstantBankCreditPaymentMethodTypedDict": ".instantbankcreditpaymentmethod",
     "InstantPaymentFees": ".instantpaymentfees",
     "InstantPaymentFeesTypedDict": ".instantpaymentfees",
     "InstitutionsSearchResponse": ".institutionssearchresponse",

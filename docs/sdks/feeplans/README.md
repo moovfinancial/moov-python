@@ -18,7 +18,11 @@ selecting a fee plan to apply to a connected account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-* [retrieve_fees](#retrieve_fees) - Retrieve fees associated with an account.
+* [list_fee_revenue](#list_fee_revenue) - Used by a partner. Retrieve revenue generated from merchant fees.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+* [retrieve_fees](#retrieve_fees) - Retrieve fees assessed to an account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -197,9 +201,60 @@ with Moov(
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
+## list_fee_revenue
+
+Used by a partner. Retrieve revenue generated from merchant fees.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/profile.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="listFeeRevenue" method="get" path="/accounts/{accountID}/fee-revenue" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="<value>",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.fee_plans.list_fee_revenue(account_id="795465fb-f955-40e7-9d48-4a6d6fbdbdf2", skip=60, count=20)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `account_id`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | The Partner's AccountID.                                                         |                                                                                  |
+| `skip`                                                                           | *Optional[int]*                                                                  | :heavy_minus_sign:                                                               | N/A                                                                              | 60                                                                               |
+| `count`                                                                          | *Optional[int]*                                                                  | :heavy_minus_sign:                                                               | N/A                                                                              | 20                                                                               |
+| `start_date_time`                                                                | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | Optional date-time to inclusively filter all fees created after this date-time.  |                                                                                  |
+| `end_date_time`                                                                  | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | Optional date-time to exclusively filter all fees created before this date-time. |                                                                                  |
+| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |                                                                                  |
+
+### Response
+
+**[operations.ListFeeRevenueResponse](../../models/operations/listfeerevenueresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
 ## retrieve_fees
 
-Retrieve fees associated with an account.
+Retrieve fees assessed to an account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.

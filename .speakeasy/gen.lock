@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: f1209f47c3166ae15a594e475186cec7
+  docChecksum: 9200bb9f28b1d28c17d0e4a0e33f3b35
   docVersion: latest
   speakeasyVersion: 1.658.2
   generationVersion: 2.755.9
-  releaseVersion: 0.19.19
-  configChecksum: 017fe5647e31a574c65d9ca497a01ae3
+  releaseVersion: 0.19.20
+  configChecksum: ecd1ff68ceb09cb8249c17091c324577
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -298,6 +298,8 @@ generatedFiles:
   - docs/models/components/individualprofile.md
   - docs/models/components/industrycodes.md
   - docs/models/components/industrytaxonomy.md
+  - docs/models/components/instantbankcreditpaymentmethod.md
+  - docs/models/components/instantbankcreditpaymentmethodpaymentmethodtype.md
   - docs/models/components/instantpaymentfees.md
   - docs/models/components/institutionssearchresponse.md
   - docs/models/components/issuedcard.md
@@ -951,6 +953,9 @@ generatedFiles:
   - docs/models/operations/listfeeplansglobals.md
   - docs/models/operations/listfeeplansrequest.md
   - docs/models/operations/listfeeplansresponse.md
+  - docs/models/operations/listfeerevenueglobals.md
+  - docs/models/operations/listfeerevenuerequest.md
+  - docs/models/operations/listfeerevenueresponse.md
   - docs/models/operations/listfeesfetchglobals.md
   - docs/models/operations/listfeesfetchrequest.md
   - docs/models/operations/listfeesfetchresponse.md
@@ -1441,6 +1446,7 @@ generatedFiles:
   - src/moovio_sdk/models/components/individualprofile.py
   - src/moovio_sdk/models/components/industrycodes.py
   - src/moovio_sdk/models/components/industrytaxonomy.py
+  - src/moovio_sdk/models/components/instantbankcreditpaymentmethod.py
   - src/moovio_sdk/models/components/instantpaymentfees.py
   - src/moovio_sdk/models/components/institutionssearchresponse.py
   - src/moovio_sdk/models/components/issuedcard.py
@@ -1870,6 +1876,7 @@ generatedFiles:
   - src/moovio_sdk/models/operations/listdisputes.py
   - src/moovio_sdk/models/operations/listfeeplanagreements.py
   - src/moovio_sdk/models/operations/listfeeplans.py
+  - src/moovio_sdk/models/operations/listfeerevenue.py
   - src/moovio_sdk/models/operations/listfeesfetch.py
   - src/moovio_sdk/models/operations/listfiles.py
   - src/moovio_sdk/models/operations/listimagemetadata.py
@@ -4469,11 +4476,17 @@ examples:
       responses:
         "200":
           application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
+  listFeeRevenue:
+    speakeasy-default-list-fee-revenue:
+      parameters:
+        path:
+          accountID: "795465fb-f955-40e7-9d48-4a6d6fbdbdf2"
+        query:
+          skip: 60
+          count: 20
+      responses:
+        "200":
+          application/json: [{"amount": {"currency": "USD", "valueDecimal": "12.987654321"}}]
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes Detected:
-  * `moov.payment_links.create()`:  `response.owner_account_id` **Added**
-  * `moov.payment_links.list()`:  `response.[].owner_account_id` **Added**
-  * `moov.payment_links.get()`:  `response.owner_account_id` **Added**
-  * `moov.payment_links.update()`:  `response.owner_account_id` **Added**
+releaseNotes: "## Python SDK Changes Detected:\n* `moov.fee_plans.list_fee_revenue()`: **Added**\n* `moov.payment_methods.list()`: \n  *  `request.payment_method_type` **Changed**\n  *  `response.[].[instant-bank-credit]` **Added**\n* `moov.payment_methods.get()`:  `response.[instant-bank-credit]` **Added**\n* `moov.transfers.generate_options()`:  `response.source_options.[].[instant-bank-credit]` **Added**\n"
