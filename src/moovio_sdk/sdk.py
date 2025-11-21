@@ -36,6 +36,7 @@ if TYPE_CHECKING:
     from moovio_sdk.images import Images
     from moovio_sdk.industries import Industries
     from moovio_sdk.institutions import Institutions
+    from moovio_sdk.invoices import Invoices
     from moovio_sdk.issuing_transactions import IssuingTransactions
     from moovio_sdk.onboarding import Onboarding
     from moovio_sdk.payment_links import PaymentLinks
@@ -74,6 +75,7 @@ class Moov(BaseSDK):
     fee_plans: "FeePlans"
     files: "Files"
     images: "Images"
+    invoices: "Invoices"
     payment_links: "PaymentLinks"
     payment_methods: "PaymentMethods"
     products: "Products"
@@ -112,6 +114,7 @@ class Moov(BaseSDK):
         "fee_plans": ("moovio_sdk.fee_plans", "FeePlans"),
         "files": ("moovio_sdk.files", "Files"),
         "images": ("moovio_sdk.images", "Images"),
+        "invoices": ("moovio_sdk.invoices", "Invoices"),
         "payment_links": ("moovio_sdk.payment_links", "PaymentLinks"),
         "payment_methods": ("moovio_sdk.payment_methods", "PaymentMethods"),
         "products": ("moovio_sdk.products", "Products"),

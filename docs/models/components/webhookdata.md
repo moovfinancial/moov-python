@@ -89,6 +89,18 @@ value: components.WebhookDataDisputeCreated = /* values here */
 value: components.WebhookDataDisputeUpdated = /* values here */
 ```
 
+### `components.WebhookDataInvoiceCreated`
+
+```python
+value: components.WebhookDataInvoiceCreated = /* values here */
+```
+
+### `components.WebhookDataInvoiceUpdated`
+
+```python
+value: components.WebhookDataInvoiceUpdated = /* values here */
+```
+
 ### `components.WebhookDataNetworkIDUpdated`
 
 ```python

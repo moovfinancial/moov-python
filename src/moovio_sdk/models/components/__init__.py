@@ -69,6 +69,7 @@ if TYPE_CHECKING:
     from .adjustment import Adjustment, AdjustmentTypedDict
     from .amount import Amount, AmountTypedDict
     from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+    from .amountdecimalupdate import AmountDecimalUpdate, AmountDecimalUpdateTypedDict
     from .amountdecimalvalidationerror import (
         AmountDecimalValidationError,
         AmountDecimalValidationErrorTypedDict,
@@ -333,6 +334,7 @@ if TYPE_CHECKING:
         CreateIndividualProfile,
         CreateIndividualProfileTypedDict,
     )
+    from .createinvoice import CreateInvoice, CreateInvoiceTypedDict
     from .createpaymentlink import CreatePaymentLink, CreatePaymentLinkTypedDict
     from .createproductoption import CreateProductOption, CreateProductOptionTypedDict
     from .createproductoptiongroup import (
@@ -547,6 +549,41 @@ if TYPE_CHECKING:
         InstitutionsSearchResponse,
         InstitutionsSearchResponseTypedDict,
     )
+    from .invoice import Invoice, InvoiceTypedDict
+    from .invoiceexternalpayment import (
+        InvoiceExternalPayment,
+        InvoiceExternalPaymentPaymentType,
+        InvoiceExternalPaymentTypedDict,
+    )
+    from .invoicelineitem import InvoiceLineItem, InvoiceLineItemTypedDict
+    from .invoicelineitemoption import (
+        InvoiceLineItemOption,
+        InvoiceLineItemOptionTypedDict,
+    )
+    from .invoicelineitemoptionvalidationerror import (
+        InvoiceLineItemOptionValidationError,
+        InvoiceLineItemOptionValidationErrorTypedDict,
+    )
+    from .invoicelineitems import InvoiceLineItems, InvoiceLineItemsTypedDict
+    from .invoicelineitemsupdate import (
+        InvoiceLineItemsUpdate,
+        InvoiceLineItemsUpdateTypedDict,
+    )
+    from .invoicelineitemsvalidationerror import (
+        InvoiceLineItemsValidationError,
+        InvoiceLineItemsValidationErrorTypedDict,
+    )
+    from .invoicelineitemvalidationerror import (
+        InvoiceLineItemValidationError,
+        InvoiceLineItemValidationErrorTypedDict,
+    )
+    from .invoicepayment import InvoicePayment, InvoicePaymentTypedDict
+    from .invoicestatus import InvoiceStatus
+    from .invoicetransferpayment import (
+        InvoiceTransferPayment,
+        InvoiceTransferPaymentTypedDict,
+        PaymentType,
+    )
     from .issuedcard import IssuedCard, IssuedCardTypedDict
     from .issuedcardauthorization import (
         IssuedCardAuthorization,
@@ -615,6 +652,7 @@ if TYPE_CHECKING:
         ManualTermsOfServiceUpdate,
         ManualTermsOfServiceUpdateTypedDict,
     )
+    from .markinvoicepaid import MarkInvoicePaid, MarkInvoicePaidTypedDict
     from .microdepositstatus import MicroDepositStatus
     from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
     from .mode import Mode
@@ -1004,6 +1042,7 @@ if TYPE_CHECKING:
     from .updatecolor import UpdateColor, UpdateColorTypedDict
     from .updatecolors import UpdateColors, UpdateColorsTypedDict
     from .updateevidence import UpdateEvidence, UpdateEvidenceTypedDict
+    from .updateinvoice import UpdateInvoice, UpdateInvoiceTypedDict
     from .updateissuedcard import UpdateIssuedCard, UpdateIssuedCardTypedDict
     from .updatepaymentlink import UpdatePaymentLink, UpdatePaymentLinkTypedDict
     from .updaterepresentative import (
@@ -1124,6 +1163,14 @@ if TYPE_CHECKING:
     from .webhookdatadisputeupdated import (
         WebhookDataDisputeUpdated,
         WebhookDataDisputeUpdatedTypedDict,
+    )
+    from .webhookdatainvoicecreated import (
+        WebhookDataInvoiceCreated,
+        WebhookDataInvoiceCreatedTypedDict,
+    )
+    from .webhookdatainvoiceupdated import (
+        WebhookDataInvoiceUpdated,
+        WebhookDataInvoiceUpdatedTypedDict,
     )
     from .webhookdatanetworkidupdated import (
         WebhookDataNetworkIDUpdated,
@@ -1279,6 +1326,8 @@ __all__ = [
     "Amount",
     "AmountDecimal",
     "AmountDecimalTypedDict",
+    "AmountDecimalUpdate",
+    "AmountDecimalUpdateTypedDict",
     "AmountDecimalValidationError",
     "AmountDecimalValidationErrorTypedDict",
     "AmountTypedDict",
@@ -1493,6 +1542,8 @@ __all__ = [
     "CreateIndividualErrorTypedDict",
     "CreateIndividualProfile",
     "CreateIndividualProfileTypedDict",
+    "CreateInvoice",
+    "CreateInvoiceTypedDict",
     "CreatePaymentLink",
     "CreatePaymentLinkTypedDict",
     "CreateProductOption",
@@ -1680,6 +1731,30 @@ __all__ = [
     "InstantPaymentFeesTypedDict",
     "InstitutionsSearchResponse",
     "InstitutionsSearchResponseTypedDict",
+    "Invoice",
+    "InvoiceExternalPayment",
+    "InvoiceExternalPaymentPaymentType",
+    "InvoiceExternalPaymentTypedDict",
+    "InvoiceLineItem",
+    "InvoiceLineItemOption",
+    "InvoiceLineItemOptionTypedDict",
+    "InvoiceLineItemOptionValidationError",
+    "InvoiceLineItemOptionValidationErrorTypedDict",
+    "InvoiceLineItemTypedDict",
+    "InvoiceLineItemValidationError",
+    "InvoiceLineItemValidationErrorTypedDict",
+    "InvoiceLineItems",
+    "InvoiceLineItemsTypedDict",
+    "InvoiceLineItemsUpdate",
+    "InvoiceLineItemsUpdateTypedDict",
+    "InvoiceLineItemsValidationError",
+    "InvoiceLineItemsValidationErrorTypedDict",
+    "InvoicePayment",
+    "InvoicePaymentTypedDict",
+    "InvoiceStatus",
+    "InvoiceTransferPayment",
+    "InvoiceTransferPaymentTypedDict",
+    "InvoiceTypedDict",
     "IssuedCard",
     "IssuedCardAuthorization",
     "IssuedCardAuthorizationEvent",
@@ -1740,6 +1815,8 @@ __all__ = [
     "ManualTermsOfServiceUpdate",
     "ManualTermsOfServiceUpdateTypedDict",
     "ManualTypedDict",
+    "MarkInvoicePaid",
+    "MarkInvoicePaidTypedDict",
     "Metadata",
     "MetadataTypedDict",
     "MicroDepositStatus",
@@ -1848,6 +1925,7 @@ __all__ = [
     "PaymentMethodsCardTypedDict",
     "PaymentMethodsWallet",
     "PaymentMethodsWalletTypedDict",
+    "PaymentType",
     "PayoutDetailsError",
     "PayoutDetailsErrorTypedDict",
     "PayoutRecipient",
@@ -2095,6 +2173,8 @@ __all__ = [
     "UpdateColorsTypedDict",
     "UpdateEvidence",
     "UpdateEvidenceTypedDict",
+    "UpdateInvoice",
+    "UpdateInvoiceTypedDict",
     "UpdateIssuedCard",
     "UpdateIssuedCardTypedDict",
     "UpdatePaymentLink",
@@ -2177,6 +2257,10 @@ __all__ = [
     "WebhookDataDisputeCreatedTypedDict",
     "WebhookDataDisputeUpdated",
     "WebhookDataDisputeUpdatedTypedDict",
+    "WebhookDataInvoiceCreated",
+    "WebhookDataInvoiceCreatedTypedDict",
+    "WebhookDataInvoiceUpdated",
+    "WebhookDataInvoiceUpdatedTypedDict",
     "WebhookDataNetworkIDUpdated",
     "WebhookDataNetworkIDUpdatedTypedDict",
     "WebhookDataPaymentMethodDisabled",
@@ -2293,6 +2377,8 @@ _dynamic_imports: dict[str, str] = {
     "AmountTypedDict": ".amount",
     "AmountDecimal": ".amountdecimal",
     "AmountDecimalTypedDict": ".amountdecimal",
+    "AmountDecimalUpdate": ".amountdecimalupdate",
+    "AmountDecimalUpdateTypedDict": ".amountdecimalupdate",
     "AmountDecimalValidationError": ".amountdecimalvalidationerror",
     "AmountDecimalValidationErrorTypedDict": ".amountdecimalvalidationerror",
     "AmountUpdate": ".amountupdate",
@@ -2510,6 +2596,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateIndividualErrorTypedDict": ".createindividualerror",
     "CreateIndividualProfile": ".createindividualprofile",
     "CreateIndividualProfileTypedDict": ".createindividualprofile",
+    "CreateInvoice": ".createinvoice",
+    "CreateInvoiceTypedDict": ".createinvoice",
     "CreatePaymentLink": ".createpaymentlink",
     "CreatePaymentLinkTypedDict": ".createpaymentlink",
     "CreateProductOption": ".createproductoption",
@@ -2693,6 +2781,31 @@ _dynamic_imports: dict[str, str] = {
     "InstantPaymentFeesTypedDict": ".instantpaymentfees",
     "InstitutionsSearchResponse": ".institutionssearchresponse",
     "InstitutionsSearchResponseTypedDict": ".institutionssearchresponse",
+    "Invoice": ".invoice",
+    "InvoiceTypedDict": ".invoice",
+    "InvoiceExternalPayment": ".invoiceexternalpayment",
+    "InvoiceExternalPaymentPaymentType": ".invoiceexternalpayment",
+    "InvoiceExternalPaymentTypedDict": ".invoiceexternalpayment",
+    "InvoiceLineItem": ".invoicelineitem",
+    "InvoiceLineItemTypedDict": ".invoicelineitem",
+    "InvoiceLineItemOption": ".invoicelineitemoption",
+    "InvoiceLineItemOptionTypedDict": ".invoicelineitemoption",
+    "InvoiceLineItemOptionValidationError": ".invoicelineitemoptionvalidationerror",
+    "InvoiceLineItemOptionValidationErrorTypedDict": ".invoicelineitemoptionvalidationerror",
+    "InvoiceLineItems": ".invoicelineitems",
+    "InvoiceLineItemsTypedDict": ".invoicelineitems",
+    "InvoiceLineItemsUpdate": ".invoicelineitemsupdate",
+    "InvoiceLineItemsUpdateTypedDict": ".invoicelineitemsupdate",
+    "InvoiceLineItemsValidationError": ".invoicelineitemsvalidationerror",
+    "InvoiceLineItemsValidationErrorTypedDict": ".invoicelineitemsvalidationerror",
+    "InvoiceLineItemValidationError": ".invoicelineitemvalidationerror",
+    "InvoiceLineItemValidationErrorTypedDict": ".invoicelineitemvalidationerror",
+    "InvoicePayment": ".invoicepayment",
+    "InvoicePaymentTypedDict": ".invoicepayment",
+    "InvoiceStatus": ".invoicestatus",
+    "InvoiceTransferPayment": ".invoicetransferpayment",
+    "InvoiceTransferPaymentTypedDict": ".invoicetransferpayment",
+    "PaymentType": ".invoicetransferpayment",
     "IssuedCard": ".issuedcard",
     "IssuedCardTypedDict": ".issuedcard",
     "IssuedCardAuthorization": ".issuedcardauthorization",
@@ -2745,6 +2858,8 @@ _dynamic_imports: dict[str, str] = {
     "ManualTermsOfServiceTypedDict": ".manualtermsofservice",
     "ManualTermsOfServiceUpdate": ".manualtermsofserviceupdate",
     "ManualTermsOfServiceUpdateTypedDict": ".manualtermsofserviceupdate",
+    "MarkInvoicePaid": ".markinvoicepaid",
+    "MarkInvoicePaidTypedDict": ".markinvoicepaid",
     "MicroDepositStatus": ".microdepositstatus",
     "MinimumCommitment": ".minimumcommitment",
     "MinimumCommitmentTypedDict": ".minimumcommitment",
@@ -3103,6 +3218,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateColorsTypedDict": ".updatecolors",
     "UpdateEvidence": ".updateevidence",
     "UpdateEvidenceTypedDict": ".updateevidence",
+    "UpdateInvoice": ".updateinvoice",
+    "UpdateInvoiceTypedDict": ".updateinvoice",
     "UpdateIssuedCard": ".updateissuedcard",
     "UpdateIssuedCardTypedDict": ".updateissuedcard",
     "UpdatePaymentLink": ".updatepaymentlink",
@@ -3193,6 +3310,10 @@ _dynamic_imports: dict[str, str] = {
     "WebhookDataDisputeCreatedTypedDict": ".webhookdatadisputecreated",
     "WebhookDataDisputeUpdated": ".webhookdatadisputeupdated",
     "WebhookDataDisputeUpdatedTypedDict": ".webhookdatadisputeupdated",
+    "WebhookDataInvoiceCreated": ".webhookdatainvoicecreated",
+    "WebhookDataInvoiceCreatedTypedDict": ".webhookdatainvoicecreated",
+    "WebhookDataInvoiceUpdated": ".webhookdatainvoiceupdated",
+    "WebhookDataInvoiceUpdatedTypedDict": ".webhookdatainvoiceupdated",
     "WebhookDataNetworkIDUpdated": ".webhookdatanetworkidupdated",
     "WebhookDataNetworkIDUpdatedTypedDict": ".webhookdatanetworkidupdated",
     "WebhookDataPaymentMethodDisabled": ".webhookdatapaymentmethoddisabled",

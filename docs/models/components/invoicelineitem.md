@@ -1,0 +1,14 @@
+# InvoiceLineItem
+
+Represents a single item in an invoice, including optional modifiers and quantity.
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `name`                                                                                      | *str*                                                                                       | :heavy_check_mark:                                                                          | The name of the item.                                                                       |
+| `base_price`                                                                                | [components.AmountDecimal](../../models/components/amountdecimal.md)                        | :heavy_check_mark:                                                                          | The base price of the item before applying option modifiers.                                |
+| `quantity`                                                                                  | *int*                                                                                       | :heavy_check_mark:                                                                          | The quantity of this item.                                                                  |
+| `options`                                                                                   | List[[components.InvoiceLineItemOption](../../models/components/invoicelineitemoption.md)]  | :heavy_minus_sign:                                                                          | Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations). |
+| `product_id`                                                                                | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | Optional unique identifier associating the line item with a product.                        |
