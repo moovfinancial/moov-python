@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 8123140884ed9bafedcda85dd85dbca5
+  docChecksum: 220cfab2e534ad6648bcb91f6cf8c22f
   docVersion: latest
-  speakeasyVersion: 1.659.0
-  generationVersion: 2.755.9
-  releaseVersion: 0.19.21
-  configChecksum: abe91b01c0ab560f6f8511fabd3387fb
+  speakeasyVersion: 1.660.0
+  generationVersion: 2.760.2
+  releaseVersion: 0.19.22
+  configChecksum: d13556dd2db9bd37361d609417ab3424
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.23.9
+    core: 5.23.10
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -203,6 +203,13 @@ generatedFiles:
   - docs/models/components/createindividualprofile.md
   - docs/models/components/createinvoice.md
   - docs/models/components/createpaymentlink.md
+  - docs/models/components/createpaymentlinklineitem.md
+  - docs/models/components/createpaymentlinklineitemoption.md
+  - docs/models/components/createpaymentlinklineitemoptionvalidationerror.md
+  - docs/models/components/createpaymentlinklineitems.md
+  - docs/models/components/createpaymentlinklineitemsupdate.md
+  - docs/models/components/createpaymentlinklineitemsvalidationerror.md
+  - docs/models/components/createpaymentlinklineitemvalidationerror.md
   - docs/models/components/createproductoption.md
   - docs/models/components/createproductoptiongroup.md
   - docs/models/components/createprofile.md
@@ -393,12 +400,9 @@ generatedFiles:
   - docs/models/components/paymentlinkdisplayoptions.md
   - docs/models/components/paymentlinkdisplayoptionsupdate.md
   - docs/models/components/paymentlinklineitem.md
+  - docs/models/components/paymentlinklineitemimagemetadata.md
   - docs/models/components/paymentlinklineitemoption.md
-  - docs/models/components/paymentlinklineitemoptionvalidationerror.md
   - docs/models/components/paymentlinklineitems.md
-  - docs/models/components/paymentlinklineitemsupdate.md
-  - docs/models/components/paymentlinklineitemsvalidationerror.md
-  - docs/models/components/paymentlinklineitemvalidationerror.md
   - docs/models/components/paymentlinkpaymentdetails.md
   - docs/models/components/paymentlinkpaymentdetailsupdate.md
   - docs/models/components/paymentlinkpayoutdetails.md
@@ -1401,6 +1405,13 @@ generatedFiles:
   - src/moovio_sdk/models/components/createindividualprofile.py
   - src/moovio_sdk/models/components/createinvoice.py
   - src/moovio_sdk/models/components/createpaymentlink.py
+  - src/moovio_sdk/models/components/createpaymentlinklineitem.py
+  - src/moovio_sdk/models/components/createpaymentlinklineitemoption.py
+  - src/moovio_sdk/models/components/createpaymentlinklineitemoptionvalidationerror.py
+  - src/moovio_sdk/models/components/createpaymentlinklineitems.py
+  - src/moovio_sdk/models/components/createpaymentlinklineitemsupdate.py
+  - src/moovio_sdk/models/components/createpaymentlinklineitemsvalidationerror.py
+  - src/moovio_sdk/models/components/createpaymentlinklineitemvalidationerror.py
   - src/moovio_sdk/models/components/createproductoption.py
   - src/moovio_sdk/models/components/createproductoptiongroup.py
   - src/moovio_sdk/models/components/createprofile.py
@@ -1573,12 +1584,9 @@ generatedFiles:
   - src/moovio_sdk/models/components/paymentlinkdisplayoptions.py
   - src/moovio_sdk/models/components/paymentlinkdisplayoptionsupdate.py
   - src/moovio_sdk/models/components/paymentlinklineitem.py
+  - src/moovio_sdk/models/components/paymentlinklineitemimagemetadata.py
   - src/moovio_sdk/models/components/paymentlinklineitemoption.py
-  - src/moovio_sdk/models/components/paymentlinklineitemoptionvalidationerror.py
   - src/moovio_sdk/models/components/paymentlinklineitems.py
-  - src/moovio_sdk/models/components/paymentlinklineitemsupdate.py
-  - src/moovio_sdk/models/components/paymentlinklineitemsvalidationerror.py
-  - src/moovio_sdk/models/components/paymentlinklineitemvalidationerror.py
   - src/moovio_sdk/models/components/paymentlinkpaymentdetails.py
   - src/moovio_sdk/models/components/paymentlinkpaymentdetailsupdate.py
   - src/moovio_sdk/models/components/paymentlinkpayoutdetails.py
@@ -4623,10 +4631,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes Detected:
-  * `moov.invoices.create_invoice()`: **Added**
-  * `moov.invoices.list_invoices()`: **Added**
-  * `moov.invoices.get_invoice()`: **Added**
-  * `moov.invoices.update_invoice()`: **Added**
-  * `moov.invoices.mark_paid_invoice()`: **Added**
+releaseNotes: "## Python SDK Changes Detected:\n* `moov.payment_links.create()`: \n  *  `request.line_items.items.[]` **Changed**\n  *  `response.line_items.items.[]` **Changed**\n* `moov.payment_links.list()`:  `response.[].line_items.items.[]` **Changed**\n* `moov.payment_links.get()`:  `response.line_items.items.[]` **Changed**\n* `moov.payment_links.update()`: \n  *  `request.line_items.items.[]` **Changed**\n  *  `response.line_items.items.[]` **Changed**\n"

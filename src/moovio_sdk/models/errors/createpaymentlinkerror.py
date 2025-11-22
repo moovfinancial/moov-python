@@ -5,9 +5,9 @@ from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.components import (
     amountvalidationerror as components_amountvalidationerror,
+    createpaymentlinklineitemsvalidationerror as components_createpaymentlinklineitemsvalidationerror,
     displayoptionserror as components_displayoptionserror,
     paymentdetailserror as components_paymentdetailserror,
-    paymentlinklineitemsvalidationerror as components_paymentlinklineitemsvalidationerror,
     payoutdetailserror as components_payoutdetailserror,
 )
 from moovio_sdk.models.errors import MoovError
@@ -40,7 +40,7 @@ class CreatePaymentLinkErrorData(BaseModel):
 
     line_items: Annotated[
         Optional[
-            components_paymentlinklineitemsvalidationerror.PaymentLinkLineItemsValidationError
+            components_createpaymentlinklineitemsvalidationerror.CreatePaymentLinkLineItemsValidationError
         ],
         pydantic.Field(alias="lineItems"),
     ] = None

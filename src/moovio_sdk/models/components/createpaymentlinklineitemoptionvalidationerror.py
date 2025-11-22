@@ -11,14 +11,14 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PaymentLinkLineItemOptionValidationErrorTypedDict(TypedDict):
+class CreatePaymentLinkLineItemOptionValidationErrorTypedDict(TypedDict):
     name: NotRequired[str]
     group: NotRequired[str]
     price_modifier: NotRequired[AmountDecimalValidationErrorTypedDict]
     quantity: NotRequired[str]
 
 
-class PaymentLinkLineItemOptionValidationError(BaseModel):
+class CreatePaymentLinkLineItemOptionValidationError(BaseModel):
     name: Optional[str] = None
 
     group: Optional[str] = None

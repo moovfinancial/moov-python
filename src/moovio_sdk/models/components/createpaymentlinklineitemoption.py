@@ -2,17 +2,13 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
-from .paymentlinklineitemimagemetadata import (
-    PaymentLinkLineItemImageMetadata,
-    PaymentLinkLineItemImageMetadataTypedDict,
-)
 from moovio_sdk.types import BaseModel
 import pydantic
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PaymentLinkLineItemOptionTypedDict(TypedDict):
+class CreatePaymentLinkLineItemOptionTypedDict(TypedDict):
     r"""Represents a modifier or option applied to a line item."""
 
     name: str
@@ -21,13 +17,13 @@ class PaymentLinkLineItemOptionTypedDict(TypedDict):
     r"""The quantity of this option."""
     price_modifier: NotRequired[AmountDecimalTypedDict]
     r"""Optional price modification applied by this option. Can be positive, negative, or zero."""
-    images: NotRequired[List[PaymentLinkLineItemImageMetadataTypedDict]]
+    image_i_ds: NotRequired[List[str]]
     r"""Optional list of images associated with this line item option."""
     group: NotRequired[str]
     r"""Optional group identifier to categorize related options (e.g., 'toppings')."""
 
 
-class PaymentLinkLineItemOption(BaseModel):
+class CreatePaymentLinkLineItemOption(BaseModel):
     r"""Represents a modifier or option applied to a line item."""
 
     name: str
@@ -41,7 +37,7 @@ class PaymentLinkLineItemOption(BaseModel):
     ] = None
     r"""Optional price modification applied by this option. Can be positive, negative, or zero."""
 
-    images: Optional[List[PaymentLinkLineItemImageMetadata]] = None
+    image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
     r"""Optional list of images associated with this line item option."""
 
     group: Optional[str] = None

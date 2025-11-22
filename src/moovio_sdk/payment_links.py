@@ -51,8 +51,8 @@ class PaymentLinks(BaseSDK):
         ] = None,
         line_items: Optional[
             Union[
-                components.PaymentLinkLineItems,
-                components.PaymentLinkLineItemsTypedDict,
+                components.CreatePaymentLinkLineItems,
+                components.CreatePaymentLinkLineItemsTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -115,7 +115,7 @@ class PaymentLinks(BaseSDK):
                     payout, Optional[components.PaymentLinkPayoutDetails]
                 ),
                 line_items=utils.get_pydantic_model(
-                    line_items, Optional[components.PaymentLinkLineItems]
+                    line_items, Optional[components.CreatePaymentLinkLineItems]
                 ),
             ),
         )
@@ -243,8 +243,8 @@ class PaymentLinks(BaseSDK):
         ] = None,
         line_items: Optional[
             Union[
-                components.PaymentLinkLineItems,
-                components.PaymentLinkLineItemsTypedDict,
+                components.CreatePaymentLinkLineItems,
+                components.CreatePaymentLinkLineItemsTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -307,7 +307,7 @@ class PaymentLinks(BaseSDK):
                     payout, Optional[components.PaymentLinkPayoutDetails]
                 ),
                 line_items=utils.get_pydantic_model(
-                    line_items, Optional[components.PaymentLinkLineItems]
+                    line_items, Optional[components.CreatePaymentLinkLineItems]
                 ),
             ),
         )
@@ -851,8 +851,8 @@ class PaymentLinks(BaseSDK):
         ] = None,
         line_items: Optional[
             Union[
-                components.PaymentLinkLineItemsUpdate,
-                components.PaymentLinkLineItemsUpdateTypedDict,
+                components.CreatePaymentLinkLineItemsUpdate,
+                components.CreatePaymentLinkLineItemsUpdateTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -911,7 +911,7 @@ class PaymentLinks(BaseSDK):
                     payout, Optional[components.PaymentLinkPayoutDetailsUpdate]
                 ),
                 line_items=utils.get_pydantic_model(
-                    line_items, Optional[components.PaymentLinkLineItemsUpdate]
+                    line_items, Optional[components.CreatePaymentLinkLineItemsUpdate]
                 ),
             ),
         )
@@ -1041,8 +1041,8 @@ class PaymentLinks(BaseSDK):
         ] = None,
         line_items: Optional[
             Union[
-                components.PaymentLinkLineItemsUpdate,
-                components.PaymentLinkLineItemsUpdateTypedDict,
+                components.CreatePaymentLinkLineItemsUpdate,
+                components.CreatePaymentLinkLineItemsUpdateTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1101,7 +1101,7 @@ class PaymentLinks(BaseSDK):
                     payout, Optional[components.PaymentLinkPayoutDetailsUpdate]
                 ),
                 line_items=utils.get_pydantic_model(
-                    line_items, Optional[components.PaymentLinkLineItemsUpdate]
+                    line_items, Optional[components.CreatePaymentLinkLineItemsUpdate]
                 ),
             ),
         )

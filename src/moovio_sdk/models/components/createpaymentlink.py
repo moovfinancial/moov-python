@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .amount import Amount, AmountTypedDict
+from .createpaymentlinklineitems import (
+    CreatePaymentLinkLineItems,
+    CreatePaymentLinkLineItemsTypedDict,
+)
 from .paymentlinkcustomeroptions import (
     PaymentLinkCustomerOptions,
     PaymentLinkCustomerOptionsTypedDict,
@@ -10,7 +14,6 @@ from .paymentlinkdisplayoptions import (
     PaymentLinkDisplayOptions,
     PaymentLinkDisplayOptionsTypedDict,
 )
-from .paymentlinklineitems import PaymentLinkLineItems, PaymentLinkLineItemsTypedDict
 from .paymentlinkpaymentdetails import (
     PaymentLinkPaymentDetails,
     PaymentLinkPaymentDetailsTypedDict,
@@ -54,7 +57,7 @@ class CreatePaymentLinkTypedDict(TypedDict):
     payment: NotRequired[PaymentLinkPaymentDetailsTypedDict]
     r"""Options for payment links used to collect payment."""
     payout: NotRequired[PaymentLinkPayoutDetailsTypedDict]
-    line_items: NotRequired[PaymentLinkLineItemsTypedDict]
+    line_items: NotRequired[CreatePaymentLinkLineItemsTypedDict]
     r"""An optional collection of line items for a payment link.
     When line items are provided, their total plus sales tax must equal the payment link amount.
     """
@@ -100,7 +103,7 @@ class CreatePaymentLink(BaseModel):
     payout: Optional[PaymentLinkPayoutDetails] = None
 
     line_items: Annotated[
-        Optional[PaymentLinkLineItems], pydantic.Field(alias="lineItems")
+        Optional[CreatePaymentLinkLineItems], pydantic.Field(alias="lineItems")
     ] = None
     r"""An optional collection of line items for a payment link.
     When line items are provided, their total plus sales tax must equal the payment link amount.

@@ -5,9 +5,9 @@ from .amountdecimalvalidationerror import (
     AmountDecimalValidationError,
     AmountDecimalValidationErrorTypedDict,
 )
-from .paymentlinklineitemoptionvalidationerror import (
-    PaymentLinkLineItemOptionValidationError,
-    PaymentLinkLineItemOptionValidationErrorTypedDict,
+from .createpaymentlinklineitemoptionvalidationerror import (
+    CreatePaymentLinkLineItemOptionValidationError,
+    CreatePaymentLinkLineItemOptionValidationErrorTypedDict,
 )
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -15,15 +15,17 @@ from typing import Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PaymentLinkLineItemValidationErrorTypedDict(TypedDict):
+class CreatePaymentLinkLineItemValidationErrorTypedDict(TypedDict):
     product_id: NotRequired[str]
     name: NotRequired[str]
     base_price: NotRequired[AmountDecimalValidationErrorTypedDict]
-    options: NotRequired[Dict[str, PaymentLinkLineItemOptionValidationErrorTypedDict]]
+    options: NotRequired[
+        Dict[str, CreatePaymentLinkLineItemOptionValidationErrorTypedDict]
+    ]
     quantity: NotRequired[str]
 
 
-class PaymentLinkLineItemValidationError(BaseModel):
+class CreatePaymentLinkLineItemValidationError(BaseModel):
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None
 
     name: Optional[str] = None
@@ -32,6 +34,6 @@ class PaymentLinkLineItemValidationError(BaseModel):
         Optional[AmountDecimalValidationError], pydantic.Field(alias="basePrice")
     ] = None
 
-    options: Optional[Dict[str, PaymentLinkLineItemOptionValidationError]] = None
+    options: Optional[Dict[str, CreatePaymentLinkLineItemOptionValidationError]] = None
 
     quantity: Optional[str] = None

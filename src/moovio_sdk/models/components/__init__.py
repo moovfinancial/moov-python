@@ -336,6 +336,34 @@ if TYPE_CHECKING:
     )
     from .createinvoice import CreateInvoice, CreateInvoiceTypedDict
     from .createpaymentlink import CreatePaymentLink, CreatePaymentLinkTypedDict
+    from .createpaymentlinklineitem import (
+        CreatePaymentLinkLineItem,
+        CreatePaymentLinkLineItemTypedDict,
+    )
+    from .createpaymentlinklineitemoption import (
+        CreatePaymentLinkLineItemOption,
+        CreatePaymentLinkLineItemOptionTypedDict,
+    )
+    from .createpaymentlinklineitemoptionvalidationerror import (
+        CreatePaymentLinkLineItemOptionValidationError,
+        CreatePaymentLinkLineItemOptionValidationErrorTypedDict,
+    )
+    from .createpaymentlinklineitems import (
+        CreatePaymentLinkLineItems,
+        CreatePaymentLinkLineItemsTypedDict,
+    )
+    from .createpaymentlinklineitemsupdate import (
+        CreatePaymentLinkLineItemsUpdate,
+        CreatePaymentLinkLineItemsUpdateTypedDict,
+    )
+    from .createpaymentlinklineitemsvalidationerror import (
+        CreatePaymentLinkLineItemsValidationError,
+        CreatePaymentLinkLineItemsValidationErrorTypedDict,
+    )
+    from .createpaymentlinklineitemvalidationerror import (
+        CreatePaymentLinkLineItemValidationError,
+        CreatePaymentLinkLineItemValidationErrorTypedDict,
+    )
     from .createproductoption import CreateProductOption, CreateProductOptionTypedDict
     from .createproductoptiongroup import (
         CreateProductOptionGroup,
@@ -755,29 +783,17 @@ if TYPE_CHECKING:
         PaymentLinkDisplayOptionsUpdateTypedDict,
     )
     from .paymentlinklineitem import PaymentLinkLineItem, PaymentLinkLineItemTypedDict
+    from .paymentlinklineitemimagemetadata import (
+        PaymentLinkLineItemImageMetadata,
+        PaymentLinkLineItemImageMetadataTypedDict,
+    )
     from .paymentlinklineitemoption import (
         PaymentLinkLineItemOption,
         PaymentLinkLineItemOptionTypedDict,
     )
-    from .paymentlinklineitemoptionvalidationerror import (
-        PaymentLinkLineItemOptionValidationError,
-        PaymentLinkLineItemOptionValidationErrorTypedDict,
-    )
     from .paymentlinklineitems import (
         PaymentLinkLineItems,
         PaymentLinkLineItemsTypedDict,
-    )
-    from .paymentlinklineitemsupdate import (
-        PaymentLinkLineItemsUpdate,
-        PaymentLinkLineItemsUpdateTypedDict,
-    )
-    from .paymentlinklineitemsvalidationerror import (
-        PaymentLinkLineItemsValidationError,
-        PaymentLinkLineItemsValidationErrorTypedDict,
-    )
-    from .paymentlinklineitemvalidationerror import (
-        PaymentLinkLineItemValidationError,
-        PaymentLinkLineItemValidationErrorTypedDict,
     )
     from .paymentlinkpaymentdetails import (
         PaymentLinkPaymentDetails,
@@ -1545,6 +1561,20 @@ __all__ = [
     "CreateInvoice",
     "CreateInvoiceTypedDict",
     "CreatePaymentLink",
+    "CreatePaymentLinkLineItem",
+    "CreatePaymentLinkLineItemOption",
+    "CreatePaymentLinkLineItemOptionTypedDict",
+    "CreatePaymentLinkLineItemOptionValidationError",
+    "CreatePaymentLinkLineItemOptionValidationErrorTypedDict",
+    "CreatePaymentLinkLineItemTypedDict",
+    "CreatePaymentLinkLineItemValidationError",
+    "CreatePaymentLinkLineItemValidationErrorTypedDict",
+    "CreatePaymentLinkLineItems",
+    "CreatePaymentLinkLineItemsTypedDict",
+    "CreatePaymentLinkLineItemsUpdate",
+    "CreatePaymentLinkLineItemsUpdateTypedDict",
+    "CreatePaymentLinkLineItemsValidationError",
+    "CreatePaymentLinkLineItemsValidationErrorTypedDict",
     "CreatePaymentLinkTypedDict",
     "CreateProductOption",
     "CreateProductOptionGroup",
@@ -1892,19 +1922,13 @@ __all__ = [
     "PaymentLinkDisplayOptionsUpdate",
     "PaymentLinkDisplayOptionsUpdateTypedDict",
     "PaymentLinkLineItem",
+    "PaymentLinkLineItemImageMetadata",
+    "PaymentLinkLineItemImageMetadataTypedDict",
     "PaymentLinkLineItemOption",
     "PaymentLinkLineItemOptionTypedDict",
-    "PaymentLinkLineItemOptionValidationError",
-    "PaymentLinkLineItemOptionValidationErrorTypedDict",
     "PaymentLinkLineItemTypedDict",
-    "PaymentLinkLineItemValidationError",
-    "PaymentLinkLineItemValidationErrorTypedDict",
     "PaymentLinkLineItems",
     "PaymentLinkLineItemsTypedDict",
-    "PaymentLinkLineItemsUpdate",
-    "PaymentLinkLineItemsUpdateTypedDict",
-    "PaymentLinkLineItemsValidationError",
-    "PaymentLinkLineItemsValidationErrorTypedDict",
     "PaymentLinkPaymentDetails",
     "PaymentLinkPaymentDetailsTypedDict",
     "PaymentLinkPaymentDetailsUpdate",
@@ -2600,6 +2624,20 @@ _dynamic_imports: dict[str, str] = {
     "CreateInvoiceTypedDict": ".createinvoice",
     "CreatePaymentLink": ".createpaymentlink",
     "CreatePaymentLinkTypedDict": ".createpaymentlink",
+    "CreatePaymentLinkLineItem": ".createpaymentlinklineitem",
+    "CreatePaymentLinkLineItemTypedDict": ".createpaymentlinklineitem",
+    "CreatePaymentLinkLineItemOption": ".createpaymentlinklineitemoption",
+    "CreatePaymentLinkLineItemOptionTypedDict": ".createpaymentlinklineitemoption",
+    "CreatePaymentLinkLineItemOptionValidationError": ".createpaymentlinklineitemoptionvalidationerror",
+    "CreatePaymentLinkLineItemOptionValidationErrorTypedDict": ".createpaymentlinklineitemoptionvalidationerror",
+    "CreatePaymentLinkLineItems": ".createpaymentlinklineitems",
+    "CreatePaymentLinkLineItemsTypedDict": ".createpaymentlinklineitems",
+    "CreatePaymentLinkLineItemsUpdate": ".createpaymentlinklineitemsupdate",
+    "CreatePaymentLinkLineItemsUpdateTypedDict": ".createpaymentlinklineitemsupdate",
+    "CreatePaymentLinkLineItemsValidationError": ".createpaymentlinklineitemsvalidationerror",
+    "CreatePaymentLinkLineItemsValidationErrorTypedDict": ".createpaymentlinklineitemsvalidationerror",
+    "CreatePaymentLinkLineItemValidationError": ".createpaymentlinklineitemvalidationerror",
+    "CreatePaymentLinkLineItemValidationErrorTypedDict": ".createpaymentlinklineitemvalidationerror",
     "CreateProductOption": ".createproductoption",
     "CreateProductOptionTypedDict": ".createproductoption",
     "CreateProductOptionGroup": ".createproductoptiongroup",
@@ -2952,18 +2990,12 @@ _dynamic_imports: dict[str, str] = {
     "PaymentLinkDisplayOptionsUpdateTypedDict": ".paymentlinkdisplayoptionsupdate",
     "PaymentLinkLineItem": ".paymentlinklineitem",
     "PaymentLinkLineItemTypedDict": ".paymentlinklineitem",
+    "PaymentLinkLineItemImageMetadata": ".paymentlinklineitemimagemetadata",
+    "PaymentLinkLineItemImageMetadataTypedDict": ".paymentlinklineitemimagemetadata",
     "PaymentLinkLineItemOption": ".paymentlinklineitemoption",
     "PaymentLinkLineItemOptionTypedDict": ".paymentlinklineitemoption",
-    "PaymentLinkLineItemOptionValidationError": ".paymentlinklineitemoptionvalidationerror",
-    "PaymentLinkLineItemOptionValidationErrorTypedDict": ".paymentlinklineitemoptionvalidationerror",
     "PaymentLinkLineItems": ".paymentlinklineitems",
     "PaymentLinkLineItemsTypedDict": ".paymentlinklineitems",
-    "PaymentLinkLineItemsUpdate": ".paymentlinklineitemsupdate",
-    "PaymentLinkLineItemsUpdateTypedDict": ".paymentlinklineitemsupdate",
-    "PaymentLinkLineItemsValidationError": ".paymentlinklineitemsvalidationerror",
-    "PaymentLinkLineItemsValidationErrorTypedDict": ".paymentlinklineitemsvalidationerror",
-    "PaymentLinkLineItemValidationError": ".paymentlinklineitemvalidationerror",
-    "PaymentLinkLineItemValidationErrorTypedDict": ".paymentlinklineitemvalidationerror",
     "PaymentLinkPaymentDetails": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetailsTypedDict": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetailsUpdate": ".paymentlinkpaymentdetailsupdate",
