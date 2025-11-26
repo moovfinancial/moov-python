@@ -65,7 +65,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param partner_account_id: The partner's Moov account ID.
         :param merchant_payment_method_id: The merchant's preferred payment method ID. Must be a wallet payment method.
         :param amount:
@@ -257,7 +257,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param partner_account_id: The partner's Moov account ID.
         :param merchant_payment_method_id: The merchant's preferred payment method ID. Must be a wallet payment method.
         :param amount:
@@ -420,7 +420,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param skip:
         :param count:
         :param type:
@@ -528,7 +528,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param skip:
         :param count:
         :param type:
@@ -633,7 +633,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param payment_link_code:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -732,7 +732,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param payment_link_code:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -865,7 +865,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param payment_link_code:
         :param amount:
         :param expires_on:
@@ -1055,7 +1055,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param payment_link_code:
         :param amount:
         :param expires_on:
@@ -1211,7 +1211,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param payment_link_code:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1309,7 +1309,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param payment_link_code:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1410,7 +1410,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param payment_link_code:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1524,7 +1524,7 @@ class PaymentLinks(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param account_id:
+        :param account_id: The merchant account ID.
         :param payment_link_code:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

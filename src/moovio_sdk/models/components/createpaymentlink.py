@@ -36,7 +36,6 @@ class CreatePaymentLinkTypedDict(TypedDict):
     `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
     to a specific recipient.
 
-    **Note:** The `payout` option is currently under development and is not yet available for general use.
     """
 
     partner_account_id: str
@@ -70,7 +69,6 @@ class CreatePaymentLink(BaseModel):
     `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
     to a specific recipient.
 
-    **Note:** The `payout` option is currently under development and is not yet available for general use.
     """
 
     partner_account_id: Annotated[str, pydantic.Field(alias="partnerAccountID")]

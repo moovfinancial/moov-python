@@ -53,6 +53,7 @@ class CreatePaymentLinkGlobals(BaseModel):
 
 class CreatePaymentLinkRequestTypedDict(TypedDict):
     account_id: str
+    r"""The merchant account ID."""
     create_payment_link: components_createpaymentlink.CreatePaymentLinkTypedDict
 
 
@@ -62,6 +63,7 @@ class CreatePaymentLinkRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The merchant account ID."""
 
     create_payment_link: Annotated[
         components_createpaymentlink.CreatePaymentLink,

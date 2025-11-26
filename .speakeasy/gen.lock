@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 220cfab2e534ad6648bcb91f6cf8c22f
+  docChecksum: 1ff6708b2e828c479cfc6141964045a8
   docVersion: latest
-  speakeasyVersion: 1.660.0
-  generationVersion: 2.760.2
-  releaseVersion: 0.19.22
-  configChecksum: d13556dd2db9bd37361d609417ab3424
+  speakeasyVersion: 1.661.2
+  generationVersion: 2.763.3
+  releaseVersion: 0.19.23
+  configChecksum: 970a13de7dcc85b31620410248ff3410
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.23.10
+    core: 5.23.11
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -35,7 +35,7 @@ features:
     nameOverrides: 3.0.1
     nullables: 1.0.1
     responseFormat: 1.0.1
-    retries: 3.0.2
+    retries: 3.0.3
     sdkHooks: 1.1.0
     unions: 3.1.0
     uploadStreams: 1.0.0
@@ -248,7 +248,6 @@ generatedFiles:
   - docs/models/components/e2eetoken.md
   - docs/models/components/e2eetokenupdate.md
   - docs/models/components/ein.md
-  - docs/models/components/email.md
   - docs/models/components/end2endencryptionerror.md
   - docs/models/components/enrichedaddressresponse.md
   - docs/models/components/enrichedbusinessprofile.md
@@ -297,8 +296,6 @@ generatedFiles:
   - docs/models/components/imagemetadata.md
   - docs/models/components/imagemetadatarequest.md
   - docs/models/components/imagemetadatavalidationerror.md
-  - docs/models/components/imageupdaterequestmultipart.md
-  - docs/models/components/imageupdaterequestmultipartimage.md
   - docs/models/components/imageuploadrequestmultipart.md
   - docs/models/components/incurredfee.md
   - docs/models/components/individualname.md
@@ -358,7 +355,6 @@ generatedFiles:
   - docs/models/components/manualtermsofservice.md
   - docs/models/components/manualtermsofserviceupdate.md
   - docs/models/components/markinvoicepaid.md
-  - docs/models/components/metadata.md
   - docs/models/components/microdepositstatus.md
   - docs/models/components/minimumcommitment.md
   - docs/models/components/mode.md
@@ -438,10 +434,6 @@ generatedFiles:
   - docs/models/components/profile.md
   - docs/models/components/pullfromcardpaymentmethod.md
   - docs/models/components/pullfromcardpaymentmethodpaymentmethodtype.md
-  - docs/models/components/pullpaymentmethodid.md
-  - docs/models/components/pullpaymentmethodid2.md
-  - docs/models/components/pushpaymentmethodid.md
-  - docs/models/components/pushpaymentmethodid2.md
   - docs/models/components/pushtocardpaymentmethod.md
   - docs/models/components/pushtocardpaymentmethodpaymentmethodtype.md
   - docs/models/components/qrcode.md
@@ -497,8 +489,6 @@ generatedFiles:
   - docs/models/components/sourcedestinationoptions.md
   - docs/models/components/ssn.md
   - docs/models/components/statement.md
-  - docs/models/components/statementdescriptor.md
-  - docs/models/components/statementdescriptor2.md
   - docs/models/components/status.md
   - docs/models/components/submissionintent.md
   - docs/models/components/sweep.md
@@ -543,7 +533,6 @@ generatedFiles:
   - docs/models/components/transfersource.md
   - docs/models/components/transferstatus.md
   - docs/models/components/transferwaitfor.md
-  - docs/models/components/two.md
   - docs/models/components/underwriting.md
   - docs/models/components/underwritingstatus.md
   - docs/models/components/updateapplepaymerchantdomains.md
@@ -1491,7 +1480,6 @@ generatedFiles:
   - src/moovio_sdk/models/components/imagemetadata.py
   - src/moovio_sdk/models/components/imagemetadatarequest.py
   - src/moovio_sdk/models/components/imagemetadatavalidationerror.py
-  - src/moovio_sdk/models/components/imageupdaterequestmultipart.py
   - src/moovio_sdk/models/components/imageuploadrequestmultipart.py
   - src/moovio_sdk/models/components/incurredfee.py
   - src/moovio_sdk/models/components/individualname.py
@@ -2908,7 +2896,7 @@ examples:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       requestBody:
-        multipart/form-data: {"file": "x-file: example.file", "filePurpose": "representative_verification", "metadata": "{\"requirement_id\": \"document.individual.verification\"}"}
+        multipart/form-data: {"file": "x-file: example.file", "filePurpose": "representative_verification"}
       responses:
         "200":
           application/json: {"fileID": "439b7a22-ec06-4993-9b21-f4f92a2aa577", "fileName": "logo.png", "accountID": "33e8f6ef-7edf-4b9a-8905-6b0649ccb34c", "filePurpose": "representative_verification", "fileStatus": "pending", "metadata": "{\"error_code\": \"document-name-mismatch\", \"requirement_id\": \"document.individual.verification\", \"representative_id\": \"c63ab175-251d-497e-a267-7346d087e180\", \"comment\": \"testing comment\"", "decisionReason": "not correct file", "fileSizeBytes": 777701, "createdOn": "2024-11-19T16:40:47.855Z", "updatedOn": "2024-06-23T05:31:09.268Z"}
@@ -3126,7 +3114,7 @@ examples:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       requestBody:
-        application/json: {"name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "birthDate": null, "responsibilities": {"ownershipPercentage": 38, "jobTitle": "CEO"}}
+        application/json: {"name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "birthDate": null, "responsibilities": {"ownershipPercentage": 38, "jobTitle": "CEO"}}
       responses:
         "200":
           application/json: {"representativeID": "d7cd54cf-a231-46bb-b1ac-c6cdafa8219e", "name": {"firstName": "Jordan", "middleName": "Reese", "lastName": "Lee", "suffix": "Jr"}, "phone": {"number": "8185551212", "countryCode": "1"}, "email": "jordan.lee@classbooker.dev", "address": {"addressLine1": "123 Main Street", "addressLine2": "Apt 302", "city": "Boulder", "stateOrProvince": "CO", "postalCode": "80301", "country": "US"}, "responsibilities": {"ownershipPercentage": 38, "jobTitle": "CEO"}, "createdOn": "2025-06-02T03:39:27.129Z", "updatedOn": "2024-06-29T17:50:33.922Z"}
@@ -4631,4 +4619,8 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes Detected:\n* `moov.payment_links.create()`: \n  *  `request.line_items.items.[]` **Changed**\n  *  `response.line_items.items.[]` **Changed**\n* `moov.payment_links.list()`:  `response.[].line_items.items.[]` **Changed**\n* `moov.payment_links.get()`:  `response.line_items.items.[]` **Changed**\n* `moov.payment_links.update()`: \n  *  `request.line_items.items.[]` **Changed**\n  *  `response.line_items.items.[]` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes Detected:
+  * `moov.images.update()`:  `request.metadata` **Changed** **Breaking** :warning:
+  * `moov.representatives.update()`:  `request.email` **Changed** **Breaking** :warning:
+  * `moov.sweeps.update_config()`:  `request` **Changed** **Breaking** :warning:

@@ -11,8 +11,7 @@ from moovio_sdk.types import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class Status(str, Enum):
@@ -20,65 +19,11 @@ class Status(str, Enum):
     DISABLED = "disabled"
 
 
-class PushPaymentMethodID2TypedDict(TypedDict):
-    pass
-
-
-class PushPaymentMethodID2(BaseModel):
-    pass
-
-
-PushPaymentMethodIDTypedDict = TypeAliasType(
-    "PushPaymentMethodIDTypedDict", Union[PushPaymentMethodID2TypedDict, str]
-)
-
-
-PushPaymentMethodID = TypeAliasType(
-    "PushPaymentMethodID", Union[PushPaymentMethodID2, str]
-)
-
-
-class PullPaymentMethodID2TypedDict(TypedDict):
-    pass
-
-
-class PullPaymentMethodID2(BaseModel):
-    pass
-
-
-PullPaymentMethodIDTypedDict = TypeAliasType(
-    "PullPaymentMethodIDTypedDict", Union[PullPaymentMethodID2TypedDict, str]
-)
-
-
-PullPaymentMethodID = TypeAliasType(
-    "PullPaymentMethodID", Union[PullPaymentMethodID2, str]
-)
-
-
-class StatementDescriptor2TypedDict(TypedDict):
-    pass
-
-
-class StatementDescriptor2(BaseModel):
-    pass
-
-
-StatementDescriptorTypedDict = TypeAliasType(
-    "StatementDescriptorTypedDict", Union[StatementDescriptor2TypedDict, str]
-)
-
-
-StatementDescriptor = TypeAliasType(
-    "StatementDescriptor", Union[StatementDescriptor2, str]
-)
-
-
 class PatchSweepConfigTypedDict(TypedDict):
     status: NotRequired[Nullable[Status]]
-    push_payment_method_id: NotRequired[Nullable[PushPaymentMethodIDTypedDict]]
-    pull_payment_method_id: NotRequired[Nullable[PullPaymentMethodIDTypedDict]]
-    statement_descriptor: NotRequired[Nullable[StatementDescriptorTypedDict]]
+    push_payment_method_id: NotRequired[Nullable[str]]
+    pull_payment_method_id: NotRequired[Nullable[str]]
+    statement_descriptor: NotRequired[Nullable[str]]
     minimum_balance: NotRequired[Nullable[str]]
 
 
@@ -86,18 +31,15 @@ class PatchSweepConfig(BaseModel):
     status: OptionalNullable[Status] = UNSET
 
     push_payment_method_id: Annotated[
-        OptionalNullable[PushPaymentMethodID],
-        pydantic.Field(alias="pushPaymentMethodID"),
+        OptionalNullable[str], pydantic.Field(alias="pushPaymentMethodID")
     ] = UNSET
 
     pull_payment_method_id: Annotated[
-        OptionalNullable[PullPaymentMethodID],
-        pydantic.Field(alias="pullPaymentMethodID"),
+        OptionalNullable[str], pydantic.Field(alias="pullPaymentMethodID")
     ] = UNSET
 
     statement_descriptor: Annotated[
-        OptionalNullable[StatementDescriptor],
-        pydantic.Field(alias="statementDescriptor"),
+        OptionalNullable[str], pydantic.Field(alias="statementDescriptor")
     ] = UNSET
 
     minimum_balance: Annotated[

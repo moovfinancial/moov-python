@@ -240,7 +240,7 @@ class Images(BaseSDK):
           Duplicate images, and requests larger than 16MB will be rejected.
 
         :param account_id:
-        :param image:
+        :param image: A PNG, JPEG, or WebP image file to upload.
         :param metadata: Optional, json-encoded metadata to associate with the uploaded image.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -377,7 +377,7 @@ class Images(BaseSDK):
           Duplicate images, and requests larger than 16MB will be rejected.
 
         :param account_id:
-        :param image:
+        :param image: A PNG, JPEG, or WebP image file to upload.
         :param metadata: Optional, json-encoded metadata to associate with the uploaded image.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -691,13 +691,13 @@ class Images(BaseSDK):
         *,
         account_id: str,
         image_id: str,
-        image: Union[
-            components.ImageUpdateRequestMultiPartImage,
-            components.ImageUpdateRequestMultiPartImageTypedDict,
-        ],
-        metadata: OptionalNullable[
-            Union[components.Metadata, components.MetadataTypedDict]
-        ] = UNSET,
+        image: Union[components.Image, components.ImageTypedDict],
+        metadata: Optional[
+            Union[
+                components.ImageMetadataRequest,
+                components.ImageMetadataRequestTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -706,15 +706,12 @@ class Images(BaseSDK):
         r"""Replace an existing image and, optionally, its metadata.
 
         This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
-        the metadata form section to keep existing metadata, or send `null` to clear it.
-        Duplicate images, and requests larger than 16MB will be rejected.
+        the metadata form section to keep existing metadata. Duplicate images, and requests larger than 16MB will be rejected.
 
         :param account_id:
         :param image_id:
-        :param image:
-        :param metadata: JSON-encoded metadata to update for the image.
-
-            Omit this field if not updating metadata, or send `null` to clear existing metadata.
+        :param image: A PNG, JPEG, or WebP image file to upload.
+        :param metadata: Optional, json-encoded metadata to associate with the uploaded image.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -733,12 +730,10 @@ class Images(BaseSDK):
         request = operations.UpdateImageRequest(
             account_id=account_id,
             image_id=image_id,
-            image_update_request_multi_part=components.ImageUpdateRequestMultiPart(
-                image=utils.get_pydantic_model(
-                    image, components.ImageUpdateRequestMultiPartImage
-                ),
+            image_upload_request_multi_part=components.ImageUploadRequestMultiPart(
+                image=utils.get_pydantic_model(image, components.Image),
                 metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[components.Metadata]
+                    metadata, Optional[components.ImageMetadataRequest]
                 ),
             ),
         )
@@ -760,11 +755,11 @@ class Images(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.image_update_request_multi_part,
+                request.image_upload_request_multi_part,
                 False,
                 False,
                 "multipart",
-                components.ImageUpdateRequestMultiPart,
+                components.ImageUploadRequestMultiPart,
             ),
             timeout_ms=timeout_ms,
         )
@@ -838,13 +833,13 @@ class Images(BaseSDK):
         *,
         account_id: str,
         image_id: str,
-        image: Union[
-            components.ImageUpdateRequestMultiPartImage,
-            components.ImageUpdateRequestMultiPartImageTypedDict,
-        ],
-        metadata: OptionalNullable[
-            Union[components.Metadata, components.MetadataTypedDict]
-        ] = UNSET,
+        image: Union[components.Image, components.ImageTypedDict],
+        metadata: Optional[
+            Union[
+                components.ImageMetadataRequest,
+                components.ImageMetadataRequestTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -853,15 +848,12 @@ class Images(BaseSDK):
         r"""Replace an existing image and, optionally, its metadata.
 
         This endpoint replaces the existing image with the new PNG, JPEG, or WebP. Omit
-        the metadata form section to keep existing metadata, or send `null` to clear it.
-        Duplicate images, and requests larger than 16MB will be rejected.
+        the metadata form section to keep existing metadata. Duplicate images, and requests larger than 16MB will be rejected.
 
         :param account_id:
         :param image_id:
-        :param image:
-        :param metadata: JSON-encoded metadata to update for the image.
-
-            Omit this field if not updating metadata, or send `null` to clear existing metadata.
+        :param image: A PNG, JPEG, or WebP image file to upload.
+        :param metadata: Optional, json-encoded metadata to associate with the uploaded image.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -880,12 +872,10 @@ class Images(BaseSDK):
         request = operations.UpdateImageRequest(
             account_id=account_id,
             image_id=image_id,
-            image_update_request_multi_part=components.ImageUpdateRequestMultiPart(
-                image=utils.get_pydantic_model(
-                    image, components.ImageUpdateRequestMultiPartImage
-                ),
+            image_upload_request_multi_part=components.ImageUploadRequestMultiPart(
+                image=utils.get_pydantic_model(image, components.Image),
                 metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[components.Metadata]
+                    metadata, Optional[components.ImageMetadataRequest]
                 ),
             ),
         )
@@ -907,11 +897,11 @@ class Images(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.image_update_request_multi_part,
+                request.image_upload_request_multi_part,
                 False,
                 False,
                 "multipart",
-                components.ImageUpdateRequestMultiPart,
+                components.ImageUploadRequestMultiPart,
             ),
             timeout_ms=timeout_ms,
         )

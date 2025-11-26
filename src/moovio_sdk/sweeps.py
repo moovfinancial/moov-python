@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional
 
 
 class Sweeps(BaseSDK):
@@ -695,21 +695,9 @@ class Sweeps(BaseSDK):
         account_id: str,
         sweep_config_id: str,
         status: OptionalNullable[components.Status] = UNSET,
-        push_payment_method_id: OptionalNullable[
-            Union[
-                components.PushPaymentMethodID, components.PushPaymentMethodIDTypedDict
-            ]
-        ] = UNSET,
-        pull_payment_method_id: OptionalNullable[
-            Union[
-                components.PullPaymentMethodID, components.PullPaymentMethodIDTypedDict
-            ]
-        ] = UNSET,
-        statement_descriptor: OptionalNullable[
-            Union[
-                components.StatementDescriptor, components.StatementDescriptorTypedDict
-            ]
-        ] = UNSET,
+        push_payment_method_id: OptionalNullable[str] = UNSET,
+        pull_payment_method_id: OptionalNullable[str] = UNSET,
+        statement_descriptor: OptionalNullable[str] = UNSET,
         minimum_balance: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -748,18 +736,9 @@ class Sweeps(BaseSDK):
             sweep_config_id=sweep_config_id,
             patch_sweep_config=components.PatchSweepConfig(
                 status=status,
-                push_payment_method_id=utils.get_pydantic_model(
-                    push_payment_method_id,
-                    OptionalNullable[components.PushPaymentMethodID],
-                ),
-                pull_payment_method_id=utils.get_pydantic_model(
-                    pull_payment_method_id,
-                    OptionalNullable[components.PullPaymentMethodID],
-                ),
-                statement_descriptor=utils.get_pydantic_model(
-                    statement_descriptor,
-                    OptionalNullable[components.StatementDescriptor],
-                ),
+                push_payment_method_id=push_payment_method_id,
+                pull_payment_method_id=pull_payment_method_id,
+                statement_descriptor=statement_descriptor,
                 minimum_balance=minimum_balance,
             ),
         )
@@ -860,21 +839,9 @@ class Sweeps(BaseSDK):
         account_id: str,
         sweep_config_id: str,
         status: OptionalNullable[components.Status] = UNSET,
-        push_payment_method_id: OptionalNullable[
-            Union[
-                components.PushPaymentMethodID, components.PushPaymentMethodIDTypedDict
-            ]
-        ] = UNSET,
-        pull_payment_method_id: OptionalNullable[
-            Union[
-                components.PullPaymentMethodID, components.PullPaymentMethodIDTypedDict
-            ]
-        ] = UNSET,
-        statement_descriptor: OptionalNullable[
-            Union[
-                components.StatementDescriptor, components.StatementDescriptorTypedDict
-            ]
-        ] = UNSET,
+        push_payment_method_id: OptionalNullable[str] = UNSET,
+        pull_payment_method_id: OptionalNullable[str] = UNSET,
+        statement_descriptor: OptionalNullable[str] = UNSET,
         minimum_balance: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -913,18 +880,9 @@ class Sweeps(BaseSDK):
             sweep_config_id=sweep_config_id,
             patch_sweep_config=components.PatchSweepConfig(
                 status=status,
-                push_payment_method_id=utils.get_pydantic_model(
-                    push_payment_method_id,
-                    OptionalNullable[components.PushPaymentMethodID],
-                ),
-                pull_payment_method_id=utils.get_pydantic_model(
-                    pull_payment_method_id,
-                    OptionalNullable[components.PullPaymentMethodID],
-                ),
-                statement_descriptor=utils.get_pydantic_model(
-                    statement_descriptor,
-                    OptionalNullable[components.StatementDescriptor],
-                ),
+                push_payment_method_id=push_payment_method_id,
+                pull_payment_method_id=pull_payment_method_id,
+                statement_descriptor=statement_descriptor,
                 minimum_balance=minimum_balance,
             ),
         )

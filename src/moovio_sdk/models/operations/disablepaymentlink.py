@@ -44,6 +44,7 @@ class DisablePaymentLinkGlobals(BaseModel):
 
 class DisablePaymentLinkRequestTypedDict(TypedDict):
     account_id: str
+    r"""The merchant account ID."""
     payment_link_code: str
 
 
@@ -53,6 +54,7 @@ class DisablePaymentLinkRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The merchant account ID."""
 
     payment_link_code: Annotated[
         str,

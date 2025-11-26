@@ -19,7 +19,7 @@ To access this endpoint using an [access token](https://docs.moov.io/api/authent
 you'll need to specify the `/accounts/{accountID}/wallets.read` scope.
 * [update_config](#update_config) - Update settings on a sweep config.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 * [list](#list) - List sweeps associated with a wallet.
 
@@ -184,7 +184,7 @@ with Moov(
 
 Update settings on a sweep config.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/wallets.write` scope.
 
 ### Example Usage
@@ -212,16 +212,16 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `account_id`                                                                                       | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `sweep_config_id`                                                                                  | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `status`                                                                                           | [OptionalNullable[components.Status]](../../models/components/status.md)                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `push_payment_method_id`                                                                           | [OptionalNullable[components.PushPaymentMethodID]](../../models/components/pushpaymentmethodid.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `pull_payment_method_id`                                                                           | [OptionalNullable[components.PullPaymentMethodID]](../../models/components/pullpaymentmethodid.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `statement_descriptor`                                                                             | [OptionalNullable[components.StatementDescriptor]](../../models/components/statementdescriptor.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `minimum_balance`                                                                                  | *OptionalNullable[str]*                                                                            | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
-| `retries`                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                   | :heavy_minus_sign:                                                                                 | Configuration to override the default retry behavior of the client.                                |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `account_id`                                                             | *str*                                                                    | :heavy_check_mark:                                                       | N/A                                                                      |
+| `sweep_config_id`                                                        | *str*                                                                    | :heavy_check_mark:                                                       | N/A                                                                      |
+| `status`                                                                 | [OptionalNullable[components.Status]](../../models/components/status.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `push_payment_method_id`                                                 | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `pull_payment_method_id`                                                 | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `statement_descriptor`                                                   | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `minimum_balance`                                                        | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `retries`                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)         | :heavy_minus_sign:                                                       | Configuration to override the default retry behavior of the client.      |
 
 ### Response
 

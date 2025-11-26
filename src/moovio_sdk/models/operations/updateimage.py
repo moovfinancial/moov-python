@@ -3,7 +3,7 @@
 from __future__ import annotations
 from moovio_sdk.models.components import (
     imagemetadata as components_imagemetadata,
-    imageupdaterequestmultipart as components_imageupdaterequestmultipart,
+    imageuploadrequestmultipart as components_imageuploadrequestmultipart,
 )
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import (
@@ -54,8 +54,8 @@ class UpdateImageGlobals(BaseModel):
 class UpdateImageRequestTypedDict(TypedDict):
     account_id: str
     image_id: str
-    image_update_request_multi_part: (
-        components_imageupdaterequestmultipart.ImageUpdateRequestMultiPartTypedDict
+    image_upload_request_multi_part: (
+        components_imageuploadrequestmultipart.ImageUploadRequestMultiPartTypedDict
     )
 
 
@@ -72,8 +72,8 @@ class UpdateImageRequest(BaseModel):
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
 
-    image_update_request_multi_part: Annotated[
-        components_imageupdaterequestmultipart.ImageUpdateRequestMultiPart,
+    image_upload_request_multi_part: Annotated[
+        components_imageuploadrequestmultipart.ImageUploadRequestMultiPart,
         FieldMetadata(request=RequestMetadata(media_type="multipart/form-data")),
     ]
 

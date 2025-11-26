@@ -11,8 +11,8 @@ from moovio_sdk.types import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PhoneTypedDict(TypedDict):
@@ -24,20 +24,6 @@ class Phone(BaseModel):
     number: Optional[str] = None
 
     country_code: Annotated[Optional[str], pydantic.Field(alias="countryCode")] = None
-
-
-class TwoTypedDict(TypedDict):
-    pass
-
-
-class Two(BaseModel):
-    pass
-
-
-EmailTypedDict = TypeAliasType("EmailTypedDict", Union[TwoTypedDict, str])
-
-
-Email = TypeAliasType("Email", Union[Two, str])
 
 
 class UpdateRepresentativeAddressTypedDict(TypedDict):
@@ -150,7 +136,7 @@ class Responsibilities(BaseModel):
 class UpdateRepresentativeTypedDict(TypedDict):
     name: NotRequired[IndividualNameUpdateTypedDict]
     phone: NotRequired[Nullable[PhoneTypedDict]]
-    email: NotRequired[Nullable[EmailTypedDict]]
+    email: NotRequired[Nullable[str]]
     address: NotRequired[Nullable[UpdateRepresentativeAddressTypedDict]]
     birth_date: NotRequired[Nullable[UpdateRepresentativeBirthDateTypedDict]]
     government_id: NotRequired[Nullable[UpdateRepresentativeGovernmentIDTypedDict]]
@@ -162,7 +148,7 @@ class UpdateRepresentative(BaseModel):
 
     phone: OptionalNullable[Phone] = UNSET
 
-    email: OptionalNullable[Email] = UNSET
+    email: OptionalNullable[str] = UNSET
 
     address: OptionalNullable[UpdateRepresentativeAddress] = UNSET
 

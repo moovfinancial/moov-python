@@ -36,7 +36,7 @@ class Files(BaseSDK):
 
         :param account_id:
         :param file: The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
-        :param file_purpose: The file's purpose.
+        :param file_purpose: The purpose of the file being uploaded.
         :param metadata: Additional metadata to be stored with the file, formatted as a JSON string.
 
             Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
@@ -181,7 +181,7 @@ class Files(BaseSDK):
 
         :param account_id:
         :param file: The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
-        :param file_purpose: The file's purpose.
+        :param file_purpose: The purpose of the file being uploaded.
         :param metadata: Additional metadata to be stored with the file, formatted as a JSON string.
 
             Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.

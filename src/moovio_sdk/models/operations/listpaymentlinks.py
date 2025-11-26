@@ -54,6 +54,7 @@ class ListPaymentLinksGlobals(BaseModel):
 
 class ListPaymentLinksRequestTypedDict(TypedDict):
     account_id: str
+    r"""The merchant account ID."""
     skip: NotRequired[int]
     count: NotRequired[int]
     type: NotRequired[components_paymentlinktype.PaymentLinkType]
@@ -66,6 +67,7 @@ class ListPaymentLinksRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""The merchant account ID."""
 
     skip: Annotated[
         Optional[int],

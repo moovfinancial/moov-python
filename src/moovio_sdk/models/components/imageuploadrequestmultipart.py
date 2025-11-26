@@ -35,17 +35,15 @@ class Image(BaseModel):
 
 
 class ImageUploadRequestMultiPartTypedDict(TypedDict):
-    r"""Multipart request body for uploading an image with optional metadata."""
-
     image: ImageTypedDict
+    r"""A PNG, JPEG, or WebP image file to upload."""
     metadata: NotRequired[ImageMetadataRequestTypedDict]
     r"""Optional, json-encoded metadata to associate with the uploaded image."""
 
 
 class ImageUploadRequestMultiPart(BaseModel):
-    r"""Multipart request body for uploading an image with optional metadata."""
-
     image: Annotated[Image, FieldMetadata(multipart=MultipartFormMetadata(file=True))]
+    r"""A PNG, JPEG, or WebP image file to upload."""
 
     metadata: Annotated[
         Optional[ImageMetadataRequest],

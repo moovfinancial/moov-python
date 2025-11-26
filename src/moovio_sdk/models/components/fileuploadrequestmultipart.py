@@ -35,12 +35,10 @@ class FileUploadRequestMultiPartFile(BaseModel):
 
 
 class FileUploadRequestMultiPartTypedDict(TypedDict):
-    r"""Request to upload a file for an account."""
-
     file: FileUploadRequestMultiPartFileTypedDict
     r"""The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`."""
     file_purpose: FilePurpose
-    r"""The file's purpose."""
+    r"""The purpose of the file being uploaded."""
     metadata: NotRequired[str]
     r"""Additional metadata to be stored with the file, formatted as a JSON string.
 
@@ -49,8 +47,6 @@ class FileUploadRequestMultiPartTypedDict(TypedDict):
 
 
 class FileUploadRequestMultiPart(BaseModel):
-    r"""Request to upload a file for an account."""
-
     file: Annotated[
         FileUploadRequestMultiPartFile,
         FieldMetadata(multipart=MultipartFormMetadata(file=True)),
@@ -60,7 +56,7 @@ class FileUploadRequestMultiPart(BaseModel):
     file_purpose: Annotated[
         FilePurpose, pydantic.Field(alias="filePurpose"), FieldMetadata(multipart=True)
     ]
-    r"""The file's purpose."""
+    r"""The purpose of the file being uploaded."""
 
     metadata: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
     r"""Additional metadata to be stored with the file, formatted as a JSON string.

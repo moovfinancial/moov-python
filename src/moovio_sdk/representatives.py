@@ -989,9 +989,7 @@ class Representatives(BaseSDK):
         phone: OptionalNullable[
             Union[components.Phone, components.PhoneTypedDict]
         ] = UNSET,
-        email: OptionalNullable[
-            Union[components.Email, components.EmailTypedDict]
-        ] = UNSET,
+        email: OptionalNullable[str] = UNSET,
         address: OptionalNullable[
             Union[
                 components.UpdateRepresentativeAddress,
@@ -1070,9 +1068,7 @@ class Representatives(BaseSDK):
                 phone=utils.get_pydantic_model(
                     phone, OptionalNullable[components.Phone]
                 ),
-                email=utils.get_pydantic_model(
-                    email, OptionalNullable[components.Email]
-                ),
+                email=email,
                 address=utils.get_pydantic_model(
                     address, OptionalNullable[components.UpdateRepresentativeAddress]
                 ),
@@ -1188,9 +1184,7 @@ class Representatives(BaseSDK):
         phone: OptionalNullable[
             Union[components.Phone, components.PhoneTypedDict]
         ] = UNSET,
-        email: OptionalNullable[
-            Union[components.Email, components.EmailTypedDict]
-        ] = UNSET,
+        email: OptionalNullable[str] = UNSET,
         address: OptionalNullable[
             Union[
                 components.UpdateRepresentativeAddress,
@@ -1269,9 +1263,7 @@ class Representatives(BaseSDK):
                 phone=utils.get_pydantic_model(
                     phone, OptionalNullable[components.Phone]
                 ),
-                email=utils.get_pydantic_model(
-                    email, OptionalNullable[components.Email]
-                ),
+                email=email,
                 address=utils.get_pydantic_model(
                     address, OptionalNullable[components.UpdateRepresentativeAddress]
                 ),
