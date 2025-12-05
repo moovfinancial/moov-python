@@ -72,6 +72,7 @@ class Authentication(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.RevokeTokenRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -187,6 +188,7 @@ class Authentication(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.RevokeTokenRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -306,6 +308,7 @@ class Authentication(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.AuthTokenRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -426,6 +429,7 @@ class Authentication(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.AuthTokenRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

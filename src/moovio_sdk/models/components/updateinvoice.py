@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 from .amountdecimalupdate import AmountDecimalUpdate, AmountDecimalUpdateTypedDict
-from .invoicelineitemsupdate import (
-    InvoiceLineItemsUpdate,
-    InvoiceLineItemsUpdateTypedDict,
+from .createinvoicelineitemsupdate import (
+    CreateInvoiceLineItemsUpdate,
+    CreateInvoiceLineItemsUpdateTypedDict,
 )
 from .invoicestatus import InvoiceStatus
 from datetime import datetime
@@ -23,7 +23,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class UpdateInvoiceTypedDict(TypedDict):
     description: NotRequired[str]
-    line_items: NotRequired[InvoiceLineItemsUpdateTypedDict]
+    line_items: NotRequired[CreateInvoiceLineItemsUpdateTypedDict]
     r"""A collection of line items for an invoice."""
     invoice_date: NotRequired[Nullable[datetime]]
     due_date: NotRequired[Nullable[datetime]]
@@ -36,7 +36,7 @@ class UpdateInvoice(BaseModel):
     description: Optional[str] = None
 
     line_items: Annotated[
-        Optional[InvoiceLineItemsUpdate], pydantic.Field(alias="lineItems")
+        Optional[CreateInvoiceLineItemsUpdate], pydantic.Field(alias="lineItems")
     ] = None
     r"""A collection of line items for an invoice."""
 

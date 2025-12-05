@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
-from .invoicelineitems import InvoiceLineItems, InvoiceLineItemsTypedDict
+from .createinvoicelineitems import (
+    CreateInvoiceLineItems,
+    CreateInvoiceLineItemsTypedDict,
+)
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -13,7 +16,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class CreateInvoiceTypedDict(TypedDict):
     customer_account_id: str
     description: str
-    line_items: InvoiceLineItemsTypedDict
+    line_items: CreateInvoiceLineItemsTypedDict
     r"""A collection of line items for an invoice."""
     invoice_date: NotRequired[datetime]
     due_date: NotRequired[datetime]
@@ -25,7 +28,7 @@ class CreateInvoice(BaseModel):
 
     description: str
 
-    line_items: Annotated[InvoiceLineItems, pydantic.Field(alias="lineItems")]
+    line_items: Annotated[CreateInvoiceLineItems, pydantic.Field(alias="lineItems")]
     r"""A collection of line items for an invoice."""
 
     invoice_date: Annotated[Optional[datetime], pydantic.Field(alias="invoiceDate")] = (

@@ -95,6 +95,7 @@ class Transfers(BaseSDK):
                 "json",
                 components.CreateTransferOptions,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -243,6 +244,7 @@ class Transfers(BaseSDK):
                 "json",
                 components.CreateTransferOptions,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -421,6 +423,7 @@ class Transfers(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_transfer, False, False, "json", components.CreateTransfer
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -612,6 +615,7 @@ class Transfers(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_transfer, False, False, "json", components.CreateTransfer
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -783,6 +787,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -928,6 +933,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1036,6 +1042,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1138,6 +1145,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1250,6 +1258,7 @@ class Transfers(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.patch_transfer, False, False, "json", components.PatchTransfer
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1378,6 +1387,7 @@ class Transfers(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.patch_transfer, False, False, "json", components.PatchTransfer
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1493,6 +1503,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1606,6 +1617,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1722,6 +1734,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1824,6 +1837,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1945,6 +1959,7 @@ class Transfers(BaseSDK):
                 "json",
                 Optional[components.CreateRefund],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2099,6 +2114,7 @@ class Transfers(BaseSDK):
                 "json",
                 Optional[components.CreateRefund],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2231,6 +2247,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2332,6 +2349,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2436,6 +2454,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2540,6 +2559,7 @@ class Transfers(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2658,6 +2678,7 @@ class Transfers(BaseSDK):
                 "json",
                 Optional[components.CreateReversal],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2795,6 +2816,7 @@ class Transfers(BaseSDK):
                 "json",
                 Optional[components.CreateReversal],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

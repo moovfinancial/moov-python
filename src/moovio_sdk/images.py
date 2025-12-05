@@ -71,6 +71,7 @@ class Images(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -172,6 +173,7 @@ class Images(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -290,6 +292,7 @@ class Images(BaseSDK):
                 "multipart",
                 components.ImageUploadRequestMultiPart,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -427,6 +430,7 @@ class Images(BaseSDK):
                 "multipart",
                 components.ImageUploadRequestMultiPart,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -544,6 +548,7 @@ class Images(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -640,6 +645,7 @@ class Images(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -761,6 +767,7 @@ class Images(BaseSDK):
                 "multipart",
                 components.ImageUploadRequestMultiPart,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -903,6 +910,7 @@ class Images(BaseSDK):
                 "multipart",
                 components.ImageUploadRequestMultiPart,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1020,6 +1028,7 @@ class Images(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1130,6 +1139,7 @@ class Images(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1252,6 +1262,7 @@ class Images(BaseSDK):
                 "json",
                 components.ImageMetadataRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1381,6 +1392,7 @@ class Images(BaseSDK):
                 "json",
                 components.ImageMetadataRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1505,6 +1517,7 @@ class Images(BaseSDK):
             if accept_header_override is not None
             else "image/jpeg;q=1, image/png;q=0.7, image/webp;q=0",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1615,6 +1628,7 @@ class Images(BaseSDK):
             if accept_header_override is not None
             else "image/jpeg;q=1, image/png;q=0.7, image/webp;q=0",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

@@ -335,6 +335,34 @@ if TYPE_CHECKING:
         CreateIndividualProfileTypedDict,
     )
     from .createinvoice import CreateInvoice, CreateInvoiceTypedDict
+    from .createinvoicelineitem import (
+        CreateInvoiceLineItem,
+        CreateInvoiceLineItemTypedDict,
+    )
+    from .createinvoicelineitemoption import (
+        CreateInvoiceLineItemOption,
+        CreateInvoiceLineItemOptionTypedDict,
+    )
+    from .createinvoicelineitemoptionvalidationerror import (
+        CreateInvoiceLineItemOptionValidationError,
+        CreateInvoiceLineItemOptionValidationErrorTypedDict,
+    )
+    from .createinvoicelineitems import (
+        CreateInvoiceLineItems,
+        CreateInvoiceLineItemsTypedDict,
+    )
+    from .createinvoicelineitemsupdate import (
+        CreateInvoiceLineItemsUpdate,
+        CreateInvoiceLineItemsUpdateTypedDict,
+    )
+    from .createinvoicelineitemsvalidationerror import (
+        CreateInvoiceLineItemsValidationError,
+        CreateInvoiceLineItemsValidationErrorTypedDict,
+    )
+    from .createinvoicelineitemvalidationerror import (
+        CreateInvoiceLineItemValidationError,
+        CreateInvoiceLineItemValidationErrorTypedDict,
+    )
     from .createpaymentlink import CreatePaymentLink, CreatePaymentLinkTypedDict
     from .createpaymentlinklineitem import (
         CreatePaymentLinkLineItem,
@@ -576,6 +604,10 @@ if TYPE_CHECKING:
         InvoiceExternalPaymentTypedDict,
     )
     from .invoicelineitem import InvoiceLineItem, InvoiceLineItemTypedDict
+    from .invoicelineitemimagemetadata import (
+        InvoiceLineItemImageMetadata,
+        InvoiceLineItemImageMetadataTypedDict,
+    )
     from .invoicelineitemoption import (
         InvoiceLineItemOption,
         InvoiceLineItemOptionTypedDict,
@@ -585,10 +617,6 @@ if TYPE_CHECKING:
         InvoiceLineItemOptionValidationErrorTypedDict,
     )
     from .invoicelineitems import InvoiceLineItems, InvoiceLineItemsTypedDict
-    from .invoicelineitemsupdate import (
-        InvoiceLineItemsUpdate,
-        InvoiceLineItemsUpdateTypedDict,
-    )
     from .invoicelineitemsvalidationerror import (
         InvoiceLineItemsValidationError,
         InvoiceLineItemsValidationErrorTypedDict,
@@ -1531,6 +1559,20 @@ __all__ = [
     "CreateIndividualProfile",
     "CreateIndividualProfileTypedDict",
     "CreateInvoice",
+    "CreateInvoiceLineItem",
+    "CreateInvoiceLineItemOption",
+    "CreateInvoiceLineItemOptionTypedDict",
+    "CreateInvoiceLineItemOptionValidationError",
+    "CreateInvoiceLineItemOptionValidationErrorTypedDict",
+    "CreateInvoiceLineItemTypedDict",
+    "CreateInvoiceLineItemValidationError",
+    "CreateInvoiceLineItemValidationErrorTypedDict",
+    "CreateInvoiceLineItems",
+    "CreateInvoiceLineItemsTypedDict",
+    "CreateInvoiceLineItemsUpdate",
+    "CreateInvoiceLineItemsUpdateTypedDict",
+    "CreateInvoiceLineItemsValidationError",
+    "CreateInvoiceLineItemsValidationErrorTypedDict",
     "CreateInvoiceTypedDict",
     "CreatePaymentLink",
     "CreatePaymentLinkLineItem",
@@ -1732,6 +1774,8 @@ __all__ = [
     "InvoiceExternalPaymentPaymentType",
     "InvoiceExternalPaymentTypedDict",
     "InvoiceLineItem",
+    "InvoiceLineItemImageMetadata",
+    "InvoiceLineItemImageMetadataTypedDict",
     "InvoiceLineItemOption",
     "InvoiceLineItemOptionTypedDict",
     "InvoiceLineItemOptionValidationError",
@@ -1741,8 +1785,6 @@ __all__ = [
     "InvoiceLineItemValidationErrorTypedDict",
     "InvoiceLineItems",
     "InvoiceLineItemsTypedDict",
-    "InvoiceLineItemsUpdate",
-    "InvoiceLineItemsUpdateTypedDict",
     "InvoiceLineItemsValidationError",
     "InvoiceLineItemsValidationErrorTypedDict",
     "InvoicePayment",
@@ -2572,6 +2614,20 @@ _dynamic_imports: dict[str, str] = {
     "CreateIndividualProfileTypedDict": ".createindividualprofile",
     "CreateInvoice": ".createinvoice",
     "CreateInvoiceTypedDict": ".createinvoice",
+    "CreateInvoiceLineItem": ".createinvoicelineitem",
+    "CreateInvoiceLineItemTypedDict": ".createinvoicelineitem",
+    "CreateInvoiceLineItemOption": ".createinvoicelineitemoption",
+    "CreateInvoiceLineItemOptionTypedDict": ".createinvoicelineitemoption",
+    "CreateInvoiceLineItemOptionValidationError": ".createinvoicelineitemoptionvalidationerror",
+    "CreateInvoiceLineItemOptionValidationErrorTypedDict": ".createinvoicelineitemoptionvalidationerror",
+    "CreateInvoiceLineItems": ".createinvoicelineitems",
+    "CreateInvoiceLineItemsTypedDict": ".createinvoicelineitems",
+    "CreateInvoiceLineItemsUpdate": ".createinvoicelineitemsupdate",
+    "CreateInvoiceLineItemsUpdateTypedDict": ".createinvoicelineitemsupdate",
+    "CreateInvoiceLineItemsValidationError": ".createinvoicelineitemsvalidationerror",
+    "CreateInvoiceLineItemsValidationErrorTypedDict": ".createinvoicelineitemsvalidationerror",
+    "CreateInvoiceLineItemValidationError": ".createinvoicelineitemvalidationerror",
+    "CreateInvoiceLineItemValidationErrorTypedDict": ".createinvoicelineitemvalidationerror",
     "CreatePaymentLink": ".createpaymentlink",
     "CreatePaymentLinkTypedDict": ".createpaymentlink",
     "CreatePaymentLinkLineItem": ".createpaymentlinklineitem",
@@ -2770,14 +2826,14 @@ _dynamic_imports: dict[str, str] = {
     "InvoiceExternalPaymentTypedDict": ".invoiceexternalpayment",
     "InvoiceLineItem": ".invoicelineitem",
     "InvoiceLineItemTypedDict": ".invoicelineitem",
+    "InvoiceLineItemImageMetadata": ".invoicelineitemimagemetadata",
+    "InvoiceLineItemImageMetadataTypedDict": ".invoicelineitemimagemetadata",
     "InvoiceLineItemOption": ".invoicelineitemoption",
     "InvoiceLineItemOptionTypedDict": ".invoicelineitemoption",
     "InvoiceLineItemOptionValidationError": ".invoicelineitemoptionvalidationerror",
     "InvoiceLineItemOptionValidationErrorTypedDict": ".invoicelineitemoptionvalidationerror",
     "InvoiceLineItems": ".invoicelineitems",
     "InvoiceLineItemsTypedDict": ".invoicelineitems",
-    "InvoiceLineItemsUpdate": ".invoicelineitemsupdate",
-    "InvoiceLineItemsUpdateTypedDict": ".invoicelineitemsupdate",
     "InvoiceLineItemsValidationError": ".invoicelineitemsvalidationerror",
     "InvoiceLineItemsValidationErrorTypedDict": ".invoicelineitemsvalidationerror",
     "InvoiceLineItemValidationError": ".invoicelineitemvalidationerror",

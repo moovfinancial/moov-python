@@ -19,7 +19,8 @@ class Invoices(BaseSDK):
         customer_account_id: str,
         description: str,
         line_items: Union[
-            components.InvoiceLineItems, components.InvoiceLineItemsTypedDict
+            components.CreateInvoiceLineItems,
+            components.CreateInvoiceLineItemsTypedDict,
         ],
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
@@ -64,7 +65,7 @@ class Invoices(BaseSDK):
                 customer_account_id=customer_account_id,
                 description=description,
                 line_items=utils.get_pydantic_model(
-                    line_items, components.InvoiceLineItems
+                    line_items, components.CreateInvoiceLineItems
                 ),
                 invoice_date=invoice_date,
                 due_date=due_date,
@@ -93,6 +94,7 @@ class Invoices(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_invoice, False, False, "json", components.CreateInvoice
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -167,7 +169,8 @@ class Invoices(BaseSDK):
         customer_account_id: str,
         description: str,
         line_items: Union[
-            components.InvoiceLineItems, components.InvoiceLineItemsTypedDict
+            components.CreateInvoiceLineItems,
+            components.CreateInvoiceLineItemsTypedDict,
         ],
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
@@ -212,7 +215,7 @@ class Invoices(BaseSDK):
                 customer_account_id=customer_account_id,
                 description=description,
                 line_items=utils.get_pydantic_model(
-                    line_items, components.InvoiceLineItems
+                    line_items, components.CreateInvoiceLineItems
                 ),
                 invoice_date=invoice_date,
                 due_date=due_date,
@@ -241,6 +244,7 @@ class Invoices(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_invoice, False, False, "json", components.CreateInvoice
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -370,6 +374,7 @@ class Invoices(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -484,6 +489,7 @@ class Invoices(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -589,6 +595,7 @@ class Invoices(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -688,6 +695,7 @@ class Invoices(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -742,8 +750,8 @@ class Invoices(BaseSDK):
         description: Optional[str] = None,
         line_items: Optional[
             Union[
-                components.InvoiceLineItemsUpdate,
-                components.InvoiceLineItemsUpdateTypedDict,
+                components.CreateInvoiceLineItemsUpdate,
+                components.CreateInvoiceLineItemsUpdateTypedDict,
             ]
         ] = None,
         invoice_date: OptionalNullable[datetime] = UNSET,
@@ -793,7 +801,7 @@ class Invoices(BaseSDK):
             update_invoice=components.UpdateInvoice(
                 description=description,
                 line_items=utils.get_pydantic_model(
-                    line_items, Optional[components.InvoiceLineItemsUpdate]
+                    line_items, Optional[components.CreateInvoiceLineItemsUpdate]
                 ),
                 invoice_date=invoice_date,
                 due_date=due_date,
@@ -823,6 +831,7 @@ class Invoices(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_invoice, False, False, "json", components.UpdateInvoice
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -898,8 +907,8 @@ class Invoices(BaseSDK):
         description: Optional[str] = None,
         line_items: Optional[
             Union[
-                components.InvoiceLineItemsUpdate,
-                components.InvoiceLineItemsUpdateTypedDict,
+                components.CreateInvoiceLineItemsUpdate,
+                components.CreateInvoiceLineItemsUpdateTypedDict,
             ]
         ] = None,
         invoice_date: OptionalNullable[datetime] = UNSET,
@@ -949,7 +958,7 @@ class Invoices(BaseSDK):
             update_invoice=components.UpdateInvoice(
                 description=description,
                 line_items=utils.get_pydantic_model(
-                    line_items, Optional[components.InvoiceLineItemsUpdate]
+                    line_items, Optional[components.CreateInvoiceLineItemsUpdate]
                 ),
                 invoice_date=invoice_date,
                 due_date=due_date,
@@ -979,6 +988,7 @@ class Invoices(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_invoice, False, False, "json", components.UpdateInvoice
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1118,6 +1128,7 @@ class Invoices(BaseSDK):
                 "json",
                 components.MarkInvoicePaid,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1257,6 +1268,7 @@ class Invoices(BaseSDK):
                 "json",
                 components.MarkInvoicePaid,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

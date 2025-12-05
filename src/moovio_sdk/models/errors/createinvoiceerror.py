@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.components import (
     amountdecimalvalidationerror as components_amountdecimalvalidationerror,
-    invoicelineitemsvalidationerror as components_invoicelineitemsvalidationerror,
+    createinvoicelineitemsvalidationerror as components_createinvoicelineitemsvalidationerror,
 )
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
@@ -23,7 +23,7 @@ class CreateInvoiceErrorData(BaseModel):
 
     line_items: Annotated[
         Optional[
-            components_invoicelineitemsvalidationerror.InvoiceLineItemsValidationError
+            components_createinvoicelineitemsvalidationerror.CreateInvoiceLineItemsValidationError
         ],
         pydantic.Field(alias="lineItems"),
     ] = None

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 1ff6708b2e828c479cfc6141964045a8
+  docChecksum: c534f686827f8ce456b22e89abbc379c
   docVersion: latest
-  speakeasyVersion: 1.661.2
-  generationVersion: 2.763.3
-  releaseVersion: 0.19.23
-  configChecksum: 970a13de7dcc85b31620410248ff3410
+  speakeasyVersion: 1.668.0
+  generationVersion: 2.770.0
+  releaseVersion: 0.20.0
+  configChecksum: b19d1c57c25c5f3262e6842b4bb7b818
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.23.11
+    core: 5.23.13
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -36,7 +36,7 @@ features:
     nullables: 1.0.1
     responseFormat: 1.0.1
     retries: 3.0.3
-    sdkHooks: 1.1.0
+    sdkHooks: 1.2.0
     unions: 3.1.0
     uploadStreams: 1.0.0
 generatedFiles:
@@ -202,6 +202,13 @@ generatedFiles:
   - docs/models/components/createindividualerrorssn.md
   - docs/models/components/createindividualprofile.md
   - docs/models/components/createinvoice.md
+  - docs/models/components/createinvoicelineitem.md
+  - docs/models/components/createinvoicelineitemoption.md
+  - docs/models/components/createinvoicelineitemoptionvalidationerror.md
+  - docs/models/components/createinvoicelineitems.md
+  - docs/models/components/createinvoicelineitemsupdate.md
+  - docs/models/components/createinvoicelineitemsvalidationerror.md
+  - docs/models/components/createinvoicelineitemvalidationerror.md
   - docs/models/components/createpaymentlink.md
   - docs/models/components/createpaymentlinklineitem.md
   - docs/models/components/createpaymentlinklineitemoption.md
@@ -312,10 +319,10 @@ generatedFiles:
   - docs/models/components/invoiceexternalpayment.md
   - docs/models/components/invoiceexternalpaymentpaymenttype.md
   - docs/models/components/invoicelineitem.md
+  - docs/models/components/invoicelineitemimagemetadata.md
   - docs/models/components/invoicelineitemoption.md
   - docs/models/components/invoicelineitemoptionvalidationerror.md
   - docs/models/components/invoicelineitems.md
-  - docs/models/components/invoicelineitemsupdate.md
   - docs/models/components/invoicelineitemsvalidationerror.md
   - docs/models/components/invoicelineitemvalidationerror.md
   - docs/models/components/invoicepayment.md
@@ -1393,6 +1400,13 @@ generatedFiles:
   - src/moovio_sdk/models/components/createindividualerror.py
   - src/moovio_sdk/models/components/createindividualprofile.py
   - src/moovio_sdk/models/components/createinvoice.py
+  - src/moovio_sdk/models/components/createinvoicelineitem.py
+  - src/moovio_sdk/models/components/createinvoicelineitemoption.py
+  - src/moovio_sdk/models/components/createinvoicelineitemoptionvalidationerror.py
+  - src/moovio_sdk/models/components/createinvoicelineitems.py
+  - src/moovio_sdk/models/components/createinvoicelineitemsupdate.py
+  - src/moovio_sdk/models/components/createinvoicelineitemsvalidationerror.py
+  - src/moovio_sdk/models/components/createinvoicelineitemvalidationerror.py
   - src/moovio_sdk/models/components/createpaymentlink.py
   - src/moovio_sdk/models/components/createpaymentlinklineitem.py
   - src/moovio_sdk/models/components/createpaymentlinklineitemoption.py
@@ -1494,10 +1508,10 @@ generatedFiles:
   - src/moovio_sdk/models/components/invoice.py
   - src/moovio_sdk/models/components/invoiceexternalpayment.py
   - src/moovio_sdk/models/components/invoicelineitem.py
+  - src/moovio_sdk/models/components/invoicelineitemimagemetadata.py
   - src/moovio_sdk/models/components/invoicelineitemoption.py
   - src/moovio_sdk/models/components/invoicelineitemoptionvalidationerror.py
   - src/moovio_sdk/models/components/invoicelineitems.py
-  - src/moovio_sdk/models/components/invoicelineitemsupdate.py
   - src/moovio_sdk/models/components/invoicelineitemsvalidationerror.py
   - src/moovio_sdk/models/components/invoicelineitemvalidationerror.py
   - src/moovio_sdk/models/components/invoicepayment.py
@@ -4619,8 +4633,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes Detected:
-  * `moov.images.update()`:  `request.metadata` **Changed** **Breaking** :warning:
-  * `moov.representatives.update()`:  `request.email` **Changed** **Breaking** :warning:
-  * `moov.sweeps.update_config()`:  `request` **Changed** **Breaking** :warning:
+releaseNotes: "## Python SDK Changes:\n* `moov.invoices.create_invoice()`: \n  *  `request.line_items.items.[]` **Changed**\n  *  `response.line_items.items.[].images` **Added**\n* `moov.invoices.list_invoices()`:  `response.[].line_items.items.[].images` **Added**\n* `moov.invoices.get_invoice()`:  `response.line_items.items.[].images` **Added**\n* `moov.invoices.update_invoice()`: \n  *  `request.line_items.items.[]` **Changed**\n  *  `response.line_items.items.[].images` **Added**\n* `moov.invoices.mark_paid_invoice()`:  `response.line_items.items.[].images` **Added**\n"

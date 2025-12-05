@@ -77,6 +77,7 @@ class Wallets(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_wallet, False, False, "json", components.CreateWallet
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -210,6 +211,7 @@ class Wallets(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_wallet, False, False, "json", components.CreateWallet
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -341,6 +343,7 @@ class Wallets(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -457,6 +460,7 @@ class Wallets(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -564,6 +568,7 @@ class Wallets(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -665,6 +670,7 @@ class Wallets(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -785,6 +791,7 @@ class Wallets(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.patch_wallet, False, False, "json", components.PatchWallet
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -926,6 +933,7 @@ class Wallets(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.patch_wallet, False, False, "json", components.PatchWallet
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

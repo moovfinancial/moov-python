@@ -113,6 +113,7 @@ class Accounts(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.CreateAccount
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -282,6 +283,7 @@ class Accounts(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.CreateAccount
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -446,6 +448,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -589,6 +592,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -685,6 +689,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -781,6 +786,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -935,6 +941,7 @@ class Accounts(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.patch_account, False, False, "json", components.PatchAccount
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1110,6 +1117,7 @@ class Accounts(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.patch_account, False, False, "json", components.PatchAccount
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1229,6 +1237,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1341,6 +1350,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1451,6 +1461,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1547,6 +1558,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1657,6 +1669,7 @@ class Accounts(BaseSDK):
                 "json",
                 components.AccountCountries,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1788,6 +1801,7 @@ class Accounts(BaseSDK):
                 "json",
                 components.AccountCountries,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1905,6 +1919,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2002,6 +2017,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2103,6 +2119,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2205,6 +2222,7 @@ class Accounts(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

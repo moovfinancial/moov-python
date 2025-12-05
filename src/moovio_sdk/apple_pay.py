@@ -79,6 +79,7 @@ class ApplePay(BaseSDK):
                 "json",
                 components.RegisterApplePayMerchantDomains,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -210,6 +211,7 @@ class ApplePay(BaseSDK):
                 "json",
                 components.RegisterApplePayMerchantDomains,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -341,6 +343,7 @@ class ApplePay(BaseSDK):
                 "json",
                 components.UpdateApplePayMerchantDomains,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -472,6 +475,7 @@ class ApplePay(BaseSDK):
                 "json",
                 components.UpdateApplePayMerchantDomains,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -587,6 +591,7 @@ class ApplePay(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -687,6 +692,7 @@ class ApplePay(BaseSDK):
                 x_moov_version=self.sdk_configuration.globals.x_moov_version,
             ),
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -803,6 +809,7 @@ class ApplePay(BaseSDK):
                 "json",
                 components.CreateApplePaySession,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -933,6 +940,7 @@ class ApplePay(BaseSDK):
                 "json",
                 components.CreateApplePaySession,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1073,6 +1081,7 @@ class ApplePay(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.link_apple_pay, False, False, "json", components.LinkApplePay
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1220,6 +1229,7 @@ class ApplePay(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.link_apple_pay, False, False, "json", components.LinkApplePay
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

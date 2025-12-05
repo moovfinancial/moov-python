@@ -2,18 +2,17 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
-from .invoicelineitemimagemetadata import (
-    InvoiceLineItemImageMetadata,
-    InvoiceLineItemImageMetadataTypedDict,
+from .createinvoicelineitemoption import (
+    CreateInvoiceLineItemOption,
+    CreateInvoiceLineItemOptionTypedDict,
 )
-from .invoicelineitemoption import InvoiceLineItemOption, InvoiceLineItemOptionTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class InvoiceLineItemTypedDict(TypedDict):
+class CreateInvoiceLineItemTypedDict(TypedDict):
     r"""Represents a single item in an invoice, including optional modifiers and quantity."""
 
     name: str
@@ -24,13 +23,13 @@ class InvoiceLineItemTypedDict(TypedDict):
     r"""The quantity of this item."""
     product_id: NotRequired[str]
     r"""Optional unique identifier associating the line item with a product."""
-    options: NotRequired[List[InvoiceLineItemOptionTypedDict]]
+    options: NotRequired[List[CreateInvoiceLineItemOptionTypedDict]]
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
-    images: NotRequired[List[InvoiceLineItemImageMetadataTypedDict]]
+    image_i_ds: NotRequired[List[str]]
     r"""Optional list of images associated with this line item."""
 
 
-class InvoiceLineItem(BaseModel):
+class CreateInvoiceLineItem(BaseModel):
     r"""Represents a single item in an invoice, including optional modifiers and quantity."""
 
     name: str
@@ -45,8 +44,8 @@ class InvoiceLineItem(BaseModel):
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None
     r"""Optional unique identifier associating the line item with a product."""
 
-    options: Optional[List[InvoiceLineItemOption]] = None
+    options: Optional[List[CreateInvoiceLineItemOption]] = None
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
 
-    images: Optional[List[InvoiceLineItemImageMetadata]] = None
+    image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
     r"""Optional list of images associated with this line item."""
