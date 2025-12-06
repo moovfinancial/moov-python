@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+from .invoicelineitemimagemetadata import (
+    InvoiceLineItemImageMetadata,
+    InvoiceLineItemImageMetadataTypedDict,
+)
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -19,6 +23,8 @@ class InvoiceLineItemOptionTypedDict(TypedDict):
     r"""Optional price modification applied by this option. Can be positive, negative, or zero."""
     group: NotRequired[str]
     r"""Optional group identifier to categorize related options (e.g., 'toppings')."""
+    images: NotRequired[List[InvoiceLineItemImageMetadataTypedDict]]
+    r"""Optional list of images associated with this line item option."""
 
 
 class InvoiceLineItemOption(BaseModel):
@@ -37,3 +43,6 @@ class InvoiceLineItemOption(BaseModel):
 
     group: Optional[str] = None
     r"""Optional group identifier to categorize related options (e.g., 'toppings')."""
+
+    images: Optional[List[InvoiceLineItemImageMetadata]] = None
+    r"""Optional list of images associated with this line item option."""
