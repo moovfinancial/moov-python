@@ -16,10 +16,6 @@ you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/branding.read` scope.
-* [update](#update) - Updates the brand properties for the specified account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/branding.write` scope.
 
 ## create
 
@@ -181,53 +177,3 @@ with Moov(
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## update
-
-Updates the brand properties for the specified account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-you'll need to specify the `/accounts/{accountID}/branding.write` scope.
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="updateBrand" method="patch" path="/accounts/{accountID}/branding" -->
-```python
-from moovio_sdk import Moov
-from moovio_sdk.models import components
-
-
-with Moov(
-    x_moov_version="v2024.01.00",
-    security=components.Security(
-        username="",
-        password="",
-    ),
-) as moov:
-
-    res = moov.branding.update(account_id="0c0dc4a5-ecd9-4223-810a-a71632980156")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `account_id`                                                                 | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
-| `colors`                                                                     | [Optional[components.UpdateColors]](../../models/components/updatecolors.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
-| `retries`                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)             | :heavy_minus_sign:                                                           | Configuration to override the default retry behavior of the client.          |
-
-### Response
-
-**[operations.UpdateBrandResponse](../../models/operations/updatebrandresponse.md)**
-
-### Errors
-
-| Error Type                  | Status Code                 | Content Type                |
-| --------------------------- | --------------------------- | --------------------------- |
-| errors.GenericError         | 400, 409                    | application/json            |
-| errors.BrandValidationError | 422                         | application/json            |
-| errors.APIError             | 4XX, 5XX                    | \*/\*                       |

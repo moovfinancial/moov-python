@@ -1052,15 +1052,12 @@ if TYPE_CHECKING:
         UpdateApplePayMerchantDomains,
         UpdateApplePayMerchantDomainsTypedDict,
     )
-    from .updatebrand import UpdateBrand, UpdateBrandTypedDict
     from .updatecard import UpdateCard, UpdateCardTypedDict
     from .updatecardaddress import UpdateCardAddress, UpdateCardAddressTypedDict
     from .updatecardexpiration import (
         UpdateCardExpiration,
         UpdateCardExpirationTypedDict,
     )
-    from .updatecolor import UpdateColor, UpdateColorTypedDict
-    from .updatecolors import UpdateColors, UpdateColorsTypedDict
     from .updateevidence import UpdateEvidence, UpdateEvidenceTypedDict
     from .updateinvoice import UpdateInvoice, UpdateInvoiceTypedDict
     from .updateissuedcard import UpdateIssuedCard, UpdateIssuedCardTypedDict
@@ -2175,18 +2172,12 @@ __all__ = [
     "UnderwritingTypedDict",
     "UpdateApplePayMerchantDomains",
     "UpdateApplePayMerchantDomainsTypedDict",
-    "UpdateBrand",
-    "UpdateBrandTypedDict",
     "UpdateCard",
     "UpdateCardAddress",
     "UpdateCardAddressTypedDict",
     "UpdateCardExpiration",
     "UpdateCardExpirationTypedDict",
     "UpdateCardTypedDict",
-    "UpdateColor",
-    "UpdateColorTypedDict",
-    "UpdateColors",
-    "UpdateColorsTypedDict",
     "UpdateEvidence",
     "UpdateEvidenceTypedDict",
     "UpdateInvoice",
@@ -3224,18 +3215,12 @@ _dynamic_imports: dict[str, str] = {
     "UnderwritingStatus": ".underwritingstatus",
     "UpdateApplePayMerchantDomains": ".updateapplepaymerchantdomains",
     "UpdateApplePayMerchantDomainsTypedDict": ".updateapplepaymerchantdomains",
-    "UpdateBrand": ".updatebrand",
-    "UpdateBrandTypedDict": ".updatebrand",
     "UpdateCard": ".updatecard",
     "UpdateCardTypedDict": ".updatecard",
     "UpdateCardAddress": ".updatecardaddress",
     "UpdateCardAddressTypedDict": ".updatecardaddress",
     "UpdateCardExpiration": ".updatecardexpiration",
     "UpdateCardExpirationTypedDict": ".updatecardexpiration",
-    "UpdateColor": ".updatecolor",
-    "UpdateColorTypedDict": ".updatecolor",
-    "UpdateColors": ".updatecolors",
-    "UpdateColorsTypedDict": ".updatecolors",
     "UpdateEvidence": ".updateevidence",
     "UpdateEvidenceTypedDict": ".updateevidence",
     "UpdateInvoice": ".updateinvoice",
