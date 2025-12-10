@@ -27,7 +27,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 0.20.2
+  version: 0.20.3
   additionalDependencies:
     dev: {}
     main: {}
@@ -71,6 +71,7 @@ python:
   outputModelSuffix: output
   packageManager: poetry
   packageName: moovio_sdk
+  preApplyUnionDiscriminators: false
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat

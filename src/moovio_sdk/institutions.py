@@ -8,6 +8,7 @@ from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional
+from typing_extensions import deprecated
 
 
 class Institutions(BaseSDK):
@@ -229,6 +230,9 @@ class Institutions(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def search(
         self,
         *,
@@ -241,7 +245,9 @@ class Institutions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.ListInstitutionsResponse:
-        r"""Search for institutions by either their name or routing number.
+        r"""This endpoint has been deprecated and will be removed in a future release. Use [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+
+        Search for institutions by either their name or routing number.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/fed.read` scope.
@@ -341,6 +347,9 @@ class Institutions(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def search_async(
         self,
         *,
@@ -353,7 +362,9 @@ class Institutions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.ListInstitutionsResponse:
-        r"""Search for institutions by either their name or routing number.
+        r"""This endpoint has been deprecated and will be removed in a future release. Use [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+
+        Search for institutions by either their name or routing number.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/fed.read` scope.

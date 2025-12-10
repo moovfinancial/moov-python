@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 5513f7159af76424c0aca82ddb77391a
+  docChecksum: 0661e7f204319a89674c17e2c7c44a3f
   docVersion: latest
-  speakeasyVersion: 1.672.0
-  generationVersion: 2.774.0
-  releaseVersion: 0.20.2
-  configChecksum: 523493d8c2aba5a550ffe8455d05e8b4
+  speakeasyVersion: 1.674.0
+  generationVersion: 2.778.0
+  releaseVersion: 0.20.3
+  configChecksum: 405d29569fe638d5a13493afe456f18d
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 44cdfdeb-8d9d-4696-bc71-71ab658004c7
-  pristine_commit_hash: f05dd410e77c311d3b77fb31f03db2cf4384cb61
-  pristine_tree_hash: b236396d342887b77ed45ecd5990820ea14ab6d8
+  generation_id: 385eb3ce-e9bf-42b5-9cd5-978e1d47e8a4
+  pristine_commit_hash: c852dbb16f2724643f98f7fcef778ac8a5d8136c
+  pristine_tree_hash: 1ea08ad600c7896d6e4bde66f4d99e36482c5aa7
 features:
   python:
     acceptHeaders: 3.0.0
@@ -41,7 +41,7 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.3
     sdkHooks: 1.2.0
-    unions: 3.1.0
+    unions: 3.1.1
     uploadStreams: 1.0.0
 trackedFiles:
   .gitattributes:
@@ -2056,9 +2056,6 @@ trackedFiles:
     id: 0fa327e8e6a5
     last_write_checksum: sha1:7246823959ed6ac83f87cd1d844c2cc850d32557
     pristine_git_object: e8f1f6e49799301eef853cb4d85505046a3c79fd
-  docs/models/components/updatebrand.md:
-    id: 05ff58b84231
-    pristine_git_object: a82dc295a272ce3d13ed52e5be127cb09f65d1af
   docs/models/components/updatecard.md:
     id: df9a81aa0f65
     last_write_checksum: sha1:ca938ac10e0901340df331e6d1a49c6cb15c0555
@@ -2071,12 +2068,6 @@ trackedFiles:
     id: d12e007e8292
     last_write_checksum: sha1:7078c3589934e47091c8804866958a4899c53053
     pristine_git_object: 68b87f8008ae4d7fae75c8d57d6555d08d25721f
-  docs/models/components/updatecolor.md:
-    id: 2936281e3c63
-    pristine_git_object: 94f38e1052d7145e1cd9e327196bf4452f1a546b
-  docs/models/components/updatecolors.md:
-    id: e327703f094b
-    pristine_git_object: 3fadc8096a4cdbcd6433c6ca01fb69006903985e
   docs/models/components/updateevidence.md:
     id: 1b840d735a46
     last_write_checksum: sha1:757d4f3f2a68b0135e2c3825152ca8574742e2d6
@@ -4361,15 +4352,6 @@ trackedFiles:
     id: a377795b522e
     last_write_checksum: sha1:8c53564fdbdc5992a93978782d3009e354e71d1f
     pristine_git_object: c45f2342bc1dd23f0d5eb89a891b96e4983bbc60
-  docs/models/operations/updatebrandglobals.md:
-    id: 599c1e03ca6a
-    pristine_git_object: 09f7d90fb82d570b70fe8b1aaa9a977f00b4a57f
-  docs/models/operations/updatebrandrequest.md:
-    id: 1570601ec6bd
-    pristine_git_object: 1abf07969dbcf0b64732e71370c67be6193ac6cd
-  docs/models/operations/updatebrandresponse.md:
-    id: 84a78b7c5265
-    pristine_git_object: 64906495be8d6f3098cdd1978f83123c6ff18e25
   docs/models/operations/updatecardglobals.md:
     id: 4253c9156d0d
     last_write_checksum: sha1:dee06e0f49e142d81004584311eb24bd2875202e
@@ -4692,8 +4674,8 @@ trackedFiles:
     pristine_git_object: 131b64dd2fe76b371bd65a7ffda8b999c9a8a4f9
   docs/sdks/institutions/README.md:
     id: 9eeb0b2b49a2
-    last_write_checksum: sha1:219095b5a0376f9c0faf8de629b1e4c174310ceb
-    pristine_git_object: 077055421311a57f9d845533090a1812e3159cce
+    last_write_checksum: sha1:0f306bcbd987ce10243816449c95e9a124c4b2d4
+    pristine_git_object: 9a0498832ff1522fb0282eaf4ec5d7b9e2a87e14
   docs/sdks/invoices/README.md:
     id: a3f76a06eded
     last_write_checksum: sha1:afff063f9598e6821aa946b43ccee5e936e9c131
@@ -4780,8 +4762,8 @@ trackedFiles:
     pristine_git_object: 1d5ebbfbdfa5cea8bf4473d15550f03923758d43
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:daf053d921ca980d41c70d93506f418d62243ffc
-    pristine_git_object: a3967269dc336320db12e80d220c36cf66ece778
+    last_write_checksum: sha1:29dfaf69f7efd4704b909d210d4dde53e660e4f3
+    pristine_git_object: 7c7e42ff4330385a222a2187e6d26ea0d90bc17b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4808,8 +4790,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:60247b6349f1105c8c8ec91d3d0c52e122876a8a
-    pristine_git_object: 74d3cc55929e12c3527f5dfb92e6d0605cd51042
+    last_write_checksum: sha1:d88258614274f0589d82c1f8960a5ff071803645
+    pristine_git_object: f4a2643b9c691527e6a0583d6d86db0a22876b4e
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
@@ -4896,8 +4878,8 @@ trackedFiles:
     pristine_git_object: 42a8bdcc215ce2b75e98e3b79b38af55dd7c2160
   src/moovio_sdk/institutions.py:
     id: cc50c1576b5b
-    last_write_checksum: sha1:c7f7684b909c52b75677265d83edea87776c9132
-    pristine_git_object: fd6ae665c736a02afa80fb324aee2f52e8553110
+    last_write_checksum: sha1:27eb7b7b019f32d15a68a86683179cbad218f154
+    pristine_git_object: 24288cd8156cc54eb36f0e1c8d6643da0ee3806f
   src/moovio_sdk/invoices.py:
     id: 122d084f7b22
     last_write_checksum: sha1:905c05d411476c8c775228b484b745da31180fc7
@@ -6742,9 +6724,6 @@ trackedFiles:
     id: 3e46edc17360
     last_write_checksum: sha1:1a4c7300840f74c50ce0d583409d2485f314b7a3
     pristine_git_object: b6f06199901a0de1eb550c26d71aca241a551ae4
-  src/moovio_sdk/models/components/updatebrand.py:
-    id: ac38faed65b1
-    pristine_git_object: 55e3b5840d826a8426d04ef25bbc57e4b28c5ec2
   src/moovio_sdk/models/components/updatecard.py:
     id: a3c70b64ed43
     last_write_checksum: sha1:3e2626014b2cbc89fef05ce90622a0123fd6283d
@@ -6757,12 +6736,6 @@ trackedFiles:
     id: 77a2b5315e81
     last_write_checksum: sha1:0220eb2aafd0dd34b0bc6178cacb567a2d4072ac
     pristine_git_object: 98879dd695f29100bd403cdf5b1b4ded1c47087a
-  src/moovio_sdk/models/components/updatecolor.py:
-    id: 51e38cf495b9
-    pristine_git_object: ec8e6048df08bfcdd6162f50d7535ae1f27e1b29
-  src/moovio_sdk/models/components/updatecolors.py:
-    id: ec0777b285c7
-    pristine_git_object: 5ead7a3e1ae987dc86e8308b3a1af2cc74d62c04
   src/moovio_sdk/models/components/updateevidence.py:
     id: a761114e3f80
     last_write_checksum: sha1:4fa5575945c7d4e7c9b7c7098df942fb32074937
@@ -7863,9 +7836,6 @@ trackedFiles:
     id: 6ffbaa465a3d
     last_write_checksum: sha1:e6241a7b94581f68ad080082f183b30727ddc262
     pristine_git_object: f88c7aa5ac1428a557b736584067650c303d5683
-  src/moovio_sdk/models/operations/updatebrand.py:
-    id: 89be0e5b4135
-    pristine_git_object: 9662938443879a0de110080455aa9e46a3ca1a71
   src/moovio_sdk/models/operations/updatecard.py:
     id: 814a88bfebd1
     last_write_checksum: sha1:b60c1f1f23970f29a90e8a89dbcd04594a416db6
@@ -10677,7 +10647,7 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Python SDK Changes:
-  * `moov.branding.update()`: **Deleted** **Breaking** :warning:
+  * `moov.institutions.search()`: **Deprecated**
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
