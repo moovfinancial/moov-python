@@ -125,6 +125,10 @@ with Moov(
                 currency="USD",
                 value=1204,
             ),
+            sales_tax_amount=components.Amount(
+                currency="USD",
+                value=1204,
+            ),
             destination=components.SchedulePaymentMethod(
                 payment_method_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
                 ach_details=components.AchDetails(
@@ -353,6 +357,10 @@ with Moov(
         recurrence_rule="<value>",
         run_transfer=components.RunTransfer(
             amount=components.Amount(
+                currency="USD",
+                value=1204,
+            ),
+            sales_tax_amount=components.Amount(
                 currency="USD",
                 value=1204,
             ),

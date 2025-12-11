@@ -5,7 +5,8 @@ from .amount import Amount, AmountTypedDict
 from .schedulepaymentmethod import SchedulePaymentMethod, SchedulePaymentMethodTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class RunTransferTypedDict(TypedDict):
@@ -17,6 +18,8 @@ class RunTransferTypedDict(TypedDict):
     source: SchedulePaymentMethodTypedDict
     description: str
     r"""Simple description to place on the transfer."""
+    sales_tax_amount: NotRequired[AmountTypedDict]
+    r"""Optional sales tax amount. This amount is included in the total transfer amount."""
 
 
 class RunTransfer(BaseModel):
@@ -32,3 +35,8 @@ class RunTransfer(BaseModel):
 
     description: str
     r"""Simple description to place on the transfer."""
+
+    sales_tax_amount: Annotated[
+        Optional[Amount], pydantic.Field(alias="salesTaxAmount")
+    ] = None
+    r"""Optional sales tax amount. This amount is included in the total transfer amount."""
