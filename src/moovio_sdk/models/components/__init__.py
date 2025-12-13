@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from .account import Account, AccountTypedDict
     from .accountcapability import AccountCapability, AccountCapabilityTypedDict
     from .accountcountries import AccountCountries, AccountCountriesTypedDict
+    from .accountfees import AccountFees, AccountFeesTypedDict
     from .accountnameverification import (
         AccountNameVerification,
         AccountNameVerificationTypedDict,
@@ -138,14 +139,24 @@ if TYPE_CHECKING:
         BillingInterchangeProgramFeeTypedDict,
     )
     from .billingsummary import (
+        AdjustmentFees,
+        AdjustmentFeesTypedDict,
         BillingSummary,
+        BillingSummaryPlatformFees,
+        BillingSummaryPlatformFeesTypedDict,
         BillingSummaryTypedDict,
+        BillingSummaryVolumeAmount,
+        BillingSummaryVolumeAmountTypedDict,
         CardAcquiring,
         CardAcquiringTypedDict,
+        OtherFees,
+        OtherFeesTypedDict,
     )
     from .billingsummarydetails import (
         BillingSummaryDetails,
         BillingSummaryDetailsTypedDict,
+        VolumeAmount,
+        VolumeAmountTypedDict,
     )
     from .billingsummaryinterchange import (
         BillingSummaryInterchange,
@@ -755,6 +766,7 @@ if TYPE_CHECKING:
         PartialScheduleAccount,
         PartialScheduleAccountTypedDict,
     )
+    from .partnerfees import PartnerFees, PartnerFeesTypedDict
     from .partnerpricing import PartnerPricing, PartnerPricingTypedDict
     from .partnerpricingagreement import (
         PartnerPricingAgreement,
@@ -927,6 +939,18 @@ if TYPE_CHECKING:
     )
     from .rtptransactionstatus import RTPTransactionStatus
     from .runtransfer import RunTransfer, RunTransferTypedDict
+    from .scheduledtransferlineitem import (
+        ScheduledTransferLineItem,
+        ScheduledTransferLineItemTypedDict,
+    )
+    from .scheduledtransferlineitemoption import (
+        ScheduledTransferLineItemOption,
+        ScheduledTransferLineItemOptionTypedDict,
+    )
+    from .scheduledtransferlineitems import (
+        ScheduledTransferLineItems,
+        ScheduledTransferLineItemsTypedDict,
+    )
     from .schedulelistresponse import (
         ScheduleListResponse,
         ScheduleListResponseTypedDict,
@@ -1297,6 +1321,8 @@ __all__ = [
     "AccountCapabilityTypedDict",
     "AccountCountries",
     "AccountCountriesTypedDict",
+    "AccountFees",
+    "AccountFeesTypedDict",
     "AccountNameVerification",
     "AccountNameVerificationTypedDict",
     "AccountTerminalApplication",
@@ -1335,6 +1361,8 @@ __all__ = [
     "AddressUpdate",
     "AddressUpdateTypedDict",
     "Adjustment",
+    "AdjustmentFees",
+    "AdjustmentFeesTypedDict",
     "AdjustmentTypedDict",
     "Amount",
     "AmountDecimal",
@@ -1406,7 +1434,11 @@ __all__ = [
     "BillingSummaryDetailsTypedDict",
     "BillingSummaryInterchange",
     "BillingSummaryInterchangeTypedDict",
+    "BillingSummaryPlatformFees",
+    "BillingSummaryPlatformFeesTypedDict",
     "BillingSummaryTypedDict",
+    "BillingSummaryVolumeAmount",
+    "BillingSummaryVolumeAmountTypedDict",
     "BirthDate",
     "BirthDateError",
     "BirthDateErrorTypedDict",
@@ -1893,8 +1925,12 @@ __all__ = [
     "OnboardingPartnerAccountTypedDict",
     "OtherCardFees",
     "OtherCardFeesTypedDict",
+    "OtherFees",
+    "OtherFeesTypedDict",
     "PartialScheduleAccount",
     "PartialScheduleAccountTypedDict",
+    "PartnerFees",
+    "PartnerFeesTypedDict",
     "PartnerPricing",
     "PartnerPricingAgreement",
     "PartnerPricingAgreementTypedDict",
@@ -2061,6 +2097,12 @@ __all__ = [
     "SchedulePaymentMethodTypedDict",
     "ScheduleResponse",
     "ScheduleResponseTypedDict",
+    "ScheduledTransferLineItem",
+    "ScheduledTransferLineItemOption",
+    "ScheduledTransferLineItemOptionTypedDict",
+    "ScheduledTransferLineItemTypedDict",
+    "ScheduledTransferLineItems",
+    "ScheduledTransferLineItemsTypedDict",
     "Security",
     "SecurityTypedDict",
     "SendFunds",
@@ -2212,6 +2254,8 @@ __all__ = [
     "VerificationStatus",
     "VerificationStatusDetail",
     "VerificationTypedDict",
+    "VolumeAmount",
+    "VolumeAmountTypedDict",
     "VolumeByCustomerType",
     "VolumeByCustomerTypeError",
     "VolumeByCustomerTypeErrorTypedDict",
@@ -2328,6 +2372,8 @@ _dynamic_imports: dict[str, str] = {
     "AccountCapabilityTypedDict": ".accountcapability",
     "AccountCountries": ".accountcountries",
     "AccountCountriesTypedDict": ".accountcountries",
+    "AccountFees": ".accountfees",
+    "AccountFeesTypedDict": ".accountfees",
     "AccountNameVerification": ".accountnameverification",
     "AccountNameVerificationTypedDict": ".accountnameverification",
     "AccountTerminalApplication": ".accountterminalapplication",
@@ -2445,12 +2491,22 @@ _dynamic_imports: dict[str, str] = {
     "BillingCountAndAmountTypedDict": ".billingcountandamount",
     "BillingInterchangeProgramFee": ".billinginterchangeprogramfee",
     "BillingInterchangeProgramFeeTypedDict": ".billinginterchangeprogramfee",
+    "AdjustmentFees": ".billingsummary",
+    "AdjustmentFeesTypedDict": ".billingsummary",
     "BillingSummary": ".billingsummary",
+    "BillingSummaryPlatformFees": ".billingsummary",
+    "BillingSummaryPlatformFeesTypedDict": ".billingsummary",
     "BillingSummaryTypedDict": ".billingsummary",
+    "BillingSummaryVolumeAmount": ".billingsummary",
+    "BillingSummaryVolumeAmountTypedDict": ".billingsummary",
     "CardAcquiring": ".billingsummary",
     "CardAcquiringTypedDict": ".billingsummary",
+    "OtherFees": ".billingsummary",
+    "OtherFeesTypedDict": ".billingsummary",
     "BillingSummaryDetails": ".billingsummarydetails",
     "BillingSummaryDetailsTypedDict": ".billingsummarydetails",
+    "VolumeAmount": ".billingsummarydetails",
+    "VolumeAmountTypedDict": ".billingsummarydetails",
     "BillingSummaryInterchange": ".billingsummaryinterchange",
     "BillingSummaryInterchangeTypedDict": ".billingsummaryinterchange",
     "BirthDate": ".birthdate",
@@ -2936,6 +2992,8 @@ _dynamic_imports: dict[str, str] = {
     "OtherCardFeesTypedDict": ".othercardfees",
     "PartialScheduleAccount": ".partialscheduleaccount",
     "PartialScheduleAccountTypedDict": ".partialscheduleaccount",
+    "PartnerFees": ".partnerfees",
+    "PartnerFeesTypedDict": ".partnerfees",
     "PartnerPricing": ".partnerpricing",
     "PartnerPricingTypedDict": ".partnerpricing",
     "PartnerPricingAgreement": ".partnerpricingagreement",
@@ -3093,6 +3151,12 @@ _dynamic_imports: dict[str, str] = {
     "RTPTransactionStatus": ".rtptransactionstatus",
     "RunTransfer": ".runtransfer",
     "RunTransferTypedDict": ".runtransfer",
+    "ScheduledTransferLineItem": ".scheduledtransferlineitem",
+    "ScheduledTransferLineItemTypedDict": ".scheduledtransferlineitem",
+    "ScheduledTransferLineItemOption": ".scheduledtransferlineitemoption",
+    "ScheduledTransferLineItemOptionTypedDict": ".scheduledtransferlineitemoption",
+    "ScheduledTransferLineItems": ".scheduledtransferlineitems",
+    "ScheduledTransferLineItemsTypedDict": ".scheduledtransferlineitems",
     "ScheduleListResponse": ".schedulelistresponse",
     "ScheduleListResponseTypedDict": ".schedulelistresponse",
     "AchDetails": ".schedulepaymentmethod",

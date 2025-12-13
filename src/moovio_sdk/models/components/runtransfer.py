@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .amount import Amount, AmountTypedDict
+from .scheduledtransferlineitems import (
+    ScheduledTransferLineItems,
+    ScheduledTransferLineItemsTypedDict,
+)
 from .schedulepaymentmethod import SchedulePaymentMethod, SchedulePaymentMethodTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -20,6 +24,10 @@ class RunTransferTypedDict(TypedDict):
     r"""Simple description to place on the transfer."""
     sales_tax_amount: NotRequired[AmountTypedDict]
     r"""Optional sales tax amount. This amount is included in the total transfer amount."""
+    line_items: NotRequired[ScheduledTransferLineItemsTypedDict]
+    r"""An optional collection of line items for a scheduled transfer.
+    When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+    """
 
 
 class RunTransfer(BaseModel):
@@ -40,3 +48,10 @@ class RunTransfer(BaseModel):
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
     r"""Optional sales tax amount. This amount is included in the total transfer amount."""
+
+    line_items: Annotated[
+        Optional[ScheduledTransferLineItems], pydantic.Field(alias="lineItems")
+    ] = None
+    r"""An optional collection of line items for a scheduled transfer.
+    When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+    """

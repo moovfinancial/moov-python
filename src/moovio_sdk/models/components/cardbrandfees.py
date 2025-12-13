@@ -13,8 +13,6 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CardBrandFeesTypedDict(TypedDict):
-    r"""A detailed breakdown of fees for a specific card brand."""
-
     total: BillingCountAndAmountTypedDict
     r"""Total fees for this card brand."""
     interchange: NotRequired[BillingCountAndAmountTypedDict]
@@ -38,8 +36,6 @@ class CardBrandFeesTypedDict(TypedDict):
 
 
 class CardBrandFees(BaseModel):
-    r"""A detailed breakdown of fees for a specific card brand."""
-
     total: BillingCountAndAmount
     r"""Total fees for this card brand."""
 

@@ -49,6 +49,28 @@ class BankAccountExceptionTypedDict(TypedDict):
     - AG03: Transaction Type Not Supported
     - MD07: Customer Deceased
     """
+    fednow_rejection_code: NotRequired[str]
+    r"""The rejection code of a FedNow transaction that caused the bank account status to change.
+
+    - AC02: Debtor account is invalid
+    - AC03: Creditor account is invalid
+    - AC04: Account closed
+    - AC06: Account is blocked
+    - AC07: Creditor account closed
+    - AC10: Debtor account currency is invalid or missing
+    - AC11: Creditor account currency is invalid or missing
+    - AC13: Debtor account type missing or invalid
+    - AC14: Creditor account type missing or invalid
+    - AG01: Transaction is forbidden on this type of account
+    - AG03: Transaction type is not supported/authorized on this account
+    - BE06: End customer specified is not known at associated Sort/National Bank Code or no longer exists in the books
+    - DUPL: Payment is a duplicate of another payment
+    - MD07: End customer is deceased
+    - NOAT: Receiving customer account does not support/accept this message type
+    - RC02: Bank identifier is invalid or missing
+    - RC03: Debtor FI identifier is invalid or missing
+    - RC04: Creditor FI identifier is invalid or missing
+    """
 
 
 class BankAccountException(BaseModel):
@@ -96,4 +118,29 @@ class BankAccountException(BaseModel):
     - AG01: Transactions Forbidden On Account
     - AG03: Transaction Type Not Supported
     - MD07: Customer Deceased
+    """
+
+    fednow_rejection_code: Annotated[
+        Optional[str], pydantic.Field(alias="fednowRejectionCode")
+    ] = None
+    r"""The rejection code of a FedNow transaction that caused the bank account status to change.
+
+    - AC02: Debtor account is invalid
+    - AC03: Creditor account is invalid
+    - AC04: Account closed
+    - AC06: Account is blocked
+    - AC07: Creditor account closed
+    - AC10: Debtor account currency is invalid or missing
+    - AC11: Creditor account currency is invalid or missing
+    - AC13: Debtor account type missing or invalid
+    - AC14: Creditor account type missing or invalid
+    - AG01: Transaction is forbidden on this type of account
+    - AG03: Transaction type is not supported/authorized on this account
+    - BE06: End customer specified is not known at associated Sort/National Bank Code or no longer exists in the books
+    - DUPL: Payment is a duplicate of another payment
+    - MD07: End customer is deceased
+    - NOAT: Receiving customer account does not support/accept this message type
+    - RC02: Bank identifier is invalid or missing
+    - RC03: Debtor FI identifier is invalid or missing
+    - RC04: Creditor FI identifier is invalid or missing
     """

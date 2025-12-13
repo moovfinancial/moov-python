@@ -7,8 +7,6 @@ from typing_extensions import TypedDict
 
 
 class BillingCountAndAmountTypedDict(TypedDict):
-    r"""Represents a count of items and their total amount."""
-
     count: int
     r"""The number of items."""
     amount: AmountDecimalTypedDict
@@ -16,8 +14,6 @@ class BillingCountAndAmountTypedDict(TypedDict):
 
 
 class BillingCountAndAmount(BaseModel):
-    r"""Represents a count of items and their total amount."""
-
     count: int
     r"""The number of items."""
 

@@ -4,11 +4,14 @@ from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict, deprecated
 
 
+@deprecated(
+    "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+)
 class PlatformFeesTypedDict(TypedDict):
-    r"""A detailed breakdown of platform fees."""
+    r"""A detailed breakdown of platform fees. This field is deprecated and will be removed in a future release. Use accountFees."""
 
     wallet_fee: AmountDecimalTypedDict
     r"""Fees associated with wallet services."""
@@ -18,8 +21,11 @@ class PlatformFeesTypedDict(TypedDict):
     r"""Total platform fees."""
 
 
+@deprecated(
+    "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+)
 class PlatformFees(BaseModel):
-    r"""A detailed breakdown of platform fees."""
+    r"""A detailed breakdown of platform fees. This field is deprecated and will be removed in a future release. Use accountFees."""
 
     wallet_fee: Annotated[AmountDecimal, pydantic.Field(alias="walletFee")]
     r"""Fees associated with wallet services."""

@@ -1457,7 +1457,7 @@ class BankAccounts(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetBankAccountVerificationResponse:
-        r"""Retrieve the current status and details of an instant verification, including whether the verification method was instant or same-day
+        r"""Retrieve the current status and details of an instant verification, including whether the verification method was instant (RTP or FedNow) or same-day
         ACH. This helps track the verification process in real-time and provides details in case of exceptions.
 
         The status will indicate the following:
@@ -1568,7 +1568,7 @@ class BankAccounts(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetBankAccountVerificationResponse:
-        r"""Retrieve the current status and details of an instant verification, including whether the verification method was instant or same-day
+        r"""Retrieve the current status and details of an instant verification, including whether the verification method was instant (RTP or FedNow) or same-day
         ACH. This helps track the verification process in real-time and provides details in case of exceptions.
 
         The status will indicate the following:
@@ -1682,14 +1682,14 @@ class BankAccounts(BaseSDK):
     ) -> operations.InitiateBankAccountVerificationResponse:
         r"""Instant micro-deposit verification offers a quick and efficient way to verify bank account ownership.
 
-        Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank's capabilities. This
+        Send a $0.01 credit with a unique verification code via RTP, FedNow, or same-day ACH, depending on the receiving bank's capabilities. This
         feature provides a faster alternative to traditional methods, allowing verification in a single session.
 
         It is recommended to use the `X-Wait-For: rail-response` header to synchronously receive the outcome of the instant credit in the
           response payload.
 
         Possible verification methods:
-          - `instant`: Real-time verification credit sent via RTP
+          - `instant`: Real-time verification credit sent via RTP or FedNow
           - `ach`: Verification credit sent via same-day ACH
 
         Possible statuses:
@@ -1819,14 +1819,14 @@ class BankAccounts(BaseSDK):
     ) -> operations.InitiateBankAccountVerificationResponse:
         r"""Instant micro-deposit verification offers a quick and efficient way to verify bank account ownership.
 
-        Send a $0.01 credit with a unique verification code via RTP or same-day ACH, depending on the receiving bank's capabilities. This
+        Send a $0.01 credit with a unique verification code via RTP, FedNow, or same-day ACH, depending on the receiving bank's capabilities. This
         feature provides a faster alternative to traditional methods, allowing verification in a single session.
 
         It is recommended to use the `X-Wait-For: rail-response` header to synchronously receive the outcome of the instant credit in the
           response payload.
 
         Possible verification methods:
-          - `instant`: Real-time verification credit sent via RTP
+          - `instant`: Real-time verification credit sent via RTP or FedNow
           - `ach`: Verification credit sent via same-day ACH
 
         Possible statuses:

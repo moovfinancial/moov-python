@@ -151,6 +151,9 @@ with Moov(
                 ),
             ),
             description="sediment yahoo a rudely mmm massive helpful brr",
+            line_items=components.ScheduledTransferLineItems(
+                items=[],
+            ),
         ),
         start=parse_datetime("2009-11-10T23:00:00Z"),
     ))
@@ -386,6 +389,28 @@ with Moov(
                 ),
             ),
             description="er reasoning following veto oof fervently ha how till now",
+            line_items=components.ScheduledTransferLineItems(
+                items=[
+                    components.ScheduledTransferLineItem(
+                        name="<value>",
+                        base_price=components.AmountDecimal(
+                            currency="USD",
+                            value_decimal="12.987654321",
+                        ),
+                        quantity=973458,
+                        options=[
+                            components.ScheduledTransferLineItemOption(
+                                name="<value>",
+                                quantity=221042,
+                                price_modifier=components.AmountDecimal(
+                                    currency="USD",
+                                    value_decimal="12.987654321",
+                                ),
+                            ),
+                        ],
+                    ),
+                ],
+            ),
         ),
         start=parse_datetime("2009-11-10T23:00:00Z"),
     ))
