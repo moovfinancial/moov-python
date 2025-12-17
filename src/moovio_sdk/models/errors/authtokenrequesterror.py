@@ -10,7 +10,6 @@ from typing import Optional
 
 class AuthTokenRequestErrorData(BaseModel):
     scope: Optional[str] = None
-
     refresh_token: Optional[str] = None
 
 

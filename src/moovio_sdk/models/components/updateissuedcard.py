@@ -5,7 +5,7 @@ from .createauthorizeduserupdate import (
     CreateAuthorizedUserUpdate,
     CreateAuthorizedUserUpdateTypedDict,
 )
-from .issuedcardstate import IssuedCardState
+from .updateissuedcardstate import UpdateIssuedCardState
 from moovio_sdk.types import BaseModel
 import pydantic
 from typing import Optional
@@ -13,13 +13,9 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class UpdateIssuedCardTypedDict(TypedDict):
-    state: NotRequired[IssuedCardState]
-    r"""The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
-
-    - `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-    - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
+    state: NotRequired[UpdateIssuedCardState]
+    r"""Updates the state of a Moov issued card.
     - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-    - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
     """
     memo: NotRequired[str]
     authorized_user: NotRequired[CreateAuthorizedUserUpdateTypedDict]
@@ -27,13 +23,9 @@ class UpdateIssuedCardTypedDict(TypedDict):
 
 
 class UpdateIssuedCard(BaseModel):
-    state: Optional[IssuedCardState] = None
-    r"""The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
-
-    - `active`: The card is operational and approves authorizations. Generally becomes active shortly after card creation.
-    - `inactive`: The card cannot approve authorizations. This is currently a temporary state assigned post-creation during the activation process.
+    state: Optional[UpdateIssuedCardState] = None
+    r"""Updates the state of a Moov issued card.
     - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-    - `pending-verification`: Awaiting additional authorized user verification before the card can be activated.
     """
 
     memo: Optional[str] = None

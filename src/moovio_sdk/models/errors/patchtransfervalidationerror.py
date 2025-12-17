@@ -12,7 +12,6 @@ from typing_extensions import Annotated
 
 class PatchTransferValidationErrorData(BaseModel):
     metadata: Optional[str] = None
-
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
 
 

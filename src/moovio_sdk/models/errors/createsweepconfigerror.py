@@ -12,21 +12,16 @@ from typing_extensions import Annotated
 
 class CreateSweepConfigErrorData(BaseModel):
     wallet_id: Annotated[Optional[str], pydantic.Field(alias="walletID")] = None
-
     status: Optional[str] = None
-
     push_payment_method_id: Annotated[
         Optional[str], pydantic.Field(alias="pushPaymentMethodID")
     ] = None
-
     pull_payment_method_id: Annotated[
         Optional[str], pydantic.Field(alias="pullPaymentMethodID")
     ] = None
-
     statement_descriptor: Annotated[
         Optional[str], pydantic.Field(alias="statementDescriptor")
     ] = None
-
     minimum_balance: Annotated[
         Optional[str], pydantic.Field(alias="minimumBalance")
     ] = None

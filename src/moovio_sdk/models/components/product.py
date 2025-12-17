@@ -12,7 +12,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ProductTypedDict(TypedDict):
-    r"""A product available for purchase, which may have optional configuration options."""
+    r"""A good or service offered by a merchant."""
 
     product_id: str
     r"""Unique identifier for a product."""
@@ -39,7 +39,7 @@ class ProductTypedDict(TypedDict):
 
 
 class Product(BaseModel):
-    r"""A product available for purchase, which may have optional configuration options."""
+    r"""A good or service offered by a merchant."""
 
     product_id: Annotated[str, pydantic.Field(alias="productID")]
     r"""Unique identifier for a product."""

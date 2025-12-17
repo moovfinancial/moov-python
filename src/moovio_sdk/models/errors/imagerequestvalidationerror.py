@@ -13,7 +13,6 @@ from typing import Optional
 
 class ImageRequestValidationErrorData(BaseModel):
     image: Optional[str] = None
-
     metadata: Optional[
         components_imagemetadatavalidationerror.ImageMetadataValidationError
     ] = None

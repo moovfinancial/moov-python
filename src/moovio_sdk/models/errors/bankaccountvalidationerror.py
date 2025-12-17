@@ -12,13 +12,9 @@ from typing_extensions import Annotated
 
 class BankAccountValidationErrorData(BaseModel):
     account: Optional[str] = None
-
     plaid: Optional[str] = None
-
     plaid_link: Annotated[Optional[str], pydantic.Field(alias="plaidLink")] = None
-
     mx: Optional[str] = None
-
     error: Optional[str] = None
 
 

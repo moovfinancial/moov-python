@@ -10,9 +10,7 @@ from typing import Optional
 
 class TransferOptionsValidationErrorData(BaseModel):
     amount: Optional[str] = None
-
     source: Optional[str] = None
-
     destination: Optional[str] = None
 
 

@@ -38,6 +38,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class UpdatePaymentLinkTypedDict(TypedDict):
     amount: NotRequired[AmountUpdateTypedDict]
+    sales_tax_amount: NotRequired[AmountUpdateTypedDict]
     expires_on: NotRequired[Nullable[datetime]]
     display: NotRequired[PaymentLinkDisplayOptionsUpdateTypedDict]
     r"""Customizable display options for a payment link."""
@@ -53,6 +54,10 @@ class UpdatePaymentLinkTypedDict(TypedDict):
 
 class UpdatePaymentLink(BaseModel):
     amount: Optional[AmountUpdate] = None
+
+    sales_tax_amount: Annotated[
+        Optional[AmountUpdate], pydantic.Field(alias="salesTaxAmount")
+    ] = None
 
     expires_on: Annotated[
         OptionalNullable[datetime], pydantic.Field(alias="expiresOn")
@@ -79,6 +84,7 @@ class UpdatePaymentLink(BaseModel):
     def serialize_model(self, handler):
         optional_fields = [
             "amount",
+            "salesTaxAmount",
             "expiresOn",
             "display",
             "customer",

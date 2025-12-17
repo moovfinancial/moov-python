@@ -18,20 +18,15 @@ class CreateInvoiceErrorData(BaseModel):
     customer_account_id: Annotated[
         Optional[str], pydantic.Field(alias="customerAccountID")
     ] = None
-
     description: Optional[str] = None
-
     line_items: Annotated[
         Optional[
             components_createinvoicelineitemsvalidationerror.CreateInvoiceLineItemsValidationError
         ],
         pydantic.Field(alias="lineItems"),
     ] = None
-
     invoice_date: Annotated[Optional[str], pydantic.Field(alias="invoiceDate")] = None
-
     due_date: Annotated[Optional[str], pydantic.Field(alias="dueDate")] = None
-
     tax_amount: Annotated[
         Optional[components_amountdecimalvalidationerror.AmountDecimalValidationError],
         pydantic.Field(alias="taxAmount"),

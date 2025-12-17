@@ -17,21 +17,17 @@ from typing_extensions import Annotated
 
 class ProductRequestValidationErrorData(BaseModel):
     title: Optional[str] = None
-
     description: Optional[str] = None
-
     base_price: Annotated[
         Optional[components_amountdecimalvalidationerror.AmountDecimalValidationError],
         pydantic.Field(alias="basePrice"),
     ] = None
-
     images: Optional[
         Dict[
             str,
             components_assignproductimagevalidationerror.AssignProductImageValidationError,
         ]
     ] = None
-
     option_groups: Annotated[
         Optional[
             Dict[

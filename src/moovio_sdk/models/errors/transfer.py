@@ -27,96 +27,69 @@ from typing_extensions import Annotated
 
 class TransferData(BaseModel):
     transfer_id: Annotated[str, pydantic.Field(alias="transferID")]
-
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
-
     source: components_transfersource.TransferSource
-
     destination: components_transferdestination.TransferDestination
-
     status: components_transferstatus.TransferStatus
     r"""Status of a transfer."""
-
     amount: components_amount.Amount
-
     completed_on: Annotated[Optional[datetime], pydantic.Field(alias="completedOn")] = (
         None
     )
-
     failure_reason: Annotated[
         Optional[components_transferfailurereason.TransferFailureReason],
         pydantic.Field(alias="failureReason"),
     ] = None
     r"""Reason for a transfer's failure."""
-
     description: Optional[str] = None
     r"""An optional description of the transfer that is used on receipts and for your own internal use."""
-
     metadata: Optional[Dict[str, str]] = None
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
-
     facilitator_fee: Annotated[
         Optional[components_facilitatorfee.FacilitatorFee],
         pydantic.Field(alias="facilitatorFee"),
     ] = None
     r"""Total or markup fee."""
-
     moov_fee: Annotated[Optional[int], pydantic.Field(alias="moovFee")] = None
     r"""Fees charged to your platform account for transfers."""
-
     moov_fee_decimal: Annotated[
         Optional[str], pydantic.Field(alias="moovFeeDecimal")
     ] = None
     r"""Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision."""
-
     moov_fee_details: Annotated[
         Optional[components_moovfeedetails.MoovFeeDetails],
         pydantic.Field(alias="moovFeeDetails"),
     ] = None
     r"""Processing and pass-through costs that add up to the moovFee."""
-
     moov_fees: Annotated[
         Optional[List[components_moovfee.MoovFee]], pydantic.Field(alias="moovFees")
     ] = None
     r"""Fees charged to accounts involved in the transfer."""
-
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupID")] = None
-
     cancellations: Optional[List[components_cancellation.Cancellation]] = None
-
     refunded_amount: Annotated[
         Optional[components_amount.Amount], pydantic.Field(alias="refundedAmount")
     ] = None
-
     refunds: Optional[List[components_cardacquiringrefund.CardAcquiringRefund]] = None
-
     disputed_amount: Annotated[
         Optional[components_amount.Amount], pydantic.Field(alias="disputedAmount")
     ] = None
-
     disputes: Optional[List[components_cardacquiringdispute.CardAcquiringDispute]] = (
         None
     )
-
     sweep_id: Annotated[Optional[str], pydantic.Field(alias="sweepID")] = None
     r"""ID of the sweep that created this transfer."""
-
     schedule_id: Annotated[Optional[str], pydantic.Field(alias="scheduleID")] = None
-
     occurrence_id: Annotated[Optional[str], pydantic.Field(alias="occurrenceID")] = None
-
     payment_link_code: Annotated[
         Optional[str], pydantic.Field(alias="paymentLinkCode")
     ] = None
-
     sales_tax_amount: Annotated[
         Optional[components_amount.Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
     r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
-
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
-
     line_items: Annotated[
         Optional[components_transferlineitems.TransferLineItems],
         pydantic.Field(alias="lineItems"),

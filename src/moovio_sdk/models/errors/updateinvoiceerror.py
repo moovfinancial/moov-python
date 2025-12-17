@@ -16,20 +16,15 @@ from typing_extensions import Annotated
 
 class UpdateInvoiceErrorData(BaseModel):
     description: Optional[str] = None
-
     line_items: Annotated[
         Optional[
             components_invoicelineitemsvalidationerror.InvoiceLineItemsValidationError
         ],
         pydantic.Field(alias="lineItems"),
     ] = None
-
     invoice_date: Annotated[Optional[str], pydantic.Field(alias="invoiceDate")] = None
-
     due_date: Annotated[Optional[str], pydantic.Field(alias="dueDate")] = None
-
     status: Optional[str] = None
-
     tax_amount: Annotated[
         Optional[components_amountdecimalvalidationerror.AmountDecimalValidationError],
         pydantic.Field(alias="taxAmount"),

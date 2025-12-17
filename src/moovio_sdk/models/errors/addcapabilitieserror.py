@@ -10,7 +10,6 @@ from typing import Dict, Optional
 
 class AddCapabilitiesErrorData(BaseModel):
     error: Optional[str] = None
-
     capabilities: Optional[Dict[str, str]] = None
 
 

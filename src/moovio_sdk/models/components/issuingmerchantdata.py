@@ -8,25 +8,31 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class IssuingMerchantDataTypedDict(TypedDict):
-    network_id: NotRequired[str]
+    network_id: str
     r"""External identifier used to identify the merchant with the card brand."""
+    country: str
+    r"""Two-letter country code."""
+    mcc: str
+    r"""The Merchant Category Code."""
     name: NotRequired[str]
     r"""Name of the merchant."""
     city: NotRequired[str]
     r"""The merchant's location."""
-    country: NotRequired[str]
-    r"""Two-letter country code."""
     postal_code: NotRequired[str]
     r"""The merchant's five-digit postal code."""
     state: NotRequired[str]
     r"""The merchant's two-letter state abbreviation."""
-    mcc: NotRequired[str]
-    r"""The Merchant Category Code."""
 
 
 class IssuingMerchantData(BaseModel):
-    network_id: Annotated[Optional[str], pydantic.Field(alias="networkID")] = None
+    network_id: Annotated[str, pydantic.Field(alias="networkID")]
     r"""External identifier used to identify the merchant with the card brand."""
+
+    country: str
+    r"""Two-letter country code."""
+
+    mcc: str
+    r"""The Merchant Category Code."""
 
     name: Optional[str] = None
     r"""Name of the merchant."""
@@ -34,14 +40,8 @@ class IssuingMerchantData(BaseModel):
     city: Optional[str] = None
     r"""The merchant's location."""
 
-    country: Optional[str] = None
-    r"""Two-letter country code."""
-
     postal_code: Annotated[Optional[str], pydantic.Field(alias="postalCode")] = None
     r"""The merchant's five-digit postal code."""
 
     state: Optional[str] = None
     r"""The merchant's two-letter state abbreviation."""
-
-    mcc: Optional[str] = None
-    r"""The Merchant Category Code."""

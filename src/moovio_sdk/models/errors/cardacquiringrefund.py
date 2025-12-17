@@ -19,15 +19,10 @@ from typing_extensions import Annotated
 class CardAcquiringRefundData(BaseModel):
     refund_id: Annotated[str, pydantic.Field(alias="refundID")]
     r"""Identifier for the refund."""
-
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
-
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
-
     status: components_refundstatus.RefundStatus
-
     amount: components_amount.Amount
-
     card_details: Annotated[
         Optional[components_refundcarddetails.RefundCardDetails],
         pydantic.Field(alias="cardDetails"),

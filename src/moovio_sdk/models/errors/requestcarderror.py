@@ -19,18 +19,13 @@ class RequestCardErrorData(BaseModel):
     funding_wallet_id: Annotated[
         Optional[str], pydantic.Field(alias="fundingWalletID")
     ] = None
-
     form_factor: Annotated[Optional[str], pydantic.Field(alias="formFactor")] = None
-
     authorized_user: Annotated[
         Optional[components_createauthorizedusererror.CreateAuthorizedUserError],
         pydantic.Field(alias="authorizedUser"),
     ] = None
-
     memo: Optional[str] = None
-
     expiration: Optional[components_cardexpirationerror.CardExpirationError] = None
-
     controls: Optional[components_issuingcontrolserror.IssuingControlsError] = None
 
 

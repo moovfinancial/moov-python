@@ -1,17 +1,12 @@
 # InvoicePayment
 
+Payment made towards an invoice, will be either a transfer or an external payment.
 
-## Supported Types
 
-### `components.InvoiceTransferPayment`
+## Fields
 
-```python
-value: components.InvoiceTransferPayment = /* values here */
-```
-
-### `components.InvoiceExternalPayment`
-
-```python
-value: components.InvoiceExternalPayment = /* values here */
-```
-
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `payment_type`                                                                                   | [components.InvoicePaymentType](../../models/components/invoicepaymenttype.md)                   | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `transfer`                                                                                       | [Optional[components.InvoiceTransferPayment]](../../models/components/invoicetransferpayment.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `external`                                                                                       | [Optional[components.InvoiceExternalPayment]](../../models/components/invoiceexternalpayment.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

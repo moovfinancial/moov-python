@@ -12,31 +12,20 @@ from typing_extensions import Annotated
 
 class ListTransfersValidationErrorData(BaseModel):
     account_i_ds: Annotated[Optional[str], pydantic.Field(alias="accountIDs")] = None
-
     status: Optional[str] = None
-
     start_date_time: Annotated[Optional[str], pydantic.Field(alias="startDateTime")] = (
         None
     )
-
     end_date_time: Annotated[Optional[str], pydantic.Field(alias="endDateTime")] = None
-
     skip: Optional[str] = None
-
     count: Optional[str] = None
-
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupID")] = None
-
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
-
     schedule_id: Annotated[Optional[str], pydantic.Field(alias="scheduleID")] = None
-
     payment_link_code: Annotated[
         Optional[str], pydantic.Field(alias="paymentLinkCode")
     ] = None
-
     refunded: Optional[str] = None
-
     disputed: Optional[str] = None
 
 

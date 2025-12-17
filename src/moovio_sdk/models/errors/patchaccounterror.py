@@ -18,23 +18,17 @@ from typing_extensions import Annotated
 
 class PatchAccountErrorData(BaseModel):
     profile: Optional[components_createprofileerror.CreateProfileError] = None
-
     metadata: Optional[str] = None
-
     terms_of_service: Annotated[
         Optional[components_termsofserviceerror.TermsOfServiceError],
         pydantic.Field(alias="termsOfService"),
     ] = None
-
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
-
     customer_support: Annotated[
         Optional[components_customersupporterror.CustomerSupportError],
         pydantic.Field(alias="customerSupport"),
     ] = None
-
     settings: Optional[components_createaccountsettings.CreateAccountSettings] = None
-
     error: Optional[str] = None
 
 

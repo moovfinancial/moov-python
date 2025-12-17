@@ -15,9 +15,7 @@ from typing_extensions import Annotated
 
 class UpdateIssuedCardErrorData(BaseModel):
     state: Optional[str] = None
-
     memo: Optional[str] = None
-
     authorized_user: Annotated[
         Optional[components_createauthorizedusererror.CreateAuthorizedUserError],
         pydantic.Field(alias="authorizedUser"),

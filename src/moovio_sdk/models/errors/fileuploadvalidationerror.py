@@ -23,7 +23,6 @@ class File(BaseModel):
 
 class FileUploadValidationErrorData(BaseModel):
     evidence_type: Annotated[Optional[str], pydantic.Field(alias="evidenceType")] = None
-
     file: Optional[File] = None
 
 

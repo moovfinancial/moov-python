@@ -12,9 +12,7 @@ from typing_extensions import Annotated
 
 class MarkInvoicePaidErrorData(BaseModel):
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
-
     description: Optional[str] = None
-
     payment_date: Annotated[Optional[str], pydantic.Field(alias="paymentDate")] = None
 
 

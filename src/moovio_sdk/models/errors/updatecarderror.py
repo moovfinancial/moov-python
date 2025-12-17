@@ -15,23 +15,16 @@ from typing_extensions import Annotated
 
 class UpdateCardErrorData(BaseModel):
     e2ee: Optional[components_end2endencryptionerror.End2EndEncryptionError] = None
-
     billing_address: Annotated[
         Optional[str], pydantic.Field(alias="billingAddress")
     ] = None
-
     expiration: Optional[str] = None
-
     card_cvv: Annotated[Optional[str], pydantic.Field(alias="cardCvv")] = None
-
     card_on_file: Annotated[Optional[str], pydantic.Field(alias="cardOnFile")] = None
-
     merchant_account_id: Annotated[
         Optional[str], pydantic.Field(alias="merchantAccountID")
     ] = None
-
     verify_name: Annotated[Optional[str], pydantic.Field(alias="verifyName")] = None
-
     holder_name: Annotated[Optional[str], pydantic.Field(alias="holderName")] = None
 
 

@@ -15,15 +15,11 @@ from typing_extensions import Annotated
 
 class CreateTicketErrorData(BaseModel):
     title: Optional[str] = None
-
     body: Optional[str] = None
-
     author: Optional[str] = None
-
     contact: Optional[components_createticketcontacterror.CreateTicketContactError] = (
         None
     )
-
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
 
 

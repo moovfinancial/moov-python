@@ -12,15 +12,11 @@ from typing_extensions import Annotated
 
 class OnboardingInviteErrorData(BaseModel):
     return_url: Annotated[Optional[str], pydantic.Field(alias="returnURL")] = None
-
     terms_of_service_url: Annotated[
         Optional[str], pydantic.Field(alias="termsOfServiceURL")
     ] = None
-
     scopes: Optional[Dict[str, str]] = None
-
     capabilities: Optional[Dict[str, str]] = None
-
     fee_plan_codes: Annotated[
         Optional[Dict[str, str]], pydantic.Field(alias="feePlanCodes")
     ] = None

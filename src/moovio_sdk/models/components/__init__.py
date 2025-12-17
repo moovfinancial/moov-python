@@ -637,6 +637,7 @@ if TYPE_CHECKING:
         InvoiceLineItemValidationErrorTypedDict,
     )
     from .invoicepayment import InvoicePayment, InvoicePaymentTypedDict
+    from .invoicepaymenttype import InvoicePaymentType
     from .invoicestatus import InvoiceStatus
     from .invoicetransferpayment import (
         InvoiceTransferPayment,
@@ -1085,6 +1086,7 @@ if TYPE_CHECKING:
     from .updateevidence import UpdateEvidence, UpdateEvidenceTypedDict
     from .updateinvoice import UpdateInvoice, UpdateInvoiceTypedDict
     from .updateissuedcard import UpdateIssuedCard, UpdateIssuedCardTypedDict
+    from .updateissuedcardstate import UpdateIssuedCardState
     from .updatepaymentlink import UpdatePaymentLink, UpdatePaymentLinkTypedDict
     from .updaterepresentative import (
         Phone,
@@ -1817,6 +1819,7 @@ __all__ = [
     "InvoiceLineItemsValidationError",
     "InvoiceLineItemsValidationErrorTypedDict",
     "InvoicePayment",
+    "InvoicePaymentType",
     "InvoicePaymentTypedDict",
     "InvoiceStatus",
     "InvoiceTransferPayment",
@@ -2225,6 +2228,7 @@ __all__ = [
     "UpdateInvoice",
     "UpdateInvoiceTypedDict",
     "UpdateIssuedCard",
+    "UpdateIssuedCardState",
     "UpdateIssuedCardTypedDict",
     "UpdatePaymentLink",
     "UpdatePaymentLinkTypedDict",
@@ -2887,6 +2891,7 @@ _dynamic_imports: dict[str, str] = {
     "InvoiceLineItemValidationErrorTypedDict": ".invoicelineitemvalidationerror",
     "InvoicePayment": ".invoicepayment",
     "InvoicePaymentTypedDict": ".invoicepayment",
+    "InvoicePaymentType": ".invoicepaymenttype",
     "InvoiceStatus": ".invoicestatus",
     "InvoiceTransferPayment": ".invoicetransferpayment",
     "InvoiceTransferPaymentTypedDict": ".invoicetransferpayment",
@@ -3291,6 +3296,7 @@ _dynamic_imports: dict[str, str] = {
     "UpdateInvoiceTypedDict": ".updateinvoice",
     "UpdateIssuedCard": ".updateissuedcard",
     "UpdateIssuedCardTypedDict": ".updateissuedcard",
+    "UpdateIssuedCardState": ".updateissuedcardstate",
     "UpdatePaymentLink": ".updatepaymentlink",
     "UpdatePaymentLinkTypedDict": ".updatepaymentlink",
     "Phone": ".updaterepresentative",

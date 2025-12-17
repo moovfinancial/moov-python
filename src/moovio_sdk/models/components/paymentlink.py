@@ -54,6 +54,8 @@ class PaymentLinkTypedDict(TypedDict):
     customer: PaymentLinkCustomerOptionsTypedDict
     created_on: datetime
     updated_on: datetime
+    sales_tax_amount: NotRequired[AmountTypedDict]
+    r"""Optional sales tax amount."""
     max_uses: NotRequired[int]
     r"""An optional limit on the number of times this payment link can be used.
 
@@ -116,6 +118,11 @@ class PaymentLink(BaseModel):
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
+
+    sales_tax_amount: Annotated[
+        Optional[Amount], pydantic.Field(alias="salesTaxAmount")
+    ] = None
+    r"""Optional sales tax amount."""
 
     max_uses: Annotated[Optional[int], pydantic.Field(alias="maxUses")] = None
     r"""An optional limit on the number of times this payment link can be used.

@@ -13,15 +13,12 @@ from typing_extensions import Annotated
 class LinkApplePayErrorData(BaseModel):
     error: Optional[str] = None
     r"""Describes an error that wasn't attributable to a single request field."""
-
     payment_data: Annotated[Optional[str], pydantic.Field(alias="paymentData")] = None
     r"""Describes an error within the `token.paymentData` request field."""
-
     payment_method: Annotated[Optional[str], pydantic.Field(alias="paymentMethod")] = (
         None
     )
     r"""Describes an error within the `token.paymentMethod` request field."""
-
     transaction_identifier: Annotated[
         Optional[str], pydantic.Field(alias="transactionIdentifier")
     ] = None

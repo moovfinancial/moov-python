@@ -10,9 +10,7 @@ from typing import Optional
 
 class CreateWalletValidationErrorData(BaseModel):
     name: Optional[str] = None
-
     description: Optional[str] = None
-
     metadata: Optional[str] = None
 
 

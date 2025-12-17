@@ -10,7 +10,6 @@ from typing import Optional
 
 class RevokeTokenRequestErrorData(BaseModel):
     token: Optional[str] = None
-
     token_type_hint: Optional[str] = None
 
 

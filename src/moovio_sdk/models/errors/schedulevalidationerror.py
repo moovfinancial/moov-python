@@ -10,9 +10,7 @@ from typing import Dict, Optional
 
 class ScheduleValidationErrorData(BaseModel):
     occurrences: Optional[Dict[str, str]] = None
-
     recur: Optional[str] = None
-
     description: Optional[str] = None
 
 

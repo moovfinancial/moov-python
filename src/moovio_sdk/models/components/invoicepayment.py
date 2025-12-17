@@ -5,26 +5,30 @@ from .invoiceexternalpayment import (
     InvoiceExternalPayment,
     InvoiceExternalPaymentTypedDict,
 )
+from .invoicepaymenttype import InvoicePaymentType
 from .invoicetransferpayment import (
     InvoiceTransferPayment,
     InvoiceTransferPaymentTypedDict,
 )
-from moovio_sdk.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
-from typing_extensions import Annotated, TypeAliasType
+from moovio_sdk.types import BaseModel
+import pydantic
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-InvoicePaymentTypedDict = TypeAliasType(
-    "InvoicePaymentTypedDict",
-    Union[InvoiceTransferPaymentTypedDict, InvoiceExternalPaymentTypedDict],
-)
+class InvoicePaymentTypedDict(TypedDict):
+    r"""Payment made towards an invoice, will be either a transfer or an external payment."""
+
+    payment_type: InvoicePaymentType
+    transfer: NotRequired[InvoiceTransferPaymentTypedDict]
+    external: NotRequired[InvoiceExternalPaymentTypedDict]
 
 
-InvoicePayment = Annotated[
-    Union[
-        Annotated[InvoiceTransferPayment, Tag("transfer")],
-        Annotated[InvoiceExternalPayment, Tag("external")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "payment_type", "paymentType")),
-]
+class InvoicePayment(BaseModel):
+    r"""Payment made towards an invoice, will be either a transfer or an external payment."""
+
+    payment_type: Annotated[InvoicePaymentType, pydantic.Field(alias="paymentType")]
+
+    transfer: Optional[InvoiceTransferPayment] = None
+
+    external: Optional[InvoiceExternalPayment] = None

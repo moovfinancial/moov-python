@@ -21,23 +21,19 @@ class CreatePaymentLinkErrorData(BaseModel):
     partner_account_id: Annotated[
         Optional[str], pydantic.Field(alias="partnerAccountID")
     ] = None
-
     merchant_payment_method_id: Annotated[
         Optional[str], pydantic.Field(alias="merchantPaymentMethodID")
     ] = None
-
     amount: Optional[components_amountvalidationerror.AmountValidationError] = None
-
+    sales_tax_amount: Annotated[
+        Optional[components_amountvalidationerror.AmountValidationError],
+        pydantic.Field(alias="salesTaxAmount"),
+    ] = None
     max_uses: Annotated[Optional[str], pydantic.Field(alias="maxUses")] = None
-
     expires_on: Annotated[Optional[str], pydantic.Field(alias="expiresOn")] = None
-
     display: Optional[components_displayoptionserror.DisplayOptionsError] = None
-
     payment: Optional[components_paymentdetailserror.PaymentDetailsError] = None
-
     payout: Optional[components_payoutdetailserror.PayoutDetailsError] = None
-
     line_items: Annotated[
         Optional[
             components_createpaymentlinklineitemsvalidationerror.CreatePaymentLinkLineItemsValidationError

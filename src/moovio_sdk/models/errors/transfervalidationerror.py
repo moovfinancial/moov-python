@@ -15,35 +15,25 @@ from typing_extensions import Annotated
 
 class TransferValidationErrorData(BaseModel):
     amount: Optional[str] = None
-
     source: Optional[str] = None
-
     source_payment_method_id: Annotated[
         Optional[str], pydantic.Field(alias="sourcePaymentMethodID")
     ] = None
-
     destination_payment_method_id: Annotated[
         Optional[str], pydantic.Field(alias="destinationPaymentMethodID")
     ] = None
-
     description: Optional[str] = None
-
     facilitator_fee_total_decimal: Annotated[
         Optional[str], pydantic.Field(alias="FacilitatorFee.TotalDecimal")
     ] = None
-
     facilitator_fee_markup_decimal: Annotated[
         Optional[str], pydantic.Field(alias="FacilitatorFee.MarkupDecimal")
     ] = None
-
     metadata: Optional[str] = None
-
     sales_tax_amount: Annotated[
         Optional[str], pydantic.Field(alias="salesTaxAmount")
     ] = None
-
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
-
     line_items: Annotated[
         Optional[
             components_transferlineitemsvalidationerror.TransferLineItemsValidationError

@@ -10,7 +10,6 @@ from typing import Optional
 
 class RefundValidationErrorData(BaseModel):
     amount: Optional[str] = None
-
     error: Optional[str] = None
     r"""Used for generic errors when invalid request data isn't attributed to a single request field."""
 

@@ -12,11 +12,8 @@ from typing_extensions import Annotated
 
 class ListWalletsValidationErrorData(BaseModel):
     status: Optional[str] = None
-
     wallet_type: Annotated[Optional[str], pydantic.Field(alias="walletType")] = None
-
     skip: Optional[str] = None
-
     count: Optional[str] = None
 
 

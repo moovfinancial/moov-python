@@ -14,41 +14,29 @@ class ListWalletTransactionsValidationErrorData(BaseModel):
     transaction_type: Annotated[
         Optional[str], pydantic.Field(alias="transactionType")
     ] = None
-
     transaction_types: Annotated[
         Optional[str], pydantic.Field(alias="transactionTypes")
     ] = None
-
     source_type: Annotated[Optional[str], pydantic.Field(alias="sourceType")] = None
-
     source_id: Annotated[Optional[str], pydantic.Field(alias="sourceID")] = None
-
     status: Optional[str] = None
-
     sweep_id: Annotated[Optional[str], pydantic.Field(alias="sweepID")] = None
-
     created_start_date_time: Annotated[
         Optional[str], pydantic.Field(alias="createdStartDateTime")
     ] = None
-
     created_end_date_time: Annotated[
         Optional[str], pydantic.Field(alias="createdEndDateTime")
     ] = None
-
     completed_start_date_time: Annotated[
         Optional[str], pydantic.Field(alias="completedStartDateTime")
     ] = None
-
     completed_end_date_time: Annotated[
         Optional[str], pydantic.Field(alias="completedEndDateTime")
     ] = None
-
     statement_descriptor: Annotated[
         Optional[str], pydantic.Field(alias="statementDescriptor")
     ] = None
-
     skip: Optional[str] = None
-
     count: Optional[str] = None
 
 

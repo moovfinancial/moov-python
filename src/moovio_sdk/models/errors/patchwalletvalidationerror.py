@@ -10,11 +10,8 @@ from typing import Optional
 
 class PatchWalletValidationErrorData(BaseModel):
     name: Optional[str] = None
-
     status: Optional[str] = None
-
     description: Optional[str] = None
-
     metadata: Optional[str] = None
 
 

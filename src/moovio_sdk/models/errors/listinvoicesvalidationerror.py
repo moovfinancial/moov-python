@@ -12,13 +12,10 @@ from typing_extensions import Annotated
 
 class ListInvoicesValidationErrorData(BaseModel):
     status: Optional[str] = None
-
     customer_account_id: Annotated[
         Optional[str], pydantic.Field(alias="customerAccountID")
     ] = None
-
     skip: Optional[str] = None
-
     count: Optional[str] = None
 
 
