@@ -56,7 +56,9 @@ class CreateTransferGlobals(BaseModel):
 
 class CreateTransferRequestTypedDict(TypedDict):
     x_idempotency_key: str
-    r"""Prevents duplicate transfers from being created."""
+    r"""Identifies a unique request to create a transfer.
+    In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.
+    """
     account_id: str
     r"""Your Moov account ID."""
     create_transfer: components_createtransfer.CreateTransferTypedDict
@@ -72,7 +74,9 @@ class CreateTransferRequest(BaseModel):
         pydantic.Field(alias="x-idempotency-key"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ]
-    r"""Prevents duplicate transfers from being created."""
+    r"""Identifies a unique request to create a transfer.
+    In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.
+    """
 
     account_id: Annotated[
         str,

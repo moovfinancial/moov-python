@@ -348,7 +348,8 @@ class Transfers(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param x_idempotency_key: Prevents duplicate transfers from being created.
+        :param x_idempotency_key: Identifies a unique request to create a transfer.
+            In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.
         :param account_id: Your Moov account ID.
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
@@ -540,7 +541,8 @@ class Transfers(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-        :param x_idempotency_key: Prevents duplicate transfers from being created.
+        :param x_idempotency_key: Identifies a unique request to create a transfer.
+            In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.
         :param account_id: Your Moov account ID.
         :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
