@@ -21,6 +21,10 @@ if TYPE_CHECKING:
     )
     from .brandvalidationerror import BrandValidationError, BrandValidationErrorData
     from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundData
+    from .connectaccountrequestvalidationerror import (
+        ConnectAccountRequestValidationError,
+        ConnectAccountRequestValidationErrorData,
+    )
     from .createaccounterror import CreateAccountError, CreateAccountErrorData
     from .createinvoiceerror import CreateInvoiceError, CreateInvoiceErrorData
     from .createpaymentlinkerror import (
@@ -161,6 +165,8 @@ __all__ = [
     "BrandValidationErrorData",
     "CardAcquiringRefund",
     "CardAcquiringRefundData",
+    "ConnectAccountRequestValidationError",
+    "ConnectAccountRequestValidationErrorData",
     "CreateAccountError",
     "CreateAccountErrorData",
     "CreateInvoiceError",
@@ -274,6 +280,8 @@ _dynamic_imports: dict[str, str] = {
     "BrandValidationErrorData": ".brandvalidationerror",
     "CardAcquiringRefund": ".cardacquiringrefund",
     "CardAcquiringRefundData": ".cardacquiringrefund",
+    "ConnectAccountRequestValidationError": ".connectaccountrequestvalidationerror",
+    "ConnectAccountRequestValidationErrorData": ".connectaccountrequestvalidationerror",
     "CreateAccountError": ".createaccounterror",
     "CreateAccountErrorData": ".createaccounterror",
     "CreateInvoiceError": ".createinvoiceerror",

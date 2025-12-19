@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: d2b73df6db7a34d9667abc0b332e7c4f
+  docChecksum: 0220175f217c735736bc892ce3fb5252
   docVersion: latest
-  speakeasyVersion: 1.680.0
-  generationVersion: 2.788.4
-  releaseVersion: 0.20.8
-  configChecksum: 9e3f3159f82aabba9df46a1cfa2b9fc3
+  speakeasyVersion: 1.680.1
+  generationVersion: 2.788.5
+  releaseVersion: 0.20.9
+  configChecksum: ffe7459c7c2c7637ad6f423fc39ece30
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 10688255-ed2c-4dda-a78b-fa90f784fd08
-  pristine_commit_hash: b823053f1026a0d42dd2e7e0e67092929c4792e6
-  pristine_tree_hash: 2fb5fd74a52924c6dad977093e93acf748ce6835
+  generation_id: bf27a44a-829a-4da0-9361-a1b0faf954fe
+  pristine_commit_hash: 356d599679bebaca170badf3b0b0b2c14dd0c67e
+  pristine_tree_hash: 4f1d1b0d8b19247cfe9e46cbab1001f8217f5a5b
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1896,6 +1896,10 @@ trackedFiles:
     id: 09ac1d80b243
     last_write_checksum: sha1:c41f03dd13e47c0e464b669c7746af91afa1f501
     pristine_git_object: aae585bc0253cda55f52d82063db2daaaa2ee0a9
+  docs/models/components/sharescopes.md:
+    id: cad782b87f09
+    last_write_checksum: sha1:c7a948b9410e1dc0e5d3cb4948e0b14e294588b6
+    pristine_git_object: 6bb1047b86ae263014bc772296727ad259823afc
   docs/models/components/sourcedestinationoptions.md:
     id: 1e94a4009696
     last_write_checksum: sha1:ebfc5501777f2b2729501b252383159f175bbc68
@@ -2448,6 +2452,10 @@ trackedFiles:
     id: a163715e9735
     last_write_checksum: sha1:4d556e879091d2f2446df13edeaa5bf76df1ea41
     pristine_git_object: a890c1cc9714b049a722b3b4af6c021c953afe4c
+  docs/models/errors/connectaccountrequestvalidationerror.md:
+    id: "4967661135e4"
+    last_write_checksum: sha1:e56725fd592e994dc446f1c87f7d6fb6bc2aa129
+    pristine_git_object: 2c4dbd2d41c3896f55ccc3fa8bc5c36189dcb7dd
   docs/models/errors/createaccounterror.md:
     id: 56a439981941
     last_write_checksum: sha1:ec5789623f21f94b56dc5c24fc5998dddff6b894
@@ -2696,6 +2704,18 @@ trackedFiles:
     id: cacd4f889a42
     last_write_checksum: sha1:a99d33deaf77fb13628372c5260b5d1d10d286fa
     pristine_git_object: 34f042c5416908b8de31164b7e5a4cb830b2a379
+  docs/models/operations/connectaccountglobals.md:
+    id: faeeaa62a9b0
+    last_write_checksum: sha1:75a73eb45bea58e9c38a8e650e1edff9335177c9
+    pristine_git_object: e74aee60af6ae2618a679306ac27c9a0cb68c2cd
+  docs/models/operations/connectaccountrequest.md:
+    id: 8bc0bc998269
+    last_write_checksum: sha1:1b75c5de34c45069340ad1e01375484a4bdbc817
+    pristine_git_object: 7413fefbc367c975eaad7b54a3184f3802a2fa0b
+  docs/models/operations/connectaccountresponse.md:
+    id: 59016d0a1a12
+    last_write_checksum: sha1:e2bbfca64a07d519a97563328cbcec7f0b7bc76c
+    pristine_git_object: da83bb4528fe84ed94b3a485328fd813ea472b20
   docs/models/operations/createaccesstokenglobals.md:
     id: b277b1273a8e
     last_write_checksum: sha1:2ee2b6bcf6accc6b7d48d058cccbec657c781de4
@@ -3804,6 +3824,18 @@ trackedFiles:
     id: 2e0978c77c43
     last_write_checksum: sha1:cd752f6e5117a96de59beeb24bd8de58f7c244e4
     pristine_git_object: c876d5279accb2b9e24a78a36dbc744a54f7067a
+  docs/models/operations/listconnectedaccountsforaccountglobals.md:
+    id: 95a64cd8a36e
+    last_write_checksum: sha1:9b96848fffb044be2d644996d6b9cd273a935d19
+    pristine_git_object: 5ad523339d9c323b35e1c1ff57e15f0856cd53c2
+  docs/models/operations/listconnectedaccountsforaccountrequest.md:
+    id: 087921a69ac1
+    last_write_checksum: sha1:0f66f7568a7f7be57d4818795f0240763579b6e4
+    pristine_git_object: 8eff7f6eac740b2e39ba34666ad7cc7009707b07
+  docs/models/operations/listconnectedaccountsforaccountresponse.md:
+    id: c178f601c4de
+    last_write_checksum: sha1:54a15cf63c9a171ee6ac2e2b7deb9516975459fd
+    pristine_git_object: c540af825cfd9448fe139aeef8511061c12bba45
   docs/models/operations/listdisputeevidenceglobals.md:
     id: 6ac28d8e97f6
     last_write_checksum: sha1:b7b7284bcd451d6c1045742bb95434b714881e72
@@ -4646,8 +4678,8 @@ trackedFiles:
     pristine_git_object: 69dd549ec7f5f885101d08dd502e25748183aebf
   docs/sdks/accounts/README.md:
     id: d6c754b1ca96
-    last_write_checksum: sha1:7f6afaf848c9d58c99905e557cdd610d330251fe
-    pristine_git_object: d75468568698f62891c67609d2f54c3dd7262efd
+    last_write_checksum: sha1:e48d23e33ae960ef89161770de4ea098658c0a5d
+    pristine_git_object: b214d513dfa1c16f638777c1173f13aac35aa911
   docs/sdks/accountterminalapplications/README.md:
     id: 6ffa432d9156
     last_write_checksum: sha1:e193da8fe85b0b566c42774f07b21efc84ed24da
@@ -4810,8 +4842,8 @@ trackedFiles:
     pristine_git_object: 1d5ebbfbdfa5cea8bf4473d15550f03923758d43
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:704bbd7586dd8cb8d4b5dd2b8998c464fc02177a
-    pristine_git_object: dff16994c7684d8fcef10f2c9c935b6416a52884
+    last_write_checksum: sha1:99bd6945fb97ab1c8278d024d48e607fcf4a9b22
+    pristine_git_object: a00a6018e85aec1b017089c4db4da915b3630380
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4838,16 +4870,16 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:39f9b469235d7c94669ac6dabe82030e51a935ed
-    pristine_git_object: 2e6a3b7d19615823bd52b4802ec64b3ec9511126
+    last_write_checksum: sha1:92b6c8e54466c5f8230604ba2f1996055f10581c
+    pristine_git_object: e2b1c351a7109b823b509a760acaac4ad9c4cb2d
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
     pristine_git_object: edf3e28ce4d276d2e7c02c78877cb673ae448b7e
   src/moovio_sdk/accounts.py:
     id: 2d2e1aa84d79
-    last_write_checksum: sha1:62badd7769fd262a85ef24c38d258b8d30aabb43
-    pristine_git_object: badcee7768ece6b630617af64b083807c3ff4364
+    last_write_checksum: sha1:7bb77ca3287a225765fbf5e574e67130f7ac97f4
+    pristine_git_object: c188849dcac8d0d5feb096a74de5e60a1dfc0d49
   src/moovio_sdk/adjustments.py:
     id: 1cd95b9ab0a0
     last_write_checksum: sha1:3e343fc92b01233db10472d65ce73efbee0e4f08
@@ -4942,8 +4974,8 @@ trackedFiles:
     pristine_git_object: 726fc5eb391035492b4bea383d91cb7e23da04d3
   src/moovio_sdk/models/components/__init__.py:
     id: 0578a22d1083
-    last_write_checksum: sha1:502bdcfd7e4f59488cc3555613d9fab6db202540
-    pristine_git_object: 4240619090006a3acd9e646d2c6f11aef847b755
+    last_write_checksum: sha1:06d6507ebad68aa8984b677fd6f465ed5106c3d8
+    pristine_git_object: 62bb10fa5c5a9f1802d404857cba643bd9b9b45a
   src/moovio_sdk/models/components/account.py:
     id: 9360bd799cd5
     last_write_checksum: sha1:a50f79a1e9a3585cbdf9098f9785b5568a51c5ca
@@ -6612,6 +6644,10 @@ trackedFiles:
     id: 2e01d48a0d80
     last_write_checksum: sha1:1349309a9fbf5280228deebaa1c2990e4c0a8197
     pristine_git_object: e66991613684a4661d8d90bd828302f4cc677203
+  src/moovio_sdk/models/components/sharescopes.py:
+    id: c67f0cf50857
+    last_write_checksum: sha1:4a58a0958b79565812f812f52375d740cbac6d6b
+    pristine_git_object: 16589ee19e4a78f402af8397f385ab28be7b3227
   src/moovio_sdk/models/components/sourcedestinationoptions.py:
     id: c929e5d80e6b
     last_write_checksum: sha1:a6c5e349430e26e604ac6dc948a8684c90bb06aa
@@ -7094,8 +7130,8 @@ trackedFiles:
     pristine_git_object: 239297961357892975abb43383562b14acb430f4
   src/moovio_sdk/models/errors/__init__.py:
     id: 66c240fcfe3d
-    last_write_checksum: sha1:67b8d0731e1a50360635cae4a35638d3ebca05d2
-    pristine_git_object: 6bce5074f1ba65e03a821e61bdbeae873d1fe264
+    last_write_checksum: sha1:28cf71da9161b937aa8b7b88051c63f50f1f8838
+    pristine_git_object: 44152783ea70334fb4751e103c7b3a34648f8622
   src/moovio_sdk/models/errors/accountterminalapplicationerror.py:
     id: 71812b3babea
     last_write_checksum: sha1:e779fa844cbb8bb777d43beb9c872ea9c4dd52e4
@@ -7128,6 +7164,10 @@ trackedFiles:
     id: a5de74865d45
     last_write_checksum: sha1:ccbaaa37e62ca7424b6180c6bb422e21eea51854
     pristine_git_object: cdb85f4050d414b4267ccded51e546208dc9046a
+  src/moovio_sdk/models/errors/connectaccountrequestvalidationerror.py:
+    id: f3d45fa7f433
+    last_write_checksum: sha1:fee8012ba2b39e144eb61db313f559852cdb9667
+    pristine_git_object: b6c158bd7bc0c33661073eb3dd32924d6972875d
   src/moovio_sdk/models/errors/createaccounterror.py:
     id: 35d310be71ed
     last_write_checksum: sha1:1bcb7876fa9197f59781536293346e25536e1746
@@ -7322,8 +7362,8 @@ trackedFiles:
     pristine_git_object: 44b45f6a64f89b923412e340441b0df9f937da0c
   src/moovio_sdk/models/operations/__init__.py:
     id: f272e55d3d27
-    last_write_checksum: sha1:4111851d9ee5096b2cfa8c4d4f9891bae9cdfa57
-    pristine_git_object: c64ca1dd12eec9c1d0ea2dddea0ba98d3d61d0e0
+    last_write_checksum: sha1:68ccae9b7ef03332a219740c190e86b6709a86bc
+    pristine_git_object: a7ca2b23b1ff36a37969cb263cfc9d1945a2b580
   src/moovio_sdk/models/operations/acceptdispute.py:
     id: 0f6236cadf9a
     last_write_checksum: sha1:a977c3a3d939b34619ddffbaef4dad4934cc6ac9
@@ -7344,6 +7384,10 @@ trackedFiles:
     id: a283ed8ecb52
     last_write_checksum: sha1:888176d6eb1e8b532425e76a61c588ed6f5f1cb2
     pristine_git_object: 065bf29652981fc893027ef8b636bdf6cd17765c
+  src/moovio_sdk/models/operations/connectaccount.py:
+    id: 740a5492a1ed
+    last_write_checksum: sha1:b492b04b3df77b87bd094e518d3b5a5b711714df
+    pristine_git_object: 7b15336aff23900f5b8ab56609465b75c28b11da
   src/moovio_sdk/models/operations/createaccesstoken.py:
     id: 3ef2c6757064
     last_write_checksum: sha1:3fbf4f2b75b539047cfd6292cefd803ef85a91d6
@@ -7712,6 +7756,10 @@ trackedFiles:
     id: 76d6817b4ef0
     last_write_checksum: sha1:7cc4334ff036ce142bc4c7484ef04238b76f7176
     pristine_git_object: 6f5638c0341e4d0814645849eeb385ecbda78dbb
+  src/moovio_sdk/models/operations/listconnectedaccountsforaccount.py:
+    id: 4cd63127b446
+    last_write_checksum: sha1:d4947d9ccf7118ee07ada324f2293e04cc820d90
+    pristine_git_object: 51b9f2467387a2e8569a1ff3e128ee72ce1a36ab
   src/moovio_sdk/models/operations/listdisputeevidence.py:
     id: f6fbe50b2d79
     last_write_checksum: sha1:4c1dd2f27f647542cb6cb946febf2fc9b57f900e
@@ -10719,8 +10767,35 @@ examples:
           application/json: {"error": "<value>"}
         "422":
           application/json: {}
+  listConnectedAccountsForAccount:
+    speakeasy-default-list-connected-accounts-for-account:
+      parameters:
+        path:
+          accountID: "7e09ffc8-e508-4fd4-a54e-21cff90a1824"
+        query:
+          skip: 60
+          count: 20
+      responses:
+        "200":
+          application/json: [{"accountID": "53ca67ea-6fd3-423f-9544-ce2404159d33", "mode": "sandbox", "accountType": "business", "displayName": "Whole Body Fitness LLC", "profile": {"business": {"legalBusinessName": "Whole Body Fitness LLC", "ownersProvided": false}}, "verification": {"verificationStatus": "unverified", "status": "unverified"}, "settings": {"cardPayment": {"statementDescriptor": "Whole Body Fitness LLC"}, "achPayment": {"companyName": "Whole Body Fitne"}}, "createdOn": "2024-12-16T17:55:20.557151867Z", "updatedOn": "2024-12-16T17:55:20.557151867Z"}]
+  connectAccount:
+    speakeasy-default-connect-account:
+      parameters:
+        path:
+          accountID: "456cb5b6-20dc-4585-97b4-745d013adb1f"
+      requestBody:
+        application/json: {"principalAccountID": "c520f1b9-0ba7-42f5-b977-248cdbe41c69", "allowScopes": ["transfers.write", "payment-methods.read"]}
+      responses:
+        "400":
+          application/json: {"error": "<value>"}
+        "422":
+          application/json: {"allowScopes": {"0": "first element failed validation..."}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Python SDK Changes:
+  * `moov.accounts.list_connected()`: **Added**
+  * `moov.accounts.connect()`: **Added**
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json

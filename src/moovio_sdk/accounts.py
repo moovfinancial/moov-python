@@ -1411,6 +1411,552 @@ class Accounts(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    def list_connected(
+        self,
+        *,
+        account_id: str,
+        name: Optional[str] = None,
+        email: Optional[str] = None,
+        type_: Optional[components.CreateAccountType] = None,
+        foreign_id: Optional[str] = None,
+        include_disconnected: Optional[bool] = None,
+        capability: Optional[components.CapabilityID] = None,
+        capability_status: Optional[components.CapabilityStatus] = None,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListConnectedAccountsForAccountResponse:
+        r"""List or search accounts to which the caller is connected.
+
+        All supported query parameters are optional. If none are provided the response will include all connected accounts.
+        Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and
+        return results based on relevance. Accounts with AccountType `guest` will not be included in the response.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+        to specify the `/accounts.read` scope.
+
+        :param account_id:
+        :param name: Filter connected accounts by name.
+
+            If provided, this query will attempt to find matches against the following Account and Profile fields:
+            <ul>
+            <li>Account `displayName`</li>
+            <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+            <li>Business Profile `legalBusinessName`</li>
+            </ul>
+
+            Filtering by Guest Profile `name` is not currently supported.
+        :param email: Filter connected accounts by email address.
+
+            Provide the full email address to filter by email.
+        :param type: Filter connected accounts by AccountType.
+
+            If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+            be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
+            the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+
+            Filtering by `type=guest` is not currently supported.
+        :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+        :param include_disconnected: Filter disconnected accounts.
+
+            If true, the response will include disconnected accounts.
+        :param capability: Filter connected accounts by the capability.
+        :param capability_status: Filter connected accounts by the capability.
+        :param skip:
+        :param count:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListConnectedAccountsForAccountRequest(
+            account_id=account_id,
+            name=name,
+            email=email,
+            type=type_,
+            foreign_id=foreign_id,
+            include_disconnected=include_disconnected,
+            capability=capability,
+            capability_status=capability_status,
+            skip=skip,
+            count=count,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/accounts/{accountID}/connected-accounts",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.ListConnectedAccountsForAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listConnectedAccountsForAccount",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListConnectedAccountsForAccountResponse(
+                result=unmarshal_json_response(List[components.Account], http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def list_connected_async(
+        self,
+        *,
+        account_id: str,
+        name: Optional[str] = None,
+        email: Optional[str] = None,
+        type_: Optional[components.CreateAccountType] = None,
+        foreign_id: Optional[str] = None,
+        include_disconnected: Optional[bool] = None,
+        capability: Optional[components.CapabilityID] = None,
+        capability_status: Optional[components.CapabilityStatus] = None,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListConnectedAccountsForAccountResponse:
+        r"""List or search accounts to which the caller is connected.
+
+        All supported query parameters are optional. If none are provided the response will include all connected accounts.
+        Pagination is supported via the `skip` and `count` query parameters. Searching by name and email will overlap and
+        return results based on relevance. Accounts with AccountType `guest` will not be included in the response.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+        to specify the `/accounts.read` scope.
+
+        :param account_id:
+        :param name: Filter connected accounts by name.
+
+            If provided, this query will attempt to find matches against the following Account and Profile fields:
+            <ul>
+            <li>Account `displayName`</li>
+            <li>Individual Profile `firstName`, `middleName`, and `lastName`</li>
+            <li>Business Profile `legalBusinessName`</li>
+            </ul>
+
+            Filtering by Guest Profile `name` is not currently supported.
+        :param email: Filter connected accounts by email address.
+
+            Provide the full email address to filter by email.
+        :param type: Filter connected accounts by AccountType.
+
+            If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
+            be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
+            the display name and Business Profile name fields (`legalBusinessName`, and `doingBusinessAs`).
+
+            Filtering by `type=guest` is not currently supported.
+        :param foreign_id: Serves as an optional alias from a foreign/external system which can be used to reference this resource.
+        :param include_disconnected: Filter disconnected accounts.
+
+            If true, the response will include disconnected accounts.
+        :param capability: Filter connected accounts by the capability.
+        :param capability_status: Filter connected accounts by the capability.
+        :param skip:
+        :param count:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListConnectedAccountsForAccountRequest(
+            account_id=account_id,
+            name=name,
+            email=email,
+            type=type_,
+            foreign_id=foreign_id,
+            include_disconnected=include_disconnected,
+            capability=capability,
+            capability_status=capability_status,
+            skip=skip,
+            count=count,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/accounts/{accountID}/connected-accounts",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.ListConnectedAccountsForAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listConnectedAccountsForAccount",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListConnectedAccountsForAccountResponse(
+                result=unmarshal_json_response(List[components.Account], http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def connect(
+        self,
+        *,
+        account_id: str,
+        principal_account_id: str,
+        allow_scopes: Optional[List[components.ApplicationScope]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ConnectAccountResponse:
+        r"""Shares access scopes from the account specified to the caller, establishing a connection
+        between the two accounts with the specified permissions.
+
+        :param account_id:
+        :param principal_account_id: The account ID that will receive access to the scopes.
+        :param allow_scopes: The list of scopes to share with the principal account. If none are provided, all intersecting scopes are added.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ConnectAccountRequest(
+            account_id=account_id,
+            share_scopes=components.ShareScopes(
+                principal_account_id=principal_account_id,
+                allow_scopes=allow_scopes,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/accounts/{accountID}/connections",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.ConnectAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.share_scopes, False, False, "json", components.ShareScopes
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="connectAccount",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "504",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "*"):
+            return operations.ConnectAccountResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConnectAccountRequestValidationErrorData, http_res
+            )
+            raise errors.ConnectAccountRequestValidationError(response_data, http_res)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def connect_async(
+        self,
+        *,
+        account_id: str,
+        principal_account_id: str,
+        allow_scopes: Optional[List[components.ApplicationScope]] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ConnectAccountResponse:
+        r"""Shares access scopes from the account specified to the caller, establishing a connection
+        between the two accounts with the specified permissions.
+
+        :param account_id:
+        :param principal_account_id: The account ID that will receive access to the scopes.
+        :param allow_scopes: The list of scopes to share with the principal account. If none are provided, all intersecting scopes are added.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ConnectAccountRequest(
+            account_id=account_id,
+            share_scopes=components.ShareScopes(
+                principal_account_id=principal_account_id,
+                allow_scopes=allow_scopes,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/accounts/{accountID}/connections",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.ConnectAccountGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.share_scopes, False, False, "json", components.ShareScopes
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="connectAccount",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "504",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "*"):
+            return operations.ConnectAccountResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConnectAccountRequestValidationErrorData, http_res
+            )
+            raise errors.ConnectAccountRequestValidationError(response_data, http_res)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def get_countries(
         self,
         *,

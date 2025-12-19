@@ -988,6 +988,7 @@ if TYPE_CHECKING:
     from .sendfundsrtperror import SendFundsRtpError, SendFundsRtpErrorTypedDict
     from .sentreceipt import SentReceipt, SentReceiptTypedDict
     from .settings import Settings, SettingsTypedDict
+    from .sharescopes import ShareScopes, ShareScopesTypedDict
     from .sourcedestinationoptions import (
         SourceDestinationOptions,
         SourceDestinationOptionsTypedDict,
@@ -2132,6 +2133,8 @@ __all__ = [
     "SentReceiptTypedDict",
     "Settings",
     "SettingsTypedDict",
+    "ShareScopes",
+    "ShareScopesTypedDict",
     "SourceDestinationOptions",
     "SourceDestinationOptionsTypedDict",
     "Ssn",
@@ -3199,6 +3202,8 @@ _dynamic_imports: dict[str, str] = {
     "SentReceiptTypedDict": ".sentreceipt",
     "Settings": ".settings",
     "SettingsTypedDict": ".settings",
+    "ShareScopes": ".sharescopes",
+    "ShareScopesTypedDict": ".sharescopes",
     "SourceDestinationOptions": ".sourcedestinationoptions",
     "SourceDestinationOptionsTypedDict": ".sourcedestinationoptions",
     "Statement": ".statement",
