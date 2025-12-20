@@ -1106,7 +1106,7 @@ class Invoices(BaseSDK):
         )
 
         req = self._build_request(
-            method="PUT",
+            method="POST",
             path="/accounts/{accountID}/invoices/{invoiceID}/mark-paid",
             base_url=base_url,
             url_variables=url_variables,
@@ -1246,7 +1246,7 @@ class Invoices(BaseSDK):
         )
 
         req = self._build_request_async(
-            method="PUT",
+            method="POST",
             path="/accounts/{accountID}/invoices/{invoiceID}/mark-paid",
             base_url=base_url,
             url_variables=url_variables,

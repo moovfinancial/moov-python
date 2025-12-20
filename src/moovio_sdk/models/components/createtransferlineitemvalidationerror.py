@@ -5,9 +5,9 @@ from .amountdecimalvalidationerror import (
     AmountDecimalValidationError,
     AmountDecimalValidationErrorTypedDict,
 )
-from .transferlineitemoptionvalidationerror import (
-    TransferLineItemOptionValidationError,
-    TransferLineItemOptionValidationErrorTypedDict,
+from .createtransferlineitemoptionvalidationerror import (
+    CreateTransferLineItemOptionValidationError,
+    CreateTransferLineItemOptionValidationErrorTypedDict,
 )
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -15,15 +15,18 @@ from typing import Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class TransferLineItemValidationErrorTypedDict(TypedDict):
+class CreateTransferLineItemValidationErrorTypedDict(TypedDict):
     product_id: NotRequired[str]
     name: NotRequired[str]
     base_price: NotRequired[AmountDecimalValidationErrorTypedDict]
-    options: NotRequired[Dict[str, TransferLineItemOptionValidationErrorTypedDict]]
+    options: NotRequired[
+        Dict[str, CreateTransferLineItemOptionValidationErrorTypedDict]
+    ]
     quantity: NotRequired[str]
+    image_i_ds: NotRequired[str]
 
 
-class TransferLineItemValidationError(BaseModel):
+class CreateTransferLineItemValidationError(BaseModel):
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None
 
     name: Optional[str] = None
@@ -32,6 +35,8 @@ class TransferLineItemValidationError(BaseModel):
         Optional[AmountDecimalValidationError], pydantic.Field(alias="basePrice")
     ] = None
 
-    options: Optional[Dict[str, TransferLineItemOptionValidationError]] = None
+    options: Optional[Dict[str, CreateTransferLineItemOptionValidationError]] = None
 
     quantity: Optional[str] = None
+
+    image_i_ds: Annotated[Optional[str], pydantic.Field(alias="imageIDs")] = None

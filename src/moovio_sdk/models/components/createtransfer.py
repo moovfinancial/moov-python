@@ -6,9 +6,12 @@ from .createtransferdestination import (
     CreateTransferDestination,
     CreateTransferDestinationTypedDict,
 )
+from .createtransferlineitems import (
+    CreateTransferLineItems,
+    CreateTransferLineItemsTypedDict,
+)
 from .createtransfersource import CreateTransferSource, CreateTransferSourceTypedDict
 from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
-from .transferlineitems import TransferLineItems, TransferLineItemsTypedDict
 from moovio_sdk.types import BaseModel
 import pydantic
 from typing import Dict, Optional
@@ -31,7 +34,7 @@ class CreateTransferTypedDict(TypedDict):
     r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
     foreign_id: NotRequired[str]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
-    line_items: NotRequired[TransferLineItemsTypedDict]
+    line_items: NotRequired[CreateTransferLineItemsTypedDict]
     r"""An optional collection of line items for a transfer.
     When line items are provided, their total plus sales tax must equal the transfer amount.
     """
@@ -66,7 +69,7 @@ class CreateTransfer(BaseModel):
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
     line_items: Annotated[
-        Optional[TransferLineItems], pydantic.Field(alias="lineItems")
+        Optional[CreateTransferLineItems], pydantic.Field(alias="lineItems")
     ] = None
     r"""An optional collection of line items for a transfer.
     When line items are provided, their total plus sales tax must equal the transfer amount.

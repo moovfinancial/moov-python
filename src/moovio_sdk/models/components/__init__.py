@@ -443,6 +443,30 @@ if TYPE_CHECKING:
         CreateTransferDestinationCard,
         CreateTransferDestinationCardTypedDict,
     )
+    from .createtransferlineitem import (
+        CreateTransferLineItem,
+        CreateTransferLineItemTypedDict,
+    )
+    from .createtransferlineitemoption import (
+        CreateTransferLineItemOption,
+        CreateTransferLineItemOptionTypedDict,
+    )
+    from .createtransferlineitemoptionvalidationerror import (
+        CreateTransferLineItemOptionValidationError,
+        CreateTransferLineItemOptionValidationErrorTypedDict,
+    )
+    from .createtransferlineitems import (
+        CreateTransferLineItems,
+        CreateTransferLineItemsTypedDict,
+    )
+    from .createtransferlineitemsvalidationerror import (
+        CreateTransferLineItemsValidationError,
+        CreateTransferLineItemsValidationErrorTypedDict,
+    )
+    from .createtransferlineitemvalidationerror import (
+        CreateTransferLineItemValidationError,
+        CreateTransferLineItemValidationErrorTypedDict,
+    )
     from .createtransferoptions import (
         CreateTransferOptions,
         CreateTransferOptionsTypedDict,
@@ -1050,23 +1074,15 @@ if TYPE_CHECKING:
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferfailurereason import TransferFailureReason
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
+    from .transferlineitemimagemetadata import (
+        TransferLineItemImageMetadata,
+        TransferLineItemImageMetadataTypedDict,
+    )
     from .transferlineitemoption import (
         TransferLineItemOption,
         TransferLineItemOptionTypedDict,
     )
-    from .transferlineitemoptionvalidationerror import (
-        TransferLineItemOptionValidationError,
-        TransferLineItemOptionValidationErrorTypedDict,
-    )
     from .transferlineitems import TransferLineItems, TransferLineItemsTypedDict
-    from .transferlineitemsvalidationerror import (
-        TransferLineItemsValidationError,
-        TransferLineItemsValidationErrorTypedDict,
-    )
-    from .transferlineitemvalidationerror import (
-        TransferLineItemValidationError,
-        TransferLineItemValidationErrorTypedDict,
-    )
     from .transferoptions import TransferOptions, TransferOptionsTypedDict
     from .transferparty import TransferParty
     from .transfersource import TransferSource, TransferSourceTypedDict
@@ -1653,6 +1669,18 @@ __all__ = [
     "CreateTransferDestinationCard",
     "CreateTransferDestinationCardTypedDict",
     "CreateTransferDestinationTypedDict",
+    "CreateTransferLineItem",
+    "CreateTransferLineItemOption",
+    "CreateTransferLineItemOptionTypedDict",
+    "CreateTransferLineItemOptionValidationError",
+    "CreateTransferLineItemOptionValidationErrorTypedDict",
+    "CreateTransferLineItemTypedDict",
+    "CreateTransferLineItemValidationError",
+    "CreateTransferLineItemValidationErrorTypedDict",
+    "CreateTransferLineItems",
+    "CreateTransferLineItemsTypedDict",
+    "CreateTransferLineItemsValidationError",
+    "CreateTransferLineItemsValidationErrorTypedDict",
     "CreateTransferOptions",
     "CreateTransferOptionsTypedDict",
     "CreateTransferSource",
@@ -2196,17 +2224,13 @@ __all__ = [
     "TransferDestinationTypedDict",
     "TransferFailureReason",
     "TransferLineItem",
+    "TransferLineItemImageMetadata",
+    "TransferLineItemImageMetadataTypedDict",
     "TransferLineItemOption",
     "TransferLineItemOptionTypedDict",
-    "TransferLineItemOptionValidationError",
-    "TransferLineItemOptionValidationErrorTypedDict",
     "TransferLineItemTypedDict",
-    "TransferLineItemValidationError",
-    "TransferLineItemValidationErrorTypedDict",
     "TransferLineItems",
     "TransferLineItemsTypedDict",
-    "TransferLineItemsValidationError",
-    "TransferLineItemsValidationErrorTypedDict",
     "TransferOptions",
     "TransferOptionsTypedDict",
     "TransferParty",
@@ -2730,6 +2754,18 @@ _dynamic_imports: dict[str, str] = {
     "CreateTransferDestinationACHTypedDict": ".createtransferdestinationach",
     "CreateTransferDestinationCard": ".createtransferdestinationcard",
     "CreateTransferDestinationCardTypedDict": ".createtransferdestinationcard",
+    "CreateTransferLineItem": ".createtransferlineitem",
+    "CreateTransferLineItemTypedDict": ".createtransferlineitem",
+    "CreateTransferLineItemOption": ".createtransferlineitemoption",
+    "CreateTransferLineItemOptionTypedDict": ".createtransferlineitemoption",
+    "CreateTransferLineItemOptionValidationError": ".createtransferlineitemoptionvalidationerror",
+    "CreateTransferLineItemOptionValidationErrorTypedDict": ".createtransferlineitemoptionvalidationerror",
+    "CreateTransferLineItems": ".createtransferlineitems",
+    "CreateTransferLineItemsTypedDict": ".createtransferlineitems",
+    "CreateTransferLineItemsValidationError": ".createtransferlineitemsvalidationerror",
+    "CreateTransferLineItemsValidationErrorTypedDict": ".createtransferlineitemsvalidationerror",
+    "CreateTransferLineItemValidationError": ".createtransferlineitemvalidationerror",
+    "CreateTransferLineItemValidationErrorTypedDict": ".createtransferlineitemvalidationerror",
     "CreateTransferOptions": ".createtransferoptions",
     "CreateTransferOptionsTypedDict": ".createtransferoptions",
     "CreateTransferSource": ".createtransfersource",
@@ -3267,16 +3303,12 @@ _dynamic_imports: dict[str, str] = {
     "TransferFailureReason": ".transferfailurereason",
     "TransferLineItem": ".transferlineitem",
     "TransferLineItemTypedDict": ".transferlineitem",
+    "TransferLineItemImageMetadata": ".transferlineitemimagemetadata",
+    "TransferLineItemImageMetadataTypedDict": ".transferlineitemimagemetadata",
     "TransferLineItemOption": ".transferlineitemoption",
     "TransferLineItemOptionTypedDict": ".transferlineitemoption",
-    "TransferLineItemOptionValidationError": ".transferlineitemoptionvalidationerror",
-    "TransferLineItemOptionValidationErrorTypedDict": ".transferlineitemoptionvalidationerror",
     "TransferLineItems": ".transferlineitems",
     "TransferLineItemsTypedDict": ".transferlineitems",
-    "TransferLineItemsValidationError": ".transferlineitemsvalidationerror",
-    "TransferLineItemsValidationErrorTypedDict": ".transferlineitemsvalidationerror",
-    "TransferLineItemValidationError": ".transferlineitemvalidationerror",
-    "TransferLineItemValidationErrorTypedDict": ".transferlineitemvalidationerror",
     "TransferOptions": ".transferoptions",
     "TransferOptionsTypedDict": ".transferoptions",
     "TransferParty": ".transferparty",

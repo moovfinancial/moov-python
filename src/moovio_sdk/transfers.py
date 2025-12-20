@@ -334,7 +334,10 @@ class Transfers(BaseSDK):
         ] = None,
         foreign_id: Optional[str] = None,
         line_items: Optional[
-            Union[components.TransferLineItems, components.TransferLineItemsTypedDict]
+            Union[
+                components.CreateTransferLineItems,
+                components.CreateTransferLineItemsTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -400,7 +403,7 @@ class Transfers(BaseSDK):
                 ),
                 foreign_id=foreign_id,
                 line_items=utils.get_pydantic_model(
-                    line_items, Optional[components.TransferLineItems]
+                    line_items, Optional[components.CreateTransferLineItems]
                 ),
             ),
         )
@@ -527,7 +530,10 @@ class Transfers(BaseSDK):
         ] = None,
         foreign_id: Optional[str] = None,
         line_items: Optional[
-            Union[components.TransferLineItems, components.TransferLineItemsTypedDict]
+            Union[
+                components.CreateTransferLineItems,
+                components.CreateTransferLineItemsTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -593,7 +599,7 @@ class Transfers(BaseSDK):
                 ),
                 foreign_id=foreign_id,
                 line_items=utils.get_pydantic_model(
-                    line_items, Optional[components.TransferLineItems]
+                    line_items, Optional[components.CreateTransferLineItems]
                 ),
             ),
         )

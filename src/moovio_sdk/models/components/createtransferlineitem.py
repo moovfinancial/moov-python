@@ -2,13 +2,9 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
-from .transferlineitemimagemetadata import (
-    TransferLineItemImageMetadata,
-    TransferLineItemImageMetadataTypedDict,
-)
-from .transferlineitemoption import (
-    TransferLineItemOption,
-    TransferLineItemOptionTypedDict,
+from .createtransferlineitemoption import (
+    CreateTransferLineItemOption,
+    CreateTransferLineItemOptionTypedDict,
 )
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -16,7 +12,7 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class TransferLineItemTypedDict(TypedDict):
+class CreateTransferLineItemTypedDict(TypedDict):
     r"""Represents a single item in a transfer, including optional modifiers and quantity."""
 
     name: str
@@ -25,15 +21,15 @@ class TransferLineItemTypedDict(TypedDict):
     r"""The base price of the item before applying option modifiers."""
     quantity: int
     r"""The quantity of this item."""
-    options: NotRequired[List[TransferLineItemOptionTypedDict]]
+    options: NotRequired[List[CreateTransferLineItemOptionTypedDict]]
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
-    images: NotRequired[List[TransferLineItemImageMetadataTypedDict]]
+    image_i_ds: NotRequired[List[str]]
     r"""Optional list of images associated with this line item."""
     product_id: NotRequired[str]
     r"""Optional unique identifier associating the line item with a product."""
 
 
-class TransferLineItem(BaseModel):
+class CreateTransferLineItem(BaseModel):
     r"""Represents a single item in a transfer, including optional modifiers and quantity."""
 
     name: str
@@ -45,10 +41,10 @@ class TransferLineItem(BaseModel):
     quantity: int
     r"""The quantity of this item."""
 
-    options: Optional[List[TransferLineItemOption]] = None
+    options: Optional[List[CreateTransferLineItemOption]] = None
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
 
-    images: Optional[List[TransferLineItemImageMetadata]] = None
+    image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
     r"""Optional list of images associated with this line item."""
 
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None

@@ -11,14 +11,15 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class TransferLineItemOptionValidationErrorTypedDict(TypedDict):
+class CreateTransferLineItemOptionValidationErrorTypedDict(TypedDict):
     name: NotRequired[str]
     group: NotRequired[str]
     price_modifier: NotRequired[AmountDecimalValidationErrorTypedDict]
     quantity: NotRequired[str]
+    image_i_ds: NotRequired[str]
 
 
-class TransferLineItemOptionValidationError(BaseModel):
+class CreateTransferLineItemOptionValidationError(BaseModel):
     name: Optional[str] = None
 
     group: Optional[str] = None
@@ -28,3 +29,5 @@ class TransferLineItemOptionValidationError(BaseModel):
     ] = None
 
     quantity: Optional[str] = None
+
+    image_i_ds: Annotated[Optional[str], pydantic.Field(alias="imageIDs")] = None

@@ -276,7 +276,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="markPaidInvoice" method="put" path="/accounts/{accountID}/invoices/{invoiceID}/mark-paid" -->
+<!-- UsageSnippet language="python" operationID="markPaidInvoice" method="post" path="/accounts/{accountID}/invoices/{invoiceID}/mark-paid" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
