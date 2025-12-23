@@ -988,7 +988,10 @@ class Images(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.DeleteImageResponse:
-        r"""Permanently delete an image by its ID.
+        r"""Disable an image by its ID.
+
+          Disabled images are still be accessible via their public URL, and cannot be assigned
+          to products or line-items.
 
         :param account_id:
         :param image_id:
@@ -1099,7 +1102,10 @@ class Images(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.DeleteImageResponse:
-        r"""Permanently delete an image by its ID.
+        r"""Disable an image by its ID.
+
+          Disabled images are still be accessible via their public URL, and cannot be assigned
+          to products or line-items.
 
         :param account_id:
         :param image_id:

@@ -736,7 +736,6 @@ if TYPE_CHECKING:
         ManualTermsOfServiceUpdate,
         ManualTermsOfServiceUpdateTypedDict,
     )
-    from .markinvoicepaid import MarkInvoicePaid, MarkInvoicePaidTypedDict
     from .microdepositstatus import MicroDepositStatus
     from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
     from .mode import Mode
@@ -1914,8 +1913,6 @@ __all__ = [
     "ManualTermsOfServiceUpdate",
     "ManualTermsOfServiceUpdateTypedDict",
     "ManualTypedDict",
-    "MarkInvoicePaid",
-    "MarkInvoicePaidTypedDict",
     "MicroDepositStatus",
     "MinimumCommitment",
     "MinimumCommitmentTypedDict",
@@ -2987,8 +2984,6 @@ _dynamic_imports: dict[str, str] = {
     "ManualTermsOfServiceTypedDict": ".manualtermsofservice",
     "ManualTermsOfServiceUpdate": ".manualtermsofserviceupdate",
     "ManualTermsOfServiceUpdateTypedDict": ".manualtermsofserviceupdate",
-    "MarkInvoicePaid": ".markinvoicepaid",
-    "MarkInvoicePaidTypedDict": ".markinvoicepaid",
     "MicroDepositStatus": ".microdepositstatus",
     "MinimumCommitment": ".minimumcommitment",
     "MinimumCommitmentTypedDict": ".minimumcommitment",

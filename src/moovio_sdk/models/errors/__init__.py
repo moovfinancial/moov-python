@@ -75,7 +75,6 @@ if TYPE_CHECKING:
         ListWalletTransactionsValidationError,
         ListWalletTransactionsValidationErrorData,
     )
-    from .markinvoicepaiderror import MarkInvoicePaidError, MarkInvoicePaidErrorData
     from .microdepositvalidationerror import (
         MicroDepositValidationError,
         MicroDepositValidationErrorData,
@@ -207,8 +206,6 @@ __all__ = [
     "ListWalletTransactionsValidationErrorData",
     "ListWalletsValidationError",
     "ListWalletsValidationErrorData",
-    "MarkInvoicePaidError",
-    "MarkInvoicePaidErrorData",
     "MicroDepositValidationError",
     "MicroDepositValidationErrorData",
     "MoovError",
@@ -320,8 +317,6 @@ _dynamic_imports: dict[str, str] = {
     "ListWalletsValidationErrorData": ".listwalletsvalidationerror",
     "ListWalletTransactionsValidationError": ".listwallettransactionsvalidationerror",
     "ListWalletTransactionsValidationErrorData": ".listwallettransactionsvalidationerror",
-    "MarkInvoicePaidError": ".markinvoicepaiderror",
-    "MarkInvoicePaidErrorData": ".markinvoicepaiderror",
     "MicroDepositValidationError": ".microdepositvalidationerror",
     "MicroDepositValidationErrorData": ".microdepositvalidationerror",
     "NoResponseError": ".no_response_error",

@@ -22,6 +22,7 @@ class ImageMetadataTypedDict(TypedDict):
     updated_on: datetime
     alt_text: NotRequired[str]
     r"""Alternative text for the image."""
+    disabled_on: NotRequired[datetime]
 
 
 class ImageMetadata(BaseModel):
@@ -43,3 +44,7 @@ class ImageMetadata(BaseModel):
 
     alt_text: Annotated[Optional[str], pydantic.Field(alias="altText")] = None
     r"""Alternative text for the image."""
+
+    disabled_on: Annotated[Optional[datetime], pydantic.Field(alias="disabledOn")] = (
+        None
+    )
