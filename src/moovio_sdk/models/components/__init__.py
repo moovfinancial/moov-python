@@ -431,6 +431,10 @@ if TYPE_CHECKING:
         CreateTicketContactErrorTypedDict,
     )
     from .createtransfer import CreateTransfer, CreateTransferTypedDict
+    from .createtransferachaddendarecord import (
+        CreateTransferACHAddendaRecord,
+        CreateTransferACHAddendaRecordTypedDict,
+    )
     from .createtransferdestination import (
         CreateTransferDestination,
         CreateTransferDestinationTypedDict,
@@ -1070,6 +1074,10 @@ if TYPE_CHECKING:
     from .transactionsource import TransactionSource
     from .transfer import Transfer, TransferTypedDict
     from .transferaccount import TransferAccount, TransferAccountTypedDict
+    from .transferachaddendarecord import (
+        TransferACHAddendaRecord,
+        TransferACHAddendaRecordTypedDict,
+    )
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferfailurereason import TransferFailureReason
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
@@ -1662,6 +1670,8 @@ __all__ = [
     "CreateTicketContactErrorTypedDict",
     "CreateTicketTypedDict",
     "CreateTransfer",
+    "CreateTransferACHAddendaRecord",
+    "CreateTransferACHAddendaRecordTypedDict",
     "CreateTransferDestination",
     "CreateTransferDestinationACH",
     "CreateTransferDestinationACHTypedDict",
@@ -2215,6 +2225,8 @@ __all__ = [
     "TokenTypeHint",
     "TransactionSource",
     "Transfer",
+    "TransferACHAddendaRecord",
+    "TransferACHAddendaRecordTypedDict",
     "TransferAccount",
     "TransferAccountTypedDict",
     "TransferDestination",
@@ -2745,6 +2757,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateTicketContactErrorTypedDict": ".createticketcontacterror",
     "CreateTransfer": ".createtransfer",
     "CreateTransferTypedDict": ".createtransfer",
+    "CreateTransferACHAddendaRecord": ".createtransferachaddendarecord",
+    "CreateTransferACHAddendaRecordTypedDict": ".createtransferachaddendarecord",
     "CreateTransferDestination": ".createtransferdestination",
     "CreateTransferDestinationTypedDict": ".createtransferdestination",
     "CreateTransferDestinationACH": ".createtransferdestinationach",
@@ -3293,6 +3307,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferTypedDict": ".transfer",
     "TransferAccount": ".transferaccount",
     "TransferAccountTypedDict": ".transferaccount",
+    "TransferACHAddendaRecord": ".transferachaddendarecord",
+    "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferFailureReason": ".transferfailurereason",

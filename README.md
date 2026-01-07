@@ -146,7 +146,7 @@ with Moov(
         "optional": "metadata",
     }, terms_of_service={
         "manual": {
-            "accepted_date": parse_datetime("2025-07-27T08:57:17.388Z"),
+            "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
             "accepted_ip": "172.217.2.46",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",
@@ -207,7 +207,7 @@ async def main():
             "optional": "metadata",
         }, terms_of_service={
             "manual": {
-                "accepted_date": parse_datetime("2025-07-27T08:57:17.388Z"),
+                "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
                 "accepted_ip": "172.217.2.46",
                 "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
                 "accepted_domain": "https://rundown-depot.org/",
@@ -276,7 +276,7 @@ with Moov(
         "optional": "metadata",
     }, terms_of_service={
         "manual": {
-            "accepted_date": parse_datetime("2025-07-27T08:57:17.388Z"),
+            "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
             "accepted_ip": "172.217.2.46",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",
@@ -1374,7 +1374,7 @@ with Moov(
         "optional": "metadata",
     }, terms_of_service={
         "manual": {
-            "accepted_date": parse_datetime("2025-07-27T08:57:17.388Z"),
+            "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
             "accepted_ip": "172.217.2.46",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",
@@ -1432,7 +1432,7 @@ with Moov(
         "optional": "metadata",
     }, terms_of_service={
         "manual": {
-            "accepted_date": parse_datetime("2025-07-27T08:57:17.388Z"),
+            "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
             "accepted_ip": "172.217.2.46",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",
@@ -1505,7 +1505,7 @@ with Moov(
             "optional": "metadata",
         }, terms_of_service={
             "manual": {
-                "accepted_date": parse_datetime("2025-07-27T08:57:17.388Z"),
+                "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
                 "accepted_ip": "172.217.2.46",
                 "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
                 "accepted_domain": "https://rundown-depot.org/",
@@ -1651,7 +1651,7 @@ with Moov(
         "optional": "metadata",
     }, terms_of_service={
         "manual": {
-            "accepted_date": parse_datetime("2025-07-27T08:57:17.388Z"),
+            "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
             "accepted_ip": "172.217.2.46",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",

@@ -5,10 +5,14 @@ from .achexception import ACHException, ACHExceptionTypedDict
 from .achtransactionstatus import ACHTransactionStatus
 from .debitholdperiod import DebitHoldPeriod
 from .seccode import SECCode
+from .transferachaddendarecord import (
+    TransferACHAddendaRecord,
+    TransferACHAddendaRecordTypedDict,
+)
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -35,6 +39,7 @@ class ACHTransactionDetailsTypedDict(TypedDict):
     completed_on: NotRequired[datetime]
     debit_hold_period: NotRequired[DebitHoldPeriod]
     r"""An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting."""
+    addenda: NotRequired[List[TransferACHAddendaRecordTypedDict]]
 
 
 class ACHTransactionDetails(BaseModel):
@@ -92,3 +97,5 @@ class ACHTransactionDetails(BaseModel):
         Optional[DebitHoldPeriod], pydantic.Field(alias="debitHoldPeriod")
     ] = None
     r"""An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting."""
+
+    addenda: Optional[List[TransferACHAddendaRecord]] = None
