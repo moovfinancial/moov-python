@@ -1,0 +1,17 @@
+# Webhook
+
+A configured webhook endpoint that receives event notifications.
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `webhook_id`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | Unique identifier for the webhook.                                               |
+| `url`                                                                            | *str*                                                                            | :heavy_check_mark:                                                               | The URL where webhook events will be sent.                                       |
+| `status`                                                                         | [components.WebhookStatus](../../models/components/webhookstatus.md)             | :heavy_check_mark:                                                               | The status of a webhook.                                                         |
+| `event_types`                                                                    | List[[components.WebhookEventType](../../models/components/webhookeventtype.md)] | :heavy_check_mark:                                                               | The list of event types this webhook is subscribed to.                           |
+| `description`                                                                    | *str*                                                                            | :heavy_check_mark:                                                               | A description of the webhook for reference.                                      |
+| `created_on`                                                                     | [date](https://docs.python.org/3/library/datetime.html#date-objects)             | :heavy_check_mark:                                                               | Timestamp of when the webhook was created.                                       |
+| `updated_on`                                                                     | [date](https://docs.python.org/3/library/datetime.html#date-objects)             | :heavy_check_mark:                                                               | Timestamp of when the webhook was last updated.                                  |
+| `last_used_on`                                                                   | [date](https://docs.python.org/3/library/datetime.html#date-objects)             | :heavy_minus_sign:                                                               | Timestamp of when the webhook last received an event.                            |

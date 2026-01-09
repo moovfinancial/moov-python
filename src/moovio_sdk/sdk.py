@@ -54,6 +54,7 @@ if TYPE_CHECKING:
     from moovio_sdk.underwriting import Underwriting
     from moovio_sdk.wallet_transactions import WalletTransactions
     from moovio_sdk.wallets import Wallets
+    from moovio_sdk.webhooks import Webhooks
 
 
 class Moov(BaseSDK):
@@ -93,6 +94,7 @@ class Moov(BaseSDK):
     end_to_end_encryption: "EndToEndEncryption"
     enriched_address: "EnrichedAddress"
     enriched_profile: "EnrichedProfile"
+    webhooks: "Webhooks"
     industries: "Industries"
     institutions: "Institutions"
     issuing_transactions: "IssuingTransactions"
@@ -138,6 +140,7 @@ class Moov(BaseSDK):
         ),
         "enriched_address": ("moovio_sdk.enriched_address", "EnrichedAddress"),
         "enriched_profile": ("moovio_sdk.enriched_profile", "EnrichedProfile"),
+        "webhooks": ("moovio_sdk.webhooks", "Webhooks"),
         "industries": ("moovio_sdk.industries", "Industries"),
         "institutions": ("moovio_sdk.institutions", "Institutions"),
         "issuing_transactions": (

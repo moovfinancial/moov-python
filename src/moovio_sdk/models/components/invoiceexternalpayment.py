@@ -3,19 +3,13 @@
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
 from datetime import datetime
-from enum import Enum
 from moovio_sdk.types import BaseModel
 import pydantic
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class InvoiceExternalPaymentPaymentType(str, Enum):
-    EXTERNAL = "external"
-
-
 class InvoiceExternalPaymentTypedDict(TypedDict):
-    payment_type: InvoiceExternalPaymentPaymentType
     description: str
     amount: AmountDecimalTypedDict
     foreign_id: NotRequired[str]
@@ -23,10 +17,6 @@ class InvoiceExternalPaymentTypedDict(TypedDict):
 
 
 class InvoiceExternalPayment(BaseModel):
-    payment_type: Annotated[
-        InvoiceExternalPaymentPaymentType, pydantic.Field(alias="paymentType")
-    ]
-
     description: str
 
     amount: AmountDecimal

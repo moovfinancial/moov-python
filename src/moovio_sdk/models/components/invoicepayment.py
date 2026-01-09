@@ -19,7 +19,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class InvoicePaymentTypedDict(TypedDict):
     r"""Payment made towards an invoice, will be either a transfer or an external payment."""
 
-    payment_type: InvoicePaymentType
+    invoice_payment_id: str
+    invoice_payment_type: InvoicePaymentType
     transfer: NotRequired[InvoiceTransferPaymentTypedDict]
     external: NotRequired[InvoiceExternalPaymentTypedDict]
 
@@ -27,7 +28,11 @@ class InvoicePaymentTypedDict(TypedDict):
 class InvoicePayment(BaseModel):
     r"""Payment made towards an invoice, will be either a transfer or an external payment."""
 
-    payment_type: Annotated[InvoicePaymentType, pydantic.Field(alias="paymentType")]
+    invoice_payment_id: Annotated[str, pydantic.Field(alias="invoicePaymentID")]
+
+    invoice_payment_type: Annotated[
+        InvoicePaymentType, pydantic.Field(alias="invoicePaymentType")
+    ]
 
     transfer: Optional[InvoiceTransferPayment] = None
 

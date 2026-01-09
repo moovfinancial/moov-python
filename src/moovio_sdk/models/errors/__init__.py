@@ -27,6 +27,10 @@ if TYPE_CHECKING:
     )
     from .createaccounterror import CreateAccountError, CreateAccountErrorData
     from .createinvoiceerror import CreateInvoiceError, CreateInvoiceErrorData
+    from .createinvoicepaymenterror import (
+        CreateInvoicePaymentError,
+        CreateInvoicePaymentErrorData,
+    )
     from .createpaymentlinkerror import (
         CreatePaymentLinkError,
         CreatePaymentLinkErrorData,
@@ -39,6 +43,10 @@ if TYPE_CHECKING:
     from .createwalletvalidationerror import (
         CreateWalletValidationError,
         CreateWalletValidationErrorData,
+    )
+    from .createwebhookvalidationerror import (
+        CreateWebhookValidationError,
+        CreateWebhookValidationErrorData,
     )
     from .feeplanagreementerror import FeePlanAgreementError, FeePlanAgreementErrorData
     from .fileuploadvalidationerror import (
@@ -143,6 +151,10 @@ if TYPE_CHECKING:
         UpdateUnderwritingErrorError,
         UpdateUnderwritingErrorErrorTypedDict,
     )
+    from .updatewebhookvalidationerror import (
+        UpdateWebhookValidationError,
+        UpdateWebhookValidationErrorData,
+    )
     from .upsertunderwritingerror import (
         UpsertUnderwritingError,
         UpsertUnderwritingErrorData,
@@ -170,6 +182,8 @@ __all__ = [
     "CreateAccountErrorData",
     "CreateInvoiceError",
     "CreateInvoiceErrorData",
+    "CreateInvoicePaymentError",
+    "CreateInvoicePaymentErrorData",
     "CreatePaymentLinkError",
     "CreatePaymentLinkErrorData",
     "CreateSweepConfigError",
@@ -178,6 +192,8 @@ __all__ = [
     "CreateTicketErrorData",
     "CreateWalletValidationError",
     "CreateWalletValidationErrorData",
+    "CreateWebhookValidationError",
+    "CreateWebhookValidationErrorData",
     "Error",
     "ErrorTypedDict",
     "FeePlanAgreementError",
@@ -257,6 +273,8 @@ __all__ = [
     "UpdateUnderwritingErrorData",
     "UpdateUnderwritingErrorError",
     "UpdateUnderwritingErrorErrorTypedDict",
+    "UpdateWebhookValidationError",
+    "UpdateWebhookValidationErrorData",
     "UpsertUnderwritingError",
     "UpsertUnderwritingErrorData",
 ]
@@ -283,6 +301,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateAccountErrorData": ".createaccounterror",
     "CreateInvoiceError": ".createinvoiceerror",
     "CreateInvoiceErrorData": ".createinvoiceerror",
+    "CreateInvoicePaymentError": ".createinvoicepaymenterror",
+    "CreateInvoicePaymentErrorData": ".createinvoicepaymenterror",
     "CreatePaymentLinkError": ".createpaymentlinkerror",
     "CreatePaymentLinkErrorData": ".createpaymentlinkerror",
     "CreateSweepConfigError": ".createsweepconfigerror",
@@ -291,6 +311,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateTicketErrorData": ".createticketerror",
     "CreateWalletValidationError": ".createwalletvalidationerror",
     "CreateWalletValidationErrorData": ".createwalletvalidationerror",
+    "CreateWebhookValidationError": ".createwebhookvalidationerror",
+    "CreateWebhookValidationErrorData": ".createwebhookvalidationerror",
     "FeePlanAgreementError": ".feeplanagreementerror",
     "FeePlanAgreementErrorData": ".feeplanagreementerror",
     "File": ".fileuploadvalidationerror",
@@ -369,6 +391,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateUnderwritingErrorData": ".updateunderwritingerror",
     "UpdateUnderwritingErrorError": ".updateunderwritingerror",
     "UpdateUnderwritingErrorErrorTypedDict": ".updateunderwritingerror",
+    "UpdateWebhookValidationError": ".updatewebhookvalidationerror",
+    "UpdateWebhookValidationErrorData": ".updatewebhookvalidationerror",
     "UpsertUnderwritingError": ".upsertunderwritingerror",
     "UpsertUnderwritingErrorData": ".upsertunderwritingerror",
 }

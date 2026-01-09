@@ -374,6 +374,10 @@ if TYPE_CHECKING:
         CreateInvoiceLineItemValidationError,
         CreateInvoiceLineItemValidationErrorTypedDict,
     )
+    from .createinvoicepayment import (
+        CreateInvoicePayment,
+        CreateInvoicePaymentTypedDict,
+    )
     from .createpaymentlink import CreatePaymentLink, CreatePaymentLinkTypedDict
     from .createpaymentlinklineitem import (
         CreatePaymentLinkLineItem,
@@ -488,6 +492,7 @@ if TYPE_CHECKING:
         CreateTransferSourceCardTypedDict,
     )
     from .createwallet import CreateWallet, CreateWalletTypedDict
+    from .createwebhook import CreateWebhook, CreateWebhookTypedDict
     from .customersupport import CustomerSupport, CustomerSupportTypedDict
     from .customersupporterror import (
         CustomerSupportError,
@@ -540,6 +545,7 @@ if TYPE_CHECKING:
         EstimatedActivityError,
         EstimatedActivityErrorTypedDict,
     )
+    from .eventtype import EventType, EventTypeTypedDict
     from .evidencetextresponse import (
         EvidenceTextResponse,
         EvidenceTextResponseTypedDict,
@@ -639,7 +645,6 @@ if TYPE_CHECKING:
     from .invoice import Invoice, InvoiceTypedDict
     from .invoiceexternalpayment import (
         InvoiceExternalPayment,
-        InvoiceExternalPaymentPaymentType,
         InvoiceExternalPaymentTypedDict,
     )
     from .invoicelineitem import InvoiceLineItem, InvoiceLineItemTypedDict
@@ -670,7 +675,6 @@ if TYPE_CHECKING:
     from .invoicetransferpayment import (
         InvoiceTransferPayment,
         InvoiceTransferPaymentTypedDict,
-        PaymentType,
     )
     from .issuedcard import IssuedCard, IssuedCardTypedDict
     from .issuedcardauthorization import (
@@ -877,6 +881,7 @@ if TYPE_CHECKING:
     from .pendinglitigation import PendingLitigation
     from .phonenumber import PhoneNumber, PhoneNumberTypedDict
     from .phonenumbererror import PhoneNumberError, PhoneNumberErrorTypedDict
+    from .pingresponse import PingResponse, PingResponseTypedDict
     from .plaidintegration import PlaidIntegration, PlaidIntegrationTypedDict
     from .plaidlinkintegration import (
         PlaidLinkIntegration,
@@ -1133,6 +1138,7 @@ if TYPE_CHECKING:
     from .updateticket import UpdateTicket, UpdateTicketTypedDict
     from .updateticketstatus import UpdateTicketStatus
     from .updateunderwriting import UpdateUnderwriting, UpdateUnderwritingTypedDict
+    from .updatewebhook import UpdateWebhook, UpdateWebhookTypedDict
     from .upsertschedule import UpsertSchedule, UpsertScheduleTypedDict
     from .upsertunderwriting import UpsertUnderwriting, UpsertUnderwritingTypedDict
     from .verification import Verification, VerificationTypedDict
@@ -1166,6 +1172,7 @@ if TYPE_CHECKING:
     from .wallettransactionstatus import WalletTransactionStatus
     from .wallettransactiontype import WalletTransactionType
     from .wallettype import WalletType
+    from .webhook import Webhook, WebhookTypedDict
     from .webhookbillingstatementcreated import (
         WebhookBillingStatementCreated,
         WebhookBillingStatementCreatedTypedDict,
@@ -1318,6 +1325,8 @@ if TYPE_CHECKING:
     )
     from .webhookevent import WebhookEvent, WebhookEventTypedDict
     from .webhookeventtype import WebhookEventType
+    from .webhooksecret import WebhookSecret, WebhookSecretTypedDict
+    from .webhookstatus import WebhookStatus
     from .webhooktransferpaymentmethoddetails import (
         WebhookTransferPaymentMethodDetails,
         WebhookTransferPaymentMethodDetailsTypedDict,
@@ -1628,6 +1637,8 @@ __all__ = [
     "CreateInvoiceLineItemsUpdateTypedDict",
     "CreateInvoiceLineItemsValidationError",
     "CreateInvoiceLineItemsValidationErrorTypedDict",
+    "CreateInvoicePayment",
+    "CreateInvoicePaymentTypedDict",
     "CreateInvoiceTypedDict",
     "CreatePaymentLink",
     "CreatePaymentLinkLineItem",
@@ -1701,6 +1712,8 @@ __all__ = [
     "CreateTransferTypedDict",
     "CreateWallet",
     "CreateWalletTypedDict",
+    "CreateWebhook",
+    "CreateWebhookTypedDict",
     "CreatedTransfer",
     "CreatedTransferTypedDict",
     "CustomerSupport",
@@ -1749,6 +1762,8 @@ __all__ = [
     "EstimatedActivityError",
     "EstimatedActivityErrorTypedDict",
     "EstimatedActivityTypedDict",
+    "EventType",
+    "EventTypeTypedDict",
     "EvidenceTextResponse",
     "EvidenceTextResponseTypedDict",
     "EvidenceType",
@@ -1840,7 +1855,6 @@ __all__ = [
     "InstitutionsSearchResponseTypedDict",
     "Invoice",
     "InvoiceExternalPayment",
-    "InvoiceExternalPaymentPaymentType",
     "InvoiceExternalPaymentTypedDict",
     "InvoiceLineItem",
     "InvoiceLineItemImageMetadata",
@@ -2027,7 +2041,6 @@ __all__ = [
     "PaymentMethodsCardTypedDict",
     "PaymentMethodsWallet",
     "PaymentMethodsWalletTypedDict",
-    "PaymentType",
     "PayoutDetailsError",
     "PayoutDetailsErrorTypedDict",
     "PayoutRecipient",
@@ -2041,6 +2054,8 @@ __all__ = [
     "PhoneNumberErrorTypedDict",
     "PhoneNumberTypedDict",
     "PhoneTypedDict",
+    "PingResponse",
+    "PingResponseTypedDict",
     "PlaidIntegration",
     "PlaidIntegrationTypedDict",
     "PlaidLinkIntegration",
@@ -2285,6 +2300,8 @@ __all__ = [
     "UpdateTicketTypedDict",
     "UpdateUnderwriting",
     "UpdateUnderwritingTypedDict",
+    "UpdateWebhook",
+    "UpdateWebhookTypedDict",
     "UpsertSchedule",
     "UpsertScheduleTypedDict",
     "UpsertUnderwriting",
@@ -2317,6 +2334,7 @@ __all__ = [
     "WalletTransactionTypedDict",
     "WalletType",
     "WalletTypedDict",
+    "Webhook",
     "WebhookBillingStatementCreated",
     "WebhookBillingStatementCreatedTypedDict",
     "WebhookData",
@@ -2397,8 +2415,12 @@ __all__ = [
     "WebhookEvent",
     "WebhookEventType",
     "WebhookEventTypedDict",
+    "WebhookSecret",
+    "WebhookSecretTypedDict",
+    "WebhookStatus",
     "WebhookTransferPaymentMethodDetails",
     "WebhookTransferPaymentMethodDetailsTypedDict",
+    "WebhookTypedDict",
     "WireInstitution",
     "WireInstitutionTypedDict",
     "WireServices",
@@ -2715,6 +2737,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateInvoiceLineItemsValidationErrorTypedDict": ".createinvoicelineitemsvalidationerror",
     "CreateInvoiceLineItemValidationError": ".createinvoicelineitemvalidationerror",
     "CreateInvoiceLineItemValidationErrorTypedDict": ".createinvoicelineitemvalidationerror",
+    "CreateInvoicePayment": ".createinvoicepayment",
+    "CreateInvoicePaymentTypedDict": ".createinvoicepayment",
     "CreatePaymentLink": ".createpaymentlink",
     "CreatePaymentLinkTypedDict": ".createpaymentlink",
     "CreatePaymentLinkLineItem": ".createpaymentlinklineitem",
@@ -2787,6 +2811,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateTransferSourceCardTypedDict": ".createtransfersourcecard",
     "CreateWallet": ".createwallet",
     "CreateWalletTypedDict": ".createwallet",
+    "CreateWebhook": ".createwebhook",
+    "CreateWebhookTypedDict": ".createwebhook",
     "CustomerSupport": ".customersupport",
     "CustomerSupportTypedDict": ".customersupport",
     "CustomerSupportError": ".customersupporterror",
@@ -2829,6 +2855,8 @@ _dynamic_imports: dict[str, str] = {
     "EstimatedActivityTypedDict": ".estimatedactivity",
     "EstimatedActivityError": ".estimatedactivityerror",
     "EstimatedActivityErrorTypedDict": ".estimatedactivityerror",
+    "EventType": ".eventtype",
+    "EventTypeTypedDict": ".eventtype",
     "EvidenceTextResponse": ".evidencetextresponse",
     "EvidenceTextResponseTypedDict": ".evidencetextresponse",
     "EvidenceType": ".evidencetype",
@@ -2923,7 +2951,6 @@ _dynamic_imports: dict[str, str] = {
     "Invoice": ".invoice",
     "InvoiceTypedDict": ".invoice",
     "InvoiceExternalPayment": ".invoiceexternalpayment",
-    "InvoiceExternalPaymentPaymentType": ".invoiceexternalpayment",
     "InvoiceExternalPaymentTypedDict": ".invoiceexternalpayment",
     "InvoiceLineItem": ".invoicelineitem",
     "InvoiceLineItemTypedDict": ".invoicelineitem",
@@ -2945,7 +2972,6 @@ _dynamic_imports: dict[str, str] = {
     "InvoiceStatus": ".invoicestatus",
     "InvoiceTransferPayment": ".invoicetransferpayment",
     "InvoiceTransferPaymentTypedDict": ".invoicetransferpayment",
-    "PaymentType": ".invoicetransferpayment",
     "IssuedCard": ".issuedcard",
     "IssuedCardTypedDict": ".issuedcard",
     "IssuedCardAuthorization": ".issuedcardauthorization",
@@ -3116,6 +3142,8 @@ _dynamic_imports: dict[str, str] = {
     "PhoneNumberTypedDict": ".phonenumber",
     "PhoneNumberError": ".phonenumbererror",
     "PhoneNumberErrorTypedDict": ".phonenumbererror",
+    "PingResponse": ".pingresponse",
+    "PingResponseTypedDict": ".pingresponse",
     "PlaidIntegration": ".plaidintegration",
     "PlaidIntegrationTypedDict": ".plaidintegration",
     "PlaidLinkIntegration": ".plaidlinkintegration",
@@ -3368,6 +3396,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateTicketStatus": ".updateticketstatus",
     "UpdateUnderwriting": ".updateunderwriting",
     "UpdateUnderwritingTypedDict": ".updateunderwriting",
+    "UpdateWebhook": ".updatewebhook",
+    "UpdateWebhookTypedDict": ".updatewebhook",
     "UpsertSchedule": ".upsertschedule",
     "UpsertScheduleTypedDict": ".upsertschedule",
     "UpsertUnderwriting": ".upsertunderwriting",
@@ -3397,6 +3427,8 @@ _dynamic_imports: dict[str, str] = {
     "WalletTransactionStatus": ".wallettransactionstatus",
     "WalletTransactionType": ".wallettransactiontype",
     "WalletType": ".wallettype",
+    "Webhook": ".webhook",
+    "WebhookTypedDict": ".webhook",
     "WebhookBillingStatementCreated": ".webhookbillingstatementcreated",
     "WebhookBillingStatementCreatedTypedDict": ".webhookbillingstatementcreated",
     "WebhookData": ".webhookdata",
@@ -3477,6 +3509,9 @@ _dynamic_imports: dict[str, str] = {
     "WebhookEvent": ".webhookevent",
     "WebhookEventTypedDict": ".webhookevent",
     "WebhookEventType": ".webhookeventtype",
+    "WebhookSecret": ".webhooksecret",
+    "WebhookSecretTypedDict": ".webhooksecret",
+    "WebhookStatus": ".webhookstatus",
     "WebhookTransferPaymentMethodDetails": ".webhooktransferpaymentmethoddetails",
     "WebhookTransferPaymentMethodDetailsTypedDict": ".webhooktransferpaymentmethoddetails",
     "WireInstitution": ".wireinstitution",

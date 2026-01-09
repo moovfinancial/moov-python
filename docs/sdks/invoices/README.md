@@ -20,6 +20,15 @@ you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+* [create_invoice_payment](#create_invoice_payment) - Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
+If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+* [list_invoice_payments](#list_invoice_payments) - List all the payments made towards an invoice.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ## create_invoice
 
@@ -260,3 +269,105 @@ with Moov(
 | errors.GenericError       | 400, 409                  | application/json          |
 | errors.UpdateInvoiceError | 422                       | application/json          |
 | errors.APIError           | 4XX, 5XX                  | \*/\*                     |
+
+## create_invoice_payment
+
+Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
+If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="createInvoicePayment" method="post" path="/accounts/{accountID}/invoices/{invoiceID}/payments" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="<value>",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.invoices.create_invoice_payment(account_id="e02333e4-a835-46d1-8d02-9af7a405e65f", invoice_id="99e7ebb0-9996-49b2-98f0-304c7332ece6")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `account_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `invoice_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `foreign_id`                                                         | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `description`                                                        | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `payment_date`                                                       | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `retries`                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)     | :heavy_minus_sign:                                                   | Configuration to override the default retry behavior of the client.  |
+
+### Response
+
+**[operations.CreateInvoicePaymentResponse](../../models/operations/createinvoicepaymentresponse.md)**
+
+### Errors
+
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| errors.GenericError              | 400, 409                         | application/json                 |
+| errors.CreateInvoicePaymentError | 422                              | application/json                 |
+| errors.APIError                  | 4XX, 5XX                         | \*/\*                            |
+
+## list_invoice_payments
+
+List all the payments made towards an invoice.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="listInvoicePayments" method="get" path="/accounts/{accountID}/invoices/{invoiceID}/payments" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="<value>",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.invoices.list_invoice_payments(account_id="dcfbb04d-465e-4dbc-ad14-420961d94d21", invoice_id="d25d8b7f-bb29-420c-8185-4ed9df60ba13")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `invoice_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.ListInvoicePaymentsResponse](../../models/operations/listinvoicepaymentsresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
