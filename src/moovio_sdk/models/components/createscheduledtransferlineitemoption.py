@@ -2,17 +2,13 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
-from .scheduledtransferimagemetadata import (
-    ScheduledTransferImageMetadata,
-    ScheduledTransferImageMetadataTypedDict,
-)
 from moovio_sdk.types import BaseModel
 import pydantic
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class ScheduledTransferLineItemOptionTypedDict(TypedDict):
+class CreateScheduledTransferLineItemOptionTypedDict(TypedDict):
     r"""Represents a modifier or option applied to a scheduled transfer line item."""
 
     name: str
@@ -23,11 +19,11 @@ class ScheduledTransferLineItemOptionTypedDict(TypedDict):
     r"""Optional price modification applied by this option. Can be positive, negative, or zero."""
     group: NotRequired[str]
     r"""Optional group identifier to categorize related options (e.g., 'toppings')."""
-    images: NotRequired[List[ScheduledTransferImageMetadataTypedDict]]
+    image_i_ds: NotRequired[List[str]]
     r"""Optional list of images associated with this line item."""
 
 
-class ScheduledTransferLineItemOption(BaseModel):
+class CreateScheduledTransferLineItemOption(BaseModel):
     r"""Represents a modifier or option applied to a scheduled transfer line item."""
 
     name: str
@@ -44,5 +40,5 @@ class ScheduledTransferLineItemOption(BaseModel):
     group: Optional[str] = None
     r"""Optional group identifier to categorize related options (e.g., 'toppings')."""
 
-    images: Optional[List[ScheduledTransferImageMetadata]] = None
+    image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
     r"""Optional list of images associated with this line item."""

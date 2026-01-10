@@ -15,7 +15,6 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class InvoiceTypedDict(TypedDict):
     invoice_id: str
     invoice_number: str
-    description: str
     customer_account_id: str
     partner_account_id: str
     status: InvoiceStatus
@@ -34,8 +33,9 @@ class InvoiceTypedDict(TypedDict):
     disputed_amount: AmountDecimalTypedDict
     r"""Total amount of disputes initiated against transfers paid towards the invoice"""
     created_on: datetime
+    description: NotRequired[str]
     payment_link_code: NotRequired[str]
-    payments: NotRequired[List[InvoicePaymentTypedDict]]
+    invoice_payments: NotRequired[List[InvoicePaymentTypedDict]]
     invoice_date: NotRequired[datetime]
     due_date: NotRequired[datetime]
     sent_on: NotRequired[datetime]
@@ -47,8 +47,6 @@ class Invoice(BaseModel):
     invoice_id: Annotated[str, pydantic.Field(alias="invoiceID")]
 
     invoice_number: Annotated[str, pydantic.Field(alias="invoiceNumber")]
-
-    description: str
 
     customer_account_id: Annotated[str, pydantic.Field(alias="customerAccountID")]
 
@@ -80,11 +78,15 @@ class Invoice(BaseModel):
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
+    description: Optional[str] = None
+
     payment_link_code: Annotated[
         Optional[str], pydantic.Field(alias="paymentLinkCode")
     ] = None
 
-    payments: Optional[List[InvoicePayment]] = None
+    invoice_payments: Annotated[
+        Optional[List[InvoicePayment]], pydantic.Field(alias="invoicePayments")
+    ] = None
 
     invoice_date: Annotated[Optional[datetime], pydantic.Field(alias="invoiceDate")] = (
         None

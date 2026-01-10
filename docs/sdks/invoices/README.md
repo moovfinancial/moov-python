@@ -53,7 +53,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.invoices.create_invoice(account_id="241bf524-e777-4941-a5e4-d7f3f34d7a00", customer_account_id="<id>", description="austere gah under ew failing provided repeatedly pick onto", line_items={
+    res = moov.invoices.create_invoice(account_id="241bf524-e777-4941-a5e4-d7f3f34d7a00", customer_account_id="<id>", line_items={
         "items": [],
     }, tax_amount={
         "currency": "USD",
@@ -71,8 +71,8 @@ with Moov(
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `account_id`                                                                           | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
 | `customer_account_id`                                                                  | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `description`                                                                          | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
 | `line_items`                                                                           | [components.CreateInvoiceLineItems](../../models/components/createinvoicelineitems.md) | :heavy_check_mark:                                                                     | A collection of line items for an invoice.                                             |
+| `description`                                                                          | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | N/A                                                                                    |
 | `invoice_date`                                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects)                   | :heavy_minus_sign:                                                                     | N/A                                                                                    |
 | `due_date`                                                                             | [date](https://docs.python.org/3/library/datetime.html#date-objects)                   | :heavy_minus_sign:                                                                     | N/A                                                                                    |
 | `tax_amount`                                                                           | [Optional[components.AmountDecimal]](../../models/components/amountdecimal.md)         | :heavy_minus_sign:                                                                     | N/A                                                                                    |
@@ -294,7 +294,10 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.invoices.create_invoice_payment(account_id="e02333e4-a835-46d1-8d02-9af7a405e65f", invoice_id="99e7ebb0-9996-49b2-98f0-304c7332ece6")
+    res = moov.invoices.create_invoice_payment(account_id="e02333e4-a835-46d1-8d02-9af7a405e65f", invoice_id="99e7ebb0-9996-49b2-98f0-304c7332ece6", amount={
+        "currency": "USD",
+        "value_decimal": "12.987654321",
+    })
 
     # Handle response
     print(res)
@@ -307,6 +310,7 @@ with Moov(
 | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | `account_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
 | `invoice_id`                                                         | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `amount`                                                             | [components.AmountDecimal](../../models/components/amountdecimal.md) | :heavy_check_mark:                                                   | N/A                                                                  |
 | `foreign_id`                                                         | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
 | `description`                                                        | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
 | `payment_date`                                                       | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |

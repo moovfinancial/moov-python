@@ -701,6 +701,9 @@ class FeePlans(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
+        transfer_id: Optional[str] = None,
+        dispute_id: Optional[str] = None,
+        residual_id: Optional[str] = None,
         start_date_time: Optional[str] = None,
         end_date_time: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -716,6 +719,9 @@ class FeePlans(BaseSDK):
         :param account_id: The Partner's AccountID.
         :param skip:
         :param count:
+        :param transfer_id: Optional transfer ID to filter the results by.
+        :param dispute_id: Optional dispute ID to filter the results by.
+        :param residual_id: Optional residual ID to filter the results by.
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
         :param retries: Override the default retry configuration for this method
@@ -737,6 +743,9 @@ class FeePlans(BaseSDK):
             skip=skip,
             count=count,
             account_id=account_id,
+            transfer_id=transfer_id,
+            dispute_id=dispute_id,
+            residual_id=residual_id,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
         )
@@ -810,6 +819,9 @@ class FeePlans(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
+        transfer_id: Optional[str] = None,
+        dispute_id: Optional[str] = None,
+        residual_id: Optional[str] = None,
         start_date_time: Optional[str] = None,
         end_date_time: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -825,6 +837,9 @@ class FeePlans(BaseSDK):
         :param account_id: The Partner's AccountID.
         :param skip:
         :param count:
+        :param transfer_id: Optional transfer ID to filter the results by.
+        :param dispute_id: Optional dispute ID to filter the results by.
+        :param residual_id: Optional residual ID to filter the results by.
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
         :param retries: Override the default retry configuration for this method
@@ -846,6 +861,9 @@ class FeePlans(BaseSDK):
             skip=skip,
             count=count,
             account_id=account_id,
+            transfer_id=transfer_id,
+            dispute_id=dispute_id,
+            residual_id=residual_id,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
         )
@@ -919,6 +937,7 @@ class FeePlans(BaseSDK):
         account_id: str,
         transfer_id: Optional[str] = None,
         dispute_id: Optional[str] = None,
+        residual_id: Optional[str] = None,
         start_date_time: Optional[str] = None,
         end_date_time: Optional[str] = None,
         skip: Optional[int] = None,
@@ -936,6 +955,7 @@ class FeePlans(BaseSDK):
         :param account_id:
         :param transfer_id: Optional transfer ID to filter the results by.
         :param dispute_id: Optional dispute ID to filter the results by.
+        :param residual_id: Optional residual ID to filter the results by.
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
         :param skip:
@@ -959,6 +979,7 @@ class FeePlans(BaseSDK):
             account_id=account_id,
             transfer_id=transfer_id,
             dispute_id=dispute_id,
+            residual_id=residual_id,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
             skip=skip,
@@ -1034,6 +1055,7 @@ class FeePlans(BaseSDK):
         account_id: str,
         transfer_id: Optional[str] = None,
         dispute_id: Optional[str] = None,
+        residual_id: Optional[str] = None,
         start_date_time: Optional[str] = None,
         end_date_time: Optional[str] = None,
         skip: Optional[int] = None,
@@ -1051,6 +1073,7 @@ class FeePlans(BaseSDK):
         :param account_id:
         :param transfer_id: Optional transfer ID to filter the results by.
         :param dispute_id: Optional dispute ID to filter the results by.
+        :param residual_id: Optional residual ID to filter the results by.
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
         :param skip:
@@ -1074,6 +1097,7 @@ class FeePlans(BaseSDK):
             account_id=account_id,
             transfer_id=transfer_id,
             dispute_id=dispute_id,
+            residual_id=residual_id,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
             skip=skip,

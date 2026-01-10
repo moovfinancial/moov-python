@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 from .amount import Amount, AmountTypedDict
-from .scheduledtransferlineitems import (
-    ScheduledTransferLineItems,
-    ScheduledTransferLineItemsTypedDict,
+from .createscheduledtransferlineitems import (
+    CreateScheduledTransferLineItems,
+    CreateScheduledTransferLineItemsTypedDict,
 )
 from .schedulepaymentmethod import SchedulePaymentMethod, SchedulePaymentMethodTypedDict
 from moovio_sdk.types import BaseModel
@@ -13,7 +13,9 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class RunTransferTypedDict(TypedDict):
+class CreateRunTransferTypedDict(TypedDict):
+    r"""Defines the attributes of a transfer."""
+
     amount: AmountTypedDict
     destination: SchedulePaymentMethodTypedDict
     partner_account_id: str
@@ -22,11 +24,15 @@ class RunTransferTypedDict(TypedDict):
     r"""Simple description to place on the transfer."""
     sales_tax_amount: NotRequired[AmountTypedDict]
     r"""Optional sales tax amount. This amount is included in the total transfer amount."""
-    line_items: NotRequired[ScheduledTransferLineItemsTypedDict]
-    r"""Line items for a scheduled transfer."""
+    line_items: NotRequired[CreateScheduledTransferLineItemsTypedDict]
+    r"""An optional collection of line items for a scheduled transfer.
+    When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+    """
 
 
-class RunTransfer(BaseModel):
+class CreateRunTransfer(BaseModel):
+    r"""Defines the attributes of a transfer."""
+
     amount: Amount
 
     destination: SchedulePaymentMethod
@@ -44,6 +50,8 @@ class RunTransfer(BaseModel):
     r"""Optional sales tax amount. This amount is included in the total transfer amount."""
 
     line_items: Annotated[
-        Optional[ScheduledTransferLineItems], pydantic.Field(alias="lineItems")
+        Optional[CreateScheduledTransferLineItems], pydantic.Field(alias="lineItems")
     ] = None
-    r"""Line items for a scheduled transfer."""
+    r"""An optional collection of line items for a scheduled transfer.
+    When line items are provided their total must equal `amount` minus `salesTaxAmount`.
+    """

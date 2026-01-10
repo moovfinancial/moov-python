@@ -424,6 +424,19 @@ if TYPE_CHECKING:
         CreateRepresentativeTypedDict,
     )
     from .createreversal import CreateReversal, CreateReversalTypedDict
+    from .createruntransfer import CreateRunTransfer, CreateRunTransferTypedDict
+    from .createscheduledtransferlineitem import (
+        CreateScheduledTransferLineItem,
+        CreateScheduledTransferLineItemTypedDict,
+    )
+    from .createscheduledtransferlineitemoption import (
+        CreateScheduledTransferLineItemOption,
+        CreateScheduledTransferLineItemOptionTypedDict,
+    )
+    from .createscheduledtransferlineitems import (
+        CreateScheduledTransferLineItems,
+        CreateScheduledTransferLineItemsTypedDict,
+    )
     from .createsweepconfig import CreateSweepConfig, CreateSweepConfigTypedDict
     from .createterminalapplication import (
         CreateTerminalApplication,
@@ -923,6 +936,7 @@ if TYPE_CHECKING:
     from .receiptrequest import Kind, ReceiptRequest, ReceiptRequestTypedDict
     from .receiptresponse import ReceiptResponse, ReceiptResponseTypedDict
     from .recur import Recur, RecurTypedDict
+    from .recurresponse import RecurResponse, RecurResponseTypedDict
     from .refundcarddetails import RefundCardDetails, RefundCardDetailsTypedDict
     from .refundcardstatus import RefundCardStatus
     from .refundpolicy import RefundPolicy
@@ -972,6 +986,10 @@ if TYPE_CHECKING:
     )
     from .rtptransactionstatus import RTPTransactionStatus
     from .runtransfer import RunTransfer, RunTransferTypedDict
+    from .scheduledtransferimagemetadata import (
+        ScheduledTransferImageMetadata,
+        ScheduledTransferImageMetadataTypedDict,
+    )
     from .scheduledtransferlineitem import (
         ScheduledTransferLineItem,
         ScheduledTransferLineItemTypedDict,
@@ -1672,6 +1690,14 @@ __all__ = [
     "CreateRepresentativeTypedDict",
     "CreateReversal",
     "CreateReversalTypedDict",
+    "CreateRunTransfer",
+    "CreateRunTransferTypedDict",
+    "CreateScheduledTransferLineItem",
+    "CreateScheduledTransferLineItemOption",
+    "CreateScheduledTransferLineItemOptionTypedDict",
+    "CreateScheduledTransferLineItemTypedDict",
+    "CreateScheduledTransferLineItems",
+    "CreateScheduledTransferLineItemsTypedDict",
     "CreateSweepConfig",
     "CreateSweepConfigTypedDict",
     "CreateTerminalApplication",
@@ -2106,6 +2132,8 @@ __all__ = [
     "ReceiptResponse",
     "ReceiptResponseTypedDict",
     "Recur",
+    "RecurResponse",
+    "RecurResponseTypedDict",
     "RecurTypedDict",
     "RefundCardDetails",
     "RefundCardDetailsTypedDict",
@@ -2151,6 +2179,8 @@ __all__ = [
     "SchedulePaymentMethodTypedDict",
     "ScheduleResponse",
     "ScheduleResponseTypedDict",
+    "ScheduledTransferImageMetadata",
+    "ScheduledTransferImageMetadataTypedDict",
     "ScheduledTransferLineItem",
     "ScheduledTransferLineItemOption",
     "ScheduledTransferLineItemOptionTypedDict",
@@ -2771,6 +2801,14 @@ _dynamic_imports: dict[str, str] = {
     "CreateRepresentativeTypedDict": ".createrepresentative",
     "CreateReversal": ".createreversal",
     "CreateReversalTypedDict": ".createreversal",
+    "CreateRunTransfer": ".createruntransfer",
+    "CreateRunTransferTypedDict": ".createruntransfer",
+    "CreateScheduledTransferLineItem": ".createscheduledtransferlineitem",
+    "CreateScheduledTransferLineItemTypedDict": ".createscheduledtransferlineitem",
+    "CreateScheduledTransferLineItemOption": ".createscheduledtransferlineitemoption",
+    "CreateScheduledTransferLineItemOptionTypedDict": ".createscheduledtransferlineitemoption",
+    "CreateScheduledTransferLineItems": ".createscheduledtransferlineitems",
+    "CreateScheduledTransferLineItemsTypedDict": ".createscheduledtransferlineitems",
     "CreateSweepConfig": ".createsweepconfig",
     "CreateSweepConfigTypedDict": ".createsweepconfig",
     "CreateTerminalApplication": ".createterminalapplication",
@@ -3187,6 +3225,8 @@ _dynamic_imports: dict[str, str] = {
     "ReceiptResponseTypedDict": ".receiptresponse",
     "Recur": ".recur",
     "RecurTypedDict": ".recur",
+    "RecurResponse": ".recurresponse",
+    "RecurResponseTypedDict": ".recurresponse",
     "RefundCardDetails": ".refundcarddetails",
     "RefundCardDetailsTypedDict": ".refundcarddetails",
     "RefundCardStatus": ".refundcardstatus",
@@ -3232,6 +3272,8 @@ _dynamic_imports: dict[str, str] = {
     "RTPTransactionStatus": ".rtptransactionstatus",
     "RunTransfer": ".runtransfer",
     "RunTransferTypedDict": ".runtransfer",
+    "ScheduledTransferImageMetadata": ".scheduledtransferimagemetadata",
+    "ScheduledTransferImageMetadataTypedDict": ".scheduledtransferimagemetadata",
     "ScheduledTransferLineItem": ".scheduledtransferlineitem",
     "ScheduledTransferLineItemTypedDict": ".scheduledtransferlineitem",
     "ScheduledTransferLineItemOption": ".scheduledtransferlineitemoption",

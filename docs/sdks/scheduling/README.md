@@ -57,7 +57,7 @@ with Moov(
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=parse_datetime("2009-11-10T23:00:00Z"),
-            run_transfer=components.RunTransfer(
+            run_transfer=components.CreateRunTransfer(
                 amount=components.Amount(
                     currency="USD",
                     value=1204,
@@ -89,7 +89,7 @@ with Moov(
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=parse_datetime("2009-11-10T23:00:00Z"),
-            run_transfer=components.RunTransfer(
+            run_transfer=components.CreateRunTransfer(
                 amount=components.Amount(
                     currency="USD",
                     value=1204,
@@ -120,7 +120,7 @@ with Moov(
         ),
     ], recur=components.Recur(
         recurrence_rule="<value>",
-        run_transfer=components.RunTransfer(
+        run_transfer=components.CreateRunTransfer(
             amount=components.Amount(
                 currency="USD",
                 value=1204,
@@ -151,7 +151,7 @@ with Moov(
                 ),
             ),
             description="sediment yahoo a rudely mmm massive helpful brr",
-            line_items=components.ScheduledTransferLineItems(
+            line_items=components.CreateScheduledTransferLineItems(
                 items=[],
             ),
         ),
@@ -263,7 +263,7 @@ with Moov(
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=parse_datetime("2009-11-10T23:00:00Z"),
-            run_transfer=components.RunTransfer(
+            run_transfer=components.CreateRunTransfer(
                 amount=components.Amount(
                     currency="USD",
                     value=1204,
@@ -295,7 +295,7 @@ with Moov(
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=parse_datetime("2009-11-10T23:00:00Z"),
-            run_transfer=components.RunTransfer(
+            run_transfer=components.CreateRunTransfer(
                 amount=components.Amount(
                     currency="USD",
                     value=1204,
@@ -327,7 +327,7 @@ with Moov(
         components.Occurrence(
             occurrence_id="c520f1b9-0ba7-42f5-b977-248cdbe41c69",
             run_on=parse_datetime("2009-11-10T23:00:00Z"),
-            run_transfer=components.RunTransfer(
+            run_transfer=components.CreateRunTransfer(
                 amount=components.Amount(
                     currency="USD",
                     value=1204,
@@ -358,7 +358,7 @@ with Moov(
         ),
     ], recur=components.Recur(
         recurrence_rule="<value>",
-        run_transfer=components.RunTransfer(
+        run_transfer=components.CreateRunTransfer(
             amount=components.Amount(
                 currency="USD",
                 value=1204,
@@ -389,9 +389,9 @@ with Moov(
                 ),
             ),
             description="er reasoning following veto oof fervently ha how till now",
-            line_items=components.ScheduledTransferLineItems(
+            line_items=components.CreateScheduledTransferLineItems(
                 items=[
-                    components.ScheduledTransferLineItem(
+                    components.CreateScheduledTransferLineItem(
                         name="<value>",
                         base_price=components.AmountDecimal(
                             currency="USD",
@@ -399,7 +399,7 @@ with Moov(
                         ),
                         quantity=973458,
                         options=[
-                            components.ScheduledTransferLineItemOption(
+                            components.CreateScheduledTransferLineItemOption(
                                 name="<value>",
                                 quantity=221042,
                                 price_modifier=components.AmountDecimal(

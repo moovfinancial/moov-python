@@ -2,13 +2,9 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
-from .scheduledtransferimagemetadata import (
-    ScheduledTransferImageMetadata,
-    ScheduledTransferImageMetadataTypedDict,
-)
-from .scheduledtransferlineitemoption import (
-    ScheduledTransferLineItemOption,
-    ScheduledTransferLineItemOptionTypedDict,
+from .createscheduledtransferlineitemoption import (
+    CreateScheduledTransferLineItemOption,
+    CreateScheduledTransferLineItemOptionTypedDict,
 )
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -16,7 +12,7 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class ScheduledTransferLineItemTypedDict(TypedDict):
+class CreateScheduledTransferLineItemTypedDict(TypedDict):
     r"""Represents a single item in a scheduled transfer, including optional modifiers and quantity."""
 
     name: str
@@ -25,15 +21,15 @@ class ScheduledTransferLineItemTypedDict(TypedDict):
     r"""The base price of the item before applying option modifiers."""
     quantity: int
     r"""The quantity of this item."""
-    options: NotRequired[List[ScheduledTransferLineItemOptionTypedDict]]
+    options: NotRequired[List[CreateScheduledTransferLineItemOptionTypedDict]]
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
     product_id: NotRequired[str]
     r"""Optional unique identifier associating the line item with a product."""
-    images: NotRequired[List[ScheduledTransferImageMetadataTypedDict]]
+    image_i_ds: NotRequired[List[str]]
     r"""Optional list of images associated with this line item."""
 
 
-class ScheduledTransferLineItem(BaseModel):
+class CreateScheduledTransferLineItem(BaseModel):
     r"""Represents a single item in a scheduled transfer, including optional modifiers and quantity."""
 
     name: str
@@ -45,11 +41,11 @@ class ScheduledTransferLineItem(BaseModel):
     quantity: int
     r"""The quantity of this item."""
 
-    options: Optional[List[ScheduledTransferLineItemOption]] = None
+    options: Optional[List[CreateScheduledTransferLineItemOption]] = None
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
 
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None
     r"""Optional unique identifier associating the line item with a product."""
 
-    images: Optional[List[ScheduledTransferImageMetadata]] = None
+    image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
     r"""Optional list of images associated with this line item."""

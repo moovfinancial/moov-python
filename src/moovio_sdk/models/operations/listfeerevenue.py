@@ -53,6 +53,12 @@ class ListFeeRevenueRequestTypedDict(TypedDict):
     r"""The Partner's AccountID."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    transfer_id: NotRequired[str]
+    r"""Optional transfer ID to filter the results by."""
+    dispute_id: NotRequired[str]
+    r"""Optional dispute ID to filter the results by."""
+    residual_id: NotRequired[str]
+    r"""Optional residual ID to filter the results by."""
     start_date_time: NotRequired[str]
     r"""Optional date-time to inclusively filter all fees created after this date-time."""
     end_date_time: NotRequired[str]
@@ -76,6 +82,27 @@ class ListFeeRevenueRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+
+    transfer_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="transferID"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional transfer ID to filter the results by."""
+
+    dispute_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="disputeID"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional dispute ID to filter the results by."""
+
+    residual_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="residualID"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional residual ID to filter the results by."""
 
     start_date_time: Annotated[
         Optional[str],

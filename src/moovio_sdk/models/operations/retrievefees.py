@@ -54,6 +54,8 @@ class RetrieveFeesRequestTypedDict(TypedDict):
     r"""Optional transfer ID to filter the results by."""
     dispute_id: NotRequired[str]
     r"""Optional dispute ID to filter the results by."""
+    residual_id: NotRequired[str]
+    r"""Optional residual ID to filter the results by."""
     start_date_time: NotRequired[str]
     r"""Optional date-time to inclusively filter all fees created after this date-time."""
     end_date_time: NotRequired[str]
@@ -82,6 +84,13 @@ class RetrieveFeesRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""Optional dispute ID to filter the results by."""
+
+    residual_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="residualID"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional residual ID to filter the results by."""
 
     start_date_time: Annotated[
         Optional[str],

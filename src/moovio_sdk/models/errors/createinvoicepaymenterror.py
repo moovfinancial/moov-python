@@ -3,6 +3,9 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
+from moovio_sdk.models.components import (
+    amountdecimalvalidationerror as components_amountdecimalvalidationerror,
+)
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -11,6 +14,9 @@ from typing_extensions import Annotated
 
 
 class CreateInvoicePaymentErrorData(BaseModel):
+    amount: Optional[
+        components_amountdecimalvalidationerror.AmountDecimalValidationError
+    ] = None
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     description: Optional[str] = None
     payment_date: Annotated[Optional[str], pydantic.Field(alias="paymentDate")] = None

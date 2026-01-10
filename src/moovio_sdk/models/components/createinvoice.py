@@ -15,9 +15,9 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class CreateInvoiceTypedDict(TypedDict):
     customer_account_id: str
-    description: str
     line_items: CreateInvoiceLineItemsTypedDict
     r"""A collection of line items for an invoice."""
+    description: NotRequired[str]
     invoice_date: NotRequired[datetime]
     due_date: NotRequired[datetime]
     tax_amount: NotRequired[AmountDecimalTypedDict]
@@ -26,10 +26,10 @@ class CreateInvoiceTypedDict(TypedDict):
 class CreateInvoice(BaseModel):
     customer_account_id: Annotated[str, pydantic.Field(alias="customerAccountID")]
 
-    description: str
-
     line_items: Annotated[CreateInvoiceLineItems, pydantic.Field(alias="lineItems")]
     r"""A collection of line items for an invoice."""
+
+    description: Optional[str] = None
 
     invoice_date: Annotated[Optional[datetime], pydantic.Field(alias="invoiceDate")] = (
         None

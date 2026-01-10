@@ -17,11 +17,11 @@ class Invoices(BaseSDK):
         *,
         account_id: str,
         customer_account_id: str,
-        description: str,
         line_items: Union[
             components.CreateInvoiceLineItems,
             components.CreateInvoiceLineItemsTypedDict,
         ],
+        description: Optional[str] = None,
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
         tax_amount: Optional[
@@ -39,8 +39,8 @@ class Invoices(BaseSDK):
 
         :param account_id:
         :param customer_account_id:
-        :param description:
         :param line_items: A collection of line items for an invoice.
+        :param description:
         :param invoice_date:
         :param due_date:
         :param tax_amount:
@@ -167,11 +167,11 @@ class Invoices(BaseSDK):
         *,
         account_id: str,
         customer_account_id: str,
-        description: str,
         line_items: Union[
             components.CreateInvoiceLineItems,
             components.CreateInvoiceLineItemsTypedDict,
         ],
+        description: Optional[str] = None,
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
         tax_amount: Optional[
@@ -189,8 +189,8 @@ class Invoices(BaseSDK):
 
         :param account_id:
         :param customer_account_id:
-        :param description:
         :param line_items: A collection of line items for an invoice.
+        :param description:
         :param invoice_date:
         :param due_date:
         :param tax_amount:
@@ -1065,6 +1065,7 @@ class Invoices(BaseSDK):
         *,
         account_id: str,
         invoice_id: str,
+        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         foreign_id: Optional[str] = None,
         description: Optional[str] = None,
         payment_date: Optional[datetime] = None,
@@ -1081,6 +1082,7 @@ class Invoices(BaseSDK):
 
         :param account_id:
         :param invoice_id:
+        :param amount:
         :param foreign_id:
         :param description:
         :param payment_date:
@@ -1104,6 +1106,7 @@ class Invoices(BaseSDK):
             invoice_id=invoice_id,
             create_invoice_payment=components.CreateInvoicePayment(
                 foreign_id=foreign_id,
+                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
                 description=description,
                 payment_date=payment_date,
             ),
@@ -1205,6 +1208,7 @@ class Invoices(BaseSDK):
         *,
         account_id: str,
         invoice_id: str,
+        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         foreign_id: Optional[str] = None,
         description: Optional[str] = None,
         payment_date: Optional[datetime] = None,
@@ -1221,6 +1225,7 @@ class Invoices(BaseSDK):
 
         :param account_id:
         :param invoice_id:
+        :param amount:
         :param foreign_id:
         :param description:
         :param payment_date:
@@ -1244,6 +1249,7 @@ class Invoices(BaseSDK):
             invoice_id=invoice_id,
             create_invoice_payment=components.CreateInvoicePayment(
                 foreign_id=foreign_id,
+                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
                 description=description,
                 payment_date=payment_date,
             ),

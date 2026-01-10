@@ -7,7 +7,7 @@ from .partialscheduleaccount import (
     PartialScheduleAccount,
     PartialScheduleAccountTypedDict,
 )
-from .recur import Recur, RecurTypedDict
+from .recurresponse import RecurResponse, RecurResponseTypedDict
 from datetime import datetime
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -28,8 +28,7 @@ class ScheduleListResponseTypedDict(TypedDict):
     description: NotRequired[str]
     r"""Simple description to place on the transfer."""
     occurrences: NotRequired[List[OccurrencesResponseTypedDict]]
-    recur: NotRequired[RecurTypedDict]
-    r"""Defines configuration for recurring transfers."""
+    recur: NotRequired[RecurResponseTypedDict]
     disabled_on: NotRequired[datetime]
     source_account: NotRequired[PartialScheduleAccountTypedDict]
     destination_account: NotRequired[PartialScheduleAccountTypedDict]
@@ -59,8 +58,7 @@ class ScheduleListResponse(BaseModel):
 
     occurrences: Optional[List[OccurrencesResponse]] = None
 
-    recur: Optional[Recur] = None
-    r"""Defines configuration for recurring transfers."""
+    recur: Optional[RecurResponse] = None
 
     disabled_on: Annotated[Optional[datetime], pydantic.Field(alias="disabledOn")] = (
         None

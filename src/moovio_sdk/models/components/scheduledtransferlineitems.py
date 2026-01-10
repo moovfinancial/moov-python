@@ -11,18 +11,14 @@ from typing_extensions import TypedDict
 
 
 class ScheduledTransferLineItemsTypedDict(TypedDict):
-    r"""An optional collection of line items for a scheduled transfer.
-    When line items are provided their total must equal `amount` minus `salesTaxAmount`.
-    """
+    r"""Line items for a scheduled transfer."""
 
     items: List[ScheduledTransferLineItemTypedDict]
     r"""The list of line items."""
 
 
 class ScheduledTransferLineItems(BaseModel):
-    r"""An optional collection of line items for a scheduled transfer.
-    When line items are provided their total must equal `amount` minus `salesTaxAmount`.
-    """
+    r"""Line items for a scheduled transfer."""
 
     items: List[ScheduledTransferLineItem]
     r"""The list of line items."""

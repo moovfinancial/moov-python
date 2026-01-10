@@ -26,7 +26,6 @@ class Error(BaseModel):
 class OccurrencesResponseTypedDict(TypedDict):
     run_on: datetime
     run_transfer: RunTransferTypedDict
-    r"""Defines the attributes of a transfer."""
     schedule_id: NotRequired[str]
     occurrence_id: NotRequired[str]
     mode: NotRequired[Mode]
@@ -48,7 +47,6 @@ class OccurrencesResponse(BaseModel):
     run_on: Annotated[datetime, pydantic.Field(alias="runOn")]
 
     run_transfer: Annotated[RunTransfer, pydantic.Field(alias="runTransfer")]
-    r"""Defines the attributes of a transfer."""
 
     schedule_id: Annotated[Optional[str], pydantic.Field(alias="scheduleID")] = None
 
