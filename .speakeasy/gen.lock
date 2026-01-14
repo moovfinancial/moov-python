@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: cc47cc56b69d844340fffa6df143ebba
+  docChecksum: 557c8a1bd430b6c11ab649760cfe78d3
   docVersion: latest
-  speakeasyVersion: 1.684.0
-  generationVersion: 2.793.0
-  releaseVersion: 0.20.15
-  configChecksum: 4bfdceef84b816d8cd6b351c931c09f3
+  speakeasyVersion: 1.685.0
+  generationVersion: 2.794.1
+  releaseVersion: 0.20.16
+  configChecksum: 29efbcff32cc4d5faec059be48be3d51
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 54eb5e36-7819-4d0d-8bad-fe0a77ae9139
-  pristine_commit_hash: ef0434b62566ef7b9efa8b12ff5636fce2a76ca5
-  pristine_tree_hash: 48ed70222847cfd1f536297d19e87048f3d0aaca
+  generation_id: 39a28d3c-618a-4987-856e-6b0453105230
+  pristine_commit_hash: d78e7b6fc793245935512b2075051729a06513f5
+  pristine_tree_hash: c4edc572964aea61f444aa67ff90fd429d623e76
 features:
   python:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.23.17
+    core: 5.23.18
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -5026,8 +5026,8 @@ trackedFiles:
     pristine_git_object: 1d5ebbfbdfa5cea8bf4473d15550f03923758d43
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:2ba8d2a721f3ba73f74e461c7bc4babf24dc1d70
-    pristine_git_object: 51f479adb1a4309389f6696de37109b4702309f4
+    last_write_checksum: sha1:76ae20c94a94d48f4ca69883718eaaf093d24c73
+    pristine_git_object: 956e948928d0c18180a3eaa326e75673931a5fa7
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -5054,8 +5054,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:05ef51d37049274cce7066a241423a2a123ef991
-    pristine_git_object: 43065a1a657f293b98b6b84ea8529a9b87ac1510
+    last_write_checksum: sha1:8d51574fe4a807c1c8a51b0f91db8d04d923d342
+    pristine_git_object: 8a1457f7ecdb50b4ba4a19c564765862598096c5
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
@@ -8462,8 +8462,8 @@ trackedFiles:
     pristine_git_object: c04e0db82b68eca041f2cb2614d748fbac80fd41
   src/moovio_sdk/utils/requestbodies.py:
     id: ca0b31c718d1
-    last_write_checksum: sha1:41885982c1cc10dc28ab857bdb22c1014612b7b3
-    pristine_git_object: 9215e4531ce128ac665fc6ceddd9b9e7062db654
+    last_write_checksum: sha1:41e2d2d2d3ecc394c8122ca4d4b85e1c3e03f054
+    pristine_git_object: 1de32b6d26f46590232f398fdba6ce0072f1659c
   src/moovio_sdk/utils/retries.py:
     id: 635246e3c9f9
     last_write_checksum: sha1:5b97ac4f59357d70c2529975d50364c88bcad607
@@ -11191,7 +11191,6 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `moov.invoices.list_invoice_payments()`:  `response.[]` **Changed** **Breaking** :warning:\n* `moov.invoices.update_invoice()`:  `response` **Changed** **Breaking** :warning:\n* `moov.invoices.create_invoice_payment()`: \n  *  `request.amount` **Added** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n  *  `error.amount` **Added**\n* `moov.invoices.get_invoice()`:  `response` **Changed** **Breaking** :warning:\n* `moov.invoices.create_invoice()`: \n  *  `request.description` **Changed**\n  *  `response` **Changed** **Breaking** :warning:\n* `moov.invoices.list_invoices()`:  `response.[]` **Changed** **Breaking** :warning:\n* `moov.fee_plans.retrieve_fees()`: \n  *  `request.residual_id` **Added**\n  *  `response.[].residual_id` **Added**\n* `moov.scheduling.create()`: \n  *  `request.occurrences.[].run_transfer.line_items.items.[]` **Changed**\n  *  `response.occurrences.[].run_transfer.line_items.items.[]` **Changed**\n* `moov.fee_plans.list_residual_fees()`:  `response.[].residual_id` **Added**\n* `moov.fee_plans.list_fee_revenue()`: \n  *  `request` **Changed**\n  *  `response.[].residual_id` **Added**\n* `moov.fee_plans.list_fees_fetch()`:  `response.[].residual_id` **Added**\n* `moov.scheduling.list()`:  `response.[].occurrences.[].run_transfer.line_items.items.[]` **Changed**\n* `moov.scheduling.update()`: \n  *  `request.occurrences.[].run_transfer.line_items.items.[]` **Changed**\n  *  `response.occurrences.[].run_transfer.line_items.items.[]` **Changed**\n* `moov.scheduling.get()`:  `response.occurrences.[].run_transfer.line_items.items.[]` **Changed**\n* `moov.scheduling.get_occurrance()`:  `response.run_transfer.line_items.items.[]` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
