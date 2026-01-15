@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .granttype import GrantType
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import FieldMetadata
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -44,3 +45,19 @@ class AuthTokenRequest(BaseModel):
 
     refresh_token: Annotated[Optional[str], FieldMetadata(form=True)] = None
     r"""The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["client_id", "client_secret", "scope", "refresh_token"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .achreturncode import ACHReturnCode
 from .rtprejectioncode import RTPRejectionCode
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -144,3 +145,21 @@ class BankAccountException(BaseModel):
     - RC03: Debtor FI identifier is invalid or missing
     - RC04: Creditor FI identifier is invalid or missing
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["achReturnCode", "rtpRejectionCode", "fednowRejectionCode"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

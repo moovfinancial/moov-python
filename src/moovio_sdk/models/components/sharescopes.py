@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .applicationscope import ApplicationScope
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -27,3 +28,19 @@ class ShareScopes(BaseModel):
         Optional[List[ApplicationScope]], pydantic.Field(alias="allowScopes")
     ] = None
     r"""The list of scopes to share with the principal account. If none are provided, all intersecting scopes are added."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["allowScopes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -13,8 +13,9 @@ from .transferlineitems import TransferLineItems, TransferLineItemsTypedDict
 from .transfersource import TransferSource, TransferSourceTypedDict
 from .transferstatus import TransferStatus
 from datetime import datetime
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -149,3 +150,47 @@ class CreatedTransfer(BaseModel):
     r"""An optional collection of line items for a transfer.
     When line items are provided, their total plus sales tax must equal the transfer amount.
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "source",
+                "destination",
+                "completedOn",
+                "status",
+                "failureReason",
+                "amount",
+                "description",
+                "metadata",
+                "facilitatorFee",
+                "moovFee",
+                "moovFeeDecimal",
+                "moovFeeDetails",
+                "groupID",
+                "cancellations",
+                "refundedAmount",
+                "refunds",
+                "disputedAmount",
+                "disputes",
+                "sweepID",
+                "scheduleID",
+                "occurrenceID",
+                "paymentLinkCode",
+                "salesTaxAmount",
+                "foreignID",
+                "lineItems",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

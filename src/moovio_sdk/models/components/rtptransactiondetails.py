@@ -4,8 +4,9 @@ from __future__ import annotations
 from .rtpfailurecode import RTPFailureCode
 from .rtptransactionstatus import RTPTransactionStatus
 from datetime import datetime
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -13,7 +14,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class RTPTransactionDetailsTypedDict(TypedDict):
     r"""RTP specific details about the transaction."""
 
-    status: RTPTransactionStatus
+    status: NotRequired[RTPTransactionStatus]
     r"""Status of a transaction within the RTP lifecycle."""
     network_response_code: NotRequired[str]
     r"""Response code returned by network on failure."""
@@ -28,7 +29,7 @@ class RTPTransactionDetailsTypedDict(TypedDict):
 class RTPTransactionDetails(BaseModel):
     r"""RTP specific details about the transaction."""
 
-    status: RTPTransactionStatus
+    status: Optional[RTPTransactionStatus] = None
     r"""Status of a transaction within the RTP lifecycle."""
 
     network_response_code: Annotated[
@@ -54,3 +55,29 @@ class RTPTransactionDetails(BaseModel):
     accepted_without_posting_on: Annotated[
         Optional[datetime], pydantic.Field(alias="acceptedWithoutPostingOn")
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "status",
+                "networkResponseCode",
+                "failureCode",
+                "initiatedOn",
+                "completedOn",
+                "failedOn",
+                "acceptedWithoutPostingOn",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

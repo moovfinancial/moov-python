@@ -6,7 +6,7 @@ from moovio_sdk.models.components import (
     ticket as components_ticket,
     ticketstatus as components_ticketstatus,
 )
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -14,6 +14,7 @@ from moovio_sdk.utils import (
     QueryParamMetadata,
 )
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -50,6 +51,22 @@ class ListTicketsGlobals(BaseModel):
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
     When no version is specified, the API defaults to `v2024.01.00`.
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["X-Moov-Version"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ListTicketsRequestTypedDict(TypedDict):
@@ -88,6 +105,22 @@ class ListTicketsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cursor", "count", "status", "foreignID"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ListTicketsResponseBodyTypedDict(TypedDict):
     r"""A paginated list of items. The `nextPage` field is omitted if there are no more pages available."""
@@ -105,6 +138,22 @@ class ListTicketsResponseBody(BaseModel):
         Optional[components_itemlistnextpage.ItemListNextPage],
         pydantic.Field(alias="nextPage"),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["nextPage"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ListTicketsResponseTypedDict(TypedDict):

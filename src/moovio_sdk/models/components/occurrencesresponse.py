@@ -5,8 +5,9 @@ from .mode import Mode
 from .occurrencestatus import OccurrenceStatus
 from .runtransfer import RunTransfer, RunTransferTypedDict
 from datetime import datetime
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -21,6 +22,22 @@ class Error(BaseModel):
     r"""Contains details on why the occurrence errored."""
 
     message: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["message"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class OccurrencesResponseTypedDict(TypedDict):
@@ -76,3 +93,32 @@ class OccurrencesResponse(BaseModel):
 
     error: Optional[Error] = None
     r"""Contains details on why the occurrence errored."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "scheduleID",
+                "occurrenceID",
+                "mode",
+                "generated",
+                "indefinite",
+                "canceledOn",
+                "ranOn",
+                "ranTransferID",
+                "status",
+                "error",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

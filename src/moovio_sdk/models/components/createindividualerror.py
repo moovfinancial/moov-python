@@ -5,8 +5,9 @@ from .addresserror import AddressError, AddressErrorTypedDict
 from .birthdateerror import BirthDateError, BirthDateErrorTypedDict
 from .individualnameerror import IndividualNameError, IndividualNameErrorTypedDict
 from .phonenumbererror import PhoneNumberError, PhoneNumberErrorTypedDict
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -21,6 +22,22 @@ class CreateIndividualErrorSsn(BaseModel):
 
     last_four: Annotated[Optional[str], pydantic.Field(alias="lastFour")] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["full", "lastFour"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class CreateIndividualErrorItinTypedDict(TypedDict):
     full: NotRequired[str]
@@ -32,6 +49,22 @@ class CreateIndividualErrorItin(BaseModel):
 
     last_four: Annotated[Optional[str], pydantic.Field(alias="lastFour")] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["full", "lastFour"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class CreateIndividualErrorGovernmentIDTypedDict(TypedDict):
     ssn: NotRequired[CreateIndividualErrorSsnTypedDict]
@@ -42,6 +75,22 @@ class CreateIndividualErrorGovernmentID(BaseModel):
     ssn: Optional[CreateIndividualErrorSsn] = None
 
     itin: Optional[CreateIndividualErrorItin] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["ssn", "itin"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateIndividualErrorTypedDict(TypedDict):
@@ -70,3 +119,21 @@ class CreateIndividualError(BaseModel):
         Optional[CreateIndividualErrorGovernmentID],
         pydantic.Field(alias="governmentID"),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["name", "phone", "email", "address", "birthDate", "governmentID"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

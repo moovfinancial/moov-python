@@ -5,7 +5,7 @@ from moovio_sdk.models.components import (
     invoice as components_invoice,
     invoicestatus as components_invoicestatus,
 )
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -13,6 +13,7 @@ from moovio_sdk.utils import (
     QueryParamMetadata,
 )
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -50,6 +51,22 @@ class ListInvoicesGlobals(BaseModel):
     When no version is specified, the API defaults to `v2024.01.00`.
     """
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["X-Moov-Version"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ListInvoicesRequestTypedDict(TypedDict):
     account_id: str
@@ -86,6 +103,22 @@ class ListInvoicesRequest(BaseModel):
         pydantic.Field(alias="customerAccountID"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["skip", "count", "status", "customerAccountID"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ListInvoicesResponseTypedDict(TypedDict):

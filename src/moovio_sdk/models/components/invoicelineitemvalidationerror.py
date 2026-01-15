@@ -9,8 +9,9 @@ from .invoicelineitemoptionvalidationerror import (
     InvoiceLineItemOptionValidationError,
     InvoiceLineItemOptionValidationErrorTypedDict,
 )
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -35,3 +36,19 @@ class InvoiceLineItemValidationError(BaseModel):
     options: Optional[Dict[str, InvoiceLineItemOptionValidationError]] = None
 
     quantity: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["productID", "name", "basePrice", "options", "quantity"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

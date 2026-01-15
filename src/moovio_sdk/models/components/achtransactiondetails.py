@@ -10,8 +10,9 @@ from .transferachaddendarecord import (
     TransferACHAddendaRecordTypedDict,
 )
 from datetime import datetime
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -19,9 +20,9 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class ACHTransactionDetailsTypedDict(TypedDict):
     r"""ACH specific details about the transaction."""
 
-    status: ACHTransactionStatus
+    status: NotRequired[ACHTransactionStatus]
     r"""Status of a transaction within the ACH lifecycle."""
-    trace_number: str
+    trace_number: NotRequired[str]
     return_: NotRequired[ACHExceptionTypedDict]
     correction: NotRequired[ACHExceptionTypedDict]
     company_entry_description: NotRequired[str]
@@ -45,10 +46,10 @@ class ACHTransactionDetailsTypedDict(TypedDict):
 class ACHTransactionDetails(BaseModel):
     r"""ACH specific details about the transaction."""
 
-    status: ACHTransactionStatus
+    status: Optional[ACHTransactionStatus] = None
     r"""Status of a transaction within the ACH lifecycle."""
 
-    trace_number: Annotated[str, pydantic.Field(alias="traceNumber")]
+    trace_number: Annotated[Optional[str], pydantic.Field(alias="traceNumber")] = None
 
     return_: Annotated[Optional[ACHException], pydantic.Field(alias="return")] = None
 
@@ -99,3 +100,38 @@ class ACHTransactionDetails(BaseModel):
     r"""An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting."""
 
     addenda: Optional[List[TransferACHAddendaRecord]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "status",
+                "traceNumber",
+                "return",
+                "correction",
+                "companyEntryDescription",
+                "originatingCompanyName",
+                "secCode",
+                "canceledOn",
+                "initiatedOn",
+                "originatedOn",
+                "correctedOn",
+                "returnedOn",
+                "failedOn",
+                "completedOn",
+                "debitHoldPeriod",
+                "addenda",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

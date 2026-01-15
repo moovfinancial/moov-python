@@ -8,8 +8,9 @@ from .billingsummaryinterchange import (
     BillingSummaryInterchangeTypedDict,
 )
 from .partnerfees import PartnerFees, PartnerFeesTypedDict
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict, deprecated
 
@@ -109,6 +110,32 @@ class CardAcquiring(BaseModel):
         Optional[BillingSummaryInterchange], pydantic.Field(alias="interchangeFees")
     ] = None
     r"""A summary of interchange fees by card brand."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "volumeAmount",
+                "volumeCount",
+                "feeAmount",
+                "merchantFeesCollected",
+                "partnerFeesAssessed",
+                "netIncome",
+                "interchangeFees",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 @deprecated(
@@ -315,3 +342,36 @@ class BillingSummary(BaseModel):
         Optional[AmountDecimal], pydantic.Field(alias="netPartnerPayment")
     ] = None
     r"""Final partner payment after deducting monthlyPartnerCosts."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "cardAcquiring",
+                "ach",
+                "instantPayments",
+                "platformFees",
+                "accountFees",
+                "adjustmentFees",
+                "otherFees",
+                "otherCardFees",
+                "total",
+                "netIncomeSubtotal",
+                "revenueShare",
+                "residualSubtotal",
+                "monthlyPartnerCosts",
+                "netPartnerPayment",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

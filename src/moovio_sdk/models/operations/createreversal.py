@@ -5,7 +5,7 @@ from moovio_sdk.models.components import (
     createreversal as components_createreversal,
     reversal as components_reversal,
 )
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -13,6 +13,7 @@ from moovio_sdk.utils import (
     RequestMetadata,
 )
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -49,6 +50,22 @@ class CreateReversalGlobals(BaseModel):
     The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
     When no version is specified, the API defaults to `v2024.01.00`.
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["X-Moov-Version"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateReversalRequestTypedDict(TypedDict):
@@ -87,6 +104,22 @@ class CreateReversalRequest(BaseModel):
         Optional[components_createreversal.CreateReversal],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["CreateReversal"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateReversalResponseTypedDict(TypedDict):

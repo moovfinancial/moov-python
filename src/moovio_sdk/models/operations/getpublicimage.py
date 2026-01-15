@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 import httpx
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -10,6 +10,7 @@ from moovio_sdk.utils import (
     QueryParamMetadata,
 )
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -49,6 +50,22 @@ class GetPublicImageRequest(BaseModel):
     the non-zero dimension. Dimensions are capped at 2048 pixels. A default size
     of 400x400 will be used if this parameter is omitted.
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["if-none-match", "size"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 GetPublicImageResponseResultTypedDict = TypeAliasType(

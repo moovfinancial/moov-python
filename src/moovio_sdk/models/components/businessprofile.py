@@ -7,8 +7,9 @@ from .industrycodes import IndustryCodes, IndustryCodesTypedDict
 from .phonenumber import PhoneNumber, PhoneNumberTypedDict
 from .primaryregulator import PrimaryRegulator
 from .representative import Representative, RepresentativeTypedDict
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -84,3 +85,34 @@ class BusinessProfile(BaseModel):
         Optional[PrimaryRegulator], pydantic.Field(alias="primaryRegulator")
     ] = None
     r"""If the business is a financial institution, this field describes its primary regulator."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "doingBusinessAs",
+                "businessType",
+                "address",
+                "phone",
+                "email",
+                "website",
+                "description",
+                "taxIDProvided",
+                "representatives",
+                "industryCodes",
+                "industry",
+                "primaryRegulator",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

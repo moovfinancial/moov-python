@@ -15,6 +15,7 @@ class Products(BaseSDK):
         self,
         *,
         account_id: str,
+        title: Optional[str] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -25,6 +26,7 @@ class Products(BaseSDK):
         r"""List active (non-disabled) products for an account.
 
         :param account_id:
+        :param title: Allows filtering products by title. This supports partial matches and is case-insensitive
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -44,6 +46,7 @@ class Products(BaseSDK):
 
         request = operations.ListProductsRequest(
             account_id=account_id,
+            title=title,
             skip=skip,
             count=count,
         )
@@ -115,6 +118,7 @@ class Products(BaseSDK):
         self,
         *,
         account_id: str,
+        title: Optional[str] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -125,6 +129,7 @@ class Products(BaseSDK):
         r"""List active (non-disabled) products for an account.
 
         :param account_id:
+        :param title: Allows filtering products by title. This supports partial matches and is case-insensitive
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -144,6 +149,7 @@ class Products(BaseSDK):
 
         request = operations.ListProductsRequest(
             account_id=account_id,
+            title=title,
             skip=skip,
             count=count,
         )

@@ -4,7 +4,8 @@ from __future__ import annotations
 from .businessprofile import BusinessProfile, BusinessProfileTypedDict
 from .guestprofile import GuestProfile, GuestProfileTypedDict
 from .individualprofile import IndividualProfile, IndividualProfileTypedDict
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -31,3 +32,19 @@ class Profile(BaseModel):
 
     guest: Optional[GuestProfile] = None
     r"""Describes a guest account profile."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["individual", "business", "guest"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

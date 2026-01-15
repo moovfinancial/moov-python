@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .terminalcard import TerminalCard, TerminalCardTypedDict
 from enum import Enum
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -38,3 +39,19 @@ class CardPresentPaymentPaymentMethod(BaseModel):
         Optional[TerminalCard], pydantic.Field(alias="terminalCard")
     ] = None
     r"""Describes payment card details captured with tap or in-person payment."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["terminalCard"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .addresserror import AddressError, AddressErrorTypedDict
 from .phonenumbererror import PhoneNumberError, PhoneNumberErrorTypedDict
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -16,6 +17,22 @@ class CreateBusinessErrorEinTypedDict(TypedDict):
 class CreateBusinessErrorEin(BaseModel):
     number: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["number"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class CreateBusinessErrorTaxIDTypedDict(TypedDict):
     ein: NotRequired[CreateBusinessErrorEinTypedDict]
@@ -23,6 +40,22 @@ class CreateBusinessErrorTaxIDTypedDict(TypedDict):
 
 class CreateBusinessErrorTaxID(BaseModel):
     ein: Optional[CreateBusinessErrorEin] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["ein"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateBusinessErrorIndustryCodesTypedDict(TypedDict):
@@ -37,6 +70,22 @@ class CreateBusinessErrorIndustryCodes(BaseModel):
     sic: Optional[str] = None
 
     mcc: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["naics", "sic", "mcc"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateBusinessErrorTypedDict(TypedDict):
@@ -91,3 +140,34 @@ class CreateBusinessError(BaseModel):
     primary_regulator: Annotated[
         Optional[str], pydantic.Field(alias="primaryRegulator")
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "legalBusinessName",
+                "doingBusinessAs",
+                "businessType",
+                "address",
+                "phone",
+                "email",
+                "website",
+                "description",
+                "taxID",
+                "industryCodes",
+                "industry",
+                "primaryRegulator",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

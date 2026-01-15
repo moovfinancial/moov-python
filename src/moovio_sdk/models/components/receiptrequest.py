@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -77,3 +78,27 @@ class ReceiptRequest(BaseModel):
     r"""The ID of the schedule occurrence associated with this receipt.
     Exactly one of forTransferID, forScheduleID, or forOccurrenceID must be provided.
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "email",
+                "emailAccountID",
+                "forTransferID",
+                "forScheduleID",
+                "forOccurrenceID",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

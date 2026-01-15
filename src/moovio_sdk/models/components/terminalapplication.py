@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .terminalapplicationplatform import TerminalApplicationPlatform
 from .terminalapplicationstatus import TerminalApplicationStatus
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -53,3 +54,21 @@ class TerminalApplication(BaseModel):
 
     version_code: Annotated[Optional[str], pydantic.Field(alias="versionCode")] = None
     r"""The app version code of the terminal application. Will be returned if platform is `android`."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["appBundleID", "packageName", "sha256Digest", "versionCode"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
