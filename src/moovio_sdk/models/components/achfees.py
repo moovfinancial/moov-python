@@ -22,6 +22,8 @@ class ACHFeesTypedDict(TypedDict):
     r"""Fees for unauthorized returns."""
     notice_of_change: BillingCountAndAmountTypedDict
     r"""Fees for notices of change."""
+    bank_account_verification: BillingCountAndAmountTypedDict
+    r"""Fees for successful bank account verifications via Plaid or MX."""
     total: BillingCountAndAmountTypedDict
     r"""Total ACH fees."""
 
@@ -54,6 +56,11 @@ class ACHFees(BaseModel):
         BillingCountAndAmount, pydantic.Field(alias="noticeOfChange")
     ]
     r"""Fees for notices of change."""
+
+    bank_account_verification: Annotated[
+        BillingCountAndAmount, pydantic.Field(alias="bankAccountVerification")
+    ]
+    r"""Fees for successful bank account verifications via Plaid or MX."""
 
     total: BillingCountAndAmount
     r"""Total ACH fees."""

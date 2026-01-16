@@ -37,6 +37,7 @@ class InvoiceTypedDict(TypedDict):
     description: NotRequired[str]
     payment_link_code: NotRequired[str]
     invoice_payments: NotRequired[List[InvoicePaymentTypedDict]]
+    r"""Payment made towards an invoice, will be either a transfer or an external payment."""
     invoice_date: NotRequired[datetime]
     due_date: NotRequired[datetime]
     sent_on: NotRequired[datetime]
@@ -88,6 +89,7 @@ class Invoice(BaseModel):
     invoice_payments: Annotated[
         Optional[List[InvoicePayment]], pydantic.Field(alias="invoicePayments")
     ] = None
+    r"""Payment made towards an invoice, will be either a transfer or an external payment."""
 
     invoice_date: Annotated[Optional[datetime], pydantic.Field(alias="invoiceDate")] = (
         None
