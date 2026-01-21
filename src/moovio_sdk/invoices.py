@@ -38,7 +38,7 @@ class Invoices(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
         :param account_id:
-        :param customer_account_id:
+        :param customer_account_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
         :param line_items: A collection of line items for an invoice.
         :param description:
         :param invoice_date:
@@ -188,7 +188,7 @@ class Invoices(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
         :param account_id:
-        :param customer_account_id:
+        :param customer_account_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
         :param line_items: A collection of line items for an invoice.
         :param description:
         :param invoice_date:

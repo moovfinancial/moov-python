@@ -22,6 +22,7 @@ class InvoicePaymentTypedDict(TypedDict):
     r"""Payment made towards an invoice, will be either a transfer or an external payment."""
 
     invoice_payment_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     invoice_payment_type: InvoicePaymentType
     amount: AmountDecimalTypedDict
     transfer: NotRequired[InvoiceTransferPaymentTypedDict]
@@ -32,6 +33,7 @@ class InvoicePayment(BaseModel):
     r"""Payment made towards an invoice, will be either a transfer or an external payment."""
 
     invoice_payment_id: Annotated[str, pydantic.Field(alias="invoicePaymentID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     invoice_payment_type: Annotated[
         InvoicePaymentType, pydantic.Field(alias="invoicePaymentType")

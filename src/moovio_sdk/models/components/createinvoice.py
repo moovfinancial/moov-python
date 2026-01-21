@@ -16,6 +16,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class CreateInvoiceTypedDict(TypedDict):
     customer_account_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     line_items: CreateInvoiceLineItemsTypedDict
     r"""A collection of line items for an invoice."""
     description: NotRequired[str]
@@ -26,6 +27,7 @@ class CreateInvoiceTypedDict(TypedDict):
 
 class CreateInvoice(BaseModel):
     customer_account_id: Annotated[str, pydantic.Field(alias="customerAccountID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     line_items: Annotated[CreateInvoiceLineItems, pydantic.Field(alias="lineItems")]
     r"""A collection of line items for an invoice."""

@@ -15,9 +15,12 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class InvoiceTypedDict(TypedDict):
     invoice_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     invoice_number: str
     customer_account_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     partner_account_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     status: InvoiceStatus
     line_items: InvoiceLineItemsTypedDict
     r"""A collection of line items for an invoice."""
@@ -47,12 +50,15 @@ class InvoiceTypedDict(TypedDict):
 
 class Invoice(BaseModel):
     invoice_id: Annotated[str, pydantic.Field(alias="invoiceID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     invoice_number: Annotated[str, pydantic.Field(alias="invoiceNumber")]
 
     customer_account_id: Annotated[str, pydantic.Field(alias="customerAccountID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     partner_account_id: Annotated[str, pydantic.Field(alias="partnerAccountID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     status: InvoiceStatus
 

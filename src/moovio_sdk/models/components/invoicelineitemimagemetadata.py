@@ -10,7 +10,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class InvoiceLineItemImageMetadataTypedDict(TypedDict):
     image_id: str
-    r"""Unique identifier for a image resource."""
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     link: str
     r"""The image's public URL."""
     public_id: str
@@ -21,7 +21,7 @@ class InvoiceLineItemImageMetadataTypedDict(TypedDict):
 
 class InvoiceLineItemImageMetadata(BaseModel):
     image_id: Annotated[str, pydantic.Field(alias="imageID")]
-    r"""Unique identifier for a image resource."""
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     link: str
     r"""The image's public URL."""
