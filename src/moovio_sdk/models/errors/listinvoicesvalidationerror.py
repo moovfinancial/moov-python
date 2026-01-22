@@ -15,6 +15,18 @@ class ListInvoicesValidationErrorData(BaseModel):
     customer_account_id: Annotated[
         Optional[str], pydantic.Field(alias="customerAccountID")
     ] = None
+    created_start_date_time: Annotated[
+        Optional[str], pydantic.Field(alias="createdStartDateTime")
+    ] = None
+    created_end_date_time: Annotated[
+        Optional[str], pydantic.Field(alias="createdEndDateTime")
+    ] = None
+    due_start_date_time: Annotated[
+        Optional[str], pydantic.Field(alias="dueStartDateTime")
+    ] = None
+    due_end_date_time: Annotated[
+        Optional[str], pydantic.Field(alias="dueEndDateTime")
+    ] = None
     skip: Optional[str] = None
     count: Optional[str] = None
 

@@ -320,6 +320,10 @@ class Invoices(BaseSDK):
         count: Optional[int] = None,
         status: Optional[components.InvoiceStatus] = None,
         customer_account_id: Optional[str] = None,
+        created_start_date_time: Optional[datetime] = None,
+        created_end_date_time: Optional[datetime] = None,
+        due_start_date_time: Optional[datetime] = None,
+        due_end_date_time: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -335,6 +339,10 @@ class Invoices(BaseSDK):
         :param count:
         :param status:
         :param customer_account_id:
+        :param created_start_date_time:
+        :param created_end_date_time:
+        :param due_start_date_time:
+        :param due_end_date_time:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -355,6 +363,10 @@ class Invoices(BaseSDK):
             count=count,
             status=status,
             customer_account_id=customer_account_id,
+            created_start_date_time=created_start_date_time,
+            created_end_date_time=created_end_date_time,
+            due_start_date_time=due_start_date_time,
+            due_end_date_time=due_end_date_time,
             account_id=account_id,
         )
 
@@ -435,6 +447,10 @@ class Invoices(BaseSDK):
         count: Optional[int] = None,
         status: Optional[components.InvoiceStatus] = None,
         customer_account_id: Optional[str] = None,
+        created_start_date_time: Optional[datetime] = None,
+        created_end_date_time: Optional[datetime] = None,
+        due_start_date_time: Optional[datetime] = None,
+        due_end_date_time: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -450,6 +466,10 @@ class Invoices(BaseSDK):
         :param count:
         :param status:
         :param customer_account_id:
+        :param created_start_date_time:
+        :param created_end_date_time:
+        :param due_start_date_time:
+        :param due_end_date_time:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -470,6 +490,10 @@ class Invoices(BaseSDK):
             count=count,
             status=status,
             customer_account_id=customer_account_id,
+            created_start_date_time=created_start_date_time,
+            created_end_date_time=created_end_date_time,
+            due_start_date_time=due_start_date_time,
+            due_end_date_time=due_end_date_time,
             account_id=account_id,
         )
 
