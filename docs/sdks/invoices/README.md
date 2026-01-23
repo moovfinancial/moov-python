@@ -6,35 +6,35 @@
 
 * [create_invoice](#create_invoice) - Create an invoice for a Moov account.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 * [list_invoices](#list_invoices) - List all the invoices created under a Moov account.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 * [get_invoice](#get_invoice) - Retrieve an invoice by ID.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 * [update_invoice](#update_invoice) - Updates an invoice.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 * [create_invoice_payment](#create_invoice_payment) - Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
 If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 * [list_invoice_payments](#list_invoice_payments) - List all the payments made towards an invoice.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ## create_invoice
 
 Create an invoice for a Moov account.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
@@ -43,6 +43,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
@@ -53,11 +54,20 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.invoices.create_invoice(account_id="241bf524-e777-4941-a5e4-d7f3f34d7a00", customer_account_id="<id>", line_items={
-        "items": [],
-    }, tax_amount={
+    res = moov.invoices.create_invoice(account_id="241bf524-e777-4941-a5e4-d7f3f34d7a00", customer_account_id="3dfff852-927d-47e8-822c-2fffc57ff6b9", line_items={
+        "items": [
+            {
+                "name": "Professional Services",
+                "base_price": {
+                    "currency": "USD",
+                    "value_decimal": "1000.00",
+                },
+                "quantity": 1,
+            },
+        ],
+    }, description="Professional services for Q1 2026", invoice_date=parse_datetime("2026-01-15T00:00:00Z"), due_date=parse_datetime("2026-02-15T00:00:00Z"), tax_amount={
         "currency": "USD",
-        "value_decimal": "12.987654321",
+        "value_decimal": "80.00",
     })
 
     # Handle response
@@ -94,7 +104,7 @@ with Moov(
 
 List all the invoices created under a Moov account.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ### Example Usage
@@ -150,7 +160,7 @@ with Moov(
 
 Retrieve an invoice by ID.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ### Example Usage
@@ -198,7 +208,7 @@ with Moov(
 
 Updates an invoice.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
@@ -207,6 +217,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
@@ -217,28 +228,18 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.invoices.update_invoice(account_id="ce46d65a-8504-4afa-b3f7-303401bd08b3", invoice_id="ef510999-370a-4350-87d5-bc81fc02a2ea", line_items={
+    res = moov.invoices.update_invoice(account_id="ce46d65a-8504-4afa-b3f7-303401bd08b3", invoice_id="ef510999-370a-4350-87d5-bc81fc02a2ea", description="Updated professional services for Q1 2026", line_items={
         "items": [
             {
-                "name": "<value>",
+                "name": "Professional Services",
                 "base_price": {
                     "currency": "USD",
-                    "value_decimal": "12.987654321",
+                    "value_decimal": "1000.00",
                 },
-                "quantity": 984515,
-                "options": [
-                    {
-                        "name": "<value>",
-                        "quantity": 761923,
-                        "price_modifier": {
-                            "currency": "USD",
-                            "value_decimal": "12.987654321",
-                        },
-                    },
-                ],
+                "quantity": 1,
             },
         ],
-    }, tax_amount={
+    }, invoice_date=parse_datetime("2026-01-16T00:00:00Z"), due_date=parse_datetime("2026-02-16T00:00:00Z"), tax_amount={
         "currency": "USD",
         "value_decimal": "12.987654321",
     })
@@ -279,7 +280,7 @@ with Moov(
 Creates a payment resource to represent that an invoice was paid outside of the Moov platform.
 If a payment link was created for the invoice, the corresponding payment link is canceled, but a receipt is still sent.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
@@ -288,6 +289,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
+from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
@@ -300,8 +302,8 @@ with Moov(
 
     res = moov.invoices.create_invoice_payment(account_id="e02333e4-a835-46d1-8d02-9af7a405e65f", invoice_id="99e7ebb0-9996-49b2-98f0-304c7332ece6", amount={
         "currency": "USD",
-        "value_decimal": "12.987654321",
-    })
+        "value_decimal": "500.00",
+    }, foreign_id="EXT-PAY-12345", description="Payment received via wire transfer", payment_date=parse_datetime("2026-01-20T14:45:00Z"))
 
     # Handle response
     print(res)
@@ -336,7 +338,7 @@ with Moov(
 
 List all the payments made towards an invoice.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ### Example Usage
