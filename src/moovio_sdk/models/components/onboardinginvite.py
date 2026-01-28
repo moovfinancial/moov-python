@@ -36,6 +36,10 @@ class OnboardingInviteTypedDict(TypedDict):
     r"""The scopes requested by the inviter."""
     terms_of_service_url: NotRequired[str]
     r"""The terms of service URL set by the inviter."""
+    grant_scopes: NotRequired[List[ApplicationScope]]
+    r"""List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+    by the new account on yourself. These values are used to determine what the account onboarded can do.
+    """
     redeemed_account_id: NotRequired[str]
     r"""The account ID of the account that redeemed the invite."""
     prefill: NotRequired[CreateAccountTypedDict]
@@ -75,6 +79,13 @@ class OnboardingInvite(BaseModel):
     ] = None
     r"""The terms of service URL set by the inviter."""
 
+    grant_scopes: Annotated[
+        Optional[List[ApplicationScope]], pydantic.Field(alias="grantScopes")
+    ] = None
+    r"""List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+    by the new account on yourself. These values are used to determine what the account onboarded can do.
+    """
+
     redeemed_account_id: Annotated[
         Optional[str], pydantic.Field(alias="redeemedAccountID")
     ] = None
@@ -97,6 +108,7 @@ class OnboardingInvite(BaseModel):
             [
                 "returnURL",
                 "termsOfServiceURL",
+                "grantScopes",
                 "redeemedAccountID",
                 "prefill",
                 "partner",

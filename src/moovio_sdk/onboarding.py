@@ -19,6 +19,7 @@ class Onboarding(BaseSDK):
         fee_plan_codes: List[str],
         return_url: Optional[str] = None,
         terms_of_service_url: Optional[str] = None,
+        grant_scopes: Optional[List[components.ApplicationScope]] = None,
         prefill: Optional[
             Union[components.CreateAccount, components.CreateAccountTypedDict]
         ] = None,
@@ -39,6 +40,8 @@ class Onboarding(BaseSDK):
         :param fee_plan_codes: List of fee plan codes to assign the account created by the invitee.
         :param return_url: Optional URL to redirect the user to after they complete the onboarding process.
         :param terms_of_service_url: Optional URL to your organization's terms of service.
+        :param grant_scopes: List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+            by the new account on yourself. These values are used to determine what the account onboarded can do.
         :param prefill:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -59,6 +62,7 @@ class Onboarding(BaseSDK):
             return_url=return_url,
             terms_of_service_url=terms_of_service_url,
             scopes=scopes,
+            grant_scopes=grant_scopes,
             capabilities=capabilities,
             fee_plan_codes=fee_plan_codes,
             prefill=utils.get_pydantic_model(
@@ -161,6 +165,7 @@ class Onboarding(BaseSDK):
         fee_plan_codes: List[str],
         return_url: Optional[str] = None,
         terms_of_service_url: Optional[str] = None,
+        grant_scopes: Optional[List[components.ApplicationScope]] = None,
         prefill: Optional[
             Union[components.CreateAccount, components.CreateAccountTypedDict]
         ] = None,
@@ -181,6 +186,8 @@ class Onboarding(BaseSDK):
         :param fee_plan_codes: List of fee plan codes to assign the account created by the invitee.
         :param return_url: Optional URL to redirect the user to after they complete the onboarding process.
         :param terms_of_service_url: Optional URL to your organization's terms of service.
+        :param grant_scopes: List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+            by the new account on yourself. These values are used to determine what the account onboarded can do.
         :param prefill:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -201,6 +208,7 @@ class Onboarding(BaseSDK):
             return_url=return_url,
             terms_of_service_url=terms_of_service_url,
             scopes=scopes,
+            grant_scopes=grant_scopes,
             capabilities=capabilities,
             fee_plan_codes=fee_plan_codes,
             prefill=utils.get_pydantic_model(

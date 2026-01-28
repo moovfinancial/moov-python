@@ -28,6 +28,10 @@ class OnboardingInviteRequestTypedDict(TypedDict):
     r"""Optional URL to redirect the user to after they complete the onboarding process."""
     terms_of_service_url: NotRequired[str]
     r"""Optional URL to your organization's terms of service."""
+    grant_scopes: NotRequired[List[ApplicationScope]]
+    r"""List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+    by the new account on yourself. These values are used to determine what the account onboarded can do.
+    """
     prefill: NotRequired[CreateAccountTypedDict]
 
 
@@ -55,11 +59,20 @@ class OnboardingInviteRequest(BaseModel):
     ] = None
     r"""Optional URL to your organization's terms of service."""
 
+    grant_scopes: Annotated[
+        Optional[List[ApplicationScope]], pydantic.Field(alias="grantScopes")
+    ] = None
+    r"""List of [scopes](https://docs.moov.io/api/authentication/scopes/) you grant to allow being used
+    by the new account on yourself. These values are used to determine what the account onboarded can do.
+    """
+
     prefill: Optional[CreateAccount] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["returnURL", "termsOfServiceURL", "prefill"])
+        optional_fields = set(
+            ["returnURL", "termsOfServiceURL", "grantScopes", "prefill"]
+        )
         serialized = handler(self)
         m = {}
 
