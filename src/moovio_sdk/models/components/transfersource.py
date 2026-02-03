@@ -14,7 +14,6 @@ from .paymentmethodsbankaccount import (
 from .paymentmethodscard import PaymentMethodsCard, PaymentMethodsCardTypedDict
 from .paymentmethodswallet import PaymentMethodsWallet, PaymentMethodsWalletTypedDict
 from .paymentmethodtype import PaymentMethodType
-from .terminalcard import TerminalCard, TerminalCardTypedDict
 from .transferaccount import TransferAccount, TransferAccountTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
@@ -37,8 +36,6 @@ class TransferSourceTypedDict(TypedDict):
     r"""A card as contained within a payment method."""
     apple_pay: NotRequired[ApplePayResponseTypedDict]
     r"""Describes an Apple Pay token on a Moov account."""
-    terminal_card: NotRequired[TerminalCardTypedDict]
-    r"""Describes payment card details captured with tap or in-person payment."""
     card_details: NotRequired[CardTransactionDetailsTypedDict]
     r"""Card-specific details about the transaction."""
     ach_details: NotRequired[ACHTransactionDetailsTypedDict]
@@ -73,11 +70,6 @@ class TransferSource(BaseModel):
     ] = None
     r"""Describes an Apple Pay token on a Moov account."""
 
-    terminal_card: Annotated[
-        Optional[TerminalCard], pydantic.Field(alias="terminalCard")
-    ] = None
-    r"""Describes payment card details captured with tap or in-person payment."""
-
     card_details: Annotated[
         Optional[CardTransactionDetails], pydantic.Field(alias="cardDetails")
     ] = None
@@ -97,7 +89,6 @@ class TransferSource(BaseModel):
                 "wallet",
                 "card",
                 "applePay",
-                "terminalCard",
                 "cardDetails",
                 "achDetails",
             ]

@@ -14,7 +14,7 @@ class Accounts(BaseSDK):
     def create(
         self,
         *,
-        account_type: components.CreateAccountType,
+        account_type: components.AccountType,
         profile: Union[components.CreateProfile, components.CreateProfileTypedDict],
         metadata: Optional[Dict[str, str]] = None,
         terms_of_service: Optional[
@@ -53,7 +53,7 @@ class Accounts(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts.write` scope.
 
-        :param account_type:
+        :param account_type: The type of entity represented by this account.
         :param profile:
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param terms_of_service:
@@ -184,7 +184,7 @@ class Accounts(BaseSDK):
     async def create_async(
         self,
         *,
-        account_type: components.CreateAccountType,
+        account_type: components.AccountType,
         profile: Union[components.CreateProfile, components.CreateProfileTypedDict],
         metadata: Optional[Dict[str, str]] = None,
         terms_of_service: Optional[
@@ -223,7 +223,7 @@ class Accounts(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
         to specify the `/accounts.write` scope.
 
-        :param account_type:
+        :param account_type: The type of entity represented by this account.
         :param profile:
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param terms_of_service:
@@ -356,7 +356,7 @@ class Accounts(BaseSDK):
         *,
         name: Optional[str] = None,
         email: Optional[str] = None,
-        type_: Optional[components.CreateAccountType] = None,
+        type_: Optional[components.AccountType] = None,
         foreign_id: Optional[str] = None,
         include_disconnected: Optional[bool] = None,
         capability: Optional[components.CapabilityID] = None,
@@ -500,7 +500,7 @@ class Accounts(BaseSDK):
         *,
         name: Optional[str] = None,
         email: Optional[str] = None,
-        type_: Optional[components.CreateAccountType] = None,
+        type_: Optional[components.AccountType] = None,
         foreign_id: Optional[str] = None,
         include_disconnected: Optional[bool] = None,
         capability: Optional[components.CapabilityID] = None,
@@ -1417,7 +1417,7 @@ class Accounts(BaseSDK):
         account_id: str,
         name: Optional[str] = None,
         email: Optional[str] = None,
-        type_: Optional[components.CreateAccountType] = None,
+        type_: Optional[components.AccountType] = None,
         foreign_id: Optional[str] = None,
         include_disconnected: Optional[bool] = None,
         capability: Optional[components.CapabilityID] = None,
@@ -1564,7 +1564,7 @@ class Accounts(BaseSDK):
         account_id: str,
         name: Optional[str] = None,
         email: Optional[str] = None,
-        type_: Optional[components.CreateAccountType] = None,
+        type_: Optional[components.AccountType] = None,
         foreign_id: Optional[str] = None,
         include_disconnected: Optional[bool] = None,
         capability: Optional[components.CapabilityID] = None,

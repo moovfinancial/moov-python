@@ -53,7 +53,7 @@ with Moov(
     ], grant_scopes=[
         components.ApplicationScope.TRANSFERS_WRITE,
     ], prefill=components.CreateAccount(
-        account_type=components.CreateAccountType.BUSINESS,
+        account_type=components.AccountType.BUSINESS,
         profile=components.CreateProfile(
             business=components.CreateBusinessProfile(
                 legal_business_name="Whole Body Fitness LLC",

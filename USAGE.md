@@ -14,7 +14,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.accounts.create(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
+    res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
         business=components.CreateBusinessProfile(
             legal_business_name="Whole Body Fitness LLC",
         ),
@@ -75,7 +75,7 @@ async def main():
         ),
     ) as moov:
 
-        res = await moov.accounts.create_async(account_type=components.CreateAccountType.BUSINESS, profile=components.CreateProfile(
+        res = await moov.accounts.create_async(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
             business=components.CreateBusinessProfile(
                 legal_business_name="Whole Body Fitness LLC",
             ),
