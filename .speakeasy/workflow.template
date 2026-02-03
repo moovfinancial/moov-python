@@ -1,0 +1,23 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    latest:
+        inputs:
+            - location: registry.speakeasyapi.dev/moov/moov/api-{{API_VERSION}}
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/moov/moov/python-{{API_VERSION}}
+targets:
+    latest:
+        target: python
+        source: latest
+        publish:
+            pypi:
+                token: $pypi_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/moov/moov/{{API_VERSION}}-python-code-samples
+            labelOverride:
+                fixedValue: Python (SDK)
+            blocking: false
