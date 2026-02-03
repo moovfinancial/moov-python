@@ -16,14 +16,21 @@ class IncurredFeeTypedDict(TypedDict):
 
     fee_id: NotRequired[str]
     account_id: NotRequired[str]
+    r"""Account ID the fee belongs to."""
     wallet_id: NotRequired[str]
+    r"""Wallet ID associated with the fee."""
     created_on: NotRequired[datetime]
+    r"""Timestamp when the fee was created."""
     fee_name: NotRequired[str]
+    r"""Name of the fee."""
     amount: NotRequired[AmountDecimalTypedDict]
+    r"""The fee amount."""
     generated_by: NotRequired[GeneratedByTypedDict]
-    r"""The entity that generated the fee."""
+    r"""Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or BankAccountID)."""
     fee_group: NotRequired[str]
+    r"""Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or an interchange or discount fee."""
     residual_id: NotRequired[str]
+    r"""Unique identifier for this residual payment calculation."""
 
 
 class IncurredFee(BaseModel):
@@ -32,23 +39,30 @@ class IncurredFee(BaseModel):
     fee_id: Annotated[Optional[str], pydantic.Field(alias="feeID")] = None
 
     account_id: Annotated[Optional[str], pydantic.Field(alias="accountID")] = None
+    r"""Account ID the fee belongs to."""
 
     wallet_id: Annotated[Optional[str], pydantic.Field(alias="walletID")] = None
+    r"""Wallet ID associated with the fee."""
 
     created_on: Annotated[Optional[datetime], pydantic.Field(alias="createdOn")] = None
+    r"""Timestamp when the fee was created."""
 
     fee_name: Annotated[Optional[str], pydantic.Field(alias="feeName")] = None
+    r"""Name of the fee."""
 
     amount: Optional[AmountDecimal] = None
+    r"""The fee amount."""
 
     generated_by: Annotated[
         Optional[GeneratedBy], pydantic.Field(alias="generatedBy")
     ] = None
-    r"""The entity that generated the fee."""
+    r"""Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or BankAccountID)."""
 
     fee_group: Annotated[Optional[str], pydantic.Field(alias="feeGroup")] = None
+    r"""Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or an interchange or discount fee."""
 
     residual_id: Annotated[Optional[str], pydantic.Field(alias="residualID")] = None
+    r"""Unique identifier for this residual payment calculation."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

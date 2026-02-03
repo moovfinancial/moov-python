@@ -2045,7 +2045,7 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
         :param account_id:
-        :param residual_id:
+        :param residual_id: Unique identifier for this residual payment calculation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2145,7 +2145,7 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
         :param account_id:
-        :param residual_id:
+        :param residual_id: Unique identifier for this residual payment calculation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2249,7 +2249,7 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
         :param account_id:
-        :param residual_id:
+        :param residual_id: Unique identifier for this residual payment calculation.
         :param skip:
         :param count:
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
@@ -2361,7 +2361,7 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 
         :param account_id:
-        :param residual_id:
+        :param residual_id: Unique identifier for this residual payment calculation.
         :param skip:
         :param count:
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.

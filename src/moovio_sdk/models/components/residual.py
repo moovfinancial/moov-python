@@ -10,48 +10,59 @@ from typing_extensions import Annotated, TypedDict
 
 class ResidualTypedDict(TypedDict):
     residual_id: str
+    r"""Unique identifier for this residual payment calculation."""
     partner_account_id: str
+    r"""The partner account ID this residual belongs to."""
     period_start: datetime
+    r"""Start date and time of the residual calculation period."""
     period_end: datetime
+    r"""End date and time of the residual calculation period."""
     merchant_fees: AmountDecimalTypedDict
+    r"""Total amount of merchant fees collected during the period. This represents the partner's revenue from merchant fees."""
     partner_cost: AmountDecimalTypedDict
+    r"""Partner's total cost (buy rate) during the period."""
     net_income: AmountDecimalTypedDict
+    r"""Net income calculated as merchant fee revenue minus partner costs."""
     revenue_share: str
-    r"""The decimal-formatted numerical string of the revenue split for partner.
-
-    For example, 2.25% is '2.25'.
-    """
+    r"""The revenue share percentage the partner receives, expressed as a decimal string (e.g., \"25.00\" for 25%)."""
     residual_amount: AmountDecimalTypedDict
-    moov_share: AmountDecimalTypedDict
+    r"""The amount the partner receives as their share of the net income (netIncome × revenueShare)."""
     created_on: datetime
+    r"""Timestamp when the residual was created."""
     updated_on: datetime
+    r"""Timestamp when the residual was last updated."""
 
 
 class Residual(BaseModel):
     residual_id: Annotated[str, pydantic.Field(alias="residualID")]
+    r"""Unique identifier for this residual payment calculation."""
 
     partner_account_id: Annotated[str, pydantic.Field(alias="partnerAccountID")]
+    r"""The partner account ID this residual belongs to."""
 
     period_start: Annotated[datetime, pydantic.Field(alias="periodStart")]
+    r"""Start date and time of the residual calculation period."""
 
     period_end: Annotated[datetime, pydantic.Field(alias="periodEnd")]
+    r"""End date and time of the residual calculation period."""
 
     merchant_fees: Annotated[AmountDecimal, pydantic.Field(alias="merchantFees")]
+    r"""Total amount of merchant fees collected during the period. This represents the partner's revenue from merchant fees."""
 
     partner_cost: Annotated[AmountDecimal, pydantic.Field(alias="partnerCost")]
+    r"""Partner's total cost (buy rate) during the period."""
 
     net_income: Annotated[AmountDecimal, pydantic.Field(alias="netIncome")]
+    r"""Net income calculated as merchant fee revenue minus partner costs."""
 
     revenue_share: Annotated[str, pydantic.Field(alias="revenueShare")]
-    r"""The decimal-formatted numerical string of the revenue split for partner.
-
-    For example, 2.25% is '2.25'.
-    """
+    r"""The revenue share percentage the partner receives, expressed as a decimal string (e.g., \"25.00\" for 25%)."""
 
     residual_amount: Annotated[AmountDecimal, pydantic.Field(alias="residualAmount")]
-
-    moov_share: Annotated[AmountDecimal, pydantic.Field(alias="moovShare")]
+    r"""The amount the partner receives as their share of the net income (netIncome × revenueShare)."""
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+    r"""Timestamp when the residual was created."""
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
+    r"""Timestamp when the residual was last updated."""

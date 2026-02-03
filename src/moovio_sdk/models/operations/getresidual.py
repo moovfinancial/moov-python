@@ -63,6 +63,7 @@ class GetResidualGlobals(BaseModel):
 class GetResidualRequestTypedDict(TypedDict):
     account_id: str
     residual_id: str
+    r"""Unique identifier for this residual payment calculation."""
 
 
 class GetResidualRequest(BaseModel):
@@ -77,6 +78,7 @@ class GetResidualRequest(BaseModel):
         pydantic.Field(alias="residualID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""Unique identifier for this residual payment calculation."""
 
 
 class GetResidualResponseTypedDict(TypedDict):

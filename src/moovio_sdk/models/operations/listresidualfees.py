@@ -68,6 +68,7 @@ class ListResidualFeesGlobals(BaseModel):
 class ListResidualFeesRequestTypedDict(TypedDict):
     account_id: str
     residual_id: str
+    r"""Unique identifier for this residual payment calculation."""
     skip: NotRequired[int]
     count: NotRequired[int]
     start_date_time: NotRequired[str]
@@ -88,6 +89,7 @@ class ListResidualFeesRequest(BaseModel):
         pydantic.Field(alias="residualID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
+    r"""Unique identifier for this residual payment calculation."""
 
     skip: Annotated[
         Optional[int],
