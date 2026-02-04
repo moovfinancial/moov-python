@@ -3,23 +3,23 @@ id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
   docChecksum: 94c9175f01a457e9960cfe109a08c9c2
   docVersion: v2025.01.00
-  speakeasyVersion: 1.700.2
-  generationVersion: 2.801.2
-  releaseVersion: 25.1.0-dev.0
-  configChecksum: ec4d806a1ad508c61e836a81fdf5efea
+  speakeasyVersion: 1.703.0
+  generationVersion: 2.803.3
+  releaseVersion: 25.1.0
+  configChecksum: 2f491253da7fb331e2200de7ddbe59b9
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: c09a738b-f5a7-4566-9a31-8480765948b5
-  pristine_commit_hash: 2efced5e7b94d944871ef70943f3391d9b761c24
-  pristine_tree_hash: a62e8be9b13154e477a483c98f0c6c67e06c326c
+  generation_id: 1ed888ef-f2de-4d78-8c00-0aec1e5bf852
+  pristine_commit_hash: 5fd12bb897465f23b1d5eee34553e16457e8d22a
+  pristine_tree_hash: 90577425dbb0236e617e98d228f2b604e6908f56
 features:
   python:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.23.18
+    core: 6.0.1
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -38,7 +38,7 @@ features:
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.1
     nullables: 1.0.2
-    responseFormat: 1.0.1
+    responseFormat: 1.1.0
     retries: 3.0.3
     sdkHooks: 1.2.1
     unions: 3.1.2
@@ -4526,12 +4526,12 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pylintrc:
     id: 7ce8b9f946e6
-    last_write_checksum: sha1:a0b2718799f9114475577691c34a9937681644a1
-    pristine_git_object: 1d5ebbfbdfa5cea8bf4473d15550f03923758d43
+    last_write_checksum: sha1:1821d294c87aa5b363661f38d62fc7d8df7d82dd
+    pristine_git_object: 67032e59a75c386c27ba1da8e133e59ccc90bb96
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:7bad42f4664d30fae0af74b4af8a6ad686721688
-    pristine_git_object: 9912e8c4ad1e71f477568c4470cd4c1b74697b71
+    last_write_checksum: sha1:ffb1a43770f3481fd8ff3bd7d061dc2be7c67f8e
+    pristine_git_object: 3e84d34feab3acbfa435b0d245501aa226f84e63
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4558,8 +4558,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:199e2b61d6b6e659df9ab9c200dc7a19ea88cb80
-    pristine_git_object: 3b363c6461dfc84990748e1e0ed67e97fc5fb860
+    last_write_checksum: sha1:129a885e03f74f66788c4cb58ba12df821868d96
+    pristine_git_object: 3f96984cf60b42651d480038005ab974a974392d
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
@@ -7538,8 +7538,8 @@ trackedFiles:
     pristine_git_object: e2c65cc294c8c1d3310ee1a5582a566e1bb6565b
   src/moovio_sdk/utils/__init__.py:
     id: 79beca5e01d2
-    last_write_checksum: sha1:ffaf69e6877a274b08066215f5a31a1b344f5402
-    pristine_git_object: f4525b2057c3d54fb3b9eff6248fd172478ce94c
+    last_write_checksum: sha1:141be7a6debce43d0acfb482e4b3dab85a894c4a
+    pristine_git_object: 23ac44834d842f128e6b5625ebc19d2b79f87cea
   src/moovio_sdk/utils/annotations.py:
     id: c5e147c445cf
     last_write_checksum: sha1:a4824ad65f730303e4e1e3ec1febf87b4eb46dbc
