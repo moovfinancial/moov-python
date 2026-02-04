@@ -29,10 +29,6 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-* [list_partner_pricing](#list_partner_pricing) - List all partner pricing plans available for use by an account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.read` scope.
 * [list_partner_pricing_agreements](#list_partner_pricing_agreements) - List all partner pricing agreements associated with an account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -349,54 +345,6 @@ with Moov(
 ### Response
 
 **[operations.ListFeesFetchResponse](../../models/operations/listfeesfetchresponse.md)**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## list_partner_pricing
-
-List all partner pricing plans available for use by an account.
-
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/profile.read` scope.
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="listPartnerPricing" method="get" path="/accounts/{accountID}/partner-pricing" -->
-```python
-from moovio_sdk import Moov
-from moovio_sdk.models import components
-
-
-with Moov(
-    x_moov_version="v2024.01.00",
-    security=components.Security(
-        username="",
-        password="",
-    ),
-) as moov:
-
-    res = moov.fee_plans.list_partner_pricing(account_id="600637f9-c38a-473f-b909-0d5ac537b8a5")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `plan_i_ds`                                                         | List[*str*]                                                         | :heavy_minus_sign:                                                  | A comma-separated list of plan IDs to filter the results by.        |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[operations.ListPartnerPricingResponse](../../models/operations/listpartnerpricingresponse.md)**
 
 ### Errors
 

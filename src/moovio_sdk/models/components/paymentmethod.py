@@ -26,10 +26,6 @@ from .cardpresentpaymentpaymentmethod import (
     CardPresentPaymentPaymentMethod,
     CardPresentPaymentPaymentMethodTypedDict,
 )
-from .instantbankcreditpaymentmethod import (
-    InstantBankCreditPaymentMethod,
-    InstantBankCreditPaymentMethodTypedDict,
-)
 from .moovwalletpaymentmethod import (
     MoovWalletPaymentMethod,
     MoovWalletPaymentMethodTypedDict,
@@ -66,7 +62,6 @@ PaymentMethodTypedDict = TypeAliasType(
         PullFromCardPaymentMethodTypedDict,
         ApplePayPaymentMethodTypedDict,
         CardPresentPaymentPaymentMethodTypedDict,
-        InstantBankCreditPaymentMethodTypedDict,
     ],
 )
 r"""A method of moving money"""
@@ -85,7 +80,6 @@ PaymentMethod = Annotated[
         Annotated[PullFromCardPaymentMethod, Tag("pull-from-card")],
         Annotated[ApplePayPaymentMethod, Tag("apple-pay")],
         Annotated[CardPresentPaymentPaymentMethod, Tag("card-present-payment")],
-        Annotated[InstantBankCreditPaymentMethod, Tag("instant-bank-credit")],
     ],
     Discriminator(
         lambda m: get_discriminator(m, "payment_method_type", "paymentMethodType")

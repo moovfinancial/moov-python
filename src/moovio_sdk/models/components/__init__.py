@@ -70,7 +70,6 @@ if TYPE_CHECKING:
     from .adjustment import Adjustment, AdjustmentTypedDict
     from .amount import Amount, AmountTypedDict
     from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
-    from .amountdecimalupdate import AmountDecimalUpdate, AmountDecimalUpdateTypedDict
     from .amountdecimalvalidationerror import (
         AmountDecimalValidationError,
         AmountDecimalValidationErrorTypedDict,
@@ -345,39 +344,6 @@ if TYPE_CHECKING:
         CreateIndividualProfile,
         CreateIndividualProfileTypedDict,
     )
-    from .createinvoice import CreateInvoice, CreateInvoiceTypedDict
-    from .createinvoicelineitem import (
-        CreateInvoiceLineItem,
-        CreateInvoiceLineItemTypedDict,
-    )
-    from .createinvoicelineitemoption import (
-        CreateInvoiceLineItemOption,
-        CreateInvoiceLineItemOptionTypedDict,
-    )
-    from .createinvoicelineitemoptionvalidationerror import (
-        CreateInvoiceLineItemOptionValidationError,
-        CreateInvoiceLineItemOptionValidationErrorTypedDict,
-    )
-    from .createinvoicelineitems import (
-        CreateInvoiceLineItems,
-        CreateInvoiceLineItemsTypedDict,
-    )
-    from .createinvoicelineitemsupdate import (
-        CreateInvoiceLineItemsUpdate,
-        CreateInvoiceLineItemsUpdateTypedDict,
-    )
-    from .createinvoicelineitemsvalidationerror import (
-        CreateInvoiceLineItemsValidationError,
-        CreateInvoiceLineItemsValidationErrorTypedDict,
-    )
-    from .createinvoicelineitemvalidationerror import (
-        CreateInvoiceLineItemValidationError,
-        CreateInvoiceLineItemValidationErrorTypedDict,
-    )
-    from .createinvoicepayment import (
-        CreateInvoicePayment,
-        CreateInvoicePaymentTypedDict,
-    )
     from .createpaymentlink import CreatePaymentLink, CreatePaymentLinkTypedDict
     from .createpaymentlinklineitem import (
         CreatePaymentLinkLineItem,
@@ -645,50 +611,12 @@ if TYPE_CHECKING:
     from .individualprofile import IndividualProfile, IndividualProfileTypedDict
     from .industrycodes import IndustryCodes, IndustryCodesTypedDict
     from .industrytaxonomy import IndustryTaxonomy, IndustryTaxonomyTypedDict
-    from .instantbankcreditpaymentmethod import (
-        InstantBankCreditPaymentMethod,
-        InstantBankCreditPaymentMethodPaymentMethodType,
-        InstantBankCreditPaymentMethodTypedDict,
-    )
     from .instantpaymentfees import InstantPaymentFees, InstantPaymentFeesTypedDict
     from .institutionssearchresponse import (
         InstitutionsSearchResponse,
         InstitutionsSearchResponseTypedDict,
     )
-    from .invoice import Invoice, InvoiceTypedDict
-    from .invoiceexternalpayment import (
-        InvoiceExternalPayment,
-        InvoiceExternalPaymentTypedDict,
-    )
-    from .invoicelineitem import InvoiceLineItem, InvoiceLineItemTypedDict
-    from .invoicelineitemimagemetadata import (
-        InvoiceLineItemImageMetadata,
-        InvoiceLineItemImageMetadataTypedDict,
-    )
-    from .invoicelineitemoption import (
-        InvoiceLineItemOption,
-        InvoiceLineItemOptionTypedDict,
-    )
-    from .invoicelineitemoptionvalidationerror import (
-        InvoiceLineItemOptionValidationError,
-        InvoiceLineItemOptionValidationErrorTypedDict,
-    )
-    from .invoicelineitems import InvoiceLineItems, InvoiceLineItemsTypedDict
-    from .invoicelineitemsvalidationerror import (
-        InvoiceLineItemsValidationError,
-        InvoiceLineItemsValidationErrorTypedDict,
-    )
-    from .invoicelineitemvalidationerror import (
-        InvoiceLineItemValidationError,
-        InvoiceLineItemValidationErrorTypedDict,
-    )
-    from .invoicepayment import InvoicePayment, InvoicePaymentTypedDict
-    from .invoicepaymenttype import InvoicePaymentType
     from .invoicestatus import InvoiceStatus
-    from .invoicetransferpayment import (
-        InvoiceTransferPayment,
-        InvoiceTransferPaymentTypedDict,
-    )
     from .issuedcard import IssuedCard, IssuedCardTypedDict
     from .issuedcardauthorization import (
         IssuedCardAuthorization,
@@ -812,7 +740,6 @@ if TYPE_CHECKING:
         PartialScheduleAccountTypedDict,
     )
     from .partnerfees import PartnerFees, PartnerFeesTypedDict
-    from .partnerpricing import PartnerPricing, PartnerPricingTypedDict
     from .partnerpricingagreement import (
         PartnerPricingAgreement,
         PartnerPricingAgreementTypedDict,
@@ -1131,7 +1058,6 @@ if TYPE_CHECKING:
         UpdateCardExpirationTypedDict,
     )
     from .updateevidence import UpdateEvidence, UpdateEvidenceTypedDict
-    from .updateinvoice import UpdateInvoice, UpdateInvoiceTypedDict
     from .updateissuedcard import UpdateIssuedCard, UpdateIssuedCardTypedDict
     from .updateissuedcardstate import UpdateIssuedCardState
     from .updatepaymentlink import UpdatePaymentLink, UpdatePaymentLinkTypedDict
@@ -1420,8 +1346,6 @@ __all__ = [
     "Amount",
     "AmountDecimal",
     "AmountDecimalTypedDict",
-    "AmountDecimalUpdate",
-    "AmountDecimalUpdateTypedDict",
     "AmountDecimalValidationError",
     "AmountDecimalValidationErrorTypedDict",
     "AmountTypedDict",
@@ -1640,24 +1564,6 @@ __all__ = [
     "CreateIndividualErrorTypedDict",
     "CreateIndividualProfile",
     "CreateIndividualProfileTypedDict",
-    "CreateInvoice",
-    "CreateInvoiceLineItem",
-    "CreateInvoiceLineItemOption",
-    "CreateInvoiceLineItemOptionTypedDict",
-    "CreateInvoiceLineItemOptionValidationError",
-    "CreateInvoiceLineItemOptionValidationErrorTypedDict",
-    "CreateInvoiceLineItemTypedDict",
-    "CreateInvoiceLineItemValidationError",
-    "CreateInvoiceLineItemValidationErrorTypedDict",
-    "CreateInvoiceLineItems",
-    "CreateInvoiceLineItemsTypedDict",
-    "CreateInvoiceLineItemsUpdate",
-    "CreateInvoiceLineItemsUpdateTypedDict",
-    "CreateInvoiceLineItemsValidationError",
-    "CreateInvoiceLineItemsValidationErrorTypedDict",
-    "CreateInvoicePayment",
-    "CreateInvoicePaymentTypedDict",
-    "CreateInvoiceTypedDict",
     "CreatePaymentLink",
     "CreatePaymentLinkLineItem",
     "CreatePaymentLinkLineItemOption",
@@ -1872,37 +1778,11 @@ __all__ = [
     "IndustryCodesTypedDict",
     "IndustryTaxonomy",
     "IndustryTaxonomyTypedDict",
-    "InstantBankCreditPaymentMethod",
-    "InstantBankCreditPaymentMethodPaymentMethodType",
-    "InstantBankCreditPaymentMethodTypedDict",
     "InstantPaymentFees",
     "InstantPaymentFeesTypedDict",
     "InstitutionsSearchResponse",
     "InstitutionsSearchResponseTypedDict",
-    "Invoice",
-    "InvoiceExternalPayment",
-    "InvoiceExternalPaymentTypedDict",
-    "InvoiceLineItem",
-    "InvoiceLineItemImageMetadata",
-    "InvoiceLineItemImageMetadataTypedDict",
-    "InvoiceLineItemOption",
-    "InvoiceLineItemOptionTypedDict",
-    "InvoiceLineItemOptionValidationError",
-    "InvoiceLineItemOptionValidationErrorTypedDict",
-    "InvoiceLineItemTypedDict",
-    "InvoiceLineItemValidationError",
-    "InvoiceLineItemValidationErrorTypedDict",
-    "InvoiceLineItems",
-    "InvoiceLineItemsTypedDict",
-    "InvoiceLineItemsValidationError",
-    "InvoiceLineItemsValidationErrorTypedDict",
-    "InvoicePayment",
-    "InvoicePaymentType",
-    "InvoicePaymentTypedDict",
     "InvoiceStatus",
-    "InvoiceTransferPayment",
-    "InvoiceTransferPaymentTypedDict",
-    "InvoiceTypedDict",
     "IssuedCard",
     "IssuedCardAuthorization",
     "IssuedCardAuthorizationEvent",
@@ -2010,10 +1890,8 @@ __all__ = [
     "PartialScheduleAccountTypedDict",
     "PartnerFees",
     "PartnerFeesTypedDict",
-    "PartnerPricing",
     "PartnerPricingAgreement",
     "PartnerPricingAgreementTypedDict",
-    "PartnerPricingTypedDict",
     "PatchAccount",
     "PatchAccountCustomerSupport",
     "PatchAccountCustomerSupportTypedDict",
@@ -2306,8 +2184,6 @@ __all__ = [
     "UpdateCardTypedDict",
     "UpdateEvidence",
     "UpdateEvidenceTypedDict",
-    "UpdateInvoice",
-    "UpdateInvoiceTypedDict",
     "UpdateIssuedCard",
     "UpdateIssuedCardState",
     "UpdateIssuedCardTypedDict",
@@ -2522,8 +2398,6 @@ _dynamic_imports: dict[str, str] = {
     "AmountTypedDict": ".amount",
     "AmountDecimal": ".amountdecimal",
     "AmountDecimalTypedDict": ".amountdecimal",
-    "AmountDecimalUpdate": ".amountdecimalupdate",
-    "AmountDecimalUpdateTypedDict": ".amountdecimalupdate",
     "AmountDecimalValidationError": ".amountdecimalvalidationerror",
     "AmountDecimalValidationErrorTypedDict": ".amountdecimalvalidationerror",
     "AmountUpdate": ".amountupdate",
@@ -2751,24 +2625,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateIndividualErrorTypedDict": ".createindividualerror",
     "CreateIndividualProfile": ".createindividualprofile",
     "CreateIndividualProfileTypedDict": ".createindividualprofile",
-    "CreateInvoice": ".createinvoice",
-    "CreateInvoiceTypedDict": ".createinvoice",
-    "CreateInvoiceLineItem": ".createinvoicelineitem",
-    "CreateInvoiceLineItemTypedDict": ".createinvoicelineitem",
-    "CreateInvoiceLineItemOption": ".createinvoicelineitemoption",
-    "CreateInvoiceLineItemOptionTypedDict": ".createinvoicelineitemoption",
-    "CreateInvoiceLineItemOptionValidationError": ".createinvoicelineitemoptionvalidationerror",
-    "CreateInvoiceLineItemOptionValidationErrorTypedDict": ".createinvoicelineitemoptionvalidationerror",
-    "CreateInvoiceLineItems": ".createinvoicelineitems",
-    "CreateInvoiceLineItemsTypedDict": ".createinvoicelineitems",
-    "CreateInvoiceLineItemsUpdate": ".createinvoicelineitemsupdate",
-    "CreateInvoiceLineItemsUpdateTypedDict": ".createinvoicelineitemsupdate",
-    "CreateInvoiceLineItemsValidationError": ".createinvoicelineitemsvalidationerror",
-    "CreateInvoiceLineItemsValidationErrorTypedDict": ".createinvoicelineitemsvalidationerror",
-    "CreateInvoiceLineItemValidationError": ".createinvoicelineitemvalidationerror",
-    "CreateInvoiceLineItemValidationErrorTypedDict": ".createinvoicelineitemvalidationerror",
-    "CreateInvoicePayment": ".createinvoicepayment",
-    "CreateInvoicePaymentTypedDict": ".createinvoicepayment",
     "CreatePaymentLink": ".createpaymentlink",
     "CreatePaymentLinkTypedDict": ".createpaymentlink",
     "CreatePaymentLinkLineItem": ".createpaymentlinklineitem",
@@ -2979,37 +2835,11 @@ _dynamic_imports: dict[str, str] = {
     "IndustryCodesTypedDict": ".industrycodes",
     "IndustryTaxonomy": ".industrytaxonomy",
     "IndustryTaxonomyTypedDict": ".industrytaxonomy",
-    "InstantBankCreditPaymentMethod": ".instantbankcreditpaymentmethod",
-    "InstantBankCreditPaymentMethodPaymentMethodType": ".instantbankcreditpaymentmethod",
-    "InstantBankCreditPaymentMethodTypedDict": ".instantbankcreditpaymentmethod",
     "InstantPaymentFees": ".instantpaymentfees",
     "InstantPaymentFeesTypedDict": ".instantpaymentfees",
     "InstitutionsSearchResponse": ".institutionssearchresponse",
     "InstitutionsSearchResponseTypedDict": ".institutionssearchresponse",
-    "Invoice": ".invoice",
-    "InvoiceTypedDict": ".invoice",
-    "InvoiceExternalPayment": ".invoiceexternalpayment",
-    "InvoiceExternalPaymentTypedDict": ".invoiceexternalpayment",
-    "InvoiceLineItem": ".invoicelineitem",
-    "InvoiceLineItemTypedDict": ".invoicelineitem",
-    "InvoiceLineItemImageMetadata": ".invoicelineitemimagemetadata",
-    "InvoiceLineItemImageMetadataTypedDict": ".invoicelineitemimagemetadata",
-    "InvoiceLineItemOption": ".invoicelineitemoption",
-    "InvoiceLineItemOptionTypedDict": ".invoicelineitemoption",
-    "InvoiceLineItemOptionValidationError": ".invoicelineitemoptionvalidationerror",
-    "InvoiceLineItemOptionValidationErrorTypedDict": ".invoicelineitemoptionvalidationerror",
-    "InvoiceLineItems": ".invoicelineitems",
-    "InvoiceLineItemsTypedDict": ".invoicelineitems",
-    "InvoiceLineItemsValidationError": ".invoicelineitemsvalidationerror",
-    "InvoiceLineItemsValidationErrorTypedDict": ".invoicelineitemsvalidationerror",
-    "InvoiceLineItemValidationError": ".invoicelineitemvalidationerror",
-    "InvoiceLineItemValidationErrorTypedDict": ".invoicelineitemvalidationerror",
-    "InvoicePayment": ".invoicepayment",
-    "InvoicePaymentTypedDict": ".invoicepayment",
-    "InvoicePaymentType": ".invoicepaymenttype",
     "InvoiceStatus": ".invoicestatus",
-    "InvoiceTransferPayment": ".invoicetransferpayment",
-    "InvoiceTransferPaymentTypedDict": ".invoicetransferpayment",
     "IssuedCard": ".issuedcard",
     "IssuedCardTypedDict": ".issuedcard",
     "IssuedCardAuthorization": ".issuedcardauthorization",
@@ -3111,8 +2941,6 @@ _dynamic_imports: dict[str, str] = {
     "PartialScheduleAccountTypedDict": ".partialscheduleaccount",
     "PartnerFees": ".partnerfees",
     "PartnerFeesTypedDict": ".partnerfees",
-    "PartnerPricing": ".partnerpricing",
-    "PartnerPricingTypedDict": ".partnerpricing",
     "PartnerPricingAgreement": ".partnerpricingagreement",
     "PartnerPricingAgreementTypedDict": ".partnerpricingagreement",
     "PatchAccount": ".patchaccount",
@@ -3410,8 +3238,6 @@ _dynamic_imports: dict[str, str] = {
     "UpdateCardExpirationTypedDict": ".updatecardexpiration",
     "UpdateEvidence": ".updateevidence",
     "UpdateEvidenceTypedDict": ".updateevidence",
-    "UpdateInvoice": ".updateinvoice",
-    "UpdateInvoiceTypedDict": ".updateinvoice",
     "UpdateIssuedCard": ".updateissuedcard",
     "UpdateIssuedCardTypedDict": ".updateissuedcard",
     "UpdateIssuedCardState": ".updateissuedcardstate",
