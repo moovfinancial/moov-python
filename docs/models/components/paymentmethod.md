@@ -71,9 +71,3 @@ value: components.ApplePayPaymentMethod = /* values here */
 value: components.CardPresentPaymentPaymentMethod = /* values here */
 ```
 
-### `components.InstantBankCreditPaymentMethod`
-
-```python
-value: components.InstantBankCreditPaymentMethod = /* values here */
-```
-

@@ -3,9 +3,9 @@
 from __future__ import annotations
 from moovio_sdk.models.components import (
     account as components_account,
+    accounttype as components_accounttype,
     capabilityid as components_capabilityid,
     capabilitystatus as components_capabilitystatus,
-    createaccounttype as components_createaccounttype,
 )
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import (
@@ -89,7 +89,7 @@ class ListConnectedAccountsForAccountRequestTypedDict(TypedDict):
 
     Provide the full email address to filter by email.
     """
-    type: NotRequired[components_createaccounttype.CreateAccountType]
+    type: NotRequired[components_accounttype.AccountType]
     r"""Filter connected accounts by AccountType.
 
     If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
@@ -146,7 +146,7 @@ class ListConnectedAccountsForAccountRequest(BaseModel):
     """
 
     type: Annotated[
-        Optional[components_createaccounttype.CreateAccountType],
+        Optional[components_accounttype.AccountType],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""Filter connected accounts by AccountType.
