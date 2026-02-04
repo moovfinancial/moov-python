@@ -673,7 +673,6 @@ if TYPE_CHECKING:
         PartialScheduleAccountTypedDict,
     )
     from .partnerfees import PartnerFees, PartnerFeesTypedDict
-    from .partnerpricing import PartnerPricing, PartnerPricingTypedDict
     from .partnerpricingagreement import (
         PartnerPricingAgreement,
         PartnerPricingAgreementTypedDict,
@@ -1733,10 +1732,8 @@ __all__ = [
     "PartialScheduleAccountTypedDict",
     "PartnerFees",
     "PartnerFeesTypedDict",
-    "PartnerPricing",
     "PartnerPricingAgreement",
     "PartnerPricingAgreementTypedDict",
-    "PartnerPricingTypedDict",
     "PatchAccount",
     "PatchAccountCustomerSupport",
     "PatchAccountCustomerSupportTypedDict",
@@ -2692,8 +2689,6 @@ _dynamic_imports: dict[str, str] = {
     "PartialScheduleAccountTypedDict": ".partialscheduleaccount",
     "PartnerFees": ".partnerfees",
     "PartnerFeesTypedDict": ".partnerfees",
-    "PartnerPricing": ".partnerpricing",
-    "PartnerPricingTypedDict": ".partnerpricing",
     "PartnerPricingAgreement": ".partnerpricingagreement",
     "PartnerPricingAgreementTypedDict": ".partnerpricingagreement",
     "PatchAccount": ".patchaccount",
