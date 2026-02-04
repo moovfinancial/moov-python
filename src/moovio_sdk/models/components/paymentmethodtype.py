@@ -17,5 +17,3 @@ class PaymentMethodType(str, Enum):
     PUSH_TO_CARD = "push-to-card"
     PULL_FROM_CARD = "pull-from-card"
     APPLE_PAY = "apple-pay"
-    CARD_PRESENT_PAYMENT = "card-present-payment"
-    INSTANT_BANK_CREDIT = "instant-bank-credit"

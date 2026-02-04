@@ -70,7 +70,6 @@ if TYPE_CHECKING:
     from .adjustment import Adjustment, AdjustmentTypedDict
     from .amount import Amount, AmountTypedDict
     from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
-    from .amountdecimalupdate import AmountDecimalUpdate, AmountDecimalUpdateTypedDict
     from .amountdecimalvalidationerror import (
         AmountDecimalValidationError,
         AmountDecimalValidationErrorTypedDict,
@@ -176,7 +175,6 @@ if TYPE_CHECKING:
         BrandColorValidationErrorTypedDict,
     )
     from .brandproperties import BrandProperties, BrandPropertiesTypedDict
-    from .businesspresence import BusinessPresence
     from .businessprofile import BusinessProfile, BusinessProfileTypedDict
     from .businesstype import BusinessType
     from .calltoaction import CallToAction
@@ -190,14 +188,6 @@ if TYPE_CHECKING:
     )
     from .capabilitystatus import CapabilityStatus
     from .card import Card, CardTypedDict
-    from .cardacceptancemethods import (
-        CardAcceptanceMethods,
-        CardAcceptanceMethodsTypedDict,
-    )
-    from .cardacceptancemethodserror import (
-        CardAcceptanceMethodsError,
-        CardAcceptanceMethodsErrorTypedDict,
-    )
     from .cardaccountupdater import CardAccountUpdater, CardAccountUpdaterTypedDict
     from .cardacquiringdispute import (
         CardAcquiringDispute,
@@ -223,11 +213,6 @@ if TYPE_CHECKING:
         CardPaymentPaymentMethodTypedDict,
     )
     from .cardpaymentsettings import CardPaymentSettings, CardPaymentSettingsTypedDict
-    from .cardpresentpaymentpaymentmethod import (
-        CardPresentPaymentPaymentMethod,
-        CardPresentPaymentPaymentMethodPaymentMethodType,
-        CardPresentPaymentPaymentMethodTypedDict,
-    )
     from .cardtransactiondetails import (
         CardTransactionDetails,
         CardTransactionDetailsTypedDict,
@@ -246,21 +231,6 @@ if TYPE_CHECKING:
         CardVolumeDistributionError,
         CardVolumeDistributionErrorTypedDict,
     )
-    from .collectfunds import CollectFunds, CollectFundsTypedDict
-    from .collectfundsach import CollectFundsAch, CollectFundsAchTypedDict
-    from .collectfundsacherror import (
-        CollectFundsAchError,
-        CollectFundsAchErrorTypedDict,
-    )
-    from .collectfundscardpayments import (
-        CollectFundsCardPayments,
-        CollectFundsCardPaymentsTypedDict,
-    )
-    from .collectfundscardpaymentserror import (
-        CollectFundsCardPaymentsError,
-        CollectFundsCardPaymentsErrorTypedDict,
-    )
-    from .collectfundserror import CollectFundsError, CollectFundsErrorTypedDict
     from .collectionpaymentmethodtype import CollectionPaymentMethodType
     from .colorsvalidationerror import (
         ColorsValidationError,
@@ -288,7 +258,6 @@ if TYPE_CHECKING:
         CreateAccountSettings,
         CreateAccountSettingsTypedDict,
     )
-    from .createaccounttype import CreateAccountType
     from .createapplepaysession import (
         CreateApplePaySession,
         CreateApplePaySessionTypedDict,
@@ -344,39 +313,6 @@ if TYPE_CHECKING:
     from .createindividualprofile import (
         CreateIndividualProfile,
         CreateIndividualProfileTypedDict,
-    )
-    from .createinvoice import CreateInvoice, CreateInvoiceTypedDict
-    from .createinvoicelineitem import (
-        CreateInvoiceLineItem,
-        CreateInvoiceLineItemTypedDict,
-    )
-    from .createinvoicelineitemoption import (
-        CreateInvoiceLineItemOption,
-        CreateInvoiceLineItemOptionTypedDict,
-    )
-    from .createinvoicelineitemoptionvalidationerror import (
-        CreateInvoiceLineItemOptionValidationError,
-        CreateInvoiceLineItemOptionValidationErrorTypedDict,
-    )
-    from .createinvoicelineitems import (
-        CreateInvoiceLineItems,
-        CreateInvoiceLineItemsTypedDict,
-    )
-    from .createinvoicelineitemsupdate import (
-        CreateInvoiceLineItemsUpdate,
-        CreateInvoiceLineItemsUpdateTypedDict,
-    )
-    from .createinvoicelineitemsvalidationerror import (
-        CreateInvoiceLineItemsValidationError,
-        CreateInvoiceLineItemsValidationErrorTypedDict,
-    )
-    from .createinvoicelineitemvalidationerror import (
-        CreateInvoiceLineItemValidationError,
-        CreateInvoiceLineItemValidationErrorTypedDict,
-    )
-    from .createinvoicepayment import (
-        CreateInvoicePayment,
-        CreateInvoicePaymentTypedDict,
     )
     from .createpaymentlink import CreatePaymentLink, CreatePaymentLinkTypedDict
     from .createpaymentlinklineitem import (
@@ -441,11 +377,6 @@ if TYPE_CHECKING:
     from .createterminalapplication import (
         CreateTerminalApplication,
         CreateTerminalApplicationTypedDict,
-    )
-    from .createticket import CreateTicket, CreateTicketTypedDict
-    from .createticketcontacterror import (
-        CreateTicketContactError,
-        CreateTicketContactErrorTypedDict,
     )
     from .createtransfer import CreateTransfer, CreateTransferTypedDict
     from .createtransferachaddendarecord import (
@@ -548,15 +479,10 @@ if TYPE_CHECKING:
         EnrichedBusinessResponseTypedDict,
     )
     from .enrichedindustries import EnrichedIndustries, EnrichedIndustriesTypedDict
+    from .enrichedindustry import EnrichedIndustry, EnrichedIndustryTypedDict
     from .enrichedindustrycodes import (
         EnrichedIndustryCodes,
         EnrichedIndustryCodesTypedDict,
-    )
-    from .entrymode import EntryMode
-    from .estimatedactivity import EstimatedActivity, EstimatedActivityTypedDict
-    from .estimatedactivityerror import (
-        EstimatedActivityError,
-        EstimatedActivityErrorTypedDict,
     )
     from .eventtype import EventType, EventTypeTypedDict
     from .evidencetextresponse import (
@@ -590,18 +516,13 @@ if TYPE_CHECKING:
         FinancialInstitutions,
         FinancialInstitutionsTypedDict,
     )
-    from .fulfillment import Fulfillment, FulfillmentTypedDict
     from .fulfillmentdetails import FulfillmentDetails, FulfillmentDetailsTypedDict
     from .fulfillmentdetailserror import (
         FulfillmentDetailsError,
         FulfillmentDetailsErrorTypedDict,
     )
-    from .fulfillmenterror import FulfillmentError, FulfillmentErrorTypedDict
-    from .fulfillmentmethod import FulfillmentMethod
-    from .fulfillmenttimeframe import FulfillmentTimeframe
     from .fullissuedcard import FullIssuedCard, FullIssuedCardTypedDict
     from .generatedby import GeneratedBy, GeneratedByTypedDict
-    from .geographicreach import GeographicReach
     from .governmentid import (
         GovernmentID,
         GovernmentIDTypedDict,
@@ -619,7 +540,6 @@ if TYPE_CHECKING:
         GovernmentIDErrorTypedDict,
     )
     from .granttype import GrantType
-    from .guestprofile import GuestProfile, GuestProfileTypedDict
     from .imagemetadata import ImageMetadata, ImageMetadataTypedDict
     from .imagemetadatarequest import (
         ImageMetadataRequest,
@@ -644,51 +564,12 @@ if TYPE_CHECKING:
     )
     from .individualprofile import IndividualProfile, IndividualProfileTypedDict
     from .industrycodes import IndustryCodes, IndustryCodesTypedDict
-    from .industrytaxonomy import IndustryTaxonomy, IndustryTaxonomyTypedDict
-    from .instantbankcreditpaymentmethod import (
-        InstantBankCreditPaymentMethod,
-        InstantBankCreditPaymentMethodPaymentMethodType,
-        InstantBankCreditPaymentMethodTypedDict,
-    )
     from .instantpaymentfees import InstantPaymentFees, InstantPaymentFeesTypedDict
     from .institutionssearchresponse import (
         InstitutionsSearchResponse,
         InstitutionsSearchResponseTypedDict,
     )
-    from .invoice import Invoice, InvoiceTypedDict
-    from .invoiceexternalpayment import (
-        InvoiceExternalPayment,
-        InvoiceExternalPaymentTypedDict,
-    )
-    from .invoicelineitem import InvoiceLineItem, InvoiceLineItemTypedDict
-    from .invoicelineitemimagemetadata import (
-        InvoiceLineItemImageMetadata,
-        InvoiceLineItemImageMetadataTypedDict,
-    )
-    from .invoicelineitemoption import (
-        InvoiceLineItemOption,
-        InvoiceLineItemOptionTypedDict,
-    )
-    from .invoicelineitemoptionvalidationerror import (
-        InvoiceLineItemOptionValidationError,
-        InvoiceLineItemOptionValidationErrorTypedDict,
-    )
-    from .invoicelineitems import InvoiceLineItems, InvoiceLineItemsTypedDict
-    from .invoicelineitemsvalidationerror import (
-        InvoiceLineItemsValidationError,
-        InvoiceLineItemsValidationErrorTypedDict,
-    )
-    from .invoicelineitemvalidationerror import (
-        InvoiceLineItemValidationError,
-        InvoiceLineItemValidationErrorTypedDict,
-    )
-    from .invoicepayment import InvoicePayment, InvoicePaymentTypedDict
-    from .invoicepaymenttype import InvoicePaymentType
     from .invoicestatus import InvoiceStatus
-    from .invoicetransferpayment import (
-        InvoiceTransferPayment,
-        InvoiceTransferPaymentTypedDict,
-    )
     from .issuedcard import IssuedCard, IssuedCardTypedDict
     from .issuedcardauthorization import (
         IssuedCardAuthorization,
@@ -722,7 +603,6 @@ if TYPE_CHECKING:
         IssuingVelocityLimitError,
         IssuingVelocityLimitErrorTypedDict,
     )
-    from .itemlistnextpage import ItemListNextPage, ItemListNextPageTypedDict
     from .jsonwebkey import JSONWebKey, JSONWebKeyTypedDict, Use
     from .linkaccountterminalapplication import (
         LinkAccountTerminalApplication,
@@ -760,26 +640,7 @@ if TYPE_CHECKING:
     from .microdepositstatus import MicroDepositStatus
     from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
     from .mode import Mode
-    from .moneytransfer import MoneyTransfer, MoneyTransferTypedDict
-    from .moneytransfererror import MoneyTransferError, MoneyTransferErrorTypedDict
-    from .moneytransferpullfromcard import (
-        MoneyTransferPullFromCard,
-        MoneyTransferPullFromCardTypedDict,
-    )
-    from .moneytransferpullfromcarderror import (
-        MoneyTransferPullFromCardError,
-        MoneyTransferPullFromCardErrorTypedDict,
-    )
-    from .moneytransferpushtocard import (
-        MoneyTransferPushToCard,
-        MoneyTransferPushToCardTypedDict,
-    )
-    from .moneytransferpushtocarderror import (
-        MoneyTransferPushToCardError,
-        MoneyTransferPushToCardErrorTypedDict,
-    )
     from .monthlyplatformfee import MonthlyPlatformFee, MonthlyPlatformFeeTypedDict
-    from .monthlyvolumerange import MonthlyVolumeRange
     from .moovfee import MoovFee, MoovFeeTypedDict
     from .moovfeedetails import MoovFeeDetails, MoovFeeDetailsTypedDict
     from .moovwalletpaymentmethod import (
@@ -812,7 +673,6 @@ if TYPE_CHECKING:
         PartialScheduleAccountTypedDict,
     )
     from .partnerfees import PartnerFees, PartnerFeesTypedDict
-    from .partnerpricing import PartnerPricing, PartnerPricingTypedDict
     from .partnerpricingagreement import (
         PartnerPricingAgreement,
         PartnerPricingAgreementTypedDict,
@@ -891,7 +751,6 @@ if TYPE_CHECKING:
         PayoutRecipientError,
         PayoutRecipientErrorTypedDict,
     )
-    from .pendinglitigation import PendingLitigation
     from .phonenumber import PhoneNumber, PhoneNumberTypedDict
     from .phonenumbererror import PhoneNumberError, PhoneNumberErrorTypedDict
     from .pingresponse import PingResponse, PingResponseTypedDict
@@ -939,7 +798,6 @@ if TYPE_CHECKING:
     from .recurresponse import RecurResponse, RecurResponseTypedDict
     from .refundcarddetails import RefundCardDetails, RefundCardDetailsTypedDict
     from .refundcardstatus import RefundCardStatus
-    from .refundpolicy import RefundPolicy
     from .refundstatus import RefundStatus
     from .registerapplepaymerchantdomains import (
         RegisterApplePayMerchantDomains,
@@ -1017,25 +875,6 @@ if TYPE_CHECKING:
     from .scheduleresponse import ScheduleResponse, ScheduleResponseTypedDict
     from .seccode import SECCode
     from .security import Security, SecurityTypedDict
-    from .sendfunds import SendFunds, SendFundsTypedDict
-    from .sendfundsach import SendFundsAch, SendFundsAchTypedDict
-    from .sendfundsacherror import SendFundsAchError, SendFundsAchErrorTypedDict
-    from .sendfundserror import SendFundsError, SendFundsErrorTypedDict
-    from .sendfundsinstantbank import (
-        SendFundsInstantBank,
-        SendFundsInstantBankTypedDict,
-    )
-    from .sendfundsinstantbankerror import (
-        SendFundsInstantBankError,
-        SendFundsInstantBankErrorTypedDict,
-    )
-    from .sendfundspushtocard import SendFundsPushToCard, SendFundsPushToCardTypedDict
-    from .sendfundspushtocarderror import (
-        SendFundsPushToCardError,
-        SendFundsPushToCardErrorTypedDict,
-    )
-    from .sendfundsrtp import SendFundsRtp, SendFundsRtpTypedDict
-    from .sendfundsrtperror import SendFundsRtpError, SendFundsRtpErrorTypedDict
     from .sentreceipt import SentReceipt, SentReceiptTypedDict
     from .settings import Settings, SettingsTypedDict
     from .sharescopes import ShareScopes, ShareScopesTypedDict
@@ -1044,7 +883,6 @@ if TYPE_CHECKING:
         SourceDestinationOptionsTypedDict,
     )
     from .statement import Statement, StatementTypedDict
-    from .submissionintent import SubmissionIntent
     from .sweep import Sweep, SweepTypedDict
     from .sweepconfig import SweepConfig, SweepConfigTypedDict
     from .sweepconfigpaymentmethod import (
@@ -1068,7 +906,6 @@ if TYPE_CHECKING:
         TerminalApplicationVersion,
         TerminalApplicationVersionTypedDict,
     )
-    from .terminalcard import TerminalCard, TerminalCardTypedDict
     from .terminalconfiguration import (
         TerminalConfiguration,
         TerminalConfigurationTypedDict,
@@ -1089,9 +926,6 @@ if TYPE_CHECKING:
         TermsOfServicePayloadUpdateTypedDict,
     )
     from .termsofservicetoken import TermsOfServiceToken, TermsOfServiceTokenTypedDict
-    from .ticket import Ticket, TicketTypedDict
-    from .ticketcontact import TicketContact, TicketContactTypedDict
-    from .ticketmessage import TicketMessage, TicketMessageTypedDict
     from .ticketstatus import TicketStatus
     from .tokentype import TokenType
     from .transactionsource import TransactionSource
@@ -1131,7 +965,6 @@ if TYPE_CHECKING:
         UpdateCardExpirationTypedDict,
     )
     from .updateevidence import UpdateEvidence, UpdateEvidenceTypedDict
-    from .updateinvoice import UpdateInvoice, UpdateInvoiceTypedDict
     from .updateissuedcard import UpdateIssuedCard, UpdateIssuedCardTypedDict
     from .updateissuedcardstate import UpdateIssuedCardState
     from .updatepaymentlink import UpdatePaymentLink, UpdatePaymentLinkTypedDict
@@ -1153,12 +986,9 @@ if TYPE_CHECKING:
         UpdateRepresentativeSsnTypedDict,
         UpdateRepresentativeTypedDict,
     )
-    from .updateticket import UpdateTicket, UpdateTicketTypedDict
-    from .updateticketstatus import UpdateTicketStatus
     from .updateunderwriting import UpdateUnderwriting, UpdateUnderwritingTypedDict
     from .updatewebhook import UpdateWebhook, UpdateWebhookTypedDict
     from .upsertschedule import UpsertSchedule, UpsertScheduleTypedDict
-    from .upsertunderwriting import UpsertUnderwriting, UpsertUnderwritingTypedDict
     from .verification import Verification, VerificationTypedDict
     from .verificationstatus import VerificationStatus
     from .verificationstatusdetail import VerificationStatusDetail
@@ -1171,14 +1001,6 @@ if TYPE_CHECKING:
         VolumeByCustomerTypeErrorTypedDict,
     )
     from .volumerange import VolumeRange, VolumeRangeTypedDict
-    from .volumesharebycustomertype import (
-        VolumeShareByCustomerType,
-        VolumeShareByCustomerTypeTypedDict,
-    )
-    from .volumesharebycustomertypeerror import (
-        VolumeShareByCustomerTypeError,
-        VolumeShareByCustomerTypeErrorTypedDict,
-    )
     from .wallet import Wallet, WalletTypedDict
     from .walletavailablebalance import (
         WalletAvailableBalance,
@@ -1420,8 +1242,6 @@ __all__ = [
     "Amount",
     "AmountDecimal",
     "AmountDecimalTypedDict",
-    "AmountDecimalUpdate",
-    "AmountDecimalUpdateTypedDict",
     "AmountDecimalValidationError",
     "AmountDecimalValidationErrorTypedDict",
     "AmountTypedDict",
@@ -1508,7 +1328,6 @@ __all__ = [
     "BrandColorsTypedDict",
     "BrandProperties",
     "BrandPropertiesTypedDict",
-    "BusinessPresence",
     "BusinessProfile",
     "BusinessProfileTypedDict",
     "BusinessType",
@@ -1523,10 +1342,6 @@ __all__ = [
     "CapabilityStatus",
     "CapabilityTypedDict",
     "Card",
-    "CardAcceptanceMethods",
-    "CardAcceptanceMethodsError",
-    "CardAcceptanceMethodsErrorTypedDict",
-    "CardAcceptanceMethodsTypedDict",
     "CardAccountUpdater",
     "CardAccountUpdaterTypedDict",
     "CardAcquiring",
@@ -1561,9 +1376,6 @@ __all__ = [
     "CardPaymentSettings",
     "CardPaymentSettingsTypedDict",
     "CardPaymentTypedDict",
-    "CardPresentPaymentPaymentMethod",
-    "CardPresentPaymentPaymentMethodPaymentMethodType",
-    "CardPresentPaymentPaymentMethodTypedDict",
     "CardTransactionDetails",
     "CardTransactionDetailsTypedDict",
     "CardTransactionFailureCode",
@@ -1578,18 +1390,6 @@ __all__ = [
     "CardVolumeDistributionError",
     "CardVolumeDistributionErrorTypedDict",
     "CardVolumeDistributionTypedDict",
-    "CollectFunds",
-    "CollectFundsAch",
-    "CollectFundsAchError",
-    "CollectFundsAchErrorTypedDict",
-    "CollectFundsAchTypedDict",
-    "CollectFundsCardPayments",
-    "CollectFundsCardPaymentsError",
-    "CollectFundsCardPaymentsErrorTypedDict",
-    "CollectFundsCardPaymentsTypedDict",
-    "CollectFundsError",
-    "CollectFundsErrorTypedDict",
-    "CollectFundsTypedDict",
     "CollectionPaymentMethodType",
     "ColorsValidationError",
     "ColorsValidationErrorTypedDict",
@@ -1604,7 +1404,6 @@ __all__ = [
     "CreateAccount",
     "CreateAccountSettings",
     "CreateAccountSettingsTypedDict",
-    "CreateAccountType",
     "CreateAccountTypedDict",
     "CreateApplePaySession",
     "CreateApplePaySessionTypedDict",
@@ -1640,24 +1439,6 @@ __all__ = [
     "CreateIndividualErrorTypedDict",
     "CreateIndividualProfile",
     "CreateIndividualProfileTypedDict",
-    "CreateInvoice",
-    "CreateInvoiceLineItem",
-    "CreateInvoiceLineItemOption",
-    "CreateInvoiceLineItemOptionTypedDict",
-    "CreateInvoiceLineItemOptionValidationError",
-    "CreateInvoiceLineItemOptionValidationErrorTypedDict",
-    "CreateInvoiceLineItemTypedDict",
-    "CreateInvoiceLineItemValidationError",
-    "CreateInvoiceLineItemValidationErrorTypedDict",
-    "CreateInvoiceLineItems",
-    "CreateInvoiceLineItemsTypedDict",
-    "CreateInvoiceLineItemsUpdate",
-    "CreateInvoiceLineItemsUpdateTypedDict",
-    "CreateInvoiceLineItemsValidationError",
-    "CreateInvoiceLineItemsValidationErrorTypedDict",
-    "CreateInvoicePayment",
-    "CreateInvoicePaymentTypedDict",
-    "CreateInvoiceTypedDict",
     "CreatePaymentLink",
     "CreatePaymentLinkLineItem",
     "CreatePaymentLinkLineItemOption",
@@ -1702,10 +1483,6 @@ __all__ = [
     "CreateSweepConfigTypedDict",
     "CreateTerminalApplication",
     "CreateTerminalApplicationTypedDict",
-    "CreateTicket",
-    "CreateTicketContactError",
-    "CreateTicketContactErrorTypedDict",
-    "CreateTicketTypedDict",
     "CreateTransfer",
     "CreateTransferACHAddendaRecord",
     "CreateTransferACHAddendaRecordTypedDict",
@@ -1779,15 +1556,12 @@ __all__ = [
     "EnrichedBusinessResponseTypedDict",
     "EnrichedIndustries",
     "EnrichedIndustriesTypedDict",
+    "EnrichedIndustry",
     "EnrichedIndustryCodes",
     "EnrichedIndustryCodesTypedDict",
-    "EntryMode",
+    "EnrichedIndustryTypedDict",
     "Error",
     "ErrorTypedDict",
-    "EstimatedActivity",
-    "EstimatedActivityError",
-    "EstimatedActivityErrorTypedDict",
-    "EstimatedActivityTypedDict",
     "EventType",
     "EventTypeTypedDict",
     "EvidenceTextResponse",
@@ -1822,21 +1596,14 @@ __all__ = [
     "FileUploadRequestMultiPartTypedDict",
     "FinancialInstitutions",
     "FinancialInstitutionsTypedDict",
-    "Fulfillment",
     "FulfillmentDetails",
     "FulfillmentDetailsError",
     "FulfillmentDetailsErrorTypedDict",
     "FulfillmentDetailsTypedDict",
-    "FulfillmentError",
-    "FulfillmentErrorTypedDict",
-    "FulfillmentMethod",
-    "FulfillmentTimeframe",
-    "FulfillmentTypedDict",
     "FullIssuedCard",
     "FullIssuedCardTypedDict",
     "GeneratedBy",
     "GeneratedByTypedDict",
-    "GeographicReach",
     "GovernmentID",
     "GovernmentIDError",
     "GovernmentIDErrorItin",
@@ -1846,8 +1613,6 @@ __all__ = [
     "GovernmentIDErrorTypedDict",
     "GovernmentIDTypedDict",
     "GrantType",
-    "GuestProfile",
-    "GuestProfileTypedDict",
     "Image",
     "ImageMetadata",
     "ImageMetadataRequest",
@@ -1870,39 +1635,11 @@ __all__ = [
     "IndividualProfileTypedDict",
     "IndustryCodes",
     "IndustryCodesTypedDict",
-    "IndustryTaxonomy",
-    "IndustryTaxonomyTypedDict",
-    "InstantBankCreditPaymentMethod",
-    "InstantBankCreditPaymentMethodPaymentMethodType",
-    "InstantBankCreditPaymentMethodTypedDict",
     "InstantPaymentFees",
     "InstantPaymentFeesTypedDict",
     "InstitutionsSearchResponse",
     "InstitutionsSearchResponseTypedDict",
-    "Invoice",
-    "InvoiceExternalPayment",
-    "InvoiceExternalPaymentTypedDict",
-    "InvoiceLineItem",
-    "InvoiceLineItemImageMetadata",
-    "InvoiceLineItemImageMetadataTypedDict",
-    "InvoiceLineItemOption",
-    "InvoiceLineItemOptionTypedDict",
-    "InvoiceLineItemOptionValidationError",
-    "InvoiceLineItemOptionValidationErrorTypedDict",
-    "InvoiceLineItemTypedDict",
-    "InvoiceLineItemValidationError",
-    "InvoiceLineItemValidationErrorTypedDict",
-    "InvoiceLineItems",
-    "InvoiceLineItemsTypedDict",
-    "InvoiceLineItemsValidationError",
-    "InvoiceLineItemsValidationErrorTypedDict",
-    "InvoicePayment",
-    "InvoicePaymentType",
-    "InvoicePaymentTypedDict",
     "InvoiceStatus",
-    "InvoiceTransferPayment",
-    "InvoiceTransferPaymentTypedDict",
-    "InvoiceTypedDict",
     "IssuedCard",
     "IssuedCardAuthorization",
     "IssuedCardAuthorizationEvent",
@@ -1927,8 +1664,6 @@ __all__ = [
     "IssuingVelocityLimitError",
     "IssuingVelocityLimitErrorTypedDict",
     "IssuingVelocityLimitTypedDict",
-    "ItemListNextPage",
-    "ItemListNextPageTypedDict",
     "Itin",
     "ItinTypedDict",
     "JSONWebKey",
@@ -1967,21 +1702,8 @@ __all__ = [
     "MinimumCommitment",
     "MinimumCommitmentTypedDict",
     "Mode",
-    "MoneyTransfer",
-    "MoneyTransferError",
-    "MoneyTransferErrorTypedDict",
-    "MoneyTransferPullFromCard",
-    "MoneyTransferPullFromCardError",
-    "MoneyTransferPullFromCardErrorTypedDict",
-    "MoneyTransferPullFromCardTypedDict",
-    "MoneyTransferPushToCard",
-    "MoneyTransferPushToCardError",
-    "MoneyTransferPushToCardErrorTypedDict",
-    "MoneyTransferPushToCardTypedDict",
-    "MoneyTransferTypedDict",
     "MonthlyPlatformFee",
     "MonthlyPlatformFeeTypedDict",
-    "MonthlyVolumeRange",
     "MoovFee",
     "MoovFeeDetails",
     "MoovFeeDetailsTypedDict",
@@ -2010,10 +1732,8 @@ __all__ = [
     "PartialScheduleAccountTypedDict",
     "PartnerFees",
     "PartnerFeesTypedDict",
-    "PartnerPricing",
     "PartnerPricingAgreement",
     "PartnerPricingAgreementTypedDict",
-    "PartnerPricingTypedDict",
     "PatchAccount",
     "PatchAccountCustomerSupport",
     "PatchAccountCustomerSupportTypedDict",
@@ -2073,7 +1793,6 @@ __all__ = [
     "PayoutRecipientError",
     "PayoutRecipientErrorTypedDict",
     "PayoutRecipientTypedDict",
-    "PendingLitigation",
     "Phone",
     "PhoneNumber",
     "PhoneNumberError",
@@ -2138,7 +1857,6 @@ __all__ = [
     "RefundCardDetails",
     "RefundCardDetailsTypedDict",
     "RefundCardStatus",
-    "RefundPolicy",
     "RefundStatus",
     "RegisterApplePayMerchantDomains",
     "RegisterApplePayMerchantDomainsTypedDict",
@@ -2189,26 +1907,6 @@ __all__ = [
     "ScheduledTransferLineItemsTypedDict",
     "Security",
     "SecurityTypedDict",
-    "SendFunds",
-    "SendFundsAch",
-    "SendFundsAchError",
-    "SendFundsAchErrorTypedDict",
-    "SendFundsAchTypedDict",
-    "SendFundsError",
-    "SendFundsErrorTypedDict",
-    "SendFundsInstantBank",
-    "SendFundsInstantBankError",
-    "SendFundsInstantBankErrorTypedDict",
-    "SendFundsInstantBankTypedDict",
-    "SendFundsPushToCard",
-    "SendFundsPushToCardError",
-    "SendFundsPushToCardErrorTypedDict",
-    "SendFundsPushToCardTypedDict",
-    "SendFundsRtp",
-    "SendFundsRtpError",
-    "SendFundsRtpErrorTypedDict",
-    "SendFundsRtpTypedDict",
-    "SendFundsTypedDict",
     "SentReceipt",
     "SentReceiptTypedDict",
     "Settings",
@@ -2222,7 +1920,6 @@ __all__ = [
     "Statement",
     "StatementTypedDict",
     "Status",
-    "SubmissionIntent",
     "Sweep",
     "SweepConfig",
     "SweepConfigPaymentMethod",
@@ -2245,8 +1942,6 @@ __all__ = [
     "TerminalApplicationTypedDict",
     "TerminalApplicationVersion",
     "TerminalApplicationVersionTypedDict",
-    "TerminalCard",
-    "TerminalCardTypedDict",
     "TerminalConfiguration",
     "TerminalConfigurationTypedDict",
     "TermsOfService",
@@ -2259,13 +1954,7 @@ __all__ = [
     "TermsOfServiceToken",
     "TermsOfServiceTokenTypedDict",
     "TermsOfServiceTypedDict",
-    "Ticket",
-    "TicketContact",
-    "TicketContactTypedDict",
-    "TicketMessage",
-    "TicketMessageTypedDict",
     "TicketStatus",
-    "TicketTypedDict",
     "TokenType",
     "TokenTypeHint",
     "TransactionSource",
@@ -2306,8 +1995,6 @@ __all__ = [
     "UpdateCardTypedDict",
     "UpdateEvidence",
     "UpdateEvidenceTypedDict",
-    "UpdateInvoice",
-    "UpdateInvoiceTypedDict",
     "UpdateIssuedCard",
     "UpdateIssuedCardState",
     "UpdateIssuedCardTypedDict",
@@ -2325,17 +2012,12 @@ __all__ = [
     "UpdateRepresentativeSsn",
     "UpdateRepresentativeSsnTypedDict",
     "UpdateRepresentativeTypedDict",
-    "UpdateTicket",
-    "UpdateTicketStatus",
-    "UpdateTicketTypedDict",
     "UpdateUnderwriting",
     "UpdateUnderwritingTypedDict",
     "UpdateWebhook",
     "UpdateWebhookTypedDict",
     "UpsertSchedule",
     "UpsertScheduleTypedDict",
-    "UpsertUnderwriting",
-    "UpsertUnderwritingTypedDict",
     "Use",
     "Verification",
     "VerificationStatus",
@@ -2349,10 +2031,6 @@ __all__ = [
     "VolumeByCustomerTypeTypedDict",
     "VolumeRange",
     "VolumeRangeTypedDict",
-    "VolumeShareByCustomerType",
-    "VolumeShareByCustomerTypeError",
-    "VolumeShareByCustomerTypeErrorTypedDict",
-    "VolumeShareByCustomerTypeTypedDict",
     "Wallet",
     "WalletAvailableBalance",
     "WalletAvailableBalanceTypedDict",
@@ -2522,8 +2200,6 @@ _dynamic_imports: dict[str, str] = {
     "AmountTypedDict": ".amount",
     "AmountDecimal": ".amountdecimal",
     "AmountDecimalTypedDict": ".amountdecimal",
-    "AmountDecimalUpdate": ".amountdecimalupdate",
-    "AmountDecimalUpdateTypedDict": ".amountdecimalupdate",
     "AmountDecimalValidationError": ".amountdecimalvalidationerror",
     "AmountDecimalValidationErrorTypedDict": ".amountdecimalvalidationerror",
     "AmountUpdate": ".amountupdate",
@@ -2617,7 +2293,6 @@ _dynamic_imports: dict[str, str] = {
     "BrandColorValidationErrorTypedDict": ".brandcolorvalidationerror",
     "BrandProperties": ".brandproperties",
     "BrandPropertiesTypedDict": ".brandproperties",
-    "BusinessPresence": ".businesspresence",
     "BusinessProfile": ".businessprofile",
     "BusinessProfileTypedDict": ".businessprofile",
     "BusinessType": ".businesstype",
@@ -2633,10 +2308,6 @@ _dynamic_imports: dict[str, str] = {
     "CapabilityStatus": ".capabilitystatus",
     "Card": ".card",
     "CardTypedDict": ".card",
-    "CardAcceptanceMethods": ".cardacceptancemethods",
-    "CardAcceptanceMethodsTypedDict": ".cardacceptancemethods",
-    "CardAcceptanceMethodsError": ".cardacceptancemethodserror",
-    "CardAcceptanceMethodsErrorTypedDict": ".cardacceptancemethodserror",
     "CardAccountUpdater": ".cardaccountupdater",
     "CardAccountUpdaterTypedDict": ".cardaccountupdater",
     "CardAcquiringDispute": ".cardacquiringdispute",
@@ -2665,9 +2336,6 @@ _dynamic_imports: dict[str, str] = {
     "CardPaymentPaymentMethodTypedDict": ".cardpaymentpaymentmethod",
     "CardPaymentSettings": ".cardpaymentsettings",
     "CardPaymentSettingsTypedDict": ".cardpaymentsettings",
-    "CardPresentPaymentPaymentMethod": ".cardpresentpaymentpaymentmethod",
-    "CardPresentPaymentPaymentMethodPaymentMethodType": ".cardpresentpaymentpaymentmethod",
-    "CardPresentPaymentPaymentMethodTypedDict": ".cardpresentpaymentpaymentmethod",
     "CardTransactionDetails": ".cardtransactiondetails",
     "CardTransactionDetailsTypedDict": ".cardtransactiondetails",
     "CardTransactionFailureCode": ".cardtransactionfailurecode",
@@ -2681,18 +2349,6 @@ _dynamic_imports: dict[str, str] = {
     "CardVolumeDistributionTypedDict": ".cardvolumedistribution",
     "CardVolumeDistributionError": ".cardvolumedistributionerror",
     "CardVolumeDistributionErrorTypedDict": ".cardvolumedistributionerror",
-    "CollectFunds": ".collectfunds",
-    "CollectFundsTypedDict": ".collectfunds",
-    "CollectFundsAch": ".collectfundsach",
-    "CollectFundsAchTypedDict": ".collectfundsach",
-    "CollectFundsAchError": ".collectfundsacherror",
-    "CollectFundsAchErrorTypedDict": ".collectfundsacherror",
-    "CollectFundsCardPayments": ".collectfundscardpayments",
-    "CollectFundsCardPaymentsTypedDict": ".collectfundscardpayments",
-    "CollectFundsCardPaymentsError": ".collectfundscardpaymentserror",
-    "CollectFundsCardPaymentsErrorTypedDict": ".collectfundscardpaymentserror",
-    "CollectFundsError": ".collectfundserror",
-    "CollectFundsErrorTypedDict": ".collectfundserror",
     "CollectionPaymentMethodType": ".collectionpaymentmethodtype",
     "ColorsValidationError": ".colorsvalidationerror",
     "ColorsValidationErrorTypedDict": ".colorsvalidationerror",
@@ -2712,7 +2368,6 @@ _dynamic_imports: dict[str, str] = {
     "CardPaymentTypedDict": ".createaccountsettings",
     "CreateAccountSettings": ".createaccountsettings",
     "CreateAccountSettingsTypedDict": ".createaccountsettings",
-    "CreateAccountType": ".createaccounttype",
     "CreateApplePaySession": ".createapplepaysession",
     "CreateApplePaySessionTypedDict": ".createapplepaysession",
     "CreateAuthorizedUser": ".createauthorizeduser",
@@ -2751,24 +2406,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateIndividualErrorTypedDict": ".createindividualerror",
     "CreateIndividualProfile": ".createindividualprofile",
     "CreateIndividualProfileTypedDict": ".createindividualprofile",
-    "CreateInvoice": ".createinvoice",
-    "CreateInvoiceTypedDict": ".createinvoice",
-    "CreateInvoiceLineItem": ".createinvoicelineitem",
-    "CreateInvoiceLineItemTypedDict": ".createinvoicelineitem",
-    "CreateInvoiceLineItemOption": ".createinvoicelineitemoption",
-    "CreateInvoiceLineItemOptionTypedDict": ".createinvoicelineitemoption",
-    "CreateInvoiceLineItemOptionValidationError": ".createinvoicelineitemoptionvalidationerror",
-    "CreateInvoiceLineItemOptionValidationErrorTypedDict": ".createinvoicelineitemoptionvalidationerror",
-    "CreateInvoiceLineItems": ".createinvoicelineitems",
-    "CreateInvoiceLineItemsTypedDict": ".createinvoicelineitems",
-    "CreateInvoiceLineItemsUpdate": ".createinvoicelineitemsupdate",
-    "CreateInvoiceLineItemsUpdateTypedDict": ".createinvoicelineitemsupdate",
-    "CreateInvoiceLineItemsValidationError": ".createinvoicelineitemsvalidationerror",
-    "CreateInvoiceLineItemsValidationErrorTypedDict": ".createinvoicelineitemsvalidationerror",
-    "CreateInvoiceLineItemValidationError": ".createinvoicelineitemvalidationerror",
-    "CreateInvoiceLineItemValidationErrorTypedDict": ".createinvoicelineitemvalidationerror",
-    "CreateInvoicePayment": ".createinvoicepayment",
-    "CreateInvoicePaymentTypedDict": ".createinvoicepayment",
     "CreatePaymentLink": ".createpaymentlink",
     "CreatePaymentLinkTypedDict": ".createpaymentlink",
     "CreatePaymentLinkLineItem": ".createpaymentlinklineitem",
@@ -2813,10 +2450,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateSweepConfigTypedDict": ".createsweepconfig",
     "CreateTerminalApplication": ".createterminalapplication",
     "CreateTerminalApplicationTypedDict": ".createterminalapplication",
-    "CreateTicket": ".createticket",
-    "CreateTicketTypedDict": ".createticket",
-    "CreateTicketContactError": ".createticketcontacterror",
-    "CreateTicketContactErrorTypedDict": ".createticketcontacterror",
     "CreateTransfer": ".createtransfer",
     "CreateTransferTypedDict": ".createtransfer",
     "CreateTransferACHAddendaRecord": ".createtransferachaddendarecord",
@@ -2886,13 +2519,10 @@ _dynamic_imports: dict[str, str] = {
     "EnrichedBusinessResponseTypedDict": ".enrichedbusinessresponse",
     "EnrichedIndustries": ".enrichedindustries",
     "EnrichedIndustriesTypedDict": ".enrichedindustries",
+    "EnrichedIndustry": ".enrichedindustry",
+    "EnrichedIndustryTypedDict": ".enrichedindustry",
     "EnrichedIndustryCodes": ".enrichedindustrycodes",
     "EnrichedIndustryCodesTypedDict": ".enrichedindustrycodes",
-    "EntryMode": ".entrymode",
-    "EstimatedActivity": ".estimatedactivity",
-    "EstimatedActivityTypedDict": ".estimatedactivity",
-    "EstimatedActivityError": ".estimatedactivityerror",
-    "EstimatedActivityErrorTypedDict": ".estimatedactivityerror",
     "EventType": ".eventtype",
     "EventTypeTypedDict": ".eventtype",
     "EvidenceTextResponse": ".evidencetextresponse",
@@ -2925,21 +2555,14 @@ _dynamic_imports: dict[str, str] = {
     "FileUploadRequestMultiPartTypedDict": ".fileuploadrequestmultipart",
     "FinancialInstitutions": ".financialinstitutions",
     "FinancialInstitutionsTypedDict": ".financialinstitutions",
-    "Fulfillment": ".fulfillment",
-    "FulfillmentTypedDict": ".fulfillment",
     "FulfillmentDetails": ".fulfillmentdetails",
     "FulfillmentDetailsTypedDict": ".fulfillmentdetails",
     "FulfillmentDetailsError": ".fulfillmentdetailserror",
     "FulfillmentDetailsErrorTypedDict": ".fulfillmentdetailserror",
-    "FulfillmentError": ".fulfillmenterror",
-    "FulfillmentErrorTypedDict": ".fulfillmenterror",
-    "FulfillmentMethod": ".fulfillmentmethod",
-    "FulfillmentTimeframe": ".fulfillmenttimeframe",
     "FullIssuedCard": ".fullissuedcard",
     "FullIssuedCardTypedDict": ".fullissuedcard",
     "GeneratedBy": ".generatedby",
     "GeneratedByTypedDict": ".generatedby",
-    "GeographicReach": ".geographicreach",
     "GovernmentID": ".governmentid",
     "GovernmentIDTypedDict": ".governmentid",
     "Itin": ".governmentid",
@@ -2953,8 +2576,6 @@ _dynamic_imports: dict[str, str] = {
     "GovernmentIDErrorSsnTypedDict": ".governmentiderror",
     "GovernmentIDErrorTypedDict": ".governmentiderror",
     "GrantType": ".granttype",
-    "GuestProfile": ".guestprofile",
-    "GuestProfileTypedDict": ".guestprofile",
     "ImageMetadata": ".imagemetadata",
     "ImageMetadataTypedDict": ".imagemetadata",
     "ImageMetadataRequest": ".imagemetadatarequest",
@@ -2977,39 +2598,11 @@ _dynamic_imports: dict[str, str] = {
     "IndividualProfileTypedDict": ".individualprofile",
     "IndustryCodes": ".industrycodes",
     "IndustryCodesTypedDict": ".industrycodes",
-    "IndustryTaxonomy": ".industrytaxonomy",
-    "IndustryTaxonomyTypedDict": ".industrytaxonomy",
-    "InstantBankCreditPaymentMethod": ".instantbankcreditpaymentmethod",
-    "InstantBankCreditPaymentMethodPaymentMethodType": ".instantbankcreditpaymentmethod",
-    "InstantBankCreditPaymentMethodTypedDict": ".instantbankcreditpaymentmethod",
     "InstantPaymentFees": ".instantpaymentfees",
     "InstantPaymentFeesTypedDict": ".instantpaymentfees",
     "InstitutionsSearchResponse": ".institutionssearchresponse",
     "InstitutionsSearchResponseTypedDict": ".institutionssearchresponse",
-    "Invoice": ".invoice",
-    "InvoiceTypedDict": ".invoice",
-    "InvoiceExternalPayment": ".invoiceexternalpayment",
-    "InvoiceExternalPaymentTypedDict": ".invoiceexternalpayment",
-    "InvoiceLineItem": ".invoicelineitem",
-    "InvoiceLineItemTypedDict": ".invoicelineitem",
-    "InvoiceLineItemImageMetadata": ".invoicelineitemimagemetadata",
-    "InvoiceLineItemImageMetadataTypedDict": ".invoicelineitemimagemetadata",
-    "InvoiceLineItemOption": ".invoicelineitemoption",
-    "InvoiceLineItemOptionTypedDict": ".invoicelineitemoption",
-    "InvoiceLineItemOptionValidationError": ".invoicelineitemoptionvalidationerror",
-    "InvoiceLineItemOptionValidationErrorTypedDict": ".invoicelineitemoptionvalidationerror",
-    "InvoiceLineItems": ".invoicelineitems",
-    "InvoiceLineItemsTypedDict": ".invoicelineitems",
-    "InvoiceLineItemsValidationError": ".invoicelineitemsvalidationerror",
-    "InvoiceLineItemsValidationErrorTypedDict": ".invoicelineitemsvalidationerror",
-    "InvoiceLineItemValidationError": ".invoicelineitemvalidationerror",
-    "InvoiceLineItemValidationErrorTypedDict": ".invoicelineitemvalidationerror",
-    "InvoicePayment": ".invoicepayment",
-    "InvoicePaymentTypedDict": ".invoicepayment",
-    "InvoicePaymentType": ".invoicepaymenttype",
     "InvoiceStatus": ".invoicestatus",
-    "InvoiceTransferPayment": ".invoicetransferpayment",
-    "InvoiceTransferPaymentTypedDict": ".invoicetransferpayment",
     "IssuedCard": ".issuedcard",
     "IssuedCardTypedDict": ".issuedcard",
     "IssuedCardAuthorization": ".issuedcardauthorization",
@@ -3034,8 +2627,6 @@ _dynamic_imports: dict[str, str] = {
     "IssuingVelocityLimitTypedDict": ".issuingvelocitylimit",
     "IssuingVelocityLimitError": ".issuingvelocitylimiterror",
     "IssuingVelocityLimitErrorTypedDict": ".issuingvelocitylimiterror",
-    "ItemListNextPage": ".itemlistnextpage",
-    "ItemListNextPageTypedDict": ".itemlistnextpage",
     "JSONWebKey": ".jsonwebkey",
     "JSONWebKeyTypedDict": ".jsonwebkey",
     "Use": ".jsonwebkey",
@@ -3066,21 +2657,8 @@ _dynamic_imports: dict[str, str] = {
     "MinimumCommitment": ".minimumcommitment",
     "MinimumCommitmentTypedDict": ".minimumcommitment",
     "Mode": ".mode",
-    "MoneyTransfer": ".moneytransfer",
-    "MoneyTransferTypedDict": ".moneytransfer",
-    "MoneyTransferError": ".moneytransfererror",
-    "MoneyTransferErrorTypedDict": ".moneytransfererror",
-    "MoneyTransferPullFromCard": ".moneytransferpullfromcard",
-    "MoneyTransferPullFromCardTypedDict": ".moneytransferpullfromcard",
-    "MoneyTransferPullFromCardError": ".moneytransferpullfromcarderror",
-    "MoneyTransferPullFromCardErrorTypedDict": ".moneytransferpullfromcarderror",
-    "MoneyTransferPushToCard": ".moneytransferpushtocard",
-    "MoneyTransferPushToCardTypedDict": ".moneytransferpushtocard",
-    "MoneyTransferPushToCardError": ".moneytransferpushtocarderror",
-    "MoneyTransferPushToCardErrorTypedDict": ".moneytransferpushtocarderror",
     "MonthlyPlatformFee": ".monthlyplatformfee",
     "MonthlyPlatformFeeTypedDict": ".monthlyplatformfee",
-    "MonthlyVolumeRange": ".monthlyvolumerange",
     "MoovFee": ".moovfee",
     "MoovFeeTypedDict": ".moovfee",
     "MoovFeeDetails": ".moovfeedetails",
@@ -3111,8 +2689,6 @@ _dynamic_imports: dict[str, str] = {
     "PartialScheduleAccountTypedDict": ".partialscheduleaccount",
     "PartnerFees": ".partnerfees",
     "PartnerFeesTypedDict": ".partnerfees",
-    "PartnerPricing": ".partnerpricing",
-    "PartnerPricingTypedDict": ".partnerpricing",
     "PartnerPricingAgreement": ".partnerpricingagreement",
     "PartnerPricingAgreementTypedDict": ".partnerpricingagreement",
     "PatchAccount": ".patchaccount",
@@ -3175,7 +2751,6 @@ _dynamic_imports: dict[str, str] = {
     "PayoutRecipientTypedDict": ".payoutrecipient",
     "PayoutRecipientError": ".payoutrecipienterror",
     "PayoutRecipientErrorTypedDict": ".payoutrecipienterror",
-    "PendingLitigation": ".pendinglitigation",
     "PhoneNumber": ".phonenumber",
     "PhoneNumberTypedDict": ".phonenumber",
     "PhoneNumberError": ".phonenumbererror",
@@ -3230,7 +2805,6 @@ _dynamic_imports: dict[str, str] = {
     "RefundCardDetails": ".refundcarddetails",
     "RefundCardDetailsTypedDict": ".refundcarddetails",
     "RefundCardStatus": ".refundcardstatus",
-    "RefundPolicy": ".refundpolicy",
     "RefundStatus": ".refundstatus",
     "RegisterApplePayMerchantDomains": ".registerapplepaymerchantdomains",
     "RegisterApplePayMerchantDomainsTypedDict": ".registerapplepaymerchantdomains",
@@ -3293,26 +2867,6 @@ _dynamic_imports: dict[str, str] = {
     "SECCode": ".seccode",
     "Security": ".security",
     "SecurityTypedDict": ".security",
-    "SendFunds": ".sendfunds",
-    "SendFundsTypedDict": ".sendfunds",
-    "SendFundsAch": ".sendfundsach",
-    "SendFundsAchTypedDict": ".sendfundsach",
-    "SendFundsAchError": ".sendfundsacherror",
-    "SendFundsAchErrorTypedDict": ".sendfundsacherror",
-    "SendFundsError": ".sendfundserror",
-    "SendFundsErrorTypedDict": ".sendfundserror",
-    "SendFundsInstantBank": ".sendfundsinstantbank",
-    "SendFundsInstantBankTypedDict": ".sendfundsinstantbank",
-    "SendFundsInstantBankError": ".sendfundsinstantbankerror",
-    "SendFundsInstantBankErrorTypedDict": ".sendfundsinstantbankerror",
-    "SendFundsPushToCard": ".sendfundspushtocard",
-    "SendFundsPushToCardTypedDict": ".sendfundspushtocard",
-    "SendFundsPushToCardError": ".sendfundspushtocarderror",
-    "SendFundsPushToCardErrorTypedDict": ".sendfundspushtocarderror",
-    "SendFundsRtp": ".sendfundsrtp",
-    "SendFundsRtpTypedDict": ".sendfundsrtp",
-    "SendFundsRtpError": ".sendfundsrtperror",
-    "SendFundsRtpErrorTypedDict": ".sendfundsrtperror",
     "SentReceipt": ".sentreceipt",
     "SentReceiptTypedDict": ".sentreceipt",
     "Settings": ".settings",
@@ -3323,7 +2877,6 @@ _dynamic_imports: dict[str, str] = {
     "SourceDestinationOptionsTypedDict": ".sourcedestinationoptions",
     "Statement": ".statement",
     "StatementTypedDict": ".statement",
-    "SubmissionIntent": ".submissionintent",
     "Sweep": ".sweep",
     "SweepTypedDict": ".sweep",
     "SweepConfig": ".sweepconfig",
@@ -3348,8 +2901,6 @@ _dynamic_imports: dict[str, str] = {
     "TerminalApplicationStatus": ".terminalapplicationstatus",
     "TerminalApplicationVersion": ".terminalapplicationversion",
     "TerminalApplicationVersionTypedDict": ".terminalapplicationversion",
-    "TerminalCard": ".terminalcard",
-    "TerminalCardTypedDict": ".terminalcard",
     "TerminalConfiguration": ".terminalconfiguration",
     "TerminalConfigurationTypedDict": ".terminalconfiguration",
     "TermsOfService": ".termsofservice",
@@ -3364,12 +2915,6 @@ _dynamic_imports: dict[str, str] = {
     "TermsOfServicePayloadUpdateTypedDict": ".termsofservicepayloadupdate",
     "TermsOfServiceToken": ".termsofservicetoken",
     "TermsOfServiceTokenTypedDict": ".termsofservicetoken",
-    "Ticket": ".ticket",
-    "TicketTypedDict": ".ticket",
-    "TicketContact": ".ticketcontact",
-    "TicketContactTypedDict": ".ticketcontact",
-    "TicketMessage": ".ticketmessage",
-    "TicketMessageTypedDict": ".ticketmessage",
     "TicketStatus": ".ticketstatus",
     "TokenType": ".tokentype",
     "TransactionSource": ".transactionsource",
@@ -3410,8 +2955,6 @@ _dynamic_imports: dict[str, str] = {
     "UpdateCardExpirationTypedDict": ".updatecardexpiration",
     "UpdateEvidence": ".updateevidence",
     "UpdateEvidenceTypedDict": ".updateevidence",
-    "UpdateInvoice": ".updateinvoice",
-    "UpdateInvoiceTypedDict": ".updateinvoice",
     "UpdateIssuedCard": ".updateissuedcard",
     "UpdateIssuedCardTypedDict": ".updateissuedcard",
     "UpdateIssuedCardState": ".updateissuedcardstate",
@@ -3433,17 +2976,12 @@ _dynamic_imports: dict[str, str] = {
     "UpdateRepresentativeSsn": ".updaterepresentative",
     "UpdateRepresentativeSsnTypedDict": ".updaterepresentative",
     "UpdateRepresentativeTypedDict": ".updaterepresentative",
-    "UpdateTicket": ".updateticket",
-    "UpdateTicketTypedDict": ".updateticket",
-    "UpdateTicketStatus": ".updateticketstatus",
     "UpdateUnderwriting": ".updateunderwriting",
     "UpdateUnderwritingTypedDict": ".updateunderwriting",
     "UpdateWebhook": ".updatewebhook",
     "UpdateWebhookTypedDict": ".updatewebhook",
     "UpsertSchedule": ".upsertschedule",
     "UpsertScheduleTypedDict": ".upsertschedule",
-    "UpsertUnderwriting": ".upsertunderwriting",
-    "UpsertUnderwritingTypedDict": ".upsertunderwriting",
     "Verification": ".verification",
     "VerificationTypedDict": ".verification",
     "VerificationStatus": ".verificationstatus",
@@ -3454,10 +2992,6 @@ _dynamic_imports: dict[str, str] = {
     "VolumeByCustomerTypeErrorTypedDict": ".volumebycustomertypeerror",
     "VolumeRange": ".volumerange",
     "VolumeRangeTypedDict": ".volumerange",
-    "VolumeShareByCustomerType": ".volumesharebycustomertype",
-    "VolumeShareByCustomerTypeTypedDict": ".volumesharebycustomertype",
-    "VolumeShareByCustomerTypeError": ".volumesharebycustomertypeerror",
-    "VolumeShareByCustomerTypeErrorTypedDict": ".volumesharebycustomertypeerror",
     "Wallet": ".wallet",
     "WalletTypedDict": ".wallet",
     "WalletAvailableBalance": ".walletavailablebalance",

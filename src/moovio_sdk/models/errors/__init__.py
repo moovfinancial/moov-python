@@ -26,11 +26,6 @@ if TYPE_CHECKING:
         ConnectAccountRequestValidationErrorData,
     )
     from .createaccounterror import CreateAccountError, CreateAccountErrorData
-    from .createinvoiceerror import CreateInvoiceError, CreateInvoiceErrorData
-    from .createinvoicepaymenterror import (
-        CreateInvoicePaymentError,
-        CreateInvoicePaymentErrorData,
-    )
     from .createpaymentlinkerror import (
         CreatePaymentLinkError,
         CreatePaymentLinkErrorData,
@@ -39,7 +34,6 @@ if TYPE_CHECKING:
         CreateSweepConfigError,
         CreateSweepConfigErrorData,
     )
-    from .createticketerror import CreateTicketError, CreateTicketErrorData
     from .createwalletvalidationerror import (
         CreateWalletValidationError,
         CreateWalletValidationErrorData,
@@ -67,10 +61,6 @@ if TYPE_CHECKING:
     )
     from .linkapplepayerror import LinkApplePayError, LinkApplePayErrorData
     from .linkcarderror import LinkCardError, LinkCardErrorData
-    from .listinvoicesvalidationerror import (
-        ListInvoicesValidationError,
-        ListInvoicesValidationErrorData,
-    )
     from .listtransfersvalidationerror import (
         ListTransfersValidationError,
         ListTransfersValidationErrorData,
@@ -138,13 +128,11 @@ if TYPE_CHECKING:
         TransferValidationErrorData,
     )
     from .updatecarderror import UpdateCardError, UpdateCardErrorData
-    from .updateinvoiceerror import UpdateInvoiceError, UpdateInvoiceErrorData
     from .updateissuedcarderror import UpdateIssuedCardError, UpdateIssuedCardErrorData
     from .updatepaymentlinkerror import (
         UpdatePaymentLinkError,
         UpdatePaymentLinkErrorData,
     )
-    from .updateticketerror import UpdateTicketError, UpdateTicketErrorData
     from .updateunderwritingerror import (
         UpdateUnderwritingError,
         UpdateUnderwritingErrorData,
@@ -154,10 +142,6 @@ if TYPE_CHECKING:
     from .updatewebhookvalidationerror import (
         UpdateWebhookValidationError,
         UpdateWebhookValidationErrorData,
-    )
-    from .upsertunderwritingerror import (
-        UpsertUnderwritingError,
-        UpsertUnderwritingErrorData,
     )
 
 __all__ = [
@@ -180,16 +164,10 @@ __all__ = [
     "ConnectAccountRequestValidationErrorData",
     "CreateAccountError",
     "CreateAccountErrorData",
-    "CreateInvoiceError",
-    "CreateInvoiceErrorData",
-    "CreateInvoicePaymentError",
-    "CreateInvoicePaymentErrorData",
     "CreatePaymentLinkError",
     "CreatePaymentLinkErrorData",
     "CreateSweepConfigError",
     "CreateSweepConfigErrorData",
-    "CreateTicketError",
-    "CreateTicketErrorData",
     "CreateWalletValidationError",
     "CreateWalletValidationErrorData",
     "CreateWebhookValidationError",
@@ -214,8 +192,6 @@ __all__ = [
     "LinkApplePayErrorData",
     "LinkCardError",
     "LinkCardErrorData",
-    "ListInvoicesValidationError",
-    "ListInvoicesValidationErrorData",
     "ListTransfersValidationError",
     "ListTransfersValidationErrorData",
     "ListWalletTransactionsValidationError",
@@ -261,22 +237,16 @@ __all__ = [
     "TransferValidationErrorData",
     "UpdateCardError",
     "UpdateCardErrorData",
-    "UpdateInvoiceError",
-    "UpdateInvoiceErrorData",
     "UpdateIssuedCardError",
     "UpdateIssuedCardErrorData",
     "UpdatePaymentLinkError",
     "UpdatePaymentLinkErrorData",
-    "UpdateTicketError",
-    "UpdateTicketErrorData",
     "UpdateUnderwritingError",
     "UpdateUnderwritingErrorData",
     "UpdateUnderwritingErrorError",
     "UpdateUnderwritingErrorErrorTypedDict",
     "UpdateWebhookValidationError",
     "UpdateWebhookValidationErrorData",
-    "UpsertUnderwritingError",
-    "UpsertUnderwritingErrorData",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -299,16 +269,10 @@ _dynamic_imports: dict[str, str] = {
     "ConnectAccountRequestValidationErrorData": ".connectaccountrequestvalidationerror",
     "CreateAccountError": ".createaccounterror",
     "CreateAccountErrorData": ".createaccounterror",
-    "CreateInvoiceError": ".createinvoiceerror",
-    "CreateInvoiceErrorData": ".createinvoiceerror",
-    "CreateInvoicePaymentError": ".createinvoicepaymenterror",
-    "CreateInvoicePaymentErrorData": ".createinvoicepaymenterror",
     "CreatePaymentLinkError": ".createpaymentlinkerror",
     "CreatePaymentLinkErrorData": ".createpaymentlinkerror",
     "CreateSweepConfigError": ".createsweepconfigerror",
     "CreateSweepConfigErrorData": ".createsweepconfigerror",
-    "CreateTicketError": ".createticketerror",
-    "CreateTicketErrorData": ".createticketerror",
     "CreateWalletValidationError": ".createwalletvalidationerror",
     "CreateWalletValidationErrorData": ".createwalletvalidationerror",
     "CreateWebhookValidationError": ".createwebhookvalidationerror",
@@ -331,8 +295,6 @@ _dynamic_imports: dict[str, str] = {
     "LinkApplePayErrorData": ".linkapplepayerror",
     "LinkCardError": ".linkcarderror",
     "LinkCardErrorData": ".linkcarderror",
-    "ListInvoicesValidationError": ".listinvoicesvalidationerror",
-    "ListInvoicesValidationErrorData": ".listinvoicesvalidationerror",
     "ListTransfersValidationError": ".listtransfersvalidationerror",
     "ListTransfersValidationErrorData": ".listtransfersvalidationerror",
     "ListWalletsValidationError": ".listwalletsvalidationerror",
@@ -379,22 +341,16 @@ _dynamic_imports: dict[str, str] = {
     "TransferValidationErrorData": ".transfervalidationerror",
     "UpdateCardError": ".updatecarderror",
     "UpdateCardErrorData": ".updatecarderror",
-    "UpdateInvoiceError": ".updateinvoiceerror",
-    "UpdateInvoiceErrorData": ".updateinvoiceerror",
     "UpdateIssuedCardError": ".updateissuedcarderror",
     "UpdateIssuedCardErrorData": ".updateissuedcarderror",
     "UpdatePaymentLinkError": ".updatepaymentlinkerror",
     "UpdatePaymentLinkErrorData": ".updatepaymentlinkerror",
-    "UpdateTicketError": ".updateticketerror",
-    "UpdateTicketErrorData": ".updateticketerror",
     "UpdateUnderwritingError": ".updateunderwritingerror",
     "UpdateUnderwritingErrorData": ".updateunderwritingerror",
     "UpdateUnderwritingErrorError": ".updateunderwritingerror",
     "UpdateUnderwritingErrorErrorTypedDict": ".updateunderwritingerror",
     "UpdateWebhookValidationError": ".updatewebhookvalidationerror",
     "UpdateWebhookValidationErrorData": ".updatewebhookvalidationerror",
-    "UpsertUnderwritingError": ".upsertunderwritingerror",
-    "UpsertUnderwritingErrorData": ".upsertunderwritingerror",
 }
 
 
