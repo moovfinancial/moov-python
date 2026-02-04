@@ -26,11 +26,6 @@ if TYPE_CHECKING:
         ConnectAccountRequestValidationErrorData,
     )
     from .createaccounterror import CreateAccountError, CreateAccountErrorData
-    from .createinvoiceerror import CreateInvoiceError, CreateInvoiceErrorData
-    from .createinvoicepaymenterror import (
-        CreateInvoicePaymentError,
-        CreateInvoicePaymentErrorData,
-    )
     from .createpaymentlinkerror import (
         CreatePaymentLinkError,
         CreatePaymentLinkErrorData,
@@ -67,10 +62,6 @@ if TYPE_CHECKING:
     )
     from .linkapplepayerror import LinkApplePayError, LinkApplePayErrorData
     from .linkcarderror import LinkCardError, LinkCardErrorData
-    from .listinvoicesvalidationerror import (
-        ListInvoicesValidationError,
-        ListInvoicesValidationErrorData,
-    )
     from .listtransfersvalidationerror import (
         ListTransfersValidationError,
         ListTransfersValidationErrorData,
@@ -138,7 +129,6 @@ if TYPE_CHECKING:
         TransferValidationErrorData,
     )
     from .updatecarderror import UpdateCardError, UpdateCardErrorData
-    from .updateinvoiceerror import UpdateInvoiceError, UpdateInvoiceErrorData
     from .updateissuedcarderror import UpdateIssuedCardError, UpdateIssuedCardErrorData
     from .updatepaymentlinkerror import (
         UpdatePaymentLinkError,
@@ -180,10 +170,6 @@ __all__ = [
     "ConnectAccountRequestValidationErrorData",
     "CreateAccountError",
     "CreateAccountErrorData",
-    "CreateInvoiceError",
-    "CreateInvoiceErrorData",
-    "CreateInvoicePaymentError",
-    "CreateInvoicePaymentErrorData",
     "CreatePaymentLinkError",
     "CreatePaymentLinkErrorData",
     "CreateSweepConfigError",
@@ -214,8 +200,6 @@ __all__ = [
     "LinkApplePayErrorData",
     "LinkCardError",
     "LinkCardErrorData",
-    "ListInvoicesValidationError",
-    "ListInvoicesValidationErrorData",
     "ListTransfersValidationError",
     "ListTransfersValidationErrorData",
     "ListWalletTransactionsValidationError",
@@ -261,8 +245,6 @@ __all__ = [
     "TransferValidationErrorData",
     "UpdateCardError",
     "UpdateCardErrorData",
-    "UpdateInvoiceError",
-    "UpdateInvoiceErrorData",
     "UpdateIssuedCardError",
     "UpdateIssuedCardErrorData",
     "UpdatePaymentLinkError",
@@ -299,10 +281,6 @@ _dynamic_imports: dict[str, str] = {
     "ConnectAccountRequestValidationErrorData": ".connectaccountrequestvalidationerror",
     "CreateAccountError": ".createaccounterror",
     "CreateAccountErrorData": ".createaccounterror",
-    "CreateInvoiceError": ".createinvoiceerror",
-    "CreateInvoiceErrorData": ".createinvoiceerror",
-    "CreateInvoicePaymentError": ".createinvoicepaymenterror",
-    "CreateInvoicePaymentErrorData": ".createinvoicepaymenterror",
     "CreatePaymentLinkError": ".createpaymentlinkerror",
     "CreatePaymentLinkErrorData": ".createpaymentlinkerror",
     "CreateSweepConfigError": ".createsweepconfigerror",
@@ -331,8 +309,6 @@ _dynamic_imports: dict[str, str] = {
     "LinkApplePayErrorData": ".linkapplepayerror",
     "LinkCardError": ".linkcarderror",
     "LinkCardErrorData": ".linkcarderror",
-    "ListInvoicesValidationError": ".listinvoicesvalidationerror",
-    "ListInvoicesValidationErrorData": ".listinvoicesvalidationerror",
     "ListTransfersValidationError": ".listtransfersvalidationerror",
     "ListTransfersValidationErrorData": ".listtransfersvalidationerror",
     "ListWalletsValidationError": ".listwalletsvalidationerror",
@@ -379,8 +355,6 @@ _dynamic_imports: dict[str, str] = {
     "TransferValidationErrorData": ".transfervalidationerror",
     "UpdateCardError": ".updatecarderror",
     "UpdateCardErrorData": ".updatecarderror",
-    "UpdateInvoiceError": ".updateinvoiceerror",
-    "UpdateInvoiceErrorData": ".updateinvoiceerror",
     "UpdateIssuedCardError": ".updateissuedcarderror",
     "UpdateIssuedCardErrorData": ".updateissuedcarderror",
     "UpdatePaymentLinkError": ".updatepaymentlinkerror",
