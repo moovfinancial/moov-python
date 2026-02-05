@@ -27,7 +27,9 @@ class CreatePaymentLinkLineItemTypedDict(TypedDict):
     image_i_ds: NotRequired[List[str]]
     r"""Optional list of images associated with this line item."""
     product_id: NotRequired[str]
-    r"""Optional unique identifier associating the line item with a product."""
+    r"""Optional unique identifier associating the line item with a product.
+    This is for reporting or tracking purposes, and does not populate other details of the line item.
+    """
 
 
 class CreatePaymentLinkLineItem(BaseModel):
@@ -49,7 +51,9 @@ class CreatePaymentLinkLineItem(BaseModel):
     r"""Optional list of images associated with this line item."""
 
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None
-    r"""Optional unique identifier associating the line item with a product."""
+    r"""Optional unique identifier associating the line item with a product.
+    This is for reporting or tracking purposes, and does not populate other details of the line item.
+    """
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

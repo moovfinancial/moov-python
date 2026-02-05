@@ -24,7 +24,9 @@ class InvoiceLineItemTypedDict(TypedDict):
     quantity: int
     r"""The quantity of this item."""
     product_id: NotRequired[str]
-    r"""Optional unique identifier associating the line item with a product."""
+    r"""Optional unique identifier associating the line item with a product.
+    This is for reporting or tracking purposes, and does not populate other details of the line item.
+    """
     options: NotRequired[List[InvoiceLineItemOptionTypedDict]]
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
     images: NotRequired[List[InvoiceLineItemImageMetadataTypedDict]]
@@ -44,7 +46,9 @@ class InvoiceLineItem(BaseModel):
     r"""The quantity of this item."""
 
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None
-    r"""Optional unique identifier associating the line item with a product."""
+    r"""Optional unique identifier associating the line item with a product.
+    This is for reporting or tracking purposes, and does not populate other details of the line item.
+    """
 
     options: Optional[List[InvoiceLineItemOption]] = None
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
