@@ -29,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 25.10.0
+  version: 25.10.1
   additionalDependencies:
     dev: {}
     main: {}
@@ -54,6 +54,7 @@ python:
   flattenGlobalSecurity: true
   flattenRequests: true
   flatteningOrder: parameters-first
+  forwardCompatibleEnumsByDefault: false
   homepage: https://moov.io/
   imports:
     option: openapi
