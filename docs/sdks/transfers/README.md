@@ -142,9 +142,67 @@ Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/o
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-### Example Usage
+### Example Usage: Created async transfer
 
-<!-- UsageSnippet language="python" operationID="createTransfer" method="post" path="/accounts/{accountID}/transfers" -->
+<!-- UsageSnippet language="python" operationID="createTransfer" method="post" path="/accounts/{accountID}/transfers" example="Created async transfer" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="v2024.01.00",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.create(x_idempotency_key="6de5561f-5a9f-4bd3-a458-ce0baacae20d", account_id="d5696c5b-7106-4093-8a7d-faa71dda002c", source={
+        "payment_method_id": "9506dbf6-4208-44c3-ad8a-e4431660e1f2",
+    }, destination={
+        "payment_method_id": "3f9969cf-a1f3-4d83-8ddc-229a506651cf",
+    }, amount={
+        "currency": "USD",
+        "value": 32945,
+    }, facilitator_fee={
+        "total_decimal": "12.987654321",
+        "markup_decimal": "0.987654321",
+    }, description="Transfer from card to wallet", metadata={
+        "optional": "metadata",
+    }, sales_tax_amount={
+        "currency": "USD",
+        "value": 1204,
+    }, line_items={
+        "items": [
+            {
+                "name": "<value>",
+                "base_price": {
+                    "currency": "USD",
+                    "value_decimal": "12.987654321",
+                },
+                "quantity": 666094,
+                "options": [
+                    {
+                        "name": "<value>",
+                        "quantity": 611009,
+                        "price_modifier": {
+                            "currency": "USD",
+                            "value_decimal": "12.987654321",
+                        },
+                    },
+                ],
+            },
+        ],
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Created synchronous transfer
+
+<!-- UsageSnippet language="python" operationID="createTransfer" method="post" path="/accounts/{accountID}/transfers" example="Created synchronous transfer" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -414,7 +472,7 @@ with Moov(
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createCancellation" method="post" path="/accounts/{accountID}/transfers/{transferID}/cancellations" -->
+<!-- UsageSnippet language="python" operationID="createCancellation" method="post" path="/accounts/{accountID}/transfers/{transferID}/cancellations" example="Created cancellation" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -461,9 +519,31 @@ with Moov(
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
   to specify the `/accounts/{accountID}/transfers.read` scope.
 
-### Example Usage
+### Example Usage: Cancellation
 
-<!-- UsageSnippet language="python" operationID="getCancellation" method="get" path="/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}" -->
+<!-- UsageSnippet language="python" operationID="getCancellation" method="get" path="/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}" example="Cancellation" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="v2024.01.00",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.get_cancellation(account_id="55cb62c2-22e4-4a36-bd53-3b9adc77ee81", transfer_id="bc13b680-bac3-432e-bf44-e9aa6426cbb2", cancellation_id="770cb4b5-d5b0-4e8b-995b-86b790296ba5")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Got cancellation
+
+<!-- UsageSnippet language="python" operationID="getCancellation" method="get" path="/accounts/{accountID}/transfers/{transferID}/cancellations/{cancellationID}" example="Got cancellation" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -513,9 +593,9 @@ See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/c
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
-### Example Usage
+### Example Usage: Successful async refund
 
-<!-- UsageSnippet language="python" operationID="initiateRefund" method="post" path="/accounts/{accountID}/transfers/{transferID}/refunds" -->
+<!-- UsageSnippet language="python" operationID="initiateRefund" method="post" path="/accounts/{accountID}/transfers/{transferID}/refunds" example="Successful async refund" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -530,6 +610,28 @@ with Moov(
 ) as moov:
 
     res = moov.transfers.initiate_refund(x_idempotency_key="8d9af6b8-67e1-4efa-8188-68039f34097d", account_id="cb6ae9f9-afab-4f06-9eb0-8abf54a3ada2", transfer_id="04022119-95be-4ef4-9dd4-b3782f6aa7b9", amount=1000)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Successful sync refund
+
+<!-- UsageSnippet language="python" operationID="initiateRefund" method="post" path="/accounts/{accountID}/transfers/{transferID}/refunds" example="Successful sync refund" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="v2024.01.00",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.initiate_refund(x_idempotency_key="4e7a906a-e6d1-4bca-9cc5-6246295ef93c", account_id="d12ddb6e-0ed9-44e8-92a7-1716ae7cc759", transfer_id="d73be489-9da4-4be7-bc04-147d8552279d", amount=1000)
 
     # Handle response
     print(res)
@@ -666,9 +768,31 @@ to learn more.
 To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
 to specify the `/accounts/{accountID}/transfers.write` scope.
 
-### Example Usage
+### Example Usage: Reversed by cancellation
 
-<!-- UsageSnippet language="python" operationID="createReversal" method="post" path="/accounts/{accountID}/transfers/{transferID}/reversals" -->
+<!-- UsageSnippet language="python" operationID="createReversal" method="post" path="/accounts/{accountID}/transfers/{transferID}/reversals" example="Reversed by cancellation" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    x_moov_version="v2024.01.00",
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.create_reversal(x_idempotency_key="93d03831-45c4-49ec-a9b2-88cbd41dfca7", account_id="c5fade57-7e5a-4380-ac7b-4abf8b3c24cf", transfer_id="82c6eae7-b7e5-4b20-b24e-5116a4d70bde", amount=1000)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Reversed by refund
+
+<!-- UsageSnippet language="python" operationID="createReversal" method="post" path="/accounts/{accountID}/transfers/{transferID}/reversals" example="Reversed by refund" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
