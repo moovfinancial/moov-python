@@ -25,7 +25,9 @@ class CreateScheduledTransferLineItemTypedDict(TypedDict):
     options: NotRequired[List[CreateScheduledTransferLineItemOptionTypedDict]]
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
     product_id: NotRequired[str]
-    r"""Optional unique identifier associating the line item with a product."""
+    r"""Optional unique identifier associating the line item with a product.
+    This is for reporting or tracking purposes, and does not populate other details of the line item.
+    """
     image_i_ds: NotRequired[List[str]]
     r"""Optional list of images associated with this line item."""
 
@@ -46,7 +48,9 @@ class CreateScheduledTransferLineItem(BaseModel):
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
 
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None
-    r"""Optional unique identifier associating the line item with a product."""
+    r"""Optional unique identifier associating the line item with a product.
+    This is for reporting or tracking purposes, and does not populate other details of the line item.
+    """
 
     image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
     r"""Optional list of images associated with this line item."""
