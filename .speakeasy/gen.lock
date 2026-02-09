@@ -3,17 +3,17 @@ id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
   docChecksum: e055531436d26761f58055b1616d577b
   docVersion: v2025.04.00
-  speakeasyVersion: 1.708.0
-  generationVersion: 2.811.2
-  releaseVersion: 25.4.2
-  configChecksum: d19911cf4fae1d46556ad9fed547c6f3
+  speakeasyVersion: 1.709.1
+  generationVersion: 2.812.2
+  releaseVersion: 25.4.3
+  configChecksum: e74ccaf5e65522cdc9efd29799030dd5
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: f8f8b508-6b9e-4c03-a453-abb36dc8fa06
-  pristine_commit_hash: e1377c45bc1c8a8ee5b58b1819638afe3f974acc
-  pristine_tree_hash: bb05c8d39b4ca459e3ca52e7bd6da207e5acf6b1
+  generation_id: 6509cf5a-5c3d-4f97-bfc4-47feb6ee0d91
+  pristine_commit_hash: d66f20d27d868595d5fce15741e5ca9348a96c0b
+  pristine_tree_hash: 71dbbc3cb7cd75e88d20825081e6b9bab0ad27fe
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4530,8 +4530,8 @@ trackedFiles:
     pristine_git_object: 67032e59a75c386c27ba1da8e133e59ccc90bb96
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:bab86e2bc753a9fff7f788cc1790549043578ec7
-    pristine_git_object: a1fce51e7ed559eae2ab337aa1e02da8294684dc
+    last_write_checksum: sha1:8f54542762ac234acc65ac421282a28f5f3b3e32
+    pristine_git_object: 18494497a41539b18b626ee60054340c98bb1d1c
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4558,8 +4558,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:623f46cbbd3ee201672538e38c81cbf15bac4165
-    pristine_git_object: b55d04703ccd1c6b7834820c65cab3c30ac7fbce
+    last_write_checksum: sha1:ee3f858d2bd9626fa491656e5b7d804231f2c606
+    pristine_git_object: 6a235d0803d3036c7727753568cc64e0c81df6b6
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
