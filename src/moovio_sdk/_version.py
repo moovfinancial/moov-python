@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "moovio_sdk"
-__version__: str = "24.1.2"
+__version__: str = "24.1.3"
 __openapi_doc_version__: str = "v2024.01.00"
-__gen_version__: str = "2.811.2"
-__user_agent__: str = "speakeasy-sdk/python 24.1.2 2.811.2 v2024.01.00 moovio_sdk"
+__gen_version__: str = "2.812.2"
+__user_agent__: str = "speakeasy-sdk/python 24.1.3 2.812.2 v2024.01.00 moovio_sdk"
 
 try:
     if __package__ is not None:
