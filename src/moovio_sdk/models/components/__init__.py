@@ -350,6 +350,14 @@ if TYPE_CHECKING:
         CreateInvoiceLineItem,
         CreateInvoiceLineItemTypedDict,
     )
+    from .createinvoicelineitemimage import (
+        CreateInvoiceLineItemImage,
+        CreateInvoiceLineItemImageTypedDict,
+    )
+    from .createinvoicelineitemimagevalidationerror import (
+        CreateInvoiceLineItemImageValidationError,
+        CreateInvoiceLineItemImageValidationErrorTypedDict,
+    )
     from .createinvoicelineitemoption import (
         CreateInvoiceLineItemOption,
         CreateInvoiceLineItemOptionTypedDict,
@@ -664,6 +672,10 @@ if TYPE_CHECKING:
     from .invoicelineitemimagemetadata import (
         InvoiceLineItemImageMetadata,
         InvoiceLineItemImageMetadataTypedDict,
+    )
+    from .invoicelineitemimagevalidationerror import (
+        InvoiceLineItemImageValidationError,
+        InvoiceLineItemImageValidationErrorTypedDict,
     )
     from .invoicelineitemoption import (
         InvoiceLineItemOption,
@@ -1641,6 +1653,10 @@ __all__ = [
     "CreateIndividualProfileTypedDict",
     "CreateInvoice",
     "CreateInvoiceLineItem",
+    "CreateInvoiceLineItemImage",
+    "CreateInvoiceLineItemImageTypedDict",
+    "CreateInvoiceLineItemImageValidationError",
+    "CreateInvoiceLineItemImageValidationErrorTypedDict",
     "CreateInvoiceLineItemOption",
     "CreateInvoiceLineItemOptionTypedDict",
     "CreateInvoiceLineItemOptionValidationError",
@@ -1884,6 +1900,8 @@ __all__ = [
     "InvoiceLineItem",
     "InvoiceLineItemImageMetadata",
     "InvoiceLineItemImageMetadataTypedDict",
+    "InvoiceLineItemImageValidationError",
+    "InvoiceLineItemImageValidationErrorTypedDict",
     "InvoiceLineItemOption",
     "InvoiceLineItemOptionTypedDict",
     "InvoiceLineItemOptionValidationError",
@@ -2752,6 +2770,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateInvoiceTypedDict": ".createinvoice",
     "CreateInvoiceLineItem": ".createinvoicelineitem",
     "CreateInvoiceLineItemTypedDict": ".createinvoicelineitem",
+    "CreateInvoiceLineItemImage": ".createinvoicelineitemimage",
+    "CreateInvoiceLineItemImageTypedDict": ".createinvoicelineitemimage",
+    "CreateInvoiceLineItemImageValidationError": ".createinvoicelineitemimagevalidationerror",
+    "CreateInvoiceLineItemImageValidationErrorTypedDict": ".createinvoicelineitemimagevalidationerror",
     "CreateInvoiceLineItemOption": ".createinvoicelineitemoption",
     "CreateInvoiceLineItemOptionTypedDict": ".createinvoicelineitemoption",
     "CreateInvoiceLineItemOptionValidationError": ".createinvoicelineitemoptionvalidationerror",
@@ -2991,6 +3013,8 @@ _dynamic_imports: dict[str, str] = {
     "InvoiceLineItemTypedDict": ".invoicelineitem",
     "InvoiceLineItemImageMetadata": ".invoicelineitemimagemetadata",
     "InvoiceLineItemImageMetadataTypedDict": ".invoicelineitemimagemetadata",
+    "InvoiceLineItemImageValidationError": ".invoicelineitemimagevalidationerror",
+    "InvoiceLineItemImageValidationErrorTypedDict": ".invoicelineitemimagevalidationerror",
     "InvoiceLineItemOption": ".invoicelineitemoption",
     "InvoiceLineItemOptionTypedDict": ".invoicelineitemoption",
     "InvoiceLineItemOptionValidationError": ".invoicelineitemoptionvalidationerror",

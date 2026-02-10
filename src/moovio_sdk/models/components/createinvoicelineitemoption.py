@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+from .createinvoicelineitemimage import (
+    CreateInvoiceLineItemImage,
+    CreateInvoiceLineItemImageTypedDict,
+)
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -20,8 +24,8 @@ class CreateInvoiceLineItemOptionTypedDict(TypedDict):
     r"""Optional price modification applied by this option. Can be positive, negative, or zero."""
     group: NotRequired[str]
     r"""Optional group identifier to categorize related options (e.g., 'toppings')."""
-    image_i_ds: NotRequired[List[str]]
-    r"""Optional list of images associated with this line item."""
+    images: NotRequired[List[CreateInvoiceLineItemImageTypedDict]]
+    r"""Optional list of images associated with this line item option."""
 
 
 class CreateInvoiceLineItemOption(BaseModel):
@@ -41,12 +45,12 @@ class CreateInvoiceLineItemOption(BaseModel):
     group: Optional[str] = None
     r"""Optional group identifier to categorize related options (e.g., 'toppings')."""
 
-    image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
-    r"""Optional list of images associated with this line item."""
+    images: Optional[List[CreateInvoiceLineItemImage]] = None
+    r"""Optional list of images associated with this line item option."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["priceModifier", "group", "imageIDs"])
+        optional_fields = set(["priceModifier", "group", "images"])
         serialized = handler(self)
         m = {}
 

@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+from .createinvoicelineitemimage import (
+    CreateInvoiceLineItemImage,
+    CreateInvoiceLineItemImageTypedDict,
+)
 from .createinvoicelineitemoption import (
     CreateInvoiceLineItemOption,
     CreateInvoiceLineItemOptionTypedDict,
@@ -28,7 +32,7 @@ class CreateInvoiceLineItemTypedDict(TypedDict):
     """
     options: NotRequired[List[CreateInvoiceLineItemOptionTypedDict]]
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
-    image_i_ds: NotRequired[List[str]]
+    images: NotRequired[List[CreateInvoiceLineItemImageTypedDict]]
     r"""Optional list of images associated with this line item."""
 
 
@@ -52,12 +56,12 @@ class CreateInvoiceLineItem(BaseModel):
     options: Optional[List[CreateInvoiceLineItemOption]] = None
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
 
-    image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
+    images: Optional[List[CreateInvoiceLineItemImage]] = None
     r"""Optional list of images associated with this line item."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["productID", "options", "imageIDs"])
+        optional_fields = set(["productID", "options", "images"])
         serialized = handler(self)
         m = {}
 

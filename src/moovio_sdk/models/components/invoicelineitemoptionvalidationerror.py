@@ -5,10 +5,14 @@ from .amountdecimalvalidationerror import (
     AmountDecimalValidationError,
     AmountDecimalValidationErrorTypedDict,
 )
+from .invoicelineitemimagevalidationerror import (
+    InvoiceLineItemImageValidationError,
+    InvoiceLineItemImageValidationErrorTypedDict,
+)
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -17,6 +21,7 @@ class InvoiceLineItemOptionValidationErrorTypedDict(TypedDict):
     group: NotRequired[str]
     price_modifier: NotRequired[AmountDecimalValidationErrorTypedDict]
     quantity: NotRequired[str]
+    images: NotRequired[Dict[str, InvoiceLineItemImageValidationErrorTypedDict]]
 
 
 class InvoiceLineItemOptionValidationError(BaseModel):
@@ -30,9 +35,11 @@ class InvoiceLineItemOptionValidationError(BaseModel):
 
     quantity: Optional[str] = None
 
+    images: Optional[Dict[str, InvoiceLineItemImageValidationError]] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "group", "priceModifier", "quantity"])
+        optional_fields = set(["name", "group", "priceModifier", "quantity", "images"])
         serialized = handler(self)
         m = {}
 

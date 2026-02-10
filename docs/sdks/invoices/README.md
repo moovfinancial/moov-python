@@ -39,7 +39,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createInvoice" method="post" path="/accounts/{accountID}/invoices" -->
+<!-- UsageSnippet language="python" operationID="createInvoice" method="post" path="/accounts/{accountID}/invoices" example="Created invoice" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -54,7 +54,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.invoices.create_invoice(account_id="241bf524-e777-4941-a5e4-d7f3f34d7a00", customer_account_id="3dfff852-927d-47e8-822c-2fffc57ff6b9", line_items={
+    res = moov.invoices.create_invoice(account_id="c463fb80-6410-48b7-9e2e-6e9ec58a654f", customer_account_id="3dfff852-927d-47e8-822c-2fffc57ff6b9", line_items={
         "items": [
             {
                 "name": "Professional Services",
@@ -109,7 +109,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listInvoices" method="get" path="/accounts/{accountID}/invoices" -->
+<!-- UsageSnippet language="python" operationID="listInvoices" method="get" path="/accounts/{accountID}/invoices" example="Invoices" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -165,7 +165,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getInvoice" method="get" path="/accounts/{accountID}/invoices/{invoiceID}" -->
+<!-- UsageSnippet language="python" operationID="getInvoice" method="get" path="/accounts/{accountID}/invoices/{invoiceID}" example="Invoice" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -213,7 +213,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="updateInvoice" method="patch" path="/accounts/{accountID}/invoices/{invoiceID}" -->
+<!-- UsageSnippet language="python" operationID="updateInvoice" method="patch" path="/accounts/{accountID}/invoices/{invoiceID}" example="Updated invoice" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -228,7 +228,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.invoices.update_invoice(account_id="ce46d65a-8504-4afa-b3f7-303401bd08b3", invoice_id="ef510999-370a-4350-87d5-bc81fc02a2ea", description="Updated professional services for Q1 2026", line_items={
+    res = moov.invoices.update_invoice(account_id="fcce46d6-5a85-404a-afa3-f7303401bd08", invoice_id="3eef5109-9937-40a3-b507-d5bc81fc02a2", description="Updated professional services for Q1 2026", line_items={
         "items": [
             {
                 "name": "Professional Services",
@@ -285,7 +285,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="createInvoicePayment" method="post" path="/accounts/{accountID}/invoices/{invoiceID}/payments" -->
+<!-- UsageSnippet language="python" operationID="createInvoicePayment" method="post" path="/accounts/{accountID}/invoices/{invoiceID}/payments" example="External payment" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -343,7 +343,7 @@ you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="listInvoicePayments" method="get" path="/accounts/{accountID}/invoices/{invoiceID}/payments" -->
+<!-- UsageSnippet language="python" operationID="listInvoicePayments" method="get" path="/accounts/{accountID}/invoices/{invoiceID}/payments" example="Payments" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
