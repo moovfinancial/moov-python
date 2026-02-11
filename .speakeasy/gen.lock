@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: cc80f10359795be83a3e905ba3bfdc75
+  docChecksum: 61e8b203470de9155b3300c32b95c094
   docVersion: latest
-  speakeasyVersion: 1.709.1
-  generationVersion: 2.812.2
-  releaseVersion: 0.21.2
-  configChecksum: 55beb291e6b2c1b36d132e63c1abca2c
+  speakeasyVersion: 1.709.4
+  generationVersion: 2.816.0
+  releaseVersion: 0.21.3
+  configChecksum: 2dae5e309f2fffd9da8721d95ca3db3a
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 812df24f-4ae0-4a93-af85-9c0f227aaa2d
-  pristine_commit_hash: edab3bba2fd95b4b7021f87243d293a454f0dbc6
-  pristine_tree_hash: eec865829e8fdfc9cef51045756762667275247f
+  generation_id: 06f67242-d0cd-4549-a801-f20718c7fb5c
+  pristine_commit_hash: 3b38097e27e2c587333b2063ef62d76bb0d97bc9
+  pristine_tree_hash: 24c9d72f5610c01444dbddc0cb39cdd0ec8dde00
 features:
   python:
     acceptHeaders: 3.0.0
@@ -3026,8 +3026,8 @@ trackedFiles:
     pristine_git_object: 452d2e31567046f7ecfa5ba79e28c7feae9951f9
   docs/models/operations/createtransferrequest.md:
     id: 479572132ed9
-    last_write_checksum: sha1:0fbc71b24880237c9bd18215f92b0311f8f77bec
-    pristine_git_object: 5765f350904b7d91d16edfb85fdd1d297675f88c
+    last_write_checksum: sha1:4b94f96d720392fc8f74d38ab204df1e0fa74709
+    pristine_git_object: 3c7936e203851686f6de487580f75e3320b83f5f
   docs/models/operations/createtransferresponse.md:
     id: 1fdce9316bfb
     last_write_checksum: sha1:63fad22496de133cdc31f0467533081f601bca33
@@ -3622,8 +3622,8 @@ trackedFiles:
     pristine_git_object: 18b2c53a79fd7e842e442b755b39945e7de765aa
   docs/models/operations/getscheduledoccurrencerequest.md:
     id: 8f9abb149231
-    last_write_checksum: sha1:ffffec45756b9b6da241fa2e80dd758642ba6159
-    pristine_git_object: 2c15d709b5b3aa1dde05e1cbac298f91bdedaa68
+    last_write_checksum: sha1:d525b8e13a4bb3cdbf4d3cb0222185fab4ca0d8e
+    pristine_git_object: 4cf9aee087172d5738bd323d73b280bfb989e264
   docs/models/operations/getscheduledoccurrenceresponse.md:
     id: 65bce9a03389
     last_write_checksum: sha1:1c2d38ca6a79befd9e44a94c3f7779f789bbfdc4
@@ -4970,8 +4970,8 @@ trackedFiles:
     pristine_git_object: 27e328e9ff417d04e28f7bfe4fb98f5e44186f9f
   docs/sdks/scheduling/README.md:
     id: 0508024015b4
-    last_write_checksum: sha1:8d993825ce7c70db02d0bf01a1f8a159fdefc75b
-    pristine_git_object: 36390f655365845dca3f892d79012571ac8d6ffd
+    last_write_checksum: sha1:688953ce2f8750a05109a8deef3c1a2ac875cdca
+    pristine_git_object: 80279af3c85122c51cf9f44ad63f562e72899f45
   docs/sdks/statements/README.md:
     id: 077d45e19c3c
     last_write_checksum: sha1:a9e45e2979ee02fafa06374773fe0b668ac3c2a9
@@ -4990,8 +4990,8 @@ trackedFiles:
     pristine_git_object: dd55895f59d9dc3c2a2d040323a4529f5c62da74
   docs/sdks/transfers/README.md:
     id: f56918861798
-    last_write_checksum: sha1:7a63296b5cd505c0f2e7272b836628ca2999ba73
-    pristine_git_object: 7cb2a7261ac31a3849dac6c0365bbe35871ad813
+    last_write_checksum: sha1:36766c2882e85642bc99f682381f8e75793d0678
+    pristine_git_object: 711d1bd0f2ef9141df9d8b9741c58e6a701ef732
   docs/sdks/underwriting/README.md:
     id: ef972250826e
     last_write_checksum: sha1:bac1f0e413f56e9aa00281ae6a39e1de71330f25
@@ -5022,8 +5022,8 @@ trackedFiles:
     pristine_git_object: 67032e59a75c386c27ba1da8e133e59ccc90bb96
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:ba94c257a2e8808ef2f38765ae3861f5334860bf
-    pristine_git_object: d2866ed1349f15143129b3e35dcb0ddb2c9bf279
+    last_write_checksum: sha1:4bd3bf1bd826de1e61477cd4d7a93c99cc9a2355
+    pristine_git_object: 22490243131fe191fcd261bad41dd0488b18e643
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -5050,8 +5050,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:14f4e230914045076f51c0d45eb0eb4381ed086c
-    pristine_git_object: 91e76b1fba134d6f324b7cc67f7e833dd529f827
+    last_write_checksum: sha1:6c9b7fe969419d9e8d2e335d8cda37cf6a78d9f5
+    pristine_git_object: 7211a06c88d310ec282536e908871808a8630e4c
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
@@ -11246,7 +11246,6 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `moov.invoices.create_invoice()`: \n  *  `request.line_items.items[]` **Changed** (Breaking ⚠️)\n  *  `error.line_items.items.Map<CreateInvoiceLineItemValidationError>` **Changed**\n* `moov.invoices.update_invoice()`: \n  *  `request.line_items.items[]` **Changed** (Breaking ⚠️)\n  *  `error.line_items.items.Map<InvoiceLineItemValidationError>` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
