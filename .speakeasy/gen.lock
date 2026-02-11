@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 43e39dd65ba0e67572dde59ce81f8788
+  docChecksum: 0913f34fed65ef412ef52d392afa46d4
   docVersion: v2025.07.00
-  speakeasyVersion: 1.709.3
-  generationVersion: 2.814.0
-  releaseVersion: 25.7.4
-  configChecksum: 1301423dc0cc4cf18521915a0c157b87
+  speakeasyVersion: 1.709.4
+  generationVersion: 2.816.0
+  releaseVersion: 25.7.5
+  configChecksum: e5c7ce34116d438bdcf091319abcb25e
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 1394b1f6-81d2-4cc0-84a7-3f651df02fb0
-  pristine_commit_hash: 942129baf1a8c788e77c25e471acbb8b5ce44883
-  pristine_tree_hash: 406ce682824e4ee90838de62aaa2134c5b23bb91
+  generation_id: 32da72b4-81ed-4e86-bc52-2b5103de2680
+  pristine_commit_hash: 8f2c8fbe1fcc1bbe5ca848a8572ca0d784e2abcb
+  pristine_tree_hash: d0e6dbcd70a5a87f9bd60009663d90b40ca9793e
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2874,8 +2874,8 @@ trackedFiles:
     pristine_git_object: 452d2e31567046f7ecfa5ba79e28c7feae9951f9
   docs/models/operations/createtransferrequest.md:
     id: 479572132ed9
-    last_write_checksum: sha1:0fbc71b24880237c9bd18215f92b0311f8f77bec
-    pristine_git_object: 5765f350904b7d91d16edfb85fdd1d297675f88c
+    last_write_checksum: sha1:4b94f96d720392fc8f74d38ab204df1e0fa74709
+    pristine_git_object: 3c7936e203851686f6de487580f75e3320b83f5f
   docs/models/operations/createtransferresponse.md:
     id: 1fdce9316bfb
     last_write_checksum: sha1:63fad22496de133cdc31f0467533081f601bca33
@@ -3458,8 +3458,8 @@ trackedFiles:
     pristine_git_object: 18b2c53a79fd7e842e442b755b39945e7de765aa
   docs/models/operations/getscheduledoccurrencerequest.md:
     id: 8f9abb149231
-    last_write_checksum: sha1:ffffec45756b9b6da241fa2e80dd758642ba6159
-    pristine_git_object: 2c15d709b5b3aa1dde05e1cbac298f91bdedaa68
+    last_write_checksum: sha1:d525b8e13a4bb3cdbf4d3cb0222185fab4ca0d8e
+    pristine_git_object: 4cf9aee087172d5738bd323d73b280bfb989e264
   docs/models/operations/getscheduledoccurrenceresponse.md:
     id: 65bce9a03389
     last_write_checksum: sha1:1c2d38ca6a79befd9e44a94c3f7779f789bbfdc4
@@ -4766,8 +4766,8 @@ trackedFiles:
     pristine_git_object: 27e328e9ff417d04e28f7bfe4fb98f5e44186f9f
   docs/sdks/scheduling/README.md:
     id: 0508024015b4
-    last_write_checksum: sha1:8d993825ce7c70db02d0bf01a1f8a159fdefc75b
-    pristine_git_object: 36390f655365845dca3f892d79012571ac8d6ffd
+    last_write_checksum: sha1:688953ce2f8750a05109a8deef3c1a2ac875cdca
+    pristine_git_object: 80279af3c85122c51cf9f44ad63f562e72899f45
   docs/sdks/statements/README.md:
     id: 077d45e19c3c
     last_write_checksum: sha1:a9e45e2979ee02fafa06374773fe0b668ac3c2a9
@@ -4786,8 +4786,8 @@ trackedFiles:
     pristine_git_object: dd55895f59d9dc3c2a2d040323a4529f5c62da74
   docs/sdks/transfers/README.md:
     id: f56918861798
-    last_write_checksum: sha1:7a63296b5cd505c0f2e7272b836628ca2999ba73
-    pristine_git_object: 7cb2a7261ac31a3849dac6c0365bbe35871ad813
+    last_write_checksum: sha1:36766c2882e85642bc99f682381f8e75793d0678
+    pristine_git_object: 711d1bd0f2ef9141df9d8b9741c58e6a701ef732
   docs/sdks/underwriting/README.md:
     id: ef972250826e
     last_write_checksum: sha1:bac1f0e413f56e9aa00281ae6a39e1de71330f25
@@ -4818,8 +4818,8 @@ trackedFiles:
     pristine_git_object: 67032e59a75c386c27ba1da8e133e59ccc90bb96
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:527157aed990342dc6473f994184a8daa9cf6762
-    pristine_git_object: 5c0d0325e65a8779d1ac71e9fcd6537f94b30c71
+    last_write_checksum: sha1:7930424ca86a34d495c2df6a01331ee67fe13c04
+    pristine_git_object: 9fd9f12cce88c8ccc6f296e86cd5a291fd59afe2
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4846,8 +4846,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:13d981da75da924a8cf15c93cc1cf067df04416d
-    pristine_git_object: 34c75f5d481a6013262081b96156edf1cdccd9c5
+    last_write_checksum: sha1:a9718b816c8fe69d8168c4ecd807f44ae0ea411e
+    pristine_git_object: d88fb284b1902954fd45d43e3364ba9af37bfbf3
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
@@ -10890,7 +10890,6 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `moov.payment_methods.list()`: \n  *  `request.payment_method_type` **Changed** (Breaking ⚠️)\n  *  `response.[].union(instant-bank-credit)` **Removed** (Breaking ⚠️)\n* `moov.payment_methods.get()`:  `response.union(instant-bank-credit)` **Removed** (Breaking ⚠️)\n* `moov.transfers.update()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.transfers.get()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.transfers.list()`:  `response.[]` **Changed** (Breaking ⚠️)\n* `moov.transfers.create()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `moov.transfers.generate_options()`:  `response.source_options[].union(instant-bank-credit)` **Removed** (Breaking ⚠️)\n* `moov.apple_pay.link_token()`:  `response.payment_method_type.enum(instant_bank_credit)` **Removed** (Breaking ⚠️)\n* `moov.bank_accounts.link()`:  `response.payment_methods[].payment_method_type.enum(instant_bank_credit)` **Removed** (Breaking ⚠️)\n* `moov.cards.list()`:  `response.[].payment_methods[].payment_method_type.enum(instant_bank_credit)` **Removed** (Breaking ⚠️)\n* `moov.bank_accounts.get()`:  `response.payment_methods[].payment_method_type.enum(instant_bank_credit)` **Removed** (Breaking ⚠️)\n* `moov.cards.link()`:  `response.payment_methods[].payment_method_type.enum(instant_bank_credit)` **Removed** (Breaking ⚠️)\n* `moov.bank_accounts.list()`:  `response.[].payment_methods[].payment_method_type.enum(instant_bank_credit)` **Removed** (Breaking ⚠️)\n* `moov.cards.get()`:  `response.payment_methods[].payment_method_type.enum(instant_bank_credit)` **Removed** (Breaking ⚠️)\n* `moov.cards.update()`:  `response.payment_methods[].payment_method_type.enum(instant_bank_credit)` **Removed** (Breaking ⚠️)\n* `moov.fee_plans.list_partner_pricing()`: **Removed** (Breaking ⚠️)\n* `moov.invoices.create_invoice()`: **Removed** (Breaking ⚠️)\n* `moov.invoices.list_invoice_payments()`: **Removed** (Breaking ⚠️)\n* `moov.invoices.create_invoice_payment()`: **Removed** (Breaking ⚠️)\n* `moov.invoices.update_invoice()`: **Removed** (Breaking ⚠️)\n* `moov.invoices.get_invoice()`: **Removed** (Breaking ⚠️)\n* `moov.invoices.list_invoices()`: **Removed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
