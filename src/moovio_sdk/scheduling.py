@@ -1223,9 +1223,9 @@ class Scheduling(BaseSDK):
 
         :param account_id:
         :param schedule_id:
-        :param occurrence_filter: Allows the specification of additional filters beyond the UUID.
+        :param occurrence_filter: Allows the specification of additional filters beyond the string.
 
-            Specifying a UUID string returns the exact occurrence.
+            Specifying a string returns the exact occurrence.
             Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
             Specifying `latest` returns the latest occurrence at or before now.
         :param retries: Override the default retry configuration for this method
@@ -1332,9 +1332,9 @@ class Scheduling(BaseSDK):
 
         :param account_id:
         :param schedule_id:
-        :param occurrence_filter: Allows the specification of additional filters beyond the UUID.
+        :param occurrence_filter: Allows the specification of additional filters beyond the string.
 
-            Specifying a UUID string returns the exact occurrence.
+            Specifying a string returns the exact occurrence.
             Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
             Specifying `latest` returns the latest occurrence at or before now.
         :param retries: Override the default retry configuration for this method
