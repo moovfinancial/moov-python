@@ -13,6 +13,7 @@ class ImageMetadataTypedDict(TypedDict):
     r"""Metadata about an uploaded image."""
 
     image_id: str
+    r"""Unique identifier for a image resource."""
     public_id: str
     r"""The ID used to get an image with the public endpoint."""
     link: str
@@ -30,6 +31,7 @@ class ImageMetadata(BaseModel):
     r"""Metadata about an uploaded image."""
 
     image_id: Annotated[str, pydantic.Field(alias="imageID")]
+    r"""Unique identifier for a image resource."""
 
     public_id: Annotated[str, pydantic.Field(alias="publicID")]
     r"""The ID used to get an image with the public endpoint."""

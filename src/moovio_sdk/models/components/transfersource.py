@@ -29,7 +29,7 @@ class TransferSourceTypedDict(TypedDict):
     r"""The payment method type that represents a payment rail and directionality"""
     account: TransferAccountTypedDict
     transfer_id: NotRequired[str]
-    r"""UUID present only if the transfer is part of a transfer group."""
+    r"""String present only if the transfer is part of a transfer group."""
     bank_account: NotRequired[PaymentMethodsBankAccountTypedDict]
     r"""A bank account as contained within a payment method."""
     wallet: NotRequired[PaymentMethodsWalletTypedDict]
@@ -56,7 +56,7 @@ class TransferSource(BaseModel):
     account: TransferAccount
 
     transfer_id: Annotated[Optional[str], pydantic.Field(alias="transferID")] = None
-    r"""UUID present only if the transfer is part of a transfer group."""
+    r"""String present only if the transfer is part of a transfer group."""
 
     bank_account: Annotated[
         Optional[PaymentMethodsBankAccount], pydantic.Field(alias="bankAccount")
