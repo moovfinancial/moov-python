@@ -66,9 +66,9 @@ class GetScheduledOccurrenceRequestTypedDict(TypedDict):
     account_id: str
     schedule_id: str
     occurrence_filter: str
-    r"""Allows the specification of additional filters beyond the UUID.
+    r"""Allows the specification of additional filters beyond the string.
 
-    Specifying a UUID string returns the exact occurrence.
+    Specifying a string returns the exact occurrence.
     Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
     Specifying `latest` returns the latest occurrence at or before now.
     """
@@ -92,9 +92,9 @@ class GetScheduledOccurrenceRequest(BaseModel):
         pydantic.Field(alias="occurrenceFilter"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
-    r"""Allows the specification of additional filters beyond the UUID.
+    r"""Allows the specification of additional filters beyond the string.
 
-    Specifying a UUID string returns the exact occurrence.
+    Specifying a string returns the exact occurrence.
     Specifying a RFC 3339 timestamp returns the latest occurrence at or before that timestamp.
     Specifying `latest` returns the latest occurrence at or before now.
     """
