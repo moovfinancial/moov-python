@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: fdbe98d6f5af4542716da712658ee15e
+  docChecksum: bb78445a87942265989bd464826c26fd
   docVersion: v2025.10.00
-  speakeasyVersion: 1.711.0
-  generationVersion: 2.818.4
-  releaseVersion: 25.10.6
-  configChecksum: c12ad83d0ed211a8c5a9966a54c5b92a
+  speakeasyVersion: 1.713.3
+  generationVersion: 2.821.8
+  releaseVersion: 25.10.7
+  configChecksum: e2f2d767b0d02377dd258fb2df4329e6
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: e877b8c0-c805-4b79-8e62-8eb8ed853b64
-  pristine_commit_hash: 59a31abfeee73d5b9a0b8735aa3864c7f759624d
-  pristine_tree_hash: 301339c66cb1165e5e4b6d877d0abd775b891477
+  generation_id: 77126fae-3e21-4a29-81c6-9bc5aa79d405
+  pristine_commit_hash: e3508061f18f0b75bafd64d6f60d5231e58b68e0
+  pristine_tree_hash: 3ab045a53e128200b8c74658afa41d96474ee283
 features:
   python:
     acceptHeaders: 3.0.0
@@ -41,7 +41,7 @@ features:
     responseFormat: 1.1.0
     retries: 3.0.3
     sdkHooks: 1.2.1
-    unions: 3.1.2
+    unions: 3.1.3
     uploadStreams: 1.0.0
 trackedFiles:
   .gitattributes:
@@ -1082,8 +1082,8 @@ trackedFiles:
     pristine_git_object: a806ba477e49df2f9abb328b131ea858ee4c47f5
   docs/models/components/generatedby.md:
     id: 254be68f6491
-    last_write_checksum: sha1:b2724752b3a84ded6a41cd1ebd18ec858a94d40e
-    pristine_git_object: 26ebdff5faf71fa84cb144407bf0fc62d38b9764
+    last_write_checksum: sha1:58a15367e6409c6b2a997093931ac1f8352ee403
+    pristine_git_object: 65436064eaf61792bc32e9ef84d0fa999f894aa0
   docs/models/components/geographicreach.md:
     id: 7dce20473750
     last_write_checksum: sha1:a99e1000d845df8544357bcc14e7bf5137820c5f
@@ -4818,8 +4818,8 @@ trackedFiles:
     pristine_git_object: 67032e59a75c386c27ba1da8e133e59ccc90bb96
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:b7c705c2b93647f24584ad99cfcb54c801e5a3e8
-    pristine_git_object: ff50e28142a887fababaeb8b2a767514df455320
+    last_write_checksum: sha1:10db1027b2fe317fb26aac31dcfea0127fc0954c
+    pristine_git_object: 27636761065d07972c362442852a3775b00e4cde
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4846,8 +4846,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:d437e3de4b45241029a066cb59717e59c342d4f3
-    pristine_git_object: 7658eb5172cd31e490eed91dace42045a35a88b8
+    last_write_checksum: sha1:29222929ca1707a108c13545e4d406ac932a9f04
+    pristine_git_object: 0bd44a7bb4b4015e074fdfe328bdd3831839c976
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
@@ -5874,8 +5874,8 @@ trackedFiles:
     pristine_git_object: 4088c9fea9834ae091814e4634094cee5e1744d3
   src/moovio_sdk/models/components/generatedby.py:
     id: 7f8d7fefebfa
-    last_write_checksum: sha1:e2852b5a15da522eeac04c2767eb80ab0ea313e6
-    pristine_git_object: 7730896b66f4ecab98a716ff457e9fbcb00fa246
+    last_write_checksum: sha1:82dd888e74ba0c9882fdebc2918c966969776662
+    pristine_git_object: 9086cad1c6b0acd31c8024c5552d79ea3f06ecbb
   src/moovio_sdk/models/components/geographicreach.py:
     id: 736185b49606
     last_write_checksum: sha1:514968b0cb63bf5a5dd8a822f893d04651b7316f
@@ -10890,6 +10890,12 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Python SDK Changes:
+  * `moov.fee_plans.list_fee_revenue()`:  `response.[].generated_by.invoice_id` **Added**
+  * `moov.fee_plans.retrieve_fees()`:  `response.[].generated_by.invoice_id` **Added**
+  * `moov.fee_plans.list_fees_fetch()`:  `response.[].generated_by.invoice_id` **Added**
+  * `moov.fee_plans.list_residual_fees()`:  `response.[].generated_by.invoice_id` **Added**
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
