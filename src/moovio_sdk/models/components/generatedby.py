@@ -16,6 +16,7 @@ class GeneratedByTypedDict(TypedDict):
     dispute_id: NotRequired[str]
     account_id: NotRequired[str]
     bank_account_id: NotRequired[str]
+    invoice_id: NotRequired[str]
 
 
 class GeneratedBy(BaseModel):
@@ -33,10 +34,19 @@ class GeneratedBy(BaseModel):
         None
     )
 
+    invoice_id: Annotated[Optional[str], pydantic.Field(alias="invoiceID")] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["transferID", "cardID", "disputeID", "accountID", "bankAccountID"]
+            [
+                "transferID",
+                "cardID",
+                "disputeID",
+                "accountID",
+                "bankAccountID",
+                "invoiceID",
+            ]
         )
         serialized = handler(self)
         m = {}
