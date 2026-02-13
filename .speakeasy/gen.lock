@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 341518728f7f031753d7f9e24e8319f3
+  docChecksum: 12c65fcff1f2e99b49cc911f3b94b37a
   docVersion: v2025.04.00
-  speakeasyVersion: 1.711.0
-  generationVersion: 2.818.4
-  releaseVersion: 25.4.6
-  configChecksum: 2ad3a12d2a2bff4f5e8efe7d0c33d42e
+  speakeasyVersion: 1.713.3
+  generationVersion: 2.821.8
+  releaseVersion: 25.4.7
+  configChecksum: 36b8c8c7462aca536a39d1087ed7f21c
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 72498553-72ba-4464-80dd-5f320223c2d9
-  pristine_commit_hash: 72517a57a97484528de781b358b55b7b236ea5be
-  pristine_tree_hash: 87c514c8948b12b718aa1e44e61329620010d86f
+  generation_id: d1e50363-cba3-4e8a-8bc5-1b8d5c225428
+  pristine_commit_hash: fc3dd483c5e89f30d33b7daffe67c7f563a138ad
+  pristine_tree_hash: 649a38ec674fa35536b784273d4d086cda01bbb8
 features:
   python:
     acceptHeaders: 3.0.0
@@ -41,7 +41,7 @@ features:
     responseFormat: 1.1.0
     retries: 3.0.3
     sdkHooks: 1.2.1
-    unions: 3.1.2
+    unions: 3.1.3
     uploadStreams: 1.0.0
 trackedFiles:
   .gitattributes:
@@ -1014,8 +1014,8 @@ trackedFiles:
     pristine_git_object: a806ba477e49df2f9abb328b131ea858ee4c47f5
   docs/models/components/generatedby.md:
     id: 254be68f6491
-    last_write_checksum: sha1:b2724752b3a84ded6a41cd1ebd18ec858a94d40e
-    pristine_git_object: 26ebdff5faf71fa84cb144407bf0fc62d38b9764
+    last_write_checksum: sha1:58a15367e6409c6b2a997093931ac1f8352ee403
+    pristine_git_object: 65436064eaf61792bc32e9ef84d0fa999f894aa0
   docs/models/components/governmentid.md:
     id: 4ada6c4fdaef
     last_write_checksum: sha1:df201110a8e12f1c8a9de320ae83f94113bfbacf
@@ -4530,8 +4530,8 @@ trackedFiles:
     pristine_git_object: 67032e59a75c386c27ba1da8e133e59ccc90bb96
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:3eae8c15c9cce55bd364efede282f4e1b101d29e
-    pristine_git_object: 74bdc07da1b58e4106a4f97449035664c93bc53a
+    last_write_checksum: sha1:1ff8c9211edf39f7a3620ca713c00aab3b1ea19b
+    pristine_git_object: f7407216fc93b5d1146d11852d40dcfa4731b16d
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4558,8 +4558,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:4f33a2d9eb66722dbfa1646fe3bdab61d6009f12
-    pristine_git_object: 38230dcf100f593c09967787718079ffca76ab01
+    last_write_checksum: sha1:a58469d99f7d55921f95bae4dfc93370ec219c37
+    pristine_git_object: 89b3c71772ddd32a8cbdf36846cd445741f15ff0
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
@@ -5518,8 +5518,8 @@ trackedFiles:
     pristine_git_object: 4088c9fea9834ae091814e4634094cee5e1744d3
   src/moovio_sdk/models/components/generatedby.py:
     id: 7f8d7fefebfa
-    last_write_checksum: sha1:e2852b5a15da522eeac04c2767eb80ab0ea313e6
-    pristine_git_object: 7730896b66f4ecab98a716ff457e9fbcb00fa246
+    last_write_checksum: sha1:82dd888e74ba0c9882fdebc2918c966969776662
+    pristine_git_object: 9086cad1c6b0acd31c8024c5552d79ea3f06ecbb
   src/moovio_sdk/models/components/governmentid.py:
     id: c28107932bf1
     last_write_checksum: sha1:5a250a05eaddb41746ae7af613455b6b8cfb213f
@@ -10367,6 +10367,12 @@ examples:
           application/json: {"secret": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Python SDK Changes:
+  * `moov.fee_plans.list_fee_revenue()`:  `response.[].generated_by.invoice_id` **Added**
+  * `moov.fee_plans.retrieve_fees()`:  `response.[].generated_by.invoice_id` **Added**
+  * `moov.fee_plans.list_fees_fetch()`:  `response.[].generated_by.invoice_id` **Added**
+  * `moov.fee_plans.list_residual_fees()`:  `response.[].generated_by.invoice_id` **Added**
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
