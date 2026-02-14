@@ -15,3 +15,9 @@ class WebhookDataBankAccountCreated(BaseModel):
     bank_account_id: Annotated[str, pydantic.Field(alias="bankAccountID")]
 
     account_id: Annotated[str, pydantic.Field(alias="accountID")]
+
+
+try:
+    WebhookDataBankAccountCreated.model_rebuild()
+except NameError:
+    pass

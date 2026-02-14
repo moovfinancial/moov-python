@@ -52,3 +52,9 @@ class AccountNameVerification(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AccountNameVerification.model_rebuild()
+except NameError:
+    pass

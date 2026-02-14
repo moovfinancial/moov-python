@@ -72,3 +72,9 @@ class TermsOfServiceError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Manual.model_rebuild()
+except NameError:
+    pass

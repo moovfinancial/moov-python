@@ -28,3 +28,9 @@ class EventType(BaseModel):
 
     description: str
     r"""A human-readable description of the event type."""
+
+
+try:
+    EventType.model_rebuild()
+except NameError:
+    pass

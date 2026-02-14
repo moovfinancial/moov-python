@@ -116,3 +116,9 @@ class BusinessProfile(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    BusinessProfile.model_rebuild()
+except NameError:
+    pass

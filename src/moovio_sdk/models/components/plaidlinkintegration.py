@@ -34,3 +34,9 @@ class PlaidLinkIntegration(BaseModel):
     """
 
     public_token: Annotated[str, pydantic.Field(alias="publicToken")]
+
+
+try:
+    PlaidLinkIntegration.model_rebuild()
+except NameError:
+    pass

@@ -91,3 +91,9 @@ class SweepConfig(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SweepConfig.model_rebuild()
+except NameError:
+    pass

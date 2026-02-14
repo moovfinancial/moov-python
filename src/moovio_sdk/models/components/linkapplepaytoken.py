@@ -61,3 +61,9 @@ class LinkApplePayToken(BaseModel):
         str, pydantic.Field(alias="transactionIdentifier")
     ]
     r"""A unique identifier provided by Apple Pay for this payment."""
+
+
+try:
+    LinkApplePayToken.model_rebuild()
+except NameError:
+    pass

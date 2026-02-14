@@ -20,3 +20,9 @@ class Cancellation(BaseModel):
     status: CancellationStatus
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+
+try:
+    Cancellation.model_rebuild()
+except NameError:
+    pass

@@ -128,3 +128,9 @@ class OnboardingInvite(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    OnboardingInvite.model_rebuild()
+except NameError:
+    pass

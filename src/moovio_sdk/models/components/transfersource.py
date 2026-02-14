@@ -7,14 +7,20 @@ from .cardtransactiondetails import (
     CardTransactionDetails,
     CardTransactionDetailsTypedDict,
 )
-from .paymentmethodsbankaccount import (
-    PaymentMethodsBankAccount,
-    PaymentMethodsBankAccountTypedDict,
-)
-from .paymentmethodscard import PaymentMethodsCard, PaymentMethodsCardTypedDict
-from .paymentmethodswallet import PaymentMethodsWallet, PaymentMethodsWalletTypedDict
-from .paymentmethodtype import PaymentMethodType
 from .transferaccount import TransferAccount, TransferAccountTypedDict
+from .transferpaymentmethodsbankaccount import (
+    TransferPaymentMethodsBankAccount,
+    TransferPaymentMethodsBankAccountTypedDict,
+)
+from .transferpaymentmethodscard import (
+    TransferPaymentMethodsCard,
+    TransferPaymentMethodsCardTypedDict,
+)
+from .transferpaymentmethodswallet import (
+    TransferPaymentMethodsWallet,
+    TransferPaymentMethodsWalletTypedDict,
+)
+from .transferpaymentmethodtype import TransferPaymentMethodType
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -24,15 +30,15 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class TransferSourceTypedDict(TypedDict):
     payment_method_id: str
-    payment_method_type: PaymentMethodType
+    payment_method_type: TransferPaymentMethodType
     r"""The payment method type that represents a payment rail and directionality"""
     account: TransferAccountTypedDict
     transfer_id: NotRequired[str]
     r"""String present only if the transfer is part of a transfer group."""
-    bank_account: NotRequired[PaymentMethodsBankAccountTypedDict]
+    bank_account: NotRequired[TransferPaymentMethodsBankAccountTypedDict]
     r"""A bank account as contained within a payment method."""
-    wallet: NotRequired[PaymentMethodsWalletTypedDict]
-    card: NotRequired[PaymentMethodsCardTypedDict]
+    wallet: NotRequired[TransferPaymentMethodsWalletTypedDict]
+    card: NotRequired[TransferPaymentMethodsCardTypedDict]
     r"""A card as contained within a payment method."""
     apple_pay: NotRequired[ApplePayResponseTypedDict]
     r"""Describes an Apple Pay token on a Moov account."""
@@ -46,7 +52,7 @@ class TransferSource(BaseModel):
     payment_method_id: Annotated[str, pydantic.Field(alias="paymentMethodID")]
 
     payment_method_type: Annotated[
-        PaymentMethodType, pydantic.Field(alias="paymentMethodType")
+        TransferPaymentMethodType, pydantic.Field(alias="paymentMethodType")
     ]
     r"""The payment method type that represents a payment rail and directionality"""
 
@@ -56,13 +62,13 @@ class TransferSource(BaseModel):
     r"""String present only if the transfer is part of a transfer group."""
 
     bank_account: Annotated[
-        Optional[PaymentMethodsBankAccount], pydantic.Field(alias="bankAccount")
+        Optional[TransferPaymentMethodsBankAccount], pydantic.Field(alias="bankAccount")
     ] = None
     r"""A bank account as contained within a payment method."""
 
-    wallet: Optional[PaymentMethodsWallet] = None
+    wallet: Optional[TransferPaymentMethodsWallet] = None
 
-    card: Optional[PaymentMethodsCard] = None
+    card: Optional[TransferPaymentMethodsCard] = None
     r"""A card as contained within a payment method."""
 
     apple_pay: Annotated[
@@ -105,3 +111,9 @@ class TransferSource(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TransferSource.model_rebuild()
+except NameError:
+    pass

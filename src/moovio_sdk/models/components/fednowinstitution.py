@@ -21,3 +21,9 @@ class FedNowInstitution(BaseModel):
     routing_number: Annotated[str, pydantic.Field(alias="routingNumber")]
 
     services: FedNowServices
+
+
+try:
+    FedNowInstitution.model_rebuild()
+except NameError:
+    pass

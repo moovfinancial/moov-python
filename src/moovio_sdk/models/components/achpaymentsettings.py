@@ -14,3 +14,9 @@ class ACHPaymentSettingsTypedDict(TypedDict):
 class ACHPaymentSettings(BaseModel):
     company_name: Annotated[str, pydantic.Field(alias="companyName")]
     r"""The description that shows up on ACH transactions. This will default to the account's display name on account creation."""
+
+
+try:
+    ACHPaymentSettings.model_rebuild()
+except NameError:
+    pass

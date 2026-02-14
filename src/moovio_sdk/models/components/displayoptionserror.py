@@ -38,3 +38,9 @@ class DisplayOptionsError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DisplayOptionsError.model_rebuild()
+except NameError:
+    pass

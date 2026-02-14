@@ -22,3 +22,9 @@ class FulfillmentDetails(BaseModel):
     shipment_duration_days: Annotated[int, pydantic.Field(alias="shipmentDurationDays")]
 
     return_policy: Annotated[ReturnPolicyType, pydantic.Field(alias="returnPolicy")]
+
+
+try:
+    FulfillmentDetails.model_rebuild()
+except NameError:
+    pass

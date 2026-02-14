@@ -43,3 +43,9 @@ class WireInstitution(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WireInstitution.model_rebuild()
+except NameError:
+    pass

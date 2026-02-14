@@ -64,3 +64,9 @@ class AccountFees(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AccountFees.model_rebuild()
+except NameError:
+    pass

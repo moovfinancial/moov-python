@@ -33,3 +33,9 @@ class PhoneNumber(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PhoneNumber.model_rebuild()
+except NameError:
+    pass

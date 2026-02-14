@@ -69,3 +69,9 @@ class CreatePaymentLinkLineItemOption(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreatePaymentLinkLineItemOption.model_rebuild()
+except NameError:
+    pass
