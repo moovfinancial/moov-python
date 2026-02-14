@@ -21,3 +21,9 @@ class RTPInstitution(BaseModel):
     routing_number: Annotated[str, pydantic.Field(alias="routingNumber")]
 
     services: RTPServices
+
+
+try:
+    RTPInstitution.model_rebuild()
+except NameError:
+    pass

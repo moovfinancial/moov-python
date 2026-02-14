@@ -47,3 +47,9 @@ class CreateTicket(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTicket.model_rebuild()
+except NameError:
+    pass

@@ -206,3 +206,9 @@ class Card(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Card.model_rebuild()
+except NameError:
+    pass

@@ -32,3 +32,9 @@ class BankAccountIntegration(BaseModel):
     r"""The bank account type."""
 
     routing_number: Annotated[str, pydantic.Field(alias="routingNumber")]
+
+
+try:
+    BankAccountIntegration.model_rebuild()
+except NameError:
+    pass

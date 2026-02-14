@@ -205,3 +205,9 @@ class Transfer(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Transfer.model_rebuild()
+except NameError:
+    pass

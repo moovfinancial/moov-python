@@ -41,3 +41,9 @@ class UpdateUnderwriting(BaseModel):
     ]
 
     fulfillment: FulfillmentDetails
+
+
+try:
+    UpdateUnderwriting.model_rebuild()
+except NameError:
+    pass

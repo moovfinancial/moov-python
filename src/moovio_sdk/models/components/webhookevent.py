@@ -34,3 +34,9 @@ class WebhookEvent(BaseModel):
     r"""The data for the webhook event. The contents are based on the event type."""
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+
+try:
+    WebhookEvent.model_rebuild()
+except NameError:
+    pass

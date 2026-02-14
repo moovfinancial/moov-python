@@ -62,3 +62,9 @@ class Ticket(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Ticket.model_rebuild()
+except NameError:
+    pass

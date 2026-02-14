@@ -67,3 +67,9 @@ class CreateProductOptionGroup(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateProductOptionGroup.model_rebuild()
+except NameError:
+    pass

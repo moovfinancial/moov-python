@@ -70,3 +70,9 @@ class CreateTransferSourceACH(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTransferSourceACH.model_rebuild()
+except NameError:
+    pass

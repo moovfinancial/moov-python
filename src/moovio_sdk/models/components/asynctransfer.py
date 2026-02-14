@@ -16,3 +16,9 @@ class AsyncTransfer(BaseModel):
     transfer_id: Annotated[str, pydantic.Field(alias="transferID")]
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+
+try:
+    AsyncTransfer.model_rebuild()
+except NameError:
+    pass

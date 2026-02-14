@@ -47,3 +47,9 @@ class IndividualName(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    IndividualName.model_rebuild()
+except NameError:
+    pass

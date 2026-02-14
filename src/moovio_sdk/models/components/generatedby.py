@@ -60,3 +60,9 @@ class GeneratedBy(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    GeneratedBy.model_rebuild()
+except NameError:
+    pass

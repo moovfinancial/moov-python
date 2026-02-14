@@ -36,3 +36,9 @@ class PartialScheduleAccount(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PartialScheduleAccount.model_rebuild()
+except NameError:
+    pass

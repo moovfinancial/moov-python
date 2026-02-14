@@ -35,3 +35,9 @@ class IssuedCardAuthorizationEvent(BaseModel):
     r"""The result of an event."""
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+
+try:
+    IssuedCardAuthorizationEvent.model_rebuild()
+except NameError:
+    pass

@@ -45,3 +45,9 @@ class Settings(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Settings.model_rebuild()
+except NameError:
+    pass

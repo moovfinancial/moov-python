@@ -121,3 +121,9 @@ class Account(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Account.model_rebuild()
+except NameError:
+    pass

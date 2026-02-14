@@ -21,3 +21,9 @@ class WebhookDataCardAutoUpdated(BaseModel):
 
     update_type: Annotated[CardUpdateReason, pydantic.Field(alias="updateType")]
     r"""The results of the card update request."""
+
+
+try:
+    WebhookDataCardAutoUpdated.model_rebuild()
+except NameError:
+    pass

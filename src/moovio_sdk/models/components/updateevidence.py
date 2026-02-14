@@ -38,3 +38,9 @@ class UpdateEvidence(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateEvidence.model_rebuild()
+except NameError:
+    pass

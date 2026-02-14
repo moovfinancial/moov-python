@@ -48,3 +48,9 @@ class EstimatedActivityError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    EstimatedActivityError.model_rebuild()
+except NameError:
+    pass

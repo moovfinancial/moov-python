@@ -25,3 +25,9 @@ class SentReceipt(BaseModel):
 
     sent_on: Annotated[datetime, pydantic.Field(alias="sentOn")]
     r"""When the receipt was sent."""
+
+
+try:
+    SentReceipt.model_rebuild()
+except NameError:
+    pass

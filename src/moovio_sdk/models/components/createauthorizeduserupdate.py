@@ -43,3 +43,9 @@ class CreateAuthorizedUserUpdate(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateAuthorizedUserUpdate.model_rebuild()
+except NameError:
+    pass

@@ -82,3 +82,9 @@ class FeePlanAgreement(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FeePlanAgreement.model_rebuild()
+except NameError:
+    pass

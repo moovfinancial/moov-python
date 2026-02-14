@@ -69,3 +69,9 @@ class Verification(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Verification.model_rebuild()
+except NameError:
+    pass

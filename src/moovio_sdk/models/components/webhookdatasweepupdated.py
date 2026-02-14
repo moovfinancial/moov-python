@@ -40,3 +40,9 @@ class WebhookDataSweepUpdated(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WebhookDataSweepUpdated.model_rebuild()
+except NameError:
+    pass

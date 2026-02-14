@@ -107,3 +107,9 @@ class FullIssuedCard(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FullIssuedCard.model_rebuild()
+except NameError:
+    pass

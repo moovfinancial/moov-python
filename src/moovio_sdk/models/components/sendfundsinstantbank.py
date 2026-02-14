@@ -33,3 +33,9 @@ class SendFundsInstantBank(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SendFundsInstantBank.model_rebuild()
+except NameError:
+    pass

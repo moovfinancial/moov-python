@@ -20,3 +20,9 @@ class WebhookDataTerminalApplicationCreated(BaseModel):
 
     status: TerminalApplicationStatus
     r"""Status of the terminal application."""
+
+
+try:
+    WebhookDataTerminalApplicationCreated.model_rebuild()
+except NameError:
+    pass

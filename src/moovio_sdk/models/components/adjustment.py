@@ -27,3 +27,9 @@ class Adjustment(BaseModel):
     amount: AmountDecimal
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+
+try:
+    Adjustment.model_rebuild()
+except NameError:
+    pass
