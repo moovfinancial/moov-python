@@ -53,3 +53,9 @@ class SendFundsError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SendFundsError.model_rebuild()
+except NameError:
+    pass

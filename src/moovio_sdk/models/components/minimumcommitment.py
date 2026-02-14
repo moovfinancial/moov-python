@@ -29,3 +29,9 @@ class MinimumCommitment(BaseModel):
 
     For example, $12.987654321 is '12.987654321'.
     """
+
+
+try:
+    MinimumCommitment.model_rebuild()
+except NameError:
+    pass

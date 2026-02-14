@@ -72,3 +72,9 @@ class TerminalApplication(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TerminalApplication.model_rebuild()
+except NameError:
+    pass

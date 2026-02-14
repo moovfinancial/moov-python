@@ -72,3 +72,9 @@ class ProductRequest(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ProductRequest.model_rebuild()
+except NameError:
+    pass

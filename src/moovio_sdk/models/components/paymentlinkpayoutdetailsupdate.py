@@ -55,3 +55,9 @@ class PaymentLinkPayoutDetailsUpdate(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PaymentLinkPayoutDetailsUpdate.model_rebuild()
+except NameError:
+    pass

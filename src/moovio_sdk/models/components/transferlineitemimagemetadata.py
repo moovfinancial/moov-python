@@ -47,3 +47,9 @@ class TransferLineItemImageMetadata(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TransferLineItemImageMetadata.model_rebuild()
+except NameError:
+    pass

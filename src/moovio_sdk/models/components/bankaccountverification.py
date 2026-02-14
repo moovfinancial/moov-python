@@ -45,3 +45,9 @@ class BankAccountVerification(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    BankAccountVerification.model_rebuild()
+except NameError:
+    pass

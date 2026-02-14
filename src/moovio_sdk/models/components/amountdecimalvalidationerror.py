@@ -33,3 +33,9 @@ class AmountDecimalValidationError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AmountDecimalValidationError.model_rebuild()
+except NameError:
+    pass

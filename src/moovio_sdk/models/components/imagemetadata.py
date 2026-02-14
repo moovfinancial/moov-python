@@ -67,3 +67,9 @@ class ImageMetadata(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ImageMetadata.model_rebuild()
+except NameError:
+    pass

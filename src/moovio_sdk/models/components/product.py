@@ -92,3 +92,9 @@ class Product(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Product.model_rebuild()
+except NameError:
+    pass

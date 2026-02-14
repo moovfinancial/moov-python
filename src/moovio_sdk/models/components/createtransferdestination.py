@@ -52,3 +52,9 @@ class CreateTransferDestination(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTransferDestination.model_rebuild()
+except NameError:
+    pass

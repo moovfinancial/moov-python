@@ -12,3 +12,9 @@ class CreateFeePlanAgreementTypedDict(TypedDict):
 
 class CreateFeePlanAgreement(BaseModel):
     plan_id: Annotated[str, pydantic.Field(alias="planID")]
+
+
+try:
+    CreateFeePlanAgreement.model_rebuild()
+except NameError:
+    pass

@@ -29,3 +29,9 @@ class OnboardingPartnerAccount(BaseModel):
 
     display_name: Annotated[str, pydantic.Field(alias="displayName")]
     r"""The name of the Moov account used to create the onboarding invite."""
+
+
+try:
+    OnboardingPartnerAccount.model_rebuild()
+except NameError:
+    pass

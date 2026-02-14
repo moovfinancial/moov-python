@@ -29,3 +29,9 @@ class MoovWalletPaymentMethod(BaseModel):
     ]
 
     wallet: PaymentMethodsWallet
+
+
+try:
+    MoovWalletPaymentMethod.model_rebuild()
+except NameError:
+    pass

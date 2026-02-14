@@ -76,3 +76,9 @@ class Webhook(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Webhook.model_rebuild()
+except NameError:
+    pass

@@ -44,3 +44,9 @@ class CardAcceptanceMethodsError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CardAcceptanceMethodsError.model_rebuild()
+except NameError:
+    pass

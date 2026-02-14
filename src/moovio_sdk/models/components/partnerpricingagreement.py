@@ -93,3 +93,9 @@ class PartnerPricingAgreement(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PartnerPricingAgreement.model_rebuild()
+except NameError:
+    pass

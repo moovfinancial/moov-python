@@ -26,3 +26,9 @@ class EvidenceTextResponse(BaseModel):
     text: str
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+
+try:
+    EvidenceTextResponse.model_rebuild()
+except NameError:
+    pass

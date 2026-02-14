@@ -77,3 +77,9 @@ class UpdateCard(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateCard.model_rebuild()
+except NameError:
+    pass

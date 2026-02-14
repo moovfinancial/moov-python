@@ -12,3 +12,9 @@ class WebhookBillingStatementCreatedTypedDict(TypedDict):
 
 class WebhookBillingStatementCreated(BaseModel):
     statement_id: Annotated[str, pydantic.Field(alias="statementID")]
+
+
+try:
+    WebhookBillingStatementCreated.model_rebuild()
+except NameError:
+    pass

@@ -63,3 +63,9 @@ class InvoiceLineItemOption(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    InvoiceLineItemOption.model_rebuild()
+except NameError:
+    pass

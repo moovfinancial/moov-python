@@ -85,3 +85,9 @@ class ApplePayResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ApplePayResponse.model_rebuild()
+except NameError:
+    pass

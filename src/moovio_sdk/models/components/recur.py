@@ -55,3 +55,9 @@ class Recur(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Recur.model_rebuild()
+except NameError:
+    pass

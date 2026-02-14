@@ -36,3 +36,9 @@ class MoneyTransferPushToCardError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    MoneyTransferPushToCardError.model_rebuild()
+except NameError:
+    pass

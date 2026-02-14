@@ -36,3 +36,9 @@ class CreateInvoiceLineItemImage(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateInvoiceLineItemImage.model_rebuild()
+except NameError:
+    pass

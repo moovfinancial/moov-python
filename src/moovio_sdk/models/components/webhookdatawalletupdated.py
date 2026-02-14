@@ -27,3 +27,9 @@ class WebhookDataWalletUpdated(BaseModel):
     - `active`: The wallet is available for use and has an enabled payment method.
     - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
     """
+
+
+try:
+    WebhookDataWalletUpdated.model_rebuild()
+except NameError:
+    pass

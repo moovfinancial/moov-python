@@ -55,3 +55,9 @@ class BillingInterchangeProgramFee(BaseModel):
 
     transfer_volume: Annotated[AmountDecimal, pydantic.Field(alias="transferVolume")]
     r"""The total transfer volume for this program."""
+
+
+try:
+    BillingInterchangeProgramFee.model_rebuild()
+except NameError:
+    pass

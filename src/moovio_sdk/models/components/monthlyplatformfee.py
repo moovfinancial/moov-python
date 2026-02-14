@@ -29,3 +29,9 @@ class MonthlyPlatformFee(BaseModel):
 
     For example, $12.987654321 is '12.987654321'.
     """
+
+
+try:
+    MonthlyPlatformFee.model_rebuild()
+except NameError:
+    pass

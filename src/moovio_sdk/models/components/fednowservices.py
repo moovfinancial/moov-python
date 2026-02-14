@@ -24,3 +24,9 @@ class FedNowServices(BaseModel):
 
     request_for_payment: Annotated[bool, pydantic.Field(alias="requestForPayment")]
     r"""Indicates if the institution can process request for payment messages."""
+
+
+try:
+    FedNowServices.model_rebuild()
+except NameError:
+    pass

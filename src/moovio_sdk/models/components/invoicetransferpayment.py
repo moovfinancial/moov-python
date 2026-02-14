@@ -14,3 +14,9 @@ class InvoiceTransferPaymentTypedDict(TypedDict):
 class InvoiceTransferPayment(BaseModel):
     transfer_id: Annotated[str, pydantic.Field(alias="transferID")]
     r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
+
+
+try:
+    InvoiceTransferPayment.model_rebuild()
+except NameError:
+    pass

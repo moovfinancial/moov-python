@@ -133,3 +133,9 @@ class PatchAccount(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PatchAccount.model_rebuild()
+except NameError:
+    pass

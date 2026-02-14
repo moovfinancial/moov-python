@@ -37,3 +37,9 @@ class RegisterApplePayMerchantDomains(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RegisterApplePayMerchantDomains.model_rebuild()
+except NameError:
+    pass

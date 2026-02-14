@@ -60,3 +60,9 @@ class InvoicePayment(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    InvoicePayment.model_rebuild()
+except NameError:
+    pass

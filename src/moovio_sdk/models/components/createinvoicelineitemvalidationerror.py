@@ -61,3 +61,9 @@ class CreateInvoiceLineItemValidationError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateInvoiceLineItemValidationError.model_rebuild()
+except NameError:
+    pass

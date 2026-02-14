@@ -92,3 +92,9 @@ class Wallet(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Wallet.model_rebuild()
+except NameError:
+    pass

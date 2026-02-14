@@ -47,3 +47,9 @@ class InvoiceLineItemImageMetadata(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    InvoiceLineItemImageMetadata.model_rebuild()
+except NameError:
+    pass

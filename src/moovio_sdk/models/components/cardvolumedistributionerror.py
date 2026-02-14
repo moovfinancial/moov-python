@@ -54,3 +54,9 @@ class CardVolumeDistributionError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CardVolumeDistributionError.model_rebuild()
+except NameError:
+    pass

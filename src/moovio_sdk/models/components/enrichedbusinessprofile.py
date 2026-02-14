@@ -61,3 +61,9 @@ class EnrichedBusinessProfile(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    EnrichedBusinessProfile.model_rebuild()
+except NameError:
+    pass

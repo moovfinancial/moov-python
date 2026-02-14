@@ -25,3 +25,9 @@ class AccountTerminalApplication(BaseModel):
         str, pydantic.Field(alias="terminalApplicationID")
     ]
     r"""ID of the terminal application."""
+
+
+try:
+    AccountTerminalApplication.model_rebuild()
+except NameError:
+    pass

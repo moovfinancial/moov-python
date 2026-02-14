@@ -30,3 +30,9 @@ class CreateInvoiceLineItemImageValidationError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateInvoiceLineItemImageValidationError.model_rebuild()
+except NameError:
+    pass
