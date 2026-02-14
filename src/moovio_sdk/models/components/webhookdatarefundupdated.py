@@ -22,3 +22,9 @@ class WebhookDataRefundUpdated(BaseModel):
     refund_id: Annotated[str, pydantic.Field(alias="refundID")]
 
     status: RefundStatus
+
+
+try:
+    WebhookDataRefundUpdated.model_rebuild()
+except NameError:
+    pass

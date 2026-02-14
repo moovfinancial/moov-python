@@ -55,3 +55,9 @@ class CardPresentPaymentPaymentMethod(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CardPresentPaymentPaymentMethod.model_rebuild()
+except NameError:
+    pass

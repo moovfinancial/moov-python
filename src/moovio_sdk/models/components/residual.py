@@ -66,3 +66,9 @@ class Residual(BaseModel):
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
     r"""Timestamp when the residual was last updated."""
+
+
+try:
+    Residual.model_rebuild()
+except NameError:
+    pass

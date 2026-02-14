@@ -33,3 +33,9 @@ class WebhookDataAccountCreated(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WebhookDataAccountCreated.model_rebuild()
+except NameError:
+    pass

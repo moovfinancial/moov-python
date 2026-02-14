@@ -47,3 +47,9 @@ class ProductImageMetadata(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ProductImageMetadata.model_rebuild()
+except NameError:
+    pass

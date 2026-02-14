@@ -59,3 +59,9 @@ class CreateTerminalApplication(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTerminalApplication.model_rebuild()
+except NameError:
+    pass

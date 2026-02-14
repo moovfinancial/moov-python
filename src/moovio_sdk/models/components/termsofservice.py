@@ -24,3 +24,9 @@ class TermsOfService(BaseModel):
 
     accepted_ip: Annotated[str, pydantic.Field(alias="acceptedIP")]
     r"""The IP address from which the terms of service were accepted."""
+
+
+try:
+    TermsOfService.model_rebuild()
+except NameError:
+    pass

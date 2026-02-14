@@ -43,3 +43,9 @@ class CardAccountUpdater(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CardAccountUpdater.model_rebuild()
+except NameError:
+    pass

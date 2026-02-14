@@ -36,3 +36,9 @@ class LinkApplePaymentMethod(BaseModel):
 
     type: str
     r"""The type of card."""
+
+
+try:
+    LinkApplePaymentMethod.model_rebuild()
+except NameError:
+    pass

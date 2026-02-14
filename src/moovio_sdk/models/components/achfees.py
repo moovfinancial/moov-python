@@ -64,3 +64,9 @@ class ACHFees(BaseModel):
 
     total: BillingCountAndAmount
     r"""Total ACH fees."""
+
+
+try:
+    ACHFees.model_rebuild()
+except NameError:
+    pass

@@ -36,3 +36,9 @@ class AchDebitFundPaymentMethod(BaseModel):
         PaymentMethodsBankAccount, pydantic.Field(alias="bankAccount")
     ]
     r"""A bank account as contained within a payment method."""
+
+
+try:
+    AchDebitFundPaymentMethod.model_rebuild()
+except NameError:
+    pass

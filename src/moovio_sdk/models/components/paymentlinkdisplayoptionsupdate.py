@@ -57,3 +57,9 @@ class PaymentLinkDisplayOptionsUpdate(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PaymentLinkDisplayOptionsUpdate.model_rebuild()
+except NameError:
+    pass

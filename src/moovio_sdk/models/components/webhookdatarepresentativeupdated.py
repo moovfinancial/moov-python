@@ -15,3 +15,9 @@ class WebhookDataRepresentativeUpdated(BaseModel):
     account_id: Annotated[str, pydantic.Field(alias="accountID")]
 
     representative_id: Annotated[str, pydantic.Field(alias="representativeID")]
+
+
+try:
+    WebhookDataRepresentativeUpdated.model_rebuild()
+except NameError:
+    pass

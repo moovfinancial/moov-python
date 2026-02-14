@@ -31,3 +31,9 @@ class PushToCardPaymentMethod(BaseModel):
 
     card: PaymentMethodsCard
     r"""A card as contained within a payment method."""
+
+
+try:
+    PushToCardPaymentMethod.model_rebuild()
+except NameError:
+    pass

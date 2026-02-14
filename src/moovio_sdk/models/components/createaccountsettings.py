@@ -87,3 +87,17 @@ class CreateAccountSettings(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CardPayment.model_rebuild()
+except NameError:
+    pass
+try:
+    AchPayment.model_rebuild()
+except NameError:
+    pass
+try:
+    CreateAccountSettings.model_rebuild()
+except NameError:
+    pass

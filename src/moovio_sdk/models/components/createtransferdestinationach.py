@@ -50,3 +50,9 @@ class CreateTransferDestinationACH(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTransferDestinationACH.model_rebuild()
+except NameError:
+    pass

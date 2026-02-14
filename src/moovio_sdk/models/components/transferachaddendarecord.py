@@ -23,3 +23,9 @@ class TransferACHAddendaRecord(BaseModel):
 
     is_masked: Annotated[bool, pydantic.Field(alias="isMasked")]
     r"""Flag indicating whether or not this record has been masked"""
+
+
+try:
+    TransferACHAddendaRecord.model_rebuild()
+except NameError:
+    pass

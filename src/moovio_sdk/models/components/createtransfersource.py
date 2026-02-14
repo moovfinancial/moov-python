@@ -74,3 +74,9 @@ class CreateTransferSource(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTransferSource.model_rebuild()
+except NameError:
+    pass

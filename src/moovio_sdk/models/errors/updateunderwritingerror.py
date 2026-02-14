@@ -101,3 +101,9 @@ class UpdateUnderwritingError(MoovError):
         message = body or raw_response.text
         super().__init__(message, raw_response, body)
         object.__setattr__(self, "data", data)
+
+
+try:
+    UpdateUnderwritingErrorError.model_rebuild()
+except NameError:
+    pass

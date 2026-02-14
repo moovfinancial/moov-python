@@ -102,3 +102,9 @@ class ReceiptRequest(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ReceiptRequest.model_rebuild()
+except NameError:
+    pass

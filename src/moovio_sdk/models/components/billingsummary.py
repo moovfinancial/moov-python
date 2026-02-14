@@ -375,3 +375,29 @@ class BillingSummary(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    BillingSummaryVolumeAmount.model_rebuild()
+except NameError:
+    pass
+try:
+    CardAcquiring.model_rebuild()
+except NameError:
+    pass
+try:
+    BillingSummaryPlatformFees.model_rebuild()
+except NameError:
+    pass
+try:
+    AdjustmentFees.model_rebuild()
+except NameError:
+    pass
+try:
+    OtherFees.model_rebuild()
+except NameError:
+    pass
+try:
+    BillingSummary.model_rebuild()
+except NameError:
+    pass

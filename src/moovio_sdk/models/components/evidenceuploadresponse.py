@@ -48,3 +48,9 @@ class EvidenceUploadResponse(BaseModel):
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
     r"""The date and time the evidence was uploaded."""
+
+
+try:
+    EvidenceUploadResponse.model_rebuild()
+except NameError:
+    pass

@@ -18,3 +18,9 @@ class TransferAccount(BaseModel):
     email: str
 
     display_name: Annotated[str, pydantic.Field(alias="displayName")]
+
+
+try:
+    TransferAccount.model_rebuild()
+except NameError:
+    pass

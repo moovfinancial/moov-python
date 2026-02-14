@@ -24,3 +24,9 @@ class AchLocation(BaseModel):
     postal_code_extension: Annotated[str, pydantic.Field(alias="postalCodeExtension")]
 
     state: str
+
+
+try:
+    AchLocation.model_rebuild()
+except NameError:
+    pass

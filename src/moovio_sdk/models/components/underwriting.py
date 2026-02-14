@@ -54,3 +54,9 @@ class Underwriting(BaseModel):
     ]
 
     fulfillment: FulfillmentDetails
+
+
+try:
+    Underwriting.model_rebuild()
+except NameError:
+    pass

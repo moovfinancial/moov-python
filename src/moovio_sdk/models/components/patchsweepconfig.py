@@ -86,3 +86,9 @@ class PatchSweepConfig(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PatchSweepConfig.model_rebuild()
+except NameError:
+    pass

@@ -19,3 +19,9 @@ class WebhookDataInvoiceUpdated(BaseModel):
     invoice_id: Annotated[str, pydantic.Field(alias="invoiceID")]
 
     status: InvoiceStatus
+
+
+try:
+    WebhookDataInvoiceUpdated.model_rebuild()
+except NameError:
+    pass

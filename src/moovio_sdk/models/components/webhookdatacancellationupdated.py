@@ -19,3 +19,9 @@ class WebhookDataCancellationUpdated(BaseModel):
     transfer_id: Annotated[str, pydantic.Field(alias="transferID")]
 
     status: CancellationStatus
+
+
+try:
+    WebhookDataCancellationUpdated.model_rebuild()
+except NameError:
+    pass

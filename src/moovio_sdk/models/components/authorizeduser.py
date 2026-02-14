@@ -19,3 +19,9 @@ class AuthorizedUser(BaseModel):
     first_name: Annotated[str, pydantic.Field(alias="firstName")]
 
     last_name: Annotated[str, pydantic.Field(alias="lastName")]
+
+
+try:
+    AuthorizedUser.model_rebuild()
+except NameError:
+    pass

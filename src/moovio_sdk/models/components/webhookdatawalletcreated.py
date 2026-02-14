@@ -15,3 +15,9 @@ class WebhookDataWalletCreated(BaseModel):
     account_id: Annotated[str, pydantic.Field(alias="accountID")]
 
     wallet_id: Annotated[str, pydantic.Field(alias="walletID")]
+
+
+try:
+    WebhookDataWalletCreated.model_rebuild()
+except NameError:
+    pass

@@ -58,3 +58,9 @@ class ManualTermsOfServiceUpdate(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ManualTermsOfServiceUpdate.model_rebuild()
+except NameError:
+    pass
