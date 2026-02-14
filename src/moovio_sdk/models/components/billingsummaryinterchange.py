@@ -34,3 +34,9 @@ class BillingSummaryInterchange(BaseModel):
 
     american_express: Annotated[AmountDecimal, pydantic.Field(alias="americanExpress")]
     r"""Total interchange fees for American Express."""
+
+
+try:
+    BillingSummaryInterchange.model_rebuild()
+except NameError:
+    pass

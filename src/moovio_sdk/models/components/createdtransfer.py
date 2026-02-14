@@ -194,3 +194,9 @@ class CreatedTransfer(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreatedTransfer.model_rebuild()
+except NameError:
+    pass

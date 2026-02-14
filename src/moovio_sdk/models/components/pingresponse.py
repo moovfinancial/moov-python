@@ -32,3 +32,9 @@ class PingResponse(BaseModel):
 
     response_status_code: Annotated[int, pydantic.Field(alias="responseStatusCode")]
     r"""The response status code after sending a ping event to the URL."""
+
+
+try:
+    PingResponse.model_rebuild()
+except NameError:
+    pass

@@ -58,3 +58,9 @@ class AddressSuggestion(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AddressSuggestion.model_rebuild()
+except NameError:
+    pass

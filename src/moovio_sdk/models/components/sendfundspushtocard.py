@@ -33,3 +33,9 @@ class SendFundsPushToCard(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SendFundsPushToCard.model_rebuild()
+except NameError:
+    pass

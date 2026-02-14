@@ -71,3 +71,9 @@ class LinkCard(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    LinkCard.model_rebuild()
+except NameError:
+    pass

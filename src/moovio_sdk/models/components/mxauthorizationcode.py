@@ -24,3 +24,9 @@ class MXAuthorizationCode(BaseModel):
     """
 
     authorization_code: Annotated[str, pydantic.Field(alias="authorizationCode")]
+
+
+try:
+    MXAuthorizationCode.model_rebuild()
+except NameError:
+    pass

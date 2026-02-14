@@ -45,3 +45,9 @@ class WebhookDataCapabilityRequested(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WebhookDataCapabilityRequested.model_rebuild()
+except NameError:
+    pass

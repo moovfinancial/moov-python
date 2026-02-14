@@ -16,3 +16,9 @@ class FinancialInstitutions(BaseModel):
     ach_participants: Annotated[
         List[AchParticipant], pydantic.Field(alias="achParticipants")
     ]
+
+
+try:
+    FinancialInstitutions.model_rebuild()
+except NameError:
+    pass

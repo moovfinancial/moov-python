@@ -37,3 +37,9 @@ class ACHPaymentDetailsError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ACHPaymentDetailsError.model_rebuild()
+except NameError:
+    pass

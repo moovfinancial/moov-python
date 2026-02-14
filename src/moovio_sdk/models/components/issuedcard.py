@@ -93,3 +93,9 @@ class IssuedCard(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    IssuedCard.model_rebuild()
+except NameError:
+    pass

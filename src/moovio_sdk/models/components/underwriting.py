@@ -135,3 +135,9 @@ class Underwriting(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Underwriting.model_rebuild()
+except NameError:
+    pass

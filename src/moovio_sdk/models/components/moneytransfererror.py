@@ -45,3 +45,9 @@ class MoneyTransferError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    MoneyTransferError.model_rebuild()
+except NameError:
+    pass

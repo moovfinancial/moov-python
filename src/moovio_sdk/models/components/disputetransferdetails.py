@@ -14,3 +14,9 @@ class DisputeTransferDetailsTypedDict(TypedDict):
 class DisputeTransferDetails(BaseModel):
     transfer_id: Annotated[str, pydantic.Field(alias="transferID")]
     r"""The disputed transfer's ID."""
+
+
+try:
+    DisputeTransferDetails.model_rebuild()
+except NameError:
+    pass

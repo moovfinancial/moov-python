@@ -70,3 +70,9 @@ class FileDetails(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FileDetails.model_rebuild()
+except NameError:
+    pass

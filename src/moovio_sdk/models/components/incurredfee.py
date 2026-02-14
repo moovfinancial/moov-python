@@ -91,3 +91,9 @@ class IncurredFee(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    IncurredFee.model_rebuild()
+except NameError:
+    pass

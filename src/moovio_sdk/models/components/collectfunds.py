@@ -40,3 +40,9 @@ class CollectFunds(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CollectFunds.model_rebuild()
+except NameError:
+    pass

@@ -47,3 +47,9 @@ class PaymentLinkLineItemImageMetadata(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PaymentLinkLineItemImageMetadata.model_rebuild()
+except NameError:
+    pass

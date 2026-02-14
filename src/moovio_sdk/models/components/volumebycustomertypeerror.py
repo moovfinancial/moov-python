@@ -39,3 +39,9 @@ class VolumeByCustomerTypeError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    VolumeByCustomerTypeError.model_rebuild()
+except NameError:
+    pass

@@ -36,3 +36,9 @@ class CollectFundsAchError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CollectFundsAchError.model_rebuild()
+except NameError:
+    pass

@@ -28,3 +28,9 @@ class WalletAvailableBalance(BaseModel):
     """
 
     value_decimal: Annotated[str, pydantic.Field(alias="valueDecimal")]
+
+
+try:
+    WalletAvailableBalance.model_rebuild()
+except NameError:
+    pass

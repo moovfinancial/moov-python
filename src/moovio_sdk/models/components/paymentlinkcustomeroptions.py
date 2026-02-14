@@ -46,3 +46,9 @@ class PaymentLinkCustomerOptions(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PaymentLinkCustomerOptions.model_rebuild()
+except NameError:
+    pass

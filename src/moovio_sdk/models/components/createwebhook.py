@@ -36,3 +36,9 @@ class CreateWebhook(BaseModel):
 
     description: str
     r"""A description of the webhook for reference. Can be an empty string."""
+
+
+try:
+    CreateWebhook.model_rebuild()
+except NameError:
+    pass

@@ -57,3 +57,9 @@ class IssuedCardTransaction(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    IssuedCardTransaction.model_rebuild()
+except NameError:
+    pass
