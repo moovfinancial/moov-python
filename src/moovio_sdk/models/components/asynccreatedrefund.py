@@ -24,3 +24,9 @@ class AsyncCreatedRefund(BaseModel):
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
     amount: Amount
+
+
+try:
+    AsyncCreatedRefund.model_rebuild()
+except NameError:
+    pass

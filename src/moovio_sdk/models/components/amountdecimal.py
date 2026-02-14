@@ -25,3 +25,9 @@ class AmountDecimal(BaseModel):
 
     For example, $12.987654321 is '12.987654321'.
     """
+
+
+try:
+    AmountDecimal.model_rebuild()
+except NameError:
+    pass

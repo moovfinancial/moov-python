@@ -15,3 +15,9 @@ class WebhookDataInvoiceCreated(BaseModel):
     account_id: Annotated[str, pydantic.Field(alias="accountID")]
 
     invoice_id: Annotated[str, pydantic.Field(alias="invoiceID")]
+
+
+try:
+    WebhookDataInvoiceCreated.model_rebuild()
+except NameError:
+    pass

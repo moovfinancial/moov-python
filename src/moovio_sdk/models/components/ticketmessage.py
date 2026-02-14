@@ -19,3 +19,9 @@ class TicketMessage(BaseModel):
     body: str
 
     sent_on: Annotated[datetime, pydantic.Field(alias="sentOn")]
+
+
+try:
+    TicketMessage.model_rebuild()
+except NameError:
+    pass

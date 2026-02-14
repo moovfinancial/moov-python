@@ -41,3 +41,9 @@ class UpdateApplePayMerchantDomains(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateApplePayMerchantDomains.model_rebuild()
+except NameError:
+    pass

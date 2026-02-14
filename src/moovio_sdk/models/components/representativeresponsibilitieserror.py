@@ -43,3 +43,9 @@ class RepresentativeResponsibilitiesError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RepresentativeResponsibilitiesError.model_rebuild()
+except NameError:
+    pass

@@ -74,3 +74,9 @@ class CreateRepresentative(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateRepresentative.model_rebuild()
+except NameError:
+    pass

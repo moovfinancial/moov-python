@@ -47,3 +47,9 @@ class SendFunds(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SendFunds.model_rebuild()
+except NameError:
+    pass

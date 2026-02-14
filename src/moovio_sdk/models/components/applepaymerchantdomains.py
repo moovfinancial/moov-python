@@ -30,3 +30,9 @@ class ApplePayMerchantDomains(BaseModel):
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
+
+
+try:
+    ApplePayMerchantDomains.model_rebuild()
+except NameError:
+    pass

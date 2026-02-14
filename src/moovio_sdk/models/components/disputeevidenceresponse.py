@@ -71,3 +71,9 @@ class DisputeEvidenceResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DisputeEvidenceResponse.model_rebuild()
+except NameError:
+    pass

@@ -15,3 +15,9 @@ class WebhookDataSweepCreated(BaseModel):
     wallet_id: Annotated[str, pydantic.Field(alias="walletID")]
 
     sweep_id: Annotated[str, pydantic.Field(alias="sweepID")]
+
+
+try:
+    WebhookDataSweepCreated.model_rebuild()
+except NameError:
+    pass

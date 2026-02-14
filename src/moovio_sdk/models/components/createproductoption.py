@@ -61,3 +61,9 @@ class CreateProductOption(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateProductOption.model_rebuild()
+except NameError:
+    pass

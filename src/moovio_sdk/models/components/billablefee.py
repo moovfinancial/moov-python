@@ -77,3 +77,9 @@ class BillableFee(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    BillableFee.model_rebuild()
+except NameError:
+    pass

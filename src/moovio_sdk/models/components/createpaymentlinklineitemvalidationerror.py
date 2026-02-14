@@ -54,3 +54,9 @@ class CreatePaymentLinkLineItemValidationError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreatePaymentLinkLineItemValidationError.model_rebuild()
+except NameError:
+    pass

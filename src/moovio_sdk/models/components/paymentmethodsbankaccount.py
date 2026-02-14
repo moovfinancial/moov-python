@@ -63,3 +63,9 @@ class PaymentMethodsBankAccount(BaseModel):
     ]
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
+
+
+try:
+    PaymentMethodsBankAccount.model_rebuild()
+except NameError:
+    pass

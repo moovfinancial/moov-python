@@ -54,3 +54,9 @@ class CreateIndividualProfile(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateIndividualProfile.model_rebuild()
+except NameError:
+    pass

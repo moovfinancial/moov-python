@@ -56,3 +56,9 @@ class UpdateCardAddress(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    UpdateCardAddress.model_rebuild()
+except NameError:
+    pass

@@ -137,3 +137,17 @@ class CreateIndividualError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateIndividualErrorSsn.model_rebuild()
+except NameError:
+    pass
+try:
+    CreateIndividualErrorItin.model_rebuild()
+except NameError:
+    pass
+try:
+    CreateIndividualError.model_rebuild()
+except NameError:
+    pass

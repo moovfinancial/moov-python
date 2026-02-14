@@ -139,3 +139,9 @@ class WalletTransaction(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WalletTransaction.model_rebuild()
+except NameError:
+    pass

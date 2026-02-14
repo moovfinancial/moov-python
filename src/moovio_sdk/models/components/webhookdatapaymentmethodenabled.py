@@ -18,3 +18,9 @@ class WebhookDataPaymentMethodEnabled(BaseModel):
     payment_method_id: Annotated[str, pydantic.Field(alias="paymentMethodID")]
 
     source_id: Annotated[str, pydantic.Field(alias="sourceID")]
+
+
+try:
+    WebhookDataPaymentMethodEnabled.model_rebuild()
+except NameError:
+    pass

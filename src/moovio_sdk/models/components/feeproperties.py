@@ -72,3 +72,9 @@ class FeeProperties(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FeeProperties.model_rebuild()
+except NameError:
+    pass

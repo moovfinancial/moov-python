@@ -74,3 +74,9 @@ class FeePlan(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FeePlan.model_rebuild()
+except NameError:
+    pass

@@ -62,3 +62,9 @@ class IndividualProfile(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    IndividualProfile.model_rebuild()
+except NameError:
+    pass

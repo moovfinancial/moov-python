@@ -55,3 +55,9 @@ class PaymentDetailsError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PaymentDetailsError.model_rebuild()
+except NameError:
+    pass

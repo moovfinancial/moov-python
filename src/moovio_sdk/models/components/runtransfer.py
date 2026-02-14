@@ -64,3 +64,9 @@ class RunTransfer(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RunTransfer.model_rebuild()
+except NameError:
+    pass

@@ -81,3 +81,9 @@ class RTPTransactionDetails(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RTPTransactionDetails.model_rebuild()
+except NameError:
+    pass

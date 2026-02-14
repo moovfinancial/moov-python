@@ -33,3 +33,9 @@ class WebhookDataAccountDisconnected(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WebhookDataAccountDisconnected.model_rebuild()
+except NameError:
+    pass

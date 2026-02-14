@@ -19,3 +19,9 @@ class BankAccountVerificationCreated(BaseModel):
     ]
 
     status: BankAccountVerificationStatus
+
+
+try:
+    BankAccountVerificationCreated.model_rebuild()
+except NameError:
+    pass

@@ -39,3 +39,9 @@ class PayoutDetailsError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PayoutDetailsError.model_rebuild()
+except NameError:
+    pass

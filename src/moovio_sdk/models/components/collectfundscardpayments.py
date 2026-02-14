@@ -64,3 +64,9 @@ class CollectFundsCardPayments(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CollectFundsCardPayments.model_rebuild()
+except NameError:
+    pass

@@ -34,3 +34,9 @@ class CardAcquiringFees(BaseModel):
 
     american_express: Annotated[CardBrandFees, pydantic.Field(alias="americanExpress")]
     r"""Fees associated with American Express transactions."""
+
+
+try:
+    CardAcquiringFees.model_rebuild()
+except NameError:
+    pass

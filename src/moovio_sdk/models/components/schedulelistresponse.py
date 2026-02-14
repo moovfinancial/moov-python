@@ -102,3 +102,9 @@ class ScheduleListResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ScheduleListResponse.model_rebuild()
+except NameError:
+    pass

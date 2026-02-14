@@ -19,3 +19,9 @@ class WebhookTransferPaymentMethodDetails(BaseModel):
     account_id: Annotated[str, pydantic.Field(alias="accountID")]
 
     payment_method_id: Annotated[str, pydantic.Field(alias="paymentMethodID")]
+
+
+try:
+    WebhookTransferPaymentMethodDetails.model_rebuild()
+except NameError:
+    pass

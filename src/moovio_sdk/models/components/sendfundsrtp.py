@@ -33,3 +33,9 @@ class SendFundsRtp(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SendFundsRtp.model_rebuild()
+except NameError:
+    pass

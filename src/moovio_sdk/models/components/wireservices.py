@@ -28,3 +28,9 @@ class WireServices(BaseModel):
         bool, pydantic.Field(alias="bookEntrySecuritiesTransferStatus")
     ]
     r"""The institution's capability to handle transfers of securities."""
+
+
+try:
+    WireServices.model_rebuild()
+except NameError:
+    pass
