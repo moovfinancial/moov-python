@@ -68,3 +68,9 @@ class RefundCardDetails(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RefundCardDetails.model_rebuild()
+except NameError:
+    pass

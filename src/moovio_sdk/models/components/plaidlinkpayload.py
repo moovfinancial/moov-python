@@ -43,3 +43,9 @@ class PlaidLinkPayload(BaseModel):
     Please see <a href=\"https://plaid.com/docs/api/sandbox/#sandboxpublic_tokencreate\" target=\"_blank\">Plaid's sandbox documentation</a> for more
     details.
     """
+
+
+try:
+    PlaidLinkPayload.model_rebuild()
+except NameError:
+    pass

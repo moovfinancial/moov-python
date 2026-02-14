@@ -122,3 +122,9 @@ class OccurrencesResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    OccurrencesResponse.model_rebuild()
+except NameError:
+    pass

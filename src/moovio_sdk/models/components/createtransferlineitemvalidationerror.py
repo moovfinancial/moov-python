@@ -59,3 +59,9 @@ class CreateTransferLineItemValidationError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTransferLineItemValidationError.model_rebuild()
+except NameError:
+    pass

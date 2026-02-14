@@ -21,3 +21,9 @@ class RTPServices(BaseModel):
         bool, pydantic.Field(alias="receiveRequestForPayment")
     ]
     r"""Can the institution receive request for payment messages"""
+
+
+try:
+    RTPServices.model_rebuild()
+except NameError:
+    pass

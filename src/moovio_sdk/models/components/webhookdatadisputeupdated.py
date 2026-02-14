@@ -39,3 +39,9 @@ class WebhookDataDisputeUpdated(BaseModel):
 
     phase: DisputePhase
     r"""The phase of a dispute within the dispute lifecycle."""
+
+
+try:
+    WebhookDataDisputeUpdated.model_rebuild()
+except NameError:
+    pass

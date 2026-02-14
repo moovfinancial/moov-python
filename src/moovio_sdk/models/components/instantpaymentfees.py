@@ -100,3 +100,9 @@ class InstantPaymentFees(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    InstantPaymentFees.model_rebuild()
+except NameError:
+    pass

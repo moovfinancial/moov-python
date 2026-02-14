@@ -100,3 +100,9 @@ class RepresentativeValidationError(MoovError):
         message = body or raw_response.text
         super().__init__(message, raw_response, body)
         object.__setattr__(self, "data", data)
+
+
+try:
+    Error.model_rebuild()
+except NameError:
+    pass

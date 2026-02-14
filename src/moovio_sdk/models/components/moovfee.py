@@ -36,3 +36,9 @@ class MoovFee(BaseModel):
 
     fee_i_ds: Annotated[List[str], pydantic.Field(alias="feeIDs")]
     r"""List of fee IDs that sum to the totalAmount."""
+
+
+try:
+    MoovFee.model_rebuild()
+except NameError:
+    pass

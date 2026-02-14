@@ -155,3 +155,9 @@ class Statement(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Statement.model_rebuild()
+except NameError:
+    pass

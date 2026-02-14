@@ -22,3 +22,9 @@ class BasicPaymentMethod(BaseModel):
         PaymentMethodType, pydantic.Field(alias="paymentMethodType")
     ]
     r"""The payment method type that represents a payment rail and directionality"""
+
+
+try:
+    BasicPaymentMethod.model_rebuild()
+except NameError:
+    pass

@@ -24,3 +24,9 @@ class CardAcquiringDispute(BaseModel):
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
     amount: Amount
+
+
+try:
+    CardAcquiringDispute.model_rebuild()
+except NameError:
+    pass

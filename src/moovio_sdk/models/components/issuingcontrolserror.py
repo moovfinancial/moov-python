@@ -37,3 +37,9 @@ class IssuingControlsError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    IssuingControlsError.model_rebuild()
+except NameError:
+    pass

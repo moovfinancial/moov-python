@@ -44,3 +44,9 @@ class ShareScopes(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ShareScopes.model_rebuild()
+except NameError:
+    pass

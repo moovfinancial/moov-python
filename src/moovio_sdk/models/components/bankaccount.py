@@ -113,3 +113,9 @@ class BankAccount(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    BankAccount.model_rebuild()
+except NameError:
+    pass

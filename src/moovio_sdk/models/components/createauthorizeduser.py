@@ -41,3 +41,9 @@ class CreateAuthorizedUser(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateAuthorizedUser.model_rebuild()
+except NameError:
+    pass

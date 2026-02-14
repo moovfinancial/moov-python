@@ -34,3 +34,9 @@ class CreateTransferDestinationCard(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTransferDestinationCard.model_rebuild()
+except NameError:
+    pass

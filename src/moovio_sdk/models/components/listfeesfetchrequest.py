@@ -34,3 +34,9 @@ class ListFeesFetchRequest(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ListFeesFetchRequest.model_rebuild()
+except NameError:
+    pass

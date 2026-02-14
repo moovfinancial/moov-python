@@ -47,3 +47,9 @@ class ScheduledTransferImageMetadata(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ScheduledTransferImageMetadata.model_rebuild()
+except NameError:
+    pass

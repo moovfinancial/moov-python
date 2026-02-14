@@ -35,3 +35,9 @@ class SourceDestinationOptions(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SourceDestinationOptions.model_rebuild()
+except NameError:
+    pass

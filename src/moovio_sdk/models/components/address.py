@@ -45,3 +45,9 @@ class Address(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Address.model_rebuild()
+except NameError:
+    pass

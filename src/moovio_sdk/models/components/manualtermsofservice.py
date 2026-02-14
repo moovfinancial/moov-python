@@ -32,3 +32,9 @@ class ManualTermsOfService(BaseModel):
     r"""The user-agent of the user making the request."""
 
     accepted_domain: Annotated[str, pydantic.Field(alias="acceptedDomain")]
+
+
+try:
+    ManualTermsOfService.model_rebuild()
+except NameError:
+    pass

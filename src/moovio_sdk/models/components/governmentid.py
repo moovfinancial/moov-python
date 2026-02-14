@@ -87,3 +87,13 @@ class GovernmentID(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Ssn.model_rebuild()
+except NameError:
+    pass
+try:
+    Itin.model_rebuild()
+except NameError:
+    pass

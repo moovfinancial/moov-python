@@ -35,3 +35,9 @@ class FulfillmentDetailsError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FulfillmentDetailsError.model_rebuild()
+except NameError:
+    pass

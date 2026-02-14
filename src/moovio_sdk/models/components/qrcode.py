@@ -14,3 +14,9 @@ class QRCodeTypedDict(TypedDict):
 class QRCode(BaseModel):
     qr_code: Annotated[str, pydantic.Field(alias="qrCode")]
     r"""A base64-encoded PNG image of the QR code."""
+
+
+try:
+    QRCode.model_rebuild()
+except NameError:
+    pass

@@ -38,3 +38,9 @@ class CardPaymentDetails(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CardPaymentDetails.model_rebuild()
+except NameError:
+    pass

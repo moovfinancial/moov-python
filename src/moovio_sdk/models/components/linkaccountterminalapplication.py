@@ -20,3 +20,9 @@ class LinkAccountTerminalApplication(BaseModel):
         str, pydantic.Field(alias="terminalApplicationID")
     ]
     r"""ID of the terminal application."""
+
+
+try:
+    LinkAccountTerminalApplication.model_rebuild()
+except NameError:
+    pass

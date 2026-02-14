@@ -48,3 +48,9 @@ class ProductOptionGroupValidationError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ProductOptionGroupValidationError.model_rebuild()
+except NameError:
+    pass

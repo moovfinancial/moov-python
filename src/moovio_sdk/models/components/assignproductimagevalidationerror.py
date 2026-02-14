@@ -30,3 +30,9 @@ class AssignProductImageValidationError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AssignProductImageValidationError.model_rebuild()
+except NameError:
+    pass

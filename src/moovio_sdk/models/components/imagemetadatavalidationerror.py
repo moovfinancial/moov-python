@@ -30,3 +30,9 @@ class ImageMetadataValidationError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ImageMetadataValidationError.model_rebuild()
+except NameError:
+    pass

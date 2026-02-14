@@ -59,3 +59,9 @@ class RequestCard(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RequestCard.model_rebuild()
+except NameError:
+    pass

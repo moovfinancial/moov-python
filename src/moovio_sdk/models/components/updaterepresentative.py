@@ -330,3 +330,29 @@ class UpdateRepresentative(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Phone.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateRepresentativeAddress.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateRepresentativeSsn.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateRepresentativeItin.model_rebuild()
+except NameError:
+    pass
+try:
+    Responsibilities.model_rebuild()
+except NameError:
+    pass
+try:
+    UpdateRepresentative.model_rebuild()
+except NameError:
+    pass

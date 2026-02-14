@@ -27,3 +27,9 @@ class PaymentMethodsWallet(BaseModel):
     - `default`: The system-generated wallet automatically created when an account is granted the wallet capability.
     - `general`: An additional, user-defined wallet created via API or Dashboard.
     """
+
+
+try:
+    PaymentMethodsWallet.model_rebuild()
+except NameError:
+    pass

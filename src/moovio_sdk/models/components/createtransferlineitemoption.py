@@ -59,3 +59,9 @@ class CreateTransferLineItemOption(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateTransferLineItemOption.model_rebuild()
+except NameError:
+    pass

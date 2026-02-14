@@ -63,3 +63,9 @@ class FacilitatorFee(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    FacilitatorFee.model_rebuild()
+except NameError:
+    pass

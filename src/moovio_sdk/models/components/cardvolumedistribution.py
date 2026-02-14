@@ -27,3 +27,9 @@ class CardVolumeDistribution(BaseModel):
     debt_repayment_percentage: Annotated[
         int, pydantic.Field(alias="debtRepaymentPercentage")
     ]
+
+
+try:
+    CardVolumeDistribution.model_rebuild()
+except NameError:
+    pass

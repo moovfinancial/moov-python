@@ -46,3 +46,9 @@ class SweepConfigPaymentMethod(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    SweepConfigPaymentMethod.model_rebuild()
+except NameError:
+    pass

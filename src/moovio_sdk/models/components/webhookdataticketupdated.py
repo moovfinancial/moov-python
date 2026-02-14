@@ -40,3 +40,9 @@ class WebhookDataTicketUpdated(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WebhookDataTicketUpdated.model_rebuild()
+except NameError:
+    pass

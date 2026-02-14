@@ -118,3 +118,13 @@ class BillingSummaryDetails(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    VolumeAmount.model_rebuild()
+except NameError:
+    pass
+try:
+    BillingSummaryDetails.model_rebuild()
+except NameError:
+    pass
