@@ -52,3 +52,9 @@ class VolumeRange(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    VolumeRange.model_rebuild()
+except NameError:
+    pass

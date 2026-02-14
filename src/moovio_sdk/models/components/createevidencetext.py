@@ -18,3 +18,9 @@ class CreateEvidenceText(BaseModel):
     r"""The text to associate with the dispute as evidence."""
 
     evidence_type: Annotated[EvidenceType, pydantic.Field(alias="evidenceType")]
+
+
+try:
+    CreateEvidenceText.model_rebuild()
+except NameError:
+    pass

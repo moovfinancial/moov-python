@@ -60,3 +60,9 @@ class PatchIndividual(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PatchIndividual.model_rebuild()
+except NameError:
+    pass

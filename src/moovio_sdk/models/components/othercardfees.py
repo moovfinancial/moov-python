@@ -45,3 +45,9 @@ class OtherCardFees(BaseModel):
 
     total: BillingCountAndAmount
     r"""Total other card fees."""
+
+
+try:
+    OtherCardFees.model_rebuild()
+except NameError:
+    pass

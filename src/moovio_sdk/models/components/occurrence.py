@@ -59,3 +59,9 @@ class Occurrence(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    Occurrence.model_rebuild()
+except NameError:
+    pass

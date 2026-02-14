@@ -108,3 +108,9 @@ class PatchBusiness(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    PatchBusiness.model_rebuild()
+except NameError:
+    pass

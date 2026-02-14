@@ -31,3 +31,9 @@ class PartnerFees(BaseModel):
 
     total: AmountDecimal
     r"""Total partner fees."""
+
+
+try:
+    PartnerFees.model_rebuild()
+except NameError:
+    pass

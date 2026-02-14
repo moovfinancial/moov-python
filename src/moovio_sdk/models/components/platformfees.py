@@ -35,3 +35,9 @@ class PlatformFees(BaseModel):
 
     total: AmountDecimal
     r"""Total platform fees."""
+
+
+try:
+    PlatformFees.model_rebuild()
+except NameError:
+    pass

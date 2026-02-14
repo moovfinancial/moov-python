@@ -87,3 +87,13 @@ class GovernmentIDError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    GovernmentIDErrorSsn.model_rebuild()
+except NameError:
+    pass
+try:
+    GovernmentIDErrorItin.model_rebuild()
+except NameError:
+    pass

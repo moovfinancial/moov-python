@@ -75,3 +75,9 @@ class AchParticipant(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    AchParticipant.model_rebuild()
+except NameError:
+    pass

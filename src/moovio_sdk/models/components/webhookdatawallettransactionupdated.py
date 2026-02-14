@@ -49,3 +49,9 @@ class WebhookDataWalletTransactionUpdated(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WebhookDataWalletTransactionUpdated.model_rebuild()
+except NameError:
+    pass

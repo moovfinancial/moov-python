@@ -171,3 +171,9 @@ class CreateBusinessError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateBusinessError.model_rebuild()
+except NameError:
+    pass

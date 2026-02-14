@@ -53,3 +53,9 @@ class WebhookDataBankAccountUpdated(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WebhookDataBankAccountUpdated.model_rebuild()
+except NameError:
+    pass

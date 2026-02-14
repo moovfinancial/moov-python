@@ -39,3 +39,9 @@ class RequirementError(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RequirementError.model_rebuild()
+except NameError:
+    pass

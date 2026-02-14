@@ -122,3 +122,9 @@ class TerminalCard(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TerminalCard.model_rebuild()
+except NameError:
+    pass

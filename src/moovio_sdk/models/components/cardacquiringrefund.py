@@ -57,3 +57,9 @@ class CardAcquiringRefund(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CardAcquiringRefund.model_rebuild()
+except NameError:
+    pass

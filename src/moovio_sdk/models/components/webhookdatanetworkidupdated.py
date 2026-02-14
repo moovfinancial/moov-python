@@ -50,3 +50,9 @@ class WebhookDataNetworkIDUpdated(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    WebhookDataNetworkIDUpdated.model_rebuild()
+except NameError:
+    pass

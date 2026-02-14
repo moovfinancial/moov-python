@@ -165,3 +165,9 @@ class ListTicketsResponse(BaseModel):
     headers: Dict[str, List[str]]
 
     result: ListTicketsResponseBody
+
+
+try:
+    ListTicketsResponseBody.model_rebuild()
+except NameError:
+    pass

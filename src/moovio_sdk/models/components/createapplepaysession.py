@@ -19,3 +19,9 @@ class CreateApplePaySession(BaseModel):
 
     display_name: Annotated[str, pydantic.Field(alias="displayName")]
     r"""A UTF-8 string to display in the Buy button."""
+
+
+try:
+    CreateApplePaySession.model_rebuild()
+except NameError:
+    pass

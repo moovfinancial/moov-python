@@ -59,3 +59,9 @@ class CreateScheduledTransferLineItemOption(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CreateScheduledTransferLineItemOption.model_rebuild()
+except NameError:
+    pass

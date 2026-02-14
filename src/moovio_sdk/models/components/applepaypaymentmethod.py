@@ -31,3 +31,9 @@ class ApplePayPaymentMethod(BaseModel):
 
     apple_pay: Annotated[ApplePayResponse, pydantic.Field(alias="applePay")]
     r"""Describes an Apple Pay token on a Moov account."""
+
+
+try:
+    ApplePayPaymentMethod.model_rebuild()
+except NameError:
+    pass

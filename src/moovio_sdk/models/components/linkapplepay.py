@@ -69,3 +69,9 @@ class LinkApplePay(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    LinkApplePay.model_rebuild()
+except NameError:
+    pass

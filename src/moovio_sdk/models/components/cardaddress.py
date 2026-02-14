@@ -49,3 +49,9 @@ class CardAddress(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    CardAddress.model_rebuild()
+except NameError:
+    pass

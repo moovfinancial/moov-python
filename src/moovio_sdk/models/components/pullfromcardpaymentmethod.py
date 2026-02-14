@@ -31,3 +31,9 @@ class PullFromCardPaymentMethod(BaseModel):
 
     card: PaymentMethodsCard
     r"""A card as contained within a payment method."""
+
+
+try:
+    PullFromCardPaymentMethod.model_rebuild()
+except NameError:
+    pass

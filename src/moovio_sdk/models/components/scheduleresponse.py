@@ -73,3 +73,9 @@ class ScheduleResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ScheduleResponse.model_rebuild()
+except NameError:
+    pass

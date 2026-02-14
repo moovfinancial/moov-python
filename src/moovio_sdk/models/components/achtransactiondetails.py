@@ -135,3 +135,9 @@ class ACHTransactionDetails(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ACHTransactionDetails.model_rebuild()
+except NameError:
+    pass

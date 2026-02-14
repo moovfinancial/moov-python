@@ -14,3 +14,9 @@ class AssignProductImageTypedDict(TypedDict):
 class AssignProductImage(BaseModel):
     image_id: Annotated[str, pydantic.Field(alias="imageID")]
     r"""Unique identifier for a product or product option image resource."""
+
+
+try:
+    AssignProductImage.model_rebuild()
+except NameError:
+    pass

@@ -38,3 +38,9 @@ class IndustryTaxonomy(BaseModel):
 
     default_mcc: Annotated[str, pydantic.Field(alias="defaultMcc")]
     r"""Default Merchant Category Code"""
+
+
+try:
+    IndustryTaxonomy.model_rebuild()
+except NameError:
+    pass

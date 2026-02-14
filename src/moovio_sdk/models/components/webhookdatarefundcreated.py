@@ -18,3 +18,9 @@ class WebhookDataRefundCreated(BaseModel):
     transfer_id: Annotated[str, pydantic.Field(alias="transferID")]
 
     refund_id: Annotated[str, pydantic.Field(alias="refundID")]
+
+
+try:
+    WebhookDataRefundCreated.model_rebuild()
+except NameError:
+    pass

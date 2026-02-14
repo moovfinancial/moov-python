@@ -19,3 +19,9 @@ class VolumeByCustomerType(BaseModel):
     consumer_to_business_percentage: Annotated[
         int, pydantic.Field(alias="consumerToBusinessPercentage")
     ]
+
+
+try:
+    VolumeByCustomerType.model_rebuild()
+except NameError:
+    pass

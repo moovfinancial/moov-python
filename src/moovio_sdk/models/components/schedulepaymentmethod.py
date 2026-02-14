@@ -103,3 +103,17 @@ class SchedulePaymentMethod(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    AchDetails.model_rebuild()
+except NameError:
+    pass
+try:
+    CardDetails.model_rebuild()
+except NameError:
+    pass
+try:
+    SchedulePaymentMethod.model_rebuild()
+except NameError:
+    pass

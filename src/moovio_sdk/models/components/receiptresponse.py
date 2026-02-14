@@ -122,3 +122,9 @@ class ReceiptResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    ReceiptResponse.model_rebuild()
+except NameError:
+    pass
