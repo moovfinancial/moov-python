@@ -5,15 +5,15 @@ management:
   docVersion: dev
   speakeasyVersion: 1.719.0
   generationVersion: 2.824.1
-  releaseVersion: 0.0.0-dev.0
-  configChecksum: 473a77824c42562fdb834addb0365410
+  releaseVersion: 0.0.0-dev.1
+  configChecksum: 668072834e4e09d93d17dbbbdf7feba5
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 60902d41-8695-4880-b232-0efd73b4a581
-  pristine_commit_hash: bc45b9a80ffaf74087cfc1c8a197651e95dc1702
-  pristine_tree_hash: f80f440545a575cadfd9577654f904c2e71d8515
+  generation_id: 24d2b053-f1e7-4bd6-a2b1-9e5dbe8608f8
+  pristine_commit_hash: 2d9285968851a90e4fd9c2983586da67089e3834
+  pristine_tree_hash: 8d3a6bcc82f61def2e464a565e124eae585df2f5
 features:
   python:
     acceptHeaders: 3.0.0
@@ -5146,8 +5146,8 @@ trackedFiles:
     pristine_git_object: 67032e59a75c386c27ba1da8e133e59ccc90bb96
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:162ab0da30a3a043b2ae1de02a7412802bb05239
-    pristine_git_object: adedba875ac555223c9b178a625d7b2147e3a3aa
+    last_write_checksum: sha1:0e4d060ae543bf557a34e91f4edcc04637eebfa1
+    pristine_git_object: b92919baa15126d8a7e8facfa4e3dedd863ee130
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -5174,8 +5174,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:bdb2bd90a8340caa331a3de34c9b53c5114df98d
-    pristine_git_object: f4a78fd18814366bf8d7e5bb3a049afd8766bf12
+    last_write_checksum: sha1:48a79c656db43f3782322fdb0a9037fa7f5411b1
+    pristine_git_object: 0c15f209bbc1954c6969bd61cf67cb40bee24515
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
