@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 145e11e0c8aaacc80575c66f9ba14dfe
+  docChecksum: 0c117326e7d829c0dc66cba8ce74bf34
   docVersion: v2024.01.00
-  speakeasyVersion: 1.716.0
-  generationVersion: 2.823.1
-  releaseVersion: 24.1.8
-  configChecksum: 9eb71a1a6f5eb48f257a6ff69bac845d
+  speakeasyVersion: 1.719.1
+  generationVersion: 2.824.1
+  releaseVersion: 24.1.9
+  configChecksum: c682082be84d07133fbe17a2e13d14b6
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 1c212dde-a977-422d-8019-443d144c05f9
-  pristine_commit_hash: 71b0240bd6daccb21663188d38c25862049e9eb7
-  pristine_tree_hash: d2b8d245e780201ac1f4074ea776eb1a32c951ff
+  generation_id: 100e8b3e-f72c-4491-acad-e47ed2bca585
+  pristine_commit_hash: 725ec418b4ece9dcd2058b2079c4038d28cae290
+  pristine_tree_hash: 7310542a81886f8f2406d1243bb5dc86dafa761f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4614,8 +4614,8 @@ trackedFiles:
     pristine_git_object: 67032e59a75c386c27ba1da8e133e59ccc90bb96
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:d8443bc25961d1ad1a20288de23cd1703e39ed46
-    pristine_git_object: f4198cbfaaeeca8b61a669f3b935301ff9f7448c
+    last_write_checksum: sha1:3230f4bd4ae66d11aff067b6942494118d0a3038
+    pristine_git_object: d18e33b1e9a41390bfcdb8d14801b29efe729c06
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4642,8 +4642,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:4937a1e72110844b2fe62fb669817167a618feaf
-    pristine_git_object: 4f8f82d431fc19586e9437c30b403f512c060316
+    last_write_checksum: sha1:c1a4ce9d702912e77dd987ef512328488bb51972
+    pristine_git_object: 5db28d624bd5e41ab414b3af03f9a5d97d58e70f
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:26402624da84c1d85504f25f1c1027f116c0e2b6
