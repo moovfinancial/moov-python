@@ -1961,7 +1961,7 @@ class Transfers(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_refund,
+                request.create_refund if request is not None else None,
                 False,
                 True,
                 "json",
@@ -2116,7 +2116,7 @@ class Transfers(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_refund,
+                request.create_refund if request is not None else None,
                 False,
                 True,
                 "json",
@@ -2680,7 +2680,7 @@ class Transfers(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_reversal,
+                request.create_reversal if request is not None else None,
                 False,
                 True,
                 "json",
@@ -2818,7 +2818,7 @@ class Transfers(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_reversal,
+                request.create_reversal if request is not None else None,
                 False,
                 True,
                 "json",
