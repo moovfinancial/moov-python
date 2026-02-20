@@ -7,3 +7,4 @@ from enum import Enum
 class PaymentLinkType(str, Enum):
     PAYMENT = "payment"
     PAYOUT = "payout"
+    INVOICE_PAYMENT = "invoice-payment"
