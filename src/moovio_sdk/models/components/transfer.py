@@ -67,6 +67,8 @@ class TransferTypedDict(TypedDict):
     r"""An optional collection of line items for a transfer.
     When line items are provided, their total plus sales tax must equal the transfer amount.
     """
+    invoice_id: NotRequired[str]
+    r"""ID of the invoice that the transfer is associated with."""
 
 
 class Transfer(BaseModel):
@@ -165,6 +167,9 @@ class Transfer(BaseModel):
     When line items are provided, their total plus sales tax must equal the transfer amount.
     """
 
+    invoice_id: Annotated[Optional[str], pydantic.Field(alias="invoiceID")] = None
+    r"""ID of the invoice that the transfer is associated with."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -191,6 +196,7 @@ class Transfer(BaseModel):
                 "salesTaxAmount",
                 "foreignID",
                 "lineItems",
+                "invoiceID",
             ]
         )
         serialized = handler(self)

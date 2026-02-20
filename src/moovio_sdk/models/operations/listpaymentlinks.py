@@ -3,7 +3,6 @@
 from __future__ import annotations
 from moovio_sdk.models.components import (
     paymentlink as components_paymentlink,
-    paymentlinkstatus as components_paymentlinkstatus,
     paymentlinktype as components_paymentlinktype,
 )
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
@@ -29,7 +28,7 @@ class ListPaymentLinksGlobalsTypedDict(TypedDict):
     - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    The `dev` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
     When no version is specified, the API defaults to `v2024.01.00`.
     """
 
@@ -48,7 +47,7 @@ class ListPaymentLinksGlobals(BaseModel):
     - `BB` is the build number, starting at `.01`, for subsequent builds in the same quarter.
     - For example, `v2024.01.00` is the initial release of the first quarter of 2024.
 
-    The `latest` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
+    The `dev` version represents the most recent development state. It may include breaking changes and should be treated as a beta release.
     When no version is specified, the API defaults to `v2024.01.00`.
     """
 
@@ -74,8 +73,8 @@ class ListPaymentLinksRequestTypedDict(TypedDict):
     r"""The merchant account ID."""
     skip: NotRequired[int]
     count: NotRequired[int]
-    type: NotRequired[components_paymentlinktype.PaymentLinkType]
-    status: NotRequired[components_paymentlinkstatus.PaymentLinkStatus]
+    types: NotRequired[List[components_paymentlinktype.PaymentLinkType]]
+    r"""A comma-separated list of payment link types to filter results."""
 
 
 class ListPaymentLinksRequest(BaseModel):
@@ -96,19 +95,15 @@ class ListPaymentLinksRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
 
-    type: Annotated[
-        Optional[components_paymentlinktype.PaymentLinkType],
+    types: Annotated[
+        Optional[List[components_paymentlinktype.PaymentLinkType]],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
-
-    status: Annotated[
-        Optional[components_paymentlinkstatus.PaymentLinkStatus],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
+    r"""A comma-separated list of payment link types to filter results."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["skip", "count", "type", "status"])
+        optional_fields = set(["skip", "count", "types"])
         serialized = handler(self)
         m = {}
 

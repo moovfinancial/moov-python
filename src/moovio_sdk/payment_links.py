@@ -424,8 +424,7 @@ class PaymentLinks(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        type_: Optional[components.PaymentLinkType] = None,
-        status: Optional[components.PaymentLinkStatus] = None,
+        types: Optional[List[components.PaymentLinkType]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -439,8 +438,7 @@ class PaymentLinks(BaseSDK):
         :param account_id: The merchant account ID.
         :param skip:
         :param count:
-        :param type:
-        :param status:
+        :param types: A comma-separated list of payment link types to filter results.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -459,8 +457,7 @@ class PaymentLinks(BaseSDK):
         request = operations.ListPaymentLinksRequest(
             skip=skip,
             count=count,
-            type=type_,
-            status=status,
+            types=types,
             account_id=account_id,
         )
 
@@ -533,8 +530,7 @@ class PaymentLinks(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        type_: Optional[components.PaymentLinkType] = None,
-        status: Optional[components.PaymentLinkStatus] = None,
+        types: Optional[List[components.PaymentLinkType]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -548,8 +544,7 @@ class PaymentLinks(BaseSDK):
         :param account_id: The merchant account ID.
         :param skip:
         :param count:
-        :param type:
-        :param status:
+        :param types: A comma-separated list of payment link types to filter results.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -568,8 +563,7 @@ class PaymentLinks(BaseSDK):
         request = operations.ListPaymentLinksRequest(
             skip=skip,
             count=count,
-            type=type_,
-            status=status,
+            types=types,
             account_id=account_id,
         )
 
