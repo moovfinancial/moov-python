@@ -29,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 0.0.0-dev.1
+  version: 0.0.0-dev.2
   additionalDependencies:
     dev: {}
     main: {}
@@ -50,6 +50,8 @@ python:
   enumFormat: enum
   envVarPrefix: MOOV
   fixFlags:
+    asyncPaginationSep2025: false
+    conflictResistantModelImportsFeb2026: false
     responseRequiredSep2024: true
   flattenGlobalSecurity: true
   flattenRequests: true

@@ -5,10 +5,6 @@ from .amountdecimalvalidationerror import (
     AmountDecimalValidationError,
     AmountDecimalValidationErrorTypedDict,
 )
-from .invoicelineitemimagevalidationerror import (
-    InvoiceLineItemImageValidationError,
-    InvoiceLineItemImageValidationErrorTypedDict,
-)
 from .invoicelineitemoptionvalidationerror import (
     InvoiceLineItemOptionValidationError,
     InvoiceLineItemOptionValidationErrorTypedDict,
@@ -26,7 +22,6 @@ class InvoiceLineItemValidationErrorTypedDict(TypedDict):
     base_price: NotRequired[AmountDecimalValidationErrorTypedDict]
     options: NotRequired[Dict[str, InvoiceLineItemOptionValidationErrorTypedDict]]
     quantity: NotRequired[str]
-    images: NotRequired[Dict[str, InvoiceLineItemImageValidationErrorTypedDict]]
 
 
 class InvoiceLineItemValidationError(BaseModel):
@@ -42,13 +37,9 @@ class InvoiceLineItemValidationError(BaseModel):
 
     quantity: Optional[str] = None
 
-    images: Optional[Dict[str, InvoiceLineItemImageValidationError]] = None
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(
-            ["productID", "name", "basePrice", "options", "quantity", "images"]
-        )
+        optional_fields = set(["productID", "name", "basePrice", "options", "quantity"])
         serialized = handler(self)
         m = {}
 
