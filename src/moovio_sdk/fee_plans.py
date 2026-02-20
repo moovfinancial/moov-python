@@ -1223,7 +1223,7 @@ class FeePlans(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.list_fees_fetch_request,
+                request.list_fees_fetch_request if request is not None else None,
                 False,
                 True,
                 "json",
@@ -1332,7 +1332,7 @@ class FeePlans(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.list_fees_fetch_request,
+                request.list_fees_fetch_request if request is not None else None,
                 False,
                 True,
                 "json",

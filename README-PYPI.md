@@ -1542,7 +1542,7 @@ with Moov(
 **Primary error:**
 * [`MoovError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/mooverror.py): The base class for HTTP error responses.
 
-<details><summary>Less common errors (54)</summary>
+<details><summary>Less common errors (55)</summary>
 
 <br />
 
@@ -1559,6 +1559,7 @@ with Moov(
 * [`ProductRequestValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/productrequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 171 methods.*
 * [`ScheduleValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/schedulevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 171 methods.*
 * [`TerminalApplicationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/terminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 171 methods.*
+* [`DuplicateCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/duplicatecarderror.py): Attempted to link card that already exists on the account. Status code `409`. Applicable to 1 of 171 methods.*
 * [`Transfer`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transfer.py): Details of a Transfer. Status code `409`. Applicable to 1 of 171 methods.*
 * [`CardAcquiringRefund`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/cardacquiringrefund.py): Details of a card refund. Status code `409`. Applicable to 1 of 171 methods.*
 * [`CreateAccountError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 171 methods.*
