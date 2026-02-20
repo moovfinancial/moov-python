@@ -171,10 +171,15 @@ class Cards(BaseSDK):
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.DuplicateCardErrorData, http_res
+            )
+            raise errors.DuplicateCardError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(errors.LinkCardErrorData, http_res)
             raise errors.LinkCardError(response_data, http_res)
-        if utils.match_response(http_res, ["401", "403", "404", "409", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "504"], "*"):
@@ -349,10 +354,15 @@ class Cards(BaseSDK):
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.DuplicateCardErrorData, http_res
+            )
+            raise errors.DuplicateCardError(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(errors.LinkCardErrorData, http_res)
             raise errors.LinkCardError(response_data, http_res)
-        if utils.match_response(http_res, ["401", "403", "404", "409", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "504"], "*"):
