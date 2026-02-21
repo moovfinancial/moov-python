@@ -16,6 +16,8 @@ class AccountFeesTypedDict(TypedDict):
     r"""Fees associated with wallet services."""
     merchant_pci_fee: AmountDecimalTypedDict
     r"""Fees for PCI compliance."""
+    invoice_payment_fee: AmountDecimalTypedDict
+    r"""Fees for invoice payments."""
     total: AmountDecimalTypedDict
     r"""Total platform fees."""
     kyb_fee: NotRequired[AmountDecimalTypedDict]
@@ -34,6 +36,11 @@ class AccountFees(BaseModel):
 
     merchant_pci_fee: Annotated[AmountDecimal, pydantic.Field(alias="merchantPCIFee")]
     r"""Fees for PCI compliance."""
+
+    invoice_payment_fee: Annotated[
+        AmountDecimal, pydantic.Field(alias="invoicePaymentFee")
+    ]
+    r"""Fees for invoice payments."""
 
     total: AmountDecimal
     r"""Total platform fees."""
