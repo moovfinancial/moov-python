@@ -12,6 +12,7 @@ from typing_extensions import Annotated
 
 class FeePlanAgreementErrorData(BaseModel):
     plan_id: Annotated[Optional[str], pydantic.Field(alias="planID")] = None
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
 
 @dataclass(unsafe_hash=True)
