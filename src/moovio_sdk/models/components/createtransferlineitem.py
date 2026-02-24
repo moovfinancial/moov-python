@@ -25,7 +25,9 @@ class CreateTransferLineItemTypedDict(TypedDict):
     options: NotRequired[List[CreateTransferLineItemOptionTypedDict]]
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
     image_i_ds: NotRequired[List[str]]
-    r"""Optional list of images associated with this line item."""
+    r"""Optional list of images associated with this line item.
+    This field is being deprecated in favor using the images associated with a productID and will soon be unsupported.
+    """
     product_id: NotRequired[str]
     r"""Optional unique identifier associating the line item with a product.
     This is for reporting or tracking purposes, and does not populate other details of the line item.
@@ -47,8 +49,16 @@ class CreateTransferLineItem(BaseModel):
     options: Optional[List[CreateTransferLineItemOption]] = None
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
 
-    image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
-    r"""Optional list of images associated with this line item."""
+    image_i_ds: Annotated[
+        Optional[List[str]],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="imageIDs",
+        ),
+    ] = None
+    r"""Optional list of images associated with this line item.
+    This field is being deprecated in favor using the images associated with a productID and will soon be unsupported.
+    """
 
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None
     r"""Optional unique identifier associating the line item with a product.
