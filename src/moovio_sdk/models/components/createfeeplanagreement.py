@@ -8,10 +8,12 @@ from typing_extensions import Annotated, TypedDict
 
 class CreateFeePlanAgreementTypedDict(TypedDict):
     plan_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
 
 class CreateFeePlanAgreement(BaseModel):
     plan_id: Annotated[str, pydantic.Field(alias="planID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
 
 try:
