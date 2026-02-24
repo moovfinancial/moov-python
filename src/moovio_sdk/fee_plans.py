@@ -249,7 +249,7 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
         :param account_id:
-        :param plan_id:
+        :param plan_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -379,7 +379,7 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
         :param account_id:
-        :param plan_id:
+        :param plan_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
