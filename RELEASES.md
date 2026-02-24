@@ -1517,3 +1517,13 @@ Based on:
 - [python v26.4.0-dev.11] .
 ### Releases
 - [PyPI v26.4.0-dev.11] https://pypi.org/project/moovio_sdk/26.4.0-dev.11 - .
+
+## 2026-02-24 02:39:50
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.725.0 (2.836.5) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v26.4.0-dev.12] .
+### Releases
+- [PyPI v26.4.0-dev.12] https://pypi.org/project/moovio_sdk/26.4.0-dev.12 - .

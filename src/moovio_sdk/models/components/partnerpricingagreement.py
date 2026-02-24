@@ -16,7 +16,9 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class PartnerPricingAgreementTypedDict(TypedDict):
     agreement_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     plan_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     name: str
     r"""The name of the agreement."""
     accepted_on: datetime
@@ -34,14 +36,17 @@ class PartnerPricingAgreementTypedDict(TypedDict):
     For example, 2.25% is '2.25'.
     """
     account_id: NotRequired[str]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     description: NotRequired[str]
     r"""The description of the agreement."""
 
 
 class PartnerPricingAgreement(BaseModel):
     agreement_id: Annotated[str, pydantic.Field(alias="agreementID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     plan_id: Annotated[str, pydantic.Field(alias="planID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     name: str
     r"""The name of the agreement."""
@@ -74,6 +79,7 @@ class PartnerPricingAgreement(BaseModel):
     """
 
     account_id: Annotated[Optional[str], pydantic.Field(alias="accountID")] = None
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     description: Optional[str] = None
     r"""The description of the agreement."""

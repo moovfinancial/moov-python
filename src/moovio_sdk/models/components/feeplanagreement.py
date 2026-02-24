@@ -16,7 +16,9 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class FeePlanAgreementTypedDict(TypedDict):
     agreement_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     plan_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     name: str
     r"""The name of the agreement."""
     accepted_on: datetime
@@ -29,14 +31,17 @@ class FeePlanAgreementTypedDict(TypedDict):
     monthly_platform_fee: MonthlyPlatformFeeTypedDict
     r"""Fixed recurring amount paid in the billing period regardless of usage."""
     account_id: NotRequired[str]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     description: NotRequired[str]
     r"""The description of the agreement."""
 
 
 class FeePlanAgreement(BaseModel):
     agreement_id: Annotated[str, pydantic.Field(alias="agreementID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     plan_id: Annotated[str, pydantic.Field(alias="planID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     name: str
     r"""The name of the agreement."""
@@ -63,6 +68,7 @@ class FeePlanAgreement(BaseModel):
     r"""Fixed recurring amount paid in the billing period regardless of usage."""
 
     account_id: Annotated[Optional[str], pydantic.Field(alias="accountID")] = None
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     description: Optional[str] = None
     r"""The description of the agreement."""
