@@ -26,7 +26,7 @@ class CreatePaymentLinkLineItemTypedDict(TypedDict):
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
     image_i_ds: NotRequired[List[str]]
     r"""Optional list of images associated with this line item.
-    This field is deprecated and will be ignored. A future release will populate images associated with the given productID.
+    This field is being deprecated in favor using the images associated with a productID and will soon be unsupported.
     """
     product_id: NotRequired[str]
     r"""Optional unique identifier associating the line item with a product.
@@ -57,7 +57,7 @@ class CreatePaymentLinkLineItem(BaseModel):
         ),
     ] = None
     r"""Optional list of images associated with this line item.
-    This field is deprecated and will be ignored. A future release will populate images associated with the given productID.
+    This field is being deprecated in favor using the images associated with a productID and will soon be unsupported.
     """
 
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None

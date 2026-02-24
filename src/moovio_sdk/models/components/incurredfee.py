@@ -15,6 +15,7 @@ class IncurredFeeTypedDict(TypedDict):
     r"""A fee incurred by a user."""
 
     fee_id: NotRequired[str]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     account_id: NotRequired[str]
     r"""Account ID the fee belongs to."""
     wallet_id: NotRequired[str]
@@ -37,6 +38,7 @@ class IncurredFee(BaseModel):
     r"""A fee incurred by a user."""
 
     fee_id: Annotated[Optional[str], pydantic.Field(alias="feeID")] = None
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     account_id: Annotated[Optional[str], pydantic.Field(alias="accountID")] = None
     r"""Account ID the fee belongs to."""
