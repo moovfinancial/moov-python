@@ -19,7 +19,9 @@ class CreateTransferLineItemOptionTypedDict(TypedDict):
     price_modifier: NotRequired[AmountDecimalTypedDict]
     r"""Optional price modification applied by this option. Can be positive, negative, or zero."""
     image_i_ds: NotRequired[List[str]]
-    r"""Optional list of images associated with this line item option."""
+    r"""Optional list of images associated with this line item option.
+    This field is being deprecated in favor using the images associated with a productID and will soon be unsupported.
+    """
     group: NotRequired[str]
     r"""Optional group identifier to categorize related options (e.g., 'toppings')."""
 
@@ -38,8 +40,16 @@ class CreateTransferLineItemOption(BaseModel):
     ] = None
     r"""Optional price modification applied by this option. Can be positive, negative, or zero."""
 
-    image_i_ds: Annotated[Optional[List[str]], pydantic.Field(alias="imageIDs")] = None
-    r"""Optional list of images associated with this line item option."""
+    image_i_ds: Annotated[
+        Optional[List[str]],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
+            alias="imageIDs",
+        ),
+    ] = None
+    r"""Optional list of images associated with this line item option.
+    This field is being deprecated in favor using the images associated with a productID and will soon be unsupported.
+    """
 
     group: Optional[str] = None
     r"""Optional group identifier to categorize related options (e.g., 'toppings')."""

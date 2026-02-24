@@ -15,6 +15,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class FeePlanTypedDict(TypedDict):
     plan_id: str
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     name: str
     r"""The name of the fee plan."""
     card_acquiring_model: CardAcquiringModel
@@ -32,6 +33,7 @@ class FeePlanTypedDict(TypedDict):
 
 class FeePlan(BaseModel):
     plan_id: Annotated[str, pydantic.Field(alias="planID")]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     name: str
     r"""The name of the fee plan."""

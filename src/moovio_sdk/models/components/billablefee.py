@@ -16,6 +16,7 @@ class BillableFeeTypedDict(TypedDict):
     r"""Specifies the pricing model used for the calculation of the final fee."""
     fee_category: FeeCategory
     billable_fee_id: NotRequired[str]
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     billable_event: NotRequired[str]
     r"""A unique code identifying a charge."""
     fee_name: NotRequired[str]
@@ -35,6 +36,7 @@ class BillableFee(BaseModel):
     billable_fee_id: Annotated[Optional[str], pydantic.Field(alias="billableFeeID")] = (
         None
     )
+    r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
 
     billable_event: Annotated[Optional[str], pydantic.Field(alias="billableEvent")] = (
         None
