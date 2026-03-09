@@ -4,6 +4,14 @@ The status of a particular dispute.
 
 Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import DisputeStatus
+
+value = DisputeStatus.RESPONSE_NEEDED
+```
+
 
 ## Values
 

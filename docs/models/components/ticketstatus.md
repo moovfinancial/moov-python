@@ -1,5 +1,13 @@
 # TicketStatus
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import TicketStatus
+
+value = TicketStatus.NEW
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # AchCreditSameDayTransferPaymentMethodPaymentMethodType
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import AchCreditSameDayTransferPaymentMethodPaymentMethodType
+
+value = AchCreditSameDayTransferPaymentMethodPaymentMethodType.ACH_CREDIT_SAME_DAY
+```
+
 
 ## Values
 

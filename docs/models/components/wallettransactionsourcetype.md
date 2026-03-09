@@ -1,5 +1,13 @@
 # WalletTransactionSourceType
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import WalletTransactionSourceType
+
+value = WalletTransactionSourceType.TRANSFER
+```
+
 
 ## Values
 

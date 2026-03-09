@@ -2,6 +2,14 @@
 
 Payment methods allowed for collecting a payment.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import CollectionPaymentMethodType
+
+value = CollectionPaymentMethodType.APPLE_PAY
+```
+
 
 ## Values
 
