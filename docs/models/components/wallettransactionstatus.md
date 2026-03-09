@@ -1,5 +1,13 @@
 # WalletTransactionStatus
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import WalletTransactionStatus
+
+value = WalletTransactionStatus.PENDING
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # BusinessPresence
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import BusinessPresence
+
+value = BusinessPresence.COMMERCIAL_OFFICE
+```
+
 
 ## Values
 

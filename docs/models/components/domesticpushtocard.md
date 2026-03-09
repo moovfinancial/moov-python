@@ -2,6 +2,14 @@
 
 Indicates which level of domestic push-to-card transfer is supported by the card, if any.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import DomesticPushToCard
+
+value = DomesticPushToCard.NOT_SUPPORTED
+```
+
 
 ## Values
 
