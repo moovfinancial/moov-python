@@ -2,6 +2,14 @@
 
 The payment method type that represents a payment rail and directionality
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import PaymentMethodType
+
+value = PaymentMethodType.MOOV_WALLET
+```
+
 
 ## Values
 

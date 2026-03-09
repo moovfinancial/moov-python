@@ -2,6 +2,14 @@
 
 Status of a transaction within the card payment lifecycle.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import CardTransactionStatus
+
+value = CardTransactionStatus.INITIATED
+```
+
 
 ## Values
 
