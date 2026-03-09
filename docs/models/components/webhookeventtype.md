@@ -2,6 +2,14 @@
 
 The type of event that occurred.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import WebhookEventType
+
+value = WebhookEventType.WILDCARD_
+```
+
 
 ## Values
 

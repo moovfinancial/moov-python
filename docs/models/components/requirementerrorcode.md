@@ -1,5 +1,13 @@
 # RequirementErrorCode
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import RequirementErrorCode
+
+value = RequirementErrorCode.INVALID_VALUE
+```
+
 
 ## Values
 

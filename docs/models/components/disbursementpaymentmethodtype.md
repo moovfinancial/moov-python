@@ -2,6 +2,14 @@
 
 Payment methods allowed for disbursing funds.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import DisbursementPaymentMethodType
+
+value = DisbursementPaymentMethodType.PUSH_TO_CARD
+```
+
 
 ## Values
 

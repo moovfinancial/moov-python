@@ -1,5 +1,13 @@
 # BankAccountVerificationStatus
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import BankAccountVerificationStatus
+
+value = BankAccountVerificationStatus.NEW
+```
+
 
 ## Values
 

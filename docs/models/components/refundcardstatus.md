@@ -1,5 +1,13 @@
 # RefundCardStatus
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import RefundCardStatus
+
+value = RefundCardStatus.INITIATED
+```
+
 
 ## Values
 

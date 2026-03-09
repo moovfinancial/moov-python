@@ -1,5 +1,13 @@
 # WalletTransactionType
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import WalletTransactionType
+
+value = WalletTransactionType.ACCOUNT_FUNDING
+```
+
 
 ## Values
 

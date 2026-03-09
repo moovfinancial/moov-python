@@ -1,5 +1,13 @@
 # WebhookDataTransferStatus
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import WebhookDataTransferStatus
+
+value = WebhookDataTransferStatus.CREATED
+```
+
 
 ## Values
 

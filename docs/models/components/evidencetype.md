@@ -1,5 +1,13 @@
 # EvidenceType
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import EvidenceType
+
+value = EvidenceType.RECEIPT
+```
+
 
 ## Values
 
