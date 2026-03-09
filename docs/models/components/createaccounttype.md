@@ -1,5 +1,13 @@
 # CreateAccountType
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import CreateAccountType
+
+value = CreateAccountType.INDIVIDUAL
+```
+
 
 ## Values
 

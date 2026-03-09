@@ -1,5 +1,13 @@
 # PullFromCardPaymentMethodPaymentMethodType
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import PullFromCardPaymentMethodPaymentMethodType
+
+value = PullFromCardPaymentMethodPaymentMethodType.PULL_FROM_CARD
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # RefundStatus
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import RefundStatus
+
+value = RefundStatus.CREATED
+```
+
 
 ## Values
 

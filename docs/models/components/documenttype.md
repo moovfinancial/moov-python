@@ -2,6 +2,14 @@
 
 Types of documents that can be uploaded.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import DocumentType
+
+value = DocumentType.DRIVERS_LICENSE
+```
+
 
 ## Values
 

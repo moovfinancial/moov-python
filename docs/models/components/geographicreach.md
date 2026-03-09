@@ -1,5 +1,13 @@
 # GeographicReach
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import GeographicReach
+
+value = GeographicReach.INTERNATIONAL_ONLY
+```
+
 
 ## Values
 

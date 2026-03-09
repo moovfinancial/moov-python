@@ -1,5 +1,13 @@
 # FulfillmentMethod
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import FulfillmentMethod
+
+value = FulfillmentMethod.BILL_OR_DEBT_PAYMENT
+```
+
 
 ## Values
 

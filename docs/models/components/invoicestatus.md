@@ -1,5 +1,13 @@
 # InvoiceStatus
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import InvoiceStatus
+
+value = InvoiceStatus.DRAFT
+```
+
 
 ## Values
 

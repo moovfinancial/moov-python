@@ -2,6 +2,14 @@
 
 The results of the card update request.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import CardUpdateReason
+
+value = CardUpdateReason.UNSPECIFIED
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # FulfillmentTimeframe
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import FulfillmentTimeframe
+
+value = FulfillmentTimeframe.IMMEDIATE
+```
+
 
 ## Values
 

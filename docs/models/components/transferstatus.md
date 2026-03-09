@@ -2,6 +2,14 @@
 
 Status of a transfer.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import TransferStatus
+
+value = TransferStatus.CREATED
+```
+
 
 ## Values
 
