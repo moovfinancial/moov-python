@@ -19,6 +19,10 @@ class InvoiceTypedDict(TypedDict):
     invoice_number: str
     customer_account_id: str
     r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
+    customer_display_name: str
+    r"""Display name of the customer account."""
+    customer_email: str
+    r"""Email address of the customer account."""
     partner_account_id: str
     r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     status: InvoiceStatus
@@ -46,6 +50,7 @@ class InvoiceTypedDict(TypedDict):
     sent_on: NotRequired[datetime]
     paid_on: NotRequired[datetime]
     canceled_on: NotRequired[datetime]
+    disabled_on: NotRequired[datetime]
 
 
 class Invoice(BaseModel):
@@ -56,6 +61,12 @@ class Invoice(BaseModel):
 
     customer_account_id: Annotated[str, pydantic.Field(alias="customerAccountID")]
     r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
+
+    customer_display_name: Annotated[str, pydantic.Field(alias="customerDisplayName")]
+    r"""Display name of the customer account."""
+
+    customer_email: Annotated[str, pydantic.Field(alias="customerEmail")]
+    r"""Email address of the customer account."""
 
     partner_account_id: Annotated[str, pydantic.Field(alias="partnerAccountID")]
     r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
@@ -111,6 +122,10 @@ class Invoice(BaseModel):
         None
     )
 
+    disabled_on: Annotated[Optional[datetime], pydantic.Field(alias="disabledOn")] = (
+        None
+    )
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -123,6 +138,7 @@ class Invoice(BaseModel):
                 "sentOn",
                 "paidOn",
                 "canceledOn",
+                "disabledOn",
             ]
         )
         serialized = handler(self)
@@ -130,7 +146,7 @@ class Invoice(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

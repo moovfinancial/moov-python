@@ -2,6 +2,14 @@
 
 Reason for a transfer's failure.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import TransferFailureReason
+
+value = TransferFailureReason.SOURCE_PAYMENT_ERROR
+```
+
 
 ## Values
 

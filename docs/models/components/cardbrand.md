@@ -2,6 +2,14 @@
 
 The card brand.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import CardBrand
+
+value = CardBrand.AMERICAN_EXPRESS
+```
+
 
 ## Values
 

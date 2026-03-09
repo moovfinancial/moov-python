@@ -1,5 +1,13 @@
 # SweepStatus
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import SweepStatus
+
+value = SweepStatus.ACCRUING
+```
+
 
 ## Values
 

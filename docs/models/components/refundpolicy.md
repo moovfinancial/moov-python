@@ -1,5 +1,13 @@
 # RefundPolicy
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import RefundPolicy
+
+value = RefundPolicy.CONDITIONAL_REFUND
+```
+
 
 ## Values
 

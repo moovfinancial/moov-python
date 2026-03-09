@@ -4,8 +4,8 @@ from __future__ import annotations
 from enum import Enum
 
 
-class RTPFailureCode(str, Enum):
-    r"""Status codes for RTP failures."""
+class InstantBankFailureCode(str, Enum):
+    r"""Status codes for instant-bank failures."""
 
     PROCESSING_ERROR = "processing-error"
     INVALID_ACCOUNT = "invalid-account"
@@ -16,4 +16,5 @@ class RTPFailureCode(str, Enum):
     LIMIT_EXCEEDED = "limit-exceeded"
     INVALID_AMOUNT = "invalid-amount"
     CUSTOMER_DECEASED = "customer-deceased"
+    PARTICIPANT_NOT_AVAILABLE = "participant-not-available"
     OTHER = "other"

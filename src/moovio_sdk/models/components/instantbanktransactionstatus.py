@@ -4,8 +4,8 @@ from __future__ import annotations
 from enum import Enum
 
 
-class RTPTransactionStatus(str, Enum):
-    r"""Status of a transaction within the RTP lifecycle."""
+class InstantBankTransactionStatus(str, Enum):
+    r"""Status of a transaction within the instant-bank lifecycle."""
 
     INITIATED = "initiated"
     COMPLETED = "completed"

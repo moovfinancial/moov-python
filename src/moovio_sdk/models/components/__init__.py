@@ -689,6 +689,13 @@ if TYPE_CHECKING:
         InstantBankCreditTransferPaymentMethodPaymentMethodType,
         InstantBankCreditTransferPaymentMethodTypedDict,
     )
+    from .instantbankfailurecode import InstantBankFailureCode
+    from .instantbanknetwork import InstantBankNetwork
+    from .instantbanktransactiondetails import (
+        InstantBankTransactionDetails,
+        InstantBankTransactionDetailsTypedDict,
+    )
+    from .instantbanktransactionstatus import InstantBankTransactionStatus
     from .instantpaymentfees import InstantPaymentFees, InstantPaymentFeesTypedDict
     from .institutionssearchresponse import (
         InstitutionsSearchResponse,
@@ -1034,15 +1041,9 @@ if TYPE_CHECKING:
         RtpCreditTransferPaymentMethodPaymentMethodType,
         RtpCreditTransferPaymentMethodTypedDict,
     )
-    from .rtpfailurecode import RTPFailureCode
     from .rtpinstitution import RTPInstitution, RTPInstitutionTypedDict
     from .rtprejectioncode import RTPRejectionCode
     from .rtpservices import RTPServices, RTPServicesTypedDict
-    from .rtptransactiondetails import (
-        RTPTransactionDetails,
-        RTPTransactionDetailsTypedDict,
-    )
-    from .rtptransactionstatus import RTPTransactionStatus
     from .runtransfer import RunTransfer, RunTransferTypedDict
     from .scheduledtransferimagemetadata import (
         ScheduledTransferImageMetadata,
@@ -1979,6 +1980,11 @@ __all__ = [
     "InstantBankCreditTransferPaymentMethod",
     "InstantBankCreditTransferPaymentMethodPaymentMethodType",
     "InstantBankCreditTransferPaymentMethodTypedDict",
+    "InstantBankFailureCode",
+    "InstantBankNetwork",
+    "InstantBankTransactionDetails",
+    "InstantBankTransactionDetailsTypedDict",
+    "InstantBankTransactionStatus",
     "InstantPaymentFees",
     "InstantPaymentFeesTypedDict",
     "InstitutionsSearchResponse",
@@ -2228,15 +2234,11 @@ __all__ = [
     "PushToCardTransferPaymentMethodTypedDict",
     "QRCode",
     "QRCodeTypedDict",
-    "RTPFailureCode",
     "RTPInstitution",
     "RTPInstitutionTypedDict",
     "RTPRejectionCode",
     "RTPServices",
     "RTPServicesTypedDict",
-    "RTPTransactionDetails",
-    "RTPTransactionDetailsTypedDict",
-    "RTPTransactionStatus",
     "ReceiptKind",
     "ReceiptRequest",
     "ReceiptRequestTypedDict",
@@ -3132,6 +3134,11 @@ _dynamic_imports: dict[str, str] = {
     "InstantBankCreditTransferPaymentMethod": ".instantbankcredittransferpaymentmethod",
     "InstantBankCreditTransferPaymentMethodPaymentMethodType": ".instantbankcredittransferpaymentmethod",
     "InstantBankCreditTransferPaymentMethodTypedDict": ".instantbankcredittransferpaymentmethod",
+    "InstantBankFailureCode": ".instantbankfailurecode",
+    "InstantBankNetwork": ".instantbanknetwork",
+    "InstantBankTransactionDetails": ".instantbanktransactiondetails",
+    "InstantBankTransactionDetailsTypedDict": ".instantbanktransactiondetails",
+    "InstantBankTransactionStatus": ".instantbanktransactionstatus",
     "InstantPaymentFees": ".instantpaymentfees",
     "InstantPaymentFeesTypedDict": ".instantpaymentfees",
     "InstitutionsSearchResponse": ".institutionssearchresponse",
@@ -3421,15 +3428,11 @@ _dynamic_imports: dict[str, str] = {
     "RtpCreditTransferPaymentMethod": ".rtpcredittransferpaymentmethod",
     "RtpCreditTransferPaymentMethodPaymentMethodType": ".rtpcredittransferpaymentmethod",
     "RtpCreditTransferPaymentMethodTypedDict": ".rtpcredittransferpaymentmethod",
-    "RTPFailureCode": ".rtpfailurecode",
     "RTPInstitution": ".rtpinstitution",
     "RTPInstitutionTypedDict": ".rtpinstitution",
     "RTPRejectionCode": ".rtprejectioncode",
     "RTPServices": ".rtpservices",
     "RTPServicesTypedDict": ".rtpservices",
-    "RTPTransactionDetails": ".rtptransactiondetails",
-    "RTPTransactionDetailsTypedDict": ".rtptransactiondetails",
-    "RTPTransactionStatus": ".rtptransactionstatus",
     "RunTransfer": ".runtransfer",
     "RunTransferTypedDict": ".runtransfer",
     "ScheduledTransferImageMetadata": ".scheduledtransferimagemetadata",

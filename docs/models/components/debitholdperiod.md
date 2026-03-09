@@ -2,6 +2,14 @@
 
 An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import DebitHoldPeriod
+
+value = DebitHoldPeriod.NO_HOLD
+```
+
 
 ## Values
 

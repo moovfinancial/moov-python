@@ -2,6 +2,14 @@
 
 The low value in each range is included. The high value in each range is excluded.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import MonthlyVolumeRange
+
+value = MonthlyVolumeRange.UNDER_10K
+```
+
 
 ## Values
 

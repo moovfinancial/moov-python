@@ -7,7 +7,10 @@ from .cardtransactiondetails import (
     CardTransactionDetails,
     CardTransactionDetailsTypedDict,
 )
-from .rtptransactiondetails import RTPTransactionDetails, RTPTransactionDetailsTypedDict
+from .instantbanktransactiondetails import (
+    InstantBankTransactionDetails,
+    InstantBankTransactionDetailsTypedDict,
+)
 from .transferaccount import TransferAccount, TransferAccountTypedDict
 from .transferpaymentmethodsbankaccount import (
     TransferPaymentMethodsBankAccount,
@@ -45,8 +48,8 @@ class TransferDestinationTypedDict(TypedDict):
     r"""Describes an Apple Pay token on a Moov account."""
     card_details: NotRequired[CardTransactionDetailsTypedDict]
     r"""Card-specific details about the transaction."""
-    rtp_details: NotRequired[RTPTransactionDetailsTypedDict]
-    r"""RTP specific details about the transaction."""
+    instant_bank_details: NotRequired[InstantBankTransactionDetailsTypedDict]
+    r"""Instant-bank specific details about the transaction."""
 
 
 class TransferDestination(BaseModel):
@@ -84,10 +87,11 @@ class TransferDestination(BaseModel):
     ] = None
     r"""Card-specific details about the transaction."""
 
-    rtp_details: Annotated[
-        Optional[RTPTransactionDetails], pydantic.Field(alias="rtpDetails")
+    instant_bank_details: Annotated[
+        Optional[InstantBankTransactionDetails],
+        pydantic.Field(alias="instantBankDetails"),
     ] = None
-    r"""RTP specific details about the transaction."""
+    r"""Instant-bank specific details about the transaction."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -99,7 +103,7 @@ class TransferDestination(BaseModel):
                 "achDetails",
                 "applePay",
                 "cardDetails",
-                "rtpDetails",
+                "instantBankDetails",
             ]
         )
         serialized = handler(self)
@@ -107,7 +111,7 @@ class TransferDestination(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

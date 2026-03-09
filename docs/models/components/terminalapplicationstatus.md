@@ -2,6 +2,14 @@
 
 Status of the terminal application.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import TerminalApplicationStatus
+
+value = TerminalApplicationStatus.UNDEFINED
+```
+
 
 ## Values
 
