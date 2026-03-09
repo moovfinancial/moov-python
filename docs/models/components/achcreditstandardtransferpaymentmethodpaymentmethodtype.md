@@ -1,5 +1,13 @@
 # AchCreditStandardTransferPaymentMethodPaymentMethodType
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import AchCreditStandardTransferPaymentMethodPaymentMethodType
+
+value = AchCreditStandardTransferPaymentMethodPaymentMethodType.ACH_CREDIT_STANDARD
+```
+
 
 ## Values
 

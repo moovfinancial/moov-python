@@ -2,6 +2,14 @@
 
 Status codes for RTP failures.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import RTPFailureCode
+
+value = RTPFailureCode.PROCESSING_ERROR
+```
+
 
 ## Values
 

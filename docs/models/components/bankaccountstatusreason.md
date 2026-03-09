@@ -2,6 +2,14 @@
 
 The reason the bank account status changed to the current value.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import BankAccountStatusReason
+
+value = BankAccountStatusReason.BANK_ACCOUNT_CREATED
+```
+
 
 ## Values
 

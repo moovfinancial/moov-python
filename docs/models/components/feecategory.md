@@ -1,5 +1,13 @@
 # FeeCategory
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import FeeCategory
+
+value = FeeCategory.ACH
+```
+
 
 ## Values
 

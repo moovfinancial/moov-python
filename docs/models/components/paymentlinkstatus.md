@@ -1,5 +1,13 @@
 # PaymentLinkStatus
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import PaymentLinkStatus
+
+value = PaymentLinkStatus.ACTIVE
+```
+
 
 ## Values
 
