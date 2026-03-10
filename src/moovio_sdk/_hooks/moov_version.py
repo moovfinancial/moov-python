@@ -1,10 +1,15 @@
-from .types import SDKConfiguration, SDKInitHook
+import httpx
+from typing import Union
+
+from .types import BeforeRequestContext, BeforeRequestHook
 
 
-class MoovVersionHook(SDKInitHook):
+class MoovVersionHook(BeforeRequestHook):
 
-    def sdk_init(self, config: SDKConfiguration) -> SDKConfiguration:
-        """Sets the X-Moov-Version global variable to the OpenAPI document version"""
+    def before_request(
+        self, hook_ctx: BeforeRequestContext, request: httpx.Request
+    ) -> Union[httpx.Request, Exception]:
+        """Sets the X-Moov-Version header on every outgoing request"""
 
-        config.globals.x_moov_version = config.openapi_doc_version
-        return config
+        request.headers["X-Moov-Version"] = hook_ctx.config.openapi_doc_version
+        return request

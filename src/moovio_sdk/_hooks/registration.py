@@ -14,4 +14,4 @@ def init_hooks(hooks: Hooks):
     Hooks are registered per SDK instance, and are valid for the lifetime of the SDK instance"""
 
     version_hook = MoovVersionHook()
-    hooks.register_sdk_init_hook(version_hook)
+    hooks.register_before_request_hook(version_hook)
