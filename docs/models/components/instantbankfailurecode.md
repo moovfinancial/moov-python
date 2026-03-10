@@ -2,6 +2,14 @@
 
 Status codes for instant-bank failures.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import InstantBankFailureCode
+
+value = InstantBankFailureCode.PROCESSING_ERROR
+```
+
 
 ## Values
 

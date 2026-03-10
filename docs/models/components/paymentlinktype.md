@@ -1,5 +1,13 @@
 # PaymentLinkType
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import PaymentLinkType
+
+value = PaymentLinkType.PAYMENT
+```
+
 
 ## Values
 

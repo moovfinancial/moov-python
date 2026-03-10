@@ -1,5 +1,13 @@
 # PendingLitigation
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import PendingLitigation
+
+value = PendingLitigation.BANKRUPTCY_OR_INSOLVENCY
+```
+
 
 ## Values
 

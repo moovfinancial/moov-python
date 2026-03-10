@@ -29,7 +29,10 @@ class UpdateInvoiceTypedDict(TypedDict):
     due_date: NotRequired[Nullable[datetime]]
     status: NotRequired[InvoiceStatus]
     r"""The status can be updated to one of the following values under specific conditions:
-    - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+    - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`. Canceling an invoice
+    indicates the invoice is no longer expected to be paid (e.g., the charge was waived or terms changed).
+    Canceled invoices still appear in list results by default and remain part of the invoice history.
+    To completely discard an invoice created by mistake, use the delete endpoint instead.
     - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
     """
     tax_amount: NotRequired[AmountDecimalUpdateTypedDict]
@@ -53,7 +56,10 @@ class UpdateInvoice(BaseModel):
 
     status: Optional[InvoiceStatus] = None
     r"""The status can be updated to one of the following values under specific conditions:
-    - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+    - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`. Canceling an invoice
+    indicates the invoice is no longer expected to be paid (e.g., the charge was waived or terms changed).
+    Canceled invoices still appear in list results by default and remain part of the invoice history.
+    To completely discard an invoice created by mistake, use the delete endpoint instead.
     - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
     """
 
@@ -79,7 +85,7 @@ class UpdateInvoice(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member

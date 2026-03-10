@@ -803,7 +803,10 @@ class Invoices(BaseSDK):
         :param invoice_date:
         :param due_date:
         :param status: The status can be updated to one of the following values under specific conditions:
-            - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+            - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`. Canceling an invoice
+            indicates the invoice is no longer expected to be paid (e.g., the charge was waived or terms changed).
+            Canceled invoices still appear in list results by default and remain part of the invoice history.
+            To completely discard an invoice created by mistake, use the delete endpoint instead.
             - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
         :param tax_amount:
         :param retries: Override the default retry configuration for this method
@@ -962,7 +965,10 @@ class Invoices(BaseSDK):
         :param invoice_date:
         :param due_date:
         :param status: The status can be updated to one of the following values under specific conditions:
-            - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`.
+            - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`. Canceling an invoice
+            indicates the invoice is no longer expected to be paid (e.g., the charge was waived or terms changed).
+            Canceled invoices still appear in list results by default and remain part of the invoice history.
+            To completely discard an invoice created by mistake, use the delete endpoint instead.
             - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
         :param tax_amount:
         :param retries: Override the default retry configuration for this method
@@ -1069,6 +1075,246 @@ class Invoices(BaseSDK):
                 errors.UpdateInvoiceErrorData, http_res
             )
             raise errors.UpdateInvoiceError(response_data, http_res)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def delete(
+        self,
+        *,
+        account_id: str,
+        invoice_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.DeleteInvoiceResponse:
+        r"""Delete an invoice. Only invoices in `draft` status can be deleted.
+
+        Deleting an invoice indicates it was created by mistake and should be completely disregarded.
+        Deleted invoices are hidden from list results by default, but can still be retrieved
+        individually through the get invoice endpoint. If you need to void an invoice that was
+        already sent or is otherwise part of the invoice history, cancel it instead by updating
+        its status to `canceled`.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+
+        :param account_id:
+        :param invoice_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.DeleteInvoiceRequest(
+            account_id=account_id,
+            invoice_id=invoice_id,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/accounts/{accountID}/invoices/{invoiceID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.DeleteInvoiceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteInvoice",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "429",
+                "4XX",
+                "500",
+                "504",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return operations.DeleteInvoiceResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def delete_async(
+        self,
+        *,
+        account_id: str,
+        invoice_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.DeleteInvoiceResponse:
+        r"""Delete an invoice. Only invoices in `draft` status can be deleted.
+
+        Deleting an invoice indicates it was created by mistake and should be completely disregarded.
+        Deleted invoices are hidden from list results by default, but can still be retrieved
+        individually through the get invoice endpoint. If you need to void an invoice that was
+        already sent or is otherwise part of the invoice history, cancel it instead by updating
+        its status to `canceled`.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+
+        :param account_id:
+        :param invoice_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.DeleteInvoiceRequest(
+            account_id=account_id,
+            invoice_id=invoice_id,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/accounts/{accountID}/invoices/{invoiceID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.DeleteInvoiceGlobals(
+                x_moov_version=self.sdk_configuration.globals.x_moov_version,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteInvoice",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "429",
+                "4XX",
+                "500",
+                "504",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return operations.DeleteInvoiceResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)

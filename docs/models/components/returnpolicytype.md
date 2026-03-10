@@ -1,5 +1,13 @@
 # ReturnPolicyType
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import ReturnPolicyType
+
+value = ReturnPolicyType.NONE
+```
+
 
 ## Values
 

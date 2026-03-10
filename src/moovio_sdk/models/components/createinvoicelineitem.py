@@ -24,7 +24,8 @@ class CreateInvoiceLineItemTypedDict(TypedDict):
     r"""The quantity of this item."""
     product_id: NotRequired[str]
     r"""Optional unique identifier associating the line item with a product.
-    This is for reporting or tracking purposes, and does not populate other details of the line item.
+    When provided, images associated with the product will be included on the line item.
+    This does not populate other details of the line item.
     """
     options: NotRequired[List[CreateInvoiceLineItemOptionTypedDict]]
     r"""Optional list of modifiers applied to this item (e.g., toppings, upgrades, customizations)."""
@@ -44,7 +45,8 @@ class CreateInvoiceLineItem(BaseModel):
 
     product_id: Annotated[Optional[str], pydantic.Field(alias="productID")] = None
     r"""Optional unique identifier associating the line item with a product.
-    This is for reporting or tracking purposes, and does not populate other details of the line item.
+    When provided, images associated with the product will be included on the line item.
+    This does not populate other details of the line item.
     """
 
     options: Optional[List[CreateInvoiceLineItemOption]] = None
@@ -58,7 +60,7 @@ class CreateInvoiceLineItem(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

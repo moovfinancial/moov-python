@@ -1,5 +1,13 @@
 # CardVerificationResult
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import CardVerificationResult
+
+value = CardVerificationResult.NO_MATCH
+```
+
 
 ## Values
 

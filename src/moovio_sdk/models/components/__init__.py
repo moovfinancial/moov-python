@@ -1041,15 +1041,9 @@ if TYPE_CHECKING:
         RtpCreditTransferPaymentMethodPaymentMethodType,
         RtpCreditTransferPaymentMethodTypedDict,
     )
-    from .rtpfailurecode import RTPFailureCode
     from .rtpinstitution import RTPInstitution, RTPInstitutionTypedDict
     from .rtprejectioncode import RTPRejectionCode
     from .rtpservices import RTPServices, RTPServicesTypedDict
-    from .rtptransactiondetails import (
-        RTPTransactionDetails,
-        RTPTransactionDetailsTypedDict,
-    )
-    from .rtptransactionstatus import RTPTransactionStatus
     from .runtransfer import RunTransfer, RunTransferTypedDict
     from .scheduledtransferimagemetadata import (
         ScheduledTransferImageMetadata,
@@ -2240,15 +2234,11 @@ __all__ = [
     "PushToCardTransferPaymentMethodTypedDict",
     "QRCode",
     "QRCodeTypedDict",
-    "RTPFailureCode",
     "RTPInstitution",
     "RTPInstitutionTypedDict",
     "RTPRejectionCode",
     "RTPServices",
     "RTPServicesTypedDict",
-    "RTPTransactionDetails",
-    "RTPTransactionDetailsTypedDict",
-    "RTPTransactionStatus",
     "ReceiptKind",
     "ReceiptRequest",
     "ReceiptRequestTypedDict",
@@ -3438,15 +3428,11 @@ _dynamic_imports: dict[str, str] = {
     "RtpCreditTransferPaymentMethod": ".rtpcredittransferpaymentmethod",
     "RtpCreditTransferPaymentMethodPaymentMethodType": ".rtpcredittransferpaymentmethod",
     "RtpCreditTransferPaymentMethodTypedDict": ".rtpcredittransferpaymentmethod",
-    "RTPFailureCode": ".rtpfailurecode",
     "RTPInstitution": ".rtpinstitution",
     "RTPInstitutionTypedDict": ".rtpinstitution",
     "RTPRejectionCode": ".rtprejectioncode",
     "RTPServices": ".rtpservices",
     "RTPServicesTypedDict": ".rtpservices",
-    "RTPTransactionDetails": ".rtptransactiondetails",
-    "RTPTransactionDetailsTypedDict": ".rtptransactiondetails",
-    "RTPTransactionStatus": ".rtptransactionstatus",
     "RunTransfer": ".runtransfer",
     "RunTransferTypedDict": ".runtransfer",
     "ScheduledTransferImageMetadata": ".scheduledtransferimagemetadata",

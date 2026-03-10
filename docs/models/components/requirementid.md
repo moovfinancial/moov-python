@@ -2,6 +2,14 @@
 
 The unique ID of what the requirement is asking to be filled out.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import RequirementID
+
+value = RequirementID.ACCOUNT_TOS_ACCEPTANCE
+```
+
 
 ## Values
 

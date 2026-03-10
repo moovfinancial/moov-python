@@ -2,6 +2,14 @@
 
 A permission that the application requests on another account.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import ApplicationScope
+
+value = ApplicationScope.ACCOUNTS_READ
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # CardTransactionFailureCode
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import CardTransactionFailureCode
+
+value = CardTransactionFailureCode.CALL_ISSUER
+```
+
 
 ## Values
 

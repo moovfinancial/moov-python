@@ -10,6 +10,14 @@ The rejection code of an RTP transaction that caused the bank account status to 
 - AG03: Transaction Type Not Supported
 - MD07: Customer Deceased
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import RTPRejectionCode
+
+value = RTPRejectionCode.AC03
+```
+
 
 ## Values
 

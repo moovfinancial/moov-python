@@ -2,6 +2,14 @@
 
 The type of event that occurred on the card.
 
+## Example Usage
+
+```python
+from moovio_sdk.models.components import IssuedCardEventType
+
+value = IssuedCardEventType.AUTHORIZATION
+```
+
 
 ## Values
 
