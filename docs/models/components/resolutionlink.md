@@ -1,0 +1,18 @@
+# ResolutionLink
+
+A temporary, secure link sent to a merchant to resolve account requirements such as KYC verification or document uploads.
+
+
+## Fields
+
+| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `code`                                                                  | *str*                                                                   | :heavy_check_mark:                                                      | A unique nanoid identifier for the resolution link.                     |
+| `account_id`                                                            | *str*                                                                   | :heavy_check_mark:                                                      | The ID of the merchant account this resolution link is associated with. |
+| `partner_account_id`                                                    | *str*                                                                   | :heavy_check_mark:                                                      | The ID of the partner account this resolution link is associated with.  |
+| `recipient`                                                             | *str*                                                                   | :heavy_check_mark:                                                      | The recipient contact information for the resolution link.              |
+| `url`                                                                   | *str*                                                                   | :heavy_check_mark:                                                      | The URL of the resolution link.                                         |
+| `created_on`                                                            | [date](https://docs.python.org/3/library/datetime.html#date-objects)    | :heavy_check_mark:                                                      | The date and time the resolution link was created.                      |
+| `updated_on`                                                            | [date](https://docs.python.org/3/library/datetime.html#date-objects)    | :heavy_check_mark:                                                      | The date and time the resolution link was last updated.                 |
+| `disabled_on`                                                           | [date](https://docs.python.org/3/library/datetime.html#date-objects)    | :heavy_minus_sign:                                                      | The date and time the resolution link was disabled, if applicable.      |
+| `expires_on`                                                            | [date](https://docs.python.org/3/library/datetime.html#date-objects)    | :heavy_check_mark:                                                      | The date and time the resolution link expires.                          |
