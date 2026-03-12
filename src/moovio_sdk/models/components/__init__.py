@@ -457,6 +457,10 @@ if TYPE_CHECKING:
         CreateRepresentative,
         CreateRepresentativeTypedDict,
     )
+    from .createresolutionlink import (
+        CreateResolutionLink,
+        CreateResolutionLinkTypedDict,
+    )
     from .createreversal import CreateReversal, CreateReversalTypedDict
     from .createruntransfer import CreateRunTransfer, CreateRunTransferTypedDict
     from .createscheduledtransferlineitem import (
@@ -1019,6 +1023,11 @@ if TYPE_CHECKING:
     from .requirementerrorcode import RequirementErrorCode
     from .requirementid import RequirementID
     from .residual import Residual, ResidualTypedDict
+    from .resolutionlink import ResolutionLink, ResolutionLinkTypedDict
+    from .resolutionlinkrecipient import (
+        ResolutionLinkRecipient,
+        ResolutionLinkRecipientTypedDict,
+    )
     from .returnpolicytype import ReturnPolicyType
     from .reversal import Reversal, ReversalTypedDict
     from .reversedwithcancellation import (
@@ -1790,6 +1799,8 @@ __all__ = [
     "CreateRefundTypedDict",
     "CreateRepresentative",
     "CreateRepresentativeTypedDict",
+    "CreateResolutionLink",
+    "CreateResolutionLinkTypedDict",
     "CreateReversal",
     "CreateReversalTypedDict",
     "CreateRunTransfer",
@@ -2269,6 +2280,10 @@ __all__ = [
     "RequirementID",
     "Residual",
     "ResidualTypedDict",
+    "ResolutionLink",
+    "ResolutionLinkRecipient",
+    "ResolutionLinkRecipientTypedDict",
+    "ResolutionLinkTypedDict",
     "Responsibilities",
     "ResponsibilitiesTypedDict",
     "ReturnPolicyType",
@@ -2948,6 +2963,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateRefundResponseTypedDict": ".createrefundresponse",
     "CreateRepresentative": ".createrepresentative",
     "CreateRepresentativeTypedDict": ".createrepresentative",
+    "CreateResolutionLink": ".createresolutionlink",
+    "CreateResolutionLinkTypedDict": ".createresolutionlink",
     "CreateReversal": ".createreversal",
     "CreateReversalTypedDict": ".createreversal",
     "CreateRunTransfer": ".createruntransfer",
@@ -3412,6 +3429,10 @@ _dynamic_imports: dict[str, str] = {
     "RequirementID": ".requirementid",
     "Residual": ".residual",
     "ResidualTypedDict": ".residual",
+    "ResolutionLink": ".resolutionlink",
+    "ResolutionLinkTypedDict": ".resolutionlink",
+    "ResolutionLinkRecipient": ".resolutionlinkrecipient",
+    "ResolutionLinkRecipientTypedDict": ".resolutionlinkrecipient",
     "ReturnPolicyType": ".returnpolicytype",
     "Reversal": ".reversal",
     "ReversalTypedDict": ".reversal",

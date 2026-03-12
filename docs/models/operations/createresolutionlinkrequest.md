@@ -1,0 +1,9 @@
+# CreateResolutionLinkRequest
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        | Example                                                                            |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `account_id`                                                                       | *str*                                                                              | :heavy_check_mark:                                                                 | N/A                                                                                |                                                                                    |
+| `create_resolution_link`                                                           | [components.CreateResolutionLink](../../models/components/createresolutionlink.md) | :heavy_check_mark:                                                                 | N/A                                                                                | {<br/>"recipient": {<br/>"phone": {<br/>"number": "5555555555",<br/>"countryCode": "1"<br/>}<br/>}<br/>} |
