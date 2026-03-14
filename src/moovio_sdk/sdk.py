@@ -9,7 +9,7 @@ import httpx
 import importlib
 from moovio_sdk import utils
 from moovio_sdk._hooks import SDKHooks
-from moovio_sdk.models import components, internal
+from moovio_sdk.models import components
 from moovio_sdk.types import OptionalNullable, UNSET
 import sys
 from typing import Callable, Dict, Optional, TYPE_CHECKING, Union, cast
@@ -166,7 +166,6 @@ class Moov(BaseSDK):
         security: Optional[
             Union[components.Security, Callable[[], components.Security]]
         ] = None,
-        x_moov_version: Optional[str] = None,
         server_idx: Optional[int] = None,
         url_params: Optional[Dict[str, str]] = None,
         server_url: Optional[str] = None,
@@ -179,7 +178,6 @@ class Moov(BaseSDK):
         r"""Instantiates the SDK configuring it with the provided parameters.
 
         :param security: The security details required for authentication
-        :param x_moov_version: Configures the x_moov_version parameter for all supported operations
         :param server_idx: The index of the server to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
@@ -213,12 +211,6 @@ class Moov(BaseSDK):
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
 
-        _globals = internal.Globals(
-            x_moov_version=utils.get_global_from_env(
-                x_moov_version, "MOOV_X_MOOV_VERSION", str
-            ),
-        )
-
         BaseSDK.__init__(
             self,
             SDKConfiguration(
@@ -226,7 +218,6 @@ class Moov(BaseSDK):
                 client_supplied=client_supplied,
                 async_client=async_client,
                 async_client_supplied=async_client_supplied,
-                globals=_globals,
                 security=security,
                 server_url=server_url,
                 server_idx=server_idx,

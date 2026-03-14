@@ -4,19 +4,16 @@ from .basesdk import BaseSDK
 from moovio_sdk import utils
 from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
-from moovio_sdk.types import BaseModel, OptionalNullable, UNSET
+from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Mapping, Optional, Union, cast
+from typing import Mapping, Optional
 
 
 class Industries(BaseSDK):
     def list(
         self,
         *,
-        request: Union[
-            operations.ListIndustriesRequest, operations.ListIndustriesRequestTypedDict
-        ] = operations.ListIndustriesRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -27,7 +24,6 @@ class Industries(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
         you'll need to specify the `/profile-enrichment.read` scope.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -42,26 +38,18 @@ class Industries(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.ListIndustriesRequest)
-        request = cast(operations.ListIndustriesRequest, request)
-
         req = self._build_request(
             method="GET",
             path="/industries",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListIndustriesGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -113,9 +101,6 @@ class Industries(BaseSDK):
     async def list_async(
         self,
         *,
-        request: Union[
-            operations.ListIndustriesRequest, operations.ListIndustriesRequestTypedDict
-        ] = operations.ListIndustriesRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -126,7 +111,6 @@ class Industries(BaseSDK):
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
         you'll need to specify the `/profile-enrichment.read` scope.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -141,26 +125,18 @@ class Industries(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.ListIndustriesRequest)
-        request = cast(operations.ListIndustriesRequest, request)
-
         req = self._build_request_async(
             method="GET",
             path="/industries",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListIndustriesGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
