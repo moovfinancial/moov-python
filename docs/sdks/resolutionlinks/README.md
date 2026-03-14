@@ -41,7 +41,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -96,7 +95,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -143,7 +141,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -191,7 +188,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
