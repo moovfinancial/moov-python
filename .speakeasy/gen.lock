@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: fda50e6dbb54f2a9eea695a02c5c0a35
+  docChecksum: 33560d60c80d7d355f56014b0d6e474e
   docVersion: v2026.04.00
   speakeasyVersion: 1.755.0
   generationVersion: 2.865.2
-  releaseVersion: 26.4.0-dev.16
-  configChecksum: 688ea9feade8d5c3d3fab3cf3e2cef5a
+  releaseVersion: 26.4.0-dev.17
+  configChecksum: e4ffc0b7b05b2d74f5684cabfbc6abff
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 355bdf2c-9ab0-4388-8310-7fd530878c65
-  pristine_commit_hash: 0c88089558948583b9df02f840fa15faaa46ee46
-  pristine_tree_hash: 1ec60e2323659ac7b49521bf3aadfd9316004b8c
+  generation_id: fdcfe01c-94ea-4165-b671-001081b6cc56
+  pristine_commit_hash: b4f7ee5f65c4f5488f7b4108eb59191de3c2fd87
+  pristine_tree_hash: a95538668d4a298172ad937ca34160df1d31365f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4465,8 +4465,8 @@ trackedFiles:
     pristine_git_object: 68b6361e4a22b7fd00d6f5a72e25278ebf35ba6d
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:dd7cf6baa94d4ebe98b9f7dee2e7899e319af0d9
-    pristine_git_object: 5794fc8ad9ba3b7c3b70e80f50bd72113f20553a
+    last_write_checksum: sha1:de63d5071e227963ad75f4f7b55402582fab97e7
+    pristine_git_object: 31e0de9107e924945f1dfaa42980dcdcc4234086
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4493,8 +4493,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:78f3861349fa58bd85b87ed3198abb659e4506f6
-    pristine_git_object: 80d2445ef4d312fde869b4b91711b0e26a31132b
+    last_write_checksum: sha1:5251a7e9666d4894a2b5b398e98327d61da4a1b4
+    pristine_git_object: 96a4aaea151778711fb168a78869a933990fd515
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:0f1c1acb1e136f56145816e0d0682dc46593e03e
