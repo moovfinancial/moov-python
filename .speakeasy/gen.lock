@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: c90cf9431797bc42d0e98cf166b2f410
+  docChecksum: fda50e6dbb54f2a9eea695a02c5c0a35
   docVersion: v2026.04.00
   speakeasyVersion: 1.755.0
   generationVersion: 2.865.2
-  releaseVersion: 26.4.0-dev.15
-  configChecksum: 9db1888f77e7ffd946c2050b61aea71f
+  releaseVersion: 26.4.0-dev.16
+  configChecksum: 688ea9feade8d5c3d3fab3cf3e2cef5a
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 03a2cb36-51b2-4249-948c-1bae1725109a
-  pristine_commit_hash: 78d1fb31d9e13d465a2a86a156a3f8344c2b0b13
-  pristine_tree_hash: 84c834db831c139782c2f188c8f623af9ce2d4b7
+  generation_id: 355bdf2c-9ab0-4388-8310-7fd530878c65
+  pristine_commit_hash: 0c88089558948583b9df02f840fa15faaa46ee46
+  pristine_tree_hash: 1ec60e2323659ac7b49521bf3aadfd9316004b8c
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4465,8 +4465,8 @@ trackedFiles:
     pristine_git_object: 68b6361e4a22b7fd00d6f5a72e25278ebf35ba6d
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:fd5d0fc9a715ebc6edd537569199d8a1d354fef2
-    pristine_git_object: ab21eff00feeb9dc6cbb5af0203e9211f08800d0
+    last_write_checksum: sha1:dd7cf6baa94d4ebe98b9f7dee2e7899e319af0d9
+    pristine_git_object: 5794fc8ad9ba3b7c3b70e80f50bd72113f20553a
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4493,8 +4493,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:cfa833fa368bbec13ad008186b6fa69b7bf2c773
-    pristine_git_object: 8fba8b94a5cc6a17d8ca5bb6866eaf6a8a739712
+    last_write_checksum: sha1:78f3861349fa58bd85b87ed3198abb659e4506f6
+    pristine_git_object: 80d2445ef4d312fde869b4b91711b0e26a31132b
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:0f1c1acb1e136f56145816e0d0682dc46593e03e
@@ -10848,15 +10848,6 @@ examples:
           application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes:
-  * `moov.end_to_end_encryption.generate_key()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.webhooks.list_event_types()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.webhooks.list()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.industries.list()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.onboarding.list_invites()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.ping.ping()`:  `request` **Removed** (Breaking ⚠️)
-  * `moov.terminal_applications.list()`:  `request` **Removed** (Breaking ⚠️)
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
