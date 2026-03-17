@@ -14,6 +14,7 @@ class CardAccountUpdaterTypedDict(TypedDict):
     r"""The results of the most recent card update request."""
 
     updated_on: NotRequired[datetime]
+    r"""Timestamp from the card network indicating when the card update was processed."""
     update_type: NotRequired[CardUpdateReason]
     r"""The results of the card update request."""
 
@@ -22,6 +23,7 @@ class CardAccountUpdater(BaseModel):
     r"""The results of the most recent card update request."""
 
     updated_on: Annotated[Optional[datetime], pydantic.Field(alias="updatedOn")] = None
+    r"""Timestamp from the card network indicating when the card update was processed."""
 
     update_type: Annotated[
         Optional[CardUpdateReason], pydantic.Field(alias="updateType")

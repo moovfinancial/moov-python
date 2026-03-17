@@ -9,12 +9,16 @@ class CardExpirationTypedDict(TypedDict):
     r"""The expiration date of the card or token."""
 
     month: str
+    r"""Two-digit month the card expires."""
     year: str
+    r"""Two-digit year the card expires."""
 
 
 class CardExpiration(BaseModel):
     r"""The expiration date of the card or token."""
 
     month: str
+    r"""Two-digit month the card expires."""
 
     year: str
+    r"""Two-digit year the card expires."""
