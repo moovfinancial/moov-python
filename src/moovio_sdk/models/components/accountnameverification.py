@@ -13,9 +13,13 @@ class AccountNameVerificationTypedDict(TypedDict):
     r"""The results of submitting cardholder name to a card network for verification."""
 
     first_name: NotRequired[CardVerificationResult]
+    r"""Verification result of the cardholder's first name."""
     last_name: NotRequired[CardVerificationResult]
+    r"""Verification result of the cardholder's last name."""
     middle_name: NotRequired[CardVerificationResult]
+    r"""Verification result of the cardholder's middle name."""
     full_name: NotRequired[CardVerificationResult]
+    r"""Verification result of the cardholder's full name."""
 
 
 class AccountNameVerification(BaseModel):
@@ -24,18 +28,22 @@ class AccountNameVerification(BaseModel):
     first_name: Annotated[
         Optional[CardVerificationResult], pydantic.Field(alias="firstName")
     ] = None
+    r"""Verification result of the cardholder's first name."""
 
     last_name: Annotated[
         Optional[CardVerificationResult], pydantic.Field(alias="lastName")
     ] = None
+    r"""Verification result of the cardholder's last name."""
 
     middle_name: Annotated[
         Optional[CardVerificationResult], pydantic.Field(alias="middleName")
     ] = None
+    r"""Verification result of the cardholder's middle name."""
 
     full_name: Annotated[
         Optional[CardVerificationResult], pydantic.Field(alias="fullName")
     ] = None
+    r"""Verification result of the cardholder's full name."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

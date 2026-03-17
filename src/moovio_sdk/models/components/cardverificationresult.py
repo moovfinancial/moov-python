@@ -5,6 +5,8 @@ from enum import Enum
 
 
 class CardVerificationResult(str, Enum):
+    r"""The result of a card verification check."""
+
     NO_MATCH = "noMatch"
     MATCH = "match"
     NOT_CHECKED = "notChecked"
