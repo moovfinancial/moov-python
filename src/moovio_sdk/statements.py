@@ -76,9 +76,6 @@ class Statements(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListStatementsGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -189,9 +186,6 @@ class Statements(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListStatementsGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -299,9 +293,6 @@ class Statements(BaseSDK):
             if accept_header_override is not None
             else "application/json;q=1, application/pdf;q=0",
             http_headers=http_headers,
-            _globals=operations.GetStatementGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -414,9 +405,6 @@ class Statements(BaseSDK):
             if accept_header_override is not None
             else "application/json;q=1, application/pdf;q=0",
             http_headers=http_headers,
-            _globals=operations.GetStatementGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,

@@ -67,9 +67,6 @@ class PaymentMethods(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListPaymentMethodsGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -176,9 +173,6 @@ class PaymentMethods(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListPaymentMethodsGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -278,9 +272,6 @@ class PaymentMethods(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetPaymentMethodGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -378,9 +369,6 @@ class PaymentMethods(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetPaymentMethodGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,

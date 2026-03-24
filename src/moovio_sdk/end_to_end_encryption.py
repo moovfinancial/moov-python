@@ -4,10 +4,10 @@ from .basesdk import BaseSDK
 from moovio_sdk import utils
 from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
-from moovio_sdk.types import BaseModel, OptionalNullable, UNSET
+from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union, cast
+from typing import Any, Mapping, Optional
 
 
 class EndToEndEncryption(BaseSDK):
@@ -57,9 +57,6 @@ class EndToEndEncryption(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.TestEndToEndTokenGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.E2EEToken
@@ -160,9 +157,6 @@ class EndToEndEncryption(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.TestEndToEndTokenGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.E2EEToken
@@ -220,10 +214,6 @@ class EndToEndEncryption(BaseSDK):
     def generate_key(
         self,
         *,
-        request: Union[
-            operations.GenerateEndToEndKeyRequest,
-            operations.GenerateEndToEndKeyRequestTypedDict,
-        ] = operations.GenerateEndToEndKeyRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -231,7 +221,6 @@ class EndToEndEncryption(BaseSDK):
     ) -> operations.GenerateEndToEndKeyResponse:
         r"""Generates a public key used to create a JWE token for passing secure authentication data through non-PCI compliant intermediaries.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -246,26 +235,18 @@ class EndToEndEncryption(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.GenerateEndToEndKeyRequest)
-        request = cast(operations.GenerateEndToEndKeyRequest, request)
-
         req = self._build_request(
             method="POST",
             path="/end-to-end-keys",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GenerateEndToEndKeyGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -314,10 +295,6 @@ class EndToEndEncryption(BaseSDK):
     async def generate_key_async(
         self,
         *,
-        request: Union[
-            operations.GenerateEndToEndKeyRequest,
-            operations.GenerateEndToEndKeyRequestTypedDict,
-        ] = operations.GenerateEndToEndKeyRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -325,7 +302,6 @@ class EndToEndEncryption(BaseSDK):
     ) -> operations.GenerateEndToEndKeyResponse:
         r"""Generates a public key used to create a JWE token for passing secure authentication data through non-PCI compliant intermediaries.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -340,26 +316,18 @@ class EndToEndEncryption(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.GenerateEndToEndKeyRequest)
-        request = cast(operations.GenerateEndToEndKeyRequest, request)
-
         req = self._build_request_async(
             method="POST",
             path="/end-to-end-keys",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GenerateEndToEndKeyGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,

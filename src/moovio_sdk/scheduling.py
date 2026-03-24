@@ -72,9 +72,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CreateScheduleGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.upsert_schedule, False, False, "json", components.UpsertSchedule
@@ -208,9 +205,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CreateScheduleGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.upsert_schedule, False, False, "json", components.UpsertSchedule
@@ -338,9 +332,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListSchedulesGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -446,9 +437,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListSchedulesGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -563,9 +551,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.UpdateScheduleGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.upsert_schedule, False, False, "json", components.UpsertSchedule
@@ -702,9 +687,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.UpdateScheduleGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.upsert_schedule, False, False, "json", components.UpsertSchedule
@@ -826,9 +808,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetSchedulesGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -926,9 +905,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetSchedulesGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1026,9 +1002,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CancelScheduleGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1140,9 +1113,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CancelScheduleGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1261,9 +1231,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetScheduledOccurrenceGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1370,9 +1337,6 @@ class Scheduling(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetScheduledOccurrenceGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,

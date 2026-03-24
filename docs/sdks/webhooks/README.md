@@ -26,7 +26,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -42,10 +41,9 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `request`                                                                            | [operations.ListEventTypesRequest](../../models/operations/listeventtypesrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
@@ -70,7 +68,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -86,10 +83,9 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `request`                                                                        | [operations.ListWebhooksRequest](../../models/operations/listwebhooksrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-| `retries`                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                 | :heavy_minus_sign:                                                               | Configuration to override the default retry behavior of the client.              |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
@@ -114,7 +110,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -163,7 +158,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -207,7 +201,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -257,7 +250,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -302,7 +294,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",
@@ -346,7 +337,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="<value>",
     security=components.Security(
         username="",
         password="",

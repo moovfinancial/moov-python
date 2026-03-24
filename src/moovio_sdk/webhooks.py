@@ -4,19 +4,16 @@ from .basesdk import BaseSDK
 from moovio_sdk import utils
 from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
-from moovio_sdk.types import BaseModel, OptionalNullable, UNSET
+from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union, cast
+from typing import Any, List, Mapping, Optional
 
 
 class Webhooks(BaseSDK):
     def list_event_types(
         self,
         *,
-        request: Union[
-            operations.ListEventTypesRequest, operations.ListEventTypesRequestTypedDict
-        ] = operations.ListEventTypesRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -24,7 +21,6 @@ class Webhooks(BaseSDK):
     ) -> operations.ListEventTypesResponse:
         r"""List all available event types that can be subscribed to.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -39,26 +35,18 @@ class Webhooks(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.ListEventTypesRequest)
-        request = cast(operations.ListEventTypesRequest, request)
-
         req = self._build_request(
             method="GET",
             path="/event-types",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListEventTypesGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -110,9 +98,6 @@ class Webhooks(BaseSDK):
     async def list_event_types_async(
         self,
         *,
-        request: Union[
-            operations.ListEventTypesRequest, operations.ListEventTypesRequestTypedDict
-        ] = operations.ListEventTypesRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -120,7 +105,6 @@ class Webhooks(BaseSDK):
     ) -> operations.ListEventTypesResponse:
         r"""List all available event types that can be subscribed to.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -135,26 +119,18 @@ class Webhooks(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.ListEventTypesRequest)
-        request = cast(operations.ListEventTypesRequest, request)
-
         req = self._build_request_async(
             method="GET",
             path="/event-types",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListEventTypesGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -206,9 +182,6 @@ class Webhooks(BaseSDK):
     def list(
         self,
         *,
-        request: Union[
-            operations.ListWebhooksRequest, operations.ListWebhooksRequestTypedDict
-        ] = operations.ListWebhooksRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -216,7 +189,6 @@ class Webhooks(BaseSDK):
     ) -> operations.ListWebhooksResponse:
         r"""List all webhooks configured for the account.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -231,26 +203,18 @@ class Webhooks(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.ListWebhooksRequest)
-        request = cast(operations.ListWebhooksRequest, request)
-
         req = self._build_request(
             method="GET",
             path="/webhooks",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListWebhooksGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -302,9 +266,6 @@ class Webhooks(BaseSDK):
     async def list_async(
         self,
         *,
-        request: Union[
-            operations.ListWebhooksRequest, operations.ListWebhooksRequestTypedDict
-        ] = operations.ListWebhooksRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -312,7 +273,6 @@ class Webhooks(BaseSDK):
     ) -> operations.ListWebhooksResponse:
         r"""List all webhooks configured for the account.
 
-        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -327,26 +287,18 @@ class Webhooks(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, operations.ListWebhooksRequest)
-        request = cast(operations.ListWebhooksRequest, request)
-
         req = self._build_request_async(
             method="GET",
             path="/webhooks",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListWebhooksGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -447,9 +399,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CreateWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.CreateWebhook
@@ -574,9 +523,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CreateWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", components.CreateWebhook
@@ -692,9 +638,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -786,9 +729,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -894,9 +834,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.UpdateWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_webhook, False, False, "json", components.UpdateWebhook
@@ -1026,9 +963,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.UpdateWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_webhook, False, False, "json", components.UpdateWebhook
@@ -1144,9 +1078,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.DisableWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1252,9 +1183,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.DisableWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1360,9 +1288,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.PingWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1454,9 +1379,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.PingWebhookGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1548,9 +1470,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetWebhookSecretGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1642,9 +1561,6 @@ class Webhooks(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetWebhookSecretGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
