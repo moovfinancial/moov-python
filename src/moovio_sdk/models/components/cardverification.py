@@ -17,27 +17,41 @@ class CardVerificationTypedDict(TypedDict):
     r"""The results of submitting cardholder data to a card network for verification."""
 
     cvv: CardVerificationResult
+    r"""Verification result of the card's CVV."""
     address_line1: CardVerificationResult
+    r"""Verification result of the billing address line 1.
+    Derived from the same AVS code as `postalCode`; the card network returns a single code covering both address fields.
+    """
     postal_code: CardVerificationResult
+    r"""Verification result of the billing address postal code.
+    Derived from the same AVS code as `addressLine1`; the card network returns a single code covering both address fields.
+    """
     account_name: NotRequired[AccountNameVerificationTypedDict]
-    r"""The results of submitting cardholder name to a card network for verification."""
+    r"""Verification results of the cardholder's name, broken down by name component."""
 
 
 class CardVerification(BaseModel):
     r"""The results of submitting cardholder data to a card network for verification."""
 
     cvv: CardVerificationResult
+    r"""Verification result of the card's CVV."""
 
     address_line1: Annotated[
         CardVerificationResult, pydantic.Field(alias="addressLine1")
     ]
+    r"""Verification result of the billing address line 1.
+    Derived from the same AVS code as `postalCode`; the card network returns a single code covering both address fields.
+    """
 
     postal_code: Annotated[CardVerificationResult, pydantic.Field(alias="postalCode")]
+    r"""Verification result of the billing address postal code.
+    Derived from the same AVS code as `addressLine1`; the card network returns a single code covering both address fields.
+    """
 
     account_name: Annotated[
         Optional[AccountNameVerification], pydantic.Field(alias="accountName")
     ] = None
-    r"""The results of submitting cardholder name to a card network for verification."""
+    r"""Verification results of the cardholder's name, broken down by name component."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
