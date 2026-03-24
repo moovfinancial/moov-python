@@ -9,7 +9,7 @@ from ._version import (
 from .httpclient import AsyncHttpClient, HttpClient
 from .utils import Logger, RetryConfig, remove_suffix
 from dataclasses import dataclass
-from moovio_sdk.models import components, internal
+from moovio_sdk.models import components
 from moovio_sdk.types import OptionalNullable, UNSET
 from pydantic import Field
 from typing import Callable, Dict, Optional, Tuple, Union
@@ -29,7 +29,6 @@ class SDKConfiguration:
     async_client: Union[AsyncHttpClient, None]
     async_client_supplied: bool
     debug_logger: Logger
-    globals: internal.Globals
     security: Optional[
         Union[components.Security, Callable[[], components.Security]]
     ] = None
