@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 590c5f7f07b8ff6522c4a49d94778915
+  docChecksum: 0b42cc59bc45925870305c18f1c77973
   docVersion: v2026.04.00
-  speakeasyVersion: 1.757.0
-  generationVersion: 2.866.0
-  releaseVersion: 26.4.0-dev.18
-  configChecksum: 257e45f3efbd465092a0268b427e11e4
+  speakeasyVersion: 1.759.1
+  generationVersion: 2.869.10
+  releaseVersion: 26.4.0-dev.19
+  configChecksum: c835e6daf88986e32ba4ae7f1f06cd57
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: ed067a05-31f3-4554-a75d-0426bf4b3697
-  pristine_commit_hash: 1772edb90f60e60e1d69b455fddb6e172322dce6
-  pristine_tree_hash: 8960c7b7611f0458a6520f42ee9c2e7fca6f44ff
+  generation_id: e25f6212-06d7-402d-ad37-bd6e602c4939
+  pristine_commit_hash: 8975ceedad0b775906b413a09a51d9784e6163db
+  pristine_tree_hash: da666730c7125b75ffd5d42e3be5750b6e8e2aa8
 features:
   python:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.7
-    core: 6.0.19
+    core: 6.0.20
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
@@ -2433,8 +2433,8 @@ trackedFiles:
     pristine_git_object: 913868767b0b5b967d1fbe40dfcf36f4a257ce66
   docs/models/components/wallettransactiontype.md:
     id: 6253110ebe81
-    last_write_checksum: sha1:7c317c13485ab838febd6eeb9d614596d11d3515
-    pristine_git_object: 0f3b0be09b164b98da6c7f078d99740a074a7fe0
+    last_write_checksum: sha1:429bd8bca9a1670d300eda6ca6720672709b5cc5
+    pristine_git_object: e3b8eb962be862bf791ceee82293d0e294808677
   docs/models/components/wallettype.md:
     id: 6ef6c3c12393
     last_write_checksum: sha1:1483cc6d032496d52a00e2a3cc0a3b877a789284
@@ -4465,8 +4465,8 @@ trackedFiles:
     pristine_git_object: 68b6361e4a22b7fd00d6f5a72e25278ebf35ba6d
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:e1422a8f6f5a23747b9eeb14dd28bb82bf1cec81
-    pristine_git_object: e34574fa496ca6bebfab9ffdc569c446e6f4ba61
+    last_write_checksum: sha1:a45772cb5ae22213688d7dff3f85bb837cdd16fd
+    pristine_git_object: d24674dd9dc98221653759b3cd3a1c679abfb161
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4493,8 +4493,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:0867f8d7cb414b1cf5dd6e169ee501f079aedd8e
-    pristine_git_object: a216d772f49ae19688f455c7764c4666564f1195
+    last_write_checksum: sha1:0bfda43e1de87a5b82f4619dd2514d98c64566e4
+    pristine_git_object: 4c03d973a0aad4886fb053bf8558b11937919650
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:0f1c1acb1e136f56145816e0d0682dc46593e03e
@@ -6721,8 +6721,8 @@ trackedFiles:
     pristine_git_object: 4a7f1211287aa5be85a0be90d6eb701a28ce4e59
   src/moovio_sdk/models/components/wallettransactiontype.py:
     id: 1b091378abd0
-    last_write_checksum: sha1:49ebec79b05f0d7fc3bf0c0f7504c0d2f7102ab9
-    pristine_git_object: 4dedf62fb82ef3da7871ee4f5d92bb092d8d0635
+    last_write_checksum: sha1:9bccad3947b2ad2532388569fedde43201801ed6
+    pristine_git_object: dc6a824ef78c024c82251ef49b9d269b6094dc12
   src/moovio_sdk/models/components/wallettype.py:
     id: 91d51541ecce
     last_write_checksum: sha1:1448f71819dfe249bfcf063825da9e7f260e9423
@@ -10848,6 +10848,7 @@ examples:
           application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Python SDK Changes:\n* `moov.sweeps.list()`:  `response.[].subtotals[].type.enum(instant_bank_failure)` **Added** (Breaking ⚠️)\n* `moov.sweeps.get()`:  `response.subtotals[].type.enum(instant_bank_failure)` **Added** (Breaking ⚠️)\n* `moov.wallet_transactions.list()`: \n  *  `request` **Changed**\n  *  `response.[].transaction_type.enum(instant_bank_failure)` **Added** (Breaking ⚠️)\n* `moov.wallet_transactions.get()`:  `response.transaction_type.enum(instant_bank_failure)` **Added** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json

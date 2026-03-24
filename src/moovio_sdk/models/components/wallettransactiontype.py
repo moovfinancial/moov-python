@@ -32,3 +32,4 @@ class WalletTransactionType(str, Enum):
     ADJUSTMENT = "adjustment"
     FEE_REVENUE = "fee-revenue"
     RESIDUAL = "residual"
+    INSTANT_BANK_FAILURE = "instant-bank-failure"
