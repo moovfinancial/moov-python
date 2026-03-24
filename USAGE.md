@@ -7,7 +7,6 @@ from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
-    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -68,7 +67,6 @@ from moovio_sdk.utils import parse_datetime
 async def main():
 
     async with Moov(
-        x_moov_version="v2024.01.00",
         security=components.Security(
             username="",
             password="",

@@ -10,27 +10,39 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class UpdateCardAddressTypedDict(TypedDict):
     address_line1: NotRequired[str]
+    r"""Street address line 1."""
     address_line2: NotRequired[str]
+    r"""Street address line 2 (e.g., apartment or suite number)."""
     city: NotRequired[str]
+    r"""City name."""
     state_or_province: NotRequired[str]
+    r"""Two-letter state or province code."""
     postal_code: NotRequired[str]
+    r"""Postal or ZIP code."""
     country: NotRequired[str]
+    r"""Two-letter ISO 3166-1 country code."""
 
 
 class UpdateCardAddress(BaseModel):
     address_line1: Annotated[Optional[str], pydantic.Field(alias="addressLine1")] = None
+    r"""Street address line 1."""
 
     address_line2: Annotated[Optional[str], pydantic.Field(alias="addressLine2")] = None
+    r"""Street address line 2 (e.g., apartment or suite number)."""
 
     city: Optional[str] = None
+    r"""City name."""
 
     state_or_province: Annotated[
         Optional[str], pydantic.Field(alias="stateOrProvince")
     ] = None
+    r"""Two-letter state or province code."""
 
     postal_code: Annotated[Optional[str], pydantic.Field(alias="postalCode")] = None
+    r"""Postal or ZIP code."""
 
     country: Optional[str] = None
+    r"""Two-letter ISO 3166-1 country code."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

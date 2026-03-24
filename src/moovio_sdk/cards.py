@@ -54,10 +54,10 @@ class Cards(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
         :param account_id:
-        :param card_number:
-        :param card_cvv:
+        :param card_number: The full card number (PAN).
+        :param card_cvv: The card's 3- or 4-digit card verification value.
         :param expiration: The expiration date of the card or token.
-        :param billing_address:
+        :param billing_address: The billing address associated with the card.
         :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
 
             When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
@@ -65,10 +65,13 @@ class Cards(BaseSDK):
         :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
             This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our
             [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
-        :param holder_name:
-        :param card_on_file:
-        :param merchant_account_id:
-        :param verify_name:
+        :param holder_name: The name of the cardholder as it appears on the card.
+        :param card_on_file: Indicates cardholder has authorized card to be stored for future payments. (e.g., recurring payments).
+            If true and no `merchantAccountID` is provided, the partner account's ID is used as the merchant account for verification.
+        :param merchant_account_id: Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+            If omitted, the partner account's details are used instead.
+        :param verify_name: If true, submits the cardholder's name to the card network for verification as part of the $0 authorization.
+            Only supported for Visa and Mastercard; requesting name verification for American Express or Discover will return an error.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -116,9 +119,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.LinkCardGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.link_card, False, False, "json", components.LinkCard
@@ -237,10 +237,10 @@ class Cards(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
         :param account_id:
-        :param card_number:
-        :param card_cvv:
+        :param card_number: The full card number (PAN).
+        :param card_cvv: The card's 3- or 4-digit card verification value.
         :param expiration: The expiration date of the card or token.
-        :param billing_address:
+        :param billing_address: The billing address associated with the card.
         :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
 
             When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
@@ -248,10 +248,13 @@ class Cards(BaseSDK):
         :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
             This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our
             [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
-        :param holder_name:
-        :param card_on_file:
-        :param merchant_account_id:
-        :param verify_name:
+        :param holder_name: The name of the cardholder as it appears on the card.
+        :param card_on_file: Indicates cardholder has authorized card to be stored for future payments. (e.g., recurring payments).
+            If true and no `merchantAccountID` is provided, the partner account's ID is used as the merchant account for verification.
+        :param merchant_account_id: Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+            If omitted, the partner account's details are used instead.
+        :param verify_name: If true, submits the cardholder's name to the card network for verification as part of the $0 authorization.
+            Only supported for Visa and Mastercard; requesting name verification for American Express or Discover will return an error.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -299,9 +302,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.LinkCardGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.link_card, False, False, "json", components.LinkCard
@@ -425,9 +425,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListCardsGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -524,9 +521,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListCardsGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -626,9 +620,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetCardGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -728,9 +719,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetCardGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -825,13 +813,16 @@ class Cards(BaseSDK):
         :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
             This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our
             [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
-        :param billing_address:
+        :param billing_address: Updated billing address to store on file for the card.
         :param expiration:
-        :param card_cvv:
-        :param card_on_file:
-        :param merchant_account_id:
-        :param verify_name:
-        :param holder_name:
+        :param card_cvv: The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification authorization, which performs both CVV and address verification.
+        :param card_on_file: Indicates cardholder has authorized card to be stored for future payments (e.g., recurring payments).
+            If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as the merchant account for verification.
+        :param merchant_account_id: Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+            If omitted, the partner account's details are used instead.
+        :param verify_name: If true, submits the cardholder's name to the card network for verification as part of the $0 authorization.
+            Only supported for Visa and Mastercard; requesting name verification for American Express or Discover will return an error.
+        :param holder_name: Updated name of the cardholder as it appears on the card.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -880,9 +871,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.UpdateCardGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_card, False, False, "json", components.UpdateCard
@@ -1001,13 +989,16 @@ class Cards(BaseSDK):
         :param e2ee: Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
             This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our
             [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
-        :param billing_address:
+        :param billing_address: Updated billing address to store on file for the card.
         :param expiration:
-        :param card_cvv:
-        :param card_on_file:
-        :param merchant_account_id:
-        :param verify_name:
-        :param holder_name:
+        :param card_cvv: The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification authorization, which performs both CVV and address verification.
+        :param card_on_file: Indicates cardholder has authorized card to be stored for future payments (e.g., recurring payments).
+            If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as the merchant account for verification.
+        :param merchant_account_id: Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+            If omitted, the partner account's details are used instead.
+        :param verify_name: If true, submits the cardholder's name to the card network for verification as part of the $0 authorization.
+            Only supported for Visa and Mastercard; requesting name verification for American Express or Discover will return an error.
+        :param holder_name: Updated name of the cardholder as it appears on the card.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1056,9 +1047,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.UpdateCardGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_card, False, False, "json", components.UpdateCard
@@ -1180,9 +1168,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.DisableCardGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1294,9 +1279,6 @@ class Cards(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.DisableCardGlobals(
-                x_moov_version=self.sdk_configuration.globals.x_moov_version,
-            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,

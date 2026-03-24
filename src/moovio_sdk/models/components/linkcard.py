@@ -13,30 +13,46 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class LinkCardTypedDict(TypedDict):
     card_number: str
+    r"""The full card number (PAN)."""
     card_cvv: str
+    r"""The card's 3- or 4-digit card verification value."""
     expiration: CardExpirationTypedDict
     r"""The expiration date of the card or token."""
     billing_address: CardAddressTypedDict
+    r"""The billing address associated with the card."""
     e2ee: NotRequired[E2EETokenTypedDict]
     r"""Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
     This token is encrypted using the public key from /end-to-end-keys and wraps an AES key. For details and examples, refer to our
     [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
     """
     holder_name: NotRequired[str]
+    r"""The name of the cardholder as it appears on the card."""
     card_on_file: NotRequired[bool]
+    r"""Indicates cardholder has authorized card to be stored for future payments. (e.g., recurring payments).
+    If true and no `merchantAccountID` is provided, the partner account's ID is used as the merchant account for verification.
+    """
     merchant_account_id: NotRequired[str]
+    r"""Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+    If omitted, the partner account's details are used instead.
+    """
     verify_name: NotRequired[bool]
+    r"""If true, submits the cardholder's name to the card network for verification as part of the $0 authorization.
+    Only supported for Visa and Mastercard; requesting name verification for American Express or Discover will return an error.
+    """
 
 
 class LinkCard(BaseModel):
     card_number: Annotated[str, pydantic.Field(alias="cardNumber")]
+    r"""The full card number (PAN)."""
 
     card_cvv: Annotated[str, pydantic.Field(alias="cardCvv")]
+    r"""The card's 3- or 4-digit card verification value."""
 
     expiration: CardExpiration
     r"""The expiration date of the card or token."""
 
     billing_address: Annotated[CardAddress, pydantic.Field(alias="billingAddress")]
+    r"""The billing address associated with the card."""
 
     e2ee: Optional[E2EEToken] = None
     r"""Wraps a compact-serialized JSON Web Encryption (JWE) token used for secure transmission of sensitive data (e.g., PCI information) through intermediaries.
@@ -45,14 +61,24 @@ class LinkCard(BaseModel):
     """
 
     holder_name: Annotated[Optional[str], pydantic.Field(alias="holderName")] = None
+    r"""The name of the cardholder as it appears on the card."""
 
     card_on_file: Annotated[Optional[bool], pydantic.Field(alias="cardOnFile")] = None
+    r"""Indicates cardholder has authorized card to be stored for future payments. (e.g., recurring payments).
+    If true and no `merchantAccountID` is provided, the partner account's ID is used as the merchant account for verification.
+    """
 
     merchant_account_id: Annotated[
         Optional[str], pydantic.Field(alias="merchantAccountID")
     ] = None
+    r"""Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+    If omitted, the partner account's details are used instead.
+    """
 
     verify_name: Annotated[Optional[bool], pydantic.Field(alias="verifyName")] = None
+    r"""If true, submits the cardholder's name to the card network for verification as part of the $0 authorization.
+    Only supported for Visa and Mastercard; requesting name verification for American Express or Discover will return an error.
+    """
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
