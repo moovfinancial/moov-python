@@ -38,6 +38,7 @@ class CardTypedDict(TypedDict):
     expiration: CardExpirationTypedDict
     r"""The expiration date of the card or token."""
     billing_address: CardAddressTypedDict
+    r"""The billing address associated with the card."""
     card_verification: CardVerificationTypedDict
     r"""The results of submitting cardholder data to a card network for verification."""
     card_category: NotRequired[str]
@@ -65,6 +66,9 @@ class CardTypedDict(TypedDict):
     card_on_file: NotRequired[bool]
     r"""Indicates cardholder has authorized card to be stored for future payments."""
     merchant_account_id: NotRequired[str]
+    r"""Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+    If omitted, the partner account's details are used instead.
+    """
     card_account_updater: NotRequired[CardAccountUpdaterTypedDict]
     r"""The results of the most recent card update request."""
     domestic_push_to_card: NotRequired[DomesticPushToCard]
@@ -106,6 +110,7 @@ class Card(BaseModel):
     r"""The expiration date of the card or token."""
 
     billing_address: Annotated[CardAddress, pydantic.Field(alias="billingAddress")]
+    r"""The billing address associated with the card."""
 
     card_verification: Annotated[
         CardVerification, pydantic.Field(alias="cardVerification")
@@ -150,6 +155,9 @@ class Card(BaseModel):
     merchant_account_id: Annotated[
         Optional[str], pydantic.Field(alias="merchantAccountID")
     ] = None
+    r"""Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+    If omitted, the partner account's details are used instead.
+    """
 
     card_account_updater: Annotated[
         Optional[CardAccountUpdater], pydantic.Field(alias="cardAccountUpdater")

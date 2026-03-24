@@ -131,7 +131,6 @@ from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
-    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -192,7 +191,6 @@ from moovio_sdk.utils import parse_datetime
 async def main():
 
     async with Moov(
-        x_moov_version="v2024.01.00",
         security=components.Security(
             username="",
             password="",
@@ -265,7 +263,6 @@ with Moov(
         username="",
         password="",
     ),
-    x_moov_version="v2024.01.00",
 ) as moov:
 
     res = moov.accounts.create(account_type=components.AccountType.BUSINESS, profile=components.CreateProfile(
@@ -1272,7 +1269,6 @@ from moovio_sdk.models import components
 
 
 with Moov(
-    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1303,7 +1299,6 @@ from moovio_sdk.utils import BackoffStrategy, RetryConfig, parse_datetime
 
 
 with Moov(
-    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1361,7 +1356,6 @@ from moovio_sdk.utils import BackoffStrategy, RetryConfig, parse_datetime
 
 with Moov(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1432,7 +1426,6 @@ from moovio_sdk.utils import parse_datetime
 
 
 with Moov(
-    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1577,7 +1570,6 @@ from moovio_sdk.utils import parse_datetime
 
 with Moov(
     server_url="https://api.moov.io",
-    x_moov_version="v2024.01.00",
     security=components.Security(
         username="",
         password="",
@@ -1720,7 +1712,6 @@ from moovio_sdk.models import components
 def main():
 
     with Moov(
-        x_moov_version="v2024.01.00",
         security=components.Security(
             username="",
             password="",
@@ -1733,7 +1724,6 @@ def main():
 async def amain():
 
     async with Moov(
-        x_moov_version="v2024.01.00",
         security=components.Security(
             username="",
             password="",

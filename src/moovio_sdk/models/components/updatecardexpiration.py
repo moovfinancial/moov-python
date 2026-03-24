@@ -9,13 +9,17 @@ from typing_extensions import NotRequired, TypedDict
 
 class UpdateCardExpirationTypedDict(TypedDict):
     month: NotRequired[str]
+    r"""Two-digit month the card expires."""
     year: NotRequired[str]
+    r"""Two-digit year the card expires."""
 
 
 class UpdateCardExpiration(BaseModel):
     month: Optional[str] = None
+    r"""Two-digit month the card expires."""
 
     year: Optional[str] = None
+    r"""Two-digit year the card expires."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
