@@ -18,12 +18,24 @@ class UpdateCardTypedDict(TypedDict):
     [GitHub repository](https://github.com/moovfinancial/moov-go/blob/main/examples/e2ee/e2ee_test.go).
     """
     billing_address: NotRequired[UpdateCardAddressTypedDict]
+    r"""Updated billing address to store on file for the card."""
     expiration: NotRequired[UpdateCardExpirationTypedDict]
     card_cvv: NotRequired[str]
+    r"""The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification authorization, which performs both CVV and address verification."""
     card_on_file: NotRequired[bool]
+    r"""Indicates cardholder has authorized card to be stored for future payments (e.g., recurring payments).
+    If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as the merchant account for verification.
+    """
     merchant_account_id: NotRequired[str]
+    r"""Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+    If omitted, the partner account's details are used instead.
+    """
     verify_name: NotRequired[bool]
+    r"""If true, submits the cardholder's name to the card network for verification as part of the $0 authorization.
+    Only supported for Visa and Mastercard; requesting name verification for American Express or Discover will return an error.
+    """
     holder_name: NotRequired[str]
+    r"""Updated name of the cardholder as it appears on the card."""
 
 
 class UpdateCard(BaseModel):
@@ -36,20 +48,32 @@ class UpdateCard(BaseModel):
     billing_address: Annotated[
         Optional[UpdateCardAddress], pydantic.Field(alias="billingAddress")
     ] = None
+    r"""Updated billing address to store on file for the card."""
 
     expiration: Optional[UpdateCardExpiration] = None
 
     card_cvv: Annotated[Optional[str], pydantic.Field(alias="cardCvv")] = None
+    r"""The card's 3- or 4-digit card verification value. Providing this triggers a new $0 verification authorization, which performs both CVV and address verification."""
 
     card_on_file: Annotated[Optional[bool], pydantic.Field(alias="cardOnFile")] = None
+    r"""Indicates cardholder has authorized card to be stored for future payments (e.g., recurring payments).
+    If true and no `merchantAccountID` is provided, the partner account's ID is automatically used as the merchant account for verification.
+    """
 
     merchant_account_id: Annotated[
         Optional[str], pydantic.Field(alias="merchantAccountID")
     ] = None
+    r"""Merchant account whose details (statement descriptor, address, etc.) are used for the card verification authorization.
+    If omitted, the partner account's details are used instead.
+    """
 
     verify_name: Annotated[Optional[bool], pydantic.Field(alias="verifyName")] = None
+    r"""If true, submits the cardholder's name to the card network for verification as part of the $0 authorization.
+    Only supported for Visa and Mastercard; requesting name verification for American Express or Discover will return an error.
+    """
 
     holder_name: Annotated[Optional[str], pydantic.Field(alias="holderName")] = None
+    r"""Updated name of the cardholder as it appears on the card."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

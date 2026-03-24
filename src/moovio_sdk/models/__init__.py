@@ -5,12 +5,12 @@ from typing import Any, TYPE_CHECKING
 from moovio_sdk.utils.dynamic_imports import lazy_getattr, lazy_dir
 
 if TYPE_CHECKING:
-    from . import components, errors, internal, operations
+    from . import components, errors, operations
 
 # package
 
 
-_sub_packages = ["components", "errors", "internal", "operations"]
+_sub_packages = ["components", "errors", "operations"]
 
 
 def __getattr__(attr_name: str) -> Any:
