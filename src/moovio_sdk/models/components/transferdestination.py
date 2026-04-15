@@ -7,6 +7,10 @@ from .cardtransactiondetails import (
     CardTransactionDetails,
     CardTransactionDetailsTypedDict,
 )
+from .instantbanktransactiondetails import (
+    InstantBankTransactionDetails,
+    InstantBankTransactionDetailsTypedDict,
+)
 from .rtpfailurecode import RTPFailureCode
 from .rtptransactionstatus import RTPTransactionStatus
 from .transferaccount import TransferAccount, TransferAccountTypedDict
@@ -126,6 +130,8 @@ class TransferDestinationTypedDict(TypedDict):
     card_details: NotRequired[CardTransactionDetailsTypedDict]
     r"""Card-specific details about the transaction."""
     rtp_details: NotRequired[RtpDetailsTypedDict]
+    instant_bank_details: NotRequired[InstantBankTransactionDetailsTypedDict]
+    r"""Instant-bank specific details about the transaction."""
 
 
 class TransferDestination(BaseModel):
@@ -171,6 +177,12 @@ class TransferDestination(BaseModel):
         ),
     ] = None
 
+    instant_bank_details: Annotated[
+        Optional[InstantBankTransactionDetails],
+        pydantic.Field(alias="instantBankDetails"),
+    ] = None
+    r"""Instant-bank specific details about the transaction."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -182,6 +194,7 @@ class TransferDestination(BaseModel):
                 "applePay",
                 "cardDetails",
                 "rtpDetails",
+                "instantBankDetails",
             ]
         )
         serialized = handler(self)
