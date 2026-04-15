@@ -1,0 +1,9 @@
+# BatchGetTransfersResponse
+
+
+## Fields
+
+| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `headers`                                                             | Dict[str, List[*str*]]                                                | :heavy_check_mark:                                                    | N/A                                                                   |
+| `result`                                                              | Dict[str, [components.Transfer](../../models/components/transfer.md)] | :heavy_check_mark:                                                    | N/A                                                                   |
