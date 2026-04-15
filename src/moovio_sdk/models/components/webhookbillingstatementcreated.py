@@ -7,10 +7,13 @@ from typing_extensions import Annotated, TypedDict
 
 
 class WebhookBillingStatementCreatedTypedDict(TypedDict):
+    account_id: str
     statement_id: str
 
 
 class WebhookBillingStatementCreated(BaseModel):
+    account_id: Annotated[str, pydantic.Field(alias="accountID")]
+
     statement_id: Annotated[str, pydantic.Field(alias="statementID")]
 
 
