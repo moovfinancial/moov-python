@@ -1,0 +1,18 @@
+# ~~RtpDetails~~
+
+DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details about the transaction.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `status`                                                                                     | [Optional[components.RTPTransactionStatus]](../../models/components/rtptransactionstatus.md) | :heavy_minus_sign:                                                                           | Status of a transaction within the RTP lifecycle.                                            |
+| `network_response_code`                                                                      | *Optional[str]*                                                                              | :heavy_minus_sign:                                                                           | Response code returned by network on failure.                                                |
+| `failure_code`                                                                               | [Optional[components.RTPFailureCode]](../../models/components/rtpfailurecode.md)             | :heavy_minus_sign:                                                                           | Status codes for RTP failures.                                                               |
+| `initiated_on`                                                                               | [date](https://docs.python.org/3/library/datetime.html#date-objects)                         | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `completed_on`                                                                               | [date](https://docs.python.org/3/library/datetime.html#date-objects)                         | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `failed_on`                                                                                  | [date](https://docs.python.org/3/library/datetime.html#date-objects)                         | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `accepted_without_posting_on`                                                                | [date](https://docs.python.org/3/library/datetime.html#date-objects)                         | :heavy_minus_sign:                                                                           | N/A                                                                                          |

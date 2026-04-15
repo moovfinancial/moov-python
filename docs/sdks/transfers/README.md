@@ -30,6 +30,14 @@ period of time. You can run multiple requests in smaller time window increments 
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [batch_get_transfers](#batch_get_transfers) - Retrieve transfer details for multiple transfers in one request. The response is a map from each
+requested transfer ID to its full transfer details when available; IDs that are not found or not
+accessible under this account are omitted from the map.
+
+Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 * [get](#get) - Retrieve full transfer details for an individual transfer of a particular Moov account. 
 
 Payment rail-specific details are included in the source and destination. Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) 
@@ -352,6 +360,60 @@ with Moov(
 | ----------------------------------- | ----------------------------------- | ----------------------------------- |
 | errors.ListTransfersValidationError | 422                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+
+## batch_get_transfers
+
+Retrieve transfer details for multiple transfers in one request. The response is a map from each
+requested transfer ID to its full transfer details when available; IDs that are not found or not
+accessible under this account are omitted from the map.
+
+Read our [transfers overview guide](https://docs.moov.io/guides/money-movement/overview/) to learn more.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="batchGetTransfers" method="post" path="/accounts/{accountID}/transfers/.fetch" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.batch_get_transfers(account_id="<id>", transfer_i_ds=[
+        "<value 1>",
+        "<value 2>",
+    ])
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `transfer_i_ds`                                                     | List[*str*]                                                         | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.BatchGetTransfersResponse](../../models/operations/batchgettransfersresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get
 

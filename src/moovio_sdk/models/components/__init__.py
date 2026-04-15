@@ -153,6 +153,10 @@ if TYPE_CHECKING:
     from .bankaccountverificationstatus import BankAccountVerificationStatus
     from .bankaccountwaitfor import BankAccountWaitFor
     from .basicpaymentmethod import BasicPaymentMethod, BasicPaymentMethodTypedDict
+    from .batchgettransfersrequest import (
+        BatchGetTransfersRequest,
+        BatchGetTransfersRequestTypedDict,
+    )
     from .billablefee import BillableFee, BillableFeeTypedDict
     from .billingcountandamount import (
         BillingCountAndAmount,
@@ -252,6 +256,7 @@ if TYPE_CHECKING:
         CardPaymentTransferPaymentMethodPaymentMethodType,
         CardPaymentTransferPaymentMethodTypedDict,
     )
+    from .cardpayouttype import CardPayoutType
     from .cardpresentpaymentpaymentmethod import (
         CardPresentPaymentPaymentMethod,
         CardPresentPaymentPaymentMethodPaymentMethodType,
@@ -975,6 +980,16 @@ if TYPE_CHECKING:
     )
     from .productrequest import ProductRequest, ProductRequestTypedDict
     from .profile import Profile, ProfileTypedDict
+    from .pullfromapplepaypaymentmethod import (
+        PullFromApplePayPaymentMethod,
+        PullFromApplePayPaymentMethodPaymentMethodType,
+        PullFromApplePayPaymentMethodTypedDict,
+    )
+    from .pullfromapplepaytransferpaymentmethod import (
+        PullFromApplePayTransferPaymentMethod,
+        PullFromApplePayTransferPaymentMethodPaymentMethodType,
+        PullFromApplePayTransferPaymentMethodTypedDict,
+    )
     from .pullfromcardpaymentmethod import (
         PullFromCardPaymentMethod,
         PullFromCardPaymentMethodPaymentMethodType,
@@ -984,6 +999,16 @@ if TYPE_CHECKING:
         PullFromCardTransferPaymentMethod,
         PullFromCardTransferPaymentMethodPaymentMethodType,
         PullFromCardTransferPaymentMethodTypedDict,
+    )
+    from .pushtoapplepaypaymentmethod import (
+        PushToApplePayPaymentMethod,
+        PushToApplePayPaymentMethodPaymentMethodType,
+        PushToApplePayPaymentMethodTypedDict,
+    )
+    from .pushtoapplepaytransferpaymentmethod import (
+        PushToApplePayTransferPaymentMethod,
+        PushToApplePayTransferPaymentMethodPaymentMethodType,
+        PushToApplePayTransferPaymentMethodTypedDict,
     )
     from .pushtocardpaymentmethod import (
         PushToCardPaymentMethod,
@@ -1050,9 +1075,11 @@ if TYPE_CHECKING:
         RtpCreditTransferPaymentMethodPaymentMethodType,
         RtpCreditTransferPaymentMethodTypedDict,
     )
+    from .rtpfailurecode import RTPFailureCode
     from .rtpinstitution import RTPInstitution, RTPInstitutionTypedDict
     from .rtprejectioncode import RTPRejectionCode
     from .rtpservices import RTPServices, RTPServicesTypedDict
+    from .rtptransactionstatus import RTPTransactionStatus
     from .runtransfer import RunTransfer, RunTransferTypedDict
     from .scheduledtransferimagemetadata import (
         ScheduledTransferImageMetadata,
@@ -1169,7 +1196,12 @@ if TYPE_CHECKING:
         TransferACHAddendaRecord,
         TransferACHAddendaRecordTypedDict,
     )
-    from .transferdestination import TransferDestination, TransferDestinationTypedDict
+    from .transferdestination import (
+        RtpDetails,
+        RtpDetailsTypedDict,
+        TransferDestination,
+        TransferDestinationTypedDict,
+    )
     from .transferentrymode import TransferEntryMode
     from .transferfailurereason import TransferFailureReason
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
@@ -1581,6 +1613,8 @@ __all__ = [
     "BankAccountWaitFor",
     "BasicPaymentMethod",
     "BasicPaymentMethodTypedDict",
+    "BatchGetTransfersRequest",
+    "BatchGetTransfersRequestTypedDict",
     "BillableFee",
     "BillableFeeTypedDict",
     "BillingCountAndAmount",
@@ -1669,6 +1703,7 @@ __all__ = [
     "CardPaymentTransferPaymentMethodPaymentMethodType",
     "CardPaymentTransferPaymentMethodTypedDict",
     "CardPaymentTypedDict",
+    "CardPayoutType",
     "CardPresentPaymentPaymentMethod",
     "CardPresentPaymentPaymentMethodPaymentMethodType",
     "CardPresentPaymentPaymentMethodTypedDict",
@@ -2231,12 +2266,24 @@ __all__ = [
     "ProductTypedDict",
     "Profile",
     "ProfileTypedDict",
+    "PullFromApplePayPaymentMethod",
+    "PullFromApplePayPaymentMethodPaymentMethodType",
+    "PullFromApplePayPaymentMethodTypedDict",
+    "PullFromApplePayTransferPaymentMethod",
+    "PullFromApplePayTransferPaymentMethodPaymentMethodType",
+    "PullFromApplePayTransferPaymentMethodTypedDict",
     "PullFromCardPaymentMethod",
     "PullFromCardPaymentMethodPaymentMethodType",
     "PullFromCardPaymentMethodTypedDict",
     "PullFromCardTransferPaymentMethod",
     "PullFromCardTransferPaymentMethodPaymentMethodType",
     "PullFromCardTransferPaymentMethodTypedDict",
+    "PushToApplePayPaymentMethod",
+    "PushToApplePayPaymentMethodPaymentMethodType",
+    "PushToApplePayPaymentMethodTypedDict",
+    "PushToApplePayTransferPaymentMethod",
+    "PushToApplePayTransferPaymentMethodPaymentMethodType",
+    "PushToApplePayTransferPaymentMethodTypedDict",
     "PushToCardPaymentMethod",
     "PushToCardPaymentMethodPaymentMethodType",
     "PushToCardPaymentMethodTypedDict",
@@ -2245,11 +2292,13 @@ __all__ = [
     "PushToCardTransferPaymentMethodTypedDict",
     "QRCode",
     "QRCodeTypedDict",
+    "RTPFailureCode",
     "RTPInstitution",
     "RTPInstitutionTypedDict",
     "RTPRejectionCode",
     "RTPServices",
     "RTPServicesTypedDict",
+    "RTPTransactionStatus",
     "ReceiptKind",
     "ReceiptRequest",
     "ReceiptRequestTypedDict",
@@ -2301,6 +2350,8 @@ __all__ = [
     "RtpCreditTransferPaymentMethod",
     "RtpCreditTransferPaymentMethodPaymentMethodType",
     "RtpCreditTransferPaymentMethodTypedDict",
+    "RtpDetails",
+    "RtpDetailsTypedDict",
     "RunTransfer",
     "RunTransferTypedDict",
     "SECCode",
@@ -2735,6 +2786,8 @@ _dynamic_imports: dict[str, str] = {
     "BankAccountWaitFor": ".bankaccountwaitfor",
     "BasicPaymentMethod": ".basicpaymentmethod",
     "BasicPaymentMethodTypedDict": ".basicpaymentmethod",
+    "BatchGetTransfersRequest": ".batchgettransfersrequest",
+    "BatchGetTransfersRequestTypedDict": ".batchgettransfersrequest",
     "BillableFee": ".billablefee",
     "BillableFeeTypedDict": ".billablefee",
     "BillingCountAndAmount": ".billingcountandamount",
@@ -2826,6 +2879,7 @@ _dynamic_imports: dict[str, str] = {
     "CardPaymentTransferPaymentMethod": ".cardpaymenttransferpaymentmethod",
     "CardPaymentTransferPaymentMethodPaymentMethodType": ".cardpaymenttransferpaymentmethod",
     "CardPaymentTransferPaymentMethodTypedDict": ".cardpaymenttransferpaymentmethod",
+    "CardPayoutType": ".cardpayouttype",
     "CardPresentPaymentPaymentMethod": ".cardpresentpaymentpaymentmethod",
     "CardPresentPaymentPaymentMethodPaymentMethodType": ".cardpresentpaymentpaymentmethod",
     "CardPresentPaymentPaymentMethodTypedDict": ".cardpresentpaymentpaymentmethod",
@@ -3384,12 +3438,24 @@ _dynamic_imports: dict[str, str] = {
     "ProductRequestTypedDict": ".productrequest",
     "Profile": ".profile",
     "ProfileTypedDict": ".profile",
+    "PullFromApplePayPaymentMethod": ".pullfromapplepaypaymentmethod",
+    "PullFromApplePayPaymentMethodPaymentMethodType": ".pullfromapplepaypaymentmethod",
+    "PullFromApplePayPaymentMethodTypedDict": ".pullfromapplepaypaymentmethod",
+    "PullFromApplePayTransferPaymentMethod": ".pullfromapplepaytransferpaymentmethod",
+    "PullFromApplePayTransferPaymentMethodPaymentMethodType": ".pullfromapplepaytransferpaymentmethod",
+    "PullFromApplePayTransferPaymentMethodTypedDict": ".pullfromapplepaytransferpaymentmethod",
     "PullFromCardPaymentMethod": ".pullfromcardpaymentmethod",
     "PullFromCardPaymentMethodPaymentMethodType": ".pullfromcardpaymentmethod",
     "PullFromCardPaymentMethodTypedDict": ".pullfromcardpaymentmethod",
     "PullFromCardTransferPaymentMethod": ".pullfromcardtransferpaymentmethod",
     "PullFromCardTransferPaymentMethodPaymentMethodType": ".pullfromcardtransferpaymentmethod",
     "PullFromCardTransferPaymentMethodTypedDict": ".pullfromcardtransferpaymentmethod",
+    "PushToApplePayPaymentMethod": ".pushtoapplepaypaymentmethod",
+    "PushToApplePayPaymentMethodPaymentMethodType": ".pushtoapplepaypaymentmethod",
+    "PushToApplePayPaymentMethodTypedDict": ".pushtoapplepaypaymentmethod",
+    "PushToApplePayTransferPaymentMethod": ".pushtoapplepaytransferpaymentmethod",
+    "PushToApplePayTransferPaymentMethodPaymentMethodType": ".pushtoapplepaytransferpaymentmethod",
+    "PushToApplePayTransferPaymentMethodTypedDict": ".pushtoapplepaytransferpaymentmethod",
     "PushToCardPaymentMethod": ".pushtocardpaymentmethod",
     "PushToCardPaymentMethodPaymentMethodType": ".pushtocardpaymentmethod",
     "PushToCardPaymentMethodTypedDict": ".pushtocardpaymentmethod",
@@ -3449,11 +3515,13 @@ _dynamic_imports: dict[str, str] = {
     "RtpCreditTransferPaymentMethod": ".rtpcredittransferpaymentmethod",
     "RtpCreditTransferPaymentMethodPaymentMethodType": ".rtpcredittransferpaymentmethod",
     "RtpCreditTransferPaymentMethodTypedDict": ".rtpcredittransferpaymentmethod",
+    "RTPFailureCode": ".rtpfailurecode",
     "RTPInstitution": ".rtpinstitution",
     "RTPInstitutionTypedDict": ".rtpinstitution",
     "RTPRejectionCode": ".rtprejectioncode",
     "RTPServices": ".rtpservices",
     "RTPServicesTypedDict": ".rtpservices",
+    "RTPTransactionStatus": ".rtptransactionstatus",
     "RunTransfer": ".runtransfer",
     "RunTransferTypedDict": ".runtransfer",
     "ScheduledTransferImageMetadata": ".scheduledtransferimagemetadata",
@@ -3563,6 +3631,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferAccountTypedDict": ".transferaccount",
     "TransferACHAddendaRecord": ".transferachaddendarecord",
     "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
+    "RtpDetails": ".transferdestination",
+    "RtpDetailsTypedDict": ".transferdestination",
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",

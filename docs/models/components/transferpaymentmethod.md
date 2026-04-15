@@ -77,3 +77,15 @@ value: components.CardPresentPaymentTransferPaymentMethod = /* values here */
 value: components.InstantBankCreditTransferPaymentMethod = /* values here */
 ```
 
+### `components.PushToApplePayTransferPaymentMethod`
+
+```python
+value: components.PushToApplePayTransferPaymentMethod = /* values here */
+```
+
+### `components.PullFromApplePayTransferPaymentMethod`
+
+```python
+value: components.PullFromApplePayTransferPaymentMethod = /* values here */
+```
+

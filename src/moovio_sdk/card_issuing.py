@@ -825,9 +825,10 @@ class CardIssuing(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "204", "*"):
+        if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateIssuedCardResponse(
-                headers=utils.get_response_headers(http_res.headers)
+                result=unmarshal_json_response(components.IssuedCard, http_res),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
@@ -968,9 +969,10 @@ class CardIssuing(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "204", "*"):
+        if utils.match_response(http_res, "200", "application/json"):
             return operations.UpdateIssuedCardResponse(
-                headers=utils.get_response_headers(http_res.headers)
+                result=unmarshal_json_response(components.IssuedCard, http_res),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["400", "409"], "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
