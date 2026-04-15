@@ -152,6 +152,10 @@ if TYPE_CHECKING:
     from .bankaccountverificationstatus import BankAccountVerificationStatus
     from .bankaccountwaitfor import BankAccountWaitFor
     from .basicpaymentmethod import BasicPaymentMethod, BasicPaymentMethodTypedDict
+    from .batchgettransfersrequest import (
+        BatchGetTransfersRequest,
+        BatchGetTransfersRequestTypedDict,
+    )
     from .billablefee import BillableFee, BillableFeeTypedDict
     from .billingcountandamount import (
         BillingCountAndAmount,
@@ -593,6 +597,13 @@ if TYPE_CHECKING:
     )
     from .individualprofile import IndividualProfile, IndividualProfileTypedDict
     from .industrycodes import IndustryCodes, IndustryCodesTypedDict
+    from .instantbankfailurecode import InstantBankFailureCode
+    from .instantbanknetwork import InstantBankNetwork
+    from .instantbanktransactiondetails import (
+        InstantBankTransactionDetails,
+        InstantBankTransactionDetailsTypedDict,
+    )
+    from .instantbanktransactionstatus import InstantBankTransactionStatus
     from .instantpaymentfees import InstantPaymentFees, InstantPaymentFeesTypedDict
     from .institutionssearchresponse import (
         InstitutionsSearchResponse,
@@ -1378,6 +1389,8 @@ __all__ = [
     "BankAccountWaitFor",
     "BasicPaymentMethod",
     "BasicPaymentMethodTypedDict",
+    "BatchGetTransfersRequest",
+    "BatchGetTransfersRequestTypedDict",
     "BillableFee",
     "BillableFeeTypedDict",
     "BillingCountAndAmount",
@@ -1720,6 +1733,11 @@ __all__ = [
     "IndividualProfileTypedDict",
     "IndustryCodes",
     "IndustryCodesTypedDict",
+    "InstantBankFailureCode",
+    "InstantBankNetwork",
+    "InstantBankTransactionDetails",
+    "InstantBankTransactionDetailsTypedDict",
+    "InstantBankTransactionStatus",
     "InstantPaymentFees",
     "InstantPaymentFeesTypedDict",
     "InstitutionsSearchResponse",
@@ -2374,6 +2392,8 @@ _dynamic_imports: dict[str, str] = {
     "BankAccountWaitFor": ".bankaccountwaitfor",
     "BasicPaymentMethod": ".basicpaymentmethod",
     "BasicPaymentMethodTypedDict": ".basicpaymentmethod",
+    "BatchGetTransfersRequest": ".batchgettransfersrequest",
+    "BatchGetTransfersRequestTypedDict": ".batchgettransfersrequest",
     "BillableFee": ".billablefee",
     "BillableFeeTypedDict": ".billablefee",
     "BillingCountAndAmount": ".billingcountandamount",
@@ -2722,6 +2742,11 @@ _dynamic_imports: dict[str, str] = {
     "IndividualProfileTypedDict": ".individualprofile",
     "IndustryCodes": ".industrycodes",
     "IndustryCodesTypedDict": ".industrycodes",
+    "InstantBankFailureCode": ".instantbankfailurecode",
+    "InstantBankNetwork": ".instantbanknetwork",
+    "InstantBankTransactionDetails": ".instantbanktransactiondetails",
+    "InstantBankTransactionDetailsTypedDict": ".instantbanktransactiondetails",
+    "InstantBankTransactionStatus": ".instantbanktransactionstatus",
     "InstantPaymentFees": ".instantpaymentfees",
     "InstantPaymentFeesTypedDict": ".instantpaymentfees",
     "InstitutionsSearchResponse": ".institutionssearchresponse",

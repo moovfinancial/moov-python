@@ -17,6 +17,12 @@ if TYPE_CHECKING:
         AssignAccountCountriesResponse,
         AssignAccountCountriesResponseTypedDict,
     )
+    from .batchgettransfers import (
+        BatchGetTransfersRequest,
+        BatchGetTransfersRequestTypedDict,
+        BatchGetTransfersResponse,
+        BatchGetTransfersResponseTypedDict,
+    )
     from .cancelschedule import (
         CancelScheduleRequest,
         CancelScheduleRequestTypedDict,
@@ -967,6 +973,10 @@ __all__ = [
     "AssignAccountCountriesRequestTypedDict",
     "AssignAccountCountriesResponse",
     "AssignAccountCountriesResponseTypedDict",
+    "BatchGetTransfersRequest",
+    "BatchGetTransfersRequestTypedDict",
+    "BatchGetTransfersResponse",
+    "BatchGetTransfersResponseTypedDict",
     "CancelScheduleRequest",
     "CancelScheduleRequestTypedDict",
     "CancelScheduleResponse",
@@ -1613,6 +1623,10 @@ _dynamic_imports: dict[str, str] = {
     "AssignAccountCountriesRequestTypedDict": ".assignaccountcountries",
     "AssignAccountCountriesResponse": ".assignaccountcountries",
     "AssignAccountCountriesResponseTypedDict": ".assignaccountcountries",
+    "BatchGetTransfersRequest": ".batchgettransfers",
+    "BatchGetTransfersRequestTypedDict": ".batchgettransfers",
+    "BatchGetTransfersResponse": ".batchgettransfers",
+    "BatchGetTransfersResponseTypedDict": ".batchgettransfers",
     "CancelScheduleRequest": ".cancelschedule",
     "CancelScheduleRequestTypedDict": ".cancelschedule",
     "CancelScheduleResponse": ".cancelschedule",
