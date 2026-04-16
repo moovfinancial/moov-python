@@ -34,10 +34,12 @@ class LinkApplePayTokenRequest(BaseModel):
 
 class LinkApplePayTokenResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
-    result: components_linkedapplepaypaymentmethod.LinkedApplePayPaymentMethodTypedDict
+    result: List[
+        components_linkedapplepaypaymentmethod.LinkedApplePayPaymentMethodTypedDict
+    ]
 
 
 class LinkApplePayTokenResponse(BaseModel):
     headers: Dict[str, List[str]]
 
-    result: components_linkedapplepaypaymentmethod.LinkedApplePayPaymentMethod
+    result: List[components_linkedapplepaypaymentmethod.LinkedApplePayPaymentMethod]
