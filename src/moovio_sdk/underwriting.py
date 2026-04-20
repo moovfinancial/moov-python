@@ -83,7 +83,7 @@ class Underwriting(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -179,7 +179,7 @@ class Underwriting(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -315,19 +315,7 @@ class Underwriting(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -472,19 +460,7 @@ class Underwriting(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
