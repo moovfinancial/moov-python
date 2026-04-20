@@ -72,7 +72,7 @@ with Moov(
         ],
     }, payout={
         "allowed_methods": [
-            components.DisbursementPaymentMethodType.ACH_CREDIT_STANDARD,
+            components.DisbursementPaymentMethodType.PUSH_TO_APPLE_PAY,
         ],
         "recipient": {
             "email": "jordan.lee@classbooker.dev",
