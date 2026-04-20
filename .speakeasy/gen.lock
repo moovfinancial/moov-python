@@ -5,15 +5,15 @@ management:
   docVersion: v2026.04.00
   speakeasyVersion: 1.761.8
   generationVersion: 2.881.2
-  releaseVersion: 26.4.0-dev.21
-  configChecksum: 833bac6b7c3a48034d85f14d110654b1
+  releaseVersion: 26.4.0
+  configChecksum: 53905cae3fb0a218dac5c0d76feebbcb
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 936b2eb0-9c21-49cb-9e80-d1531155dc3b
-  pristine_commit_hash: 05bd96b2f7142fca571218a9f269338468af0c80
-  pristine_tree_hash: d6c55d081af0e0d1da30928ad3487329ae17d2a0
+  generation_id: 8488a4eb-925c-47e3-b194-df0125dc64fb
+  pristine_commit_hash: fbf572062d7dedc0a60dc03f092f14321a9f7c6b
+  pristine_tree_hash: db379269bc47f7ef562cec2515370f863b653488
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4617,8 +4617,8 @@ trackedFiles:
     pristine_git_object: 68b6361e4a22b7fd00d6f5a72e25278ebf35ba6d
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:121e0a0befc295229939851643d5d3c87c758956
-    pristine_git_object: f97ff790e5842386d36d0fde5ff72a876e7e3f02
+    last_write_checksum: sha1:ae44003d2135a10afa447b1f55b8fa9e65b59847
+    pristine_git_object: a78cd67cbc63065bed04cc6a5233ec8c27ab496c
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4645,8 +4645,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:307999d61bd4e7fd6b5f40cc562b811ad107195d
-    pristine_git_object: d344cf7761b1b132d7afe1a2f2bd385b9c1ef872
+    last_write_checksum: sha1:ecd9a57561ad5e07e40ab8a3661d9290b6aef1a0
+    pristine_git_object: 31a8a8f796f9e67032c16c3ba9ca41edbf2e95d2
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:92df233993bc233908220d240fb575306638f0d2
@@ -11122,7 +11122,6 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `moov.payment_links.update()`: \n  *  `request.payout.allowed_methods[]` **Changed**\n  *  `response.payout.allowed_methods[]` **Changed** (Breaking ⚠️)\n* `moov.cards.list()`:  `response.[].payment_methods[].payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.bank_accounts.link()`:  `response.payment_methods[].payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.bank_accounts.list()`:  `response.[].payment_methods[].payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.bank_accounts.get()`:  `response.payment_methods[].payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.cards.link()`:  `response.payment_methods[].payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.payment_links.get()`:  `response.payout.allowed_methods[]` **Changed** (Breaking ⚠️)\n* `moov.cards.get()`:  `response.payment_methods[].payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.cards.update()`:  `response.payment_methods[].payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.payment_links.create()`: \n  *  `request.payout.allowed_methods[]` **Changed**\n  *  `response.payout.allowed_methods[]` **Changed** (Breaking ⚠️)\n* `moov.apple_pay.link_token()`:  `response.[].payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.payment_links.list()`:  `response.[].payout.allowed_methods[]` **Changed** (Breaking ⚠️)\n* `moov.transfers.update()`:  `response.source.payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.payment_methods.list()`: \n  *  `request.payment_method_type` **Changed**\n  *  `response.[]` **Changed** (Breaking ⚠️)\n* `moov.payment_methods.get()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.transfers.get()`:  `response.source.payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.transfers.batch_get_transfers()`:  `response.Map<Transfer>.source.payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.transfers.list()`:  `response.[].source.payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.transfers.generate_options()`:  `response.source_options[]` **Changed** (Breaking ⚠️)\n* `moov.transfers.create()`: \n  *  `response.source.payment_method_type` **Changed** (Breaking ⚠️)\n  *  `error.source.payment_method_type` **Changed** (Breaking ⚠️)\n* `moov.resolution_links.get()`:  `response.status` **Added**\n* `moov.google_pay.link_token()`: **Added**\n* `moov.resolution_links.create()`:  `response.status` **Added**\n* `moov.resolution_links.list()`:  `response.[].status` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
