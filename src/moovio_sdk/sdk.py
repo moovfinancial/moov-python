@@ -33,6 +33,7 @@ if TYPE_CHECKING:
     from moovio_sdk.enriched_profile import EnrichedProfile
     from moovio_sdk.fee_plans import FeePlans
     from moovio_sdk.files import Files
+    from moovio_sdk.google_pay import GooglePay
     from moovio_sdk.images import Images
     from moovio_sdk.industries import Industries
     from moovio_sdk.institutions import Institutions
@@ -76,6 +77,7 @@ class Moov(BaseSDK):
     disputes: "Disputes"
     fee_plans: "FeePlans"
     files: "Files"
+    google_pay: "GooglePay"
     images: "Images"
     invoices: "Invoices"
     payment_links: "PaymentLinks"
@@ -117,6 +119,7 @@ class Moov(BaseSDK):
         "disputes": ("moovio_sdk.disputes", "Disputes"),
         "fee_plans": ("moovio_sdk.fee_plans", "FeePlans"),
         "files": ("moovio_sdk.files", "Files"),
+        "google_pay": ("moovio_sdk.google_pay", "GooglePay"),
         "images": ("moovio_sdk.images", "Images"),
         "invoices": ("moovio_sdk.invoices", "Invoices"),
         "payment_links": ("moovio_sdk.payment_links", "PaymentLinks"),

@@ -606,6 +606,12 @@ if TYPE_CHECKING:
         LinkCardResponse,
         LinkCardResponseTypedDict,
     )
+    from .linkgooglepaytoken import (
+        LinkGooglePayTokenRequest,
+        LinkGooglePayTokenRequestTypedDict,
+        LinkGooglePayTokenResponse,
+        LinkGooglePayTokenResponseTypedDict,
+    )
     from .listaccounts import (
         ListAccountsRequest,
         ListAccountsRequestTypedDict,
@@ -1476,6 +1482,10 @@ __all__ = [
     "LinkCardRequestTypedDict",
     "LinkCardResponse",
     "LinkCardResponseTypedDict",
+    "LinkGooglePayTokenRequest",
+    "LinkGooglePayTokenRequestTypedDict",
+    "LinkGooglePayTokenResponse",
+    "LinkGooglePayTokenResponseTypedDict",
     "ListAccountTerminalApplicationsRequest",
     "ListAccountTerminalApplicationsRequestTypedDict",
     "ListAccountTerminalApplicationsResponse",
@@ -2195,6 +2205,10 @@ _dynamic_imports: dict[str, str] = {
     "LinkCardRequestTypedDict": ".linkcard",
     "LinkCardResponse": ".linkcard",
     "LinkCardResponseTypedDict": ".linkcard",
+    "LinkGooglePayTokenRequest": ".linkgooglepaytoken",
+    "LinkGooglePayTokenRequestTypedDict": ".linkgooglepaytoken",
+    "LinkGooglePayTokenResponse": ".linkgooglepaytoken",
+    "LinkGooglePayTokenResponseTypedDict": ".linkgooglepaytoken",
     "ListAccountsRequest": ".listaccounts",
     "ListAccountsRequestTypedDict": ".listaccounts",
     "ListAccountsResponse": ".listaccounts",

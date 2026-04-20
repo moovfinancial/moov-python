@@ -26,6 +26,10 @@ from .cardpresentpaymentpaymentmethod import (
     CardPresentPaymentPaymentMethod,
     CardPresentPaymentPaymentMethodTypedDict,
 )
+from .googlepaypaymentmethod import (
+    GooglePayPaymentMethod,
+    GooglePayPaymentMethodTypedDict,
+)
 from .instantbankcreditpaymentmethod import (
     InstantBankCreditPaymentMethod,
     InstantBankCreditPaymentMethodTypedDict,
@@ -42,6 +46,10 @@ from .pullfromcardpaymentmethod import (
     PullFromCardPaymentMethod,
     PullFromCardPaymentMethodTypedDict,
 )
+from .pullfromgooglepaypaymentmethod import (
+    PullFromGooglePayPaymentMethod,
+    PullFromGooglePayPaymentMethodTypedDict,
+)
 from .pushtoapplepaypaymentmethod import (
     PushToApplePayPaymentMethod,
     PushToApplePayPaymentMethodTypedDict,
@@ -49,6 +57,10 @@ from .pushtoapplepaypaymentmethod import (
 from .pushtocardpaymentmethod import (
     PushToCardPaymentMethod,
     PushToCardPaymentMethodTypedDict,
+)
+from .pushtogooglepaypaymentmethod import (
+    PushToGooglePayPaymentMethod,
+    PushToGooglePayPaymentMethodTypedDict,
 )
 from .rtpcreditpaymentmethod import (
     RtpCreditPaymentMethod,
@@ -77,6 +89,9 @@ PaymentMethodTypedDict = TypeAliasType(
         InstantBankCreditPaymentMethodTypedDict,
         PushToApplePayPaymentMethodTypedDict,
         PullFromApplePayPaymentMethodTypedDict,
+        GooglePayPaymentMethodTypedDict,
+        PushToGooglePayPaymentMethodTypedDict,
+        PullFromGooglePayPaymentMethodTypedDict,
     ],
 )
 r"""A method of moving money"""
@@ -98,6 +113,9 @@ PaymentMethod = Annotated[
         Annotated[InstantBankCreditPaymentMethod, Tag("instant-bank-credit")],
         Annotated[PushToApplePayPaymentMethod, Tag("push-to-apple-pay")],
         Annotated[PullFromApplePayPaymentMethod, Tag("pull-from-apple-pay")],
+        Annotated[GooglePayPaymentMethod, Tag("google-pay")],
+        Annotated[PushToGooglePayPaymentMethod, Tag("push-to-google-pay")],
+        Annotated[PullFromGooglePayPaymentMethod, Tag("pull-from-google-pay")],
     ],
     Discriminator(
         lambda m: get_discriminator(m, "payment_method_type", "paymentMethodType")

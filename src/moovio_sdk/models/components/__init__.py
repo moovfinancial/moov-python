@@ -645,6 +645,22 @@ if TYPE_CHECKING:
     from .fullissuedcard import FullIssuedCard, FullIssuedCardTypedDict
     from .generatedby import GeneratedBy, GeneratedByTypedDict
     from .geographicreach import GeographicReach
+    from .googlepayintermediatesigningkey import (
+        GooglePayIntermediateSigningKey,
+        GooglePayIntermediateSigningKeyTypedDict,
+    )
+    from .googlepaypaymentmethod import (
+        GooglePayPaymentMethod,
+        GooglePayPaymentMethodPaymentMethodType,
+        GooglePayPaymentMethodTypedDict,
+    )
+    from .googlepayresponse import GooglePayResponse, GooglePayResponseTypedDict
+    from .googlepaytoken import GooglePayToken, GooglePayTokenTypedDict
+    from .googlepaytransferpaymentmethod import (
+        GooglePayTransferPaymentMethod,
+        GooglePayTransferPaymentMethodPaymentMethodType,
+        GooglePayTransferPaymentMethodTypedDict,
+    )
     from .governmentid import (
         GovernmentID,
         GovernmentIDTypedDict,
@@ -800,6 +816,12 @@ if TYPE_CHECKING:
         LinkedApplePayPaymentMethod,
         LinkedApplePayPaymentMethodTypedDict,
     )
+    from .linkedgooglepaypaymentmethod import (
+        LinkedGooglePayPaymentMethod,
+        LinkedGooglePayPaymentMethodPaymentMethodType,
+        LinkedGooglePayPaymentMethodTypedDict,
+    )
+    from .linkgooglepay import LinkGooglePay, LinkGooglePayTypedDict
     from .listfeesfetchrequest import (
         ListFeesFetchRequest,
         ListFeesFetchRequestTypedDict,
@@ -1000,6 +1022,16 @@ if TYPE_CHECKING:
         PullFromCardTransferPaymentMethodPaymentMethodType,
         PullFromCardTransferPaymentMethodTypedDict,
     )
+    from .pullfromgooglepaypaymentmethod import (
+        PullFromGooglePayPaymentMethod,
+        PullFromGooglePayPaymentMethodPaymentMethodType,
+        PullFromGooglePayPaymentMethodTypedDict,
+    )
+    from .pullfromgooglepaytransferpaymentmethod import (
+        PullFromGooglePayTransferPaymentMethod,
+        PullFromGooglePayTransferPaymentMethodPaymentMethodType,
+        PullFromGooglePayTransferPaymentMethodTypedDict,
+    )
     from .pushtoapplepaypaymentmethod import (
         PushToApplePayPaymentMethod,
         PushToApplePayPaymentMethodPaymentMethodType,
@@ -1019,6 +1051,16 @@ if TYPE_CHECKING:
         PushToCardTransferPaymentMethod,
         PushToCardTransferPaymentMethodPaymentMethodType,
         PushToCardTransferPaymentMethodTypedDict,
+    )
+    from .pushtogooglepaypaymentmethod import (
+        PushToGooglePayPaymentMethod,
+        PushToGooglePayPaymentMethodPaymentMethodType,
+        PushToGooglePayPaymentMethodTypedDict,
+    )
+    from .pushtogooglepaytransferpaymentmethod import (
+        PushToGooglePayTransferPaymentMethod,
+        PushToGooglePayTransferPaymentMethodPaymentMethodType,
+        PushToGooglePayTransferPaymentMethodTypedDict,
     )
     from .qrcode import QRCode, QRCodeTypedDict
     from .receiptkind import ReceiptKind
@@ -1053,6 +1095,7 @@ if TYPE_CHECKING:
         ResolutionLinkRecipient,
         ResolutionLinkRecipientTypedDict,
     )
+    from .resolutionlinkstatus import ResolutionLinkStatus
     from .returnpolicytype import ReturnPolicyType
     from .reversal import Reversal, ReversalTypedDict
     from .reversedwithcancellation import (
@@ -1985,6 +2028,18 @@ __all__ = [
     "GeneratedBy",
     "GeneratedByTypedDict",
     "GeographicReach",
+    "GooglePayIntermediateSigningKey",
+    "GooglePayIntermediateSigningKeyTypedDict",
+    "GooglePayPaymentMethod",
+    "GooglePayPaymentMethodPaymentMethodType",
+    "GooglePayPaymentMethodTypedDict",
+    "GooglePayResponse",
+    "GooglePayResponseTypedDict",
+    "GooglePayToken",
+    "GooglePayTokenTypedDict",
+    "GooglePayTransferPaymentMethod",
+    "GooglePayTransferPaymentMethodPaymentMethodType",
+    "GooglePayTransferPaymentMethodTypedDict",
     "GovernmentID",
     "GovernmentIDError",
     "GovernmentIDErrorItin",
@@ -2105,8 +2160,13 @@ __all__ = [
     "LinkCard",
     "LinkCardTypedDict",
     "LinkCardWaitFor",
+    "LinkGooglePay",
+    "LinkGooglePayTypedDict",
     "LinkedApplePayPaymentMethod",
     "LinkedApplePayPaymentMethodTypedDict",
+    "LinkedGooglePayPaymentMethod",
+    "LinkedGooglePayPaymentMethodPaymentMethodType",
+    "LinkedGooglePayPaymentMethodTypedDict",
     "ListFeesFetchRequest",
     "ListFeesFetchRequestTypedDict",
     "Logo",
@@ -2278,6 +2338,12 @@ __all__ = [
     "PullFromCardTransferPaymentMethod",
     "PullFromCardTransferPaymentMethodPaymentMethodType",
     "PullFromCardTransferPaymentMethodTypedDict",
+    "PullFromGooglePayPaymentMethod",
+    "PullFromGooglePayPaymentMethodPaymentMethodType",
+    "PullFromGooglePayPaymentMethodTypedDict",
+    "PullFromGooglePayTransferPaymentMethod",
+    "PullFromGooglePayTransferPaymentMethodPaymentMethodType",
+    "PullFromGooglePayTransferPaymentMethodTypedDict",
     "PushToApplePayPaymentMethod",
     "PushToApplePayPaymentMethodPaymentMethodType",
     "PushToApplePayPaymentMethodTypedDict",
@@ -2290,6 +2356,12 @@ __all__ = [
     "PushToCardTransferPaymentMethod",
     "PushToCardTransferPaymentMethodPaymentMethodType",
     "PushToCardTransferPaymentMethodTypedDict",
+    "PushToGooglePayPaymentMethod",
+    "PushToGooglePayPaymentMethodPaymentMethodType",
+    "PushToGooglePayPaymentMethodTypedDict",
+    "PushToGooglePayTransferPaymentMethod",
+    "PushToGooglePayTransferPaymentMethodPaymentMethodType",
+    "PushToGooglePayTransferPaymentMethodTypedDict",
     "QRCode",
     "QRCodeTypedDict",
     "RTPFailureCode",
@@ -2332,6 +2404,7 @@ __all__ = [
     "ResolutionLink",
     "ResolutionLinkRecipient",
     "ResolutionLinkRecipientTypedDict",
+    "ResolutionLinkStatus",
     "ResolutionLinkTypedDict",
     "Responsibilities",
     "ResponsibilitiesTypedDict",
@@ -3160,6 +3233,18 @@ _dynamic_imports: dict[str, str] = {
     "GeneratedBy": ".generatedby",
     "GeneratedByTypedDict": ".generatedby",
     "GeographicReach": ".geographicreach",
+    "GooglePayIntermediateSigningKey": ".googlepayintermediatesigningkey",
+    "GooglePayIntermediateSigningKeyTypedDict": ".googlepayintermediatesigningkey",
+    "GooglePayPaymentMethod": ".googlepaypaymentmethod",
+    "GooglePayPaymentMethodPaymentMethodType": ".googlepaypaymentmethod",
+    "GooglePayPaymentMethodTypedDict": ".googlepaypaymentmethod",
+    "GooglePayResponse": ".googlepayresponse",
+    "GooglePayResponseTypedDict": ".googlepayresponse",
+    "GooglePayToken": ".googlepaytoken",
+    "GooglePayTokenTypedDict": ".googlepaytoken",
+    "GooglePayTransferPaymentMethod": ".googlepaytransferpaymentmethod",
+    "GooglePayTransferPaymentMethodPaymentMethodType": ".googlepaytransferpaymentmethod",
+    "GooglePayTransferPaymentMethodTypedDict": ".googlepaytransferpaymentmethod",
     "GovernmentID": ".governmentid",
     "GovernmentIDTypedDict": ".governmentid",
     "Itin": ".governmentid",
@@ -3284,6 +3369,11 @@ _dynamic_imports: dict[str, str] = {
     "LinkCardWaitFor": ".linkcardwaitfor",
     "LinkedApplePayPaymentMethod": ".linkedapplepaypaymentmethod",
     "LinkedApplePayPaymentMethodTypedDict": ".linkedapplepaypaymentmethod",
+    "LinkedGooglePayPaymentMethod": ".linkedgooglepaypaymentmethod",
+    "LinkedGooglePayPaymentMethodPaymentMethodType": ".linkedgooglepaypaymentmethod",
+    "LinkedGooglePayPaymentMethodTypedDict": ".linkedgooglepaypaymentmethod",
+    "LinkGooglePay": ".linkgooglepay",
+    "LinkGooglePayTypedDict": ".linkgooglepay",
     "ListFeesFetchRequest": ".listfeesfetchrequest",
     "ListFeesFetchRequestTypedDict": ".listfeesfetchrequest",
     "ManualTermsOfService": ".manualtermsofservice",
@@ -3450,6 +3540,12 @@ _dynamic_imports: dict[str, str] = {
     "PullFromCardTransferPaymentMethod": ".pullfromcardtransferpaymentmethod",
     "PullFromCardTransferPaymentMethodPaymentMethodType": ".pullfromcardtransferpaymentmethod",
     "PullFromCardTransferPaymentMethodTypedDict": ".pullfromcardtransferpaymentmethod",
+    "PullFromGooglePayPaymentMethod": ".pullfromgooglepaypaymentmethod",
+    "PullFromGooglePayPaymentMethodPaymentMethodType": ".pullfromgooglepaypaymentmethod",
+    "PullFromGooglePayPaymentMethodTypedDict": ".pullfromgooglepaypaymentmethod",
+    "PullFromGooglePayTransferPaymentMethod": ".pullfromgooglepaytransferpaymentmethod",
+    "PullFromGooglePayTransferPaymentMethodPaymentMethodType": ".pullfromgooglepaytransferpaymentmethod",
+    "PullFromGooglePayTransferPaymentMethodTypedDict": ".pullfromgooglepaytransferpaymentmethod",
     "PushToApplePayPaymentMethod": ".pushtoapplepaypaymentmethod",
     "PushToApplePayPaymentMethodPaymentMethodType": ".pushtoapplepaypaymentmethod",
     "PushToApplePayPaymentMethodTypedDict": ".pushtoapplepaypaymentmethod",
@@ -3462,6 +3558,12 @@ _dynamic_imports: dict[str, str] = {
     "PushToCardTransferPaymentMethod": ".pushtocardtransferpaymentmethod",
     "PushToCardTransferPaymentMethodPaymentMethodType": ".pushtocardtransferpaymentmethod",
     "PushToCardTransferPaymentMethodTypedDict": ".pushtocardtransferpaymentmethod",
+    "PushToGooglePayPaymentMethod": ".pushtogooglepaypaymentmethod",
+    "PushToGooglePayPaymentMethodPaymentMethodType": ".pushtogooglepaypaymentmethod",
+    "PushToGooglePayPaymentMethodTypedDict": ".pushtogooglepaypaymentmethod",
+    "PushToGooglePayTransferPaymentMethod": ".pushtogooglepaytransferpaymentmethod",
+    "PushToGooglePayTransferPaymentMethodPaymentMethodType": ".pushtogooglepaytransferpaymentmethod",
+    "PushToGooglePayTransferPaymentMethodTypedDict": ".pushtogooglepaytransferpaymentmethod",
     "QRCode": ".qrcode",
     "QRCodeTypedDict": ".qrcode",
     "ReceiptKind": ".receiptkind",
@@ -3499,6 +3601,7 @@ _dynamic_imports: dict[str, str] = {
     "ResolutionLinkTypedDict": ".resolutionlink",
     "ResolutionLinkRecipient": ".resolutionlinkrecipient",
     "ResolutionLinkRecipientTypedDict": ".resolutionlinkrecipient",
+    "ResolutionLinkStatus": ".resolutionlinkstatus",
     "ReturnPolicyType": ".returnpolicytype",
     "Reversal": ".reversal",
     "ReversalTypedDict": ".reversal",
