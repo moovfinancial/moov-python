@@ -12,6 +12,7 @@ from moovio_sdk.models.components import (
     facilitatorfee as components_facilitatorfee,
     moovfee as components_moovfee,
     moovfeedetails as components_moovfeedetails,
+    transfercapture as components_transfercapture,
     transferdestination as components_transferdestination,
     transferfailurereason as components_transferfailurereason,
     transferlineitems as components_transferlineitems,
@@ -99,6 +100,8 @@ class TransferData(BaseModel):
     """
     invoice_id: Annotated[Optional[str], pydantic.Field(alias="invoiceID")] = None
     r"""ID of the invoice that the transfer is associated with."""
+    capture: Optional[components_transfercapture.TransferCapture] = None
+    r"""The card authorization and capture IDs associated with a transfer."""
 
 
 @dataclass(unsafe_hash=True)

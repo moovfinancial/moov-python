@@ -71,6 +71,7 @@ if TYPE_CHECKING:
     )
     from .linkapplepayerror import LinkApplePayError, LinkApplePayErrorData
     from .linkcarderror import LinkCardError, LinkCardErrorData
+    from .linkgooglepayerror import LinkGooglePayError, LinkGooglePayErrorData
     from .listinvoicesvalidationerror import (
         ListInvoicesValidationError,
         ListInvoicesValidationErrorData,
@@ -222,6 +223,8 @@ __all__ = [
     "LinkApplePayErrorData",
     "LinkCardError",
     "LinkCardErrorData",
+    "LinkGooglePayError",
+    "LinkGooglePayErrorData",
     "ListInvoicesValidationError",
     "ListInvoicesValidationErrorData",
     "ListTransfersValidationError",
@@ -343,6 +346,8 @@ _dynamic_imports: dict[str, str] = {
     "LinkApplePayErrorData": ".linkapplepayerror",
     "LinkCardError": ".linkcarderror",
     "LinkCardErrorData": ".linkcarderror",
+    "LinkGooglePayError": ".linkgooglepayerror",
+    "LinkGooglePayErrorData": ".linkgooglepayerror",
     "ListInvoicesValidationError": ".listinvoicesvalidationerror",
     "ListInvoicesValidationErrorData": ".listinvoicesvalidationerror",
     "ListTransfersValidationError": ".listtransfersvalidationerror",

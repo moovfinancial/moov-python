@@ -115,17 +115,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -261,17 +251,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -441,17 +421,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -634,17 +604,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -704,6 +664,8 @@ class Transfers(BaseSDK):
         refunded: Optional[bool] = None,
         disputed: Optional[bool] = None,
         foreign_id: Optional[str] = None,
+        authorization_i_ds: Optional[List[str]] = None,
+        capture_i_ds: Optional[List[str]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -734,6 +696,8 @@ class Transfers(BaseSDK):
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
+        :param authorization_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+        :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -762,6 +726,8 @@ class Transfers(BaseSDK):
             refunded=refunded,
             disputed=disputed,
             foreign_id=foreign_id,
+            authorization_i_ds=authorization_i_ds,
+            capture_i_ds=capture_i_ds,
             skip=skip,
             count=count,
             account_id=account_id,
@@ -803,7 +769,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "422", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -847,6 +813,8 @@ class Transfers(BaseSDK):
         refunded: Optional[bool] = None,
         disputed: Optional[bool] = None,
         foreign_id: Optional[str] = None,
+        authorization_i_ds: Optional[List[str]] = None,
+        capture_i_ds: Optional[List[str]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -877,6 +845,8 @@ class Transfers(BaseSDK):
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
+        :param authorization_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+        :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -905,6 +875,8 @@ class Transfers(BaseSDK):
             refunded=refunded,
             disputed=disputed,
             foreign_id=foreign_id,
+            authorization_i_ds=authorization_i_ds,
+            capture_i_ds=capture_i_ds,
             skip=skip,
             count=count,
             account_id=account_id,
@@ -946,7 +918,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "422", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1062,7 +1034,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1174,7 +1146,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1276,7 +1248,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1376,7 +1348,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1486,17 +1458,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "401",
-                "403",
-                "404",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1612,17 +1574,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "401",
-                "403",
-                "404",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1725,17 +1677,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1836,17 +1778,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1950,7 +1882,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2050,7 +1982,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2169,17 +2101,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2321,17 +2243,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2451,7 +2363,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2550,7 +2462,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2652,7 +2564,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2754,7 +2666,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["401", "403", "404", "429", "4XX", "500", "504", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2870,19 +2782,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -3005,19 +2905,7 @@ class Transfers(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "504",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

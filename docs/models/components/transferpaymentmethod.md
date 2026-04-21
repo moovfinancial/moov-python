@@ -89,3 +89,21 @@ value: components.PushToApplePayTransferPaymentMethod = /* values here */
 value: components.PullFromApplePayTransferPaymentMethod = /* values here */
 ```
 
+### `components.GooglePayTransferPaymentMethod`
+
+```python
+value: components.GooglePayTransferPaymentMethod = /* values here */
+```
+
+### `components.PushToGooglePayTransferPaymentMethod`
+
+```python
+value: components.PushToGooglePayTransferPaymentMethod = /* values here */
+```
+
+### `components.PullFromGooglePayTransferPaymentMethod`
+
+```python
+value: components.PullFromGooglePayTransferPaymentMethod = /* values here */
+```
+

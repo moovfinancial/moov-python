@@ -29,6 +29,10 @@ from .cardpresentpaymenttransferpaymentmethod import (
     CardPresentPaymentTransferPaymentMethod,
     CardPresentPaymentTransferPaymentMethodTypedDict,
 )
+from .googlepaytransferpaymentmethod import (
+    GooglePayTransferPaymentMethod,
+    GooglePayTransferPaymentMethodTypedDict,
+)
 from .instantbankcredittransferpaymentmethod import (
     InstantBankCreditTransferPaymentMethod,
     InstantBankCreditTransferPaymentMethodTypedDict,
@@ -45,6 +49,10 @@ from .pullfromcardtransferpaymentmethod import (
     PullFromCardTransferPaymentMethod,
     PullFromCardTransferPaymentMethodTypedDict,
 )
+from .pullfromgooglepaytransferpaymentmethod import (
+    PullFromGooglePayTransferPaymentMethod,
+    PullFromGooglePayTransferPaymentMethodTypedDict,
+)
 from .pushtoapplepaytransferpaymentmethod import (
     PushToApplePayTransferPaymentMethod,
     PushToApplePayTransferPaymentMethodTypedDict,
@@ -52,6 +60,10 @@ from .pushtoapplepaytransferpaymentmethod import (
 from .pushtocardtransferpaymentmethod import (
     PushToCardTransferPaymentMethod,
     PushToCardTransferPaymentMethodTypedDict,
+)
+from .pushtogooglepaytransferpaymentmethod import (
+    PushToGooglePayTransferPaymentMethod,
+    PushToGooglePayTransferPaymentMethodTypedDict,
 )
 from .rtpcredittransferpaymentmethod import (
     RtpCreditTransferPaymentMethod,
@@ -80,6 +92,9 @@ TransferPaymentMethodTypedDict = TypeAliasType(
         InstantBankCreditTransferPaymentMethodTypedDict,
         PushToApplePayTransferPaymentMethodTypedDict,
         PullFromApplePayTransferPaymentMethodTypedDict,
+        GooglePayTransferPaymentMethodTypedDict,
+        PushToGooglePayTransferPaymentMethodTypedDict,
+        PullFromGooglePayTransferPaymentMethodTypedDict,
     ],
 )
 r"""A method of moving money"""
@@ -101,6 +116,9 @@ TransferPaymentMethod = Annotated[
         Annotated[InstantBankCreditTransferPaymentMethod, Tag("instant-bank-credit")],
         Annotated[PushToApplePayTransferPaymentMethod, Tag("push-to-apple-pay")],
         Annotated[PullFromApplePayTransferPaymentMethod, Tag("pull-from-apple-pay")],
+        Annotated[GooglePayTransferPaymentMethod, Tag("google-pay")],
+        Annotated[PushToGooglePayTransferPaymentMethod, Tag("push-to-google-pay")],
+        Annotated[PullFromGooglePayTransferPaymentMethod, Tag("pull-from-google-pay")],
     ],
     Discriminator(
         lambda m: get_discriminator(m, "payment_method_type", "paymentMethodType")
