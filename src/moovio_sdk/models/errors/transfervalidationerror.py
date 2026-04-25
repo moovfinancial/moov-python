@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.components import (
+    createtransferamountdetailsvalidationerror as components_createtransferamountdetailsvalidationerror,
     createtransferlineitemsvalidationerror as components_createtransferlineitemsvalidationerror,
 )
 from moovio_sdk.models.errors import MoovError
@@ -39,6 +40,12 @@ class TransferValidationErrorData(BaseModel):
             components_createtransferlineitemsvalidationerror.CreateTransferLineItemsValidationError
         ],
         pydantic.Field(alias="lineItems"),
+    ] = None
+    amount_details: Annotated[
+        Optional[
+            components_createtransferamountdetailsvalidationerror.CreateTransferAmountDetailsValidationError
+        ],
+        pydantic.Field(alias="amountDetails"),
     ] = None
 
 

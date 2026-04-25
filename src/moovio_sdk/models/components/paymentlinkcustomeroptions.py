@@ -13,6 +13,8 @@ class PaymentLinkCustomerOptionsTypedDict(TypedDict):
     r"""If true, a billing address is required when completing the payment form."""
     require_phone: NotRequired[bool]
     r"""If true, a phone number is required when completing the payment form."""
+    tipping_enabled: NotRequired[bool]
+    r"""If true, tipping is enabled on the payment form. Defaults to false."""
     metadata: NotRequired[Dict[str, str]]
     r"""Optional free-form metadata for the Moov account that will represent this customer."""
 
@@ -28,12 +30,19 @@ class PaymentLinkCustomerOptions(BaseModel):
     )
     r"""If true, a phone number is required when completing the payment form."""
 
+    tipping_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="tippingEnabled")
+    ] = None
+    r"""If true, tipping is enabled on the payment form. Defaults to false."""
+
     metadata: Optional[Dict[str, str]] = None
     r"""Optional free-form metadata for the Moov account that will represent this customer."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["requireAddress", "requirePhone", "metadata"])
+        optional_fields = set(
+            ["requireAddress", "requirePhone", "tippingEnabled", "metadata"]
+        )
         serialized = handler(self)
         m = {}
 

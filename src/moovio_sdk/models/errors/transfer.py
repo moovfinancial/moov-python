@@ -12,6 +12,7 @@ from moovio_sdk.models.components import (
     facilitatorfee as components_facilitatorfee,
     moovfee as components_moovfee,
     moovfeedetails as components_moovfeedetails,
+    transferamountdetails as components_transferamountdetails,
     transferdestination as components_transferdestination,
     transferfailurereason as components_transferfailurereason,
     transferlineitems as components_transferlineitems,
@@ -87,7 +88,6 @@ class TransferData(BaseModel):
     sales_tax_amount: Annotated[
         Optional[components_amount.Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
-    r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     line_items: Annotated[
@@ -99,6 +99,10 @@ class TransferData(BaseModel):
     """
     invoice_id: Annotated[Optional[str], pydantic.Field(alias="invoiceID")] = None
     r"""ID of the invoice that the transfer is associated with."""
+    amount_details: Annotated[
+        Optional[components_transferamountdetails.TransferAmountDetails],
+        pydantic.Field(alias="amountDetails"),
+    ] = None
 
 
 @dataclass(unsafe_hash=True)

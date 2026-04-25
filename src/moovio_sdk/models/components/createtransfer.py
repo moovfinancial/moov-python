@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .amount import Amount, AmountTypedDict
+from .createtransferamountdetails import (
+    CreateTransferAmountDetails,
+    CreateTransferAmountDetailsTypedDict,
+)
 from .createtransferdestination import (
     CreateTransferDestination,
     CreateTransferDestinationTypedDict,
@@ -32,13 +36,13 @@ class CreateTransferTypedDict(TypedDict):
     metadata: NotRequired[Dict[str, str]]
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
     sales_tax_amount: NotRequired[AmountTypedDict]
-    r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
     foreign_id: NotRequired[str]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     line_items: NotRequired[CreateTransferLineItemsTypedDict]
     r"""An optional collection of line items for a transfer.
     When line items are provided, their total plus sales tax must equal the transfer amount.
     """
+    amount_details: NotRequired[CreateTransferAmountDetailsTypedDict]
 
 
 class CreateTransfer(BaseModel):
@@ -64,7 +68,6 @@ class CreateTransfer(BaseModel):
     sales_tax_amount: Annotated[
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
-    r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
@@ -76,6 +79,10 @@ class CreateTransfer(BaseModel):
     When line items are provided, their total plus sales tax must equal the transfer amount.
     """
 
+    amount_details: Annotated[
+        Optional[CreateTransferAmountDetails], pydantic.Field(alias="amountDetails")
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -86,6 +93,7 @@ class CreateTransfer(BaseModel):
                 "salesTaxAmount",
                 "foreignID",
                 "lineItems",
+                "amountDetails",
             ]
         )
         serialized = handler(self)

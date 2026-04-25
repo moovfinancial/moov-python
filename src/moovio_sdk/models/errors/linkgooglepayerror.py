@@ -5,14 +5,22 @@ from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
+import pydantic
 from typing import Optional
+from typing_extensions import Annotated
 
 
 class LinkGooglePayErrorData(BaseModel):
     error: Optional[str] = None
     r"""Describes an error that wasn't attributable to a single request field."""
-    token: Optional[str] = None
-    r"""Describes an error within the `token` request field."""
+    merchant_account_id: Annotated[
+        Optional[str], pydantic.Field(alias="merchantAccountID")
+    ] = None
+    r"""Describes an error within the `merchantAccountID` request field."""
+    payment_method_data: Annotated[
+        Optional[str], pydantic.Field(alias="paymentMethodData")
+    ] = None
+    r"""Describes an error within the `paymentMethodData` request field."""
 
 
 @dataclass(unsafe_hash=True)

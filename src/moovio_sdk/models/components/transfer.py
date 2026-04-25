@@ -8,6 +8,7 @@ from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundTypedDi
 from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
 from .moovfee import MoovFee, MoovFeeTypedDict
 from .moovfeedetails import MoovFeeDetails, MoovFeeDetailsTypedDict
+from .transferamountdetails import TransferAmountDetails, TransferAmountDetailsTypedDict
 from .transferdestination import TransferDestination, TransferDestinationTypedDict
 from .transferfailurereason import TransferFailureReason
 from .transferlineitems import TransferLineItems, TransferLineItemsTypedDict
@@ -60,7 +61,6 @@ class TransferTypedDict(TypedDict):
     occurrence_id: NotRequired[str]
     payment_link_code: NotRequired[str]
     sales_tax_amount: NotRequired[AmountTypedDict]
-    r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
     foreign_id: NotRequired[str]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     line_items: NotRequired[TransferLineItemsTypedDict]
@@ -69,6 +69,7 @@ class TransferTypedDict(TypedDict):
     """
     invoice_id: NotRequired[str]
     r"""ID of the invoice that the transfer is associated with."""
+    amount_details: NotRequired[TransferAmountDetailsTypedDict]
 
 
 class Transfer(BaseModel):
@@ -155,7 +156,6 @@ class Transfer(BaseModel):
     sales_tax_amount: Annotated[
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
-    r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
@@ -169,6 +169,10 @@ class Transfer(BaseModel):
 
     invoice_id: Annotated[Optional[str], pydantic.Field(alias="invoiceID")] = None
     r"""ID of the invoice that the transfer is associated with."""
+
+    amount_details: Annotated[
+        Optional[TransferAmountDetails], pydantic.Field(alias="amountDetails")
+    ] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -197,6 +201,7 @@ class Transfer(BaseModel):
                 "foreignID",
                 "lineItems",
                 "invoiceID",
+                "amountDetails",
             ]
         )
         serialized = handler(self)

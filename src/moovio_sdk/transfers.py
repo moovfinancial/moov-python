@@ -313,6 +313,12 @@ class Transfers(BaseSDK):
                 components.CreateTransferLineItemsTypedDict,
             ]
         ] = None,
+        amount_details: Optional[
+            Union[
+                components.CreateTransferAmountDetails,
+                components.CreateTransferAmountDetailsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -336,10 +342,11 @@ class Transfers(BaseSDK):
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-        :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+        :param sales_tax_amount:
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param line_items: An optional collection of line items for a transfer.
             When line items are provided, their total plus sales tax must equal the transfer amount.
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -378,6 +385,9 @@ class Transfers(BaseSDK):
                 foreign_id=foreign_id,
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreateTransferLineItems]
+                ),
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.CreateTransferAmountDetails]
                 ),
             ),
         )
@@ -496,6 +506,12 @@ class Transfers(BaseSDK):
                 components.CreateTransferLineItemsTypedDict,
             ]
         ] = None,
+        amount_details: Optional[
+            Union[
+                components.CreateTransferAmountDetails,
+                components.CreateTransferAmountDetailsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -519,10 +535,11 @@ class Transfers(BaseSDK):
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-        :param sales_tax_amount: Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged.
+        :param sales_tax_amount:
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param line_items: An optional collection of line items for a transfer.
             When line items are provided, their total plus sales tax must equal the transfer amount.
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -561,6 +578,9 @@ class Transfers(BaseSDK):
                 foreign_id=foreign_id,
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreateTransferLineItems]
+                ),
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.CreateTransferAmountDetails]
                 ),
             ),
         )

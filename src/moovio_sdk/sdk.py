@@ -52,6 +52,7 @@ if TYPE_CHECKING:
     from moovio_sdk.support import Support
     from moovio_sdk.sweeps import Sweeps
     from moovio_sdk.terminal_applications import TerminalApplications
+    from moovio_sdk.transfer_config import TransferConfig
     from moovio_sdk.transfers import Transfers
     from moovio_sdk.underwriting import Underwriting
     from moovio_sdk.wallet_transactions import WalletTransactions
@@ -90,6 +91,7 @@ class Moov(BaseSDK):
     sweeps: "Sweeps"
     account_terminal_applications: "AccountTerminalApplications"
     support: "Support"
+    transfer_config: "TransferConfig"
     transfers: "Transfers"
     underwriting: "Underwriting"
     wallets: "Wallets"
@@ -135,6 +137,7 @@ class Moov(BaseSDK):
             "AccountTerminalApplications",
         ),
         "support": ("moovio_sdk.support", "Support"),
+        "transfer_config": ("moovio_sdk.transfer_config", "TransferConfig"),
         "transfers": ("moovio_sdk.transfers", "Transfers"),
         "underwriting": ("moovio_sdk.underwriting", "Underwriting"),
         "wallets": ("moovio_sdk.wallets", "Wallets"),

@@ -7,6 +7,7 @@ from .cardacquiringdispute import CardAcquiringDispute, CardAcquiringDisputeType
 from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundTypedDict
 from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
 from .moovfeedetails import MoovFeeDetails, MoovFeeDetailsTypedDict
+from .transferamountdetails import TransferAmountDetails, TransferAmountDetailsTypedDict
 from .transferdestination import TransferDestination, TransferDestinationTypedDict
 from .transferfailurereason import TransferFailureReason
 from .transferlineitems import TransferLineItems, TransferLineItemsTypedDict
@@ -54,13 +55,14 @@ class CreatedTransferTypedDict(TypedDict):
     occurrence_id: NotRequired[str]
     payment_link_code: NotRequired[str]
     sales_tax_amount: NotRequired[AmountTypedDict]
-    r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
+    r"""Optional sales tax amount."""
     foreign_id: NotRequired[str]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     line_items: NotRequired[TransferLineItemsTypedDict]
     r"""An optional collection of line items for a transfer.
     When line items are provided, their total plus sales tax must equal the transfer amount.
     """
+    amount_details: NotRequired[TransferAmountDetailsTypedDict]
 
 
 class CreatedTransfer(BaseModel):
@@ -139,7 +141,7 @@ class CreatedTransfer(BaseModel):
     sales_tax_amount: Annotated[
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
-    r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
+    r"""Optional sales tax amount."""
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
@@ -150,6 +152,10 @@ class CreatedTransfer(BaseModel):
     r"""An optional collection of line items for a transfer.
     When line items are provided, their total plus sales tax must equal the transfer amount.
     """
+
+    amount_details: Annotated[
+        Optional[TransferAmountDetails], pydantic.Field(alias="amountDetails")
+    ] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -180,6 +186,7 @@ class CreatedTransfer(BaseModel):
                 "salesTaxAmount",
                 "foreignID",
                 "lineItems",
+                "amountDetails",
             ]
         )
         serialized = handler(self)

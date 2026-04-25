@@ -15,7 +15,11 @@ class GooglePay(BaseSDK):
         self,
         *,
         account_id: str,
-        token: Union[components.GooglePayToken, components.GooglePayTokenTypedDict],
+        merchant_account_id: str,
+        payment_method_data: Union[
+            components.GooglePayPaymentMethodData,
+            components.GooglePayPaymentMethodDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -23,16 +27,19 @@ class GooglePay(BaseSDK):
     ) -> operations.LinkGooglePayTokenResponse:
         r"""Connect a Google Pay token to the specified account.
 
-        The `token` data is defined by Google Pay and should be passed through from Google Pay's response unmodified.
+        The `paymentMethodData` field should contain the `paymentMethodData` property from Google Pay's
+        [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) response,
+        passed through unmodified.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
         :param account_id: ID of the Moov account representing the cardholder.
-        :param token: Contains the encrypted payment token as returned from Google Pay.
-
-            Refer to [Google's documentation](https://developers.google.com/pay/api/web/guides/resources/payment-data-cryptography#payment-method-token-structure)
-            for more information.
+        :param merchant_account_id: The merchant accountID this token was minted for. Must match the `gatewayMerchantId`
+            value passed to Google Pay when constructing the PaymentDataRequest. card-gateway validates
+            that the decrypted `gatewayMerchantId` matches this value.
+        :param payment_method_data: The `paymentMethodData` object from Google Pay's
+            [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -51,7 +58,10 @@ class GooglePay(BaseSDK):
         request = operations.LinkGooglePayTokenRequest(
             account_id=account_id,
             link_google_pay=components.LinkGooglePay(
-                token=utils.get_pydantic_model(token, components.GooglePayToken),
+                merchant_account_id=merchant_account_id,
+                payment_method_data=utils.get_pydantic_model(
+                    payment_method_data, components.GooglePayPaymentMethodData
+                ),
             ),
         )
 
@@ -133,7 +143,11 @@ class GooglePay(BaseSDK):
         self,
         *,
         account_id: str,
-        token: Union[components.GooglePayToken, components.GooglePayTokenTypedDict],
+        merchant_account_id: str,
+        payment_method_data: Union[
+            components.GooglePayPaymentMethodData,
+            components.GooglePayPaymentMethodDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -141,16 +155,19 @@ class GooglePay(BaseSDK):
     ) -> operations.LinkGooglePayTokenResponse:
         r"""Connect a Google Pay token to the specified account.
 
-        The `token` data is defined by Google Pay and should be passed through from Google Pay's response unmodified.
+        The `paymentMethodData` field should contain the `paymentMethodData` property from Google Pay's
+        [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) response,
+        passed through unmodified.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/cards.write` scope.
 
         :param account_id: ID of the Moov account representing the cardholder.
-        :param token: Contains the encrypted payment token as returned from Google Pay.
-
-            Refer to [Google's documentation](https://developers.google.com/pay/api/web/guides/resources/payment-data-cryptography#payment-method-token-structure)
-            for more information.
+        :param merchant_account_id: The merchant accountID this token was minted for. Must match the `gatewayMerchantId`
+            value passed to Google Pay when constructing the PaymentDataRequest. card-gateway validates
+            that the decrypted `gatewayMerchantId` matches this value.
+        :param payment_method_data: The `paymentMethodData` object from Google Pay's
+            [PaymentData](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -169,7 +186,10 @@ class GooglePay(BaseSDK):
         request = operations.LinkGooglePayTokenRequest(
             account_id=account_id,
             link_google_pay=components.LinkGooglePay(
-                token=utils.get_pydantic_model(token, components.GooglePayToken),
+                merchant_account_id=merchant_account_id,
+                payment_method_data=utils.get_pydantic_model(
+                    payment_method_data, components.GooglePayPaymentMethodData
+                ),
             ),
         )
 

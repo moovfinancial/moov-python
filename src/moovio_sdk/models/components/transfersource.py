@@ -7,6 +7,7 @@ from .cardtransactiondetails import (
     CardTransactionDetails,
     CardTransactionDetailsTypedDict,
 )
+from .googlepayresponse import GooglePayResponse, GooglePayResponseTypedDict
 from .transferaccount import TransferAccount, TransferAccountTypedDict
 from .transferpaymentmethodsbankaccount import (
     TransferPaymentMethodsBankAccount,
@@ -43,6 +44,8 @@ class TransferSourceTypedDict(TypedDict):
     r"""A card as contained within a payment method."""
     apple_pay: NotRequired[ApplePayResponseTypedDict]
     r"""Describes an Apple Pay token on a Moov account."""
+    google_pay: NotRequired[GooglePayResponseTypedDict]
+    r"""Describes a Google Pay token on a Moov account."""
     terminal_card: NotRequired[TransferTerminalCardTypedDict]
     r"""Describes payment card details captured with tap or in-person payment."""
     card_details: NotRequired[CardTransactionDetailsTypedDict]
@@ -79,6 +82,11 @@ class TransferSource(BaseModel):
     ] = None
     r"""Describes an Apple Pay token on a Moov account."""
 
+    google_pay: Annotated[
+        Optional[GooglePayResponse], pydantic.Field(alias="googlePay")
+    ] = None
+    r"""Describes a Google Pay token on a Moov account."""
+
     terminal_card: Annotated[
         Optional[TransferTerminalCard], pydantic.Field(alias="terminalCard")
     ] = None
@@ -103,6 +111,7 @@ class TransferSource(BaseModel):
                 "wallet",
                 "card",
                 "applePay",
+                "googlePay",
                 "terminalCard",
                 "cardDetails",
                 "achDetails",
