@@ -87,7 +87,6 @@ class TransferData(BaseModel):
     sales_tax_amount: Annotated[
         Optional[components_amount.Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
-    r"""Optional sales tax amount. `transfer.amount.value` should be inclusive of any sales tax and represents the total amount charged."""
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     line_items: Annotated[
