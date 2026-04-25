@@ -48,6 +48,13 @@ class PaymentLinkTypedDict(TypedDict):
     link: str
     r"""Link to the payment landing page for this payment link."""
     amount: AmountTypedDict
+    r"""The fixed amount of the payment link.
+
+    In API versions before `2026.07.00`, this was a required field.
+
+    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+    for `open` payment amount types.
+    """
     uses: int
     r"""The number of times this payment link has been used."""
     display: PaymentLinkDisplayOptionsTypedDict
@@ -107,6 +114,13 @@ class PaymentLink(BaseModel):
     r"""Link to the payment landing page for this payment link."""
 
     amount: Amount
+    r"""The fixed amount of the payment link.
+
+    In API versions before `2026.07.00`, this was a required field.
+
+    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+    for `open` payment amount types.
+    """
 
     uses: int
     r"""The number of times this payment link has been used."""
