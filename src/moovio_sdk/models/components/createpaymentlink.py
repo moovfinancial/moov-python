@@ -44,9 +44,17 @@ class CreatePaymentLinkTypedDict(TypedDict):
     merchant_payment_method_id: str
     r"""The merchant's preferred payment method ID. Must be a wallet payment method."""
     amount: AmountTypedDict
+    r"""The fixed amount of the payment link.
+
+    In API versions before `2026.07.00`, this was a required field.
+
+    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+    for `open` payment amount types.
+    """
     display: PaymentLinkDisplayOptionsTypedDict
     r"""Customizable display options for a payment link."""
     sales_tax_amount: NotRequired[AmountTypedDict]
+    r"""Optional sales tax amount."""
     max_uses: NotRequired[int]
     r"""An optional limit on the number of times this payment link can be used.
 
@@ -82,6 +90,13 @@ class CreatePaymentLink(BaseModel):
     r"""The merchant's preferred payment method ID. Must be a wallet payment method."""
 
     amount: Amount
+    r"""The fixed amount of the payment link.
+
+    In API versions before `2026.07.00`, this was a required field.
+
+    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+    for `open` payment amount types.
+    """
 
     display: PaymentLinkDisplayOptions
     r"""Customizable display options for a payment link."""
@@ -89,6 +104,7 @@ class CreatePaymentLink(BaseModel):
     sales_tax_amount: Annotated[
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
+    r"""Optional sales tax amount."""
 
     max_uses: Annotated[Optional[int], pydantic.Field(alias="maxUses")] = None
     r"""An optional limit on the number of times this payment link can be used.
