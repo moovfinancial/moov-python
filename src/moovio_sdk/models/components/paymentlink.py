@@ -3,6 +3,10 @@
 from __future__ import annotations
 from .amount import Amount, AmountTypedDict
 from .mode import Mode
+from .paymentlinkamountdetails import (
+    PaymentLinkAmountDetails,
+    PaymentLinkAmountDetailsTypedDict,
+)
 from .paymentlinkcustomeroptions import (
     PaymentLinkCustomerOptions,
     PaymentLinkCustomerOptionsTypedDict,
@@ -47,7 +51,6 @@ class PaymentLinkTypedDict(TypedDict):
     r"""The merchant's preferred payment method ID. Must be a wallet payment method."""
     link: str
     r"""Link to the payment landing page for this payment link."""
-    amount: AmountTypedDict
     uses: int
     r"""The number of times this payment link has been used."""
     display: PaymentLinkDisplayOptionsTypedDict
@@ -55,6 +58,14 @@ class PaymentLinkTypedDict(TypedDict):
     customer: PaymentLinkCustomerOptionsTypedDict
     created_on: datetime
     updated_on: datetime
+    amount: NotRequired[AmountTypedDict]
+    r"""The fixed amount of the payment link.
+
+    In API versions before `2026.07.00`, this was a required field.
+
+    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+    for `open` payment amount types.
+    """
     sales_tax_amount: NotRequired[AmountTypedDict]
     r"""Optional sales tax amount."""
     max_uses: NotRequired[int]
@@ -74,6 +85,7 @@ class PaymentLinkTypedDict(TypedDict):
     When line items are provided, their total plus sales tax must equal the payment link amount.
     """
     disabled_on: NotRequired[datetime]
+    amount_details: NotRequired[PaymentLinkAmountDetailsTypedDict]
 
 
 class PaymentLink(BaseModel):
@@ -106,8 +118,6 @@ class PaymentLink(BaseModel):
     link: str
     r"""Link to the payment landing page for this payment link."""
 
-    amount: Amount
-
     uses: int
     r"""The number of times this payment link has been used."""
 
@@ -119,6 +129,15 @@ class PaymentLink(BaseModel):
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
+
+    amount: Optional[Amount] = None
+    r"""The fixed amount of the payment link.
+
+    In API versions before `2026.07.00`, this was a required field.
+
+    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+    for `open` payment amount types.
+    """
 
     sales_tax_amount: Annotated[
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")
@@ -155,10 +174,15 @@ class PaymentLink(BaseModel):
         None
     )
 
+    amount_details: Annotated[
+        Optional[PaymentLinkAmountDetails], pydantic.Field(alias="amountDetails")
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "amount",
                 "salesTaxAmount",
                 "maxUses",
                 "lastUsedOn",
@@ -167,6 +191,7 @@ class PaymentLink(BaseModel):
                 "payout",
                 "lineItems",
                 "disabledOn",
+                "amountDetails",
             ]
         )
         serialized = handler(self)

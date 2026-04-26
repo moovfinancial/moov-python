@@ -7,6 +7,7 @@ from .cardtransactiondetails import (
     CardTransactionDetails,
     CardTransactionDetailsTypedDict,
 )
+from .googlepayresponse import GooglePayResponse, GooglePayResponseTypedDict
 from .instantbanktransactiondetails import (
     InstantBankTransactionDetails,
     InstantBankTransactionDetailsTypedDict,
@@ -127,6 +128,8 @@ class TransferDestinationTypedDict(TypedDict):
     r"""ACH specific details about the transaction."""
     apple_pay: NotRequired[ApplePayResponseTypedDict]
     r"""Describes an Apple Pay token on a Moov account."""
+    google_pay: NotRequired[GooglePayResponseTypedDict]
+    r"""Describes a Google Pay token on a Moov account."""
     card_details: NotRequired[CardTransactionDetailsTypedDict]
     r"""Card-specific details about the transaction."""
     rtp_details: NotRequired[RtpDetailsTypedDict]
@@ -164,6 +167,11 @@ class TransferDestination(BaseModel):
     ] = None
     r"""Describes an Apple Pay token on a Moov account."""
 
+    google_pay: Annotated[
+        Optional[GooglePayResponse], pydantic.Field(alias="googlePay")
+    ] = None
+    r"""Describes a Google Pay token on a Moov account."""
+
     card_details: Annotated[
         Optional[CardTransactionDetails], pydantic.Field(alias="cardDetails")
     ] = None
@@ -192,6 +200,7 @@ class TransferDestination(BaseModel):
                 "card",
                 "achDetails",
                 "applePay",
+                "googlePay",
                 "cardDetails",
                 "rtpDetails",
                 "instantBankDetails",

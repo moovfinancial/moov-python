@@ -3,13 +3,24 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
+from moovio_sdk.models.components import (
+    refundamountdetailsvalidationerror as components_refundamountdetailsvalidationerror,
+)
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
+import pydantic
 from typing import Optional
+from typing_extensions import Annotated
 
 
 class RefundValidationErrorData(BaseModel):
     amount: Optional[str] = None
+    amount_details: Annotated[
+        Optional[
+            components_refundamountdetailsvalidationerror.RefundAmountDetailsValidationError
+        ],
+        pydantic.Field(alias="amountDetails"),
+    ] = None
     error: Optional[str] = None
     r"""Used for generic errors when invalid request data isn't attributed to a single request field."""
 

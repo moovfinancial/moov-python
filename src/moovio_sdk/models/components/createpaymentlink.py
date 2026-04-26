@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .amount import Amount, AmountTypedDict
+from .createpaymentlinkamountdetails import (
+    CreatePaymentLinkAmountDetails,
+    CreatePaymentLinkAmountDetailsTypedDict,
+)
 from .createpaymentlinklineitems import (
     CreatePaymentLinkLineItems,
     CreatePaymentLinkLineItemsTypedDict,
@@ -43,10 +47,18 @@ class CreatePaymentLinkTypedDict(TypedDict):
     r"""The partner's Moov account ID."""
     merchant_payment_method_id: str
     r"""The merchant's preferred payment method ID. Must be a wallet payment method."""
-    amount: AmountTypedDict
     display: PaymentLinkDisplayOptionsTypedDict
     r"""Customizable display options for a payment link."""
+    amount: NotRequired[AmountTypedDict]
+    r"""The fixed amount of the payment link.
+
+    In API versions before `2026.07.00`, this was a required field.
+
+    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+    for `open` payment amount types.
+    """
     sales_tax_amount: NotRequired[AmountTypedDict]
+    r"""Optional sales tax amount."""
     max_uses: NotRequired[int]
     r"""An optional limit on the number of times this payment link can be used.
 
@@ -62,6 +74,7 @@ class CreatePaymentLinkTypedDict(TypedDict):
     r"""An optional collection of line items for a payment link.
     When line items are provided, their total plus sales tax must equal the payment link amount.
     """
+    amount_details: NotRequired[CreatePaymentLinkAmountDetailsTypedDict]
 
 
 class CreatePaymentLink(BaseModel):
@@ -81,14 +94,22 @@ class CreatePaymentLink(BaseModel):
     ]
     r"""The merchant's preferred payment method ID. Must be a wallet payment method."""
 
-    amount: Amount
-
     display: PaymentLinkDisplayOptions
     r"""Customizable display options for a payment link."""
+
+    amount: Optional[Amount] = None
+    r"""The fixed amount of the payment link.
+
+    In API versions before `2026.07.00`, this was a required field.
+
+    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+    for `open` payment amount types.
+    """
 
     sales_tax_amount: Annotated[
         Optional[Amount], pydantic.Field(alias="salesTaxAmount")
     ] = None
+    r"""Optional sales tax amount."""
 
     max_uses: Annotated[Optional[int], pydantic.Field(alias="maxUses")] = None
     r"""An optional limit on the number of times this payment link can be used.
@@ -113,10 +134,15 @@ class CreatePaymentLink(BaseModel):
     When line items are provided, their total plus sales tax must equal the payment link amount.
     """
 
+    amount_details: Annotated[
+        Optional[CreatePaymentLinkAmountDetails], pydantic.Field(alias="amountDetails")
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "amount",
                 "salesTaxAmount",
                 "maxUses",
                 "expiresOn",
@@ -124,6 +150,7 @@ class CreatePaymentLink(BaseModel):
                 "payment",
                 "payout",
                 "lineItems",
+                "amountDetails",
             ]
         )
         serialized = handler(self)

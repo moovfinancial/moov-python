@@ -2,20 +2,17 @@
 
 from __future__ import annotations
 from .googlepayresponse import GooglePayResponse, GooglePayResponseTypedDict
-from enum import Enum
+from .paymentmethodtype import PaymentMethodType
 from moovio_sdk.types import BaseModel
 import pydantic
 from typing_extensions import Annotated, TypedDict
 
 
-class LinkedGooglePayPaymentMethodPaymentMethodType(str, Enum):
-    GOOGLE_PAY = "google-pay"
-
-
 class LinkedGooglePayPaymentMethodTypedDict(TypedDict):
     payment_method_id: str
     r"""The new payment method's ID."""
-    payment_method_type: LinkedGooglePayPaymentMethodPaymentMethodType
+    payment_method_type: PaymentMethodType
+    r"""The payment method type that represents a payment rail and directionality"""
     google_pay: GooglePayResponseTypedDict
     r"""Describes a Google Pay token on a Moov account."""
 
@@ -25,9 +22,9 @@ class LinkedGooglePayPaymentMethod(BaseModel):
     r"""The new payment method's ID."""
 
     payment_method_type: Annotated[
-        LinkedGooglePayPaymentMethodPaymentMethodType,
-        pydantic.Field(alias="paymentMethodType"),
+        PaymentMethodType, pydantic.Field(alias="paymentMethodType")
     ]
+    r"""The payment method type that represents a payment rail and directionality"""
 
     google_pay: Annotated[GooglePayResponse, pydantic.Field(alias="googlePay")]
     r"""Describes a Google Pay token on a Moov account."""

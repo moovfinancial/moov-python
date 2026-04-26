@@ -22,6 +22,10 @@ from .paymentlinkpayoutdetailsupdate import (
     PaymentLinkPayoutDetailsUpdate,
     PaymentLinkPayoutDetailsUpdateTypedDict,
 )
+from .updatepaymentlinkamountdetails import (
+    UpdatePaymentLinkAmountDetails,
+    UpdatePaymentLinkAmountDetailsTypedDict,
+)
 from datetime import datetime
 from moovio_sdk.types import (
     BaseModel,
@@ -50,6 +54,7 @@ class UpdatePaymentLinkTypedDict(TypedDict):
     r"""An optional collection of line items for a payment link.
     When line items are provided, their total plus sales tax must equal the payment link amount.
     """
+    amount_details: NotRequired[UpdatePaymentLinkAmountDetailsTypedDict]
 
 
 class UpdatePaymentLink(BaseModel):
@@ -80,6 +85,10 @@ class UpdatePaymentLink(BaseModel):
     When line items are provided, their total plus sales tax must equal the payment link amount.
     """
 
+    amount_details: Annotated[
+        Optional[UpdatePaymentLinkAmountDetails], pydantic.Field(alias="amountDetails")
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -92,6 +101,7 @@ class UpdatePaymentLink(BaseModel):
                 "payment",
                 "payout",
                 "lineItems",
+                "amountDetails",
             ]
         )
         nullable_fields = set(["expiresOn"])

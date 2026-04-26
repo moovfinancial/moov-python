@@ -89,6 +89,11 @@ if TYPE_CHECKING:
     from .adjustment import Adjustment, AdjustmentTypedDict
     from .amount import Amount, AmountTypedDict
     from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+    from .amountdecimalrange import AmountDecimalRange, AmountDecimalRangeTypedDict
+    from .amountdecimalrangeupdate import (
+        AmountDecimalRangeUpdate,
+        AmountDecimalRangeUpdateTypedDict,
+    )
     from .amountdecimalupdate import AmountDecimalUpdate, AmountDecimalUpdateTypedDict
     from .amountdecimalvalidationerror import (
         AmountDecimalValidationError,
@@ -418,6 +423,14 @@ if TYPE_CHECKING:
         CreateInvoicePaymentTypedDict,
     )
     from .createpaymentlink import CreatePaymentLink, CreatePaymentLinkTypedDict
+    from .createpaymentlinkamountdetails import (
+        CreatePaymentLinkAmountDetails,
+        CreatePaymentLinkAmountDetailsTypedDict,
+    )
+    from .createpaymentlinkamountdetailsvalidationerror import (
+        CreatePaymentLinkAmountDetailsValidationError,
+        CreatePaymentLinkAmountDetailsValidationErrorTypedDict,
+    )
     from .createpaymentlinklineitem import (
         CreatePaymentLinkLineItem,
         CreatePaymentLinkLineItemTypedDict,
@@ -490,10 +503,23 @@ if TYPE_CHECKING:
         CreateTicketContactError,
         CreateTicketContactErrorTypedDict,
     )
+    from .createtippresets import CreateTipPresets, CreateTipPresetsTypedDict
     from .createtransfer import CreateTransfer, CreateTransferTypedDict
     from .createtransferachaddendarecord import (
         CreateTransferACHAddendaRecord,
         CreateTransferACHAddendaRecordTypedDict,
+    )
+    from .createtransferamountdetails import (
+        CreateTransferAmountDetails,
+        CreateTransferAmountDetailsTypedDict,
+    )
+    from .createtransferamountdetailsvalidationerror import (
+        CreateTransferAmountDetailsValidationError,
+        CreateTransferAmountDetailsValidationErrorTypedDict,
+    )
+    from .createtransferconfig import (
+        CreateTransferConfig,
+        CreateTransferConfigTypedDict,
     )
     from .createtransferdestination import (
         CreateTransferDestination,
@@ -645,17 +671,36 @@ if TYPE_CHECKING:
     from .fullissuedcard import FullIssuedCard, FullIssuedCardTypedDict
     from .generatedby import GeneratedBy, GeneratedByTypedDict
     from .geographicreach import GeographicReach
-    from .googlepayintermediatesigningkey import (
-        GooglePayIntermediateSigningKey,
-        GooglePayIntermediateSigningKeyTypedDict,
+    from .googlepayassurancedetails import (
+        GooglePayAssuranceDetails,
+        GooglePayAssuranceDetailsTypedDict,
+    )
+    from .googlepaybillingaddress import (
+        GooglePayBillingAddress,
+        GooglePayBillingAddressTypedDict,
+    )
+    from .googlepaycardinfo import (
+        CardFundingSource,
+        CardNetwork,
+        GooglePayCardInfo,
+        GooglePayCardInfoTypedDict,
     )
     from .googlepaypaymentmethod import (
         GooglePayPaymentMethod,
         GooglePayPaymentMethodPaymentMethodType,
         GooglePayPaymentMethodTypedDict,
     )
+    from .googlepaypaymentmethoddata import (
+        GooglePayPaymentMethodData,
+        GooglePayPaymentMethodDataTypedDict,
+        Type,
+    )
     from .googlepayresponse import GooglePayResponse, GooglePayResponseTypedDict
-    from .googlepaytoken import GooglePayToken, GooglePayTokenTypedDict
+    from .googlepaytokenizationdata import (
+        GooglePayTokenizationData,
+        GooglePayTokenizationDataType,
+        GooglePayTokenizationDataTypedDict,
+    )
     from .googlepaytransferpaymentmethod import (
         GooglePayTransferPaymentMethod,
         GooglePayTransferPaymentMethodPaymentMethodType,
@@ -818,7 +863,6 @@ if TYPE_CHECKING:
     )
     from .linkedgooglepaypaymentmethod import (
         LinkedGooglePayPaymentMethod,
-        LinkedGooglePayPaymentMethodPaymentMethodType,
         LinkedGooglePayPaymentMethodTypedDict,
     )
     from .linkgooglepay import LinkGooglePay, LinkGooglePayTypedDict
@@ -912,6 +956,10 @@ if TYPE_CHECKING:
     from .patchwallet import PatchWallet, PatchWalletTypedDict
     from .paymentdetailserror import PaymentDetailsError, PaymentDetailsErrorTypedDict
     from .paymentlink import PaymentLink, PaymentLinkTypedDict
+    from .paymentlinkamountdetails import (
+        PaymentLinkAmountDetails,
+        PaymentLinkAmountDetailsTypedDict,
+    )
     from .paymentlinkcustomeroptions import (
         PaymentLinkCustomerOptions,
         PaymentLinkCustomerOptionsTypedDict,
@@ -938,11 +986,13 @@ if TYPE_CHECKING:
         PaymentLinkLineItemsTypedDict,
     )
     from .paymentlinkpaymentdetails import (
+        AmountType,
         PaymentLinkPaymentDetails,
         PaymentLinkPaymentDetailsTypedDict,
     )
     from .paymentlinkpaymentdetailsupdate import (
         PaymentLinkPaymentDetailsUpdate,
+        PaymentLinkPaymentDetailsUpdateAmountType,
         PaymentLinkPaymentDetailsUpdateTypedDict,
     )
     from .paymentlinkpayoutdetails import (
@@ -1062,12 +1112,19 @@ if TYPE_CHECKING:
         PushToGooglePayTransferPaymentMethodPaymentMethodType,
         PushToGooglePayTransferPaymentMethodTypedDict,
     )
+    from .puttippresets import PutTipPresets, PutTipPresetsTypedDict
+    from .puttransferconfig import PutTransferConfig, PutTransferConfigTypedDict
     from .qrcode import QRCode, QRCodeTypedDict
     from .receiptkind import ReceiptKind
     from .receiptrequest import Kind, ReceiptRequest, ReceiptRequestTypedDict
     from .receiptresponse import ReceiptResponse, ReceiptResponseTypedDict
     from .recur import Recur, RecurTypedDict
     from .recurresponse import RecurResponse, RecurResponseTypedDict
+    from .refundamountdetails import RefundAmountDetails, RefundAmountDetailsTypedDict
+    from .refundamountdetailsvalidationerror import (
+        RefundAmountDetailsValidationError,
+        RefundAmountDetailsValidationErrorTypedDict,
+    )
     from .refundcarddetails import RefundCardDetails, RefundCardDetailsTypedDict
     from .refundcardstatus import RefundCardStatus
     from .refundpolicy import RefundPolicy
@@ -1231,6 +1288,8 @@ if TYPE_CHECKING:
     from .ticketcontact import TicketContact, TicketContactTypedDict
     from .ticketmessage import TicketMessage, TicketMessageTypedDict
     from .ticketstatus import TicketStatus
+    from .tipcalculationbasis import TipCalculationBasis
+    from .tippresets import TipPresets, TipPresetsTypedDict
     from .tokentype import TokenType
     from .transactionsource import TransactionSource
     from .transfer import Transfer, TransferTypedDict
@@ -1239,7 +1298,12 @@ if TYPE_CHECKING:
         TransferACHAddendaRecord,
         TransferACHAddendaRecordTypedDict,
     )
+    from .transferamountdetails import (
+        TransferAmountDetails,
+        TransferAmountDetailsTypedDict,
+    )
     from .transfercapture import TransferCapture, TransferCaptureTypedDict
+    from .transferconfig import TransferConfig, TransferConfigTypedDict
     from .transferdestination import (
         RtpDetails,
         RtpDetailsTypedDict,
@@ -1301,6 +1365,14 @@ if TYPE_CHECKING:
     from .updateissuedcard import UpdateIssuedCard, UpdateIssuedCardTypedDict
     from .updateissuedcardstate import UpdateIssuedCardState
     from .updatepaymentlink import UpdatePaymentLink, UpdatePaymentLinkTypedDict
+    from .updatepaymentlinkamountdetails import (
+        UpdatePaymentLinkAmountDetails,
+        UpdatePaymentLinkAmountDetailsTypedDict,
+    )
+    from .updatepaymentlinkamountdetailsvalidationerror import (
+        UpdatePaymentLinkAmountDetailsValidationError,
+        UpdatePaymentLinkAmountDetailsValidationErrorTypedDict,
+    )
     from .updaterepresentative import (
         Phone,
         PhoneTypedDict,
@@ -1597,11 +1669,16 @@ __all__ = [
     "AdjustmentTypedDict",
     "Amount",
     "AmountDecimal",
+    "AmountDecimalRange",
+    "AmountDecimalRangeTypedDict",
+    "AmountDecimalRangeUpdate",
+    "AmountDecimalRangeUpdateTypedDict",
     "AmountDecimalTypedDict",
     "AmountDecimalUpdate",
     "AmountDecimalUpdateTypedDict",
     "AmountDecimalValidationError",
     "AmountDecimalValidationErrorTypedDict",
+    "AmountType",
     "AmountTypedDict",
     "AmountUpdate",
     "AmountUpdateTypedDict",
@@ -1732,7 +1809,9 @@ __all__ = [
     "CardExpirationError",
     "CardExpirationErrorTypedDict",
     "CardExpirationTypedDict",
+    "CardFundingSource",
     "CardIssuingNetwork",
+    "CardNetwork",
     "CardPayment",
     "CardPaymentDetails",
     "CardPaymentDetailsError",
@@ -1849,6 +1928,10 @@ __all__ = [
     "CreateInvoicePaymentTypedDict",
     "CreateInvoiceTypedDict",
     "CreatePaymentLink",
+    "CreatePaymentLinkAmountDetails",
+    "CreatePaymentLinkAmountDetailsTypedDict",
+    "CreatePaymentLinkAmountDetailsValidationError",
+    "CreatePaymentLinkAmountDetailsValidationErrorTypedDict",
     "CreatePaymentLinkLineItem",
     "CreatePaymentLinkLineItemOption",
     "CreatePaymentLinkLineItemOptionTypedDict",
@@ -1898,9 +1981,17 @@ __all__ = [
     "CreateTicketContactError",
     "CreateTicketContactErrorTypedDict",
     "CreateTicketTypedDict",
+    "CreateTipPresets",
+    "CreateTipPresetsTypedDict",
     "CreateTransfer",
     "CreateTransferACHAddendaRecord",
     "CreateTransferACHAddendaRecordTypedDict",
+    "CreateTransferAmountDetails",
+    "CreateTransferAmountDetailsTypedDict",
+    "CreateTransferAmountDetailsValidationError",
+    "CreateTransferAmountDetailsValidationErrorTypedDict",
+    "CreateTransferConfig",
+    "CreateTransferConfigTypedDict",
     "CreateTransferDestination",
     "CreateTransferDestinationACH",
     "CreateTransferDestinationACHTypedDict",
@@ -2029,15 +2120,22 @@ __all__ = [
     "GeneratedBy",
     "GeneratedByTypedDict",
     "GeographicReach",
-    "GooglePayIntermediateSigningKey",
-    "GooglePayIntermediateSigningKeyTypedDict",
+    "GooglePayAssuranceDetails",
+    "GooglePayAssuranceDetailsTypedDict",
+    "GooglePayBillingAddress",
+    "GooglePayBillingAddressTypedDict",
+    "GooglePayCardInfo",
+    "GooglePayCardInfoTypedDict",
     "GooglePayPaymentMethod",
+    "GooglePayPaymentMethodData",
+    "GooglePayPaymentMethodDataTypedDict",
     "GooglePayPaymentMethodPaymentMethodType",
     "GooglePayPaymentMethodTypedDict",
     "GooglePayResponse",
     "GooglePayResponseTypedDict",
-    "GooglePayToken",
-    "GooglePayTokenTypedDict",
+    "GooglePayTokenizationData",
+    "GooglePayTokenizationDataType",
+    "GooglePayTokenizationDataTypedDict",
     "GooglePayTransferPaymentMethod",
     "GooglePayTransferPaymentMethodPaymentMethodType",
     "GooglePayTransferPaymentMethodTypedDict",
@@ -2166,7 +2264,6 @@ __all__ = [
     "LinkedApplePayPaymentMethod",
     "LinkedApplePayPaymentMethodTypedDict",
     "LinkedGooglePayPaymentMethod",
-    "LinkedGooglePayPaymentMethodPaymentMethodType",
     "LinkedGooglePayPaymentMethodTypedDict",
     "ListFeesFetchRequest",
     "ListFeesFetchRequestTypedDict",
@@ -2251,6 +2348,8 @@ __all__ = [
     "PaymentDetailsError",
     "PaymentDetailsErrorTypedDict",
     "PaymentLink",
+    "PaymentLinkAmountDetails",
+    "PaymentLinkAmountDetailsTypedDict",
     "PaymentLinkCustomerOptions",
     "PaymentLinkCustomerOptionsTypedDict",
     "PaymentLinkDisplayOptions",
@@ -2268,6 +2367,7 @@ __all__ = [
     "PaymentLinkPaymentDetails",
     "PaymentLinkPaymentDetailsTypedDict",
     "PaymentLinkPaymentDetailsUpdate",
+    "PaymentLinkPaymentDetailsUpdateAmountType",
     "PaymentLinkPaymentDetailsUpdateTypedDict",
     "PaymentLinkPayoutDetails",
     "PaymentLinkPayoutDetailsTypedDict",
@@ -2363,6 +2463,10 @@ __all__ = [
     "PushToGooglePayTransferPaymentMethod",
     "PushToGooglePayTransferPaymentMethodPaymentMethodType",
     "PushToGooglePayTransferPaymentMethodTypedDict",
+    "PutTipPresets",
+    "PutTipPresetsTypedDict",
+    "PutTransferConfig",
+    "PutTransferConfigTypedDict",
     "QRCode",
     "QRCodeTypedDict",
     "RTPFailureCode",
@@ -2381,6 +2485,10 @@ __all__ = [
     "RecurResponse",
     "RecurResponseTypedDict",
     "RecurTypedDict",
+    "RefundAmountDetails",
+    "RefundAmountDetailsTypedDict",
+    "RefundAmountDetailsValidationError",
+    "RefundAmountDetailsValidationErrorTypedDict",
     "RefundCardDetails",
     "RefundCardDetailsTypedDict",
     "RefundCardStatus",
@@ -2522,6 +2630,9 @@ __all__ = [
     "TicketMessageTypedDict",
     "TicketStatus",
     "TicketTypedDict",
+    "TipCalculationBasis",
+    "TipPresets",
+    "TipPresetsTypedDict",
     "TokenType",
     "TokenTypeHint",
     "TransactionSource",
@@ -2530,8 +2641,12 @@ __all__ = [
     "TransferACHAddendaRecordTypedDict",
     "TransferAccount",
     "TransferAccountTypedDict",
+    "TransferAmountDetails",
+    "TransferAmountDetailsTypedDict",
     "TransferCapture",
     "TransferCaptureTypedDict",
+    "TransferConfig",
+    "TransferConfigTypedDict",
     "TransferDestination",
     "TransferDestinationTypedDict",
     "TransferEntryMode",
@@ -2563,6 +2678,7 @@ __all__ = [
     "TransferTerminalCardTypedDict",
     "TransferTypedDict",
     "TransferWaitFor",
+    "Type",
     "Underwriting",
     "UnderwritingStatus",
     "UnderwritingTypedDict",
@@ -2582,6 +2698,10 @@ __all__ = [
     "UpdateIssuedCardState",
     "UpdateIssuedCardTypedDict",
     "UpdatePaymentLink",
+    "UpdatePaymentLinkAmountDetails",
+    "UpdatePaymentLinkAmountDetailsTypedDict",
+    "UpdatePaymentLinkAmountDetailsValidationError",
+    "UpdatePaymentLinkAmountDetailsValidationErrorTypedDict",
     "UpdatePaymentLinkTypedDict",
     "UpdateRepresentative",
     "UpdateRepresentativeAddress",
@@ -2804,6 +2924,10 @@ _dynamic_imports: dict[str, str] = {
     "AmountTypedDict": ".amount",
     "AmountDecimal": ".amountdecimal",
     "AmountDecimalTypedDict": ".amountdecimal",
+    "AmountDecimalRange": ".amountdecimalrange",
+    "AmountDecimalRangeTypedDict": ".amountdecimalrange",
+    "AmountDecimalRangeUpdate": ".amountdecimalrangeupdate",
+    "AmountDecimalRangeUpdateTypedDict": ".amountdecimalrangeupdate",
     "AmountDecimalUpdate": ".amountdecimalupdate",
     "AmountDecimalUpdateTypedDict": ".amountdecimalupdate",
     "AmountDecimalValidationError": ".amountdecimalvalidationerror",
@@ -3065,6 +3189,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateInvoicePaymentTypedDict": ".createinvoicepayment",
     "CreatePaymentLink": ".createpaymentlink",
     "CreatePaymentLinkTypedDict": ".createpaymentlink",
+    "CreatePaymentLinkAmountDetails": ".createpaymentlinkamountdetails",
+    "CreatePaymentLinkAmountDetailsTypedDict": ".createpaymentlinkamountdetails",
+    "CreatePaymentLinkAmountDetailsValidationError": ".createpaymentlinkamountdetailsvalidationerror",
+    "CreatePaymentLinkAmountDetailsValidationErrorTypedDict": ".createpaymentlinkamountdetailsvalidationerror",
     "CreatePaymentLinkLineItem": ".createpaymentlinklineitem",
     "CreatePaymentLinkLineItemTypedDict": ".createpaymentlinklineitem",
     "CreatePaymentLinkLineItemOption": ".createpaymentlinklineitemoption",
@@ -3113,10 +3241,18 @@ _dynamic_imports: dict[str, str] = {
     "CreateTicketTypedDict": ".createticket",
     "CreateTicketContactError": ".createticketcontacterror",
     "CreateTicketContactErrorTypedDict": ".createticketcontacterror",
+    "CreateTipPresets": ".createtippresets",
+    "CreateTipPresetsTypedDict": ".createtippresets",
     "CreateTransfer": ".createtransfer",
     "CreateTransferTypedDict": ".createtransfer",
     "CreateTransferACHAddendaRecord": ".createtransferachaddendarecord",
     "CreateTransferACHAddendaRecordTypedDict": ".createtransferachaddendarecord",
+    "CreateTransferAmountDetails": ".createtransferamountdetails",
+    "CreateTransferAmountDetailsTypedDict": ".createtransferamountdetails",
+    "CreateTransferAmountDetailsValidationError": ".createtransferamountdetailsvalidationerror",
+    "CreateTransferAmountDetailsValidationErrorTypedDict": ".createtransferamountdetailsvalidationerror",
+    "CreateTransferConfig": ".createtransferconfig",
+    "CreateTransferConfigTypedDict": ".createtransferconfig",
     "CreateTransferDestination": ".createtransferdestination",
     "CreateTransferDestinationTypedDict": ".createtransferdestination",
     "CreateTransferDestinationACH": ".createtransferdestinationach",
@@ -3236,15 +3372,25 @@ _dynamic_imports: dict[str, str] = {
     "GeneratedBy": ".generatedby",
     "GeneratedByTypedDict": ".generatedby",
     "GeographicReach": ".geographicreach",
-    "GooglePayIntermediateSigningKey": ".googlepayintermediatesigningkey",
-    "GooglePayIntermediateSigningKeyTypedDict": ".googlepayintermediatesigningkey",
+    "GooglePayAssuranceDetails": ".googlepayassurancedetails",
+    "GooglePayAssuranceDetailsTypedDict": ".googlepayassurancedetails",
+    "GooglePayBillingAddress": ".googlepaybillingaddress",
+    "GooglePayBillingAddressTypedDict": ".googlepaybillingaddress",
+    "CardFundingSource": ".googlepaycardinfo",
+    "CardNetwork": ".googlepaycardinfo",
+    "GooglePayCardInfo": ".googlepaycardinfo",
+    "GooglePayCardInfoTypedDict": ".googlepaycardinfo",
     "GooglePayPaymentMethod": ".googlepaypaymentmethod",
     "GooglePayPaymentMethodPaymentMethodType": ".googlepaypaymentmethod",
     "GooglePayPaymentMethodTypedDict": ".googlepaypaymentmethod",
+    "GooglePayPaymentMethodData": ".googlepaypaymentmethoddata",
+    "GooglePayPaymentMethodDataTypedDict": ".googlepaypaymentmethoddata",
+    "Type": ".googlepaypaymentmethoddata",
     "GooglePayResponse": ".googlepayresponse",
     "GooglePayResponseTypedDict": ".googlepayresponse",
-    "GooglePayToken": ".googlepaytoken",
-    "GooglePayTokenTypedDict": ".googlepaytoken",
+    "GooglePayTokenizationData": ".googlepaytokenizationdata",
+    "GooglePayTokenizationDataType": ".googlepaytokenizationdata",
+    "GooglePayTokenizationDataTypedDict": ".googlepaytokenizationdata",
     "GooglePayTransferPaymentMethod": ".googlepaytransferpaymentmethod",
     "GooglePayTransferPaymentMethodPaymentMethodType": ".googlepaytransferpaymentmethod",
     "GooglePayTransferPaymentMethodTypedDict": ".googlepaytransferpaymentmethod",
@@ -3373,7 +3519,6 @@ _dynamic_imports: dict[str, str] = {
     "LinkedApplePayPaymentMethod": ".linkedapplepaypaymentmethod",
     "LinkedApplePayPaymentMethodTypedDict": ".linkedapplepaypaymentmethod",
     "LinkedGooglePayPaymentMethod": ".linkedgooglepaypaymentmethod",
-    "LinkedGooglePayPaymentMethodPaymentMethodType": ".linkedgooglepaypaymentmethod",
     "LinkedGooglePayPaymentMethodTypedDict": ".linkedgooglepaypaymentmethod",
     "LinkGooglePay": ".linkgooglepay",
     "LinkGooglePayTypedDict": ".linkgooglepay",
@@ -3458,6 +3603,8 @@ _dynamic_imports: dict[str, str] = {
     "PaymentDetailsErrorTypedDict": ".paymentdetailserror",
     "PaymentLink": ".paymentlink",
     "PaymentLinkTypedDict": ".paymentlink",
+    "PaymentLinkAmountDetails": ".paymentlinkamountdetails",
+    "PaymentLinkAmountDetailsTypedDict": ".paymentlinkamountdetails",
     "PaymentLinkCustomerOptions": ".paymentlinkcustomeroptions",
     "PaymentLinkCustomerOptionsTypedDict": ".paymentlinkcustomeroptions",
     "PaymentLinkDisplayOptions": ".paymentlinkdisplayoptions",
@@ -3472,9 +3619,11 @@ _dynamic_imports: dict[str, str] = {
     "PaymentLinkLineItemOptionTypedDict": ".paymentlinklineitemoption",
     "PaymentLinkLineItems": ".paymentlinklineitems",
     "PaymentLinkLineItemsTypedDict": ".paymentlinklineitems",
+    "AmountType": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetails": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetailsTypedDict": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetailsUpdate": ".paymentlinkpaymentdetailsupdate",
+    "PaymentLinkPaymentDetailsUpdateAmountType": ".paymentlinkpaymentdetailsupdate",
     "PaymentLinkPaymentDetailsUpdateTypedDict": ".paymentlinkpaymentdetailsupdate",
     "PaymentLinkPayoutDetails": ".paymentlinkpayoutdetails",
     "PaymentLinkPayoutDetailsTypedDict": ".paymentlinkpayoutdetails",
@@ -3567,6 +3716,10 @@ _dynamic_imports: dict[str, str] = {
     "PushToGooglePayTransferPaymentMethod": ".pushtogooglepaytransferpaymentmethod",
     "PushToGooglePayTransferPaymentMethodPaymentMethodType": ".pushtogooglepaytransferpaymentmethod",
     "PushToGooglePayTransferPaymentMethodTypedDict": ".pushtogooglepaytransferpaymentmethod",
+    "PutTipPresets": ".puttippresets",
+    "PutTipPresetsTypedDict": ".puttippresets",
+    "PutTransferConfig": ".puttransferconfig",
+    "PutTransferConfigTypedDict": ".puttransferconfig",
     "QRCode": ".qrcode",
     "QRCodeTypedDict": ".qrcode",
     "ReceiptKind": ".receiptkind",
@@ -3579,6 +3732,10 @@ _dynamic_imports: dict[str, str] = {
     "RecurTypedDict": ".recur",
     "RecurResponse": ".recurresponse",
     "RecurResponseTypedDict": ".recurresponse",
+    "RefundAmountDetails": ".refundamountdetails",
+    "RefundAmountDetailsTypedDict": ".refundamountdetails",
+    "RefundAmountDetailsValidationError": ".refundamountdetailsvalidationerror",
+    "RefundAmountDetailsValidationErrorTypedDict": ".refundamountdetailsvalidationerror",
     "RefundCardDetails": ".refundcarddetails",
     "RefundCardDetailsTypedDict": ".refundcarddetails",
     "RefundCardStatus": ".refundcardstatus",
@@ -3729,6 +3886,9 @@ _dynamic_imports: dict[str, str] = {
     "TicketMessage": ".ticketmessage",
     "TicketMessageTypedDict": ".ticketmessage",
     "TicketStatus": ".ticketstatus",
+    "TipCalculationBasis": ".tipcalculationbasis",
+    "TipPresets": ".tippresets",
+    "TipPresetsTypedDict": ".tippresets",
     "TokenType": ".tokentype",
     "TransactionSource": ".transactionsource",
     "Transfer": ".transfer",
@@ -3737,8 +3897,12 @@ _dynamic_imports: dict[str, str] = {
     "TransferAccountTypedDict": ".transferaccount",
     "TransferACHAddendaRecord": ".transferachaddendarecord",
     "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
+    "TransferAmountDetails": ".transferamountdetails",
+    "TransferAmountDetailsTypedDict": ".transferamountdetails",
     "TransferCapture": ".transfercapture",
     "TransferCaptureTypedDict": ".transfercapture",
+    "TransferConfig": ".transferconfig",
+    "TransferConfigTypedDict": ".transferconfig",
     "RtpDetails": ".transferdestination",
     "RtpDetailsTypedDict": ".transferdestination",
     "TransferDestination": ".transferdestination",
@@ -3791,6 +3955,10 @@ _dynamic_imports: dict[str, str] = {
     "UpdateIssuedCardState": ".updateissuedcardstate",
     "UpdatePaymentLink": ".updatepaymentlink",
     "UpdatePaymentLinkTypedDict": ".updatepaymentlink",
+    "UpdatePaymentLinkAmountDetails": ".updatepaymentlinkamountdetails",
+    "UpdatePaymentLinkAmountDetailsTypedDict": ".updatepaymentlinkamountdetails",
+    "UpdatePaymentLinkAmountDetailsValidationError": ".updatepaymentlinkamountdetailsvalidationerror",
+    "UpdatePaymentLinkAmountDetailsValidationErrorTypedDict": ".updatepaymentlinkamountdetailsvalidationerror",
     "Phone": ".updaterepresentative",
     "PhoneTypedDict": ".updaterepresentative",
     "Responsibilities": ".updaterepresentative",

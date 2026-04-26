@@ -134,6 +134,10 @@ if TYPE_CHECKING:
         TerminalApplicationErrorData,
     )
     from .transfer import Transfer, TransferData
+    from .transferconfigvalidationerror import (
+        TransferConfigValidationError,
+        TransferConfigValidationErrorData,
+    )
     from .transferoptionsvalidationerror import (
         TransferOptionsValidationError,
         TransferOptionsValidationErrorData,
@@ -265,6 +269,8 @@ __all__ = [
     "TerminalApplicationError",
     "TerminalApplicationErrorData",
     "Transfer",
+    "TransferConfigValidationError",
+    "TransferConfigValidationErrorData",
     "TransferData",
     "TransferOptionsValidationError",
     "TransferOptionsValidationErrorData",
@@ -390,6 +396,8 @@ _dynamic_imports: dict[str, str] = {
     "TerminalApplicationErrorData": ".terminalapplicationerror",
     "Transfer": ".transfer",
     "TransferData": ".transfer",
+    "TransferConfigValidationError": ".transferconfigvalidationerror",
+    "TransferConfigValidationErrorData": ".transferconfigvalidationerror",
     "TransferOptionsValidationError": ".transferoptionsvalidationerror",
     "TransferOptionsValidationErrorData": ".transferoptionsvalidationerror",
     "TransferValidationError": ".transfervalidationerror",

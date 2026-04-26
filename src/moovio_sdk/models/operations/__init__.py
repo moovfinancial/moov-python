@@ -159,6 +159,12 @@ if TYPE_CHECKING:
         CreateTransferResponseResultTypedDict,
         CreateTransferResponseTypedDict,
     )
+    from .createtransferconfig import (
+        CreateTransferConfigRequest,
+        CreateTransferConfigRequestTypedDict,
+        CreateTransferConfigResponse,
+        CreateTransferConfigResponseTypedDict,
+    )
     from .createtransferoptions import (
         CreateTransferOptionsRequest,
         CreateTransferOptionsRequestTypedDict,
@@ -531,6 +537,12 @@ if TYPE_CHECKING:
         GetTransferRequestTypedDict,
         GetTransferResponse,
         GetTransferResponseTypedDict,
+    )
+    from .gettransferconfig import (
+        GetTransferConfigRequest,
+        GetTransferConfigRequestTypedDict,
+        GetTransferConfigResponse,
+        GetTransferConfigResponseTypedDict,
     )
     from .getunderwriting import (
         GetUnderwritingRequest,
@@ -1025,6 +1037,12 @@ if TYPE_CHECKING:
         UpdateTransferResponse,
         UpdateTransferResponseTypedDict,
     )
+    from .updatetransferconfig import (
+        UpdateTransferConfigRequest,
+        UpdateTransferConfigRequestTypedDict,
+        UpdateTransferConfigResponse,
+        UpdateTransferConfigResponseTypedDict,
+    )
     from .updatewallet import (
         UpdateWalletRequest,
         UpdateWalletRequestTypedDict,
@@ -1173,6 +1191,10 @@ __all__ = [
     "CreateTicketRequestTypedDict",
     "CreateTicketResponse",
     "CreateTicketResponseTypedDict",
+    "CreateTransferConfigRequest",
+    "CreateTransferConfigRequestTypedDict",
+    "CreateTransferConfigResponse",
+    "CreateTransferConfigResponseTypedDict",
     "CreateTransferOptionsRequest",
     "CreateTransferOptionsRequestTypedDict",
     "CreateTransferOptionsResponse",
@@ -1427,6 +1449,10 @@ __all__ = [
     "GetTicketRequestTypedDict",
     "GetTicketResponse",
     "GetTicketResponseTypedDict",
+    "GetTransferConfigRequest",
+    "GetTransferConfigRequestTypedDict",
+    "GetTransferConfigResponse",
+    "GetTransferConfigResponseTypedDict",
     "GetTransferRequest",
     "GetTransferRequestTypedDict",
     "GetTransferResponse",
@@ -1760,6 +1786,10 @@ __all__ = [
     "UpdateTicketRequestTypedDict",
     "UpdateTicketResponse",
     "UpdateTicketResponseTypedDict",
+    "UpdateTransferConfigRequest",
+    "UpdateTransferConfigRequestTypedDict",
+    "UpdateTransferConfigResponse",
+    "UpdateTransferConfigResponseTypedDict",
     "UpdateTransferRequest",
     "UpdateTransferRequestTypedDict",
     "UpdateTransferResponse",
@@ -1903,6 +1933,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateTransferResponseResult": ".createtransfer",
     "CreateTransferResponseResultTypedDict": ".createtransfer",
     "CreateTransferResponseTypedDict": ".createtransfer",
+    "CreateTransferConfigRequest": ".createtransferconfig",
+    "CreateTransferConfigRequestTypedDict": ".createtransferconfig",
+    "CreateTransferConfigResponse": ".createtransferconfig",
+    "CreateTransferConfigResponseTypedDict": ".createtransferconfig",
     "CreateTransferOptionsRequest": ".createtransferoptions",
     "CreateTransferOptionsRequestTypedDict": ".createtransferoptions",
     "CreateTransferOptionsResponse": ".createtransferoptions",
@@ -2155,6 +2189,10 @@ _dynamic_imports: dict[str, str] = {
     "GetTransferRequestTypedDict": ".gettransfer",
     "GetTransferResponse": ".gettransfer",
     "GetTransferResponseTypedDict": ".gettransfer",
+    "GetTransferConfigRequest": ".gettransferconfig",
+    "GetTransferConfigRequestTypedDict": ".gettransferconfig",
+    "GetTransferConfigResponse": ".gettransferconfig",
+    "GetTransferConfigResponseTypedDict": ".gettransferconfig",
     "GetUnderwritingRequest": ".getunderwriting",
     "GetUnderwritingRequestTypedDict": ".getunderwriting",
     "GetUnderwritingResponse": ".getunderwriting",
@@ -2488,6 +2526,10 @@ _dynamic_imports: dict[str, str] = {
     "UpdateTransferRequestTypedDict": ".updatetransfer",
     "UpdateTransferResponse": ".updatetransfer",
     "UpdateTransferResponseTypedDict": ".updatetransfer",
+    "UpdateTransferConfigRequest": ".updatetransferconfig",
+    "UpdateTransferConfigRequestTypedDict": ".updatetransferconfig",
+    "UpdateTransferConfigResponse": ".updatetransferconfig",
+    "UpdateTransferConfigResponseTypedDict": ".updatetransferconfig",
     "UpdateWalletRequest": ".updatewallet",
     "UpdateWalletRequestTypedDict": ".updatewallet",
     "UpdateWalletResponse": ".updatewallet",

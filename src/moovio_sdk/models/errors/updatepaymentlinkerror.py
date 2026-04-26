@@ -9,6 +9,7 @@ from moovio_sdk.models.components import (
     displayoptionserror as components_displayoptionserror,
     paymentdetailserror as components_paymentdetailserror,
     payoutdetailserror as components_payoutdetailserror,
+    updatepaymentlinkamountdetailsvalidationerror as components_updatepaymentlinkamountdetailsvalidationerror,
 )
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
@@ -32,6 +33,12 @@ class UpdatePaymentLinkErrorData(BaseModel):
             components_createpaymentlinklineitemsvalidationerror.CreatePaymentLinkLineItemsValidationError
         ],
         pydantic.Field(alias="lineItems"),
+    ] = None
+    amount_details: Annotated[
+        Optional[
+            components_updatepaymentlinkamountdetailsvalidationerror.UpdatePaymentLinkAmountDetailsValidationError
+        ],
+        pydantic.Field(alias="amountDetails"),
     ] = None
 
 

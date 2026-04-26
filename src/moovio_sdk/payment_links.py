@@ -24,11 +24,11 @@ class PaymentLinks(BaseSDK):
         account_id: str,
         partner_account_id: str,
         merchant_payment_method_id: str,
-        amount: Union[components.Amount, components.AmountTypedDict],
         display: Union[
             components.PaymentLinkDisplayOptions,
             components.PaymentLinkDisplayOptionsTypedDict,
         ],
+        amount: Optional[Union[components.Amount, components.AmountTypedDict]] = None,
         sales_tax_amount: Optional[
             Union[components.Amount, components.AmountTypedDict]
         ] = None,
@@ -58,6 +58,12 @@ class PaymentLinks(BaseSDK):
                 components.CreatePaymentLinkLineItemsTypedDict,
             ]
         ] = None,
+        amount_details: Optional[
+            Union[
+                components.CreatePaymentLinkAmountDetails,
+                components.CreatePaymentLinkAmountDetailsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -71,9 +77,14 @@ class PaymentLinks(BaseSDK):
         :param account_id: The merchant account ID.
         :param partner_account_id: The partner's Moov account ID.
         :param merchant_payment_method_id: The merchant's preferred payment method ID. Must be a wallet payment method.
-        :param amount:
         :param display: Customizable display options for a payment link.
-        :param sales_tax_amount:
+        :param amount: The fixed amount of the payment link.
+
+            In API versions before `2026.07.00`, this was a required field.
+
+            In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+            for `open` payment amount types.
+        :param sales_tax_amount: Optional sales tax amount.
         :param max_uses: An optional limit on the number of times this payment link can be used.
 
             **For payouts, `maxUses` is always 1.**
@@ -83,6 +94,7 @@ class PaymentLinks(BaseSDK):
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus sales tax must equal the payment link amount.
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -103,7 +115,7 @@ class PaymentLinks(BaseSDK):
             create_payment_link=components.CreatePaymentLink(
                 partner_account_id=partner_account_id,
                 merchant_payment_method_id=merchant_payment_method_id,
-                amount=utils.get_pydantic_model(amount, components.Amount),
+                amount=utils.get_pydantic_model(amount, Optional[components.Amount]),
                 sales_tax_amount=utils.get_pydantic_model(
                     sales_tax_amount, Optional[components.Amount]
                 ),
@@ -123,6 +135,9 @@ class PaymentLinks(BaseSDK):
                 ),
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreatePaymentLinkLineItems]
+                ),
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.CreatePaymentLinkAmountDetails]
                 ),
             ),
         )
@@ -209,11 +224,11 @@ class PaymentLinks(BaseSDK):
         account_id: str,
         partner_account_id: str,
         merchant_payment_method_id: str,
-        amount: Union[components.Amount, components.AmountTypedDict],
         display: Union[
             components.PaymentLinkDisplayOptions,
             components.PaymentLinkDisplayOptionsTypedDict,
         ],
+        amount: Optional[Union[components.Amount, components.AmountTypedDict]] = None,
         sales_tax_amount: Optional[
             Union[components.Amount, components.AmountTypedDict]
         ] = None,
@@ -243,6 +258,12 @@ class PaymentLinks(BaseSDK):
                 components.CreatePaymentLinkLineItemsTypedDict,
             ]
         ] = None,
+        amount_details: Optional[
+            Union[
+                components.CreatePaymentLinkAmountDetails,
+                components.CreatePaymentLinkAmountDetailsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -256,9 +277,14 @@ class PaymentLinks(BaseSDK):
         :param account_id: The merchant account ID.
         :param partner_account_id: The partner's Moov account ID.
         :param merchant_payment_method_id: The merchant's preferred payment method ID. Must be a wallet payment method.
-        :param amount:
         :param display: Customizable display options for a payment link.
-        :param sales_tax_amount:
+        :param amount: The fixed amount of the payment link.
+
+            In API versions before `2026.07.00`, this was a required field.
+
+            In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
+            for `open` payment amount types.
+        :param sales_tax_amount: Optional sales tax amount.
         :param max_uses: An optional limit on the number of times this payment link can be used.
 
             **For payouts, `maxUses` is always 1.**
@@ -268,6 +294,7 @@ class PaymentLinks(BaseSDK):
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus sales tax must equal the payment link amount.
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -288,7 +315,7 @@ class PaymentLinks(BaseSDK):
             create_payment_link=components.CreatePaymentLink(
                 partner_account_id=partner_account_id,
                 merchant_payment_method_id=merchant_payment_method_id,
-                amount=utils.get_pydantic_model(amount, components.Amount),
+                amount=utils.get_pydantic_model(amount, Optional[components.Amount]),
                 sales_tax_amount=utils.get_pydantic_model(
                     sales_tax_amount, Optional[components.Amount]
                 ),
@@ -308,6 +335,9 @@ class PaymentLinks(BaseSDK):
                 ),
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreatePaymentLinkLineItems]
+                ),
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.CreatePaymentLinkAmountDetails]
                 ),
             ),
         )
@@ -830,6 +860,12 @@ class PaymentLinks(BaseSDK):
                 components.CreatePaymentLinkLineItemsUpdateTypedDict,
             ]
         ] = None,
+        amount_details: Optional[
+            Union[
+                components.UpdatePaymentLinkAmountDetails,
+                components.UpdatePaymentLinkAmountDetailsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -851,6 +887,7 @@ class PaymentLinks(BaseSDK):
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus sales tax must equal the payment link amount.
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -891,6 +928,9 @@ class PaymentLinks(BaseSDK):
                 ),
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreatePaymentLinkLineItemsUpdate]
+                ),
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.UpdatePaymentLinkAmountDetails]
                 ),
             ),
         )
@@ -1013,6 +1053,12 @@ class PaymentLinks(BaseSDK):
                 components.CreatePaymentLinkLineItemsUpdateTypedDict,
             ]
         ] = None,
+        amount_details: Optional[
+            Union[
+                components.UpdatePaymentLinkAmountDetails,
+                components.UpdatePaymentLinkAmountDetailsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1034,6 +1080,7 @@ class PaymentLinks(BaseSDK):
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus sales tax must equal the payment link amount.
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1074,6 +1121,9 @@ class PaymentLinks(BaseSDK):
                 ),
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreatePaymentLinkLineItemsUpdate]
+                ),
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.UpdatePaymentLinkAmountDetails]
                 ),
             ),
         )
