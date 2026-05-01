@@ -20,7 +20,9 @@ class Files(BaseSDK):
             components.FileUploadRequestMultiPartFileTypedDict,
         ],
         file_purpose: components.FilePurpose,
-        metadata: Optional[str] = None,
+        metadata: Optional[
+            Union[components.FileUploadMetadata, components.FileUploadMetadataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -35,11 +37,9 @@ class Files(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/files.write` scope.
 
         :param account_id:
-        :param file: The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
+        :param file: The file to upload. Valid types are `csv`, `png`, `jpeg`, `pdf`.
         :param file_purpose: The purpose of the file being uploaded.
-        :param metadata: Additional metadata to be stored with the file, formatted as a JSON string.
-
-            Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+        :param metadata: Additional metadata to be stored with the file.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -62,7 +62,9 @@ class Files(BaseSDK):
                     file, components.FileUploadRequestMultiPartFile
                 ),
                 file_purpose=file_purpose,
-                metadata=metadata,
+                metadata=utils.get_pydantic_model(
+                    metadata, Optional[components.FileUploadMetadata]
+                ),
             ),
         )
 
@@ -151,7 +153,9 @@ class Files(BaseSDK):
             components.FileUploadRequestMultiPartFileTypedDict,
         ],
         file_purpose: components.FilePurpose,
-        metadata: Optional[str] = None,
+        metadata: Optional[
+            Union[components.FileUploadMetadata, components.FileUploadMetadataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -166,11 +170,9 @@ class Files(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/files.write` scope.
 
         :param account_id:
-        :param file: The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`.
+        :param file: The file to upload. Valid types are `csv`, `png`, `jpeg`, `pdf`.
         :param file_purpose: The purpose of the file being uploaded.
-        :param metadata: Additional metadata to be stored with the file, formatted as a JSON string.
-
-            Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
+        :param metadata: Additional metadata to be stored with the file.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -193,7 +195,9 @@ class Files(BaseSDK):
                     file, components.FileUploadRequestMultiPartFile
                 ),
                 file_purpose=file_purpose,
-                metadata=metadata,
+                metadata=utils.get_pydantic_model(
+                    metadata, Optional[components.FileUploadMetadata]
+                ),
             ),
         )
 
