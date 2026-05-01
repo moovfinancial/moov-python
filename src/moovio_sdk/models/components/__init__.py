@@ -539,6 +539,7 @@ if TYPE_CHECKING:
     from .filedetails import FileDetails, FileDetailsTypedDict
     from .filepurpose import FilePurpose
     from .filestatus import FileStatus
+    from .fileuploadmetadata import FileUploadMetadata, FileUploadMetadataTypedDict
     from .fileuploadrequestmultipart import (
         FileUploadRequestMultiPart,
         FileUploadRequestMultiPartFile,
@@ -1688,6 +1689,8 @@ __all__ = [
     "FilePurpose",
     "FileStatus",
     "FileTypedDict",
+    "FileUploadMetadata",
+    "FileUploadMetadataTypedDict",
     "FileUploadRequestMultiPart",
     "FileUploadRequestMultiPartFile",
     "FileUploadRequestMultiPartFileTypedDict",
@@ -2693,6 +2696,8 @@ _dynamic_imports: dict[str, str] = {
     "FileDetailsTypedDict": ".filedetails",
     "FilePurpose": ".filepurpose",
     "FileStatus": ".filestatus",
+    "FileUploadMetadata": ".fileuploadmetadata",
+    "FileUploadMetadataTypedDict": ".fileuploadmetadata",
     "FileUploadRequestMultiPart": ".fileuploadrequestmultipart",
     "FileUploadRequestMultiPartFile": ".fileuploadrequestmultipart",
     "FileUploadRequestMultiPartFileTypedDict": ".fileuploadrequestmultipart",
