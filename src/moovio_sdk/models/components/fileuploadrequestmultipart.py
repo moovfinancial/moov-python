@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .filepurpose import FilePurpose
+from .fileuploadmetadata import FileUploadMetadata, FileUploadMetadataTypedDict
 import io
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import FieldMetadata, MultipartFormMetadata
@@ -53,14 +54,11 @@ class FileUploadRequestMultiPartFile(BaseModel):
 
 class FileUploadRequestMultiPartTypedDict(TypedDict):
     file: FileUploadRequestMultiPartFileTypedDict
-    r"""The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`."""
+    r"""The file to upload. Valid types are `csv`, `png`, `jpeg`, `pdf`."""
     file_purpose: FilePurpose
     r"""The purpose of the file being uploaded."""
-    metadata: NotRequired[str]
-    r"""Additional metadata to be stored with the file, formatted as a JSON string.
-
-    Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
-    """
+    metadata: NotRequired[FileUploadMetadataTypedDict]
+    r"""Additional metadata to be stored with the file."""
 
 
 class FileUploadRequestMultiPart(BaseModel):
@@ -68,18 +66,18 @@ class FileUploadRequestMultiPart(BaseModel):
         FileUploadRequestMultiPartFile,
         FieldMetadata(multipart=MultipartFormMetadata(file=True)),
     ]
-    r"""The file to be added. Valid types are `csv`, `png`, `jpeg`, `pdf`."""
+    r"""The file to upload. Valid types are `csv`, `png`, `jpeg`, `pdf`."""
 
     file_purpose: Annotated[
         FilePurpose, pydantic.Field(alias="filePurpose"), FieldMetadata(multipart=True)
     ]
     r"""The purpose of the file being uploaded."""
 
-    metadata: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
-    r"""Additional metadata to be stored with the file, formatted as a JSON string.
-
-    Valid keys are `representative_id`, `comment`, `requirement_id`, `error_code`.
-    """
+    metadata: Annotated[
+        Optional[FileUploadMetadata],
+        FieldMetadata(multipart=MultipartFormMetadata(json=True)),
+    ] = None
+    r"""Additional metadata to be stored with the file."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
