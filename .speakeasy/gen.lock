@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: d38fda5b3ffabd28e8e46bbbe3927b31
+  docChecksum: 1f180c7ccbc30ca9dec6dd10af6eb207
   docVersion: v2026.04.00
-  speakeasyVersion: 1.761.11
-  generationVersion: 2.881.17
-  releaseVersion: 26.4.2
-  configChecksum: 2e2e9c839900b5b77148ad8848ee17a0
+  speakeasyVersion: 1.762.0
+  generationVersion: 2.882.0
+  releaseVersion: 26.4.3
+  configChecksum: 2c09aa7bcc5a98dbe8db4f0e181f33ab
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 419b75f3-3e4a-4dc2-9143-e4ac5ae0f485
-  pristine_commit_hash: b4fdb1371d9e2f37cd92715b1d886eb92c514f96
-  pristine_tree_hash: 860cfda5d8ba97dc77d5c99c6251c023a99eb0c2
+  generation_id: 883b33c2-13f9-421a-bebd-eb19dac67506
+  pristine_commit_hash: b280044762dd88d21d9e6210d20d228d6a092901
+  pristine_tree_hash: d239c1d0efb88dc18a745932edd00958e1b0e7cc
 features:
   python:
     acceptHeaders: 3.0.0
@@ -669,8 +669,8 @@ trackedFiles:
     pristine_git_object: 7cd354029d30752441674e9c8ccf32bb4c3c4916
   docs/models/components/collectionpaymentmethodtype.md:
     id: cbe8cc7ebbae
-    last_write_checksum: sha1:36945362887b9c3dd73f5c00829a0d8477c264e0
-    pristine_git_object: 1ad0a9e5518aaf8db92c9e64a2a592e106016525
+    last_write_checksum: sha1:9d4dfd99fc9b38b960ca3d697ba554fbd717313c
+    pristine_git_object: ac6484a207b4f5170dae7e6f77d89c9301b248f5
   docs/models/components/colorsvalidationerror.md:
     id: 5b3bd235d674
     last_write_checksum: sha1:0864a505f466b1530e4726612b186d6470a7577e
@@ -4717,8 +4717,8 @@ trackedFiles:
     pristine_git_object: 68b6361e4a22b7fd00d6f5a72e25278ebf35ba6d
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:57abf1ee702088234a9d7d10446e1529ef547c13
-    pristine_git_object: f1811505e04ac86baa226f12fc703ff60192fc88
+    last_write_checksum: sha1:57d92245a9363385fe91d0963463b3ea8b274779
+    pristine_git_object: f4a56867e4a0ab314652cf55a198ba9653280de8
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4745,8 +4745,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:07faada8b3013a918f006e8183f6993ed0198e99
-    pristine_git_object: 1e0d539e4f242f203cc7e342db8b6c5fd1b235b1
+    last_write_checksum: sha1:ac1332fd1dea5793d0733449a211a59080d8ed88
+    pristine_git_object: 019168681ddded505e625fdcb7d87ef9e48dc6c0
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:92df233993bc233908220d240fb575306638f0d2
@@ -5373,8 +5373,8 @@ trackedFiles:
     pristine_git_object: ead39f2dd8d7bccb214a598525b7baa1cf0a2dda
   src/moovio_sdk/models/components/collectionpaymentmethodtype.py:
     id: 47f3e955b299
-    last_write_checksum: sha1:5492fbb37b63108798ea6a0d7402c6b2fe2099b9
-    pristine_git_object: cc2313ed05b28e89bf7ae682813ad99e3fd778e1
+    last_write_checksum: sha1:2971d4153140c367cf4571fa68cbb8f8d098f411
+    pristine_git_object: b3c4841917a716449cca70cc78aa668a3f4a8080
   src/moovio_sdk/models/components/colorsvalidationerror.py:
     id: 4ed19e2b2867
     last_write_checksum: sha1:93fea75fc333ce71efa09a6aae467384ab3a2fcc
@@ -11351,9 +11351,7 @@ examples:
           application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Python SDK Changes:
-  * `moov.files.upload()`:  `request.metadata` **Changed** (Breaking ⚠️)
+releaseNotes: "## Python SDK Changes:\n* `moov.payment_links.create()`: \n  *  `request.payment.allowed_methods[].enum(google_pay)` **Added**\n  *  `response.payment.allowed_methods[].enum(google_pay)` **Added** (Breaking ⚠️)\n* `moov.payment_links.list()`:  `response.[].payment.allowed_methods[].enum(google_pay)` **Added** (Breaking ⚠️)\n* `moov.payment_links.get()`:  `response.payment.allowed_methods[].enum(google_pay)` **Added** (Breaking ⚠️)\n* `moov.payment_links.update()`: \n  *  `request.payment.allowed_methods[].enum(google_pay)` **Added**\n  *  `response.payment.allowed_methods[].enum(google_pay)` **Added** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
