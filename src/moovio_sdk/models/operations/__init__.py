@@ -332,6 +332,10 @@ if TYPE_CHECKING:
         GetCardResponse,
         GetCardResponseTypedDict,
     )
+    from .getcardmetadata import (
+        GetCardMetadataResponse,
+        GetCardMetadataResponseTypedDict,
+    )
     from .getdispute import (
         GetDisputeRequest,
         GetDisputeRequestTypedDict,
@@ -1309,6 +1313,8 @@ __all__ = [
     "GetCapabilityRequestTypedDict",
     "GetCapabilityResponse",
     "GetCapabilityResponseTypedDict",
+    "GetCardMetadataResponse",
+    "GetCardMetadataResponseTypedDict",
     "GetCardRequest",
     "GetCardRequestTypedDict",
     "GetCardResponse",
@@ -2049,6 +2055,8 @@ _dynamic_imports: dict[str, str] = {
     "GetCardRequestTypedDict": ".getcard",
     "GetCardResponse": ".getcard",
     "GetCardResponseTypedDict": ".getcard",
+    "GetCardMetadataResponse": ".getcardmetadata",
+    "GetCardMetadataResponseTypedDict": ".getcardmetadata",
     "GetDisputeRequest": ".getdispute",
     "GetDisputeRequestTypedDict": ".getdispute",
     "GetDisputeResponse": ".getdispute",

@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.components import (
-    reversalamountdetailsvalidationerror as components_reversalamountdetailsvalidationerror,
+    end2endencryptionerror as components_end2endencryptionerror,
 )
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
@@ -13,23 +13,19 @@ from typing import Optional
 from typing_extensions import Annotated
 
 
-class ReversalValidationErrorData(BaseModel):
-    amount: Optional[str] = None
-    amount_details: Annotated[
-        Optional[
-            components_reversalamountdetailsvalidationerror.ReversalAmountDetailsValidationError
-        ],
-        pydantic.Field(alias="amountDetails"),
-    ] = None
+class CardMetadataRequestErrorData(BaseModel):
+    error: Optional[str] = None
+    e2ee: Optional[components_end2endencryptionerror.End2EndEncryptionError] = None
+    card_number: Annotated[Optional[str], pydantic.Field(alias="cardNumber")] = None
 
 
 @dataclass(unsafe_hash=True)
-class ReversalValidationError(MoovError):
-    data: ReversalValidationErrorData = field(hash=False)
+class CardMetadataRequestError(MoovError):
+    data: CardMetadataRequestErrorData = field(hash=False)
 
     def __init__(
         self,
-        data: ReversalValidationErrorData,
+        data: CardMetadataRequestErrorData,
         raw_response: httpx.Response,
         body: Optional[str] = None,
     ):

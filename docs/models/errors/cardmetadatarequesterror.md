@@ -1,0 +1,10 @@
+# CardMetadataRequestError
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `error`                                                                                          | *Optional[str]*                                                                                  | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `e2ee`                                                                                           | [Optional[components.End2EndEncryptionError]](../../models/components/end2endencryptionerror.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `card_number`                                                                                    | *Optional[str]*                                                                                  | :heavy_minus_sign:                                                                               | N/A                                                                                              |

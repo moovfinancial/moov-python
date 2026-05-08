@@ -864,7 +864,12 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.transfers.create_reversal(x_idempotency_key="93d03831-45c4-49ec-a9b2-88cbd41dfca7", account_id="c5fade57-7e5a-4380-ac7b-4abf8b3c24cf", transfer_id="82c6eae7-b7e5-4b20-b24e-5116a4d70bde", amount=1000)
+    res = moov.transfers.create_reversal(x_idempotency_key="93d03831-45c4-49ec-a9b2-88cbd41dfca7", account_id="c5fade57-7e5a-4380-ac7b-4abf8b3c24cf", transfer_id="82c6eae7-b7e5-4b20-b24e-5116a4d70bde", amount=1000, amount_details={
+        "surcharge": {
+            "currency": "USD",
+            "value_decimal": "12.987654321",
+        },
+    })
 
     # Handle response
     print(res)
@@ -885,7 +890,12 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.transfers.create_reversal(x_idempotency_key="b91d00b2-4ecb-4eb4-a67f-d6f76c0b7ad8", account_id="f225b49d-911b-440b-baed-6065968b69cb", transfer_id="a17b29e2-4af6-4c9d-ad3a-dd0ded2966ad", amount=1000)
+    res = moov.transfers.create_reversal(x_idempotency_key="b91d00b2-4ecb-4eb4-a67f-d6f76c0b7ad8", account_id="f225b49d-911b-440b-baed-6065968b69cb", transfer_id="a17b29e2-4af6-4c9d-ad3a-dd0ded2966ad", amount=1000, amount_details={
+        "surcharge": {
+            "currency": "USD",
+            "value_decimal": "12.987654321",
+        },
+    })
 
     # Handle response
     print(res)
@@ -900,6 +910,7 @@ with Moov(
 | `account_id`                                                                                               | *str*                                                                                                      | :heavy_check_mark:                                                                                         | The Moov account ID.                                                                                       |                                                                                                            |
 | `transfer_id`                                                                                              | *str*                                                                                                      | :heavy_check_mark:                                                                                         | The transfer ID to reverse.                                                                                |                                                                                                            |
 | `amount`                                                                                                   | *int*                                                                                                      | :heavy_check_mark:                                                                                         | Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation. | 1000                                                                                                       |
+| `amount_details`                                                                                           | [Optional[components.ReversalAmountDetails]](../../models/components/reversalamountdetails.md)             | :heavy_minus_sign:                                                                                         | Breakdown of the reversed amount.                                                                          |                                                                                                            |
 | `retries`                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                           | :heavy_minus_sign:                                                                                         | Configuration to override the default retry behavior of the client.                                        |                                                                                                            |
 
 ### Response

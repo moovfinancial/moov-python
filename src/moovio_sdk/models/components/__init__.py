@@ -245,6 +245,8 @@ if TYPE_CHECKING:
     from .cardexpiration import CardExpiration, CardExpirationTypedDict
     from .cardexpirationerror import CardExpirationError, CardExpirationErrorTypedDict
     from .cardissuingnetwork import CardIssuingNetwork
+    from .cardmetadata import CardMetadata, CardMetadataTypedDict
+    from .cardmetadatarequest import CardMetadataRequest, CardMetadataRequestTypedDict
     from .cardpaymentdetails import CardPaymentDetails, CardPaymentDetailsTypedDict
     from .cardpaymentdetailserror import (
         CardPaymentDetailsError,
@@ -1156,6 +1158,14 @@ if TYPE_CHECKING:
     from .resolutionlinkstatus import ResolutionLinkStatus
     from .returnpolicytype import ReturnPolicyType
     from .reversal import Reversal, ReversalTypedDict
+    from .reversalamountdetails import (
+        ReversalAmountDetails,
+        ReversalAmountDetailsTypedDict,
+    )
+    from .reversalamountdetailsvalidationerror import (
+        ReversalAmountDetailsValidationError,
+        ReversalAmountDetailsValidationErrorTypedDict,
+    )
     from .reversedwithcancellation import (
         ReversedWithCancellation,
         ReversedWithCancellationTypedDict,
@@ -1812,6 +1822,10 @@ __all__ = [
     "CardExpirationTypedDict",
     "CardFundingSource",
     "CardIssuingNetwork",
+    "CardMetadata",
+    "CardMetadataRequest",
+    "CardMetadataRequestTypedDict",
+    "CardMetadataTypedDict",
     "CardNetwork",
     "CardPayment",
     "CardPaymentDetails",
@@ -2522,6 +2536,10 @@ __all__ = [
     "ResponsibilitiesTypedDict",
     "ReturnPolicyType",
     "Reversal",
+    "ReversalAmountDetails",
+    "ReversalAmountDetailsTypedDict",
+    "ReversalAmountDetailsValidationError",
+    "ReversalAmountDetailsValidationErrorTypedDict",
     "ReversalTypedDict",
     "ReversedWithCancellation",
     "ReversedWithCancellationTypedDict",
@@ -3070,6 +3088,10 @@ _dynamic_imports: dict[str, str] = {
     "CardExpirationError": ".cardexpirationerror",
     "CardExpirationErrorTypedDict": ".cardexpirationerror",
     "CardIssuingNetwork": ".cardissuingnetwork",
+    "CardMetadata": ".cardmetadata",
+    "CardMetadataTypedDict": ".cardmetadata",
+    "CardMetadataRequest": ".cardmetadatarequest",
+    "CardMetadataRequestTypedDict": ".cardmetadatarequest",
     "CardPaymentDetails": ".cardpaymentdetails",
     "CardPaymentDetailsTypedDict": ".cardpaymentdetails",
     "CardPaymentDetailsError": ".cardpaymentdetailserror",
@@ -3770,6 +3792,10 @@ _dynamic_imports: dict[str, str] = {
     "ReturnPolicyType": ".returnpolicytype",
     "Reversal": ".reversal",
     "ReversalTypedDict": ".reversal",
+    "ReversalAmountDetails": ".reversalamountdetails",
+    "ReversalAmountDetailsTypedDict": ".reversalamountdetails",
+    "ReversalAmountDetailsValidationError": ".reversalamountdetailsvalidationerror",
+    "ReversalAmountDetailsValidationErrorTypedDict": ".reversalamountdetailsvalidationerror",
     "ReversedWithCancellation": ".reversedwithcancellation",
     "ReversedWithCancellationTypedDict": ".reversedwithcancellation",
     "ReversedWithRefund": ".reversedwithrefund",
