@@ -983,6 +983,10 @@ if TYPE_CHECKING:
     from .rtpinstitution import RTPInstitution, RTPInstitutionTypedDict
     from .rtprejectioncode import RTPRejectionCode
     from .rtpservices import RTPServices, RTPServicesTypedDict
+    from .rtptransactiondetails import (
+        RTPTransactionDetails,
+        RTPTransactionDetailsTypedDict,
+    )
     from .rtptransactionstatus import RTPTransactionStatus
     from .runtransfer import RunTransfer, RunTransferTypedDict
     from .scheduledtransferimagemetadata import (
@@ -1100,12 +1104,7 @@ if TYPE_CHECKING:
         TransferACHAddendaRecord,
         TransferACHAddendaRecordTypedDict,
     )
-    from .transferdestination import (
-        RtpDetails,
-        RtpDetailsTypedDict,
-        TransferDestination,
-        TransferDestinationTypedDict,
-    )
+    from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
     from .transferfailurereason import TransferFailureReason
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
@@ -2145,6 +2144,8 @@ __all__ = [
     "RTPRejectionCode",
     "RTPServices",
     "RTPServicesTypedDict",
+    "RTPTransactionDetails",
+    "RTPTransactionDetailsTypedDict",
     "RTPTransactionStatus",
     "ReceiptKind",
     "ReceiptRequest",
@@ -2193,8 +2194,6 @@ __all__ = [
     "RtpCreditTransferPaymentMethod",
     "RtpCreditTransferPaymentMethodPaymentMethodType",
     "RtpCreditTransferPaymentMethodTypedDict",
-    "RtpDetails",
-    "RtpDetailsTypedDict",
     "RunTransfer",
     "RunTransferTypedDict",
     "SECCode",
@@ -3302,6 +3301,8 @@ _dynamic_imports: dict[str, str] = {
     "RTPRejectionCode": ".rtprejectioncode",
     "RTPServices": ".rtpservices",
     "RTPServicesTypedDict": ".rtpservices",
+    "RTPTransactionDetails": ".rtptransactiondetails",
+    "RTPTransactionDetailsTypedDict": ".rtptransactiondetails",
     "RTPTransactionStatus": ".rtptransactionstatus",
     "RunTransfer": ".runtransfer",
     "RunTransferTypedDict": ".runtransfer",
@@ -3412,8 +3413,6 @@ _dynamic_imports: dict[str, str] = {
     "TransferAccountTypedDict": ".transferaccount",
     "TransferACHAddendaRecord": ".transferachaddendarecord",
     "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
-    "RtpDetails": ".transferdestination",
-    "RtpDetailsTypedDict": ".transferdestination",
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",
