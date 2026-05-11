@@ -3,6 +3,8 @@
 from __future__ import annotations
 from .cardbrand import CardBrand
 from .cardexpiration import CardExpiration, CardExpirationTypedDict
+from .cardtype import CardType
+from enum import Enum
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -10,13 +12,28 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+class AuthMethod(str, Enum):
+    r"""The authentication method used for the Google Pay token."""
+
+    PAN_ONLY = "PAN_ONLY"
+    CRYPTOGRAM_3_DS = "CRYPTOGRAM_3DS"
+
+
 class GooglePayResponseTypedDict(TypedDict):
     r"""Describes a Google Pay token on a Moov account."""
 
+    token_id: str
+    r"""The unique identifier of the Google Pay token."""
     brand: CardBrand
     r"""The card brand."""
-    card_details: str
-    r"""The last four digits of the underlying card number."""
+    card_type: CardType
+    r"""The type of the card."""
+    card_display_name: str
+    r"""User-friendly name of the tokenized card returned by Google Pay.
+
+    It usually contains the last four digits of the underlying card.
+    There is no standard format.
+    """
     fingerprint: str
     r"""Uniquely identifies a linked payment card or token.
     For Apple Pay, the fingerprint is based on the tokenized card number and may vary based on the user's device.
@@ -24,18 +41,32 @@ class GooglePayResponseTypedDict(TypedDict):
     """
     expiration: CardExpirationTypedDict
     r"""The expiration date of the card or token."""
+    dynamic_last_four: str
+    r"""The last four digits of the Google Pay token, which may differ from the tokenized card's last four digits."""
     issuer_country: NotRequired[str]
     r"""Country where the underlying card was issued."""
+    auth_method: NotRequired[AuthMethod]
+    r"""The authentication method used for the Google Pay token."""
 
 
 class GooglePayResponse(BaseModel):
     r"""Describes a Google Pay token on a Moov account."""
 
+    token_id: Annotated[str, pydantic.Field(alias="tokenID")]
+    r"""The unique identifier of the Google Pay token."""
+
     brand: CardBrand
     r"""The card brand."""
 
-    card_details: Annotated[str, pydantic.Field(alias="cardDetails")]
-    r"""The last four digits of the underlying card number."""
+    card_type: Annotated[CardType, pydantic.Field(alias="cardType")]
+    r"""The type of the card."""
+
+    card_display_name: Annotated[str, pydantic.Field(alias="cardDisplayName")]
+    r"""User-friendly name of the tokenized card returned by Google Pay.
+
+    It usually contains the last four digits of the underlying card.
+    There is no standard format.
+    """
 
     fingerprint: str
     r"""Uniquely identifies a linked payment card or token.
@@ -46,14 +77,22 @@ class GooglePayResponse(BaseModel):
     expiration: CardExpiration
     r"""The expiration date of the card or token."""
 
+    dynamic_last_four: Annotated[str, pydantic.Field(alias="dynamicLastFour")]
+    r"""The last four digits of the Google Pay token, which may differ from the tokenized card's last four digits."""
+
     issuer_country: Annotated[Optional[str], pydantic.Field(alias="issuerCountry")] = (
         None
     )
     r"""Country where the underlying card was issued."""
 
+    auth_method: Annotated[Optional[AuthMethod], pydantic.Field(alias="authMethod")] = (
+        None
+    )
+    r"""The authentication method used for the Google Pay token."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["issuerCountry"])
+        optional_fields = set(["issuerCountry", "authMethod"])
         serialized = handler(self)
         m = {}
 

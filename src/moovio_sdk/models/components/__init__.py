@@ -683,7 +683,11 @@ if TYPE_CHECKING:
         GooglePayPaymentMethodDataTypedDict,
         Type,
     )
-    from .googlepayresponse import GooglePayResponse, GooglePayResponseTypedDict
+    from .googlepayresponse import (
+        AuthMethod,
+        GooglePayResponse,
+        GooglePayResponseTypedDict,
+    )
     from .googlepaytokenizationdata import (
         GooglePayTokenizationData,
         GooglePayTokenizationDataType,
@@ -1156,6 +1160,10 @@ if TYPE_CHECKING:
     from .rtpinstitution import RTPInstitution, RTPInstitutionTypedDict
     from .rtprejectioncode import RTPRejectionCode
     from .rtpservices import RTPServices, RTPServicesTypedDict
+    from .rtptransactiondetails import (
+        RTPTransactionDetails,
+        RTPTransactionDetailsTypedDict,
+    )
     from .rtptransactionstatus import RTPTransactionStatus
     from .runtransfer import RunTransfer, RunTransferTypedDict
     from .scheduledtransferimagemetadata import (
@@ -1280,12 +1288,7 @@ if TYPE_CHECKING:
         TransferAmountDetailsTypedDict,
     )
     from .transferconfig import TransferConfig, TransferConfigTypedDict
-    from .transferdestination import (
-        RtpDetails,
-        RtpDetailsTypedDict,
-        TransferDestination,
-        TransferDestinationTypedDict,
-    )
+    from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
     from .transferfailurereason import TransferFailureReason
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
@@ -1670,6 +1673,7 @@ __all__ = [
     "AsyncCreatedRefundTypedDict",
     "AsyncTransfer",
     "AsyncTransferTypedDict",
+    "AuthMethod",
     "AuthToken",
     "AuthTokenRequest",
     "AuthTokenRequestTypedDict",
@@ -2433,6 +2437,8 @@ __all__ = [
     "RTPRejectionCode",
     "RTPServices",
     "RTPServicesTypedDict",
+    "RTPTransactionDetails",
+    "RTPTransactionDetailsTypedDict",
     "RTPTransactionStatus",
     "ReceiptKind",
     "ReceiptRequest",
@@ -2486,8 +2492,6 @@ __all__ = [
     "RtpCreditTransferPaymentMethod",
     "RtpCreditTransferPaymentMethodPaymentMethodType",
     "RtpCreditTransferPaymentMethodTypedDict",
-    "RtpDetails",
-    "RtpDetailsTypedDict",
     "RunTransfer",
     "RunTransferTypedDict",
     "SECCode",
@@ -3328,6 +3332,7 @@ _dynamic_imports: dict[str, str] = {
     "GooglePayPaymentMethodData": ".googlepaypaymentmethoddata",
     "GooglePayPaymentMethodDataTypedDict": ".googlepaypaymentmethoddata",
     "Type": ".googlepaypaymentmethoddata",
+    "AuthMethod": ".googlepayresponse",
     "GooglePayResponse": ".googlepayresponse",
     "GooglePayResponseTypedDict": ".googlepayresponse",
     "GooglePayTokenizationData": ".googlepaytokenizationdata",
@@ -3718,6 +3723,8 @@ _dynamic_imports: dict[str, str] = {
     "RTPRejectionCode": ".rtprejectioncode",
     "RTPServices": ".rtpservices",
     "RTPServicesTypedDict": ".rtpservices",
+    "RTPTransactionDetails": ".rtptransactiondetails",
+    "RTPTransactionDetailsTypedDict": ".rtptransactiondetails",
     "RTPTransactionStatus": ".rtptransactionstatus",
     "RunTransfer": ".runtransfer",
     "RunTransferTypedDict": ".runtransfer",
@@ -3835,8 +3842,6 @@ _dynamic_imports: dict[str, str] = {
     "TransferAmountDetailsTypedDict": ".transferamountdetails",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
-    "RtpDetails": ".transferdestination",
-    "RtpDetailsTypedDict": ".transferdestination",
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",

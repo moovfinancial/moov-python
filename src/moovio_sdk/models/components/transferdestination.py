@@ -12,8 +12,7 @@ from .instantbanktransactiondetails import (
     InstantBankTransactionDetails,
     InstantBankTransactionDetailsTypedDict,
 )
-from .rtpfailurecode import RTPFailureCode
-from .rtptransactionstatus import RTPTransactionStatus
+from .rtptransactiondetails import RTPTransactionDetails, RTPTransactionDetailsTypedDict
 from .transferaccount import TransferAccount, TransferAccountTypedDict
 from .transferpaymentmethodsbankaccount import (
     TransferPaymentMethodsBankAccount,
@@ -28,90 +27,11 @@ from .transferpaymentmethodswallet import (
     TransferPaymentMethodsWalletTypedDict,
 )
 from .transferpaymentmethodtype import TransferPaymentMethodType
-from datetime import datetime
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict, deprecated
-
-
-@deprecated(
-    "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-)
-class RtpDetailsTypedDict(TypedDict):
-    r"""DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details about the transaction."""
-
-    status: NotRequired[RTPTransactionStatus]
-    r"""Status of a transaction within the RTP lifecycle."""
-    network_response_code: NotRequired[str]
-    r"""Response code returned by network on failure."""
-    failure_code: NotRequired[RTPFailureCode]
-    r"""Status codes for RTP failures."""
-    initiated_on: NotRequired[datetime]
-    completed_on: NotRequired[datetime]
-    failed_on: NotRequired[datetime]
-    accepted_without_posting_on: NotRequired[datetime]
-
-
-@deprecated(
-    "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-)
-class RtpDetails(BaseModel):
-    r"""DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details about the transaction."""
-
-    status: Optional[RTPTransactionStatus] = None
-    r"""Status of a transaction within the RTP lifecycle."""
-
-    network_response_code: Annotated[
-        Optional[str], pydantic.Field(alias="networkResponseCode")
-    ] = None
-    r"""Response code returned by network on failure."""
-
-    failure_code: Annotated[
-        Optional[RTPFailureCode], pydantic.Field(alias="failureCode")
-    ] = None
-    r"""Status codes for RTP failures."""
-
-    initiated_on: Annotated[Optional[datetime], pydantic.Field(alias="initiatedOn")] = (
-        None
-    )
-
-    completed_on: Annotated[Optional[datetime], pydantic.Field(alias="completedOn")] = (
-        None
-    )
-
-    failed_on: Annotated[Optional[datetime], pydantic.Field(alias="failedOn")] = None
-
-    accepted_without_posting_on: Annotated[
-        Optional[datetime], pydantic.Field(alias="acceptedWithoutPostingOn")
-    ] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(
-            [
-                "status",
-                "networkResponseCode",
-                "failureCode",
-                "initiatedOn",
-                "completedOn",
-                "failedOn",
-                "acceptedWithoutPostingOn",
-            ]
-        )
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class TransferDestinationTypedDict(TypedDict):
@@ -132,7 +52,8 @@ class TransferDestinationTypedDict(TypedDict):
     r"""Describes a Google Pay token on a Moov account."""
     card_details: NotRequired[CardTransactionDetailsTypedDict]
     r"""Card-specific details about the transaction."""
-    rtp_details: NotRequired[RtpDetailsTypedDict]
+    rtp_details: NotRequired[RTPTransactionDetailsTypedDict]
+    r"""DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details about the transaction."""
     instant_bank_details: NotRequired[InstantBankTransactionDetailsTypedDict]
     r"""Instant-bank specific details about the transaction."""
 
@@ -178,12 +99,13 @@ class TransferDestination(BaseModel):
     r"""Card-specific details about the transaction."""
 
     rtp_details: Annotated[
-        Optional[RtpDetails],
+        Optional[RTPTransactionDetails],
         pydantic.Field(
             deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
             alias="rtpDetails",
         ),
     ] = None
+    r"""DEPRECATED: use `InstantBankTransactionDetails` instead (v2026.04.00 or later). RTP specific details about the transaction."""
 
     instant_bank_details: Annotated[
         Optional[InstantBankTransactionDetails],
@@ -220,10 +142,6 @@ class TransferDestination(BaseModel):
         return m
 
 
-try:
-    RtpDetails.model_rebuild()
-except NameError:
-    pass
 try:
     TransferDestination.model_rebuild()
 except NameError:
