@@ -65,7 +65,7 @@ class TransferTypedDict(TypedDict):
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     line_items: NotRequired[TransferLineItemsTypedDict]
     r"""An optional collection of line items for a transfer.
-    When line items are provided, their total plus sales tax must equal the transfer amount.
+    When line items are provided, their total plus tax must equal the transfer amount.
     """
     invoice_id: NotRequired[str]
     r"""ID of the invoice that the transfer is associated with."""
@@ -164,7 +164,7 @@ class Transfer(BaseModel):
         Optional[TransferLineItems], pydantic.Field(alias="lineItems")
     ] = None
     r"""An optional collection of line items for a transfer.
-    When line items are provided, their total plus sales tax must equal the transfer amount.
+    When line items are provided, their total plus tax must equal the transfer amount.
     """
 
     invoice_id: Annotated[Optional[str], pydantic.Field(alias="invoiceID")] = None

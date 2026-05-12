@@ -12,7 +12,7 @@ from typing_extensions import TypedDict
 
 class CreateTransferLineItemsTypedDict(TypedDict):
     r"""An optional collection of line items for a transfer.
-    When line items are provided, their total plus sales tax must equal the transfer amount.
+    When line items are provided, their total plus tax must equal the transfer amount.
     """
 
     items: List[CreateTransferLineItemTypedDict]
@@ -21,7 +21,7 @@ class CreateTransferLineItemsTypedDict(TypedDict):
 
 class CreateTransferLineItems(BaseModel):
     r"""An optional collection of line items for a transfer.
-    When line items are provided, their total plus sales tax must equal the transfer amount.
+    When line items are provided, their total plus tax must equal the transfer amount.
     """
 
     items: List[CreateTransferLineItem]

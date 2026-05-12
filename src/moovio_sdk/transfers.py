@@ -345,7 +345,7 @@ class Transfers(BaseSDK):
         :param sales_tax_amount:
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param line_items: An optional collection of line items for a transfer.
-            When line items are provided, their total plus sales tax must equal the transfer amount.
+            When line items are provided, their total plus tax must equal the transfer amount.
         :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -538,7 +538,7 @@ class Transfers(BaseSDK):
         :param sales_tax_amount:
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param line_items: An optional collection of line items for a transfer.
-            When line items are provided, their total plus sales tax must equal the transfer amount.
+            When line items are provided, their total plus tax must equal the transfer amount.
         :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
