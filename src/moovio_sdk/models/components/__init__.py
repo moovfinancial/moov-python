@@ -698,7 +698,11 @@ if TYPE_CHECKING:
         GooglePayPaymentMethodDataTypedDict,
         Type,
     )
-    from .googlepayresponse import GooglePayResponse, GooglePayResponseTypedDict
+    from .googlepayresponse import (
+        AuthMethod,
+        GooglePayResponse,
+        GooglePayResponseTypedDict,
+    )
     from .googlepaytokenizationdata import (
         GooglePayTokenizationData,
         GooglePayTokenizationDataType,
@@ -1186,11 +1190,9 @@ if TYPE_CHECKING:
         RtpCreditTransferPaymentMethodPaymentMethodType,
         RtpCreditTransferPaymentMethodTypedDict,
     )
-    from .rtpfailurecode import RTPFailureCode
     from .rtpinstitution import RTPInstitution, RTPInstitutionTypedDict
     from .rtprejectioncode import RTPRejectionCode
     from .rtpservices import RTPServices, RTPServicesTypedDict
-    from .rtptransactionstatus import RTPTransactionStatus
     from .runtransfer import RunTransfer, RunTransferTypedDict
     from .scheduledtransferimagemetadata import (
         ScheduledTransferImageMetadata,
@@ -1315,12 +1317,7 @@ if TYPE_CHECKING:
     )
     from .transfercapture import TransferCapture, TransferCaptureTypedDict
     from .transferconfig import TransferConfig, TransferConfigTypedDict
-    from .transferdestination import (
-        RtpDetails,
-        RtpDetailsTypedDict,
-        TransferDestination,
-        TransferDestinationTypedDict,
-    )
+    from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
     from .transferfailurereason import TransferFailureReason
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
@@ -1718,6 +1715,7 @@ __all__ = [
     "AsyncCreatedRefundTypedDict",
     "AsyncTransfer",
     "AsyncTransferTypedDict",
+    "AuthMethod",
     "AuthToken",
     "AuthTokenRequest",
     "AuthTokenRequestTypedDict",
@@ -2486,13 +2484,11 @@ __all__ = [
     "PutTransferConfigTypedDict",
     "QRCode",
     "QRCodeTypedDict",
-    "RTPFailureCode",
     "RTPInstitution",
     "RTPInstitutionTypedDict",
     "RTPRejectionCode",
     "RTPServices",
     "RTPServicesTypedDict",
-    "RTPTransactionStatus",
     "ReceiptKind",
     "ReceiptRequest",
     "ReceiptRequestTypedDict",
@@ -2553,8 +2549,6 @@ __all__ = [
     "RtpCreditTransferPaymentMethod",
     "RtpCreditTransferPaymentMethodPaymentMethodType",
     "RtpCreditTransferPaymentMethodTypedDict",
-    "RtpDetails",
-    "RtpDetailsTypedDict",
     "RunTransfer",
     "RunTransferTypedDict",
     "SECCode",
@@ -3413,6 +3407,7 @@ _dynamic_imports: dict[str, str] = {
     "GooglePayPaymentMethodData": ".googlepaypaymentmethoddata",
     "GooglePayPaymentMethodDataTypedDict": ".googlepaypaymentmethoddata",
     "Type": ".googlepaypaymentmethoddata",
+    "AuthMethod": ".googlepayresponse",
     "GooglePayResponse": ".googlepayresponse",
     "GooglePayResponseTypedDict": ".googlepayresponse",
     "GooglePayTokenizationData": ".googlepaytokenizationdata",
@@ -3809,13 +3804,11 @@ _dynamic_imports: dict[str, str] = {
     "RtpCreditTransferPaymentMethod": ".rtpcredittransferpaymentmethod",
     "RtpCreditTransferPaymentMethodPaymentMethodType": ".rtpcredittransferpaymentmethod",
     "RtpCreditTransferPaymentMethodTypedDict": ".rtpcredittransferpaymentmethod",
-    "RTPFailureCode": ".rtpfailurecode",
     "RTPInstitution": ".rtpinstitution",
     "RTPInstitutionTypedDict": ".rtpinstitution",
     "RTPRejectionCode": ".rtprejectioncode",
     "RTPServices": ".rtpservices",
     "RTPServicesTypedDict": ".rtpservices",
-    "RTPTransactionStatus": ".rtptransactionstatus",
     "RunTransfer": ".runtransfer",
     "RunTransferTypedDict": ".runtransfer",
     "ScheduledTransferImageMetadata": ".scheduledtransferimagemetadata",
@@ -3934,8 +3927,6 @@ _dynamic_imports: dict[str, str] = {
     "TransferCaptureTypedDict": ".transfercapture",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
-    "RtpDetails": ".transferdestination",
-    "RtpDetailsTypedDict": ".transferdestination",
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",
