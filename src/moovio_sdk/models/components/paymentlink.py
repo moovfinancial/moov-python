@@ -78,7 +78,7 @@ class PaymentLinkTypedDict(TypedDict):
     payout: NotRequired[PaymentLinkPayoutDetailsTypedDict]
     line_items: NotRequired[PaymentLinkLineItemsTypedDict]
     r"""An optional collection of line items for a payment link.
-    When line items are provided, their total plus sales tax must equal the payment link amount.
+    When line items are provided, their total plus tax must equal the payment link amount.
     """
     disabled_on: NotRequired[datetime]
 
@@ -162,7 +162,7 @@ class PaymentLink(BaseModel):
         Optional[PaymentLinkLineItems], pydantic.Field(alias="lineItems")
     ] = None
     r"""An optional collection of line items for a payment link.
-    When line items are provided, their total plus sales tax must equal the payment link amount.
+    When line items are provided, their total plus tax must equal the payment link amount.
     """
 
     disabled_on: Annotated[Optional[datetime], pydantic.Field(alias="disabledOn")] = (
