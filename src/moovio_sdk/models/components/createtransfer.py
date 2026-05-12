@@ -36,7 +36,7 @@ class CreateTransferTypedDict(TypedDict):
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     line_items: NotRequired[CreateTransferLineItemsTypedDict]
     r"""An optional collection of line items for a transfer.
-    When line items are provided, their total plus sales tax must equal the transfer amount.
+    When line items are provided, their total plus tax must equal the transfer amount.
     """
 
 
@@ -71,7 +71,7 @@ class CreateTransfer(BaseModel):
         Optional[CreateTransferLineItems], pydantic.Field(alias="lineItems")
     ] = None
     r"""An optional collection of line items for a transfer.
-    When line items are provided, their total plus sales tax must equal the transfer amount.
+    When line items are provided, their total plus tax must equal the transfer amount.
     """
 
     @model_serializer(mode="wrap")
