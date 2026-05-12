@@ -1597,3 +1597,13 @@ Based on:
 - [python v25.8.5] .
 ### Releases
 - [PyPI v25.8.5] https://pypi.org/project/moovio_sdk/25.8.5 - .
+
+## 2026-05-12 17:57:21
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.762.0 (2.882.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v25.8.6] .
+### Releases
+- [PyPI v25.8.6] https://pypi.org/project/moovio_sdk/25.8.6 - .

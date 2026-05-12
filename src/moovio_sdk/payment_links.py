@@ -87,7 +87,7 @@ class PaymentLinks(BaseSDK):
         :param payment: Options for payment links used to collect payment.
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
-            When line items are provided, their total plus sales tax must equal the payment link amount.
+            When line items are provided, their total plus tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -277,7 +277,7 @@ class PaymentLinks(BaseSDK):
         :param payment: Options for payment links used to collect payment.
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
-            When line items are provided, their total plus sales tax must equal the payment link amount.
+            When line items are provided, their total plus tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -860,7 +860,7 @@ class PaymentLinks(BaseSDK):
         :param payment: Options for payment links used to collect payment.
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
-            When line items are provided, their total plus sales tax must equal the payment link amount.
+            When line items are provided, their total plus tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1043,7 +1043,7 @@ class PaymentLinks(BaseSDK):
         :param payment: Options for payment links used to collect payment.
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
-            When line items are provided, their total plus sales tax must equal the payment link amount.
+            When line items are provided, their total plus tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
