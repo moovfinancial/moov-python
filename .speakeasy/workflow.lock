@@ -1,9 +1,9 @@
-speakeasyVersion: 1.762.0
+speakeasyVersion: 1.763.0
 sources:
     latest:
         sourceNamespace: python-v2025.04.00
-        sourceRevisionDigest: sha256:06887097f9c8ee895965166bc967ce156e46516292f9199a20af0529536709f6
-        sourceBlobDigest: sha256:4152b5afe909768131c1cce5c1cad89a5332430d25cd8d7a32591d4b32a82ab0
+        sourceRevisionDigest: sha256:e14c35c09159900800efede873b93542e8a6f9e6cef1dc229d52ee4a8f3914d5
+        sourceBlobDigest: sha256:563fb3340af6f8cad7799ca6141e9a256e4a66540d48a3c5ab3b195d02cfcc2d
         tags:
             - latest
             - v2025.04.00
@@ -11,10 +11,10 @@ targets:
     latest:
         source: latest
         sourceNamespace: python-v2025.04.00
-        sourceRevisionDigest: sha256:06887097f9c8ee895965166bc967ce156e46516292f9199a20af0529536709f6
-        sourceBlobDigest: sha256:4152b5afe909768131c1cce5c1cad89a5332430d25cd8d7a32591d4b32a82ab0
+        sourceRevisionDigest: sha256:e14c35c09159900800efede873b93542e8a6f9e6cef1dc229d52ee4a8f3914d5
+        sourceBlobDigest: sha256:563fb3340af6f8cad7799ca6141e9a256e4a66540d48a3c5ab3b195d02cfcc2d
         codeSamplesNamespace: v2025.04.00-python-code-samples
-        codeSamplesRevisionDigest: sha256:53aded38cd9703d3d348cc104941d9b025209c1fd0a0e615bc8caa98bde5f469
+        codeSamplesRevisionDigest: sha256:3f9bdee3a9da7c2323f4aa53363951a5163d6a2cd8b98a3181543032813ee828
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
