@@ -1127,11 +1127,6 @@ if TYPE_CHECKING:
     from .receiptresponse import ReceiptResponse, ReceiptResponseTypedDict
     from .recur import Recur, RecurTypedDict
     from .recurresponse import RecurResponse, RecurResponseTypedDict
-    from .refundamountdetails import RefundAmountDetails, RefundAmountDetailsTypedDict
-    from .refundamountdetailsvalidationerror import (
-        RefundAmountDetailsValidationError,
-        RefundAmountDetailsValidationErrorTypedDict,
-    )
     from .refundcarddetails import RefundCardDetails, RefundCardDetailsTypedDict
     from .refundcardstatus import RefundCardStatus
     from .refundpolicy import RefundPolicy
@@ -1162,14 +1157,6 @@ if TYPE_CHECKING:
     from .resolutionlinkstatus import ResolutionLinkStatus
     from .returnpolicytype import ReturnPolicyType
     from .reversal import Reversal, ReversalTypedDict
-    from .reversalamountdetails import (
-        ReversalAmountDetails,
-        ReversalAmountDetailsTypedDict,
-    )
-    from .reversalamountdetailsvalidationerror import (
-        ReversalAmountDetailsValidationError,
-        ReversalAmountDetailsValidationErrorTypedDict,
-    )
     from .reversedwithcancellation import (
         ReversedWithCancellation,
         ReversedWithCancellationTypedDict,
@@ -1315,7 +1302,6 @@ if TYPE_CHECKING:
         TransferAmountDetails,
         TransferAmountDetailsTypedDict,
     )
-    from .transfercapture import TransferCapture, TransferCaptureTypedDict
     from .transferconfig import TransferConfig, TransferConfigTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
@@ -2498,10 +2484,6 @@ __all__ = [
     "RecurResponse",
     "RecurResponseTypedDict",
     "RecurTypedDict",
-    "RefundAmountDetails",
-    "RefundAmountDetailsTypedDict",
-    "RefundAmountDetailsValidationError",
-    "RefundAmountDetailsValidationErrorTypedDict",
     "RefundCardDetails",
     "RefundCardDetailsTypedDict",
     "RefundCardStatus",
@@ -2532,10 +2514,6 @@ __all__ = [
     "ResponsibilitiesTypedDict",
     "ReturnPolicyType",
     "Reversal",
-    "ReversalAmountDetails",
-    "ReversalAmountDetailsTypedDict",
-    "ReversalAmountDetailsValidationError",
-    "ReversalAmountDetailsValidationErrorTypedDict",
     "ReversalTypedDict",
     "ReversedWithCancellation",
     "ReversedWithCancellationTypedDict",
@@ -2658,8 +2636,6 @@ __all__ = [
     "TransferAccountTypedDict",
     "TransferAmountDetails",
     "TransferAmountDetailsTypedDict",
-    "TransferCapture",
-    "TransferCaptureTypedDict",
     "TransferConfig",
     "TransferConfigTypedDict",
     "TransferDestination",
@@ -3754,10 +3730,6 @@ _dynamic_imports: dict[str, str] = {
     "RecurTypedDict": ".recur",
     "RecurResponse": ".recurresponse",
     "RecurResponseTypedDict": ".recurresponse",
-    "RefundAmountDetails": ".refundamountdetails",
-    "RefundAmountDetailsTypedDict": ".refundamountdetails",
-    "RefundAmountDetailsValidationError": ".refundamountdetailsvalidationerror",
-    "RefundAmountDetailsValidationErrorTypedDict": ".refundamountdetailsvalidationerror",
     "RefundCardDetails": ".refundcarddetails",
     "RefundCardDetailsTypedDict": ".refundcarddetails",
     "RefundCardStatus": ".refundcardstatus",
@@ -3787,10 +3759,6 @@ _dynamic_imports: dict[str, str] = {
     "ReturnPolicyType": ".returnpolicytype",
     "Reversal": ".reversal",
     "ReversalTypedDict": ".reversal",
-    "ReversalAmountDetails": ".reversalamountdetails",
-    "ReversalAmountDetailsTypedDict": ".reversalamountdetails",
-    "ReversalAmountDetailsValidationError": ".reversalamountdetailsvalidationerror",
-    "ReversalAmountDetailsValidationErrorTypedDict": ".reversalamountdetailsvalidationerror",
     "ReversedWithCancellation": ".reversedwithcancellation",
     "ReversedWithCancellationTypedDict": ".reversedwithcancellation",
     "ReversedWithRefund": ".reversedwithrefund",
@@ -3923,8 +3891,6 @@ _dynamic_imports: dict[str, str] = {
     "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
     "TransferAmountDetails": ".transferamountdetails",
     "TransferAmountDetailsTypedDict": ".transferamountdetails",
-    "TransferCapture": ".transfercapture",
-    "TransferCaptureTypedDict": ".transfercapture",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
     "TransferDestination": ".transferdestination",

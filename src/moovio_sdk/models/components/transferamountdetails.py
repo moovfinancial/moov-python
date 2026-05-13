@@ -13,8 +13,6 @@ class TransferAmountDetailsTypedDict(TypedDict):
     r"""The amount of tip applied to the transfer."""
     tax: NotRequired[AmountDecimalTypedDict]
     r"""The amount of tax applied to the transfer."""
-    surcharge: NotRequired[AmountDecimalTypedDict]
-    r"""The amount of surcharge applied to the transfer."""
 
 
 class TransferAmountDetails(BaseModel):
@@ -24,12 +22,9 @@ class TransferAmountDetails(BaseModel):
     tax: Optional[AmountDecimal] = None
     r"""The amount of tax applied to the transfer."""
 
-    surcharge: Optional[AmountDecimal] = None
-    r"""The amount of surcharge applied to the transfer."""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["tip", "tax", "surcharge"])
+        optional_fields = set(["tip", "tax"])
         serialized = handler(self)
         m = {}
 

@@ -1,4 +1,4 @@
-speakeasyVersion: 1.762.0
+speakeasyVersion: 1.763.0
 sources:
     dev:
         sourceNamespace: python-dev
@@ -8,42 +8,41 @@ sources:
             - latest
             - dev
     latest:
-        sourceNamespace: latest
-        sourceRevisionDigest: sha256:7bd50948e673c520ebde8cfd3e6e0fcaf8597dc307b1adb78d9939df55023bd7
-        sourceBlobDigest: sha256:c3453e7a5da153a4c0f7041e441b3de5bc4ad3d9cbfa078445e16f0e4b86dd70
+        sourceNamespace: python-v2026.07.00
+        sourceRevisionDigest: sha256:5994f25232525267a98bb64f81486ce4291683adc17caa15b96d4826ed6e6152
+        sourceBlobDigest: sha256:d69c3e384c9c1ea9db48083b99d523d7fb49ae566f3135e40b330821ebddf18b
         tags:
             - latest
-            - speakeasy-sdk-regen-1771028367
-            - latest
+            - v2026.07.00
 targets:
     latest:
-        source: dev
-        sourceNamespace: python-dev
-        sourceRevisionDigest: sha256:ab3e2ba6f41f31cf1b90f6dae1feae63a56cc244ff0486eef08de014bbfd8ca7
-        sourceBlobDigest: sha256:c4d29782f5b0e42a467161a7e98290af573afec86bf7101f5d01beb16e2137aa
-        codeSamplesNamespace: dev-python-code-samples
-        codeSamplesRevisionDigest: sha256:e5f729513175089b87a22cfde0b8681f0dd490e630c6626dada44f76158cbf31
+        source: latest
+        sourceNamespace: python-v2026.07.00
+        sourceRevisionDigest: sha256:5994f25232525267a98bb64f81486ce4291683adc17caa15b96d4826ed6e6152
+        sourceBlobDigest: sha256:d69c3e384c9c1ea9db48083b99d523d7fb49ae566f3135e40b330821ebddf18b
+        codeSamplesNamespace: v2026.07.00-python-code-samples
+        codeSamplesRevisionDigest: sha256:438dd881c968fdb6b941a6f4eb1d03d1fecd6e43fb92594955a4ffcfbf491236
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
-        dev:
+        latest:
             inputs:
-                - location: registry.speakeasyapi.dev/moov/moov/api-dev
+                - location: registry.speakeasyapi.dev/moov/moov/api-v2026.07.00
             overlays:
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
             registry:
-                location: registry.speakeasyapi.dev/moov/moov/python-dev
+                location: registry.speakeasyapi.dev/moov/moov/python-v2026.07.00
     targets:
         latest:
             target: python
-            source: dev
+            source: latest
             publish:
                 pypi:
                     token: $pypi_token
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/moov/moov/dev-python-code-samples
+                    location: registry.speakeasyapi.dev/moov/moov/v2026.07.00-python-code-samples
                 labelOverride:
                     fixedValue: Python (SDK)
                 blocking: false

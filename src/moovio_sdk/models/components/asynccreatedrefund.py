@@ -2,13 +2,10 @@
 
 from __future__ import annotations
 from .amount import Amount, AmountTypedDict
-from .refundamountdetails import RefundAmountDetails, RefundAmountDetailsTypedDict
 from datetime import datetime
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import BaseModel
 import pydantic
-from pydantic import model_serializer
-from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 
 class AsyncCreatedRefundTypedDict(TypedDict):
@@ -17,7 +14,6 @@ class AsyncCreatedRefundTypedDict(TypedDict):
     refund_id: str
     created_on: datetime
     amount: AmountTypedDict
-    amount_details: NotRequired[RefundAmountDetailsTypedDict]
 
 
 class AsyncCreatedRefund(BaseModel):
@@ -28,26 +24,6 @@ class AsyncCreatedRefund(BaseModel):
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
     amount: Amount
-
-    amount_details: Annotated[
-        Optional[RefundAmountDetails], pydantic.Field(alias="amountDetails")
-    ] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["amountDetails"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
 
 
 try:

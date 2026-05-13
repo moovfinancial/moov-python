@@ -9,17 +9,14 @@ from typing_extensions import NotRequired, TypedDict
 
 class CreatePaymentLinkAmountDetailsValidationErrorTypedDict(TypedDict):
     tax: NotRequired[str]
-    surcharge: NotRequired[str]
 
 
 class CreatePaymentLinkAmountDetailsValidationError(BaseModel):
     tax: Optional[str] = None
 
-    surcharge: Optional[str] = None
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["tax", "surcharge"])
+        optional_fields = set(["tax"])
         serialized = handler(self)
         m = {}
 

@@ -9,7 +9,6 @@ from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
 from .moovfee import MoovFee, MoovFeeTypedDict
 from .moovfeedetails import MoovFeeDetails, MoovFeeDetailsTypedDict
 from .transferamountdetails import TransferAmountDetails, TransferAmountDetailsTypedDict
-from .transfercapture import TransferCapture, TransferCaptureTypedDict
 from .transferdestination import TransferDestination, TransferDestinationTypedDict
 from .transferfailurereason import TransferFailureReason
 from .transferlineitems import TransferLineItems, TransferLineItemsTypedDict
@@ -70,8 +69,6 @@ class TransferTypedDict(TypedDict):
     invoice_id: NotRequired[str]
     r"""ID of the invoice that the transfer is associated with."""
     amount_details: NotRequired[TransferAmountDetailsTypedDict]
-    capture: NotRequired[TransferCaptureTypedDict]
-    r"""The card authorization and capture IDs associated with a transfer."""
 
 
 class Transfer(BaseModel):
@@ -172,9 +169,6 @@ class Transfer(BaseModel):
         Optional[TransferAmountDetails], pydantic.Field(alias="amountDetails")
     ] = None
 
-    capture: Optional[TransferCapture] = None
-    r"""The card authorization and capture IDs associated with a transfer."""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -202,7 +196,6 @@ class Transfer(BaseModel):
                 "lineItems",
                 "invoiceID",
                 "amountDetails",
-                "capture",
             ]
         )
         serialized = handler(self)

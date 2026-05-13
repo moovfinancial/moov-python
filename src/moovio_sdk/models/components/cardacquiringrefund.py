@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 from .amount import Amount, AmountTypedDict
-from .refundamountdetails import RefundAmountDetails, RefundAmountDetailsTypedDict
 from .refundcarddetails import RefundCardDetails, RefundCardDetailsTypedDict
 from .refundstatus import RefundStatus
 from datetime import datetime
@@ -22,7 +21,6 @@ class CardAcquiringRefundTypedDict(TypedDict):
     updated_on: datetime
     status: RefundStatus
     amount: AmountTypedDict
-    amount_details: NotRequired[RefundAmountDetailsTypedDict]
     card_details: NotRequired[RefundCardDetailsTypedDict]
 
 
@@ -40,17 +38,13 @@ class CardAcquiringRefund(BaseModel):
 
     amount: Amount
 
-    amount_details: Annotated[
-        Optional[RefundAmountDetails], pydantic.Field(alias="amountDetails")
-    ] = None
-
     card_details: Annotated[
         Optional[RefundCardDetails], pydantic.Field(alias="cardDetails")
     ] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["amountDetails", "cardDetails"])
+        optional_fields = set(["cardDetails"])
         serialized = handler(self)
         m = {}
 

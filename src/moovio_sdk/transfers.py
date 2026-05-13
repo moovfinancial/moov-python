@@ -670,8 +670,6 @@ class Transfers(BaseSDK):
         refunded: Optional[bool] = None,
         disputed: Optional[bool] = None,
         foreign_id: Optional[str] = None,
-        authorization_i_ds: Optional[List[str]] = None,
-        capture_i_ds: Optional[List[str]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -702,8 +700,6 @@ class Transfers(BaseSDK):
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
-        :param authorization_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
-        :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -732,8 +728,6 @@ class Transfers(BaseSDK):
             refunded=refunded,
             disputed=disputed,
             foreign_id=foreign_id,
-            authorization_i_ds=authorization_i_ds,
-            capture_i_ds=capture_i_ds,
             skip=skip,
             count=count,
             account_id=account_id,
@@ -819,8 +813,6 @@ class Transfers(BaseSDK):
         refunded: Optional[bool] = None,
         disputed: Optional[bool] = None,
         foreign_id: Optional[str] = None,
-        authorization_i_ds: Optional[List[str]] = None,
-        capture_i_ds: Optional[List[str]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -851,8 +843,6 @@ class Transfers(BaseSDK):
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
-        :param authorization_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
-        :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -881,8 +871,6 @@ class Transfers(BaseSDK):
             refunded=refunded,
             disputed=disputed,
             foreign_id=foreign_id,
-            authorization_i_ds=authorization_i_ds,
-            capture_i_ds=capture_i_ds,
             skip=skip,
             count=count,
             account_id=account_id,
@@ -2020,11 +2008,6 @@ class Transfers(BaseSDK):
         transfer_id: str,
         x_wait_for: Optional[components.TransferWaitFor] = None,
         amount: Optional[int] = None,
-        amount_details: Optional[
-            Union[
-                components.RefundAmountDetails, components.RefundAmountDetailsTypedDict
-            ]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2044,7 +2027,6 @@ class Transfers(BaseSDK):
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
-        :param amount_details: Breakdown of the refunded amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2067,9 +2049,6 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             create_refund=components.CreateRefund(
                 amount=amount,
-                amount_details=utils.get_pydantic_model(
-                    amount_details, Optional[components.RefundAmountDetails]
-                ),
             ),
         )
 
@@ -2171,11 +2150,6 @@ class Transfers(BaseSDK):
         transfer_id: str,
         x_wait_for: Optional[components.TransferWaitFor] = None,
         amount: Optional[int] = None,
-        amount_details: Optional[
-            Union[
-                components.RefundAmountDetails, components.RefundAmountDetailsTypedDict
-            ]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2195,7 +2169,6 @@ class Transfers(BaseSDK):
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
-        :param amount_details: Breakdown of the refunded amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2218,9 +2191,6 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             create_refund=components.CreateRefund(
                 amount=amount,
-                amount_details=utils.get_pydantic_model(
-                    amount_details, Optional[components.RefundAmountDetails]
-                ),
             ),
         )
 
@@ -2723,12 +2693,6 @@ class Transfers(BaseSDK):
         account_id: str,
         transfer_id: str,
         amount: int,
-        amount_details: Optional[
-            Union[
-                components.ReversalAmountDetails,
-                components.ReversalAmountDetailsTypedDict,
-            ]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2745,7 +2709,6 @@ class Transfers(BaseSDK):
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
         :param amount: Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
-        :param amount_details: Breakdown of the reversed amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2767,9 +2730,6 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             create_reversal=components.CreateReversal(
                 amount=amount,
-                amount_details=utils.get_pydantic_model(
-                    amount_details, Optional[components.ReversalAmountDetails]
-                ),
             ),
         )
 
@@ -2856,12 +2816,6 @@ class Transfers(BaseSDK):
         account_id: str,
         transfer_id: str,
         amount: int,
-        amount_details: Optional[
-            Union[
-                components.ReversalAmountDetails,
-                components.ReversalAmountDetailsTypedDict,
-            ]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2878,7 +2832,6 @@ class Transfers(BaseSDK):
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
         :param amount: Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
-        :param amount_details: Breakdown of the reversed amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2900,9 +2853,6 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             create_reversal=components.CreateReversal(
                 amount=amount,
-                amount_details=utils.get_pydantic_model(
-                    amount_details, Optional[components.ReversalAmountDetails]
-                ),
             ),
         )
 
