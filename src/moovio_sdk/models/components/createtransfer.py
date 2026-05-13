@@ -35,12 +35,11 @@ class CreateTransferTypedDict(TypedDict):
     r"""An optional description of the transfer that is used on receipts and for your own internal use."""
     metadata: NotRequired[Dict[str, str]]
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
-    sales_tax_amount: NotRequired[AmountTypedDict]
     foreign_id: NotRequired[str]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     line_items: NotRequired[CreateTransferLineItemsTypedDict]
     r"""An optional collection of line items for a transfer.
-    When line items are provided, their total plus sales tax must equal the transfer amount.
+    When line items are provided, their total plus tax must equal the transfer amount.
     """
     amount_details: NotRequired[CreateTransferAmountDetailsTypedDict]
 
@@ -65,10 +64,6 @@ class CreateTransfer(BaseModel):
     metadata: Optional[Dict[str, str]] = None
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
 
-    sales_tax_amount: Annotated[
-        Optional[Amount], pydantic.Field(alias="salesTaxAmount")
-    ] = None
-
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
@@ -76,7 +71,7 @@ class CreateTransfer(BaseModel):
         Optional[CreateTransferLineItems], pydantic.Field(alias="lineItems")
     ] = None
     r"""An optional collection of line items for a transfer.
-    When line items are provided, their total plus sales tax must equal the transfer amount.
+    When line items are provided, their total plus tax must equal the transfer amount.
     """
 
     amount_details: Annotated[
@@ -90,7 +85,6 @@ class CreateTransfer(BaseModel):
                 "facilitatorFee",
                 "description",
                 "metadata",
-                "salesTaxAmount",
                 "foreignID",
                 "lineItems",
                 "amountDetails",

@@ -57,8 +57,6 @@ class CreatePaymentLinkTypedDict(TypedDict):
     In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
     for `open` payment amount types.
     """
-    sales_tax_amount: NotRequired[AmountTypedDict]
-    r"""Optional sales tax amount."""
     max_uses: NotRequired[int]
     r"""An optional limit on the number of times this payment link can be used.
 
@@ -72,7 +70,7 @@ class CreatePaymentLinkTypedDict(TypedDict):
     payout: NotRequired[PaymentLinkPayoutDetailsTypedDict]
     line_items: NotRequired[CreatePaymentLinkLineItemsTypedDict]
     r"""An optional collection of line items for a payment link.
-    When line items are provided, their total plus sales tax must equal the payment link amount.
+    When line items are provided, their total plus tax must equal the payment link amount.
     """
     amount_details: NotRequired[CreatePaymentLinkAmountDetailsTypedDict]
 
@@ -106,11 +104,6 @@ class CreatePaymentLink(BaseModel):
     for `open` payment amount types.
     """
 
-    sales_tax_amount: Annotated[
-        Optional[Amount], pydantic.Field(alias="salesTaxAmount")
-    ] = None
-    r"""Optional sales tax amount."""
-
     max_uses: Annotated[Optional[int], pydantic.Field(alias="maxUses")] = None
     r"""An optional limit on the number of times this payment link can be used.
 
@@ -131,7 +124,7 @@ class CreatePaymentLink(BaseModel):
         Optional[CreatePaymentLinkLineItems], pydantic.Field(alias="lineItems")
     ] = None
     r"""An optional collection of line items for a payment link.
-    When line items are provided, their total plus sales tax must equal the payment link amount.
+    When line items are provided, their total plus tax must equal the payment link amount.
     """
 
     amount_details: Annotated[
@@ -143,7 +136,6 @@ class CreatePaymentLink(BaseModel):
         optional_fields = set(
             [
                 "amount",
-                "salesTaxAmount",
                 "maxUses",
                 "expiresOn",
                 "customer",

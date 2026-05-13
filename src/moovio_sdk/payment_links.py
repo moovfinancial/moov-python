@@ -29,9 +29,6 @@ class PaymentLinks(BaseSDK):
             components.PaymentLinkDisplayOptionsTypedDict,
         ],
         amount: Optional[Union[components.Amount, components.AmountTypedDict]] = None,
-        sales_tax_amount: Optional[
-            Union[components.Amount, components.AmountTypedDict]
-        ] = None,
         max_uses: Optional[int] = None,
         expires_on: Optional[datetime] = None,
         customer: Optional[
@@ -84,7 +81,6 @@ class PaymentLinks(BaseSDK):
 
             In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
             for `open` payment amount types.
-        :param sales_tax_amount: Optional sales tax amount.
         :param max_uses: An optional limit on the number of times this payment link can be used.
 
             **For payouts, `maxUses` is always 1.**
@@ -93,7 +89,7 @@ class PaymentLinks(BaseSDK):
         :param payment: Options for payment links used to collect payment.
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
-            When line items are provided, their total plus sales tax must equal the payment link amount.
+            When line items are provided, their total plus tax must equal the payment link amount.
         :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -116,9 +112,6 @@ class PaymentLinks(BaseSDK):
                 partner_account_id=partner_account_id,
                 merchant_payment_method_id=merchant_payment_method_id,
                 amount=utils.get_pydantic_model(amount, Optional[components.Amount]),
-                sales_tax_amount=utils.get_pydantic_model(
-                    sales_tax_amount, Optional[components.Amount]
-                ),
                 max_uses=max_uses,
                 expires_on=expires_on,
                 display=utils.get_pydantic_model(
@@ -229,9 +222,6 @@ class PaymentLinks(BaseSDK):
             components.PaymentLinkDisplayOptionsTypedDict,
         ],
         amount: Optional[Union[components.Amount, components.AmountTypedDict]] = None,
-        sales_tax_amount: Optional[
-            Union[components.Amount, components.AmountTypedDict]
-        ] = None,
         max_uses: Optional[int] = None,
         expires_on: Optional[datetime] = None,
         customer: Optional[
@@ -284,7 +274,6 @@ class PaymentLinks(BaseSDK):
 
             In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
             for `open` payment amount types.
-        :param sales_tax_amount: Optional sales tax amount.
         :param max_uses: An optional limit on the number of times this payment link can be used.
 
             **For payouts, `maxUses` is always 1.**
@@ -293,7 +282,7 @@ class PaymentLinks(BaseSDK):
         :param payment: Options for payment links used to collect payment.
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
-            When line items are provided, their total plus sales tax must equal the payment link amount.
+            When line items are provided, their total plus tax must equal the payment link amount.
         :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -316,9 +305,6 @@ class PaymentLinks(BaseSDK):
                 partner_account_id=partner_account_id,
                 merchant_payment_method_id=merchant_payment_method_id,
                 amount=utils.get_pydantic_model(amount, Optional[components.Amount]),
-                sales_tax_amount=utils.get_pydantic_model(
-                    sales_tax_amount, Optional[components.Amount]
-                ),
                 max_uses=max_uses,
                 expires_on=expires_on,
                 display=utils.get_pydantic_model(
@@ -826,9 +812,6 @@ class PaymentLinks(BaseSDK):
         amount: Optional[
             Union[components.AmountUpdate, components.AmountUpdateTypedDict]
         ] = None,
-        sales_tax_amount: Optional[
-            Union[components.AmountUpdate, components.AmountUpdateTypedDict]
-        ] = None,
         expires_on: OptionalNullable[datetime] = UNSET,
         display: Optional[
             Union[
@@ -879,14 +862,13 @@ class PaymentLinks(BaseSDK):
         :param account_id: The merchant account ID.
         :param payment_link_code:
         :param amount:
-        :param sales_tax_amount:
         :param expires_on:
         :param display: Customizable display options for a payment link.
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
-            When line items are provided, their total plus sales tax must equal the payment link amount.
+            When line items are provided, their total plus tax must equal the payment link amount.
         :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -909,9 +891,6 @@ class PaymentLinks(BaseSDK):
             update_payment_link=components.UpdatePaymentLink(
                 amount=utils.get_pydantic_model(
                     amount, Optional[components.AmountUpdate]
-                ),
-                sales_tax_amount=utils.get_pydantic_model(
-                    sales_tax_amount, Optional[components.AmountUpdate]
                 ),
                 expires_on=expires_on,
                 display=utils.get_pydantic_model(
@@ -1019,9 +998,6 @@ class PaymentLinks(BaseSDK):
         amount: Optional[
             Union[components.AmountUpdate, components.AmountUpdateTypedDict]
         ] = None,
-        sales_tax_amount: Optional[
-            Union[components.AmountUpdate, components.AmountUpdateTypedDict]
-        ] = None,
         expires_on: OptionalNullable[datetime] = UNSET,
         display: Optional[
             Union[
@@ -1072,14 +1048,13 @@ class PaymentLinks(BaseSDK):
         :param account_id: The merchant account ID.
         :param payment_link_code:
         :param amount:
-        :param sales_tax_amount:
         :param expires_on:
         :param display: Customizable display options for a payment link.
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
         :param line_items: An optional collection of line items for a payment link.
-            When line items are provided, their total plus sales tax must equal the payment link amount.
+            When line items are provided, their total plus tax must equal the payment link amount.
         :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1102,9 +1077,6 @@ class PaymentLinks(BaseSDK):
             update_payment_link=components.UpdatePaymentLink(
                 amount=utils.get_pydantic_model(
                     amount, Optional[components.AmountUpdate]
-                ),
-                sales_tax_amount=utils.get_pydantic_model(
-                    sales_tax_amount, Optional[components.AmountUpdate]
                 ),
                 expires_on=expires_on,
                 display=utils.get_pydantic_model(

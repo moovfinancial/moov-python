@@ -9,17 +9,22 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class PaymentLinkAmountDetailsTypedDict(TypedDict):
+    tax: NotRequired[AmountDecimalTypedDict]
+    r"""The amount of tax applied to the payment link."""
     surcharge: NotRequired[AmountDecimalTypedDict]
     r"""The amount of surcharge applied to the payment link."""
 
 
 class PaymentLinkAmountDetails(BaseModel):
+    tax: Optional[AmountDecimal] = None
+    r"""The amount of tax applied to the payment link."""
+
     surcharge: Optional[AmountDecimal] = None
     r"""The amount of surcharge applied to the payment link."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["surcharge"])
+        optional_fields = set(["tax", "surcharge"])
         serialized = handler(self)
         m = {}
 

@@ -42,7 +42,6 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class UpdatePaymentLinkTypedDict(TypedDict):
     amount: NotRequired[AmountUpdateTypedDict]
-    sales_tax_amount: NotRequired[AmountUpdateTypedDict]
     expires_on: NotRequired[Nullable[datetime]]
     display: NotRequired[PaymentLinkDisplayOptionsUpdateTypedDict]
     r"""Customizable display options for a payment link."""
@@ -52,17 +51,13 @@ class UpdatePaymentLinkTypedDict(TypedDict):
     payout: NotRequired[PaymentLinkPayoutDetailsUpdateTypedDict]
     line_items: NotRequired[CreatePaymentLinkLineItemsUpdateTypedDict]
     r"""An optional collection of line items for a payment link.
-    When line items are provided, their total plus sales tax must equal the payment link amount.
+    When line items are provided, their total plus tax must equal the payment link amount.
     """
     amount_details: NotRequired[UpdatePaymentLinkAmountDetailsTypedDict]
 
 
 class UpdatePaymentLink(BaseModel):
     amount: Optional[AmountUpdate] = None
-
-    sales_tax_amount: Annotated[
-        Optional[AmountUpdate], pydantic.Field(alias="salesTaxAmount")
-    ] = None
 
     expires_on: Annotated[
         OptionalNullable[datetime], pydantic.Field(alias="expiresOn")
@@ -82,7 +77,7 @@ class UpdatePaymentLink(BaseModel):
         Optional[CreatePaymentLinkLineItemsUpdate], pydantic.Field(alias="lineItems")
     ] = None
     r"""An optional collection of line items for a payment link.
-    When line items are provided, their total plus sales tax must equal the payment link amount.
+    When line items are provided, their total plus tax must equal the payment link amount.
     """
 
     amount_details: Annotated[
@@ -94,7 +89,6 @@ class UpdatePaymentLink(BaseModel):
         optional_fields = set(
             [
                 "amount",
-                "salesTaxAmount",
                 "expiresOn",
                 "display",
                 "customer",

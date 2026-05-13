@@ -66,8 +66,6 @@ class PaymentLinkTypedDict(TypedDict):
     In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
     for `open` payment amount types.
     """
-    sales_tax_amount: NotRequired[AmountTypedDict]
-    r"""Optional sales tax amount."""
     max_uses: NotRequired[int]
     r"""An optional limit on the number of times this payment link can be used.
 
@@ -82,7 +80,7 @@ class PaymentLinkTypedDict(TypedDict):
     payout: NotRequired[PaymentLinkPayoutDetailsTypedDict]
     line_items: NotRequired[PaymentLinkLineItemsTypedDict]
     r"""An optional collection of line items for a payment link.
-    When line items are provided, their total plus sales tax must equal the payment link amount.
+    When line items are provided, their total plus tax must equal the payment link amount.
     """
     disabled_on: NotRequired[datetime]
     amount_details: NotRequired[PaymentLinkAmountDetailsTypedDict]
@@ -139,11 +137,6 @@ class PaymentLink(BaseModel):
     for `open` payment amount types.
     """
 
-    sales_tax_amount: Annotated[
-        Optional[Amount], pydantic.Field(alias="salesTaxAmount")
-    ] = None
-    r"""Optional sales tax amount."""
-
     max_uses: Annotated[Optional[int], pydantic.Field(alias="maxUses")] = None
     r"""An optional limit on the number of times this payment link can be used.
 
@@ -167,7 +160,7 @@ class PaymentLink(BaseModel):
         Optional[PaymentLinkLineItems], pydantic.Field(alias="lineItems")
     ] = None
     r"""An optional collection of line items for a payment link.
-    When line items are provided, their total plus sales tax must equal the payment link amount.
+    When line items are provided, their total plus tax must equal the payment link amount.
     """
 
     disabled_on: Annotated[Optional[datetime], pydantic.Field(alias="disabledOn")] = (
@@ -183,7 +176,6 @@ class PaymentLink(BaseModel):
         optional_fields = set(
             [
                 "amount",
-                "salesTaxAmount",
                 "maxUses",
                 "lastUsedOn",
                 "expiresOn",

@@ -303,9 +303,6 @@ class Transfers(BaseSDK):
         ] = None,
         description: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
-        sales_tax_amount: Optional[
-            Union[components.Amount, components.AmountTypedDict]
-        ] = None,
         foreign_id: Optional[str] = None,
         line_items: Optional[
             Union[
@@ -342,10 +339,9 @@ class Transfers(BaseSDK):
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-        :param sales_tax_amount:
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param line_items: An optional collection of line items for a transfer.
-            When line items are provided, their total plus sales tax must equal the transfer amount.
+            When line items are provided, their total plus tax must equal the transfer amount.
         :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -379,9 +375,6 @@ class Transfers(BaseSDK):
                 ),
                 description=description,
                 metadata=metadata,
-                sales_tax_amount=utils.get_pydantic_model(
-                    sales_tax_amount, Optional[components.Amount]
-                ),
                 foreign_id=foreign_id,
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreateTransferLineItems]
@@ -496,9 +489,6 @@ class Transfers(BaseSDK):
         ] = None,
         description: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
-        sales_tax_amount: Optional[
-            Union[components.Amount, components.AmountTypedDict]
-        ] = None,
         foreign_id: Optional[str] = None,
         line_items: Optional[
             Union[
@@ -535,10 +525,9 @@ class Transfers(BaseSDK):
         :param facilitator_fee: Total or markup fee.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
-        :param sales_tax_amount:
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param line_items: An optional collection of line items for a transfer.
-            When line items are provided, their total plus sales tax must equal the transfer amount.
+            When line items are provided, their total plus tax must equal the transfer amount.
         :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -572,9 +561,6 @@ class Transfers(BaseSDK):
                 ),
                 description=description,
                 metadata=metadata,
-                sales_tax_amount=utils.get_pydantic_model(
-                    sales_tax_amount, Optional[components.Amount]
-                ),
                 foreign_id=foreign_id,
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreateTransferLineItems]

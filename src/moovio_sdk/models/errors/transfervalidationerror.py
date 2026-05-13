@@ -31,9 +31,6 @@ class TransferValidationErrorData(BaseModel):
         Optional[str], pydantic.Field(alias="FacilitatorFee.MarkupDecimal")
     ] = None
     metadata: Optional[str] = None
-    sales_tax_amount: Annotated[
-        Optional[str], pydantic.Field(alias="salesTaxAmount")
-    ] = None
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     line_items: Annotated[
         Optional[
