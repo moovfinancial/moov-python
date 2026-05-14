@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: e2a656170278412806ca04a42e7d6e96
+  docChecksum: 0729dfdd7f0dc69242706ff0badb141a
   docVersion: dev
-  speakeasyVersion: 1.762.0
-  generationVersion: 2.882.0
-  releaseVersion: 0.0.0-dev.19
-  configChecksum: 11c784c30e152938310ac63ed0007010
+  speakeasyVersion: 1.763.0
+  generationVersion: 2.884.0
+  releaseVersion: 0.0.0-dev.20
+  configChecksum: 62741216cf32c436745200e41fe6ec64
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: 367e624b-057d-4a24-8e5e-123a69f76b88
-  pristine_commit_hash: 5b73b787688858d839c5c6ca6dcea751b13f08f0
-  pristine_tree_hash: 0ee1196111363e2b0422e5eb2ea08ae66af2a64e
+  generation_id: 4ef9d528-de39-40a0-9f6b-47bc27289040
+  pristine_commit_hash: 333af1da06491d9493a6c8fb0088a55a39a09828
+  pristine_tree_hash: b1aab734c5a6b305f4d6f808b6120b99cb6865e5
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2725,8 +2725,8 @@ trackedFiles:
     pristine_git_object: 7e6adc4ec675c7ab1fea6db829ec97b8e084ff46
   docs/models/components/webhookdatabankaccountdeleted.md:
     id: 378f3904e661
-    last_write_checksum: sha1:89624b66b2479e8bc6980d03e363b2c33d1ab1ac
-    pristine_git_object: bde234e1b60e1461093d811365a4e41304886c22
+    last_write_checksum: sha1:6eae04e770c6cc6e640d6a508fcb764808207018
+    pristine_git_object: b49a9f60856561f5eedbf3a6ca1a21444438f0f9
   docs/models/components/webhookdatabankaccountupdated.md:
     id: e1488aacc065
     last_write_checksum: sha1:84f633e98b768fa96e96572cbd45d9d18610fca1
@@ -4781,8 +4781,8 @@ trackedFiles:
     pristine_git_object: 68b6361e4a22b7fd00d6f5a72e25278ebf35ba6d
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:fc8f5fd406ddb5fa578557bca7df5e970af6204c
-    pristine_git_object: f4f7c197ce7fd87c4c2c0437e6c2bd6634bf1373
+    last_write_checksum: sha1:142626b49b27e8043bb61ba585829ec9009fd59d
+    pristine_git_object: 3623e6292168e916378bd12c789abae8d6e60837
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4809,8 +4809,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:5e443090e0af47932d37a72ee29281bba463bfc4
-    pristine_git_object: 796de274365f2a6b3274ae49ec302ff98b467c20
+    last_write_checksum: sha1:e24724e03909b95ae8e4a6979b696feae92274ed
+    pristine_git_object: 4fecf4ab561c30a1f39be30dadbecd24c8d2c69b
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:92df233993bc233908220d240fb575306638f0d2
@@ -7241,8 +7241,8 @@ trackedFiles:
     pristine_git_object: c0ebfe969901a4ab574bbec5bce386f1ec4b15f4
   src/moovio_sdk/models/components/webhookdata.py:
     id: 06c91c59590d
-    last_write_checksum: sha1:6415c843d9cbfdf519699b8a96dd65e66709b6c6
-    pristine_git_object: f86a6c2872125f1a1829da7bae6a5bd7fe1a65c9
+    last_write_checksum: sha1:13d9a082b7db0ca13b0a5596af059aafd545f28f
+    pristine_git_object: 0404d40a991686246655488e2690dc2ca4ce7eae
   src/moovio_sdk/models/components/webhookdataaccountcreated.py:
     id: f7263a1ef7d0
     last_write_checksum: sha1:50635e60f53b2e4faead23a4b0a4bea9428b0f11
@@ -7265,8 +7265,8 @@ trackedFiles:
     pristine_git_object: 2710a360df1abe37ecc6f2d429eb41f793844114
   src/moovio_sdk/models/components/webhookdatabankaccountdeleted.py:
     id: 74fd709265c6
-    last_write_checksum: sha1:8badb44ddc188ed749c7695039aeca5236bda1c3
-    pristine_git_object: 29638924fa7e3790bb779e6536902dda2de62427
+    last_write_checksum: sha1:b76f53c9e566423f5da7ab11cadfb010a61faf4c
+    pristine_git_object: f630436f020a97784b80b1365e5b9d4788c1dd85
   src/moovio_sdk/models/components/webhookdatabankaccountupdated.py:
     id: 268c2d4e1b0a
     last_write_checksum: sha1:ac82b1ddaff5f893ed12631f88860dbe8254f02f
@@ -11482,7 +11482,6 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `moov.payment_links.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `moov.payment_links.list()`:  `response.[]` **Changed** (Breaking ⚠️)\n* `moov.payment_links.get()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.payment_links.update()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `moov.transfers.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `moov.transfers.list()`:  `response.[]` **Changed** (Breaking ⚠️)\n* `moov.transfers.batch_get_transfers()`:  `response.Map<Transfer>` **Changed** (Breaking ⚠️)\n* `moov.transfers.get()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.transfers.update()`:  `response` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
