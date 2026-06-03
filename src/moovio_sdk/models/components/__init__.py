@@ -1288,6 +1288,7 @@ if TYPE_CHECKING:
         TransferAmountDetailsTypedDict,
     )
     from .transferconfig import TransferConfig, TransferConfigTypedDict
+    from .transfercontrols import TransferControls, TransferControlsTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
     from .transferfailurereason import TransferFailureReason
@@ -2603,6 +2604,8 @@ __all__ = [
     "TransferAmountDetailsTypedDict",
     "TransferConfig",
     "TransferConfigTypedDict",
+    "TransferControls",
+    "TransferControlsTypedDict",
     "TransferDestination",
     "TransferDestinationTypedDict",
     "TransferEntryMode",
@@ -3842,6 +3845,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferAmountDetailsTypedDict": ".transferamountdetails",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
+    "TransferControls": ".transfercontrols",
+    "TransferControlsTypedDict": ".transfercontrols",
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",

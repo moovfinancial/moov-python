@@ -1344,8 +1344,8 @@ class Images(BaseSDK):
         size: Optional[str] = "400x400",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetPublicAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetPublicImageResponse:
         r"""Get an image by its public ID.
@@ -1455,8 +1455,8 @@ class Images(BaseSDK):
         size: Optional[str] = "400x400",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetPublicAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetPublicImageResponse:
         r"""Get an image by its public ID.

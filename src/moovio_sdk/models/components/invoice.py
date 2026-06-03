@@ -31,7 +31,7 @@ class InvoiceTypedDict(TypedDict):
     subtotal_amount: AmountDecimalTypedDict
     tax_amount: AmountDecimalTypedDict
     total_amount: AmountDecimalTypedDict
-    r"""Total amount of the invoice, sum of subTotalAmount and taxAmount"""
+    r"""Total amount of the invoice, including subtotal, tax, and surcharge amounts."""
     pending_amount: AmountDecimalTypedDict
     r"""Total amount of pending transfers paid towards the invoice"""
     paid_amount: AmountDecimalTypedDict
@@ -81,7 +81,7 @@ class Invoice(BaseModel):
     tax_amount: Annotated[AmountDecimal, pydantic.Field(alias="taxAmount")]
 
     total_amount: Annotated[AmountDecimal, pydantic.Field(alias="totalAmount")]
-    r"""Total amount of the invoice, sum of subTotalAmount and taxAmount"""
+    r"""Total amount of the invoice, including subtotal, tax, and surcharge amounts."""
 
     pending_amount: Annotated[AmountDecimal, pydantic.Field(alias="pendingAmount")]
     r"""Total amount of pending transfers paid towards the invoice"""
