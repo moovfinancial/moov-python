@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+from .amountdetails import AmountDetails, AmountDetailsTypedDict
 from .invoicelineitems import InvoiceLineItems, InvoiceLineItemsTypedDict
 from .invoicepayment import InvoicePayment, InvoicePaymentTypedDict
 from .invoicestatus import InvoiceStatus
@@ -29,9 +30,8 @@ class InvoiceTypedDict(TypedDict):
     line_items: InvoiceLineItemsTypedDict
     r"""A collection of line items for an invoice."""
     subtotal_amount: AmountDecimalTypedDict
-    tax_amount: AmountDecimalTypedDict
     total_amount: AmountDecimalTypedDict
-    r"""Total amount of the invoice, sum of subTotalAmount and taxAmount"""
+    r"""Total amount of the invoice, including subtotal, tax, and surcharge amounts."""
     pending_amount: AmountDecimalTypedDict
     r"""Total amount of pending transfers paid towards the invoice"""
     paid_amount: AmountDecimalTypedDict
@@ -42,6 +42,7 @@ class InvoiceTypedDict(TypedDict):
     r"""Total amount of disputes initiated against transfers paid towards the invoice"""
     created_on: datetime
     description: NotRequired[str]
+    amount_details: NotRequired[AmountDetailsTypedDict]
     payment_link_code: NotRequired[str]
     invoice_payments: NotRequired[List[InvoicePaymentTypedDict]]
     r"""Payment made towards an invoice, will be either a transfer or an external payment."""
@@ -78,10 +79,8 @@ class Invoice(BaseModel):
 
     subtotal_amount: Annotated[AmountDecimal, pydantic.Field(alias="subtotalAmount")]
 
-    tax_amount: Annotated[AmountDecimal, pydantic.Field(alias="taxAmount")]
-
     total_amount: Annotated[AmountDecimal, pydantic.Field(alias="totalAmount")]
-    r"""Total amount of the invoice, sum of subTotalAmount and taxAmount"""
+    r"""Total amount of the invoice, including subtotal, tax, and surcharge amounts."""
 
     pending_amount: Annotated[AmountDecimal, pydantic.Field(alias="pendingAmount")]
     r"""Total amount of pending transfers paid towards the invoice"""
@@ -98,6 +97,10 @@ class Invoice(BaseModel):
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
     description: Optional[str] = None
+
+    amount_details: Annotated[
+        Optional[AmountDetails], pydantic.Field(alias="amountDetails")
+    ] = None
 
     payment_link_code: Annotated[
         Optional[str], pydantic.Field(alias="paymentLinkCode")
@@ -131,6 +134,7 @@ class Invoice(BaseModel):
         optional_fields = set(
             [
                 "description",
+                "amountDetails",
                 "paymentLinkCode",
                 "invoicePayments",
                 "invoiceDate",

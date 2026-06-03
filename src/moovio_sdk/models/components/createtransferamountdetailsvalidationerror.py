@@ -10,6 +10,7 @@ from typing_extensions import NotRequired, TypedDict
 class CreateTransferAmountDetailsValidationErrorTypedDict(TypedDict):
     tip: NotRequired[str]
     tax: NotRequired[str]
+    surcharge: NotRequired[str]
 
 
 class CreateTransferAmountDetailsValidationError(BaseModel):
@@ -17,9 +18,11 @@ class CreateTransferAmountDetailsValidationError(BaseModel):
 
     tax: Optional[str] = None
 
+    surcharge: Optional[str] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["tip", "tax"])
+        optional_fields = set(["tip", "tax", "surcharge"])
         serialized = handler(self)
         m = {}
 

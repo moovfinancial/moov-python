@@ -6,6 +6,7 @@ from datetime import datetime
 import httpx
 from moovio_sdk.models.components import (
     amount as components_amount,
+    refundamountdetails as components_refundamountdetails,
     refundcarddetails as components_refundcarddetails,
     refundstatus as components_refundstatus,
 )
@@ -23,6 +24,10 @@ class CardAcquiringRefundData(BaseModel):
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
     status: components_refundstatus.RefundStatus
     amount: components_amount.Amount
+    amount_details: Annotated[
+        Optional[components_refundamountdetails.RefundAmountDetails],
+        pydantic.Field(alias="amountDetails"),
+    ] = None
     card_details: Annotated[
         Optional[components_refundcarddetails.RefundCardDetails],
         pydantic.Field(alias="cardDetails"),

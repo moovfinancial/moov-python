@@ -3,13 +3,24 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
+from moovio_sdk.models.components import (
+    reversalamountdetailsvalidationerror as components_reversalamountdetailsvalidationerror,
+)
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
+import pydantic
 from typing import Optional
+from typing_extensions import Annotated
 
 
 class ReversalValidationErrorData(BaseModel):
     amount: Optional[str] = None
+    amount_details: Annotated[
+        Optional[
+            components_reversalamountdetailsvalidationerror.ReversalAmountDetailsValidationError
+        ],
+        pydantic.Field(alias="amountDetails"),
+    ] = None
 
 
 @dataclass(unsafe_hash=True)

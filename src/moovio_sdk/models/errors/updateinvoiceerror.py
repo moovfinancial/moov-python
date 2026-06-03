@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.components import (
-    amountdecimalvalidationerror as components_amountdecimalvalidationerror,
+    amountdetailsvalidationerror as components_amountdetailsvalidationerror,
     invoicelineitemsvalidationerror as components_invoicelineitemsvalidationerror,
 )
 from moovio_sdk.models.errors import MoovError
@@ -25,9 +25,9 @@ class UpdateInvoiceErrorData(BaseModel):
     invoice_date: Annotated[Optional[str], pydantic.Field(alias="invoiceDate")] = None
     due_date: Annotated[Optional[str], pydantic.Field(alias="dueDate")] = None
     status: Optional[str] = None
-    tax_amount: Annotated[
-        Optional[components_amountdecimalvalidationerror.AmountDecimalValidationError],
-        pydantic.Field(alias="taxAmount"),
+    amount_details: Annotated[
+        Optional[components_amountdetailsvalidationerror.AmountDetailsValidationError],
+        pydantic.Field(alias="amountDetails"),
     ] = None
 
 

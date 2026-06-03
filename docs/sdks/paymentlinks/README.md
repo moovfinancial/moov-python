@@ -81,12 +81,12 @@ with Moov(
         },
     }, line_items={
         "items": [],
-    }, amount_details={
-        "tax": {
-            "currency": "USD",
-            "value_decimal": "8.25",
-        },
-    })
+    }, amount_details=components.CreatePaymentLinkAmountDetails(
+        tax=components.AmountDecimal(
+            currency="USD",
+            value_decimal="8.25",
+        ),
+    ))
 
     # Handle response
     print(res)
@@ -300,12 +300,12 @@ with Moov(
                 ],
             },
         ],
-    }, amount_details={
-        "tax": {
-            "currency": "USD",
-            "value_decimal": "9.25",
-        },
-    })
+    }, amount_details=components.UpdatePaymentLinkAmountDetails(
+        tax=components.AmountDecimalUpdate(
+            currency="USD",
+            value_decimal="9.25",
+        ),
+    ))
 
     # Handle response
     print(res)

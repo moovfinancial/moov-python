@@ -2008,6 +2008,11 @@ class Transfers(BaseSDK):
         transfer_id: str,
         x_wait_for: Optional[components.TransferWaitFor] = None,
         amount: Optional[int] = None,
+        amount_details: Optional[
+            Union[
+                components.RefundAmountDetails, components.RefundAmountDetailsTypedDict
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2027,6 +2032,7 @@ class Transfers(BaseSDK):
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+        :param amount_details: Breakdown of the refunded amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2049,6 +2055,9 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             create_refund=components.CreateRefund(
                 amount=amount,
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.RefundAmountDetails]
+                ),
             ),
         )
 
@@ -2150,6 +2159,11 @@ class Transfers(BaseSDK):
         transfer_id: str,
         x_wait_for: Optional[components.TransferWaitFor] = None,
         amount: Optional[int] = None,
+        amount_details: Optional[
+            Union[
+                components.RefundAmountDetails, components.RefundAmountDetailsTypedDict
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2169,6 +2183,7 @@ class Transfers(BaseSDK):
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
         :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+        :param amount_details: Breakdown of the refunded amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2191,6 +2206,9 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             create_refund=components.CreateRefund(
                 amount=amount,
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.RefundAmountDetails]
+                ),
             ),
         )
 
@@ -2693,6 +2711,12 @@ class Transfers(BaseSDK):
         account_id: str,
         transfer_id: str,
         amount: int,
+        amount_details: Optional[
+            Union[
+                components.ReversalAmountDetails,
+                components.ReversalAmountDetailsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2709,6 +2733,7 @@ class Transfers(BaseSDK):
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
         :param amount: Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
+        :param amount_details: Breakdown of the reversed amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2730,6 +2755,9 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             create_reversal=components.CreateReversal(
                 amount=amount,
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.ReversalAmountDetails]
+                ),
             ),
         )
 
@@ -2816,6 +2844,12 @@ class Transfers(BaseSDK):
         account_id: str,
         transfer_id: str,
         amount: int,
+        amount_details: Optional[
+            Union[
+                components.ReversalAmountDetails,
+                components.ReversalAmountDetailsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2832,6 +2866,7 @@ class Transfers(BaseSDK):
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
         :param amount: Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
+        :param amount_details: Breakdown of the reversed amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2853,6 +2888,9 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             create_reversal=components.CreateReversal(
                 amount=amount,
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.ReversalAmountDetails]
+                ),
             ),
         )
 

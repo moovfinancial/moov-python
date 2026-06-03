@@ -1,31 +1,31 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: d5bbfa10785186a2e99e9bdb81c37de0
+  docChecksum: b2b3e2a1a140e1900cf8cf53d547f8bd
   docVersion: v2026.07.00
-  speakeasyVersion: 1.763.0
-  generationVersion: 2.884.0
-  releaseVersion: 26.7.0-dev.1
-  configChecksum: 1696e3ab37c19c21007537556952b5ec
+  speakeasyVersion: 1.770.0
+  generationVersion: 2.893.0
+  releaseVersion: 26.7.0-dev.2
+  configChecksum: 95b28f03e2a4f7a54aa2ea74eefe1b1b
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: cb893dd7-e450-4892-bc8a-e13cfbb8d7bd
-  pristine_commit_hash: e4c6e6771bb7c70e9efdba0f238d717c8b2ba603
-  pristine_tree_hash: f55056f55d8a5c8d03ba9946fa633b1b67b98583
+  generation_id: 57da3850-d573-42d7-8626-0013b387109f
+  pristine_commit_hash: f5b282030363a8888cc34f88125f552c257e7789
+  pristine_tree_hash: f50a034a30d17287a7d8cd2f5c547da5892050b9
 features:
   python:
     acceptHeaders: 3.0.0
-    additionalDependencies: 1.0.0
+    additionalDependencies: 1.1.0
     constsAndDefaults: 1.0.7
-    core: 6.0.21
+    core: 6.0.24
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     downloadStreams: 1.0.1
     enumUnions: 0.1.1
-    envVarSecurityUsage: 0.3.2
+    envVarSecurityUsage: 0.3.3
     flatRequests: 1.0.1
     flattening: 3.1.1
     globalSecurity: 3.0.7
@@ -33,7 +33,7 @@ features:
     globalServerURLs: 3.2.1
     ignores: 3.0.1
     includes: 3.0.0
-    methodArguments: 1.0.2
+    methodArguments: 1.1.0
     multipartFileContentType: 1.0.0
     nameOverrides: 3.0.3
     nullables: 1.0.2
@@ -41,7 +41,7 @@ features:
     retries: 3.0.5
     sdkHooks: 1.2.1
     unions: 3.1.5
-    uploadStreams: 1.0.0
+    uploadStreams: 1.0.2
 trackedFiles:
   .gitattributes:
     id: 24139dae6567
@@ -255,6 +255,18 @@ trackedFiles:
     id: f0f1bc66f2b6
     last_write_checksum: sha1:57a541cccc5d35b7b999ff94253dce8a5f8d21c2
     pristine_git_object: 604a18db52fa9ecce87f2db74bc340cac52752ff
+  docs/models/components/amountdetails.md:
+    id: ea9a7f5fa585
+    last_write_checksum: sha1:9b60baf93917d7e8aae19bdbc047c58b1990b1f9
+    pristine_git_object: 6dafc81388983bdca22071b121f3a85fa63d6fa9
+  docs/models/components/amountdetailsupdate.md:
+    id: f54d42906cfa
+    last_write_checksum: sha1:90f710280b0dbf81afe9e77a0296b5eb50bc50e3
+    pristine_git_object: ddf5d62fba2900c4c71434e4b939f3450a369215
+  docs/models/components/amountdetailsvalidationerror.md:
+    id: 61659e5c943c
+    last_write_checksum: sha1:fa63d336187cc8675981c17b20e546e8dcf29c29
+    pristine_git_object: 415e8ce168ee39bf1bca207e14f3bf86320f6b92
   docs/models/components/amounttype.md:
     id: c081f7a1701c
     last_write_checksum: sha1:63efa8fe230bcebc4cd6689f3ecc1ec5e1ddce6f
@@ -313,8 +325,8 @@ trackedFiles:
     pristine_git_object: f70bc879971ee0afddea1445e24234422d3d7d61
   docs/models/components/asynccreatedrefund.md:
     id: bf51ecca0ee8
-    last_write_checksum: sha1:7e7b5d6c14f48f22a3811476396948469e16f25c
-    pristine_git_object: ddee403002dd042448d1130a0ba65a548790264d
+    last_write_checksum: sha1:d6a1008cbca1dcfcde9592cbee18a791bd03ee4a
+    pristine_git_object: c923ce30c05adf6e51be4655d85b732e2bc144da
   docs/models/components/asynctransfer.md:
     id: b5be08583a2e
     last_write_checksum: sha1:ea2179586f8b7a4466e41b3ad0a49093edb3456f
@@ -533,8 +545,8 @@ trackedFiles:
     pristine_git_object: 538ef73afbc0b409f8099fd48d5d07d2b648244e
   docs/models/components/cardacquiringrefund.md:
     id: 00374814ee20
-    last_write_checksum: sha1:4d556e879091d2f2446df13edeaa5bf76df1ea41
-    pristine_git_object: a890c1cc9714b049a722b3b4af6c021c953afe4c
+    last_write_checksum: sha1:5ac18b577dbd7f983cc15ae110bda1923d510a8d
+    pristine_git_object: c4c760a423769f82c2e94da7f052e1b9a5e60096
   docs/models/components/cardaddress.md:
     id: 5c36514bc749
     last_write_checksum: sha1:1925765f3876ebf46a4469c5be517db01da3da4c
@@ -801,8 +813,8 @@ trackedFiles:
     pristine_git_object: 738ebc0a433d74c66b1c7e2bdb484b451cf979fd
   docs/models/components/createinvoice.md:
     id: ba0266667477
-    last_write_checksum: sha1:5e3558c13130b18b5872b051eada13e8a3c9e47d
-    pristine_git_object: 1e1453751276657eba0e17019c2bcd480d15bf3d
+    last_write_checksum: sha1:d4f1b45035fa112497df4158d7dc84accfd22b39
+    pristine_git_object: de949d77d28fafee4310ad5cfd3f89342051e752
   docs/models/components/createinvoicelineitem.md:
     id: 11fff17cfe36
     last_write_checksum: sha1:3a201440166b8dbb0c13e4d970705026a44a5d23
@@ -841,12 +853,12 @@ trackedFiles:
     pristine_git_object: 7da9131850b57ed82fe75e4511fff6eab2c917e4
   docs/models/components/createpaymentlinkamountdetails.md:
     id: b14061e3d883
-    last_write_checksum: sha1:a6b0f02a6ad00edec96eb4d222cb19b8136f9d36
-    pristine_git_object: 6f8e6c1fecb529a8d2bbf7685548740a8d4a40a9
+    last_write_checksum: sha1:252822a9f089d76746c14f609d8207aabe84f448
+    pristine_git_object: 255ef6c8fae2f9498da3917e1a991c00236a766d
   docs/models/components/createpaymentlinkamountdetailsvalidationerror.md:
     id: 266ca45d8195
-    last_write_checksum: sha1:6c93a7b83050551336c47cf6082755ecec9df37d
-    pristine_git_object: 480b770d2811176eff14f0a7b4b1ff3bb38cb83f
+    last_write_checksum: sha1:e77ae295259913c6adc7eca62df6701cbc721e30
+    pristine_git_object: 98441cf5aea25769944ea6eea0e5f3448751a4b8
   docs/models/components/createpaymentlinklineitem.md:
     id: 7e2f59afb4df
     last_write_checksum: sha1:593cf79e47af067182738661eb8db1b47802bdfb
@@ -893,8 +905,8 @@ trackedFiles:
     pristine_git_object: 04f48365b56ebc01defbda2799572128168b825b
   docs/models/components/createrefund.md:
     id: 40a62c49e740
-    last_write_checksum: sha1:9a8d4cf20aac64808b465a8d4b22b93437a98830
-    pristine_git_object: cfdce232d49fcff54676337bdaaf39ca2fd744f9
+    last_write_checksum: sha1:93470ddd861f969c1f5d1dac479b10161f9a8294
+    pristine_git_object: 36b5e4155a2bbc34dffd1ba2180bc26955a6c1c5
   docs/models/components/createrefundresponse.md:
     id: e5c19f168a98
     last_write_checksum: sha1:121c15da8b8eb69bdf35284fe1087a8170e0dea0
@@ -909,8 +921,8 @@ trackedFiles:
     pristine_git_object: cd3fe33c19ebd15e145a992641557cc70901f6a0
   docs/models/components/createreversal.md:
     id: 5164172de6cd
-    last_write_checksum: sha1:26ddd37f2e57aa985603c17b0cd7f5c72e03498c
-    pristine_git_object: e11a20110afb81ada6067249cf8a92635d6d331b
+    last_write_checksum: sha1:c593ae52b0d3eb80eab16174fd13a1b98611d47b
+    pristine_git_object: 84c5cbba02940d5794f38ac5f3c3c444c9ff03cc
   docs/models/components/createruntransfer.md:
     id: 3ef001079ee5
     last_write_checksum: sha1:9d493b2a82cbd7799430efd76632c7bebb9cd376
@@ -957,12 +969,12 @@ trackedFiles:
     pristine_git_object: 3fe52af50a0484b5a131708076c72dd6d9223eb4
   docs/models/components/createtransferamountdetails.md:
     id: 3d3466d21819
-    last_write_checksum: sha1:873bd014150b4b66edcc80028e2f5dafdd1cb172
-    pristine_git_object: 14e949420d054a0104b1b1c07628ebbe49fe50b0
+    last_write_checksum: sha1:db7fd21e3cad1ebe4f2c6cf6554a05546713783a
+    pristine_git_object: e7613ac630ac3fac6e3aea32690ebf9cb36adb67
   docs/models/components/createtransferamountdetailsvalidationerror.md:
     id: cdb54047434e
-    last_write_checksum: sha1:d1ae2aa026006cefba718d3fd5df83c10300235e
-    pristine_git_object: 03ee13a97057d32ad9b989287b021c09b31d8171
+    last_write_checksum: sha1:3d61c69acc888ab4ee6c25c777f33a0dbc8d4fd1
+    pristine_git_object: 4e9ddf89b84a5a518320419abff4dbacd519e30b
   docs/models/components/createtransferconfig.md:
     id: 4e2fb0a8fd1a
     last_write_checksum: sha1:e31ec59ed5b74fda74667507f9ff78ed5e36aab0
@@ -1413,8 +1425,8 @@ trackedFiles:
     pristine_git_object: 59b235054d37c3a89fc0b06b1dd45e29d61d410b
   docs/models/components/invoice.md:
     id: dfe36624d47f
-    last_write_checksum: sha1:5cbae9513482695c38bb60df87e63bae5208f7fa
-    pristine_git_object: a0cdc50bebd71cf540ae75e9e07a20739aefb8af
+    last_write_checksum: sha1:72377c473f4cb29eab3c31b6085e861d85ffa21e
+    pristine_git_object: bfd5516a773268d34d5a20284f6f2bc8d8aa5e22
   docs/models/components/invoiceexternalpayment.md:
     id: 813d9c5f0cf4
     last_write_checksum: sha1:21e6b8a4c71162ba393a6f401217ba6769e9b9ce
@@ -1765,8 +1777,8 @@ trackedFiles:
     pristine_git_object: c606ae696c8498ee9c001f137146a8bb2ae9e077
   docs/models/components/paymentlinkamountdetails.md:
     id: ab076ddca1a6
-    last_write_checksum: sha1:6fa0683b2145adc510ad0bc6fddae54af8a4ea87
-    pristine_git_object: b27c5612d510370d6aa55c47da7e1676f5b40a41
+    last_write_checksum: sha1:cc43d3961de994e6da660a79cfdca5a40ec58e1a
+    pristine_git_object: c33742dd8796fc5333a4b091616dabe5509c141b
   docs/models/components/paymentlinkcustomeroptions.md:
     id: bdfaf37648a7
     last_write_checksum: sha1:b9d9796edafbc3f7bb810dbb9b7a10538c6b3739
@@ -2059,6 +2071,14 @@ trackedFiles:
     id: 2ed2fff22e9e
     last_write_checksum: sha1:9b4b42a5443ac29c52a4199f952b6f84e4068655
     pristine_git_object: e23ccdc7c2fcef46842efd5e81264c0e3d5653f6
+  docs/models/components/refundamountdetails.md:
+    id: 84d57c232488
+    last_write_checksum: sha1:88af6e211119cc59c543931d2ad6428d5bdd02f6
+    pristine_git_object: 2de00660f171537a5ed9d29283d9bb407f564ea9
+  docs/models/components/refundamountdetailsvalidationerror.md:
+    id: 57ed9d1c2379
+    last_write_checksum: sha1:becb010d481cb939be19eaa8ae3af2ba90b73762
+    pristine_git_object: b5f18c2ba0a303c7107e642ec88c02781d5c6718
   docs/models/components/refundcarddetails.md:
     id: ec25f53ab597
     last_write_checksum: sha1:a4622e58e6eaedef7b3a0347d9f7bb95ffc28ce7
@@ -2135,6 +2155,14 @@ trackedFiles:
     id: 1012398f702f
     last_write_checksum: sha1:c1f11823ec391faae870f7fc78ea763f5038b46b
     pristine_git_object: dba66538198c5c723d4226dab2fa2b4ac8fef3b0
+  docs/models/components/reversalamountdetails.md:
+    id: 0fce81c38614
+    last_write_checksum: sha1:78daf749822adcccbc6f9ade6418c3d6cc190b1f
+    pristine_git_object: 25b55b24024ebef909aed04ac0bdd99feeaafeef
+  docs/models/components/reversalamountdetailsvalidationerror.md:
+    id: 59cd3ee76285
+    last_write_checksum: sha1:a632739e7a84129f9bc0a99a5d360b03877f1270
+    pristine_git_object: cddb63c21985b7841f4a829e54305456c24cb76e
   docs/models/components/reversedwithcancellation.md:
     id: 0e8c69a54966
     last_write_checksum: sha1:20149c7f8bad54ea6bd387ef9100064afafbe843
@@ -2417,12 +2445,16 @@ trackedFiles:
     pristine_git_object: 65fd806adbef7e0b2f8b89e53378410e9b4be195
   docs/models/components/transferamountdetails.md:
     id: 2dc29e72828f
-    last_write_checksum: sha1:86fccf74197abb7e12c062747ee923a45243ed0a
-    pristine_git_object: 97f3cc15daf02d66f88a7a1805b4da03f1a9e9e7
+    last_write_checksum: sha1:45e88c4b3764389a284c5c3a4b8db44844e9c631
+    pristine_git_object: 6798549f7f34b8dee3671b06c2fe8ba5bc71a8ef
   docs/models/components/transferconfig.md:
     id: 4fcd0d6d38b7
-    last_write_checksum: sha1:7e9634d6d5c1650d951e5ac4835f9043f1f34ff1
-    pristine_git_object: 5c9077b851352afc7a363e4496652e0f2b90aa54
+    last_write_checksum: sha1:67c16dd6692d8fb6f81b389f7cef37b0ef2cb63f
+    pristine_git_object: feb93a7472cba30621be7022103c878ad5bc6cc6
+  docs/models/components/transfercontrols.md:
+    id: e5af89049fbd
+    last_write_checksum: sha1:703afc0eb13b2572506dbeba249dc72ad7c30211
+    pristine_git_object: abc9ef88e50a60b809570f41a29486d0df138c59
   docs/models/components/transferdestination.md:
     id: f96e60ad1910
     last_write_checksum: sha1:c62adbd6e0c2b9a18577aed0e98c0d6cfdbff7bd
@@ -2529,8 +2561,8 @@ trackedFiles:
     pristine_git_object: 40703a0bbfc01fc5f613ed594e061df14a6f2f43
   docs/models/components/updateinvoice.md:
     id: 4057275c6de5
-    last_write_checksum: sha1:396f6af7c4736e84fc2d70fdf65e3d22b8f9d78c
-    pristine_git_object: d5a611a707a385dd8ff1e27498e2d5eb6e0135a8
+    last_write_checksum: sha1:2f3d8994b49bbe477e71d40bcfc8ab550fa676bb
+    pristine_git_object: dfe603f53117ae4b7ad22918245a54d9d9c052ac
   docs/models/components/updateissuedcard.md:
     id: 24534f50fa1f
     last_write_checksum: sha1:bc0861a88e55fc05c566d74147006cca26a718f5
@@ -2545,12 +2577,12 @@ trackedFiles:
     pristine_git_object: 4586ebfb2190c0196e21d3afcf51745139a8977b
   docs/models/components/updatepaymentlinkamountdetails.md:
     id: 9f6ca1dc922f
-    last_write_checksum: sha1:ab463aabc805498e07805ccdffdf141a20a3cb71
-    pristine_git_object: 5f7f337d91f7b907796fb2ca083576d31639ea39
+    last_write_checksum: sha1:f5294ee6641bcf6adf40eab68d0805cc3462fada
+    pristine_git_object: 09aaf9be12114a17c26be1c6a9100318dd03eb2d
   docs/models/components/updatepaymentlinkamountdetailsvalidationerror.md:
     id: e1090437dba5
-    last_write_checksum: sha1:e008a3e8ede0e4d7e7e14b7083d6e991846fa527
-    pristine_git_object: 65c0c001f5d762865b1f550bb0b1fb2c25fad80d
+    last_write_checksum: sha1:0dbe6afa3d242e5d08f912bc0b5e98785910e313
+    pristine_git_object: 61f0e9eaa186dfb5f9b08f14d5a2d42c66c543af
   docs/models/components/updaterepresentative.md:
     id: 8919592e3c34
     last_write_checksum: sha1:cda02e5d0b2732219291a8ce2acd90b3329c6dab
@@ -2885,8 +2917,8 @@ trackedFiles:
     pristine_git_object: e29947fa22a991be6f0c86d3ce73ead2cdc403f6
   docs/models/errors/cardacquiringrefund.md:
     id: a163715e9735
-    last_write_checksum: sha1:4d556e879091d2f2446df13edeaa5bf76df1ea41
-    pristine_git_object: a890c1cc9714b049a722b3b4af6c021c953afe4c
+    last_write_checksum: sha1:5ac18b577dbd7f983cc15ae110bda1923d510a8d
+    pristine_git_object: c4c760a423769f82c2e94da7f052e1b9a5e60096
   docs/models/errors/cardmetadatarequesterror.md:
     id: bbef5dca6f89
     last_write_checksum: sha1:bd8ae329872af8b1b971aa87c702e4fb0366c7a7
@@ -2901,8 +2933,8 @@ trackedFiles:
     pristine_git_object: fadc9df9831f5901a1e354bfad2d9477235b04f1
   docs/models/errors/createinvoiceerror.md:
     id: 9e5482f2cee2
-    last_write_checksum: sha1:07882ed5e40253dcc889a58003cc5050cfb654b2
-    pristine_git_object: c872a9884e8147b426f9fe215f0f2840a255df3b
+    last_write_checksum: sha1:9db5191d7ef9e86a4d8fad94b2bcfaae99f87ff7
+    pristine_git_object: 749fcef5b3c16ea713cfe39990c53cc8432a6245
   docs/models/errors/createinvoicepaymenterror.md:
     id: 0f2929430963
     last_write_checksum: sha1:892a040c916ed91305a5e0d0cf0be854c00712d1
@@ -3025,8 +3057,8 @@ trackedFiles:
     pristine_git_object: 418abb183383bdf4b0fc30eabba955a41f9e4c76
   docs/models/errors/refundvalidationerror.md:
     id: f3b1960ab14e
-    last_write_checksum: sha1:f571770765ef3716ae857ebe03e7b814da0c64b0
-    pristine_git_object: 8cadf63888e588b7fdb54447969e979994d36d59
+    last_write_checksum: sha1:fd5cc282a68e382de2bc54c14b24282f2c562683
+    pristine_git_object: ba89faaa77562167c188945fad28c39b133060ed
   docs/models/errors/representativevalidationerror.md:
     id: 8a11c39f8a9b
     last_write_checksum: sha1:c6723338d91c9323601b20d24271268d6c835d12
@@ -3037,8 +3069,8 @@ trackedFiles:
     pristine_git_object: c2243714be1e112b83f2ddd362661755e90f130c
   docs/models/errors/reversalvalidationerror.md:
     id: 1ce0f398db0e
-    last_write_checksum: sha1:9791cdc2415849d6f0cf68f3eb4c574438eb5e05
-    pristine_git_object: 269654ff1454ddf26def60cfcdcc85cd05d9aaaf
+    last_write_checksum: sha1:709081bd8831f0bbdb3e940ca9f4a174ed8a0b67
+    pristine_git_object: 40097a299482782144caccc22f8589f14f8370b1
   docs/models/errors/revoketokenrequesterror.md:
     id: 67ec8c2fa636
     last_write_checksum: sha1:22bc7902b5b70fef57d1d61d07ead6f02f0b56c9
@@ -3073,8 +3105,8 @@ trackedFiles:
     pristine_git_object: fded5b60662658353eda979074774616aa4e8a07
   docs/models/errors/updateinvoiceerror.md:
     id: 115c696f0d4f
-    last_write_checksum: sha1:0722218ccdf6cb3a0db7ea9c1a01e564d9ee3854
-    pristine_git_object: 7cb19e921d3be4dd13911000571e58c99df6bb10
+    last_write_checksum: sha1:bf336c0c66fb553c9dfe3223be757ca27c09f2ab
+    pristine_git_object: d473fd4ddbaf0a2727d6b942db57cef0bcea2a26
   docs/models/errors/updateissuedcarderror.md:
     id: 24e7e4f766d9
     last_write_checksum: sha1:18d8ed4717e73d54d41e3ad96487675297d8a51c
@@ -4665,8 +4697,8 @@ trackedFiles:
     pristine_git_object: fa590803b44946938ed12ae0608b5e37712b8165
   docs/sdks/invoices/README.md:
     id: a3f76a06eded
-    last_write_checksum: sha1:3c7c531d32ac823ab6a5e311dd8ffb8b7766d5b4
-    pristine_git_object: 6ff9bb7a1acabfbea45ecc8ff4e7728dee20beac
+    last_write_checksum: sha1:666c587216b95905d9c8b637b86b669d9c148aa9
+    pristine_git_object: 79a96ec3de58ad7cb369304bee91c68ce89d1392
   docs/sdks/issuingtransactions/README.md:
     id: 248409a4a639
     last_write_checksum: sha1:cfe051bbb47c4208d2a32459c41ba72d62138ae1
@@ -4677,8 +4709,8 @@ trackedFiles:
     pristine_git_object: 11fcab99731bc1d4d66aeb2d2be3e6276e1fb53a
   docs/sdks/paymentlinks/README.md:
     id: 35777159619c
-    last_write_checksum: sha1:6d59d4cadd6e425d9b4c55e658a7adbe7094d066
-    pristine_git_object: 9e91273ecefeb0999469345bc2a05a2703833e75
+    last_write_checksum: sha1:ce96ec16f1a1b9166014156736f971c364f9343e
+    pristine_git_object: 957267efbc0969e3c5efb64c9437d89366bc41c4
   docs/sdks/paymentmethods/README.md:
     id: 98b2df26035c
     last_write_checksum: sha1:ada3753b9a23953d8bb4c3c43fed047a36136656
@@ -4729,8 +4761,8 @@ trackedFiles:
     pristine_git_object: a12df344950fdff0694b2f21ec75612aac326e9a
   docs/sdks/transfers/README.md:
     id: f56918861798
-    last_write_checksum: sha1:8fcb35299249bed34b591b33ce80a55bf2494c86
-    pristine_git_object: a6b61dfb173dc5a1e66f5fffa67c47c3b7a17ee6
+    last_write_checksum: sha1:c5c07eb99c111ee17cf517e9de1206187fd17ee8
+    pristine_git_object: 49a6e2cf3296108728ed72c11ae8d47c34623ecc
   docs/sdks/underwriting/README.md:
     id: ef972250826e
     last_write_checksum: sha1:8b5dd486720620237b35f09ef93237da66e85c19
@@ -4761,8 +4793,8 @@ trackedFiles:
     pristine_git_object: 68b6361e4a22b7fd00d6f5a72e25278ebf35ba6d
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:9473c247c52bb2602296d7845c8ae8780d5b314d
-    pristine_git_object: 1719e3cce306a618ccb2242d24b4c7a641ec2a14
+    last_write_checksum: sha1:1f43116e0afda991babfc030e9626f433c444231
+    pristine_git_object: 92c0add859f6445eb0ffc03a50dae55a060b8884
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4789,8 +4821,8 @@ trackedFiles:
     pristine_git_object: 9ba58aa0a5e674a162ed526aff895212cb0c00de
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:c1f01bcb9db42cfce439da313816df4f6a241a15
-    pristine_git_object: 621734ec7186ade22fbe7f8fd3688c65cff2f267
+    last_write_checksum: sha1:63e3e934e3456198cc5f7d77b59c399d0642b8dc
+    pristine_git_object: 007a5a47fba5e6f4d517f6217f22081e1af26fcb
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:92df233993bc233908220d240fb575306638f0d2
@@ -4841,8 +4873,8 @@ trackedFiles:
     pristine_git_object: a1384a03b472420d780a248a3e43a3944e45f0db
   src/moovio_sdk/disputes.py:
     id: 34190a1b391b
-    last_write_checksum: sha1:c3f7d0dbecc8a215b9fefe94a0e0dfb8a70dc3fc
-    pristine_git_object: 2666455154fffef2e902753523ecfd966a523166
+    last_write_checksum: sha1:63c3e4eefc41dea0d6aed63d25afc04a0af89458
+    pristine_git_object: cfb1f62690fdf79513397897b7f44efb15b31535
   src/moovio_sdk/end_to_end_encryption.py:
     id: b283c7d8d18d
     last_write_checksum: sha1:93dc70201be9c878522434c213e08373ce6fa4da
@@ -4873,8 +4905,8 @@ trackedFiles:
     pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
   src/moovio_sdk/images.py:
     id: 4ad6073500db
-    last_write_checksum: sha1:0214259544f86eb2352a456b3dfea2814fbaa2c9
-    pristine_git_object: 9433e204358e66bee39899c0d3f5b97d8981cf4c
+    last_write_checksum: sha1:5ce3128bc82212d6a17fd87fc0572e6fd645074e
+    pristine_git_object: 153fbaeb1fd3e0d66a48b5243eea635338703bd2
   src/moovio_sdk/industries.py:
     id: a7c11f4f103f
     last_write_checksum: sha1:91288edab0b28b969eecc7566d1aafd115d26027
@@ -4885,8 +4917,8 @@ trackedFiles:
     pristine_git_object: b233b3601a8a5cbc34103952a7c6c19787a26b12
   src/moovio_sdk/invoices.py:
     id: 122d084f7b22
-    last_write_checksum: sha1:1d0970c7ed2ac3cbfbe115bc531d4f4190dd4eda
-    pristine_git_object: 6664fedf9a536ff432df85d94d2564c79c2255eb
+    last_write_checksum: sha1:3f365f7d712da16aa05c8cb85c896029a9c7e630
+    pristine_git_object: cfb2ba04c6464061ea3a1b8552b3119afc8397d6
   src/moovio_sdk/issuing_transactions.py:
     id: 11e0671f91fb
     last_write_checksum: sha1:b9c9da301172a26a5fb1251d9728fb652bd8583d
@@ -4897,8 +4929,8 @@ trackedFiles:
     pristine_git_object: 7a1836158a266bb8eb78a60b47ac9f5423845a8e
   src/moovio_sdk/models/components/__init__.py:
     id: 0578a22d1083
-    last_write_checksum: sha1:876c3e971204326a1cf4a2dede77c2959cdbbe21
-    pristine_git_object: dd13c8010d5e7932b7249aae53949d8ae101565e
+    last_write_checksum: sha1:cc817aba4c1a8a50eee73b28ea85a5af433239b4
+    pristine_git_object: 5a10557ab38b7ea3efe5be0645a7c959905ad4a6
   src/moovio_sdk/models/components/account.py:
     id: 9360bd799cd5
     last_write_checksum: sha1:657212f60d0be7c683552d7a64b03ab08d8e4ea6
@@ -5055,6 +5087,18 @@ trackedFiles:
     id: d3864af825f6
     last_write_checksum: sha1:aea2eb1c9d9fd86a029658e597bf9dad34b41d33
     pristine_git_object: d7ced8ac56da1cff01bcc3b8d6ec239f0be74d72
+  src/moovio_sdk/models/components/amountdetails.py:
+    id: 56dfd914cebd
+    last_write_checksum: sha1:4eb3bb99abaca0c39238434855e6147ec6403cf0
+    pristine_git_object: 82f78821cdefd455d05d4563656e3160d97cffd6
+  src/moovio_sdk/models/components/amountdetailsupdate.py:
+    id: 804cd879b5e7
+    last_write_checksum: sha1:7b7d7da2cd9b174be3e00c3ec6dce6e22dcb2330
+    pristine_git_object: 58d355c5f49ae17a2099e2677343a5c7ae94fc70
+  src/moovio_sdk/models/components/amountdetailsvalidationerror.py:
+    id: c05086bfaa76
+    last_write_checksum: sha1:356b74a5d0e368eb6846ebba88910d73e65684c9
+    pristine_git_object: 53038aaaed73f88466a17534293ed312fbba0caf
   src/moovio_sdk/models/components/amountupdate.py:
     id: 49cc9c3f3412
     last_write_checksum: sha1:d6852417706224d369c31813d1645e27b69a40d6
@@ -5101,8 +5145,8 @@ trackedFiles:
     pristine_git_object: f3a5f099c404baff0e8efd2a672858a23e6d8fcb
   src/moovio_sdk/models/components/asynccreatedrefund.py:
     id: b4f28cbd9398
-    last_write_checksum: sha1:7e248c07dec7fd48ac5ac38d58d7239654bfcc14
-    pristine_git_object: 5ed911abf03cf57ac50014a7f92651f11476283b
+    last_write_checksum: sha1:04b12c63838fa081c44ae3e5d229c9dbe1396829
+    pristine_git_object: fde6ccda083ec9cd09c23db73c110f9f0c8b5154
   src/moovio_sdk/models/components/asynctransfer.py:
     id: b2e1837fcc07
     last_write_checksum: sha1:6f733acfc2b1f40672f08c94dfcee3240da60504
@@ -5305,8 +5349,8 @@ trackedFiles:
     pristine_git_object: ebcb7c63e4e6256b017c423add25b5ec62c55609
   src/moovio_sdk/models/components/cardacquiringrefund.py:
     id: 87e2669f1186
-    last_write_checksum: sha1:aff2477f167fb70d7948ee00d88a2a40d3f7f276
-    pristine_git_object: 7a1a845b19ff4342220e2c3622838c2ea11416be
+    last_write_checksum: sha1:1c08ca562d767a06ceea80feecba467ece145c3c
+    pristine_git_object: 23d8f0fddd30ac1e755bd251ba99b3640e973b73
   src/moovio_sdk/models/components/cardaddress.py:
     id: 3f6a1eeecd6c
     last_write_checksum: sha1:26adff089f8351949f44b1e4b9633788229634f7
@@ -5517,8 +5561,8 @@ trackedFiles:
     pristine_git_object: 6f1109b43cda69c39e00912c3081030fb5b66df2
   src/moovio_sdk/models/components/createinvoice.py:
     id: 2f5ed921ec12
-    last_write_checksum: sha1:9e2acf6c65cb8af6ce0aaa5455621ef70ba5b692
-    pristine_git_object: 494fc5d31d570f29241676423f8a4b08874b2940
+    last_write_checksum: sha1:e1f5027d9341332d00759b379ff1f97dc37cde94
+    pristine_git_object: 06a9567a821de3250ff0aefd4c71c0e5d50b60b6
   src/moovio_sdk/models/components/createinvoicelineitem.py:
     id: cb74e239de2d
     last_write_checksum: sha1:9fa16391f1eb0bb9fa7a64fc8f2a71c6b5cd0049
@@ -5557,12 +5601,12 @@ trackedFiles:
     pristine_git_object: 73348dd8b21ec71be5180cf7156afb21aaf8c469
   src/moovio_sdk/models/components/createpaymentlinkamountdetails.py:
     id: f6651a9eaef3
-    last_write_checksum: sha1:846a8ad18a335a9d32f8762e1556ce07b81ca34d
-    pristine_git_object: 4978f190abb18dcd8b87781d16b7dd7ad5cfe943
+    last_write_checksum: sha1:0732ace25f1bc3fc86f9203b533e2a9522153bd0
+    pristine_git_object: 74f2e1c80d18ae96af2f694d88fa186662d2dd2f
   src/moovio_sdk/models/components/createpaymentlinkamountdetailsvalidationerror.py:
     id: e9e22a2f12fb
-    last_write_checksum: sha1:5bd9a39c64c5e68e7541cb95559d17ab08698a3b
-    pristine_git_object: d31d165516246216dc466d10b8be3f2c09f3dd6b
+    last_write_checksum: sha1:81f023b3c303ecf8ffe0994aa83e5c86ade15780
+    pristine_git_object: 5e9ff323b24bd61a87ab5267df1ee41995fb5509
   src/moovio_sdk/models/components/createpaymentlinklineitem.py:
     id: 4cdf1b0313b8
     last_write_checksum: sha1:26087c47104b78621d008b6c0d84357dbcd0d91a
@@ -5609,8 +5653,8 @@ trackedFiles:
     pristine_git_object: a841a61b18cddc3ca16b89ab19ebdaef86ddceef
   src/moovio_sdk/models/components/createrefund.py:
     id: 43a981c83a4e
-    last_write_checksum: sha1:30a8db0b58aca8fe6f9bd3528b9fd1494f66ac57
-    pristine_git_object: 48f174c6c5fe134197eb1739d945b824966ed206
+    last_write_checksum: sha1:dbccda67187e88eafc0abf66ef6d9bb7e250a3ef
+    pristine_git_object: 6d7932d977ff27a10dd5cdd61d5f4d43091eed9c
   src/moovio_sdk/models/components/createrefundresponse.py:
     id: 9e4de401cb61
     last_write_checksum: sha1:879459396656211b590b9f7da459ea4a0f061ebb
@@ -5625,8 +5669,8 @@ trackedFiles:
     pristine_git_object: c387789ee3c02773dc414fe9fec95e78dc99c563
   src/moovio_sdk/models/components/createreversal.py:
     id: b45e017167f3
-    last_write_checksum: sha1:a4cff2ceddaeb6634c37bc86533681ba5b791240
-    pristine_git_object: 811e1872ed08f449196420370b4515aba8832b4f
+    last_write_checksum: sha1:28c4f802606bc3132ad41fb53bdb2e435e3969c8
+    pristine_git_object: 50fcede55c153fa0570721c34bdf08af3c528684
   src/moovio_sdk/models/components/createruntransfer.py:
     id: ed210c0cb2e8
     last_write_checksum: sha1:e466a2715d64105ba72ddd73c81de9496f0756e4
@@ -5673,12 +5717,12 @@ trackedFiles:
     pristine_git_object: 565c110f0ab075713027df72116b5318dc878279
   src/moovio_sdk/models/components/createtransferamountdetails.py:
     id: 1995b1300ed1
-    last_write_checksum: sha1:b6ba674f1171fad19910703dfc4b42099f413556
-    pristine_git_object: e3cc4bd02d287b64ed594627a1963ec065b5a8b2
+    last_write_checksum: sha1:f1ed2e20db44b0e49515e1e6918e8189b14daece
+    pristine_git_object: 8a99301ab78b4132b1eea1c4e078dbed5b9488a4
   src/moovio_sdk/models/components/createtransferamountdetailsvalidationerror.py:
     id: f5deeaf5340f
-    last_write_checksum: sha1:0d0b32ab9c8ab841a7f71561281aa25c07fe36c4
-    pristine_git_object: 174d30daaa97c36f6dda5ce71060f958fa165366
+    last_write_checksum: sha1:f36fbdaa49589f00b00815b02a1116ae2f05e80f
+    pristine_git_object: 649fe8e1da11beee96442b792b4d79bfeff26f15
   src/moovio_sdk/models/components/createtransferconfig.py:
     id: 1210dc490403
     last_write_checksum: sha1:81091f5305f323214e8a774fbc7b432966ec61ef
@@ -6081,8 +6125,8 @@ trackedFiles:
     pristine_git_object: f755a8cb7059ec7aa44cd12399c908393c9a62dd
   src/moovio_sdk/models/components/invoice.py:
     id: 7cc0f582d249
-    last_write_checksum: sha1:54819eb85541492b59799d82f09d5790da2dfe42
-    pristine_git_object: 0e92f7e4202d90dc850f7efb7669b685a0ce6793
+    last_write_checksum: sha1:d0a94173bb6d171510f1998d91540f1b0701813b
+    pristine_git_object: bccd071b52b55bf0a1bc015ab4232816d06b37c6
   src/moovio_sdk/models/components/invoiceexternalpayment.py:
     id: 593efb274cb2
     last_write_checksum: sha1:f57a64c7285145a65742ab286d5c6e28b9baf5d4
@@ -6401,8 +6445,8 @@ trackedFiles:
     pristine_git_object: 4ef301f6ed9a7db3f3084618a63be3daf6e8bd71
   src/moovio_sdk/models/components/paymentlinkamountdetails.py:
     id: af8708da45cd
-    last_write_checksum: sha1:14a703f31027eb15e52e10ad46dc8c7878d809c8
-    pristine_git_object: 26df0a4cec004d815b4b26446ee839c26eb19d91
+    last_write_checksum: sha1:257d3bf8d2e15b454c22b97075d0269a533cd220
+    pristine_git_object: 8b0eca8fb982cbab7fcc73399ea64d96bdafb1d7
   src/moovio_sdk/models/components/paymentlinkcustomeroptions.py:
     id: bb100a887aac
     last_write_checksum: sha1:7b3bf9517d778f81f19b36c0dda12bebc7672f69
@@ -6639,6 +6683,14 @@ trackedFiles:
     id: aebf8bee5c0a
     last_write_checksum: sha1:f709ef9b7aaa8cfe52e3095b95072fe5afe15be1
     pristine_git_object: d60e91e741a7fa0fdcaf9c84587eb7a3bb7e77c8
+  src/moovio_sdk/models/components/refundamountdetails.py:
+    id: 618de2f76da2
+    last_write_checksum: sha1:98cc36cc6b708d931f350b93fc134e35120d07d5
+    pristine_git_object: 2cdf37f1a92c24e2947fdd108f9a59c9e778c007
+  src/moovio_sdk/models/components/refundamountdetailsvalidationerror.py:
+    id: a5cf80d9d12f
+    last_write_checksum: sha1:776a2bc20ef83ab902945e6fb12360df2a77d3e0
+    pristine_git_object: 3d871533e53abb967933220c7d484e79cb56d1b2
   src/moovio_sdk/models/components/refundcarddetails.py:
     id: d2fe4862fa6d
     last_write_checksum: sha1:5c1f72279fbdb483becdd8a9710dfd391742ae50
@@ -6711,6 +6763,14 @@ trackedFiles:
     id: 0f2df35334a0
     last_write_checksum: sha1:72e1d423d263416474ad20b08f9eafb944d724dd
     pristine_git_object: 75d2490e56b4a81d43b539c4f99b58587a8b59bb
+  src/moovio_sdk/models/components/reversalamountdetails.py:
+    id: 6e9a27a0819c
+    last_write_checksum: sha1:45baec3f1f88af0aaa5fe31d977a759615d3282d
+    pristine_git_object: a925d52101577609634d9f168e6d337b183a56fe
+  src/moovio_sdk/models/components/reversalamountdetailsvalidationerror.py:
+    id: f707c1c7f66d
+    last_write_checksum: sha1:d1e80a6218ed4709a6125258ddc328b40585984b
+    pristine_git_object: b18ff9c26417c6a6fff3d6786c05210f670e5ca1
   src/moovio_sdk/models/components/reversedwithcancellation.py:
     id: 564db39a34af
     last_write_checksum: sha1:39c00756b274b80761b9a161c63f8b98a66e4579
@@ -6969,12 +7029,16 @@ trackedFiles:
     pristine_git_object: a7832a78add04109b2dc2c79e2d398fc71876739
   src/moovio_sdk/models/components/transferamountdetails.py:
     id: 452225b18990
-    last_write_checksum: sha1:8aa97dc467b2a54ff5e0a536b8f58dc132447f4b
-    pristine_git_object: f414f518468ac6c32109c3a9881709309442ce40
+    last_write_checksum: sha1:5018bd1ace84e470530f63d1bb114e04a5a2c7e5
+    pristine_git_object: 23a753243d996bae2c867887ebe2151d67cfd6d0
   src/moovio_sdk/models/components/transferconfig.py:
     id: 2a1795d0aa43
-    last_write_checksum: sha1:89e76e9653f4baea14592de4ded302af87f8c99a
-    pristine_git_object: 9f6b75e069d89f0d518a6781c32a3a4b0273557d
+    last_write_checksum: sha1:549b0591bc9f26ea492fdd022f7f5bc35f79ee37
+    pristine_git_object: bd0d10603f359c4778a0c266c27adf9dfcec5e3b
+  src/moovio_sdk/models/components/transfercontrols.py:
+    id: c23315714fa7
+    last_write_checksum: sha1:0d4abbd8785c0215060103859d82568c7b2677c0
+    pristine_git_object: f4414a65c5bd588f55fa70b98d54b5d8b3db5440
   src/moovio_sdk/models/components/transferdestination.py:
     id: 0645a7a3e541
     last_write_checksum: sha1:ae209e25799f6cab36bf3faac0511ffc020e4cde
@@ -7077,8 +7141,8 @@ trackedFiles:
     pristine_git_object: 85e99f759e6ed7324cbc4c7c508c82ee23cb72bf
   src/moovio_sdk/models/components/updateinvoice.py:
     id: a53cb18ad03a
-    last_write_checksum: sha1:a2099f2eae2560b911dea505a05d9bfd7e875285
-    pristine_git_object: 00711b42100213a6b85a94445b8701b04105c428
+    last_write_checksum: sha1:130978f85190c1907c1eee8f74df9805ac9fdafb
+    pristine_git_object: 896061d65225fbcd04d6fe501f1b6f31d6048c5f
   src/moovio_sdk/models/components/updateissuedcard.py:
     id: 8e44a0e7b5bd
     last_write_checksum: sha1:64450aecf9d58a0676314e5897ab4cdefa18375c
@@ -7093,12 +7157,12 @@ trackedFiles:
     pristine_git_object: e623042022f7bc320ae34724502e73f136484c8d
   src/moovio_sdk/models/components/updatepaymentlinkamountdetails.py:
     id: 91f722e80b2f
-    last_write_checksum: sha1:d29715d85cb99b7cf3701c9dff6397520d356639
-    pristine_git_object: 81054042d6d8cee20b6cfceb3f2c32223546f9fc
+    last_write_checksum: sha1:dd7a224eb19c8b3c3b62aff88f7ac1c39e6da491
+    pristine_git_object: 3eafb8bd462fcf653ddd7e32f867f5b50b08f448
   src/moovio_sdk/models/components/updatepaymentlinkamountdetailsvalidationerror.py:
     id: ca42261afac2
-    last_write_checksum: sha1:3418641403e4dab99cc45c7458b55bde003ede3c
-    pristine_git_object: 2c8f84223b8ee131e25ac53f14ac0018695c7df5
+    last_write_checksum: sha1:7be475549a2be6248ad07e85db7663d6e8c3676d
+    pristine_git_object: c8e3dda14b2918ea880a83fa8e7591fb593300bd
   src/moovio_sdk/models/components/updaterepresentative.py:
     id: 7c5155cd0583
     last_write_checksum: sha1:3a457bfde108c327cf75329675f92d7a3c0b7da9
@@ -7413,8 +7477,8 @@ trackedFiles:
     pristine_git_object: 2bc62853d33c9bf3fc0d53f2bbd397df7cd42cd1
   src/moovio_sdk/models/errors/cardacquiringrefund.py:
     id: a5de74865d45
-    last_write_checksum: sha1:ccbaaa37e62ca7424b6180c6bb422e21eea51854
-    pristine_git_object: cdb85f4050d414b4267ccded51e546208dc9046a
+    last_write_checksum: sha1:f9647ed3d1739964c668e961a1f649ca6c95f8e7
+    pristine_git_object: 35eda6a25977fa5a8502ee197873871412a23013
   src/moovio_sdk/models/errors/cardmetadatarequesterror.py:
     id: 84cd0b4b788b
     last_write_checksum: sha1:3a5d4e7f4e1a51d32d53abefcb59ae9d85430f11
@@ -7429,8 +7493,8 @@ trackedFiles:
     pristine_git_object: 3b48074ac4e60cac9c9034afd81a7f02d973b13d
   src/moovio_sdk/models/errors/createinvoiceerror.py:
     id: a16cd4750832
-    last_write_checksum: sha1:a56e37545d3a7e1d0fddaf0e2161ffb0e38f74b6
-    pristine_git_object: 3a8fe998764101c02865aa3c6c32119d62c15da4
+    last_write_checksum: sha1:4feef85a0fa67e3d3e214072500070ab37e6f502
+    pristine_git_object: 82484bf64e52e23d90d1617ff93e7aabe891c112
   src/moovio_sdk/models/errors/createinvoicepaymenterror.py:
     id: 8d4b351e5cf1
     last_write_checksum: sha1:420ebcf90533307d4b67b1a12c24a25a48e8f4f7
@@ -7553,8 +7617,8 @@ trackedFiles:
     pristine_git_object: 51c42fe113f4398e8e3449a6bc1ba74da66992e2
   src/moovio_sdk/models/errors/refundvalidationerror.py:
     id: 25272274bbac
-    last_write_checksum: sha1:20363f72dd0340cb5d71931c7ebb759268ffb3d8
-    pristine_git_object: 83a65cd3cdf27addbace23c5248a67b1961f2540
+    last_write_checksum: sha1:c6ca1b319ec1c942f4ce124a8004af2959f9aead
+    pristine_git_object: 3e0cf351688509613600924dd2642d72607b1e20
   src/moovio_sdk/models/errors/representativevalidationerror.py:
     id: 786b47b89464
     last_write_checksum: sha1:f8404a79881ef6fdc9650854c24228965ea6217d
@@ -7569,8 +7633,8 @@ trackedFiles:
     pristine_git_object: 7d12674d17809fd8caac947947d74d9456ea71f5
   src/moovio_sdk/models/errors/reversalvalidationerror.py:
     id: cb075efe3df9
-    last_write_checksum: sha1:439449d22449bc778acb2768706f3ee6c261e3e7
-    pristine_git_object: dc0cb7231a7715a85c4b608abd4af67965c6b8d4
+    last_write_checksum: sha1:9ac8117f0e9f0efd04db1adee03b095497a5f08e
+    pristine_git_object: 85034e8030bcb02f7dde5fb507ccb505f04ea2b4
   src/moovio_sdk/models/errors/revoketokenrequesterror.py:
     id: a7ace3369e78
     last_write_checksum: sha1:5eee71bfcf3151345d409f692f361c324cd6be88
@@ -7605,8 +7669,8 @@ trackedFiles:
     pristine_git_object: bbc6a04506377c4e55488e5e0be3bfd96b50ce75
   src/moovio_sdk/models/errors/updateinvoiceerror.py:
     id: 9f7ccb5ee242
-    last_write_checksum: sha1:8e5249535b57c6bfb1c338ef011ced0844a7db46
-    pristine_git_object: 984da8eb7f2b5815631a58724329fca46069d9be
+    last_write_checksum: sha1:e9c34aa3a660dcf9b876c1ce3ff07f72b4fe0de1
+    pristine_git_object: 6f87bc8af444b73d388efde3254fa11deabc8729
   src/moovio_sdk/models/errors/updateissuedcarderror.py:
     id: 7a1a61ad7846
     last_write_checksum: sha1:edf61314f74954d42f0c8f1f67d7bd03fd8cefe3
@@ -8393,8 +8457,8 @@ trackedFiles:
     pristine_git_object: 8a6822e26255c8e28c8cb53b1628e7582a2f776c
   src/moovio_sdk/payment_links.py:
     id: 3ce3432fc929
-    last_write_checksum: sha1:51a5cc7c72a891326e536963756a0a07ee0cf382
-    pristine_git_object: 5585387b0e985dd5a0008918a84d50566ea2becc
+    last_write_checksum: sha1:5450cfb30ba6a796922f041dd0e210244f587efe
+    pristine_git_object: 64d9209c5230cf1ad6602a39f909f13584c15913
   src/moovio_sdk/payment_methods.py:
     id: c5caca116f29
     last_write_checksum: sha1:46a29e1b29006b8d438aa91c29c5baf18188aaef
@@ -8437,8 +8501,8 @@ trackedFiles:
     pristine_git_object: ea328beb602a4a5acf1799ef24635c8d912d5fc0
   src/moovio_sdk/statements.py:
     id: 9f9c91ea89e8
-    last_write_checksum: sha1:d1d5b6c25ba4230090081c9ca7753518b14eda2a
-    pristine_git_object: cba219be55bef4235b61e11b424f19c2b98dda6e
+    last_write_checksum: sha1:cd967469cc73d5771e13d0fcb82bd1b32ad42b20
+    pristine_git_object: d2f68c22dad653220e1b0ea47e5bd00b53053124
   src/moovio_sdk/support.py:
     id: 76b42fead2a6
     last_write_checksum: sha1:26ed9988a69e4f70ab07068e8a7eb2e417a7bc09
@@ -8457,12 +8521,16 @@ trackedFiles:
     pristine_git_object: 8250bed77d2e0bd3fbbf126f74c89c39b79d7c55
   src/moovio_sdk/transfers.py:
     id: f7185a46ba8b
-    last_write_checksum: sha1:3064db58360fb014dce2a404950409dcae496866
-    pristine_git_object: ae271f67a11df062c998702239119d3ed21ab04f
+    last_write_checksum: sha1:5663c831ac03b13526cd3922eef9f79bd4efc9b2
+    pristine_git_object: 836ffe522b6b478918b8b50b718054a6f88ffd3d
   src/moovio_sdk/types/__init__.py:
     id: 92ade9d2397f
-    last_write_checksum: sha1:140ebdd01a46f92ffc710c52c958c4eba3cf68ed
-    pristine_git_object: fc76fe0c5505e29859b5d2bb707d48fd27661b8c
+    last_write_checksum: sha1:f9ad14217f832e74f594285960125add50324be9
+    pristine_git_object: faa268137bc01c9d08cfadc4797017db48747a96
+  src/moovio_sdk/types/base64fileinput.py:
+    id: 137148ce38c7
+    last_write_checksum: sha1:4780e893d3853b5a6e28d9a6ca3ee102ce0f502d
+    pristine_git_object: 25fc53989ed497649363f983219fc58705c8bf87
   src/moovio_sdk/types/basemodel.py:
     id: a2eb650f8443
     last_write_checksum: sha1:10d84aedeb9d35edfdadf2c3020caa1d24d8b584
@@ -8517,8 +8585,8 @@ trackedFiles:
     pristine_git_object: c04e0db82b68eca041f2cb2614d748fbac80fd41
   src/moovio_sdk/utils/requestbodies.py:
     id: ca0b31c718d1
-    last_write_checksum: sha1:41e2d2d2d3ecc394c8122ca4d4b85e1c3e03f054
-    pristine_git_object: 1de32b6d26f46590232f398fdba6ce0072f1659c
+    last_write_checksum: sha1:e1fef575283b7fe7fe2ad392dbbb3fb105309124
+    pristine_git_object: 591415af8e64baa410627b507d2740afb5387d13
   src/moovio_sdk/utils/retries.py:
     id: 635246e3c9f9
     last_write_checksum: sha1:471372f5c5d1dd5583239c9cf3c75f1b636e5d87
@@ -10044,7 +10112,7 @@ examples:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       requestBody:
-        application/json: {"amount": 1000}
+        application/json: {"amount": 1000, "amountDetails": {"surcharge": {"currency": "USD", "valueDecimal": "12.987654321"}}}
       responses:
         "200":
           application/json: {"refundID": "d4963079-5b35-4d17-981e-8f851753f786", "createdOn": "2023-09-09T14:15:22Z", "amount": {"currency": "USD", "value": 1204}}
@@ -10058,7 +10126,7 @@ examples:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       requestBody:
-        application/json: {"amount": 1000}
+        application/json: {"amount": 1000, "amountDetails": {"surcharge": {"currency": "USD", "valueDecimal": "12.987654321"}}}
       responses:
         "200":
           application/json: {"refundID": "d4963079-5b35-4d17-981e-8f851753f786", "createdOn": "2023-09-09T14:15:22Z", "updatedOn": "2023-09-09T14:17:41Z", "status": "pending", "amount": {"currency": "USD", "value": 1204}, "cardDetails": {"status": "confirmed", "initiatedOn": "2023-09-09T14:16:22Z", "confirmedOn": "2023-09-09T14:17:41Z"}}
@@ -10107,7 +10175,7 @@ examples:
           X-Moov-Version: "v2024.01.00"
       responses:
         "200":
-          application/json: {"refundID": "18037bce-04f8-464c-9d60-c7d3136a40a1", "createdOn": "2025-03-27T13:14:59.679Z", "updatedOn": "2023-07-31T23:52:13.362Z", "status": "pending", "amount": {"currency": "USD", "value": 1204}}
+          application/json: {"refundID": "18037bce-04f8-464c-9d60-c7d3136a40a1", "createdOn": "2025-03-27T13:14:59.679Z", "updatedOn": "2023-07-31T23:52:13.362Z", "status": "pending", "amount": {"currency": "USD", "value": 1204}, "amountDetails": {"surcharge": {"currency": "USD", "valueDecimal": "12.987654321"}}}
   createReversal:
     Reversed by refund:
       parameters:
@@ -10119,7 +10187,7 @@ examples:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       requestBody:
-        application/json: {"amount": 1000}
+        application/json: {"amount": 1000, "amountDetails": {"surcharge": {"currency": "USD", "valueDecimal": "12.987654321"}}}
       responses:
         "200":
           application/json: {"refund": {"refundID": "89ca7f54-13ba-4714-b9af-17163eae2057", "createdOn": "2025-01-19T03:07:26.001024809Z", "updatedOn": "2025-01-19T03:07:26.602114307Z", "status": "pending", "amount": {"currency": "USD", "value": 1938}, "cardDetails": {"status": "confirmed", "confirmedOn": "2025-01-19T03:07:26.602114307Z"}}}
@@ -10133,7 +10201,7 @@ examples:
           x-moov-version: "v2024.01.00"
           X-Moov-Version: "v2024.01.00"
       requestBody:
-        application/json: {"amount": 1000}
+        application/json: {"amount": 1000, "amountDetails": {"surcharge": {"currency": "USD", "valueDecimal": "12.987654321"}}}
       responses:
         "200":
           application/json: {"cancellation": {"cancellationID": "89ca7f54-13ba-4714-b9af-17163eae2057", "status": "completed", "createdOn": "2025-01-19T03:02:43.255309588Z"}}
@@ -11087,10 +11155,10 @@ examples:
         path:
           accountID: "c463fb80-6410-48b7-9e2e-6e9ec58a654f"
       requestBody:
-        application/json: {"customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "description": "Professional services for Q1 2026", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z", "taxAmount": {"currency": "USD", "valueDecimal": "80.00"}}
+        application/json: {"customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "description": "Professional services for Q1 2026", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z"}
       responses:
         "201":
-          application/json: {"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "unpaid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "taxAmount": {"currency": "USD", "valueDecimal": "80.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "0.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z"}
+          application/json: {"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "unpaid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "0.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z"}
   listInvoices:
     speakeasy-default-list-invoices:
       parameters:
@@ -11113,7 +11181,7 @@ examples:
           count: 20
       responses:
         "200":
-          application/json: [{"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "unpaid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "taxAmount": {"currency": "USD", "valueDecimal": "80.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "0.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z"}, {"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "paid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "taxAmount": {"currency": "USD", "valueDecimal": "80.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "invoicePayments": [{"invoicePaymentID": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "invoicePaymentType": "transfer", "amount": {"currency": "USD", "valueDecimal": "1080.00"}, "transfer": {"transferID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"}}], "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z", "sentOn": "2026-01-15T10:30:00Z", "paidOn": "2026-01-20T14:45:00Z"}]
+          application/json: [{"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "unpaid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "0.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z"}, {"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "paid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "invoicePayments": [{"invoicePaymentID": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "invoicePaymentType": "transfer", "amount": {"currency": "USD", "valueDecimal": "1080.00"}, "transfer": {"transferID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"}}], "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z", "sentOn": "2026-01-15T10:30:00Z", "paidOn": "2026-01-20T14:45:00Z"}]
   getInvoice:
     speakeasy-default-get-invoice:
       parameters:
@@ -11130,7 +11198,7 @@ examples:
           invoiceID: "fc90d016-39ea-4110-b77a-2e1c95827f46"
       responses:
         "200":
-          application/json: {"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "paid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "taxAmount": {"currency": "USD", "valueDecimal": "80.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "invoicePayments": [{"invoicePaymentID": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "invoicePaymentType": "transfer", "amount": {"currency": "USD", "valueDecimal": "1080.00"}, "transfer": {"transferID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"}}], "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z", "sentOn": "2026-01-15T10:30:00Z", "paidOn": "2026-01-20T14:45:00Z"}
+          application/json: {"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "paid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "invoicePayments": [{"invoicePaymentID": "a1b2c3d4-e5f6-7890-abcd-ef1234567890", "invoicePaymentType": "transfer", "amount": {"currency": "USD", "valueDecimal": "1080.00"}, "transfer": {"transferID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43"}}], "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z", "sentOn": "2026-01-15T10:30:00Z", "paidOn": "2026-01-20T14:45:00Z"}
   updateInvoice:
     speakeasy-default-update-invoice:
       parameters:
@@ -11155,7 +11223,7 @@ examples:
         application/json: {"description": "Updated professional services for Q1 2026", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "invoiceDate": "2026-01-16T00:00:00Z", "dueDate": "2026-02-16T00:00:00Z"}
       responses:
         "200":
-          application/json: {"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "unpaid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "taxAmount": {"currency": "USD", "valueDecimal": "80.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "0.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z"}
+          application/json: {"invoiceID": "ec7e1848-dc80-4ab0-8827-dd7fc0737b43", "invoiceNumber": "INV-1001", "description": "Professional services for Q1 2026", "customerAccountID": "3dfff852-927d-47e8-822c-2fffc57ff6b9", "customerDisplayName": "Acme Corp", "customerEmail": "billing@acmecorp.com", "partnerAccountID": "5dfff852-927d-47e8-822c-2fffc57ff6b8", "status": "unpaid", "lineItems": {"items": [{"name": "Professional Services", "basePrice": {"currency": "USD", "valueDecimal": "1000.00"}, "quantity": 1}]}, "subtotalAmount": {"currency": "USD", "valueDecimal": "1000.00"}, "totalAmount": {"currency": "USD", "valueDecimal": "1080.00"}, "pendingAmount": {"currency": "USD", "valueDecimal": "0.00"}, "paidAmount": {"currency": "USD", "valueDecimal": "0.00"}, "refundedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "disputedAmount": {"currency": "USD", "valueDecimal": "0.00"}, "createdOn": "2024-05-06T12:20:38.184Z", "invoiceDate": "2026-01-15T00:00:00Z", "dueDate": "2026-02-15T00:00:00Z"}
   markPaidInvoice:
     speakeasy-default-mark-paid-invoice:
       parameters:
@@ -11394,7 +11462,7 @@ examples:
         application/json: {"tipPresets": {"fixedAmountOptions": [{"currency": "USD", "valueDecimal": "12.987654321"}]}}
       responses:
         "201":
-          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}}
+          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}, "transferControls": [{"accountID": "01234567-89ab-cdef-0123-456789abcdef", "partnerAccountID": "01234567-89ab-cdef-0123-456789abcdef", "debtRepayment": false, "allowDynamicDescriptor": true, "allowSurcharge": true}]}
   getTransferConfig:
     Fixed amount tip config:
       parameters:
@@ -11409,7 +11477,7 @@ examples:
           accountID: "<id>"
       responses:
         "200":
-          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}}
+          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}, "transferControls": [{"accountID": "01234567-89ab-cdef-0123-456789abcdef", "partnerAccountID": "01234567-89ab-cdef-0123-456789abcdef", "debtRepayment": false, "allowDynamicDescriptor": true, "allowSurcharge": true}]}
   updateTransferConfig:
     Updated fixed amount tip config:
       parameters:
@@ -11428,7 +11496,7 @@ examples:
         application/json: {"tipPresets": {"fixedAmountOptions": [{"currency": "USD", "valueDecimal": "12.987654321"}]}}
       responses:
         "200":
-          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}}
+          application/json: {"tipPresets": {"calculationBasis": "pre-tax", "percentageOptions": [10, 15, 20]}, "transferControls": [{"accountID": "01234567-89ab-cdef-0123-456789abcdef", "partnerAccountID": "01234567-89ab-cdef-0123-456789abcdef", "debtRepayment": false, "allowDynamicDescriptor": true, "allowSurcharge": true}]}
   getCardMetadata:
     speakeasy-default-get-card-metadata:
       requestBody:
@@ -11442,6 +11510,7 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Python SDK Changes:\n* `moov.invoices.create_invoice()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `moov.invoices.list_invoices()`:  `response.[]` **Changed** (Breaking ⚠️)\n* `moov.invoices.get_invoice()`:  `response` **Changed** (Breaking ⚠️)\n* `moov.invoices.update_invoice()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed** (Breaking ⚠️)\n* `moov.payment_links.create()`: \n  *  `request.amount_details.surcharge` **Added**\n  *  `response.amount_details.surcharge` **Added**\n  *  `error.amount_details.surcharge` **Added**\n* `moov.payment_links.list()`:  `response.[].amount_details.surcharge` **Added**\n* `moov.payment_links.get()`:  `response.amount_details.surcharge` **Added**\n* `moov.payment_links.update()`: \n  *  `request.amount_details.surcharge` **Added**\n  *  `response.amount_details.surcharge` **Added**\n  *  `error.amount_details.surcharge` **Added**\n* `moov.transfer_config.create()`:  `response.transfer_controls` **Added**\n* `moov.transfer_config.get()`:  `response.transfer_controls` **Added**\n* `moov.transfer_config.update()`:  `response.transfer_controls` **Added**\n* `moov.transfers.create()`: \n  *  `request.amount_details.surcharge` **Added**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `moov.transfers.list()`:  `response.[]` **Changed**\n* `moov.transfers.batch_get_transfers()`:  `response.Map<Transfer>` **Changed**\n* `moov.transfers.get()`:  `response` **Changed**\n* `moov.transfers.update()`:  `response` **Changed**\n* `moov.transfers.initiate_refund()`: \n  *  `request.amount_details` **Added**\n  *  `response` **Changed**\n  *  `error.amount_details` **Added**\n* `moov.transfers.list_refunds()`:  `response.[].amount_details` **Added**\n* `moov.transfers.get_refund()`:  `response.amount_details` **Added**\n* `moov.transfers.create_reversal()`: \n  *  `request.amount_details` **Added**\n  *  `response.union(ReversedWithRefund).refund.amount_details` **Added**\n  *  `error.amount_details` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json

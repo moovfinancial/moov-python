@@ -99,6 +99,12 @@ if TYPE_CHECKING:
         AmountDecimalValidationError,
         AmountDecimalValidationErrorTypedDict,
     )
+    from .amountdetails import AmountDetails, AmountDetailsTypedDict
+    from .amountdetailsupdate import AmountDetailsUpdate, AmountDetailsUpdateTypedDict
+    from .amountdetailsvalidationerror import (
+        AmountDetailsValidationError,
+        AmountDetailsValidationErrorTypedDict,
+    )
     from .amountupdate import AmountUpdate, AmountUpdateTypedDict
     from .amountvalidationerror import (
         AmountValidationError,
@@ -1127,6 +1133,11 @@ if TYPE_CHECKING:
     from .receiptresponse import ReceiptResponse, ReceiptResponseTypedDict
     from .recur import Recur, RecurTypedDict
     from .recurresponse import RecurResponse, RecurResponseTypedDict
+    from .refundamountdetails import RefundAmountDetails, RefundAmountDetailsTypedDict
+    from .refundamountdetailsvalidationerror import (
+        RefundAmountDetailsValidationError,
+        RefundAmountDetailsValidationErrorTypedDict,
+    )
     from .refundcarddetails import RefundCardDetails, RefundCardDetailsTypedDict
     from .refundcardstatus import RefundCardStatus
     from .refundpolicy import RefundPolicy
@@ -1157,6 +1168,14 @@ if TYPE_CHECKING:
     from .resolutionlinkstatus import ResolutionLinkStatus
     from .returnpolicytype import ReturnPolicyType
     from .reversal import Reversal, ReversalTypedDict
+    from .reversalamountdetails import (
+        ReversalAmountDetails,
+        ReversalAmountDetailsTypedDict,
+    )
+    from .reversalamountdetailsvalidationerror import (
+        ReversalAmountDetailsValidationError,
+        ReversalAmountDetailsValidationErrorTypedDict,
+    )
     from .reversedwithcancellation import (
         ReversedWithCancellation,
         ReversedWithCancellationTypedDict,
@@ -1303,6 +1322,7 @@ if TYPE_CHECKING:
         TransferAmountDetailsTypedDict,
     )
     from .transferconfig import TransferConfig, TransferConfigTypedDict
+    from .transfercontrols import TransferControls, TransferControlsTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
     from .transferfailurereason import TransferFailureReason
@@ -1672,6 +1692,12 @@ __all__ = [
     "AmountDecimalUpdateTypedDict",
     "AmountDecimalValidationError",
     "AmountDecimalValidationErrorTypedDict",
+    "AmountDetails",
+    "AmountDetailsTypedDict",
+    "AmountDetailsUpdate",
+    "AmountDetailsUpdateTypedDict",
+    "AmountDetailsValidationError",
+    "AmountDetailsValidationErrorTypedDict",
     "AmountType",
     "AmountTypedDict",
     "AmountUpdate",
@@ -2484,6 +2510,10 @@ __all__ = [
     "RecurResponse",
     "RecurResponseTypedDict",
     "RecurTypedDict",
+    "RefundAmountDetails",
+    "RefundAmountDetailsTypedDict",
+    "RefundAmountDetailsValidationError",
+    "RefundAmountDetailsValidationErrorTypedDict",
     "RefundCardDetails",
     "RefundCardDetailsTypedDict",
     "RefundCardStatus",
@@ -2514,6 +2544,10 @@ __all__ = [
     "ResponsibilitiesTypedDict",
     "ReturnPolicyType",
     "Reversal",
+    "ReversalAmountDetails",
+    "ReversalAmountDetailsTypedDict",
+    "ReversalAmountDetailsValidationError",
+    "ReversalAmountDetailsValidationErrorTypedDict",
     "ReversalTypedDict",
     "ReversedWithCancellation",
     "ReversedWithCancellationTypedDict",
@@ -2638,6 +2672,8 @@ __all__ = [
     "TransferAmountDetailsTypedDict",
     "TransferConfig",
     "TransferConfigTypedDict",
+    "TransferControls",
+    "TransferControlsTypedDict",
     "TransferDestination",
     "TransferDestinationTypedDict",
     "TransferEntryMode",
@@ -2923,6 +2959,12 @@ _dynamic_imports: dict[str, str] = {
     "AmountDecimalUpdateTypedDict": ".amountdecimalupdate",
     "AmountDecimalValidationError": ".amountdecimalvalidationerror",
     "AmountDecimalValidationErrorTypedDict": ".amountdecimalvalidationerror",
+    "AmountDetails": ".amountdetails",
+    "AmountDetailsTypedDict": ".amountdetails",
+    "AmountDetailsUpdate": ".amountdetailsupdate",
+    "AmountDetailsUpdateTypedDict": ".amountdetailsupdate",
+    "AmountDetailsValidationError": ".amountdetailsvalidationerror",
+    "AmountDetailsValidationErrorTypedDict": ".amountdetailsvalidationerror",
     "AmountUpdate": ".amountupdate",
     "AmountUpdateTypedDict": ".amountupdate",
     "AmountValidationError": ".amountvalidationerror",
@@ -3730,6 +3772,10 @@ _dynamic_imports: dict[str, str] = {
     "RecurTypedDict": ".recur",
     "RecurResponse": ".recurresponse",
     "RecurResponseTypedDict": ".recurresponse",
+    "RefundAmountDetails": ".refundamountdetails",
+    "RefundAmountDetailsTypedDict": ".refundamountdetails",
+    "RefundAmountDetailsValidationError": ".refundamountdetailsvalidationerror",
+    "RefundAmountDetailsValidationErrorTypedDict": ".refundamountdetailsvalidationerror",
     "RefundCardDetails": ".refundcarddetails",
     "RefundCardDetailsTypedDict": ".refundcarddetails",
     "RefundCardStatus": ".refundcardstatus",
@@ -3759,6 +3805,10 @@ _dynamic_imports: dict[str, str] = {
     "ReturnPolicyType": ".returnpolicytype",
     "Reversal": ".reversal",
     "ReversalTypedDict": ".reversal",
+    "ReversalAmountDetails": ".reversalamountdetails",
+    "ReversalAmountDetailsTypedDict": ".reversalamountdetails",
+    "ReversalAmountDetailsValidationError": ".reversalamountdetailsvalidationerror",
+    "ReversalAmountDetailsValidationErrorTypedDict": ".reversalamountdetailsvalidationerror",
     "ReversedWithCancellation": ".reversedwithcancellation",
     "ReversedWithCancellationTypedDict": ".reversedwithcancellation",
     "ReversedWithRefund": ".reversedwithrefund",
@@ -3893,6 +3943,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferAmountDetailsTypedDict": ".transferamountdetails",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
+    "TransferControls": ".transfercontrols",
+    "TransferControlsTypedDict": ".transfercontrols",
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",

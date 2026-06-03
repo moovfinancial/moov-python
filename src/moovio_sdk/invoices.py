@@ -24,8 +24,8 @@ class Invoices(BaseSDK):
         description: Optional[str] = None,
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
-        tax_amount: Optional[
-            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        amount_details: Optional[
+            Union[components.AmountDetails, components.AmountDetailsTypedDict]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -43,7 +43,7 @@ class Invoices(BaseSDK):
         :param description:
         :param invoice_date:
         :param due_date:
-        :param tax_amount:
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -69,8 +69,8 @@ class Invoices(BaseSDK):
                 ),
                 invoice_date=invoice_date,
                 due_date=due_date,
-                tax_amount=utils.get_pydantic_model(
-                    tax_amount, Optional[components.AmountDecimal]
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.AmountDetails]
                 ),
             ),
         )
@@ -159,8 +159,8 @@ class Invoices(BaseSDK):
         description: Optional[str] = None,
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
-        tax_amount: Optional[
-            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        amount_details: Optional[
+            Union[components.AmountDetails, components.AmountDetailsTypedDict]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -178,7 +178,7 @@ class Invoices(BaseSDK):
         :param description:
         :param invoice_date:
         :param due_date:
-        :param tax_amount:
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -204,8 +204,8 @@ class Invoices(BaseSDK):
                 ),
                 invoice_date=invoice_date,
                 due_date=due_date,
-                tax_amount=utils.get_pydantic_model(
-                    tax_amount, Optional[components.AmountDecimal]
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.AmountDetails]
                 ),
             ),
         )
@@ -739,9 +739,9 @@ class Invoices(BaseSDK):
         invoice_date: OptionalNullable[datetime] = UNSET,
         due_date: OptionalNullable[datetime] = UNSET,
         status: Optional[components.InvoiceStatus] = None,
-        tax_amount: Optional[
+        amount_details: Optional[
             Union[
-                components.AmountDecimalUpdate, components.AmountDecimalUpdateTypedDict
+                components.AmountDetailsUpdate, components.AmountDetailsUpdateTypedDict
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -766,7 +766,7 @@ class Invoices(BaseSDK):
             Canceled invoices still appear in list results by default and remain part of the invoice history.
             To completely discard an invoice created by mistake, use the delete endpoint instead.
             - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
-        :param tax_amount:
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -793,8 +793,8 @@ class Invoices(BaseSDK):
                 invoice_date=invoice_date,
                 due_date=due_date,
                 status=status,
-                tax_amount=utils.get_pydantic_model(
-                    tax_amount, Optional[components.AmountDecimalUpdate]
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.AmountDetailsUpdate]
                 ),
             ),
         )
@@ -886,9 +886,9 @@ class Invoices(BaseSDK):
         invoice_date: OptionalNullable[datetime] = UNSET,
         due_date: OptionalNullable[datetime] = UNSET,
         status: Optional[components.InvoiceStatus] = None,
-        tax_amount: Optional[
+        amount_details: Optional[
             Union[
-                components.AmountDecimalUpdate, components.AmountDecimalUpdateTypedDict
+                components.AmountDetailsUpdate, components.AmountDetailsUpdateTypedDict
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -913,7 +913,7 @@ class Invoices(BaseSDK):
             Canceled invoices still appear in list results by default and remain part of the invoice history.
             To completely discard an invoice created by mistake, use the delete endpoint instead.
             - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
-        :param tax_amount:
+        :param amount_details:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -940,8 +940,8 @@ class Invoices(BaseSDK):
                 invoice_date=invoice_date,
                 due_date=due_date,
                 status=status,
-                tax_amount=utils.get_pydantic_model(
-                    tax_amount, Optional[components.AmountDecimalUpdate]
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.AmountDetailsUpdate]
                 ),
             ),
         )
