@@ -99,6 +99,12 @@ if TYPE_CHECKING:
         AmountDecimalValidationError,
         AmountDecimalValidationErrorTypedDict,
     )
+    from .amountdetails import AmountDetails, AmountDetailsTypedDict
+    from .amountdetailsupdate import AmountDetailsUpdate, AmountDetailsUpdateTypedDict
+    from .amountdetailsvalidationerror import (
+        AmountDetailsValidationError,
+        AmountDetailsValidationErrorTypedDict,
+    )
     from .amountupdate import AmountUpdate, AmountUpdateTypedDict
     from .amountvalidationerror import (
         AmountValidationError,
@@ -1317,6 +1323,7 @@ if TYPE_CHECKING:
     )
     from .transfercapture import TransferCapture, TransferCaptureTypedDict
     from .transferconfig import TransferConfig, TransferConfigTypedDict
+    from .transfercontrols import TransferControls, TransferControlsTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
     from .transferfailurereason import TransferFailureReason
@@ -1686,6 +1693,12 @@ __all__ = [
     "AmountDecimalUpdateTypedDict",
     "AmountDecimalValidationError",
     "AmountDecimalValidationErrorTypedDict",
+    "AmountDetails",
+    "AmountDetailsTypedDict",
+    "AmountDetailsUpdate",
+    "AmountDetailsUpdateTypedDict",
+    "AmountDetailsValidationError",
+    "AmountDetailsValidationErrorTypedDict",
     "AmountType",
     "AmountTypedDict",
     "AmountUpdate",
@@ -2662,6 +2675,8 @@ __all__ = [
     "TransferCaptureTypedDict",
     "TransferConfig",
     "TransferConfigTypedDict",
+    "TransferControls",
+    "TransferControlsTypedDict",
     "TransferDestination",
     "TransferDestinationTypedDict",
     "TransferEntryMode",
@@ -2947,6 +2962,12 @@ _dynamic_imports: dict[str, str] = {
     "AmountDecimalUpdateTypedDict": ".amountdecimalupdate",
     "AmountDecimalValidationError": ".amountdecimalvalidationerror",
     "AmountDecimalValidationErrorTypedDict": ".amountdecimalvalidationerror",
+    "AmountDetails": ".amountdetails",
+    "AmountDetailsTypedDict": ".amountdetails",
+    "AmountDetailsUpdate": ".amountdetailsupdate",
+    "AmountDetailsUpdateTypedDict": ".amountdetailsupdate",
+    "AmountDetailsValidationError": ".amountdetailsvalidationerror",
+    "AmountDetailsValidationErrorTypedDict": ".amountdetailsvalidationerror",
     "AmountUpdate": ".amountupdate",
     "AmountUpdateTypedDict": ".amountupdate",
     "AmountValidationError": ".amountvalidationerror",
@@ -3927,6 +3948,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferCaptureTypedDict": ".transfercapture",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
+    "TransferControls": ".transfercontrols",
+    "TransferControlsTypedDict": ".transfercontrols",
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",

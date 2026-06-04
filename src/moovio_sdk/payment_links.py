@@ -1375,8 +1375,8 @@ class PaymentLinks(BaseSDK):
         payment_link_code: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetQRCodeAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetPaymentLinkQRCodeResponse:
         r"""Retrieve the payment link encoded in a QR code.
@@ -1487,8 +1487,8 @@ class PaymentLinks(BaseSDK):
         payment_link_code: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetQRCodeAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetPaymentLinkQRCodeResponse:
         r"""Retrieve the payment link encoded in a QR code.

@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 from .tippresets import TipPresets, TipPresetsTypedDict
+from .transfercontrols import TransferControls, TransferControlsTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -14,6 +15,7 @@ class TransferConfigTypedDict(TypedDict):
 
     tip_presets: NotRequired[TipPresetsTypedDict]
     r"""Tip presets when calculating tips for a transfer."""
+    transfer_controls: NotRequired[List[TransferControlsTypedDict]]
 
 
 class TransferConfig(BaseModel):
@@ -24,9 +26,13 @@ class TransferConfig(BaseModel):
     )
     r"""Tip presets when calculating tips for a transfer."""
 
+    transfer_controls: Annotated[
+        Optional[List[TransferControls]], pydantic.Field(alias="transferControls")
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["tipPresets"])
+        optional_fields = set(["tipPresets", "transferControls"])
         serialized = handler(self)
         m = {}
 

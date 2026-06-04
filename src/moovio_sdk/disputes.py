@@ -2273,8 +2273,8 @@ class Disputes(BaseSDK):
         evidence_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetEvidenceDataAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetDisputeEvidenceDataResponse:
         r"""Downloads dispute evidence data by ID.
@@ -2388,8 +2388,8 @@ class Disputes(BaseSDK):
         evidence_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetEvidenceDataAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetDisputeEvidenceDataResponse:
         r"""Downloads dispute evidence data by ID.
