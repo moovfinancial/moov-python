@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional
+from typing import Any, Iterable, List, Mapping, Optional
 
 
 class Webhooks(BaseSDK):
@@ -352,7 +352,7 @@ class Webhooks(BaseSDK):
         *,
         url: str,
         status: components.WebhookStatus,
-        event_types: List[components.WebhookEventType],
+        event_types: Iterable[components.WebhookEventType],
         description: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -383,7 +383,7 @@ class Webhooks(BaseSDK):
         request = components.CreateWebhook(
             url=url,
             status=status,
-            event_types=event_types,
+            event_types=utils.unmarshal(event_types, List[components.WebhookEventType]),
             description=description,
         )
 
@@ -464,7 +464,7 @@ class Webhooks(BaseSDK):
         *,
         url: str,
         status: components.WebhookStatus,
-        event_types: List[components.WebhookEventType],
+        event_types: Iterable[components.WebhookEventType],
         description: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -495,7 +495,7 @@ class Webhooks(BaseSDK):
         request = components.CreateWebhook(
             url=url,
             status=status,
-            event_types=event_types,
+            event_types=utils.unmarshal(event_types, List[components.WebhookEventType]),
             description=description,
         )
 
@@ -759,7 +759,7 @@ class Webhooks(BaseSDK):
         webhook_id: str,
         url: str,
         status: components.WebhookStatus,
-        event_types: List[components.WebhookEventType],
+        event_types: Iterable[components.WebhookEventType],
         description: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -793,7 +793,9 @@ class Webhooks(BaseSDK):
             update_webhook=components.UpdateWebhook(
                 url=url,
                 status=status,
-                event_types=event_types,
+                event_types=utils.unmarshal(
+                    event_types, List[components.WebhookEventType]
+                ),
                 description=description,
             ),
         )
@@ -876,7 +878,7 @@ class Webhooks(BaseSDK):
         webhook_id: str,
         url: str,
         status: components.WebhookStatus,
-        event_types: List[components.WebhookEventType],
+        event_types: Iterable[components.WebhookEventType],
         description: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -910,7 +912,9 @@ class Webhooks(BaseSDK):
             update_webhook=components.UpdateWebhook(
                 url=url,
                 status=status,
-                event_types=event_types,
+                event_types=utils.unmarshal(
+                    event_types, List[components.WebhookEventType]
+                ),
                 description=description,
             ),
         )

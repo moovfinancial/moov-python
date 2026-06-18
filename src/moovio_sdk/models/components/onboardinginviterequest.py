@@ -19,7 +19,7 @@ class OnboardingInviteRequestTypedDict(TypedDict):
     account. These values are used to determine what can be done with the account onboarded.
     """
     capabilities: List[CapabilityID]
-    r"""List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+    r"""List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/) you intend to request for this
     account. These values are used to determine what information to collect from the user during onboarding.
     """
     fee_plan_codes: List[str]
@@ -44,7 +44,7 @@ class OnboardingInviteRequest(BaseModel):
     """
 
     capabilities: List[CapabilityID]
-    r"""List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+    r"""List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/) you intend to request for this
     account. These values are used to determine what information to collect from the user during onboarding.
     """
 

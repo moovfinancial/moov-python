@@ -7,19 +7,19 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Onboarding(BaseSDK):
     def create_invite(
         self,
         *,
-        scopes: List[components.ApplicationScope],
-        capabilities: List[components.CapabilityID],
-        fee_plan_codes: List[str],
+        scopes: Iterable[components.ApplicationScope],
+        capabilities: Iterable[components.CapabilityID],
+        fee_plan_codes: Iterable[str],
         return_url: Optional[str] = None,
         terms_of_service_url: Optional[str] = None,
-        grant_scopes: Optional[List[components.ApplicationScope]] = None,
+        grant_scopes: Optional[Iterable[components.ApplicationScope]] = None,
         prefill: Optional[
             Union[components.CreateAccount, components.CreateAccountTypedDict]
         ] = None,
@@ -35,7 +35,7 @@ class Onboarding(BaseSDK):
 
         :param scopes: List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
             account. These values are used to determine what can be done with the account onboarded.
-        :param capabilities: List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+        :param capabilities: List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/) you intend to request for this
             account. These values are used to determine what information to collect from the user during onboarding.
         :param fee_plan_codes: List of fee plan codes to assign the account created by the invitee.
         :param return_url: Optional URL to redirect the user to after they complete the onboarding process.
@@ -61,10 +61,12 @@ class Onboarding(BaseSDK):
         request = components.OnboardingInviteRequest(
             return_url=return_url,
             terms_of_service_url=terms_of_service_url,
-            scopes=scopes,
-            grant_scopes=grant_scopes,
-            capabilities=capabilities,
-            fee_plan_codes=fee_plan_codes,
+            scopes=utils.unmarshal(scopes, List[components.ApplicationScope]),
+            grant_scopes=utils.unmarshal(
+                grant_scopes, Optional[List[components.ApplicationScope]]
+            ),
+            capabilities=utils.unmarshal(capabilities, List[components.CapabilityID]),
+            fee_plan_codes=utils.unmarshal(fee_plan_codes, List[str]),
             prefill=utils.get_pydantic_model(
                 prefill, Optional[components.CreateAccount]
             ),
@@ -145,12 +147,12 @@ class Onboarding(BaseSDK):
     async def create_invite_async(
         self,
         *,
-        scopes: List[components.ApplicationScope],
-        capabilities: List[components.CapabilityID],
-        fee_plan_codes: List[str],
+        scopes: Iterable[components.ApplicationScope],
+        capabilities: Iterable[components.CapabilityID],
+        fee_plan_codes: Iterable[str],
         return_url: Optional[str] = None,
         terms_of_service_url: Optional[str] = None,
-        grant_scopes: Optional[List[components.ApplicationScope]] = None,
+        grant_scopes: Optional[Iterable[components.ApplicationScope]] = None,
         prefill: Optional[
             Union[components.CreateAccount, components.CreateAccountTypedDict]
         ] = None,
@@ -166,7 +168,7 @@ class Onboarding(BaseSDK):
 
         :param scopes: List of [scopes](https://docs.moov.io/api/authentication/scopes/) you request to use on this
             account. These values are used to determine what can be done with the account onboarded.
-        :param capabilities: List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/) you intend to request for this
+        :param capabilities: List of [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/) you intend to request for this
             account. These values are used to determine what information to collect from the user during onboarding.
         :param fee_plan_codes: List of fee plan codes to assign the account created by the invitee.
         :param return_url: Optional URL to redirect the user to after they complete the onboarding process.
@@ -192,10 +194,12 @@ class Onboarding(BaseSDK):
         request = components.OnboardingInviteRequest(
             return_url=return_url,
             terms_of_service_url=terms_of_service_url,
-            scopes=scopes,
-            grant_scopes=grant_scopes,
-            capabilities=capabilities,
-            fee_plan_codes=fee_plan_codes,
+            scopes=utils.unmarshal(scopes, List[components.ApplicationScope]),
+            grant_scopes=utils.unmarshal(
+                grant_scopes, Optional[List[components.ApplicationScope]]
+            ),
+            capabilities=utils.unmarshal(capabilities, List[components.CapabilityID]),
+            fee_plan_codes=utils.unmarshal(fee_plan_codes, List[str]),
             prefill=utils.get_pydantic_model(
                 prefill, Optional[components.CreateAccount]
             ),
