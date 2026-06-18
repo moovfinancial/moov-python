@@ -10,6 +10,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class WebhookDataSweepUpdatedTypedDict(TypedDict):
+    account_id: str
+    r"""The accountID associated with the wallet being swept."""
     wallet_id: str
     sweep_id: str
     status: SweepStatus
@@ -17,6 +19,9 @@ class WebhookDataSweepUpdatedTypedDict(TypedDict):
 
 
 class WebhookDataSweepUpdated(BaseModel):
+    account_id: Annotated[str, pydantic.Field(alias="accountID")]
+    r"""The accountID associated with the wallet being swept."""
+
     wallet_id: Annotated[str, pydantic.Field(alias="walletID")]
 
     sweep_id: Annotated[str, pydantic.Field(alias="sweepID")]

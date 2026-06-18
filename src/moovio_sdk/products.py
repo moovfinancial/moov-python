@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Products(BaseSDK):
@@ -220,14 +220,14 @@ class Products(BaseSDK):
         description: Optional[str] = None,
         images: Optional[
             Union[
-                List[components.AssignProductImage],
-                List[components.AssignProductImageTypedDict],
+                Iterable[components.AssignProductImage],
+                Iterable[components.AssignProductImageTypedDict],
             ]
         ] = None,
         option_groups: Optional[
             Union[
-                List[components.CreateProductOptionGroup],
-                List[components.CreateProductOptionGroupTypedDict],
+                Iterable[components.CreateProductOptionGroup],
+                Iterable[components.CreateProductOptionGroupTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -360,14 +360,14 @@ class Products(BaseSDK):
         description: Optional[str] = None,
         images: Optional[
             Union[
-                List[components.AssignProductImage],
-                List[components.AssignProductImageTypedDict],
+                Iterable[components.AssignProductImage],
+                Iterable[components.AssignProductImageTypedDict],
             ]
         ] = None,
         option_groups: Optional[
             Union[
-                List[components.CreateProductOptionGroup],
-                List[components.CreateProductOptionGroupTypedDict],
+                Iterable[components.CreateProductOptionGroup],
+                Iterable[components.CreateProductOptionGroupTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -689,14 +689,14 @@ class Products(BaseSDK):
         description: Optional[str] = None,
         images: Optional[
             Union[
-                List[components.AssignProductImage],
-                List[components.AssignProductImageTypedDict],
+                Iterable[components.AssignProductImage],
+                Iterable[components.AssignProductImageTypedDict],
             ]
         ] = None,
         option_groups: Optional[
             Union[
-                List[components.CreateProductOptionGroup],
-                List[components.CreateProductOptionGroupTypedDict],
+                Iterable[components.CreateProductOptionGroup],
+                Iterable[components.CreateProductOptionGroupTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -832,14 +832,14 @@ class Products(BaseSDK):
         description: Optional[str] = None,
         images: Optional[
             Union[
-                List[components.AssignProductImage],
-                List[components.AssignProductImageTypedDict],
+                Iterable[components.AssignProductImage],
+                Iterable[components.AssignProductImageTypedDict],
             ]
         ] = None,
         option_groups: Optional[
             Union[
-                List[components.CreateProductOptionGroup],
-                List[components.CreateProductOptionGroupTypedDict],
+                Iterable[components.CreateProductOptionGroup],
+                Iterable[components.CreateProductOptionGroupTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,

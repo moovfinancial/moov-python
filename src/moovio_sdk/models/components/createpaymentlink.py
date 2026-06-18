@@ -33,7 +33,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class CreatePaymentLinkTypedDict(TypedDict):
     r"""Request to create a new payment link.
 
-    A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
+    A payment link must include exactly one of `payment`, `payout`, or `customAmountPayment` details. For payout payment links,
     `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
     to a specific recipient.
 
@@ -48,8 +48,8 @@ class CreatePaymentLinkTypedDict(TypedDict):
 
     In API versions before `2026.07.00`, this was a required field.
 
-    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-    for `open` payment amount types.
+    In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and must be
+    omitted for `customAmountPayment` links, where the payor chooses the amount.
     """
     display: PaymentLinkDisplayOptionsTypedDict
     r"""Customizable display options for a payment link."""
@@ -75,7 +75,7 @@ class CreatePaymentLinkTypedDict(TypedDict):
 class CreatePaymentLink(BaseModel):
     r"""Request to create a new payment link.
 
-    A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
+    A payment link must include exactly one of `payment`, `payout`, or `customAmountPayment` details. For payout payment links,
     `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
     to a specific recipient.
 
@@ -94,8 +94,8 @@ class CreatePaymentLink(BaseModel):
 
     In API versions before `2026.07.00`, this was a required field.
 
-    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-    for `open` payment amount types.
+    In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and must be
+    omitted for `customAmountPayment` links, where the payor chooses the amount.
     """
 
     display: PaymentLinkDisplayOptions
