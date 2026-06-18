@@ -9,7 +9,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class GetEvidenceDataAcceptEnum(str, Enum):
@@ -32,8 +32,8 @@ class Disputes(BaseSDK):
         status: Optional[components.DisputeStatus] = None,
         merchant_account_id: Optional[str] = None,
         cardholder_account_id: Optional[str] = None,
-        dispute_i_ds: Optional[List[str]] = None,
-        transfer_i_ds: Optional[List[str]] = None,
+        dispute_i_ds: Optional[Iterable[str]] = None,
+        transfer_i_ds: Optional[Iterable[str]] = None,
         order_by: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -86,8 +86,8 @@ class Disputes(BaseSDK):
             status=status,
             merchant_account_id=merchant_account_id,
             cardholder_account_id=cardholder_account_id,
-            dispute_i_ds=dispute_i_ds,
-            transfer_i_ds=transfer_i_ds,
+            dispute_i_ds=utils.unmarshal(dispute_i_ds, Optional[List[str]]),
+            transfer_i_ds=utils.unmarshal(transfer_i_ds, Optional[List[str]]),
             order_by=order_by,
         )
 
@@ -168,8 +168,8 @@ class Disputes(BaseSDK):
         status: Optional[components.DisputeStatus] = None,
         merchant_account_id: Optional[str] = None,
         cardholder_account_id: Optional[str] = None,
-        dispute_i_ds: Optional[List[str]] = None,
-        transfer_i_ds: Optional[List[str]] = None,
+        dispute_i_ds: Optional[Iterable[str]] = None,
+        transfer_i_ds: Optional[Iterable[str]] = None,
         order_by: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -222,8 +222,8 @@ class Disputes(BaseSDK):
             status=status,
             merchant_account_id=merchant_account_id,
             cardholder_account_id=cardholder_account_id,
-            dispute_i_ds=dispute_i_ds,
-            transfer_i_ds=transfer_i_ds,
+            dispute_i_ds=utils.unmarshal(dispute_i_ds, Optional[List[str]]),
+            transfer_i_ds=utils.unmarshal(transfer_i_ds, Optional[List[str]]),
             order_by=order_by,
         )
 
@@ -2273,8 +2273,8 @@ class Disputes(BaseSDK):
         evidence_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetEvidenceDataAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetDisputeEvidenceDataResponse:
         r"""Downloads dispute evidence data by ID.
@@ -2388,8 +2388,8 @@ class Disputes(BaseSDK):
         evidence_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetEvidenceDataAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetDisputeEvidenceDataResponse:
         r"""Downloads dispute evidence data by ID.

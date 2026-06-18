@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import BaseModel, OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union, cast
+from typing import Any, Iterable, List, Mapping, Optional, Union, cast
 
 
 class Receipts(BaseSDK):
@@ -15,7 +15,8 @@ class Receipts(BaseSDK):
         self,
         *,
         request: Union[
-            List[components.ReceiptRequest], List[components.ReceiptRequestTypedDict]
+            Iterable[components.ReceiptRequest],
+            Iterable[components.ReceiptRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -120,7 +121,8 @@ class Receipts(BaseSDK):
         self,
         *,
         request: Union[
-            List[components.ReceiptRequest], List[components.ReceiptRequestTypedDict]
+            Iterable[components.ReceiptRequest],
+            Iterable[components.ReceiptRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,

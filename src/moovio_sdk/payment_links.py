@@ -9,7 +9,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class GetQRCodeAcceptEnum(str, Enum):
@@ -75,8 +75,8 @@ class PaymentLinks(BaseSDK):
 
             In API versions before `2026.07.00`, this was a required field.
 
-            In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-            for `open` payment amount types.
+            In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and must be
+            omitted for `customAmountPayment` links, where the payor chooses the amount.
         :param display: Customizable display options for a payment link.
         :param sales_tax_amount: Optional sales tax amount.
         :param max_uses: An optional limit on the number of times this payment link can be used.
@@ -265,8 +265,8 @@ class PaymentLinks(BaseSDK):
 
             In API versions before `2026.07.00`, this was a required field.
 
-            In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-            for `open` payment amount types.
+            In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and must be
+            omitted for `customAmountPayment` links, where the payor chooses the amount.
         :param display: Customizable display options for a payment link.
         :param sales_tax_amount: Optional sales tax amount.
         :param max_uses: An optional limit on the number of times this payment link can be used.
@@ -404,7 +404,7 @@ class PaymentLinks(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        types: Optional[List[components.PaymentLinkType]] = None,
+        types: Optional[Iterable[components.PaymentLinkType]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -437,7 +437,7 @@ class PaymentLinks(BaseSDK):
         request = operations.ListPaymentLinksRequest(
             skip=skip,
             count=count,
-            types=types,
+            types=utils.unmarshal(types, Optional[List[components.PaymentLinkType]]),
             account_id=account_id,
         )
 
@@ -507,7 +507,7 @@ class PaymentLinks(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        types: Optional[List[components.PaymentLinkType]] = None,
+        types: Optional[Iterable[components.PaymentLinkType]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -540,7 +540,7 @@ class PaymentLinks(BaseSDK):
         request = operations.ListPaymentLinksRequest(
             skip=skip,
             count=count,
-            types=types,
+            types=utils.unmarshal(types, Optional[List[components.PaymentLinkType]]),
             account_id=account_id,
         )
 
@@ -1363,8 +1363,8 @@ class PaymentLinks(BaseSDK):
         payment_link_code: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetQRCodeAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetPaymentLinkQRCodeResponse:
         r"""Retrieve the payment link encoded in a QR code.
@@ -1475,8 +1475,8 @@ class PaymentLinks(BaseSDK):
         payment_link_code: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[GetQRCodeAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetPaymentLinkQRCodeResponse:
         r"""Retrieve the payment link encoded in a QR code.

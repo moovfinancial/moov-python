@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 
 
 class Accounts(BaseSDK):
@@ -16,7 +16,7 @@ class Accounts(BaseSDK):
         *,
         account_type: components.CreateAccountType,
         profile: Union[components.CreateProfile, components.CreateProfileTypedDict],
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         terms_of_service: Optional[
             Union[
                 components.TermsOfServicePayload,
@@ -30,28 +30,26 @@ class Accounts(BaseSDK):
         settings: Optional[
             Union[components.Settings, components.SettingsTypedDict]
         ] = None,
-        capabilities: Optional[List[components.CapabilityID]] = None,
+        capabilities: Optional[Iterable[components.CapabilityID]] = None,
         mode: Optional[components.Mode] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.CreateAccountResponse:
-        r"""You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
-        information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
+        r"""You can create business or individual accounts for your users (i.e., customers, merchants) by passing the required information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/).
 
-        If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities, you'll need to:
-          + Send Moov the user [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance.
-            This can be done upon account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field.
-        If you're creating a business account with the business type `llc`, `partnership`, or `privateCorporation`, you'll need to:
+        The `transfers` capability is automatically requested for every account. If you request any capability beyond `transfers` (for example, `send-funds.ach`, `collect-funds.card-payments`), you'll need to:
+          + Send Moov the user's [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance. This can be done at account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field.
+          + Fulfill the [verification and underwriting requirements](https://docs.moov.io/guides/accounts/requirements/) for each requested capability. A capability isn't enabled until its requirements pass — check the capability's status to see what's still outstanding.
+
+        If you're creating a business account, depending on the business type, you'll also need to:
           + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after creating the account.
           + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that business representative ownership information is complete.
 
-        Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/).
-        Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode.
+        Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/). Note that the `mode` field (for production or sandbox) is only required when creating a Partner account. All other account requests will ignore the mode field and be set to the calling Partner account's mode.
 
-        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts.write` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts.write` scope.
 
         :param account_type:
         :param profile:
@@ -61,7 +59,11 @@ class Accounts(BaseSDK):
         :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when
             contacting a customer support team. This data is only allowed on a business account.
         :param settings: User provided settings to manage an account.
-        :param capabilities:
+        :param capabilities: Capabilities to request when the account is created. Request granular capability IDs that match your use case.
+
+            Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+            The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
         :param mode: The operating mode for an account.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -81,7 +83,7 @@ class Accounts(BaseSDK):
         request = components.CreateAccount(
             account_type=account_type,
             profile=utils.get_pydantic_model(profile, components.CreateProfile),
-            metadata=metadata,
+            metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
             terms_of_service=utils.get_pydantic_model(
                 terms_of_service, Optional[components.TermsOfServicePayload]
             ),
@@ -90,7 +92,9 @@ class Accounts(BaseSDK):
                 customer_support, Optional[components.CustomerSupport]
             ),
             settings=utils.get_pydantic_model(settings, Optional[components.Settings]),
-            capabilities=capabilities,
+            capabilities=utils.unmarshal(
+                capabilities, Optional[List[components.CapabilityID]]
+            ),
             mode=mode,
         )
 
@@ -171,7 +175,7 @@ class Accounts(BaseSDK):
         *,
         account_type: components.CreateAccountType,
         profile: Union[components.CreateProfile, components.CreateProfileTypedDict],
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         terms_of_service: Optional[
             Union[
                 components.TermsOfServicePayload,
@@ -185,28 +189,26 @@ class Accounts(BaseSDK):
         settings: Optional[
             Union[components.Settings, components.SettingsTypedDict]
         ] = None,
-        capabilities: Optional[List[components.CapabilityID]] = None,
+        capabilities: Optional[Iterable[components.CapabilityID]] = None,
         mode: Optional[components.Mode] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.CreateAccountResponse:
-        r"""You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
-        information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
+        r"""You can create business or individual accounts for your users (i.e., customers, merchants) by passing the required information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/).
 
-        If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities, you'll need to:
-          + Send Moov the user [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance.
-            This can be done upon account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field.
-        If you're creating a business account with the business type `llc`, `partnership`, or `privateCorporation`, you'll need to:
+        The `transfers` capability is automatically requested for every account. If you request any capability beyond `transfers` (for example, `send-funds.ach`, `collect-funds.card-payments`), you'll need to:
+          + Send Moov the user's [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance. This can be done at account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field.
+          + Fulfill the [verification and underwriting requirements](https://docs.moov.io/guides/accounts/requirements/) for each requested capability. A capability isn't enabled until its requirements pass — check the capability's status to see what's still outstanding.
+
+        If you're creating a business account, depending on the business type, you'll also need to:
           + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after creating the account.
           + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that business representative ownership information is complete.
 
-        Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/).
-        Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode.
+        Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/). Note that the `mode` field (for production or sandbox) is only required when creating a Partner account. All other account requests will ignore the mode field and be set to the calling Partner account's mode.
 
-        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
-        to specify the `/accounts.write` scope.
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts.write` scope.
 
         :param account_type:
         :param profile:
@@ -216,7 +218,11 @@ class Accounts(BaseSDK):
         :param customer_support: User-provided information that can be displayed on credit card transactions for customers to use when
             contacting a customer support team. This data is only allowed on a business account.
         :param settings: User provided settings to manage an account.
-        :param capabilities:
+        :param capabilities: Capabilities to request when the account is created. Request granular capability IDs that match your use case.
+
+            Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+            The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
         :param mode: The operating mode for an account.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -236,7 +242,7 @@ class Accounts(BaseSDK):
         request = components.CreateAccount(
             account_type=account_type,
             profile=utils.get_pydantic_model(profile, components.CreateProfile),
-            metadata=metadata,
+            metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
             terms_of_service=utils.get_pydantic_model(
                 terms_of_service, Optional[components.TermsOfServicePayload]
             ),
@@ -245,7 +251,9 @@ class Accounts(BaseSDK):
                 customer_support, Optional[components.CustomerSupport]
             ),
             settings=utils.get_pydantic_model(settings, Optional[components.Settings]),
-            capabilities=capabilities,
+            capabilities=utils.unmarshal(
+                capabilities, Optional[List[components.CapabilityID]]
+            ),
             mode=mode,
         )
 
@@ -798,7 +806,7 @@ class Accounts(BaseSDK):
         profile: Optional[
             Union[components.PatchProfile, components.PatchProfileTypedDict]
         ] = None,
-        metadata: OptionalNullable[Dict[str, str]] = UNSET,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
         terms_of_service: Optional[
             Union[
                 components.TermsOfServicePayloadUpdate,
@@ -865,7 +873,7 @@ class Accounts(BaseSDK):
                 profile=utils.get_pydantic_model(
                     profile, Optional[components.PatchProfile]
                 ),
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
                 terms_of_service=utils.get_pydantic_model(
                     terms_of_service, Optional[components.TermsOfServicePayloadUpdate]
                 ),
@@ -959,7 +967,7 @@ class Accounts(BaseSDK):
         profile: Optional[
             Union[components.PatchProfile, components.PatchProfileTypedDict]
         ] = None,
-        metadata: OptionalNullable[Dict[str, str]] = UNSET,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
         terms_of_service: Optional[
             Union[
                 components.TermsOfServicePayloadUpdate,
@@ -1026,7 +1034,7 @@ class Accounts(BaseSDK):
                 profile=utils.get_pydantic_model(
                     profile, Optional[components.PatchProfile]
                 ),
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
                 terms_of_service=utils.get_pydantic_model(
                     terms_of_service, Optional[components.TermsOfServicePayloadUpdate]
                 ),
@@ -1604,7 +1612,7 @@ class Accounts(BaseSDK):
         *,
         account_id: str,
         principal_account_id: str,
-        allow_scopes: Optional[List[components.ApplicationScope]] = None,
+        allow_scopes: Optional[Iterable[components.ApplicationScope]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1635,7 +1643,9 @@ class Accounts(BaseSDK):
             account_id=account_id,
             share_scopes=components.ShareScopes(
                 principal_account_id=principal_account_id,
-                allow_scopes=allow_scopes,
+                allow_scopes=utils.unmarshal(
+                    allow_scopes, Optional[List[components.ApplicationScope]]
+                ),
             ),
         )
 
@@ -1715,7 +1725,7 @@ class Accounts(BaseSDK):
         *,
         account_id: str,
         principal_account_id: str,
-        allow_scopes: Optional[List[components.ApplicationScope]] = None,
+        allow_scopes: Optional[Iterable[components.ApplicationScope]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1746,7 +1756,9 @@ class Accounts(BaseSDK):
             account_id=account_id,
             share_scopes=components.ShareScopes(
                 principal_account_id=principal_account_id,
-                allow_scopes=allow_scopes,
+                allow_scopes=utils.unmarshal(
+                    allow_scopes, Optional[List[components.ApplicationScope]]
+                ),
             ),
         )
 
@@ -2013,7 +2025,7 @@ class Accounts(BaseSDK):
         self,
         *,
         account_id: str,
-        countries: List[str],
+        countries: Iterable[str],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2046,7 +2058,7 @@ class Accounts(BaseSDK):
         request = operations.AssignAccountCountriesRequest(
             account_id=account_id,
             account_countries=components.AccountCountries(
-                countries=countries,
+                countries=utils.unmarshal(countries, List[str]),
             ),
         )
 
@@ -2130,7 +2142,7 @@ class Accounts(BaseSDK):
         self,
         *,
         account_id: str,
-        countries: List[str],
+        countries: Iterable[str],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2163,7 +2175,7 @@ class Accounts(BaseSDK):
         request = operations.AssignAccountCountriesRequest(
             account_id=account_id,
             account_countries=components.AccountCountries(
-                countries=countries,
+                countries=utils.unmarshal(countries, List[str]),
             ),
         )
 

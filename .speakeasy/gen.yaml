@@ -30,7 +30,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 25.8.7
+  version: 25.9.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -42,6 +42,7 @@ python:
     - Speakeasy
     - Moov
   baseErrorName: MoovError
+  bodyVariantOverloads: false
   clientServerStatusCodesAsErrors: true
   constFieldCasing: upper
   defaultErrorName: APIError
@@ -50,6 +51,10 @@ python:
   enableCustomCodeRegions: false
   enumFormat: enum
   envVarPrefix: MOOV
+  errorSchemaValidation: true
+  eventStreamClassNames:
+    async: EventStreamAsync
+    sync: EventStream
   fixFlags:
     asyncPaginationSep2025: false
     conflictResistantModelImportsFeb2026: false
@@ -70,19 +75,25 @@ python:
       webhooks: models/webhooks
   inferUnionDiscriminators: true
   inputModelSuffix: input
+  inputTypedDictSuffix: TypedDict
   legacyPyright: true
   license: ""
   maxMethodParams: 999
   methodArguments: infer-optional-args
+  methodTimeoutArgument: timeout-ms
+  methodTimeoutUnits: milliseconds
   moduleName: ""
   multipartArrayFormat: legacy
+  optionalDependencies: {}
   outputModelSuffix: output
   packageManager: poetry
   packageName: moovio_sdk
   preApplyUnionDiscriminators: false
   pytestFilterWarnings: []
   pytestTimeout: 0
+  rawResponseHelpers: false
   responseFormat: flat
+  responseSchemaValidation: true
   sseFlatResponse: false
   templateVersion: v2
   useAsyncHooks: false

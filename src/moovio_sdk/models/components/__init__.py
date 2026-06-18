@@ -123,7 +123,6 @@ if TYPE_CHECKING:
     )
     from .asynccreatedrefund import AsyncCreatedRefund, AsyncCreatedRefundTypedDict
     from .asynctransfer import AsyncTransfer, AsyncTransferTypedDict
-    from .authorizeduser import AuthorizedUser, AuthorizedUserTypedDict
     from .authtoken import AuthToken, AuthTokenTypedDict
     from .authtokenrequest import AuthTokenRequest, AuthTokenRequestTypedDict
     from .bankaccount import BankAccount, BankAccountTypedDict
@@ -329,18 +328,6 @@ if TYPE_CHECKING:
     from .createapplepaysession import (
         CreateApplePaySession,
         CreateApplePaySessionTypedDict,
-    )
-    from .createauthorizeduser import (
-        CreateAuthorizedUser,
-        CreateAuthorizedUserTypedDict,
-    )
-    from .createauthorizedusererror import (
-        CreateAuthorizedUserError,
-        CreateAuthorizedUserErrorTypedDict,
-    )
-    from .createauthorizeduserupdate import (
-        CreateAuthorizedUserUpdate,
-        CreateAuthorizedUserUpdateTypedDict,
     )
     from .createbusinesserror import (
         CreateBusinessError,
@@ -1146,7 +1133,12 @@ if TYPE_CHECKING:
         UpdateCardExpirationTypedDict,
     )
     from .updateevidence import UpdateEvidence, UpdateEvidenceTypedDict
-    from .updateissuedcard import UpdateIssuedCard, UpdateIssuedCardTypedDict
+    from .updateissuedcard import (
+        BillingAddress,
+        BillingAddressTypedDict,
+        UpdateIssuedCard,
+        UpdateIssuedCardTypedDict,
+    )
     from .updateissuedcardstate import UpdateIssuedCardState
     from .updatepaymentlink import UpdatePaymentLink, UpdatePaymentLinkTypedDict
     from .updaterepresentative import (
@@ -1221,6 +1213,10 @@ if TYPE_CHECKING:
     from .webhookdataaccountupdated import (
         WebhookDataAccountUpdated,
         WebhookDataAccountUpdatedTypedDict,
+    )
+    from .webhookdataauthorizationexpiring import (
+        WebhookDataAuthorizationExpiring,
+        WebhookDataAuthorizationExpiringTypedDict,
     )
     from .webhookdatabalanceupdated import (
         WebhookDataBalanceUpdated,
@@ -1480,8 +1476,6 @@ __all__ = [
     "AuthTokenRequest",
     "AuthTokenRequestTypedDict",
     "AuthTokenTypedDict",
-    "AuthorizedUser",
-    "AuthorizedUserTypedDict",
     "BankAccount",
     "BankAccountException",
     "BankAccountExceptionTypedDict",
@@ -1507,6 +1501,8 @@ __all__ = [
     "BatchGetTransfersRequestTypedDict",
     "BillableFee",
     "BillableFeeTypedDict",
+    "BillingAddress",
+    "BillingAddressTypedDict",
     "BillingCountAndAmount",
     "BillingCountAndAmountTypedDict",
     "BillingInterchangeProgramFee",
@@ -1643,12 +1639,6 @@ __all__ = [
     "CreateAccountTypedDict",
     "CreateApplePaySession",
     "CreateApplePaySessionTypedDict",
-    "CreateAuthorizedUser",
-    "CreateAuthorizedUserError",
-    "CreateAuthorizedUserErrorTypedDict",
-    "CreateAuthorizedUserTypedDict",
-    "CreateAuthorizedUserUpdate",
-    "CreateAuthorizedUserUpdateTypedDict",
     "CreateBusinessError",
     "CreateBusinessErrorEin",
     "CreateBusinessErrorEinTypedDict",
@@ -2392,6 +2382,8 @@ __all__ = [
     "WebhookDataAccountDisconnectedTypedDict",
     "WebhookDataAccountUpdated",
     "WebhookDataAccountUpdatedTypedDict",
+    "WebhookDataAuthorizationExpiring",
+    "WebhookDataAuthorizationExpiringTypedDict",
     "WebhookDataBalanceUpdated",
     "WebhookDataBalanceUpdatedTypedDict",
     "WebhookDataBankAccountCreated",
@@ -2581,8 +2573,6 @@ _dynamic_imports: dict[str, str] = {
     "AsyncCreatedRefundTypedDict": ".asynccreatedrefund",
     "AsyncTransfer": ".asynctransfer",
     "AsyncTransferTypedDict": ".asynctransfer",
-    "AuthorizedUser": ".authorizeduser",
-    "AuthorizedUserTypedDict": ".authorizeduser",
     "AuthToken": ".authtoken",
     "AuthTokenTypedDict": ".authtoken",
     "AuthTokenRequest": ".authtokenrequest",
@@ -2754,12 +2744,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateAccountType": ".createaccounttype",
     "CreateApplePaySession": ".createapplepaysession",
     "CreateApplePaySessionTypedDict": ".createapplepaysession",
-    "CreateAuthorizedUser": ".createauthorizeduser",
-    "CreateAuthorizedUserTypedDict": ".createauthorizeduser",
-    "CreateAuthorizedUserError": ".createauthorizedusererror",
-    "CreateAuthorizedUserErrorTypedDict": ".createauthorizedusererror",
-    "CreateAuthorizedUserUpdate": ".createauthorizeduserupdate",
-    "CreateAuthorizedUserUpdateTypedDict": ".createauthorizeduserupdate",
     "CreateBusinessError": ".createbusinesserror",
     "CreateBusinessErrorEin": ".createbusinesserror",
     "CreateBusinessErrorEinTypedDict": ".createbusinesserror",
@@ -3434,6 +3418,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateCardExpirationTypedDict": ".updatecardexpiration",
     "UpdateEvidence": ".updateevidence",
     "UpdateEvidenceTypedDict": ".updateevidence",
+    "BillingAddress": ".updateissuedcard",
+    "BillingAddressTypedDict": ".updateissuedcard",
     "UpdateIssuedCard": ".updateissuedcard",
     "UpdateIssuedCardTypedDict": ".updateissuedcard",
     "UpdateIssuedCardState": ".updateissuedcardstate",
@@ -3503,6 +3489,8 @@ _dynamic_imports: dict[str, str] = {
     "WebhookDataAccountDisconnectedTypedDict": ".webhookdataaccountdisconnected",
     "WebhookDataAccountUpdated": ".webhookdataaccountupdated",
     "WebhookDataAccountUpdatedTypedDict": ".webhookdataaccountupdated",
+    "WebhookDataAuthorizationExpiring": ".webhookdataauthorizationexpiring",
+    "WebhookDataAuthorizationExpiringTypedDict": ".webhookdataauthorizationexpiring",
     "WebhookDataBalanceUpdated": ".webhookdatabalanceupdated",
     "WebhookDataBalanceUpdatedTypedDict": ".webhookdatabalanceupdated",
     "WebhookDataBankAccountCreated": ".webhookdatabankaccountcreated",
