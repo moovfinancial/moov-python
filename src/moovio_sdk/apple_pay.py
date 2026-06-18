@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class ApplePay(BaseSDK):
@@ -16,7 +16,7 @@ class ApplePay(BaseSDK):
         *,
         account_id: str,
         display_name: Optional[str] = None,
-        domains: Optional[List[str]] = None,
+        domains: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -52,7 +52,7 @@ class ApplePay(BaseSDK):
             account_id=account_id,
             register_apple_pay_merchant_domains=components.RegisterApplePayMerchantDomains(
                 display_name=display_name,
-                domains=domains,
+                domains=utils.unmarshal(domains, Optional[List[str]]),
             ),
         )
 
@@ -134,7 +134,7 @@ class ApplePay(BaseSDK):
         *,
         account_id: str,
         display_name: Optional[str] = None,
-        domains: Optional[List[str]] = None,
+        domains: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -170,7 +170,7 @@ class ApplePay(BaseSDK):
             account_id=account_id,
             register_apple_pay_merchant_domains=components.RegisterApplePayMerchantDomains(
                 display_name=display_name,
-                domains=domains,
+                domains=utils.unmarshal(domains, Optional[List[str]]),
             ),
         )
 
@@ -251,8 +251,8 @@ class ApplePay(BaseSDK):
         self,
         *,
         account_id: str,
-        add_domains: Optional[List[str]] = None,
-        remove_domains: Optional[List[str]] = None,
+        add_domains: Optional[Iterable[str]] = None,
+        remove_domains: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -287,8 +287,8 @@ class ApplePay(BaseSDK):
         request = operations.UpdateApplePayMerchantDomainsRequest(
             account_id=account_id,
             update_apple_pay_merchant_domains=components.UpdateApplePayMerchantDomains(
-                add_domains=add_domains,
-                remove_domains=remove_domains,
+                add_domains=utils.unmarshal(add_domains, Optional[List[str]]),
+                remove_domains=utils.unmarshal(remove_domains, Optional[List[str]]),
             ),
         )
 
@@ -368,8 +368,8 @@ class ApplePay(BaseSDK):
         self,
         *,
         account_id: str,
-        add_domains: Optional[List[str]] = None,
-        remove_domains: Optional[List[str]] = None,
+        add_domains: Optional[Iterable[str]] = None,
+        remove_domains: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -404,8 +404,8 @@ class ApplePay(BaseSDK):
         request = operations.UpdateApplePayMerchantDomainsRequest(
             account_id=account_id,
             update_apple_pay_merchant_domains=components.UpdateApplePayMerchantDomains(
-                add_domains=add_domains,
-                remove_domains=remove_domains,
+                add_domains=utils.unmarshal(add_domains, Optional[List[str]]),
+                remove_domains=utils.unmarshal(remove_domains, Optional[List[str]]),
             ),
         )
 

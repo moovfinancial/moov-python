@@ -31,6 +31,12 @@ class CreateAccountTypedDict(TypedDict):
     settings: NotRequired[SettingsTypedDict]
     r"""User provided settings to manage an account."""
     capabilities: NotRequired[List[CapabilityID]]
+    r"""Capabilities to request when the account is created. Request granular capability IDs that match your use case.
+
+    Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+    The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
+    """
     mode: NotRequired[Mode]
     r"""The operating mode for an account."""
 
@@ -62,6 +68,12 @@ class CreateAccount(BaseModel):
     r"""User provided settings to manage an account."""
 
     capabilities: Optional[List[CapabilityID]] = None
+    r"""Capabilities to request when the account is created. Request granular capability IDs that match your use case.
+
+    Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+    The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
+    """
 
     mode: Optional[Mode] = None
     r"""The operating mode for an account."""

@@ -8,7 +8,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional
+from typing import Any, Iterable, List, Mapping, Optional
 
 
 class WalletTransactions(BaseSDK):
@@ -20,7 +20,7 @@ class WalletTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         transaction_type: Optional[components.WalletTransactionType] = None,
-        transaction_types: Optional[List[components.WalletTransactionType]] = None,
+        transaction_types: Optional[Iterable[components.WalletTransactionType]] = None,
         source_type: Optional[components.WalletTransactionSourceType] = None,
         source_id: Optional[str] = None,
         status: Optional[components.WalletTransactionStatus] = None,
@@ -76,7 +76,9 @@ class WalletTransactions(BaseSDK):
             count=count,
             wallet_id=wallet_id,
             transaction_type=transaction_type,
-            transaction_types=transaction_types,
+            transaction_types=utils.unmarshal(
+                transaction_types, Optional[List[components.WalletTransactionType]]
+            ),
             source_type=source_type,
             source_id=source_id,
             status=status,
@@ -163,7 +165,7 @@ class WalletTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         transaction_type: Optional[components.WalletTransactionType] = None,
-        transaction_types: Optional[List[components.WalletTransactionType]] = None,
+        transaction_types: Optional[Iterable[components.WalletTransactionType]] = None,
         source_type: Optional[components.WalletTransactionSourceType] = None,
         source_id: Optional[str] = None,
         status: Optional[components.WalletTransactionStatus] = None,
@@ -219,7 +221,9 @@ class WalletTransactions(BaseSDK):
             count=count,
             wallet_id=wallet_id,
             transaction_type=transaction_type,
-            transaction_types=transaction_types,
+            transaction_types=utils.unmarshal(
+                transaction_types, Optional[List[components.WalletTransactionType]]
+            ),
             source_type=source_type,
             source_id=source_id,
             status=status,
