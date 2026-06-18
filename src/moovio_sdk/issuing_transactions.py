@@ -8,7 +8,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import List, Mapping, Optional
+from typing import Iterable, List, Mapping, Optional
 
 
 class IssuingTransactions(BaseSDK):
@@ -21,7 +21,7 @@ class IssuingTransactions(BaseSDK):
         issued_card_id: Optional[str] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
-        statuses: Optional[List[components.IssuingAuthorizationStatus]] = None,
+        statuses: Optional[Iterable[components.IssuingAuthorizationStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -61,7 +61,9 @@ class IssuingTransactions(BaseSDK):
             issued_card_id=issued_card_id,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
-            statuses=statuses,
+            statuses=utils.unmarshal(
+                statuses, Optional[List[components.IssuingAuthorizationStatus]]
+            ),
         )
 
         req = self._build_request(
@@ -135,7 +137,7 @@ class IssuingTransactions(BaseSDK):
         issued_card_id: Optional[str] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
-        statuses: Optional[List[components.IssuingAuthorizationStatus]] = None,
+        statuses: Optional[Iterable[components.IssuingAuthorizationStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -175,7 +177,9 @@ class IssuingTransactions(BaseSDK):
             issued_card_id=issued_card_id,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
-            statuses=statuses,
+            statuses=utils.unmarshal(
+                statuses, Optional[List[components.IssuingAuthorizationStatus]]
+            ),
         )
 
         req = self._build_request_async(

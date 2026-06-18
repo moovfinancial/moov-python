@@ -2,11 +2,8 @@
 
 from __future__ import annotations
 from .achpaymentdetails import ACHPaymentDetails, ACHPaymentDetailsTypedDict
-from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
-from .amountdecimalrange import AmountDecimalRange, AmountDecimalRangeTypedDict
 from .cardpaymentdetails import CardPaymentDetails, CardPaymentDetailsTypedDict
 from .collectionpaymentmethodtype import CollectionPaymentMethodType
-from enum import Enum
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -14,24 +11,11 @@ from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class AmountType(str, Enum):
-    r"""Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose."""
-
-    FIXED = "fixed"
-    OPEN = "open"
-
-
 class PaymentLinkPaymentDetailsTypedDict(TypedDict):
     r"""Options for payment links used to collect payment."""
 
     allowed_methods: List[CollectionPaymentMethodType]
     r"""A list of payment methods that should be supported for this payment link."""
-    amount_type: NotRequired[AmountType]
-    r"""Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose."""
-    amount_range: NotRequired[AmountDecimalRangeTypedDict]
-    r"""The minimum and maximum amounts the buyer can specify when `amountType` is `open`."""
-    suggested_amounts: NotRequired[List[AmountDecimalTypedDict]]
-    r"""Optional preset amounts displayed to the buyer when `amountType` is `open`."""
     card_details: NotRequired[CardPaymentDetailsTypedDict]
     r"""Options for payment links used to collect a card payment."""
     ach_details: NotRequired[ACHPaymentDetailsTypedDict]
@@ -48,21 +32,6 @@ class PaymentLinkPaymentDetails(BaseModel):
     ]
     r"""A list of payment methods that should be supported for this payment link."""
 
-    amount_type: Annotated[Optional[AmountType], pydantic.Field(alias="amountType")] = (
-        AmountType.FIXED
-    )
-    r"""Indicates whether the payment amount is fixed by the merchant or open for the buyer to choose."""
-
-    amount_range: Annotated[
-        Optional[AmountDecimalRange], pydantic.Field(alias="amountRange")
-    ] = None
-    r"""The minimum and maximum amounts the buyer can specify when `amountType` is `open`."""
-
-    suggested_amounts: Annotated[
-        Optional[List[AmountDecimal]], pydantic.Field(alias="suggestedAmounts")
-    ] = None
-    r"""Optional preset amounts displayed to the buyer when `amountType` is `open`."""
-
     card_details: Annotated[
         Optional[CardPaymentDetails], pydantic.Field(alias="cardDetails")
     ] = None
@@ -78,16 +47,7 @@ class PaymentLinkPaymentDetails(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(
-            [
-                "amountType",
-                "amountRange",
-                "suggestedAmounts",
-                "cardDetails",
-                "achDetails",
-                "metadata",
-            ]
-        )
+        optional_fields = set(["cardDetails", "achDetails", "metadata"])
         serialized = handler(self)
         m = {}
 

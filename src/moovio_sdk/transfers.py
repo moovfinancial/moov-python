@@ -8,7 +8,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 
 
 class Transfers(BaseSDK):
@@ -302,7 +302,7 @@ class Transfers(BaseSDK):
             Union[components.FacilitatorFee, components.FacilitatorFeeTypedDict]
         ] = None,
         description: Optional[str] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         foreign_id: Optional[str] = None,
         line_items: Optional[
             Union[
@@ -374,7 +374,7 @@ class Transfers(BaseSDK):
                     facilitator_fee, Optional[components.FacilitatorFee]
                 ),
                 description=description,
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
                 foreign_id=foreign_id,
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreateTransferLineItems]
@@ -488,7 +488,7 @@ class Transfers(BaseSDK):
             Union[components.FacilitatorFee, components.FacilitatorFeeTypedDict]
         ] = None,
         description: Optional[str] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         foreign_id: Optional[str] = None,
         line_items: Optional[
             Union[
@@ -560,7 +560,7 @@ class Transfers(BaseSDK):
                     facilitator_fee, Optional[components.FacilitatorFee]
                 ),
                 description=description,
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
                 foreign_id=foreign_id,
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreateTransferLineItems]
@@ -660,7 +660,7 @@ class Transfers(BaseSDK):
         self,
         *,
         account_id: str,
-        account_i_ds: Optional[List[str]] = None,
+        account_i_ds: Optional[Iterable[str]] = None,
         status: Optional[components.TransferStatus] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
@@ -718,7 +718,7 @@ class Transfers(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListTransfersRequest(
-            account_i_ds=account_i_ds,
+            account_i_ds=utils.unmarshal(account_i_ds, Optional[List[str]]),
             status=status,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
@@ -803,7 +803,7 @@ class Transfers(BaseSDK):
         self,
         *,
         account_id: str,
-        account_i_ds: Optional[List[str]] = None,
+        account_i_ds: Optional[Iterable[str]] = None,
         status: Optional[components.TransferStatus] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
@@ -861,7 +861,7 @@ class Transfers(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListTransfersRequest(
-            account_i_ds=account_i_ds,
+            account_i_ds=utils.unmarshal(account_i_ds, Optional[List[str]]),
             status=status,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
@@ -946,7 +946,7 @@ class Transfers(BaseSDK):
         self,
         *,
         account_id: str,
-        transfer_i_ds: List[str],
+        transfer_i_ds: Iterable[str],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -981,7 +981,7 @@ class Transfers(BaseSDK):
         request = operations.BatchGetTransfersRequest(
             account_id=account_id,
             batch_get_transfers_request=components.BatchGetTransfersRequest(
-                transfer_i_ds=transfer_i_ds,
+                transfer_i_ds=utils.unmarshal(transfer_i_ds, List[str]),
             ),
         )
 
@@ -1058,7 +1058,7 @@ class Transfers(BaseSDK):
         self,
         *,
         account_id: str,
-        transfer_i_ds: List[str],
+        transfer_i_ds: Iterable[str],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1093,7 +1093,7 @@ class Transfers(BaseSDK):
         request = operations.BatchGetTransfersRequest(
             account_id=account_id,
             batch_get_transfers_request=components.BatchGetTransfersRequest(
-                transfer_i_ds=transfer_i_ds,
+                transfer_i_ds=utils.unmarshal(transfer_i_ds, List[str]),
             ),
         )
 
@@ -1371,7 +1371,7 @@ class Transfers(BaseSDK):
         *,
         transfer_id: str,
         account_id: str,
-        metadata: OptionalNullable[Dict[str, str]] = UNSET,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
         foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1408,7 +1408,7 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             account_id=account_id,
             patch_transfer=components.PatchTransfer(
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
                 foreign_id=foreign_id,
             ),
         )
@@ -1487,7 +1487,7 @@ class Transfers(BaseSDK):
         *,
         transfer_id: str,
         account_id: str,
-        metadata: OptionalNullable[Dict[str, str]] = UNSET,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
         foreign_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1524,7 +1524,7 @@ class Transfers(BaseSDK):
             transfer_id=transfer_id,
             account_id=account_id,
             patch_transfer=components.PatchTransfer(
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
                 foreign_id=foreign_id,
             ),
         )
@@ -1786,6 +1786,200 @@ class Transfers(BaseSDK):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def list_cancellations(
+        self,
+        *,
+        account_id: str,
+        transfer_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListCancellationsResponse:
+        r"""Get a list of cancellations for a transfer.
+
+          To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+          to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id: Moov account ID of the partner or transfer's source or destination.
+        :param transfer_id: Identifier for the transfer.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListCancellationsRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/accounts/{accountID}/transfers/{transferID}/cancellations",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listCancellations",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListCancellationsResponse(
+                result=unmarshal_json_response(List[components.Cancellation], http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def list_cancellations_async(
+        self,
+        *,
+        account_id: str,
+        transfer_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListCancellationsResponse:
+        r"""Get a list of cancellations for a transfer.
+
+          To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
+          to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id: Moov account ID of the partner or transfer's source or destination.
+        :param transfer_id: Identifier for the transfer.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListCancellationsRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/accounts/{accountID}/transfers/{transferID}/cancellations",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listCancellations",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListCancellationsResponse(
+                result=unmarshal_json_response(List[components.Cancellation], http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "504"], "*"):

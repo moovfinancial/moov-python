@@ -3,9 +3,7 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
-from moovio_sdk.models.components import (
-    createauthorizedusererror as components_createauthorizedusererror,
-)
+from moovio_sdk.models.components import addresserror as components_addresserror
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -15,10 +13,11 @@ from typing_extensions import Annotated
 
 class UpdateIssuedCardErrorData(BaseModel):
     state: Optional[str] = None
-    memo: Optional[str] = None
-    authorized_user: Annotated[
-        Optional[components_createauthorizedusererror.CreateAuthorizedUserError],
-        pydantic.Field(alias="authorizedUser"),
+    nickname: Optional[str] = None
+    metadata: Optional[str] = None
+    billing_address: Annotated[
+        Optional[components_addresserror.AddressError],
+        pydantic.Field(alias="billingAddress"),
     ] = None
 
 

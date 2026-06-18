@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class BankAccounts(BaseSDK):
@@ -1084,7 +1084,7 @@ class BankAccounts(BaseSDK):
         *,
         account_id: str,
         bank_account_id: str,
-        amounts: List[int],
+        amounts: Iterable[int],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1117,7 +1117,7 @@ class BankAccounts(BaseSDK):
             account_id=account_id,
             bank_account_id=bank_account_id,
             complete_micro_deposits=components.CompleteMicroDeposits(
-                amounts=amounts,
+                amounts=utils.unmarshal(amounts, List[int]),
             ),
         )
 
@@ -1204,7 +1204,7 @@ class BankAccounts(BaseSDK):
         *,
         account_id: str,
         bank_account_id: str,
-        amounts: List[int],
+        amounts: Iterable[int],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1237,7 +1237,7 @@ class BankAccounts(BaseSDK):
             account_id=account_id,
             bank_account_id=bank_account_id,
             complete_micro_deposits=components.CompleteMicroDeposits(
-                amounts=amounts,
+                amounts=utils.unmarshal(amounts, List[int]),
             ),
         )
 

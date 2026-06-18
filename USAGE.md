@@ -47,7 +47,10 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    }, mode=components.Mode.PRODUCTION)
+    }, capabilities=[
+        components.CapabilityID.COLLECT_FUNDS_CARD_PAYMENTS,
+        components.CapabilityID.SEND_FUNDS_ACH,
+    ], mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)
@@ -107,7 +110,10 @@ async def main():
             "ach_payment": {
                 "company_name": "WholeBodyFitness",
             },
-        }, mode=components.Mode.PRODUCTION)
+        }, capabilities=[
+            components.CapabilityID.COLLECT_FUNDS_CARD_PAYMENTS,
+            components.CapabilityID.SEND_FUNDS_ACH,
+        ], mode=components.Mode.PRODUCTION)
 
         # Handle response
         print(res)

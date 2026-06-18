@@ -10,6 +10,10 @@ from .createpaymentlinklineitems import (
     CreatePaymentLinkLineItems,
     CreatePaymentLinkLineItemsTypedDict,
 )
+from .paymentlinkcustomamountpaymentdetails import (
+    PaymentLinkCustomAmountPaymentDetails,
+    PaymentLinkCustomAmountPaymentDetailsTypedDict,
+)
 from .paymentlinkcustomeroptions import (
     PaymentLinkCustomerOptions,
     PaymentLinkCustomerOptionsTypedDict,
@@ -37,7 +41,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class CreatePaymentLinkTypedDict(TypedDict):
     r"""Request to create a new payment link.
 
-    A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
+    A payment link must include exactly one of `payment`, `payout`, or `customAmountPayment` details. For payout payment links,
     `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
     to a specific recipient.
 
@@ -54,8 +58,8 @@ class CreatePaymentLinkTypedDict(TypedDict):
 
     In API versions before `2026.07.00`, this was a required field.
 
-    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-    for `open` payment amount types.
+    In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and must be
+    omitted for `customAmountPayment` links, where the payor chooses the amount.
     """
     max_uses: NotRequired[int]
     r"""An optional limit on the number of times this payment link can be used.
@@ -68,6 +72,8 @@ class CreatePaymentLinkTypedDict(TypedDict):
     payment: NotRequired[PaymentLinkPaymentDetailsTypedDict]
     r"""Options for payment links used to collect payment."""
     payout: NotRequired[PaymentLinkPayoutDetailsTypedDict]
+    custom_amount_payment: NotRequired[PaymentLinkCustomAmountPaymentDetailsTypedDict]
+    r"""Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`."""
     line_items: NotRequired[CreatePaymentLinkLineItemsTypedDict]
     r"""An optional collection of line items for a payment link.
     When line items are provided, their total plus tax must equal the payment link amount.
@@ -78,7 +84,7 @@ class CreatePaymentLinkTypedDict(TypedDict):
 class CreatePaymentLink(BaseModel):
     r"""Request to create a new payment link.
 
-    A payment link must include either `payment` or `payout` details, but not both. For payout payment links,
+    A payment link must include exactly one of `payment`, `payout`, or `customAmountPayment` details. For payout payment links,
     `maxUses` will automatically be set to 1, as these are intended for a one-time disbursement
     to a specific recipient.
 
@@ -100,8 +106,8 @@ class CreatePaymentLink(BaseModel):
 
     In API versions before `2026.07.00`, this was a required field.
 
-    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-    for `open` payment amount types.
+    In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and must be
+    omitted for `customAmountPayment` links, where the payor chooses the amount.
     """
 
     max_uses: Annotated[Optional[int], pydantic.Field(alias="maxUses")] = None
@@ -119,6 +125,12 @@ class CreatePaymentLink(BaseModel):
     r"""Options for payment links used to collect payment."""
 
     payout: Optional[PaymentLinkPayoutDetails] = None
+
+    custom_amount_payment: Annotated[
+        Optional[PaymentLinkCustomAmountPaymentDetails],
+        pydantic.Field(alias="customAmountPayment"),
+    ] = None
+    r"""Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`."""
 
     line_items: Annotated[
         Optional[CreatePaymentLinkLineItems], pydantic.Field(alias="lineItems")
@@ -141,6 +153,7 @@ class CreatePaymentLink(BaseModel):
                 "customer",
                 "payment",
                 "payout",
+                "customAmountPayment",
                 "lineItems",
                 "amountDetails",
             ]

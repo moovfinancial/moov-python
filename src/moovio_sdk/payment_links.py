@@ -9,7 +9,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class GetQRCodeAcceptEnum(str, Enum):
@@ -49,6 +49,12 @@ class PaymentLinks(BaseSDK):
                 components.PaymentLinkPayoutDetailsTypedDict,
             ]
         ] = None,
+        custom_amount_payment: Optional[
+            Union[
+                components.PaymentLinkCustomAmountPaymentDetails,
+                components.PaymentLinkCustomAmountPaymentDetailsTypedDict,
+            ]
+        ] = None,
         line_items: Optional[
             Union[
                 components.CreatePaymentLinkLineItems,
@@ -79,8 +85,8 @@ class PaymentLinks(BaseSDK):
 
             In API versions before `2026.07.00`, this was a required field.
 
-            In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-            for `open` payment amount types.
+            In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and must be
+            omitted for `customAmountPayment` links, where the payor chooses the amount.
         :param max_uses: An optional limit on the number of times this payment link can be used.
 
             **For payouts, `maxUses` is always 1.**
@@ -88,6 +94,7 @@ class PaymentLinks(BaseSDK):
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
+        :param custom_amount_payment: Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`.
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus tax must equal the payment link amount.
         :param amount_details:
@@ -125,6 +132,10 @@ class PaymentLinks(BaseSDK):
                 ),
                 payout=utils.get_pydantic_model(
                     payout, Optional[components.PaymentLinkPayoutDetails]
+                ),
+                custom_amount_payment=utils.get_pydantic_model(
+                    custom_amount_payment,
+                    Optional[components.PaymentLinkCustomAmountPaymentDetails],
                 ),
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreatePaymentLinkLineItems]
@@ -242,6 +253,12 @@ class PaymentLinks(BaseSDK):
                 components.PaymentLinkPayoutDetailsTypedDict,
             ]
         ] = None,
+        custom_amount_payment: Optional[
+            Union[
+                components.PaymentLinkCustomAmountPaymentDetails,
+                components.PaymentLinkCustomAmountPaymentDetailsTypedDict,
+            ]
+        ] = None,
         line_items: Optional[
             Union[
                 components.CreatePaymentLinkLineItems,
@@ -272,8 +289,8 @@ class PaymentLinks(BaseSDK):
 
             In API versions before `2026.07.00`, this was a required field.
 
-            In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-            for `open` payment amount types.
+            In API version `2026.07.00` and beyond, this field is required for `payment` and `payout` links and must be
+            omitted for `customAmountPayment` links, where the payor chooses the amount.
         :param max_uses: An optional limit on the number of times this payment link can be used.
 
             **For payouts, `maxUses` is always 1.**
@@ -281,6 +298,7 @@ class PaymentLinks(BaseSDK):
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
+        :param custom_amount_payment: Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`.
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus tax must equal the payment link amount.
         :param amount_details:
@@ -318,6 +336,10 @@ class PaymentLinks(BaseSDK):
                 ),
                 payout=utils.get_pydantic_model(
                     payout, Optional[components.PaymentLinkPayoutDetails]
+                ),
+                custom_amount_payment=utils.get_pydantic_model(
+                    custom_amount_payment,
+                    Optional[components.PaymentLinkCustomAmountPaymentDetails],
                 ),
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreatePaymentLinkLineItems]
@@ -410,7 +432,7 @@ class PaymentLinks(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        types: Optional[List[components.PaymentLinkType]] = None,
+        types: Optional[Iterable[components.PaymentLinkType]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -443,7 +465,7 @@ class PaymentLinks(BaseSDK):
         request = operations.ListPaymentLinksRequest(
             skip=skip,
             count=count,
-            types=types,
+            types=utils.unmarshal(types, Optional[List[components.PaymentLinkType]]),
             account_id=account_id,
         )
 
@@ -513,7 +535,7 @@ class PaymentLinks(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        types: Optional[List[components.PaymentLinkType]] = None,
+        types: Optional[Iterable[components.PaymentLinkType]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -546,7 +568,7 @@ class PaymentLinks(BaseSDK):
         request = operations.ListPaymentLinksRequest(
             skip=skip,
             count=count,
-            types=types,
+            types=utils.unmarshal(types, Optional[List[components.PaymentLinkType]]),
             account_id=account_id,
         )
 
@@ -837,6 +859,12 @@ class PaymentLinks(BaseSDK):
                 components.PaymentLinkPayoutDetailsUpdateTypedDict,
             ]
         ] = None,
+        custom_amount_payment: Optional[
+            Union[
+                components.PaymentLinkCustomAmountPaymentDetailsUpdate,
+                components.PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict,
+            ]
+        ] = None,
         line_items: Optional[
             Union[
                 components.CreatePaymentLinkLineItemsUpdate,
@@ -867,6 +895,7 @@ class PaymentLinks(BaseSDK):
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
+        :param custom_amount_payment: Options for a custom amount payment link. A payment link's type cannot be changed after creation.
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus tax must equal the payment link amount.
         :param amount_details:
@@ -904,6 +933,10 @@ class PaymentLinks(BaseSDK):
                 ),
                 payout=utils.get_pydantic_model(
                     payout, Optional[components.PaymentLinkPayoutDetailsUpdate]
+                ),
+                custom_amount_payment=utils.get_pydantic_model(
+                    custom_amount_payment,
+                    Optional[components.PaymentLinkCustomAmountPaymentDetailsUpdate],
                 ),
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreatePaymentLinkLineItemsUpdate]
@@ -1023,6 +1056,12 @@ class PaymentLinks(BaseSDK):
                 components.PaymentLinkPayoutDetailsUpdateTypedDict,
             ]
         ] = None,
+        custom_amount_payment: Optional[
+            Union[
+                components.PaymentLinkCustomAmountPaymentDetailsUpdate,
+                components.PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict,
+            ]
+        ] = None,
         line_items: Optional[
             Union[
                 components.CreatePaymentLinkLineItemsUpdate,
@@ -1053,6 +1092,7 @@ class PaymentLinks(BaseSDK):
         :param customer:
         :param payment: Options for payment links used to collect payment.
         :param payout:
+        :param custom_amount_payment: Options for a custom amount payment link. A payment link's type cannot be changed after creation.
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus tax must equal the payment link amount.
         :param amount_details:
@@ -1090,6 +1130,10 @@ class PaymentLinks(BaseSDK):
                 ),
                 payout=utils.get_pydantic_model(
                     payout, Optional[components.PaymentLinkPayoutDetailsUpdate]
+                ),
+                custom_amount_payment=utils.get_pydantic_model(
+                    custom_amount_payment,
+                    Optional[components.PaymentLinkCustomAmountPaymentDetailsUpdate],
                 ),
                 line_items=utils.get_pydantic_model(
                     line_items, Optional[components.CreatePaymentLinkLineItemsUpdate]

@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional
+from typing import Any, Iterable, List, Mapping, Optional
 
 
 class Capabilities(BaseSDK):
@@ -22,7 +22,7 @@ class Capabilities(BaseSDK):
     ) -> operations.ListCapabilitiesResponse:
         r"""Retrieve all the capabilities an account has requested.
 
-        Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+        Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
@@ -118,7 +118,7 @@ class Capabilities(BaseSDK):
     ) -> operations.ListCapabilitiesResponse:
         r"""Retrieve all the capabilities an account has requested.
 
-        Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+        Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
@@ -207,19 +207,23 @@ class Capabilities(BaseSDK):
         self,
         *,
         account_id: str,
-        capabilities: List[components.CapabilityID],
+        capabilities: Iterable[components.CapabilityID],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.RequestCapabilitiesResponse:
-        r"""Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+        r"""Request capabilities for a specific account. Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
         :param account_id:
-        :param capabilities:
+        :param capabilities: Capabilities to request for the account. Request granular capability IDs that match your use case.
+
+            Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+            The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -238,7 +242,9 @@ class Capabilities(BaseSDK):
         request = operations.RequestCapabilitiesRequest(
             account_id=account_id,
             add_capabilities=components.AddCapabilities(
-                capabilities=capabilities,
+                capabilities=utils.unmarshal(
+                    capabilities, List[components.CapabilityID]
+                ),
             ),
         )
 
@@ -322,19 +328,23 @@ class Capabilities(BaseSDK):
         self,
         *,
         account_id: str,
-        capabilities: List[components.CapabilityID],
+        capabilities: Iterable[components.CapabilityID],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.RequestCapabilitiesResponse:
-        r"""Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+        r"""Request capabilities for a specific account. Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
         :param account_id:
-        :param capabilities:
+        :param capabilities: Capabilities to request for the account. Request granular capability IDs that match your use case.
+
+            Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+            The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Use granular values such as `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance` instead.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -353,7 +363,9 @@ class Capabilities(BaseSDK):
         request = operations.RequestCapabilitiesRequest(
             account_id=account_id,
             add_capabilities=components.AddCapabilities(
-                capabilities=capabilities,
+                capabilities=utils.unmarshal(
+                    capabilities, List[components.CapabilityID]
+                ),
             ),
         )
 
@@ -443,7 +455,7 @@ class Capabilities(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetCapabilityResponse:
-        r"""Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+        r"""Retrieve a specific capability that an account has requested. Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
@@ -451,7 +463,13 @@ class Capabilities(BaseSDK):
         :param account_id:
         :param capability_id: Moov account capabilities.
 
-            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+            **Deprecated capabilities**
+
+            The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance`). Deprecated values will be removed in a future API version.
+
+            Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in the list for your Partner account. These are read-only capabilities that Moov requests. These capabilities remain active with your account and require no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -542,7 +560,7 @@ class Capabilities(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetCapabilityResponse:
-        r"""Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+        r"""Retrieve a specific capability that an account has requested. Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
@@ -550,7 +568,13 @@ class Capabilities(BaseSDK):
         :param account_id:
         :param capability_id: Moov account capabilities.
 
-            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+            **Deprecated capabilities**
+
+            The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance`). Deprecated values will be removed in a future API version.
+
+            Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in the list for your Partner account. These are read-only capabilities that Moov requests. These capabilities remain active with your account and require no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -641,7 +665,7 @@ class Capabilities(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.DisableCapabilityResponse:
-        r"""Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+        r"""Disable a specific capability that an account has requested. Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
           To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
@@ -649,7 +673,13 @@ class Capabilities(BaseSDK):
         :param account_id:
         :param capability_id: Moov account capabilities.
 
-            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+            **Deprecated capabilities**
+
+            The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance`). Deprecated values will be removed in a future API version.
+
+            Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in the list for your Partner account. These are read-only capabilities that Moov requests. These capabilities remain active with your account and require no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -743,7 +773,7 @@ class Capabilities(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.DisableCapabilityResponse:
-        r"""Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+        r"""Disable a specific capability that an account has requested. Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
           To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
@@ -751,7 +781,13 @@ class Capabilities(BaseSDK):
         :param account_id:
         :param capability_id: Moov account capabilities.
 
-            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in your list. These are read-only capabilities that Moov requests and uses for account verification purposes. These capabilities remains active with your account and require no additional action.
+            **Deprecated capabilities**
+
+            The `send-funds`, `collect-funds`, and `wallet` capability IDs are deprecated. Request granular capabilities instead (for example, `send-funds.ach`, `collect-funds.card-payments`, or `wallet.balance`). Deprecated values will be removed in a future API version.
+
+            Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to choose the right capabilities for your integration.
+
+            The `production-app`, `platform.production-app`, and / or `platform.wallet-transfers` capabilities might appear in the list for your Partner account. These are read-only capabilities that Moov requests. These capabilities remain active with your account and require no additional action.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

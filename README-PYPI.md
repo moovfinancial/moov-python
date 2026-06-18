@@ -171,7 +171,10 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    }, mode=components.Mode.PRODUCTION)
+    }, capabilities=[
+        components.CapabilityID.COLLECT_FUNDS_CARD_PAYMENTS,
+        components.CapabilityID.SEND_FUNDS_ACH,
+    ], mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)
@@ -231,7 +234,10 @@ async def main():
             "ach_payment": {
                 "company_name": "WholeBodyFitness",
             },
-        }, mode=components.Mode.PRODUCTION)
+        }, capabilities=[
+            components.CapabilityID.COLLECT_FUNDS_CARD_PAYMENTS,
+            components.CapabilityID.SEND_FUNDS_ACH,
+        ], mode=components.Mode.PRODUCTION)
 
         # Handle response
         print(res)
@@ -299,7 +305,10 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    }, mode=components.Mode.PRODUCTION)
+    }, capabilities=[
+        components.CapabilityID.COLLECT_FUNDS_CARD_PAYMENTS,
+        components.CapabilityID.SEND_FUNDS_ACH,
+    ], mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)
@@ -334,21 +343,19 @@ you'll need to specify the `/accounts/{accountID}/terminal-configuration.read` s
 
 ### [Accounts](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/accounts/README.md)
 
-* [create](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/accounts/README.md#create) - You can create **business** or **individual** accounts for your users (i.e., customers, merchants) by passing the required
-information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/requirements/).
+* [create](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/accounts/README.md#create) - You can create business or individual accounts for your users (i.e., customers, merchants) by passing the required information to Moov. Requirements differ per account type and requested [capabilities](https://docs.moov.io/guides/accounts/capabilities/reference/).
 
-If you're requesting the `wallet`, `send-funds`, `collect-funds`, or `card-issuing` capabilities, you'll need to:
-  + Send Moov the user [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance.
-    This can be done upon account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field.
-If you're creating a business account with the business type `llc`, `partnership`, or `privateCorporation`, you'll need to:
+The `transfers` capability is automatically requested for every account. If you request any capability beyond `transfers` (for example, `send-funds.ach`, `collect-funds.card-payments`), you'll need to:
+  + Send Moov the user's [platform terms of service agreement](https://docs.moov.io/guides/accounts/requirements/platform-agreement/) acceptance. This can be done at account creation, or by [patching](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account using the `termsOfService` field.
+  + Fulfill the [verification and underwriting requirements](https://docs.moov.io/guides/accounts/requirements/) for each requested capability. A capability isn't enabled until its requirements pass — check the capability's status to see what's still outstanding.
+
+If you're creating a business account, depending on the business type, you'll also need to:
   + Provide [business representatives](https://docs.moov.io/api/moov-accounts/representatives/) after creating the account.
   + [Patch](https://docs.moov.io/api/moov-accounts/accounts/patch/) the account to indicate that business representative ownership information is complete.
 
-Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/).
-Note that the `mode` field (for production or sandbox) is only required when creating a _facilitator_ account. All non-facilitator account requests will ignore the mode field and be set to the calling facilitator's mode.
+Visit our documentation to read more about [creating accounts](https://docs.moov.io/guides/accounts/create-accounts/) and [verification requirements](https://docs.moov.io/guides/accounts/requirements/identity-verification/). Note that the `mode` field (for production or sandbox) is only required when creating a Partner account. All other account requests will ignore the mode field and be set to the calling Partner account's mode.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
-to specify the `/accounts.write` scope.
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) you'll need to specify the `/accounts.write` scope.
 * [list](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/accounts/README.md#list) - List or search accounts to which the caller is connected.
 
 All supported query parameters are optional. If none are provided the response will include all connected accounts.
@@ -580,19 +587,19 @@ you'll need to specify the `/accounts/{accountID}/branding.read` scope.
 
 * [list](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/capabilities/README.md#list) - Retrieve all the capabilities an account has requested.
 
-Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
-* [request](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/capabilities/README.md#request) - Request capabilities for a specific account. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+* [request](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/capabilities/README.md#request) - Request capabilities for a specific account. Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
-* [get](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/capabilities/README.md#get) - Retrieve a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+* [get](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/capabilities/README.md#get) - Retrieve a specific capability that an account has requested. Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/capabilities.read` scope.
-* [disable](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/capabilities/README.md#disable) - Disable a specific capability that an account has requested. Read our [capabilities guide](https://docs.moov.io/guides/accounts/capabilities/) to learn more.
+* [disable](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/capabilities/README.md#disable) - Disable a specific capability that an account has requested. Read our [capabilities reference](https://docs.moov.io/guides/accounts/capabilities/reference/) to learn more.
 
   To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
@@ -1284,6 +1291,10 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
   
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
   to specify the `/accounts/{accountID}/transfers.write` scope.
+* [list_cancellations](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#list_cancellations) -   Get a list of cancellations for a transfer.
+  
+  To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
+  to specify the `/accounts/{accountID}/transfers.read` scope.
 * [get_cancellation](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#get_cancellation) -   Get details of a cancellation for a transfer.
   
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
@@ -1473,7 +1484,10 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    }, mode=components.Mode.PRODUCTION,
+    }, capabilities=[
+        components.CapabilityID.COLLECT_FUNDS_CARD_PAYMENTS,
+        components.CapabilityID.SEND_FUNDS_ACH,
+    ], mode=components.Mode.PRODUCTION,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -1530,7 +1544,10 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    }, mode=components.Mode.PRODUCTION)
+    }, capabilities=[
+        components.CapabilityID.COLLECT_FUNDS_CARD_PAYMENTS,
+        components.CapabilityID.SEND_FUNDS_ACH,
+    ], mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)
@@ -1602,7 +1619,10 @@ with Moov(
             "ach_payment": {
                 "company_name": "WholeBodyFitness",
             },
-        }, mode=components.Mode.PRODUCTION)
+        }, capabilities=[
+            components.CapabilityID.COLLECT_FUNDS_CARD_PAYMENTS,
+            components.CapabilityID.SEND_FUNDS_ACH,
+        ], mode=components.Mode.PRODUCTION)
 
         # Handle response
         print(res)
@@ -1636,64 +1656,64 @@ with Moov(
 
 
 **Inherit from [`MoovError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/mooverror.py)**:
-* [`GenericError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/genericerror.py): Applicable to 85 of 188 methods.*
-* [`BrandValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/brandvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 188 methods.*
-* [`ImageRequestValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/imagerequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 188 methods.*
-* [`ProductRequestValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/productrequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 188 methods.*
-* [`ScheduleValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/schedulevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 188 methods.*
-* [`TransferConfigValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transferconfigvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 188 methods.*
-* [`TerminalApplicationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/terminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 188 methods.*
-* [`DuplicateCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/duplicatecarderror.py): Attempted to link card that already exists on the account. Status code `409`. Applicable to 1 of 188 methods.*
-* [`Transfer`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transfer.py): Details of a Transfer. Status code `409`. Applicable to 1 of 188 methods.*
-* [`CardAcquiringRefund`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/cardacquiringrefund.py): Details of a card refund. Status code `409`. Applicable to 1 of 188 methods.*
-* [`CreateAccountError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`PatchAccountError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/patchaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`ConnectAccountRequestValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/connectaccountrequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`AssignCountriesError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/assigncountrieserror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`LinkApplePayError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/linkapplepayerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`BankAccountValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/bankaccountvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`MicroDepositValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/microdepositvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`AddCapabilitiesError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/addcapabilitieserror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`LinkCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/linkcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`UpdateCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updatecarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`CardMetadataRequestError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/cardmetadatarequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`FileUploadValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/fileuploadvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`FeePlanAgreementError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/feeplanagreementerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`FileValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/filevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`LinkGooglePayError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/linkgooglepayerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`ImageMetadataValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/imagemetadatavalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`CreateInvoiceError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createinvoiceerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`ListInvoicesValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/listinvoicesvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`UpdateInvoiceError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updateinvoiceerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`CreateInvoicePaymentError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createinvoicepaymenterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`CreatePaymentLinkError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createpaymentlinkerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`UpdatePaymentLinkError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updatepaymentlinkerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`RepresentativeValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/representativevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`CreateResolutionLinkError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createresolutionlinkerror.py): Describes validation errors for the create resolution link request. Status code `422`. Applicable to 1 of 188 methods.*
-* [`CreateSweepConfigError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createsweepconfigerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`PatchSweepConfigError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/patchsweepconfigerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`AccountTerminalApplicationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/accountterminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`CreateTicketError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createticketerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`UpdateTicketError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updateticketerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`TransferOptionsValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transferoptionsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`TransferValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transfervalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`ListTransfersValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/listtransfersvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`PatchTransferValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/patchtransfervalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`RefundValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/refundvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`ReversalValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/reversalvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`UpsertUnderwritingError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/upsertunderwritingerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`UpdateUnderwritingError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updateunderwritingerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`CreateWalletValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createwalletvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`ListWalletsValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/listwalletsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`PatchWalletValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/patchwalletvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`ListWalletTransactionsValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/listwallettransactionsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`CreateWebhookValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createwebhookvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`UpdateWebhookValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updatewebhookvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`RequestCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/requestcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`UpdateIssuedCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updateissuedcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`RevokeTokenRequestError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/revoketokenrequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`AuthTokenRequestError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/authtokenrequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
-* [`OnboardingInviteError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/onboardinginviteerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 188 methods.*
+* [`GenericError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/genericerror.py): Applicable to 85 of 189 methods.*
+* [`BrandValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/brandvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 189 methods.*
+* [`ImageRequestValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/imagerequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 189 methods.*
+* [`ProductRequestValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/productrequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 189 methods.*
+* [`ScheduleValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/schedulevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 189 methods.*
+* [`TransferConfigValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transferconfigvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 189 methods.*
+* [`TerminalApplicationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/terminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 189 methods.*
+* [`DuplicateCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/duplicatecarderror.py): Attempted to link card that already exists on the account. Status code `409`. Applicable to 1 of 189 methods.*
+* [`Transfer`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transfer.py): Details of a Transfer. Status code `409`. Applicable to 1 of 189 methods.*
+* [`CardAcquiringRefund`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/cardacquiringrefund.py): Details of a card refund. Status code `409`. Applicable to 1 of 189 methods.*
+* [`CreateAccountError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`PatchAccountError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/patchaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`ConnectAccountRequestValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/connectaccountrequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`AssignCountriesError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/assigncountrieserror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`LinkApplePayError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/linkapplepayerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`BankAccountValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/bankaccountvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`MicroDepositValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/microdepositvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`AddCapabilitiesError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/addcapabilitieserror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`LinkCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/linkcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`UpdateCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updatecarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`CardMetadataRequestError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/cardmetadatarequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`FileUploadValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/fileuploadvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`FeePlanAgreementError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/feeplanagreementerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`FileValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/filevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`LinkGooglePayError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/linkgooglepayerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`ImageMetadataValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/imagemetadatavalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`CreateInvoiceError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createinvoiceerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`ListInvoicesValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/listinvoicesvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`UpdateInvoiceError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updateinvoiceerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`CreateInvoicePaymentError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createinvoicepaymenterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`CreatePaymentLinkError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createpaymentlinkerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`UpdatePaymentLinkError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updatepaymentlinkerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`RepresentativeValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/representativevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`CreateResolutionLinkError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createresolutionlinkerror.py): Describes validation errors for the create resolution link request. Status code `422`. Applicable to 1 of 189 methods.*
+* [`CreateSweepConfigError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createsweepconfigerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`PatchSweepConfigError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/patchsweepconfigerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`AccountTerminalApplicationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/accountterminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`CreateTicketError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createticketerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`UpdateTicketError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updateticketerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`TransferOptionsValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transferoptionsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`TransferValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/transfervalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`ListTransfersValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/listtransfersvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`PatchTransferValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/patchtransfervalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`RefundValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/refundvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`ReversalValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/reversalvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`UpsertUnderwritingError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/upsertunderwritingerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`UpdateUnderwritingError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updateunderwritingerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`CreateWalletValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createwalletvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`ListWalletsValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/listwalletsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`PatchWalletValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/patchwalletvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`ListWalletTransactionsValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/listwallettransactionsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`CreateWebhookValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/createwebhookvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`UpdateWebhookValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updatewebhookvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`RequestCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/requestcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`UpdateIssuedCardError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/updateissuedcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`RevokeTokenRequestError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/revoketokenrequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`AuthTokenRequestError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/authtokenrequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
+* [`OnboardingInviteError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/onboardinginviteerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 189 methods.*
 * [`ResponseValidationError`](https://github.com/moovfinancial/moov-python/blob/master/./src/moovio_sdk/models/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -1755,7 +1775,10 @@ with Moov(
         "ach_payment": {
             "company_name": "WholeBodyFitness",
         },
-    }, mode=components.Mode.PRODUCTION)
+    }, capabilities=[
+        components.CapabilityID.COLLECT_FUNDS_CARD_PAYMENTS,
+        components.CapabilityID.SEND_FUNDS_ACH,
+    ], mode=components.Mode.PRODUCTION)
 
     # Handle response
     print(res)

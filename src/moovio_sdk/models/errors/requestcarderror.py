@@ -4,8 +4,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.components import (
+    addresserror as components_addresserror,
     cardexpirationerror as components_cardexpirationerror,
-    createauthorizedusererror as components_createauthorizedusererror,
     issuingcontrolserror as components_issuingcontrolserror,
 )
 from moovio_sdk.models.errors import MoovError
@@ -16,15 +16,15 @@ from typing_extensions import Annotated
 
 
 class RequestCardErrorData(BaseModel):
-    funding_wallet_id: Annotated[
-        Optional[str], pydantic.Field(alias="fundingWalletID")
+    authorized_user_account_id: Annotated[
+        Optional[str], pydantic.Field(alias="authorizedUserAccountID")
     ] = None
-    form_factor: Annotated[Optional[str], pydantic.Field(alias="formFactor")] = None
-    authorized_user: Annotated[
-        Optional[components_createauthorizedusererror.CreateAuthorizedUserError],
-        pydantic.Field(alias="authorizedUser"),
+    nickname: Optional[str] = None
+    metadata: Optional[str] = None
+    billing_address: Annotated[
+        Optional[components_addresserror.AddressError],
+        pydantic.Field(alias="billingAddress"),
     ] = None
-    memo: Optional[str] = None
     expiration: Optional[components_cardexpirationerror.CardExpirationError] = None
     controls: Optional[components_issuingcontrolserror.IssuingControlsError] = None
 

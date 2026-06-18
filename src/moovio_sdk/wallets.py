@@ -17,7 +17,7 @@ class Wallets(BaseSDK):
         account_id: str,
         name: str,
         description: Optional[str] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -54,7 +54,7 @@ class Wallets(BaseSDK):
             create_wallet=components.CreateWallet(
                 name=name,
                 description=description,
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
             ),
         )
 
@@ -136,7 +136,7 @@ class Wallets(BaseSDK):
         account_id: str,
         name: str,
         description: Optional[str] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -173,7 +173,7 @@ class Wallets(BaseSDK):
             create_wallet=components.CreateWallet(
                 name=name,
                 description=description,
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
             ),
         )
 
@@ -683,7 +683,7 @@ class Wallets(BaseSDK):
         name: Optional[str] = None,
         status: Optional[components.WalletStatus] = None,
         description: Optional[str] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -726,7 +726,7 @@ class Wallets(BaseSDK):
                 name=name,
                 status=status,
                 description=description,
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
             ),
         )
 
@@ -810,7 +810,7 @@ class Wallets(BaseSDK):
         name: Optional[str] = None,
         status: Optional[components.WalletStatus] = None,
         description: Optional[str] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -853,7 +853,7 @@ class Wallets(BaseSDK):
                 name=name,
                 status=status,
                 description=description,
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
             ),
         )
 

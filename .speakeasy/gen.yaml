@@ -30,7 +30,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 26.7.0-dev.2
+  version: 26.7.0-dev.3
   additionalDependencies:
     dev: {}
     main: {}
@@ -51,6 +51,10 @@ python:
   enableCustomCodeRegions: false
   enumFormat: enum
   envVarPrefix: MOOV
+  errorSchemaValidation: true
+  eventStreamClassNames:
+    async: EventStreamAsync
+    sync: EventStream
   fixFlags:
     asyncPaginationSep2025: false
     conflictResistantModelImportsFeb2026: false
@@ -71,6 +75,7 @@ python:
       webhooks: models/webhooks
   inferUnionDiscriminators: true
   inputModelSuffix: input
+  inputTypedDictSuffix: TypedDict
   legacyPyright: true
   license: ""
   maxMethodParams: 999
@@ -88,6 +93,7 @@ python:
   pytestTimeout: 0
   rawResponseHelpers: false
   responseFormat: flat
+  responseSchemaValidation: true
   sseFlatResponse: false
   templateVersion: v2
   useAsyncHooks: false

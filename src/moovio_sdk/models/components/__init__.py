@@ -135,7 +135,6 @@ if TYPE_CHECKING:
     )
     from .asynccreatedrefund import AsyncCreatedRefund, AsyncCreatedRefundTypedDict
     from .asynctransfer import AsyncTransfer, AsyncTransferTypedDict
-    from .authorizeduser import AuthorizedUser, AuthorizedUserTypedDict
     from .authtoken import AuthToken, AuthTokenTypedDict
     from .authtokenrequest import AuthTokenRequest, AuthTokenRequestTypedDict
     from .bankaccount import BankAccount, BankAccountTypedDict
@@ -344,18 +343,6 @@ if TYPE_CHECKING:
     from .createapplepaysession import (
         CreateApplePaySession,
         CreateApplePaySessionTypedDict,
-    )
-    from .createauthorizeduser import (
-        CreateAuthorizedUser,
-        CreateAuthorizedUserTypedDict,
-    )
-    from .createauthorizedusererror import (
-        CreateAuthorizedUserError,
-        CreateAuthorizedUserErrorTypedDict,
-    )
-    from .createauthorizeduserupdate import (
-        CreateAuthorizedUserUpdate,
-        CreateAuthorizedUserUpdateTypedDict,
     )
     from .createbusinesserror import (
         CreateBusinessError,
@@ -583,6 +570,10 @@ if TYPE_CHECKING:
     )
     from .createwallet import CreateWallet, CreateWalletTypedDict
     from .createwebhook import CreateWebhook, CreateWebhookTypedDict
+    from .customamountpaymentdetailserror import (
+        CustomAmountPaymentDetailsError,
+        CustomAmountPaymentDetailsErrorTypedDict,
+    )
     from .customersupport import CustomerSupport, CustomerSupportTypedDict
     from .customersupporterror import (
         CustomerSupportError,
@@ -973,6 +964,14 @@ if TYPE_CHECKING:
         PaymentLinkAmountDetails,
         PaymentLinkAmountDetailsTypedDict,
     )
+    from .paymentlinkcustomamountpaymentdetails import (
+        PaymentLinkCustomAmountPaymentDetails,
+        PaymentLinkCustomAmountPaymentDetailsTypedDict,
+    )
+    from .paymentlinkcustomamountpaymentdetailsupdate import (
+        PaymentLinkCustomAmountPaymentDetailsUpdate,
+        PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict,
+    )
     from .paymentlinkcustomeroptions import (
         PaymentLinkCustomerOptions,
         PaymentLinkCustomerOptionsTypedDict,
@@ -999,13 +998,11 @@ if TYPE_CHECKING:
         PaymentLinkLineItemsTypedDict,
     )
     from .paymentlinkpaymentdetails import (
-        AmountType,
         PaymentLinkPaymentDetails,
         PaymentLinkPaymentDetailsTypedDict,
     )
     from .paymentlinkpaymentdetailsupdate import (
         PaymentLinkPaymentDetailsUpdate,
-        PaymentLinkPaymentDetailsUpdateAmountType,
         PaymentLinkPaymentDetailsUpdateTypedDict,
     )
     from .paymentlinkpayoutdetails import (
@@ -1376,7 +1373,12 @@ if TYPE_CHECKING:
     )
     from .updateevidence import UpdateEvidence, UpdateEvidenceTypedDict
     from .updateinvoice import UpdateInvoice, UpdateInvoiceTypedDict
-    from .updateissuedcard import UpdateIssuedCard, UpdateIssuedCardTypedDict
+    from .updateissuedcard import (
+        BillingAddress,
+        BillingAddressTypedDict,
+        UpdateIssuedCard,
+        UpdateIssuedCardTypedDict,
+    )
     from .updateissuedcardstate import UpdateIssuedCardState
     from .updatepaymentlink import UpdatePaymentLink, UpdatePaymentLinkTypedDict
     from .updatepaymentlinkamountdetails import (
@@ -1459,6 +1461,10 @@ if TYPE_CHECKING:
     from .webhookdataaccountupdated import (
         WebhookDataAccountUpdated,
         WebhookDataAccountUpdatedTypedDict,
+    )
+    from .webhookdataauthorizationexpiring import (
+        WebhookDataAuthorizationExpiring,
+        WebhookDataAuthorizationExpiringTypedDict,
     )
     from .webhookdatabalanceupdated import (
         WebhookDataBalanceUpdated,
@@ -1698,7 +1704,6 @@ __all__ = [
     "AmountDetailsUpdateTypedDict",
     "AmountDetailsValidationError",
     "AmountDetailsValidationErrorTypedDict",
-    "AmountType",
     "AmountTypedDict",
     "AmountUpdate",
     "AmountUpdateTypedDict",
@@ -1732,8 +1737,6 @@ __all__ = [
     "AuthTokenRequest",
     "AuthTokenRequestTypedDict",
     "AuthTokenTypedDict",
-    "AuthorizedUser",
-    "AuthorizedUserTypedDict",
     "BankAccount",
     "BankAccountException",
     "BankAccountExceptionTypedDict",
@@ -1759,6 +1762,8 @@ __all__ = [
     "BatchGetTransfersRequestTypedDict",
     "BillableFee",
     "BillableFeeTypedDict",
+    "BillingAddress",
+    "BillingAddressTypedDict",
     "BillingCountAndAmount",
     "BillingCountAndAmountTypedDict",
     "BillingInterchangeProgramFee",
@@ -1902,12 +1907,6 @@ __all__ = [
     "CreateAccountTypedDict",
     "CreateApplePaySession",
     "CreateApplePaySessionTypedDict",
-    "CreateAuthorizedUser",
-    "CreateAuthorizedUserError",
-    "CreateAuthorizedUserErrorTypedDict",
-    "CreateAuthorizedUserTypedDict",
-    "CreateAuthorizedUserUpdate",
-    "CreateAuthorizedUserUpdateTypedDict",
     "CreateBusinessError",
     "CreateBusinessErrorEin",
     "CreateBusinessErrorEinTypedDict",
@@ -2050,6 +2049,8 @@ __all__ = [
     "CreateWebhookTypedDict",
     "CreatedTransfer",
     "CreatedTransferTypedDict",
+    "CustomAmountPaymentDetailsError",
+    "CustomAmountPaymentDetailsErrorTypedDict",
     "CustomerSupport",
     "CustomerSupportError",
     "CustomerSupportErrorTypedDict",
@@ -2377,6 +2378,10 @@ __all__ = [
     "PaymentLink",
     "PaymentLinkAmountDetails",
     "PaymentLinkAmountDetailsTypedDict",
+    "PaymentLinkCustomAmountPaymentDetails",
+    "PaymentLinkCustomAmountPaymentDetailsTypedDict",
+    "PaymentLinkCustomAmountPaymentDetailsUpdate",
+    "PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict",
     "PaymentLinkCustomerOptions",
     "PaymentLinkCustomerOptionsTypedDict",
     "PaymentLinkDisplayOptions",
@@ -2394,7 +2399,6 @@ __all__ = [
     "PaymentLinkPaymentDetails",
     "PaymentLinkPaymentDetailsTypedDict",
     "PaymentLinkPaymentDetailsUpdate",
-    "PaymentLinkPaymentDetailsUpdateAmountType",
     "PaymentLinkPaymentDetailsUpdateTypedDict",
     "PaymentLinkPayoutDetails",
     "PaymentLinkPayoutDetailsTypedDict",
@@ -2791,6 +2795,8 @@ __all__ = [
     "WebhookDataAccountDisconnectedTypedDict",
     "WebhookDataAccountUpdated",
     "WebhookDataAccountUpdatedTypedDict",
+    "WebhookDataAuthorizationExpiring",
+    "WebhookDataAuthorizationExpiringTypedDict",
     "WebhookDataBalanceUpdated",
     "WebhookDataBalanceUpdatedTypedDict",
     "WebhookDataBankAccountCreated",
@@ -2992,8 +2998,6 @@ _dynamic_imports: dict[str, str] = {
     "AsyncCreatedRefundTypedDict": ".asynccreatedrefund",
     "AsyncTransfer": ".asynctransfer",
     "AsyncTransferTypedDict": ".asynctransfer",
-    "AuthorizedUser": ".authorizeduser",
-    "AuthorizedUserTypedDict": ".authorizeduser",
     "AuthToken": ".authtoken",
     "AuthTokenTypedDict": ".authtoken",
     "AuthTokenRequest": ".authtokenrequest",
@@ -3170,12 +3174,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateAccountType": ".createaccounttype",
     "CreateApplePaySession": ".createapplepaysession",
     "CreateApplePaySessionTypedDict": ".createapplepaysession",
-    "CreateAuthorizedUser": ".createauthorizeduser",
-    "CreateAuthorizedUserTypedDict": ".createauthorizeduser",
-    "CreateAuthorizedUserError": ".createauthorizedusererror",
-    "CreateAuthorizedUserErrorTypedDict": ".createauthorizedusererror",
-    "CreateAuthorizedUserUpdate": ".createauthorizeduserupdate",
-    "CreateAuthorizedUserUpdateTypedDict": ".createauthorizeduserupdate",
     "CreateBusinessError": ".createbusinesserror",
     "CreateBusinessErrorEin": ".createbusinesserror",
     "CreateBusinessErrorEinTypedDict": ".createbusinesserror",
@@ -3320,6 +3318,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateWalletTypedDict": ".createwallet",
     "CreateWebhook": ".createwebhook",
     "CreateWebhookTypedDict": ".createwebhook",
+    "CustomAmountPaymentDetailsError": ".customamountpaymentdetailserror",
+    "CustomAmountPaymentDetailsErrorTypedDict": ".customamountpaymentdetailserror",
     "CustomerSupport": ".customersupport",
     "CustomerSupportTypedDict": ".customersupport",
     "CustomerSupportError": ".customersupporterror",
@@ -3645,6 +3645,10 @@ _dynamic_imports: dict[str, str] = {
     "PaymentLinkTypedDict": ".paymentlink",
     "PaymentLinkAmountDetails": ".paymentlinkamountdetails",
     "PaymentLinkAmountDetailsTypedDict": ".paymentlinkamountdetails",
+    "PaymentLinkCustomAmountPaymentDetails": ".paymentlinkcustomamountpaymentdetails",
+    "PaymentLinkCustomAmountPaymentDetailsTypedDict": ".paymentlinkcustomamountpaymentdetails",
+    "PaymentLinkCustomAmountPaymentDetailsUpdate": ".paymentlinkcustomamountpaymentdetailsupdate",
+    "PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict": ".paymentlinkcustomamountpaymentdetailsupdate",
     "PaymentLinkCustomerOptions": ".paymentlinkcustomeroptions",
     "PaymentLinkCustomerOptionsTypedDict": ".paymentlinkcustomeroptions",
     "PaymentLinkDisplayOptions": ".paymentlinkdisplayoptions",
@@ -3659,11 +3663,9 @@ _dynamic_imports: dict[str, str] = {
     "PaymentLinkLineItemOptionTypedDict": ".paymentlinklineitemoption",
     "PaymentLinkLineItems": ".paymentlinklineitems",
     "PaymentLinkLineItemsTypedDict": ".paymentlinklineitems",
-    "AmountType": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetails": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetailsTypedDict": ".paymentlinkpaymentdetails",
     "PaymentLinkPaymentDetailsUpdate": ".paymentlinkpaymentdetailsupdate",
-    "PaymentLinkPaymentDetailsUpdateAmountType": ".paymentlinkpaymentdetailsupdate",
     "PaymentLinkPaymentDetailsUpdateTypedDict": ".paymentlinkpaymentdetailsupdate",
     "PaymentLinkPayoutDetails": ".paymentlinkpayoutdetails",
     "PaymentLinkPayoutDetailsTypedDict": ".paymentlinkpayoutdetails",
@@ -3990,6 +3992,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateEvidenceTypedDict": ".updateevidence",
     "UpdateInvoice": ".updateinvoice",
     "UpdateInvoiceTypedDict": ".updateinvoice",
+    "BillingAddress": ".updateissuedcard",
+    "BillingAddressTypedDict": ".updateissuedcard",
     "UpdateIssuedCard": ".updateissuedcard",
     "UpdateIssuedCardTypedDict": ".updateissuedcard",
     "UpdateIssuedCardState": ".updateissuedcardstate",
@@ -4063,6 +4067,8 @@ _dynamic_imports: dict[str, str] = {
     "WebhookDataAccountDisconnectedTypedDict": ".webhookdataaccountdisconnected",
     "WebhookDataAccountUpdated": ".webhookdataaccountupdated",
     "WebhookDataAccountUpdatedTypedDict": ".webhookdataaccountupdated",
+    "WebhookDataAuthorizationExpiring": ".webhookdataauthorizationexpiring",
+    "WebhookDataAuthorizationExpiringTypedDict": ".webhookdataauthorizationexpiring",
     "WebhookDataBalanceUpdated": ".webhookdatabalanceupdated",
     "WebhookDataBalanceUpdatedTypedDict": ".webhookdatabalanceupdated",
     "WebhookDataBankAccountCreated": ".webhookdatabankaccountcreated",

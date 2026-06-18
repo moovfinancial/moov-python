@@ -6,6 +6,10 @@ from .createpaymentlinklineitemsupdate import (
     CreatePaymentLinkLineItemsUpdate,
     CreatePaymentLinkLineItemsUpdateTypedDict,
 )
+from .paymentlinkcustomamountpaymentdetailsupdate import (
+    PaymentLinkCustomAmountPaymentDetailsUpdate,
+    PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict,
+)
 from .paymentlinkcustomeroptions import (
     PaymentLinkCustomerOptions,
     PaymentLinkCustomerOptionsTypedDict,
@@ -49,6 +53,10 @@ class UpdatePaymentLinkTypedDict(TypedDict):
     payment: NotRequired[PaymentLinkPaymentDetailsUpdateTypedDict]
     r"""Options for payment links used to collect payment."""
     payout: NotRequired[PaymentLinkPayoutDetailsUpdateTypedDict]
+    custom_amount_payment: NotRequired[
+        PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict
+    ]
+    r"""Options for a custom amount payment link. A payment link's type cannot be changed after creation."""
     line_items: NotRequired[CreatePaymentLinkLineItemsUpdateTypedDict]
     r"""An optional collection of line items for a payment link.
     When line items are provided, their total plus tax must equal the payment link amount.
@@ -73,6 +81,12 @@ class UpdatePaymentLink(BaseModel):
 
     payout: Optional[PaymentLinkPayoutDetailsUpdate] = None
 
+    custom_amount_payment: Annotated[
+        Optional[PaymentLinkCustomAmountPaymentDetailsUpdate],
+        pydantic.Field(alias="customAmountPayment"),
+    ] = None
+    r"""Options for a custom amount payment link. A payment link's type cannot be changed after creation."""
+
     line_items: Annotated[
         Optional[CreatePaymentLinkLineItemsUpdate], pydantic.Field(alias="lineItems")
     ] = None
@@ -94,6 +108,7 @@ class UpdatePaymentLink(BaseModel):
                 "customer",
                 "payment",
                 "payout",
+                "customAmountPayment",
                 "lineItems",
                 "amountDetails",
             ]
