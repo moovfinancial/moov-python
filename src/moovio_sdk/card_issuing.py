@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 
 
 class CardIssuing(BaseSDK):
@@ -15,12 +15,12 @@ class CardIssuing(BaseSDK):
         self,
         *,
         account_id: str,
-        funding_wallet_id: str,
-        authorized_user: Union[
-            components.CreateAuthorizedUser, components.CreateAuthorizedUserTypedDict
-        ],
-        form_factor: components.IssuedCardFormFactor,
-        memo: Optional[str] = None,
+        authorized_user_account_id: Optional[str] = None,
+        nickname: Optional[str] = None,
+        metadata: Optional[Mapping[str, str]] = None,
+        billing_address: Optional[
+            Union[components.Address, components.AddressTypedDict]
+        ] = None,
         expiration: Optional[
             Union[components.CardExpiration, components.CardExpirationTypedDict]
         ] = None,
@@ -38,10 +38,10 @@ class CardIssuing(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
         :param account_id: The Moov business account for which the card is to be issued.
-        :param funding_wallet_id:
-        :param authorized_user: Fields for identifying an authorized individual.
-        :param form_factor: Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
-        :param memo: An optional descriptive name for the card.
+        :param authorized_user_account_id:
+        :param nickname:
+        :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param billing_address:
         :param expiration: The expiration date of the card or token.
         :param controls:
         :param retries: Override the default retry configuration for this method
@@ -62,12 +62,12 @@ class CardIssuing(BaseSDK):
         request = operations.RequestCardRequest(
             account_id=account_id,
             request_card=components.RequestCard(
-                funding_wallet_id=funding_wallet_id,
-                authorized_user=utils.get_pydantic_model(
-                    authorized_user, components.CreateAuthorizedUser
+                authorized_user_account_id=authorized_user_account_id,
+                nickname=nickname,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
+                billing_address=utils.get_pydantic_model(
+                    billing_address, Optional[components.Address]
                 ),
-                form_factor=form_factor,
-                memo=memo,
                 expiration=utils.get_pydantic_model(
                     expiration, Optional[components.CardExpiration]
                 ),
@@ -79,7 +79,7 @@ class CardIssuing(BaseSDK):
 
         req = self._build_request(
             method="POST",
-            path="/issuing/{accountID}/issued-cards",
+            path="/issuing/{accountID}/cards",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -153,12 +153,12 @@ class CardIssuing(BaseSDK):
         self,
         *,
         account_id: str,
-        funding_wallet_id: str,
-        authorized_user: Union[
-            components.CreateAuthorizedUser, components.CreateAuthorizedUserTypedDict
-        ],
-        form_factor: components.IssuedCardFormFactor,
-        memo: Optional[str] = None,
+        authorized_user_account_id: Optional[str] = None,
+        nickname: Optional[str] = None,
+        metadata: Optional[Mapping[str, str]] = None,
+        billing_address: Optional[
+            Union[components.Address, components.AddressTypedDict]
+        ] = None,
         expiration: Optional[
             Union[components.CardExpiration, components.CardExpirationTypedDict]
         ] = None,
@@ -176,10 +176,10 @@ class CardIssuing(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 
         :param account_id: The Moov business account for which the card is to be issued.
-        :param funding_wallet_id:
-        :param authorized_user: Fields for identifying an authorized individual.
-        :param form_factor: Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card.
-        :param memo: An optional descriptive name for the card.
+        :param authorized_user_account_id:
+        :param nickname:
+        :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param billing_address:
         :param expiration: The expiration date of the card or token.
         :param controls:
         :param retries: Override the default retry configuration for this method
@@ -200,12 +200,12 @@ class CardIssuing(BaseSDK):
         request = operations.RequestCardRequest(
             account_id=account_id,
             request_card=components.RequestCard(
-                funding_wallet_id=funding_wallet_id,
-                authorized_user=utils.get_pydantic_model(
-                    authorized_user, components.CreateAuthorizedUser
+                authorized_user_account_id=authorized_user_account_id,
+                nickname=nickname,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
+                billing_address=utils.get_pydantic_model(
+                    billing_address, Optional[components.Address]
                 ),
-                form_factor=form_factor,
-                memo=memo,
                 expiration=utils.get_pydantic_model(
                     expiration, Optional[components.CardExpiration]
                 ),
@@ -217,7 +217,7 @@ class CardIssuing(BaseSDK):
 
         req = self._build_request_async(
             method="POST",
-            path="/issuing/{accountID}/issued-cards",
+            path="/issuing/{accountID}/cards",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -293,7 +293,7 @@ class CardIssuing(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        states: Optional[List[components.IssuedCardState]] = None,
+        states: Optional[Iterable[components.IssuedCardState]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -327,12 +327,12 @@ class CardIssuing(BaseSDK):
             account_id=account_id,
             skip=skip,
             count=count,
-            states=states,
+            states=utils.unmarshal(states, Optional[List[components.IssuedCardState]]),
         )
 
         req = self._build_request(
             method="GET",
-            path="/issuing/{accountID}/issued-cards",
+            path="/issuing/{accountID}/cards",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -396,7 +396,7 @@ class CardIssuing(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        states: Optional[List[components.IssuedCardState]] = None,
+        states: Optional[Iterable[components.IssuedCardState]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -430,12 +430,12 @@ class CardIssuing(BaseSDK):
             account_id=account_id,
             skip=skip,
             count=count,
-            states=states,
+            states=utils.unmarshal(states, Optional[List[components.IssuedCardState]]),
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/issuing/{accountID}/issued-cards",
+            path="/issuing/{accountID}/cards",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -532,7 +532,7 @@ class CardIssuing(BaseSDK):
 
         req = self._build_request(
             method="GET",
-            path="/issuing/{accountID}/issued-cards/{issuedCardID}",
+            path="/issuing/{accountID}/cards/{issuedCardID}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -629,7 +629,7 @@ class CardIssuing(BaseSDK):
 
         req = self._build_request_async(
             method="GET",
-            path="/issuing/{accountID}/issued-cards/{issuedCardID}",
+            path="/issuing/{accountID}/cards/{issuedCardID}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -693,13 +693,11 @@ class CardIssuing(BaseSDK):
         account_id: str,
         issued_card_id: str,
         state: Optional[components.UpdateIssuedCardState] = None,
-        memo: Optional[str] = None,
-        authorized_user: Optional[
-            Union[
-                components.CreateAuthorizedUserUpdate,
-                components.CreateAuthorizedUserUpdateTypedDict,
-            ]
-        ] = None,
+        nickname: OptionalNullable[str] = UNSET,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
+        billing_address: OptionalNullable[
+            Union[components.BillingAddress, components.BillingAddressTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -714,8 +712,9 @@ class CardIssuing(BaseSDK):
         :param issued_card_id:
         :param state: Updates the state of a Moov issued card.
             - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-        :param memo:
-        :param authorized_user: Fields for identifying an authorized individual.
+        :param nickname:
+        :param metadata:
+        :param billing_address:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -736,16 +735,17 @@ class CardIssuing(BaseSDK):
             issued_card_id=issued_card_id,
             update_issued_card=components.UpdateIssuedCard(
                 state=state,
-                memo=memo,
-                authorized_user=utils.get_pydantic_model(
-                    authorized_user, Optional[components.CreateAuthorizedUserUpdate]
+                nickname=nickname,
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
+                billing_address=utils.get_pydantic_model(
+                    billing_address, OptionalNullable[components.BillingAddress]
                 ),
             ),
         )
 
         req = self._build_request(
             method="PATCH",
-            path="/issuing/{accountID}/issued-cards/{issuedCardID}",
+            path="/issuing/{accountID}/cards/{issuedCardID}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -825,13 +825,11 @@ class CardIssuing(BaseSDK):
         account_id: str,
         issued_card_id: str,
         state: Optional[components.UpdateIssuedCardState] = None,
-        memo: Optional[str] = None,
-        authorized_user: Optional[
-            Union[
-                components.CreateAuthorizedUserUpdate,
-                components.CreateAuthorizedUserUpdateTypedDict,
-            ]
-        ] = None,
+        nickname: OptionalNullable[str] = UNSET,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
+        billing_address: OptionalNullable[
+            Union[components.BillingAddress, components.BillingAddressTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -846,8 +844,9 @@ class CardIssuing(BaseSDK):
         :param issued_card_id:
         :param state: Updates the state of a Moov issued card.
             - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
-        :param memo:
-        :param authorized_user: Fields for identifying an authorized individual.
+        :param nickname:
+        :param metadata:
+        :param billing_address:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -868,16 +867,17 @@ class CardIssuing(BaseSDK):
             issued_card_id=issued_card_id,
             update_issued_card=components.UpdateIssuedCard(
                 state=state,
-                memo=memo,
-                authorized_user=utils.get_pydantic_model(
-                    authorized_user, Optional[components.CreateAuthorizedUserUpdate]
+                nickname=nickname,
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
+                billing_address=utils.get_pydantic_model(
+                    billing_address, OptionalNullable[components.BillingAddress]
                 ),
             ),
         )
 
         req = self._build_request_async(
             method="PATCH",
-            path="/issuing/{accountID}/issued-cards/{issuedCardID}",
+            path="/issuing/{accountID}/cards/{issuedCardID}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -992,7 +992,7 @@ class CardIssuing(BaseSDK):
 
         req = self._build_request(
             method="GET",
-            path="/issuing/{accountID}/issued-cards/{issuedCardID}/details",
+            path="/issuing/{accountID}/cards/{issuedCardID}/details",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1091,7 +1091,7 @@ class CardIssuing(BaseSDK):
 
         req = self._build_request_async(
             method="GET",
-            path="/issuing/{accountID}/issued-cards/{issuedCardID}/details",
+            path="/issuing/{accountID}/cards/{issuedCardID}/details",
             base_url=base_url,
             url_variables=url_variables,
             request=request,

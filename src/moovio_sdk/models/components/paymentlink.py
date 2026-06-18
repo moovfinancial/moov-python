@@ -52,8 +52,8 @@ class PaymentLinkTypedDict(TypedDict):
 
     In API versions before `2026.07.00`, this was a required field.
 
-    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-    for `open` payment amount types.
+    In API version `2026.07.00` and beyond, this field is present for `payment` and `payout` links and omitted
+    for `customAmountPayment` links, where the payor chooses the amount.
     """
     uses: int
     r"""The number of times this payment link has been used."""
@@ -118,8 +118,8 @@ class PaymentLink(BaseModel):
 
     In API versions before `2026.07.00`, this was a required field.
 
-    In API version `2026.07.00` and beyond, this field is required for `fixed` payment amount types and omitted
-    for `open` payment amount types.
+    In API version `2026.07.00` and beyond, this field is present for `payment` and `payout` links and omitted
+    for `customAmountPayment` links, where the payor chooses the amount.
     """
 
     uses: int
