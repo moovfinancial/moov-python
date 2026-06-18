@@ -7,11 +7,16 @@ from typing_extensions import Annotated, TypedDict
 
 
 class WebhookDataSweepCreatedTypedDict(TypedDict):
+    account_id: str
+    r"""The accountID associated with the wallet being swept."""
     wallet_id: str
     sweep_id: str
 
 
 class WebhookDataSweepCreated(BaseModel):
+    account_id: Annotated[str, pydantic.Field(alias="accountID")]
+    r"""The accountID associated with the wallet being swept."""
+
     wallet_id: Annotated[str, pydantic.Field(alias="walletID")]
 
     sweep_id: Annotated[str, pydantic.Field(alias="sweepID")]
