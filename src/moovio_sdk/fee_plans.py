@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional
+from typing import Any, Iterable, List, Mapping, Optional
 
 
 class FeePlans(BaseSDK):
@@ -17,8 +17,8 @@ class FeePlans(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        agreement_id: Optional[List[str]] = None,
-        status: Optional[List[components.FeePlanAgreementStatus]] = None,
+        agreement_id: Optional[Iterable[str]] = None,
+        status: Optional[Iterable[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -53,8 +53,10 @@ class FeePlans(BaseSDK):
             skip=skip,
             count=count,
             account_id=account_id,
-            agreement_id=agreement_id,
-            status=status,
+            agreement_id=utils.unmarshal(agreement_id, Optional[List[str]]),
+            status=utils.unmarshal(
+                status, Optional[List[components.FeePlanAgreementStatus]]
+            ),
         )
 
         req = self._build_request(
@@ -125,8 +127,8 @@ class FeePlans(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        agreement_id: Optional[List[str]] = None,
-        status: Optional[List[components.FeePlanAgreementStatus]] = None,
+        agreement_id: Optional[Iterable[str]] = None,
+        status: Optional[Iterable[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -161,8 +163,10 @@ class FeePlans(BaseSDK):
             skip=skip,
             count=count,
             account_id=account_id,
-            agreement_id=agreement_id,
-            status=status,
+            agreement_id=utils.unmarshal(agreement_id, Optional[List[str]]),
+            status=utils.unmarshal(
+                status, Optional[List[components.FeePlanAgreementStatus]]
+            ),
         )
 
         req = self._build_request_async(
@@ -461,7 +465,7 @@ class FeePlans(BaseSDK):
         self,
         *,
         account_id: str,
-        plan_i_ds: Optional[List[str]] = None,
+        plan_i_ds: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -492,7 +496,7 @@ class FeePlans(BaseSDK):
 
         request = operations.ListFeePlansRequest(
             account_id=account_id,
-            plan_i_ds=plan_i_ds,
+            plan_i_ds=utils.unmarshal(plan_i_ds, Optional[List[str]]),
         )
 
         req = self._build_request(
@@ -559,7 +563,7 @@ class FeePlans(BaseSDK):
         self,
         *,
         account_id: str,
-        plan_i_ds: Optional[List[str]] = None,
+        plan_i_ds: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -590,7 +594,7 @@ class FeePlans(BaseSDK):
 
         request = operations.ListFeePlansRequest(
             account_id=account_id,
-            plan_i_ds=plan_i_ds,
+            plan_i_ds=utils.unmarshal(plan_i_ds, Optional[List[str]]),
         )
 
         req = self._build_request_async(
@@ -1117,7 +1121,7 @@ class FeePlans(BaseSDK):
         self,
         *,
         account_id: str,
-        fee_i_ds: Optional[List[str]] = None,
+        fee_i_ds: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1148,7 +1152,7 @@ class FeePlans(BaseSDK):
         request = operations.ListFeesFetchRequest(
             account_id=account_id,
             list_fees_fetch_request=components.ListFeesFetchRequest(
-                fee_i_ds=fee_i_ds,
+                fee_i_ds=utils.unmarshal(fee_i_ds, Optional[List[str]]),
             ),
         )
 
@@ -1223,7 +1227,7 @@ class FeePlans(BaseSDK):
         self,
         *,
         account_id: str,
-        fee_i_ds: Optional[List[str]] = None,
+        fee_i_ds: Optional[Iterable[str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1254,7 +1258,7 @@ class FeePlans(BaseSDK):
         request = operations.ListFeesFetchRequest(
             account_id=account_id,
             list_fees_fetch_request=components.ListFeesFetchRequest(
-                fee_i_ds=fee_i_ds,
+                fee_i_ds=utils.unmarshal(fee_i_ds, Optional[List[str]]),
             ),
         )
 
@@ -1331,8 +1335,8 @@ class FeePlans(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        agreement_id: Optional[List[str]] = None,
-        status: Optional[List[components.FeePlanAgreementStatus]] = None,
+        agreement_id: Optional[Iterable[str]] = None,
+        status: Optional[Iterable[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1367,8 +1371,10 @@ class FeePlans(BaseSDK):
             skip=skip,
             count=count,
             account_id=account_id,
-            agreement_id=agreement_id,
-            status=status,
+            agreement_id=utils.unmarshal(agreement_id, Optional[List[str]]),
+            status=utils.unmarshal(
+                status, Optional[List[components.FeePlanAgreementStatus]]
+            ),
         )
 
         req = self._build_request(
@@ -1439,8 +1445,8 @@ class FeePlans(BaseSDK):
         account_id: str,
         skip: Optional[int] = None,
         count: Optional[int] = None,
-        agreement_id: Optional[List[str]] = None,
-        status: Optional[List[components.FeePlanAgreementStatus]] = None,
+        agreement_id: Optional[Iterable[str]] = None,
+        status: Optional[Iterable[components.FeePlanAgreementStatus]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1475,8 +1481,10 @@ class FeePlans(BaseSDK):
             skip=skip,
             count=count,
             account_id=account_id,
-            agreement_id=agreement_id,
-            status=status,
+            agreement_id=utils.unmarshal(agreement_id, Optional[List[str]]),
+            status=utils.unmarshal(
+                status, Optional[List[components.FeePlanAgreementStatus]]
+            ),
         )
 
         req = self._build_request_async(
