@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .cardpayouttype import CardPayoutType
+from datetime import datetime
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -12,6 +13,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class CreateTransferDestinationCardTypedDict(TypedDict):
     dynamic_descriptor: NotRequired[str]
     r"""An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field."""
+    scheduled_delivery_on: NotRequired[datetime]
+    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future."""
     payout_type: NotRequired[CardPayoutType]
     r"""An optional field to specify the type of card payout, used to route the transfer with the appropriate business application identifier (BAI)."""
 
@@ -22,6 +25,11 @@ class CreateTransferDestinationCard(BaseModel):
     ] = None
     r"""An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field."""
 
+    scheduled_delivery_on: Annotated[
+        Optional[datetime], pydantic.Field(alias="scheduledDeliveryOn")
+    ] = None
+    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future."""
+
     payout_type: Annotated[
         Optional[CardPayoutType], pydantic.Field(alias="payoutType")
     ] = None
@@ -29,7 +37,9 @@ class CreateTransferDestinationCard(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["dynamicDescriptor", "payoutType"])
+        optional_fields = set(
+            ["dynamicDescriptor", "scheduledDeliveryOn", "payoutType"]
+        )
         serialized = handler(self)
         m = {}
 

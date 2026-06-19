@@ -6,6 +6,7 @@ import httpx
 from moovio_sdk.models.components import (
     amountvalidationerror as components_amountvalidationerror,
     createpaymentlinklineitemsvalidationerror as components_createpaymentlinklineitemsvalidationerror,
+    customamountpaymentdetailserror as components_customamountpaymentdetailserror,
     displayoptionserror as components_displayoptionserror,
     paymentdetailserror as components_paymentdetailserror,
     payoutdetailserror as components_payoutdetailserror,
@@ -24,6 +25,12 @@ class UpdatePaymentLinkErrorData(BaseModel):
     display: Optional[components_displayoptionserror.DisplayOptionsError] = None
     payment: Optional[components_paymentdetailserror.PaymentDetailsError] = None
     payout: Optional[components_payoutdetailserror.PayoutDetailsError] = None
+    custom_amount_payment: Annotated[
+        Optional[
+            components_customamountpaymentdetailserror.CustomAmountPaymentDetailsError
+        ],
+        pydantic.Field(alias="customAmountPayment"),
+    ] = None
     line_items: Annotated[
         Optional[
             components_createpaymentlinklineitemsvalidationerror.CreatePaymentLinkLineItemsValidationError

@@ -20,6 +20,8 @@ class CardTransactionDetailsTypedDict(TypedDict):
     failure_code: NotRequired[CardTransactionFailureCode]
     dynamic_descriptor: NotRequired[str]
     r"""An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field."""
+    scheduled_delivery_on: NotRequired[datetime]
+    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future."""
     transaction_source: NotRequired[TransactionSource]
     r"""Specifies the nature and initiator of a transaction.
 
@@ -54,6 +56,11 @@ class CardTransactionDetails(BaseModel):
         Optional[str], pydantic.Field(alias="dynamicDescriptor")
     ] = None
     r"""An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field."""
+
+    scheduled_delivery_on: Annotated[
+        Optional[datetime], pydantic.Field(alias="scheduledDeliveryOn")
+    ] = None
+    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future."""
 
     transaction_source: Annotated[
         Optional[TransactionSource], pydantic.Field(alias="transactionSource")
@@ -108,6 +115,7 @@ class CardTransactionDetails(BaseModel):
                 "status",
                 "failureCode",
                 "dynamicDescriptor",
+                "scheduledDeliveryOn",
                 "transactionSource",
                 "initiatedOn",
                 "confirmedOn",

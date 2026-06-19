@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Scheduling(BaseSDK):
@@ -17,7 +17,10 @@ class Scheduling(BaseSDK):
         account_id: str,
         description: Optional[str] = None,
         occurrences: Optional[
-            Union[List[components.Occurrence], List[components.OccurrenceTypedDict]]
+            Union[
+                Iterable[components.Occurrence],
+                Iterable[components.OccurrenceTypedDict],
+            ]
         ] = None,
         recur: Optional[Union[components.Recur, components.RecurTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -138,7 +141,10 @@ class Scheduling(BaseSDK):
         account_id: str,
         description: Optional[str] = None,
         occurrences: Optional[
-            Union[List[components.Occurrence], List[components.OccurrenceTypedDict]]
+            Union[
+                Iterable[components.Occurrence],
+                Iterable[components.OccurrenceTypedDict],
+            ]
         ] = None,
         recur: Optional[Union[components.Recur, components.RecurTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -470,7 +476,10 @@ class Scheduling(BaseSDK):
         schedule_id: str,
         description: Optional[str] = None,
         occurrences: Optional[
-            Union[List[components.Occurrence], List[components.OccurrenceTypedDict]]
+            Union[
+                Iterable[components.Occurrence],
+                Iterable[components.OccurrenceTypedDict],
+            ]
         ] = None,
         recur: Optional[Union[components.Recur, components.RecurTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -594,7 +603,10 @@ class Scheduling(BaseSDK):
         schedule_id: str,
         description: Optional[str] = None,
         occurrences: Optional[
-            Union[List[components.Occurrence], List[components.OccurrenceTypedDict]]
+            Union[
+                Iterable[components.Occurrence],
+                Iterable[components.OccurrenceTypedDict],
+            ]
         ] = None,
         recur: Optional[Union[components.Recur, components.RecurTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
