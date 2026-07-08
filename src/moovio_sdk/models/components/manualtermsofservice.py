@@ -13,7 +13,7 @@ class ManualTermsOfServiceTypedDict(TypedDict):
     accepted_date: datetime
     r"""The date and time the terms of service were accepted."""
     accepted_ip: str
-    r"""The IP address from which the terms of service were accepted."""
+    r"""The IP address (IPv4 or IPv6) from which the terms of service were accepted."""
     accepted_user_agent: str
     r"""The user-agent of the user making the request."""
     accepted_domain: str
@@ -26,7 +26,7 @@ class ManualTermsOfService(BaseModel):
     r"""The date and time the terms of service were accepted."""
 
     accepted_ip: Annotated[str, pydantic.Field(alias="acceptedIP")]
-    r"""The IP address from which the terms of service were accepted."""
+    r"""The IP address (IPv4 or IPv6) from which the terms of service were accepted."""
 
     accepted_user_agent: Annotated[str, pydantic.Field(alias="acceptedUserAgent")]
     r"""The user-agent of the user making the request."""
