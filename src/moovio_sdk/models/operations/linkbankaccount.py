@@ -26,7 +26,7 @@ class LinkBankAccountRequestTypedDict(TypedDict):
     r"""Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
 
     When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
-    linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
+    linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
     """
 
 
@@ -50,7 +50,7 @@ class LinkBankAccountRequest(BaseModel):
     r"""Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
 
     When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
-    linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
+    linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
     """
 
     @model_serializer(mode="wrap")

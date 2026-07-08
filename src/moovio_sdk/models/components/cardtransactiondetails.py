@@ -20,6 +20,8 @@ class CardTransactionDetailsTypedDict(TypedDict):
     failure_code: NotRequired[CardTransactionFailureCode]
     dynamic_descriptor: NotRequired[str]
     r"""An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field."""
+    scheduled_delivery_on: NotRequired[datetime]
+    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future in production. In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred delivery using the sandbox test cards with relaxed wait times."""
     transaction_source: NotRequired[TransactionSource]
     r"""Specifies the nature and initiator of a transaction.
 
@@ -32,6 +34,7 @@ class CardTransactionDetailsTypedDict(TypedDict):
     failed_on: NotRequired[datetime]
     canceled_on: NotRequired[datetime]
     completed_on: NotRequired[datetime]
+    deferred_on: NotRequired[datetime]
     interchange_qualification: NotRequired[str]
     r"""The program assigned by the card network that determines the interchange rate for the transfer."""
     fee_program: NotRequired[str]
@@ -54,6 +57,11 @@ class CardTransactionDetails(BaseModel):
         Optional[str], pydantic.Field(alias="dynamicDescriptor")
     ] = None
     r"""An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field."""
+
+    scheduled_delivery_on: Annotated[
+        Optional[datetime], pydantic.Field(alias="scheduledDeliveryOn")
+    ] = None
+    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future in production. In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred delivery using the sandbox test cards with relaxed wait times."""
 
     transaction_source: Annotated[
         Optional[TransactionSource], pydantic.Field(alias="transactionSource")
@@ -84,6 +92,10 @@ class CardTransactionDetails(BaseModel):
         None
     )
 
+    deferred_on: Annotated[Optional[datetime], pydantic.Field(alias="deferredOn")] = (
+        None
+    )
+
     interchange_qualification: Annotated[
         Optional[str],
         pydantic.Field(
@@ -108,6 +120,7 @@ class CardTransactionDetails(BaseModel):
                 "status",
                 "failureCode",
                 "dynamicDescriptor",
+                "scheduledDeliveryOn",
                 "transactionSource",
                 "initiatedOn",
                 "confirmedOn",
@@ -115,6 +128,7 @@ class CardTransactionDetails(BaseModel):
                 "failedOn",
                 "canceledOn",
                 "completedOn",
+                "deferredOn",
                 "interchangeQualification",
                 "feeProgram",
                 "authorizationCode",

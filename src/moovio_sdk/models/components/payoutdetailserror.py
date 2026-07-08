@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .payoutrecipienterror import PayoutRecipientError, PayoutRecipientErrorTypedDict
+from .pushoptionserror import PushOptionsError, PushOptionsErrorTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -13,6 +14,7 @@ class PayoutDetailsErrorTypedDict(TypedDict):
     allowed_methods: NotRequired[str]
     recipient: NotRequired[PayoutRecipientErrorTypedDict]
     metadata: NotRequired[str]
+    push_options: NotRequired[PushOptionsErrorTypedDict]
 
 
 class PayoutDetailsError(BaseModel):
@@ -24,9 +26,15 @@ class PayoutDetailsError(BaseModel):
 
     metadata: Optional[str] = None
 
+    push_options: Annotated[
+        Optional[PushOptionsError], pydantic.Field(alias="pushOptions")
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["allowedMethods", "recipient", "metadata"])
+        optional_fields = set(
+            ["allowedMethods", "recipient", "metadata", "pushOptions"]
+        )
         serialized = handler(self)
         m = {}
 
