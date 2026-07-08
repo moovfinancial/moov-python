@@ -13,7 +13,7 @@ class TermsOfServiceTypedDict(TypedDict):
     accepted_date: datetime
     r"""The date and time the terms of service were accepted."""
     accepted_ip: str
-    r"""The IP address from which the terms of service were accepted."""
+    r"""The IP address (IPv4 or IPv6) from which the terms of service were accepted."""
 
 
 class TermsOfService(BaseModel):
@@ -23,7 +23,7 @@ class TermsOfService(BaseModel):
     r"""The date and time the terms of service were accepted."""
 
     accepted_ip: Annotated[str, pydantic.Field(alias="acceptedIP")]
-    r"""The IP address from which the terms of service were accepted."""
+    r"""The IP address (IPv4 or IPv6) from which the terms of service were accepted."""
 
 
 try:
