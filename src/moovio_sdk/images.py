@@ -89,6 +89,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -188,6 +190,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -304,6 +308,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -427,6 +433,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -530,6 +538,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -624,6 +634,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -743,6 +755,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -871,6 +885,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -977,6 +993,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1077,6 +1095,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1186,6 +1206,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1301,6 +1323,8 @@ class Images(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1412,6 +1436,8 @@ class Images(BaseSDK):
                 operation_id="getPublicImage",
                 oauth2_scopes=None,
                 security_source=None,
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1523,6 +1549,8 @@ class Images(BaseSDK):
                 operation_id="getPublicImage",
                 oauth2_scopes=None,
                 security_source=None,
+                tags=["Images"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

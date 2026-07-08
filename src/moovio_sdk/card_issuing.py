@@ -114,6 +114,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -252,6 +254,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -307,7 +311,7 @@ class CardIssuing(BaseSDK):
         :param account_id: The Moov business account for which the cards have been issued.
         :param skip:
         :param count:
-        :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+        :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -364,6 +368,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -410,7 +416,7 @@ class CardIssuing(BaseSDK):
         :param account_id: The Moov business account for which the cards have been issued.
         :param skip:
         :param count:
-        :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`
+        :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -467,6 +473,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -564,6 +572,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -661,6 +671,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -784,6 +796,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -916,6 +930,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1024,6 +1040,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1123,6 +1141,8 @@ class CardIssuing(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Card issuing"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

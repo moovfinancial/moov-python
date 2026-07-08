@@ -27,7 +27,7 @@ class BankAccounts(BaseSDK):
         r"""Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
 
         It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked
-        bank-account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment
+        bank account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment
         Methods](https://docs.moov.io/api/sources/payment-methods/list/)
         endpoint to wait for the new payment methods to be available for use.
 
@@ -39,7 +39,7 @@ class BankAccounts(BaseSDK):
         :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
 
             When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
-            linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
+            linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -104,6 +104,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -155,7 +157,7 @@ class BankAccounts(BaseSDK):
         r"""Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
 
         It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked
-        bank-account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment
+        bank account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment
         Methods](https://docs.moov.io/api/sources/payment-methods/list/)
         endpoint to wait for the new payment methods to be available for use.
 
@@ -167,7 +169,7 @@ class BankAccounts(BaseSDK):
         :param x_wait_for: Optional header to wait for certain events, such as the creation of a payment method, to occur before returning a response.
 
             When this header is set to `payment-method`, the response will include any payment methods that were created for the newly
-            linked card in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
+            linked bank account in the `paymentMethods` field. Otherwise, the `paymentMethods` field will be omitted from the response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -232,6 +234,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -337,6 +341,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -433,6 +439,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -532,6 +540,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -631,6 +641,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -728,6 +740,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -828,6 +842,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -939,6 +955,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1050,6 +1068,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1162,6 +1182,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1282,6 +1304,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1399,6 +1423,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1507,6 +1533,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1626,6 +1654,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1749,6 +1779,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1871,6 +1903,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1993,6 +2027,8 @@ class BankAccounts(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Bank accounts"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
