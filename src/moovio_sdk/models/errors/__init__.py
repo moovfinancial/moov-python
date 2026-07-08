@@ -55,6 +55,10 @@ if TYPE_CHECKING:
         CreateWebhookValidationError,
         CreateWebhookValidationErrorData,
     )
+    from .depositaccountvalidationerror import (
+        DepositAccountValidationError,
+        DepositAccountValidationErrorData,
+    )
     from .duplicatecarderror import DuplicateCardError, DuplicateCardErrorData
     from .feeplanagreementerror import FeePlanAgreementError, FeePlanAgreementErrorData
     from .fileuploadvalidationerror import (
@@ -211,6 +215,8 @@ __all__ = [
     "CreateWalletValidationErrorData",
     "CreateWebhookValidationError",
     "CreateWebhookValidationErrorData",
+    "DepositAccountValidationError",
+    "DepositAccountValidationErrorData",
     "DuplicateCardError",
     "DuplicateCardErrorData",
     "Error",
@@ -340,6 +346,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateWalletValidationErrorData": ".createwalletvalidationerror",
     "CreateWebhookValidationError": ".createwebhookvalidationerror",
     "CreateWebhookValidationErrorData": ".createwebhookvalidationerror",
+    "DepositAccountValidationError": ".depositaccountvalidationerror",
+    "DepositAccountValidationErrorData": ".depositaccountvalidationerror",
     "DuplicateCardError": ".duplicatecarderror",
     "DuplicateCardErrorData": ".duplicatecarderror",
     "FeePlanAgreementError": ".feeplanagreementerror",

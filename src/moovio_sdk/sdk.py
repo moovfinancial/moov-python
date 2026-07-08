@@ -27,6 +27,7 @@ if TYPE_CHECKING:
     from moovio_sdk.capabilities import Capabilities
     from moovio_sdk.card_issuing import CardIssuing
     from moovio_sdk.cards import Cards
+    from moovio_sdk.deposit_view import DepositView
     from moovio_sdk.disputes import Disputes
     from moovio_sdk.end_to_end_encryption import EndToEndEncryption
     from moovio_sdk.enriched_address import EnrichedAddress
@@ -110,6 +111,7 @@ class Moov(BaseSDK):
     ping: "Ping"
     receipts: "Receipts"
     terminal_applications: "TerminalApplications"
+    deposit_view: "DepositView"
     _sub_sdk_map = {
         "accounts": ("moovio_sdk.accounts", "Accounts"),
         "adjustments": ("moovio_sdk.adjustments", "Adjustments"),
@@ -165,6 +167,7 @@ class Moov(BaseSDK):
             "moovio_sdk.terminal_applications",
             "TerminalApplications",
         ),
+        "deposit_view": ("moovio_sdk.deposit_view", "DepositView"),
     }
 
     def __init__(

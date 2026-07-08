@@ -10,26 +10,30 @@ from moovio_sdk.types import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Dict, Optional
+from typing import Dict
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PatchTransferTypedDict(TypedDict):
     metadata: NotRequired[Nullable[Dict[str, str]]]
-    foreign_id: NotRequired[str]
+    r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
+    foreign_id: NotRequired[Nullable[str]]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
 
 class PatchTransfer(BaseModel):
     metadata: OptionalNullable[Dict[str, str]] = UNSET
+    r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
 
-    foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
+    foreign_id: Annotated[OptionalNullable[str], pydantic.Field(alias="foreignID")] = (
+        UNSET
+    )
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["metadata", "foreignID"])
-        nullable_fields = set(["metadata"])
+        nullable_fields = set(["metadata", "foreignID"])
         serialized = handler(self)
         m = {}
 

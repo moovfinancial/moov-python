@@ -58,6 +58,10 @@ class PaymentMethodsCardTypedDict(TypedDict):
     r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
     domestic_pull_from_card: NotRequired[DomesticPullFromCard]
     r"""Indicates if the card supports domestic pull-from-card transfer."""
+    card_category: NotRequired[str]
+    r"""The category or level of the card defined by the issuer.
+    Examples include, but not limited to, \"REWARDS\", \"TRADITIONAL REWARDS\", \"CLASSIC\", and \"CORPORATE PURCHASING\".
+    """
 
 
 class PaymentMethodsCard(BaseModel):
@@ -131,6 +135,11 @@ class PaymentMethodsCard(BaseModel):
     ] = None
     r"""Indicates if the card supports domestic pull-from-card transfer."""
 
+    card_category: Annotated[Optional[str], pydantic.Field(alias="cardCategory")] = None
+    r"""The category or level of the card defined by the issuer.
+    Examples include, but not limited to, \"REWARDS\", \"TRADITIONAL REWARDS\", \"CLASSIC\", and \"CORPORATE PURCHASING\".
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -143,6 +152,7 @@ class PaymentMethodsCard(BaseModel):
                 "cardAccountUpdater",
                 "domesticPushToCard",
                 "domesticPullFromCard",
+                "cardCategory",
             ]
         )
         serialized = handler(self)

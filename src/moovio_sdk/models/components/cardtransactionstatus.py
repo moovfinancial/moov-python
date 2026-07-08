@@ -13,3 +13,4 @@ class CardTransactionStatus(str, Enum):
     SETTLED = "settled"
     FAILED = "failed"
     COMPLETED = "completed"
+    DEFERRED = "deferred"
