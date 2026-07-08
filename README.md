@@ -146,7 +146,7 @@ with Moov(
     }, terms_of_service={
         "manual": {
             "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
-            "accepted_ip": "172.217.2.46",
+            "accepted_ip": "2001:db8::1",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",
         },
@@ -209,7 +209,7 @@ async def main():
         }, terms_of_service={
             "manual": {
                 "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
-                "accepted_ip": "172.217.2.46",
+                "accepted_ip": "2001:db8::1",
                 "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
                 "accepted_domain": "https://rundown-depot.org/",
             },
@@ -280,7 +280,7 @@ with Moov(
     }, terms_of_service={
         "manual": {
             "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
-            "accepted_ip": "172.217.2.46",
+            "accepted_ip": "2001:db8::1",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",
         },
@@ -483,7 +483,7 @@ you'll need to specify the `/profile-enrichment.read` scope.
 * [link](docs/sdks/bankaccounts/README.md#link) - Link a bank account to an existing Moov account. Read our [bank accounts guide](https://docs.moov.io/guides/sources/bank-accounts/) to learn more.
 
 It is strongly recommended that callers include the `X-Wait-For` header, set to `payment-method`, if the newly linked
-bank-account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment
+bank account is intended to be used right away. If this header is not included, the caller will need to poll the [List Payment
 Methods](https://docs.moov.io/api/sources/payment-methods/list/)
 endpoint to wait for the new payment methods to be available for use.
 
@@ -1377,7 +1377,7 @@ with Moov(
     }, terms_of_service={
         "manual": {
             "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
-            "accepted_ip": "172.217.2.46",
+            "accepted_ip": "2001:db8::1",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",
         },
@@ -1437,7 +1437,7 @@ with Moov(
     }, terms_of_service={
         "manual": {
             "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
-            "accepted_ip": "172.217.2.46",
+            "accepted_ip": "2001:db8::1",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",
         },
@@ -1512,7 +1512,7 @@ with Moov(
         }, terms_of_service={
             "manual": {
                 "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
-                "accepted_ip": "172.217.2.46",
+                "accepted_ip": "2001:db8::1",
                 "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
                 "accepted_domain": "https://rundown-depot.org/",
             },
@@ -1660,7 +1660,7 @@ with Moov(
     }, terms_of_service={
         "manual": {
             "accepted_date": parse_datetime("2026-07-27T08:57:17.388Z"),
-            "accepted_ip": "172.217.2.46",
+            "accepted_ip": "2001:db8::1",
             "accepted_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36",
             "accepted_domain": "https://rundown-depot.org/",
         },
