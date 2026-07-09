@@ -44,6 +44,8 @@ class InvoiceTypedDict(TypedDict):
     description: NotRequired[str]
     amount_details: NotRequired[AmountDetailsTypedDict]
     payment_link_code: NotRequired[str]
+    payment_link_url: NotRequired[str]
+    r"""URL to the hosted payment link for the invoice."""
     invoice_payments: NotRequired[List[InvoicePaymentTypedDict]]
     r"""Payment made towards an invoice, will be either a transfer or an external payment."""
     invoice_date: NotRequired[datetime]
@@ -106,6 +108,11 @@ class Invoice(BaseModel):
         Optional[str], pydantic.Field(alias="paymentLinkCode")
     ] = None
 
+    payment_link_url: Annotated[
+        Optional[str], pydantic.Field(alias="paymentLinkURL")
+    ] = None
+    r"""URL to the hosted payment link for the invoice."""
+
     invoice_payments: Annotated[
         Optional[List[InvoicePayment]], pydantic.Field(alias="invoicePayments")
     ] = None
@@ -136,6 +143,7 @@ class Invoice(BaseModel):
                 "description",
                 "amountDetails",
                 "paymentLinkCode",
+                "paymentLinkURL",
                 "invoicePayments",
                 "invoiceDate",
                 "dueDate",

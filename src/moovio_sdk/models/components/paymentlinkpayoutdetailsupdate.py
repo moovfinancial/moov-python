@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .disbursementpaymentmethodtype import DisbursementPaymentMethodType
 from .payoutrecipient import PayoutRecipient, PayoutRecipientTypedDict
+from .pushoptionsupdate import PushOptionsUpdate, PushOptionsUpdateTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -21,6 +22,12 @@ class PaymentLinkPayoutDetailsUpdateTypedDict(TypedDict):
     """
     metadata: NotRequired[Dict[str, str]]
     r"""Optional free-form metadata for the transfer."""
+    push_options: NotRequired[PushOptionsUpdateTypedDict]
+    r"""Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes `push-to-card`.
+
+    The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
+    (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these options.
+    """
 
 
 class PaymentLinkPayoutDetailsUpdate(BaseModel):
@@ -40,9 +47,20 @@ class PaymentLinkPayoutDetailsUpdate(BaseModel):
     metadata: Optional[Dict[str, str]] = None
     r"""Optional free-form metadata for the transfer."""
 
+    push_options: Annotated[
+        Optional[PushOptionsUpdate], pydantic.Field(alias="pushOptions")
+    ] = None
+    r"""Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes `push-to-card`.
+
+    The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
+    (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these options.
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["allowedMethods", "recipient", "metadata"])
+        optional_fields = set(
+            ["allowedMethods", "recipient", "metadata", "pushOptions"]
+        )
         serialized = handler(self)
         m = {}
 

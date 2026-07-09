@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from .walletstatus import WalletStatus
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -15,9 +21,8 @@ class PatchWalletTypedDict(TypedDict):
     - `active`: The wallet is available for use and has an enabled payment method.
     - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
     """
-    description: NotRequired[str]
-    metadata: NotRequired[Dict[str, str]]
-    r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
+    description: NotRequired[Nullable[str]]
+    metadata: NotRequired[Nullable[Dict[str, str]]]
 
 
 class PatchWallet(BaseModel):
@@ -29,23 +34,31 @@ class PatchWallet(BaseModel):
     - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
     """
 
-    description: Optional[str] = None
+    description: OptionalNullable[str] = UNSET
 
-    metadata: Optional[Dict[str, str]] = None
-    r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
+    metadata: OptionalNullable[Dict[str, str]] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["name", "status", "description", "metadata"])
+        nullable_fields = set(["description", "metadata"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

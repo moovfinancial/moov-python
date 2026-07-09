@@ -95,6 +95,8 @@ class Wallets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Wallets"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -214,6 +216,8 @@ class Wallets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Wallets"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -331,6 +335,8 @@ class Wallets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Wallets"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -445,6 +451,8 @@ class Wallets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Wallets"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -550,6 +558,8 @@ class Wallets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Wallets"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -649,6 +659,8 @@ class Wallets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Wallets"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -682,8 +694,8 @@ class Wallets(BaseSDK):
         account_id: str,
         name: Optional[str] = None,
         status: Optional[components.WalletStatus] = None,
-        description: Optional[str] = None,
-        metadata: Optional[Mapping[str, str]] = None,
+        description: OptionalNullable[str] = UNSET,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -703,7 +715,7 @@ class Wallets(BaseSDK):
             - `active`: The wallet is available for use and has an enabled payment method.
             - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
         :param description:
-        :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param metadata:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -726,7 +738,7 @@ class Wallets(BaseSDK):
                 name=name,
                 status=status,
                 description=description,
-                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
             ),
         )
 
@@ -767,6 +779,8 @@ class Wallets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Wallets"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -809,8 +823,8 @@ class Wallets(BaseSDK):
         account_id: str,
         name: Optional[str] = None,
         status: Optional[components.WalletStatus] = None,
-        description: Optional[str] = None,
-        metadata: Optional[Mapping[str, str]] = None,
+        description: OptionalNullable[str] = UNSET,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -830,7 +844,7 @@ class Wallets(BaseSDK):
             - `active`: The wallet is available for use and has an enabled payment method.
             - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
         :param description:
-        :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param metadata:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -853,7 +867,7 @@ class Wallets(BaseSDK):
                 name=name,
                 status=status,
                 description=description,
-                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
             ),
         )
 
@@ -894,6 +908,8 @@ class Wallets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Wallets"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

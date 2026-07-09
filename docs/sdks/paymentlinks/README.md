@@ -368,12 +368,12 @@ with Moov(
                 ],
             },
         ],
-    }, amount_details=components.UpdatePaymentLinkAmountDetails(
-        tax=components.AmountDecimalUpdate(
-            currency="USD",
-            value_decimal="9.25",
-        ),
-    ))
+    }, amount_details={
+        "tax": {
+            "currency": "USD",
+            "value_decimal": "9.25",
+        },
+    })
 
     # Handle response
     print(res)

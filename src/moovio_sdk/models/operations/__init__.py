@@ -70,6 +70,12 @@ if TYPE_CHECKING:
         CreateCancellationResponse,
         CreateCancellationResponseTypedDict,
     )
+    from .createdepositaccount import (
+        CreateDepositAccountRequest,
+        CreateDepositAccountRequestTypedDict,
+        CreateDepositAccountResponse,
+        CreateDepositAccountResponseTypedDict,
+    )
     from .createfeeplanagreements import (
         CreateFeePlanAgreementsRequest,
         CreateFeePlanAgreementsRequestTypedDict,
@@ -1147,6 +1153,10 @@ __all__ = [
     "CreateCancellationRequestTypedDict",
     "CreateCancellationResponse",
     "CreateCancellationResponseTypedDict",
+    "CreateDepositAccountRequest",
+    "CreateDepositAccountRequestTypedDict",
+    "CreateDepositAccountResponse",
+    "CreateDepositAccountResponseTypedDict",
     "CreateFeePlanAgreementsRequest",
     "CreateFeePlanAgreementsRequestTypedDict",
     "CreateFeePlanAgreementsResponse",
@@ -1889,6 +1899,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateCancellationRequestTypedDict": ".createcancellation",
     "CreateCancellationResponse": ".createcancellation",
     "CreateCancellationResponseTypedDict": ".createcancellation",
+    "CreateDepositAccountRequest": ".createdepositaccount",
+    "CreateDepositAccountRequestTypedDict": ".createdepositaccount",
+    "CreateDepositAccountResponse": ".createdepositaccount",
+    "CreateDepositAccountResponseTypedDict": ".createdepositaccount",
     "CreateFeePlanAgreementsRequest": ".createfeeplanagreements",
     "CreateFeePlanAgreementsRequestTypedDict": ".createfeeplanagreements",
     "CreateFeePlanAgreementsResponse": ".createfeeplanagreements",

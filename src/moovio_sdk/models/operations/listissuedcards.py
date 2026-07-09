@@ -19,7 +19,7 @@ class ListIssuedCardsRequestTypedDict(TypedDict):
     skip: NotRequired[int]
     count: NotRequired[int]
     states: NotRequired[List[components_issuedcardstate.IssuedCardState]]
-    r"""Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`"""
+    r"""Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`"""
 
 
 class ListIssuedCardsRequest(BaseModel):
@@ -44,7 +44,7 @@ class ListIssuedCardsRequest(BaseModel):
         Optional[List[components_issuedcardstate.IssuedCardState]],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
-    r"""Optional, comma-separated states to filter the Moov list issued cards response. For example `active,pending-verification`"""
+    r"""Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

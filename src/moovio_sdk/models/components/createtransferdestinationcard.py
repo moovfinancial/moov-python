@@ -14,7 +14,7 @@ class CreateTransferDestinationCardTypedDict(TypedDict):
     dynamic_descriptor: NotRequired[str]
     r"""An optional override of the default card statement descriptor for a transfer. Accounts must be enabled by Moov to set this field."""
     scheduled_delivery_on: NotRequired[datetime]
-    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future."""
+    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future in production. In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred delivery using the sandbox test cards with relaxed wait times."""
     payout_type: NotRequired[CardPayoutType]
     r"""An optional field to specify the type of card payout, used to route the transfer with the appropriate business application identifier (BAI)."""
 
@@ -28,7 +28,7 @@ class CreateTransferDestinationCard(BaseModel):
     scheduled_delivery_on: Annotated[
         Optional[datetime], pydantic.Field(alias="scheduledDeliveryOn")
     ] = None
-    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future."""
+    r"""The scheduled date and time for the transfer to be delivered. This field is only valid for push-to-card transfers. Must be between 24 and 48 hours in the future in production. In sandbox mode, any future time up to 48 hours is accepted so integrations can test deferred delivery using the sandbox test cards with relaxed wait times."""
 
     payout_type: Annotated[
         Optional[CardPayoutType], pydantic.Field(alias="payoutType")
