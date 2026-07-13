@@ -34,6 +34,8 @@ class CardBrandFeesTypedDict(TypedDict):
     r"""Details of declined transactions."""
     refunds: NotRequired[BillingCountAndAmountTypedDict]
     r"""Details of refunded transactions."""
+    card_cancellations: NotRequired[BillingCountAndAmountTypedDict]
+    r"""Details of card cancellations."""
 
 
 class CardBrandFees(BaseModel):
@@ -83,6 +85,11 @@ class CardBrandFees(BaseModel):
     refunds: Optional[BillingCountAndAmount] = None
     r"""Details of refunded transactions."""
 
+    card_cancellations: Annotated[
+        Optional[BillingCountAndAmount], pydantic.Field(alias="cardCancellations")
+    ] = None
+    r"""Details of card cancellations."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -96,6 +103,7 @@ class CardBrandFees(BaseModel):
                 "completedInternationalInPerson",
                 "declines",
                 "refunds",
+                "cardCancellations",
             ]
         )
         serialized = handler(self)
