@@ -5,7 +5,7 @@ from enum import Enum
 
 
 class FilePurpose(str, Enum):
-    r"""The file's purpose."""
+    r"""The purpose of the file being uploaded."""
 
     BUSINESS_VERIFICATION = "business_verification"
     REPRESENTATIVE_VERIFICATION = "representative_verification"

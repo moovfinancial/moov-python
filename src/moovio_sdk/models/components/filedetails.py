@@ -18,7 +18,7 @@ class FileDetailsTypedDict(TypedDict):
     file_name: str
     account_id: str
     file_purpose: FilePurpose
-    r"""The file's purpose."""
+    r"""The purpose of the file being uploaded."""
     file_status: FileStatus
     r"""The file's status."""
     metadata: str
@@ -38,7 +38,7 @@ class FileDetails(BaseModel):
     account_id: Annotated[str, pydantic.Field(alias="accountID")]
 
     file_purpose: Annotated[FilePurpose, pydantic.Field(alias="filePurpose")]
-    r"""The file's purpose."""
+    r"""The purpose of the file being uploaded."""
 
     file_status: Annotated[FileStatus, pydantic.Field(alias="fileStatus")]
     r"""The file's status."""
