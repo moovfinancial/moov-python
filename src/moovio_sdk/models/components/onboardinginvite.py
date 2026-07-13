@@ -33,7 +33,7 @@ class OnboardingInviteTypedDict(TypedDict):
     r"""List of fee plan codes to assign the account created by the invitee."""
     created_on: datetime
     return_url: NotRequired[str]
-    r"""The scopes requested by the inviter."""
+    r"""Optional URL to redirect the user to after they complete the onboarding process."""
     terms_of_service_url: NotRequired[str]
     r"""The terms of service URL set by the inviter."""
     grant_scopes: NotRequired[List[ApplicationScope]]
@@ -72,7 +72,7 @@ class OnboardingInvite(BaseModel):
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
 
     return_url: Annotated[Optional[str], pydantic.Field(alias="returnURL")] = None
-    r"""The scopes requested by the inviter."""
+    r"""Optional URL to redirect the user to after they complete the onboarding process."""
 
     terms_of_service_url: Annotated[
         Optional[str], pydantic.Field(alias="termsOfServiceURL")
