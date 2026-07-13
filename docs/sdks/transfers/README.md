@@ -84,6 +84,12 @@ to learn more.
 
 To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
 to specify the `/accounts/{accountID}/transfers.write` scope.
+* [get_risk_outcomes](#get_risk_outcomes) - Retrieve the risk rules that contributed to a transfer's risk decision.
+
+This endpoint has limited availability and must be enabled for your account by Moov.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ## generate_options
 
@@ -362,8 +368,6 @@ with Moov(
 | `refunded`                                                                                                                            | *Optional[bool]*                                                                                                                      | :heavy_minus_sign:                                                                                                                    | Optional parameter to only return refunded transfers.                                                                                 |                                                                                                                                       |
 | `disputed`                                                                                                                            | *Optional[bool]*                                                                                                                      | :heavy_minus_sign:                                                                                                                    | Optional parameter to only return disputed transfers.                                                                                 |                                                                                                                                       |
 | `foreign_id`                                                                                                                          | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Optional alias from a foreign/external system which can be used to reference this resource.                                           |                                                                                                                                       |
-| `authorization_i_ds`                                                                                                                  | List[*str*]                                                                                                                           | :heavy_minus_sign:                                                                                                                    | Optional comma-separated IDs to filter for transfers associated with specific card authorizations.                                    |                                                                                                                                       |
-| `capture_i_ds`                                                                                                                        | List[*str*]                                                                                                                           | :heavy_minus_sign:                                                                                                                    | Optional comma-separated IDs to filter for transfers associated with specific card captures.                                          |                                                                                                                                       |
 | `skip`                                                                                                                                | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | N/A                                                                                                                                   | 60                                                                                                                                    |
 | `count`                                                                                                                               | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | N/A                                                                                                                                   | 20                                                                                                                                    |
 | `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |                                                                                                                                       |
@@ -968,3 +972,52 @@ with Moov(
 | errors.GenericError            | 400, 409                       | application/json               |
 | errors.ReversalValidationError | 422                            | application/json               |
 | errors.APIError                | 4XX, 5XX                       | \*/\*                          |
+
+## get_risk_outcomes
+
+Retrieve the risk rules that contributed to a transfer's risk decision.
+
+This endpoint has limited availability and must be enabled for your account by Moov.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="getTransferRiskOutcomes" method="get" path="/transfers/{transferID}/risk-outcomes" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.get_risk_outcomes(transfer_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `transfer_id`                                                                                            | *str*                                                                                                    | :heavy_check_mark:                                                                                       | Identifier for the transfer.                                                                             |
+| `x_account_id`                                                                                           | *Optional[str]*                                                                                          | :heavy_minus_sign:                                                                                       | The account the transfer belongs to. When omitted, the account is resolved<br/>from the calling credentials. |
+| `retries`                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                         | :heavy_minus_sign:                                                                                       | Configuration to override the default retry behavior of the client.                                      |
+
+### Response
+
+**[operations.GetTransferRiskOutcomesResponse](../../models/operations/gettransferriskoutcomesresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |

@@ -330,6 +330,7 @@ if TYPE_CHECKING:
         CompleteMicroDepositsTypedDict,
     )
     from .contact import Contact, ContactTypedDict
+    from .contributingrule import ContributingRule, ContributingRuleTypedDict
     from .createaccount import CreateAccount, CreateAccountTypedDict
     from .createaccountsettings import (
         AchPayment,
@@ -950,6 +951,10 @@ if TYPE_CHECKING:
         PartnerPricingAgreement,
         PartnerPricingAgreementTypedDict,
     )
+    from .partnerriskoutcomesresponse import (
+        PartnerRiskOutcomesResponse,
+        PartnerRiskOutcomesResponseTypedDict,
+    )
     from .patchaccount import (
         PatchAccount,
         PatchAccountCustomerSupport,
@@ -1327,7 +1332,6 @@ if TYPE_CHECKING:
         TransferAmountDetails,
         TransferAmountDetailsTypedDict,
     )
-    from .transfercapture import TransferCapture, TransferCaptureTypedDict
     from .transferconfig import TransferConfig, TransferConfigTypedDict
     from .transfercontrols import TransferControls, TransferControlsTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
@@ -1914,6 +1918,8 @@ __all__ = [
     "CompletedMicroDepositsTypedDict",
     "Contact",
     "ContactTypedDict",
+    "ContributingRule",
+    "ContributingRuleTypedDict",
     "CreateAccount",
     "CreateAccountSettings",
     "CreateAccountSettingsTypedDict",
@@ -2373,6 +2379,8 @@ __all__ = [
     "PartnerFeesTypedDict",
     "PartnerPricingAgreement",
     "PartnerPricingAgreementTypedDict",
+    "PartnerRiskOutcomesResponse",
+    "PartnerRiskOutcomesResponseTypedDict",
     "PatchAccount",
     "PatchAccountCustomerSupport",
     "PatchAccountCustomerSupportTypedDict",
@@ -2702,8 +2710,6 @@ __all__ = [
     "TransferAccountTypedDict",
     "TransferAmountDetails",
     "TransferAmountDetailsTypedDict",
-    "TransferCapture",
-    "TransferCaptureTypedDict",
     "TransferConfig",
     "TransferConfigTypedDict",
     "TransferControls",
@@ -3193,6 +3199,8 @@ _dynamic_imports: dict[str, str] = {
     "CompleteMicroDepositsTypedDict": ".completemicrodeposits",
     "Contact": ".contact",
     "ContactTypedDict": ".contact",
+    "ContributingRule": ".contributingrule",
+    "ContributingRuleTypedDict": ".contributingrule",
     "CreateAccount": ".createaccount",
     "CreateAccountTypedDict": ".createaccount",
     "AchPayment": ".createaccountsettings",
@@ -3654,6 +3662,8 @@ _dynamic_imports: dict[str, str] = {
     "PartnerFeesTypedDict": ".partnerfees",
     "PartnerPricingAgreement": ".partnerpricingagreement",
     "PartnerPricingAgreementTypedDict": ".partnerpricingagreement",
+    "PartnerRiskOutcomesResponse": ".partnerriskoutcomesresponse",
+    "PartnerRiskOutcomesResponseTypedDict": ".partnerriskoutcomesresponse",
     "PatchAccount": ".patchaccount",
     "PatchAccountCustomerSupport": ".patchaccount",
     "PatchAccountCustomerSupportTypedDict": ".patchaccount",
@@ -3983,8 +3993,6 @@ _dynamic_imports: dict[str, str] = {
     "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
     "TransferAmountDetails": ".transferamountdetails",
     "TransferAmountDetailsTypedDict": ".transferamountdetails",
-    "TransferCapture": ".transfercapture",
-    "TransferCaptureTypedDict": ".transfercapture",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
     "TransferControls": ".transfercontrols",
