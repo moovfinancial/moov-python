@@ -554,6 +554,12 @@ if TYPE_CHECKING:
         GetTransferConfigResponse,
         GetTransferConfigResponseTypedDict,
     )
+    from .gettransferriskoutcomes import (
+        GetTransferRiskOutcomesRequest,
+        GetTransferRiskOutcomesRequestTypedDict,
+        GetTransferRiskOutcomesResponse,
+        GetTransferRiskOutcomesResponseTypedDict,
+    )
     from .getunderwriting import (
         GetUnderwritingRequest,
         GetUnderwritingRequestTypedDict,
@@ -1479,6 +1485,10 @@ __all__ = [
     "GetTransferRequestTypedDict",
     "GetTransferResponse",
     "GetTransferResponseTypedDict",
+    "GetTransferRiskOutcomesRequest",
+    "GetTransferRiskOutcomesRequestTypedDict",
+    "GetTransferRiskOutcomesResponse",
+    "GetTransferRiskOutcomesResponseTypedDict",
     "GetUnderwritingRequest",
     "GetUnderwritingRequestTypedDict",
     "GetUnderwritingResponse",
@@ -2225,6 +2235,10 @@ _dynamic_imports: dict[str, str] = {
     "GetTransferConfigRequestTypedDict": ".gettransferconfig",
     "GetTransferConfigResponse": ".gettransferconfig",
     "GetTransferConfigResponseTypedDict": ".gettransferconfig",
+    "GetTransferRiskOutcomesRequest": ".gettransferriskoutcomes",
+    "GetTransferRiskOutcomesRequestTypedDict": ".gettransferriskoutcomes",
+    "GetTransferRiskOutcomesResponse": ".gettransferriskoutcomes",
+    "GetTransferRiskOutcomesResponseTypedDict": ".gettransferriskoutcomes",
     "GetUnderwritingRequest": ".getunderwriting",
     "GetUnderwritingRequestTypedDict": ".getunderwriting",
     "GetUnderwritingResponse": ".getunderwriting",

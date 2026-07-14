@@ -330,6 +330,7 @@ if TYPE_CHECKING:
         CompleteMicroDepositsTypedDict,
     )
     from .contact import Contact, ContactTypedDict
+    from .contributingrule import ContributingRule, ContributingRuleTypedDict
     from .createaccount import CreateAccount, CreateAccountTypedDict
     from .createaccountsettings import (
         AchPayment,
@@ -949,6 +950,10 @@ if TYPE_CHECKING:
     from .partnerpricingagreement import (
         PartnerPricingAgreement,
         PartnerPricingAgreementTypedDict,
+    )
+    from .partnerriskoutcomesresponse import (
+        PartnerRiskOutcomesResponse,
+        PartnerRiskOutcomesResponseTypedDict,
     )
     from .patchaccount import (
         PatchAccount,
@@ -1914,6 +1919,8 @@ __all__ = [
     "CompletedMicroDepositsTypedDict",
     "Contact",
     "ContactTypedDict",
+    "ContributingRule",
+    "ContributingRuleTypedDict",
     "CreateAccount",
     "CreateAccountSettings",
     "CreateAccountSettingsTypedDict",
@@ -2373,6 +2380,8 @@ __all__ = [
     "PartnerFeesTypedDict",
     "PartnerPricingAgreement",
     "PartnerPricingAgreementTypedDict",
+    "PartnerRiskOutcomesResponse",
+    "PartnerRiskOutcomesResponseTypedDict",
     "PatchAccount",
     "PatchAccountCustomerSupport",
     "PatchAccountCustomerSupportTypedDict",
@@ -3193,6 +3202,8 @@ _dynamic_imports: dict[str, str] = {
     "CompleteMicroDepositsTypedDict": ".completemicrodeposits",
     "Contact": ".contact",
     "ContactTypedDict": ".contact",
+    "ContributingRule": ".contributingrule",
+    "ContributingRuleTypedDict": ".contributingrule",
     "CreateAccount": ".createaccount",
     "CreateAccountTypedDict": ".createaccount",
     "AchPayment": ".createaccountsettings",
@@ -3654,6 +3665,8 @@ _dynamic_imports: dict[str, str] = {
     "PartnerFeesTypedDict": ".partnerfees",
     "PartnerPricingAgreement": ".partnerpricingagreement",
     "PartnerPricingAgreementTypedDict": ".partnerpricingagreement",
+    "PartnerRiskOutcomesResponse": ".partnerriskoutcomesresponse",
+    "PartnerRiskOutcomesResponseTypedDict": ".partnerriskoutcomesresponse",
     "PatchAccount": ".patchaccount",
     "PatchAccountCustomerSupport": ".patchaccount",
     "PatchAccountCustomerSupportTypedDict": ".patchaccount",
