@@ -16,6 +16,7 @@ class Products(BaseSDK):
         *,
         account_id: str,
         title: Optional[str] = None,
+        category: Optional[str] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -27,6 +28,9 @@ class Products(BaseSDK):
 
         :param account_id:
         :param title: Allows filtering products by title. This supports partial matches and is case-insensitive
+        :param category: Filter products by category. Accepts a category ID at any level of the taxonomy;
+            a product matches when the given category is anywhere in its category's breadcrumb
+            (i.e. filtering by a top-level category returns products in any of its descendants).
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -47,6 +51,7 @@ class Products(BaseSDK):
         request = operations.ListProductsRequest(
             account_id=account_id,
             title=title,
+            category=category,
             skip=skip,
             count=count,
         )
@@ -118,6 +123,7 @@ class Products(BaseSDK):
         *,
         account_id: str,
         title: Optional[str] = None,
+        category: Optional[str] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -129,6 +135,9 @@ class Products(BaseSDK):
 
         :param account_id:
         :param title: Allows filtering products by title. This supports partial matches and is case-insensitive
+        :param category: Filter products by category. Accepts a category ID at any level of the taxonomy;
+            a product matches when the given category is anywhere in its category's breadcrumb
+            (i.e. filtering by a top-level category returns products in any of its descendants).
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -149,6 +158,7 @@ class Products(BaseSDK):
         request = operations.ListProductsRequest(
             account_id=account_id,
             title=title,
+            category=category,
             skip=skip,
             count=count,
         )
@@ -234,6 +244,7 @@ class Products(BaseSDK):
                 Iterable[components.CreateProductOptionGroupTypedDict],
             ]
         ] = None,
+        category_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -251,6 +262,7 @@ class Products(BaseSDK):
             - HTML is not permitted and will be rejected
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
+        :param category_id: The ID of a product taxonomy category to associate with the product.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -280,6 +292,7 @@ class Products(BaseSDK):
                 option_groups=utils.get_pydantic_model(
                     option_groups, Optional[List[components.CreateProductOptionGroup]]
                 ),
+                category_id=category_id,
             ),
         )
 
@@ -376,6 +389,7 @@ class Products(BaseSDK):
                 Iterable[components.CreateProductOptionGroupTypedDict],
             ]
         ] = None,
+        category_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -393,6 +407,7 @@ class Products(BaseSDK):
             - HTML is not permitted and will be rejected
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
+        :param category_id: The ID of a product taxonomy category to associate with the product.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -422,6 +437,7 @@ class Products(BaseSDK):
                 option_groups=utils.get_pydantic_model(
                     option_groups, Optional[List[components.CreateProductOptionGroup]]
                 ),
+                category_id=category_id,
             ),
         )
 
@@ -711,6 +727,7 @@ class Products(BaseSDK):
                 Iterable[components.CreateProductOptionGroupTypedDict],
             ]
         ] = None,
+        category_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -729,6 +746,7 @@ class Products(BaseSDK):
             - HTML is not permitted and will be rejected
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
+        :param category_id: The ID of a product taxonomy category to associate with the product.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -759,6 +777,7 @@ class Products(BaseSDK):
                 option_groups=utils.get_pydantic_model(
                     option_groups, Optional[List[components.CreateProductOptionGroup]]
                 ),
+                category_id=category_id,
             ),
         )
 
@@ -856,6 +875,7 @@ class Products(BaseSDK):
                 Iterable[components.CreateProductOptionGroupTypedDict],
             ]
         ] = None,
+        category_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -874,6 +894,7 @@ class Products(BaseSDK):
             - HTML is not permitted and will be rejected
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
+        :param category_id: The ID of a product taxonomy category to associate with the product.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -904,6 +925,7 @@ class Products(BaseSDK):
                 option_groups=utils.get_pydantic_model(
                     option_groups, Optional[List[components.CreateProductOptionGroup]]
                 ),
+                category_id=category_id,
             ),
         )
 
@@ -1169,6 +1191,178 @@ class Products(BaseSDK):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def list_categories(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListProductCategoriesResponse:
+        r"""Returns the full, read-only list of product categories from the product taxonomy.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request(
+            method="GET",
+            path="/product-categories",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listProductCategories",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Products"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListProductCategoriesResponse(
+                result=unmarshal_json_response(components.ProductCategories, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def list_categories_async(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListProductCategoriesResponse:
+        r"""Returns the full, read-only list of product categories from the product taxonomy.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request_async(
+            method="GET",
+            path="/product-categories",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listProductCategories",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Products"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListProductCategoriesResponse(
+                result=unmarshal_json_response(components.ProductCategories, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "504"], "*"):

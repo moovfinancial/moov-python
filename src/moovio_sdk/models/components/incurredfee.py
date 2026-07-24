@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+from .feepaidby import FeePaidBy
 from .generatedby import GeneratedBy, GeneratedByTypedDict
 from datetime import datetime
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
@@ -32,6 +33,8 @@ class IncurredFeeTypedDict(TypedDict):
     r"""Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or an interchange or discount fee."""
     residual_id: NotRequired[str]
     r"""Unique identifier for this residual payment calculation."""
+    fee_paid_by: NotRequired[FeePaidBy]
+    r"""Indicates which party to the money movement bore this fee."""
 
 
 class IncurredFee(BaseModel):
@@ -66,6 +69,11 @@ class IncurredFee(BaseModel):
     residual_id: Annotated[Optional[str], pydantic.Field(alias="residualID")] = None
     r"""Unique identifier for this residual payment calculation."""
 
+    fee_paid_by: Annotated[Optional[FeePaidBy], pydantic.Field(alias="feePaidBy")] = (
+        None
+    )
+    r"""Indicates which party to the money movement bore this fee."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -79,6 +87,7 @@ class IncurredFee(BaseModel):
                 "generatedBy",
                 "feeGroup",
                 "residualID",
+                "feePaidBy",
             ]
         )
         serialized = handler(self)

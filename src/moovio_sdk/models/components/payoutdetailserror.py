@@ -15,6 +15,7 @@ class PayoutDetailsErrorTypedDict(TypedDict):
     recipient: NotRequired[PayoutRecipientErrorTypedDict]
     metadata: NotRequired[str]
     push_options: NotRequired[PushOptionsErrorTypedDict]
+    fee_paid_by: NotRequired[str]
 
 
 class PayoutDetailsError(BaseModel):
@@ -30,10 +31,12 @@ class PayoutDetailsError(BaseModel):
         Optional[PushOptionsError], pydantic.Field(alias="pushOptions")
     ] = None
 
+    fee_paid_by: Annotated[Optional[str], pydantic.Field(alias="feePaidBy")] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["allowedMethods", "recipient", "metadata", "pushOptions"]
+            ["allowedMethods", "recipient", "metadata", "pushOptions", "feePaidBy"]
         )
         serialized = handler(self)
         m = {}

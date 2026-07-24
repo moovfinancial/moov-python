@@ -137,6 +137,12 @@ if TYPE_CHECKING:
     from .asynctransfer import AsyncTransfer, AsyncTransferTypedDict
     from .authtoken import AuthToken, AuthTokenTypedDict
     from .authtokenrequest import AuthTokenRequest, AuthTokenRequestTypedDict
+    from .avataruploadrequest import (
+        AvatarUploadRequest,
+        AvatarUploadRequestFile,
+        AvatarUploadRequestFileTypedDict,
+        AvatarUploadRequestTypedDict,
+    )
     from .bankaccount import BankAccount, BankAccountTypedDict
     from .bankaccountexception import (
         BankAccountException,
@@ -645,6 +651,7 @@ if TYPE_CHECKING:
     from .fednowservices import FedNowServices, FedNowServicesTypedDict
     from .feecategory import FeeCategory
     from .feemodel import FeeModel
+    from .feepaidby import FeePaidBy
     from .feeplan import FeePlan, FeePlanTypedDict
     from .feeplanagreement import FeePlanAgreement, FeePlanAgreementTypedDict
     from .feeplanagreementstatus import FeePlanAgreementStatus
@@ -1050,6 +1057,8 @@ if TYPE_CHECKING:
     from .platformfees import PlatformFees, PlatformFeesTypedDict
     from .primaryregulator import PrimaryRegulator
     from .product import Product, ProductTypedDict
+    from .productcategories import ProductCategories, ProductCategoriesTypedDict
+    from .productcategory import ProductCategory, ProductCategoryTypedDict
     from .productimagemetadata import (
         ProductImageMetadata,
         ProductImageMetadataTypedDict,
@@ -1332,6 +1341,7 @@ if TYPE_CHECKING:
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
     from .transferfailurereason import TransferFailureReason
+    from .transferfeepaidby import TransferFeePaidBy, TransferFeePaidByTypedDict
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
     from .transferlineitemimagemetadata import (
         TransferLineItemImageMetadata,
@@ -1750,6 +1760,10 @@ __all__ = [
     "AuthTokenRequest",
     "AuthTokenRequestTypedDict",
     "AuthTokenTypedDict",
+    "AvatarUploadRequest",
+    "AvatarUploadRequestFile",
+    "AvatarUploadRequestFileTypedDict",
+    "AvatarUploadRequestTypedDict",
     "BankAccount",
     "BankAccountException",
     "BankAccountExceptionTypedDict",
@@ -2127,6 +2141,7 @@ __all__ = [
     "FedNowServicesTypedDict",
     "FeeCategory",
     "FeeModel",
+    "FeePaidBy",
     "FeePlan",
     "FeePlanAgreement",
     "FeePlanAgreementStatus",
@@ -2458,6 +2473,10 @@ __all__ = [
     "PlatformFeesTypedDict",
     "PrimaryRegulator",
     "Product",
+    "ProductCategories",
+    "ProductCategoriesTypedDict",
+    "ProductCategory",
+    "ProductCategoryTypedDict",
     "ProductImageMetadata",
     "ProductImageMetadataTypedDict",
     "ProductOption",
@@ -2709,6 +2728,8 @@ __all__ = [
     "TransferDestinationTypedDict",
     "TransferEntryMode",
     "TransferFailureReason",
+    "TransferFeePaidBy",
+    "TransferFeePaidByTypedDict",
     "TransferLineItem",
     "TransferLineItemImageMetadata",
     "TransferLineItemImageMetadataTypedDict",
@@ -3029,6 +3050,10 @@ _dynamic_imports: dict[str, str] = {
     "AuthTokenTypedDict": ".authtoken",
     "AuthTokenRequest": ".authtokenrequest",
     "AuthTokenRequestTypedDict": ".authtokenrequest",
+    "AvatarUploadRequest": ".avataruploadrequest",
+    "AvatarUploadRequestFile": ".avataruploadrequest",
+    "AvatarUploadRequestFileTypedDict": ".avataruploadrequest",
+    "AvatarUploadRequestTypedDict": ".avataruploadrequest",
     "BankAccount": ".bankaccount",
     "BankAccountTypedDict": ".bankaccount",
     "BankAccountException": ".bankaccountexception",
@@ -3406,6 +3431,7 @@ _dynamic_imports: dict[str, str] = {
     "FedNowServicesTypedDict": ".fednowservices",
     "FeeCategory": ".feecategory",
     "FeeModel": ".feemodel",
+    "FeePaidBy": ".feepaidby",
     "FeePlan": ".feeplan",
     "FeePlanTypedDict": ".feeplan",
     "FeePlanAgreement": ".feeplanagreement",
@@ -3737,6 +3763,10 @@ _dynamic_imports: dict[str, str] = {
     "PrimaryRegulator": ".primaryregulator",
     "Product": ".product",
     "ProductTypedDict": ".product",
+    "ProductCategories": ".productcategories",
+    "ProductCategoriesTypedDict": ".productcategories",
+    "ProductCategory": ".productcategory",
+    "ProductCategoryTypedDict": ".productcategory",
     "ProductImageMetadata": ".productimagemetadata",
     "ProductImageMetadataTypedDict": ".productimagemetadata",
     "ProductOption": ".productoption",
@@ -3988,6 +4018,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",
     "TransferFailureReason": ".transferfailurereason",
+    "TransferFeePaidBy": ".transferfeepaidby",
+    "TransferFeePaidByTypedDict": ".transferfeepaidby",
     "TransferLineItem": ".transferlineitem",
     "TransferLineItemTypedDict": ".transferlineitem",
     "TransferLineItemImageMetadata": ".transferlineitemimagemetadata",
