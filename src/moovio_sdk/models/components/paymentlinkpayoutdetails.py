@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .disbursementpaymentmethodtype import DisbursementPaymentMethodType
+from .feepaidby import FeePaidBy
 from .payoutrecipient import PayoutRecipient, PayoutRecipientTypedDict
 from .pushoptions import PushOptions, PushOptionsTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
@@ -27,6 +28,11 @@ class PaymentLinkPayoutDetailsTypedDict(TypedDict):
 
     The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
     (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these options.
+    """
+    fee_paid_by: NotRequired[Dict[str, FeePaidBy]]
+    r"""Indicates which party bears the fee, keyed by disbursement payment method (`DisbursementPaymentMethodType`).
+
+    Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
     """
 
 
@@ -55,9 +61,17 @@ class PaymentLinkPayoutDetails(BaseModel):
     (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these options.
     """
 
+    fee_paid_by: Annotated[
+        Optional[Dict[str, FeePaidBy]], pydantic.Field(alias="feePaidBy")
+    ] = None
+    r"""Indicates which party bears the fee, keyed by disbursement payment method (`DisbursementPaymentMethodType`).
+
+    Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["metadata", "pushOptions"])
+        optional_fields = set(["metadata", "pushOptions", "feePaidBy"])
         serialized = handler(self)
         m = {}
 

@@ -184,6 +184,14 @@ if TYPE_CHECKING:
         CreateWalletResponseTypedDict,
     )
     from .createwebhook import CreateWebhookResponse, CreateWebhookResponseTypedDict
+    from .deleteavatar import (
+        DeleteAvatarRequest,
+        DeleteAvatarRequestTypedDict,
+        DeleteAvatarResponse,
+        DeleteAvatarResponseTypedDict,
+        DeleteAvatarSecurity,
+        DeleteAvatarSecurityTypedDict,
+    )
     from .deletedisputeevidencefile import (
         DeleteDisputeEvidenceFileRequest,
         DeleteDisputeEvidenceFileRequestTypedDict,
@@ -802,6 +810,10 @@ if TYPE_CHECKING:
         ListPaymentMethodsResponse,
         ListPaymentMethodsResponseTypedDict,
     )
+    from .listproductcategories import (
+        ListProductCategoriesResponse,
+        ListProductCategoriesResponseTypedDict,
+    )
     from .listproducts import (
         ListProductsRequest,
         ListProductsRequestTypedDict,
@@ -1077,6 +1089,14 @@ if TYPE_CHECKING:
         UpdateWebhookResponse,
         UpdateWebhookResponseTypedDict,
     )
+    from .uploadavatar import (
+        UploadAvatarRequest,
+        UploadAvatarRequestTypedDict,
+        UploadAvatarResponse,
+        UploadAvatarResponseTypedDict,
+        UploadAvatarSecurity,
+        UploadAvatarSecurityTypedDict,
+    )
     from .uploaddisputeevidencefile import (
         UploadDisputeEvidenceFileRequest,
         UploadDisputeEvidenceFileRequestTypedDict,
@@ -1237,6 +1257,12 @@ __all__ = [
     "CreateWalletResponseTypedDict",
     "CreateWebhookResponse",
     "CreateWebhookResponseTypedDict",
+    "DeleteAvatarRequest",
+    "DeleteAvatarRequestTypedDict",
+    "DeleteAvatarResponse",
+    "DeleteAvatarResponseTypedDict",
+    "DeleteAvatarSecurity",
+    "DeleteAvatarSecurityTypedDict",
     "DeleteDisputeEvidenceFileRequest",
     "DeleteDisputeEvidenceFileRequestTypedDict",
     "DeleteDisputeEvidenceFileResponse",
@@ -1654,6 +1680,8 @@ __all__ = [
     "ListPaymentMethodsRequestTypedDict",
     "ListPaymentMethodsResponse",
     "ListPaymentMethodsResponseTypedDict",
+    "ListProductCategoriesResponse",
+    "ListProductCategoriesResponseTypedDict",
     "ListProductsRequest",
     "ListProductsRequestTypedDict",
     "ListProductsResponse",
@@ -1838,6 +1866,12 @@ __all__ = [
     "UpdateWebhookRequestTypedDict",
     "UpdateWebhookResponse",
     "UpdateWebhookResponseTypedDict",
+    "UploadAvatarRequest",
+    "UploadAvatarRequestTypedDict",
+    "UploadAvatarResponse",
+    "UploadAvatarResponseTypedDict",
+    "UploadAvatarSecurity",
+    "UploadAvatarSecurityTypedDict",
     "UploadDisputeEvidenceFileRequest",
     "UploadDisputeEvidenceFileRequestTypedDict",
     "UploadDisputeEvidenceFileResponse",
@@ -1987,6 +2021,12 @@ _dynamic_imports: dict[str, str] = {
     "CreateWalletResponseTypedDict": ".createwallet",
     "CreateWebhookResponse": ".createwebhook",
     "CreateWebhookResponseTypedDict": ".createwebhook",
+    "DeleteAvatarRequest": ".deleteavatar",
+    "DeleteAvatarRequestTypedDict": ".deleteavatar",
+    "DeleteAvatarResponse": ".deleteavatar",
+    "DeleteAvatarResponseTypedDict": ".deleteavatar",
+    "DeleteAvatarSecurity": ".deleteavatar",
+    "DeleteAvatarSecurityTypedDict": ".deleteavatar",
     "DeleteDisputeEvidenceFileRequest": ".deletedisputeevidencefile",
     "DeleteDisputeEvidenceFileRequestTypedDict": ".deletedisputeevidencefile",
     "DeleteDisputeEvidenceFileResponse": ".deletedisputeevidencefile",
@@ -2403,6 +2443,8 @@ _dynamic_imports: dict[str, str] = {
     "ListPaymentMethodsRequestTypedDict": ".listpaymentmethods",
     "ListPaymentMethodsResponse": ".listpaymentmethods",
     "ListPaymentMethodsResponseTypedDict": ".listpaymentmethods",
+    "ListProductCategoriesResponse": ".listproductcategories",
+    "ListProductCategoriesResponseTypedDict": ".listproductcategories",
     "ListProductsRequest": ".listproducts",
     "ListProductsRequestTypedDict": ".listproducts",
     "ListProductsResponse": ".listproducts",
@@ -2588,6 +2630,12 @@ _dynamic_imports: dict[str, str] = {
     "UpdateWebhookRequestTypedDict": ".updatewebhook",
     "UpdateWebhookResponse": ".updatewebhook",
     "UpdateWebhookResponseTypedDict": ".updatewebhook",
+    "UploadAvatarRequest": ".uploadavatar",
+    "UploadAvatarRequestTypedDict": ".uploadavatar",
+    "UploadAvatarResponse": ".uploadavatar",
+    "UploadAvatarResponseTypedDict": ".uploadavatar",
+    "UploadAvatarSecurity": ".uploadavatar",
+    "UploadAvatarSecurityTypedDict": ".uploadavatar",
     "UploadDisputeEvidenceFileRequest": ".uploaddisputeevidencefile",
     "UploadDisputeEvidenceFileRequestTypedDict": ".uploaddisputeevidencefile",
     "UploadDisputeEvidenceFileResponse": ".uploaddisputeevidencefile",

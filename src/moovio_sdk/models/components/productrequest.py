@@ -31,6 +31,8 @@ class ProductRequestTypedDict(TypedDict):
     r"""Assign previously uploaded images to a product or option."""
     option_groups: NotRequired[List[CreateProductOptionGroupTypedDict]]
     r"""Optional configuration options for a product, such as size or color."""
+    category_id: NotRequired[str]
+    r"""The ID of a product taxonomy category to associate with the product."""
 
 
 class ProductRequest(BaseModel):
@@ -57,9 +59,12 @@ class ProductRequest(BaseModel):
     ] = None
     r"""Optional configuration options for a product, such as size or color."""
 
+    category_id: Annotated[Optional[str], pydantic.Field(alias="categoryID")] = None
+    r"""The ID of a product taxonomy category to associate with the product."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "images", "optionGroups"])
+        optional_fields = set(["description", "images", "optionGroups", "categoryID"])
         serialized = handler(self)
         m = {}
 

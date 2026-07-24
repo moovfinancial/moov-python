@@ -320,6 +320,9 @@ class Transfers(BaseSDK):
                 components.CreateTransferAmountDetailsTypedDict,
             ]
         ] = None,
+        fee_paid_by: Optional[
+            Union[components.TransferFeePaidBy, components.TransferFeePaidByTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -347,6 +350,7 @@ class Transfers(BaseSDK):
         :param line_items: An optional collection of line items for a transfer.
             When line items are provided, their total plus tax must equal the transfer amount.
         :param amount_details:
+        :param fee_paid_by: Indicates which party bears fees for the transfer, keyed by fee type.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -385,6 +389,9 @@ class Transfers(BaseSDK):
                 ),
                 amount_details=utils.get_pydantic_model(
                     amount_details, Optional[components.CreateTransferAmountDetails]
+                ),
+                fee_paid_by=utils.get_pydantic_model(
+                    fee_paid_by, Optional[components.TransferFeePaidBy]
                 ),
             ),
         )
@@ -508,6 +515,9 @@ class Transfers(BaseSDK):
                 components.CreateTransferAmountDetailsTypedDict,
             ]
         ] = None,
+        fee_paid_by: Optional[
+            Union[components.TransferFeePaidBy, components.TransferFeePaidByTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -535,6 +545,7 @@ class Transfers(BaseSDK):
         :param line_items: An optional collection of line items for a transfer.
             When line items are provided, their total plus tax must equal the transfer amount.
         :param amount_details:
+        :param fee_paid_by: Indicates which party bears fees for the transfer, keyed by fee type.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -573,6 +584,9 @@ class Transfers(BaseSDK):
                 ),
                 amount_details=utils.get_pydantic_model(
                     amount_details, Optional[components.CreateTransferAmountDetails]
+                ),
+                fee_paid_by=utils.get_pydantic_model(
+                    fee_paid_by, Optional[components.TransferFeePaidBy]
                 ),
             ),
         )

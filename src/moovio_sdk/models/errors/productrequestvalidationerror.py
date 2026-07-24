@@ -37,6 +37,7 @@ class ProductRequestValidationErrorData(BaseModel):
         ],
         pydantic.Field(alias="optionGroups"),
     ] = None
+    category_id: Annotated[Optional[str], pydantic.Field(alias="categoryID")] = None
 
 
 @dataclass(unsafe_hash=True)

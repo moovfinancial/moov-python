@@ -14,6 +14,11 @@ class ListProductsRequestTypedDict(TypedDict):
     account_id: str
     title: NotRequired[str]
     r"""Allows filtering products by title. This supports partial matches and is case-insensitive"""
+    category: NotRequired[str]
+    r"""Filter products by category. Accepts a category ID at any level of the taxonomy;
+    a product matches when the given category is anywhere in its category's breadcrumb
+    (i.e. filtering by a top-level category returns products in any of its descendants).
+    """
     skip: NotRequired[int]
     count: NotRequired[int]
 
@@ -31,6 +36,15 @@ class ListProductsRequest(BaseModel):
     ] = None
     r"""Allows filtering products by title. This supports partial matches and is case-insensitive"""
 
+    category: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Filter products by category. Accepts a category ID at any level of the taxonomy;
+    a product matches when the given category is anywhere in its category's breadcrumb
+    (i.e. filtering by a top-level category returns products in any of its descendants).
+    """
+
     skip: Annotated[
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
@@ -43,7 +57,7 @@ class ListProductsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["title", "skip", "count"])
+        optional_fields = set(["title", "category", "skip", "count"])
         serialized = handler(self)
         m = {}
 
