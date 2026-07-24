@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: d07e421b323a0062b89befec19bf6ae7
+  docChecksum: 16fa531784ffc71fad38412adb1db7a5
   docVersion: v2026.01.00
-  speakeasyVersion: 1.790.0
-  generationVersion: 2.917.0
-  releaseVersion: 26.4.2
-  configChecksum: 82a903be56d131a48c3931ee070455b1
+  speakeasyVersion: 1.791.0
+  generationVersion: 2.924.0
+  releaseVersion: 26.4.3
+  configChecksum: 7d8a8dd437052c672c5b9c1bfd9d1523
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: d07636de-13ae-4518-92fd-c4c635ebd03c
-  pristine_commit_hash: ecb0388bf441d8c0c1f0c6f61972aa1bb6f12319
-  pristine_tree_hash: 93822f1c1dd3752a8f62dac81365fb73f6a3b310
+  generation_id: 87dd8e84-b30f-4a5c-8635-dfc5e52b9303
+  pristine_commit_hash: 149c682469c05b39ea6c2a7a4ff37bb2d491befc
+  pristine_tree_hash: 6fb57d2b8bc1773e0266a9ff54ae39651958fe7d
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1301,16 +1301,16 @@ trackedFiles:
     pristine_git_object: 7e498b11cd9bde138e94928cf9dd7f7f010ad637
   docs/models/components/issuingintervallimit.md:
     id: 66a82e5ba746
-    last_write_checksum: sha1:5c3717fdc0d5d4e82fcb2829e4ceede6bb9fedba
-    pristine_git_object: 18882439d4cb8da88e812a35a38dc71d34910721
+    last_write_checksum: sha1:ec3135d634a242d63029b633a38c2feb759585eb
+    pristine_git_object: 1196c490f8b7fa4d7177c13c0449da59f3b5ef2a
   docs/models/components/issuingmerchantdata.md:
     id: 458b3e2e3964
     last_write_checksum: sha1:b1e510851415a233a66232c21779a0ab432bc024
     pristine_git_object: 65976877c7b1b53bbf19564b1a5325ed987b8472
   docs/models/components/issuingvelocitylimit.md:
     id: b10f07a0882c
-    last_write_checksum: sha1:757757760b02afde2d3db7d19c95e06379aeb9a0
-    pristine_git_object: 70a00136b70d66a0648b4aaa8f6f65d621358926
+    last_write_checksum: sha1:fbdc906a100aa3b5b0ba9bcd30b5508a9d282dff
+    pristine_git_object: 74bde8b536c3c709f26a72a8846eb371d49295fd
   docs/models/components/issuingvelocitylimiterror.md:
     id: 7fb244c0cfcc
     last_write_checksum: sha1:218521156f4ec9891c0c4654a6735c449ad076d6
@@ -4273,8 +4273,8 @@ trackedFiles:
     pristine_git_object: 68b6361e4a22b7fd00d6f5a72e25278ebf35ba6d
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:b96c689afaaa46c7cfb21d73afa493bbaeb61e4f
-    pristine_git_object: d026d8b609bf00569586a3d3f004ce3ddbf8b077
+    last_write_checksum: sha1:6769f796cf05a60d952bd53cf3f7d3b8b65560c8
+    pristine_git_object: 7c4cf4b95f38f91c3efb083218fd76142f351153
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -4301,8 +4301,8 @@ trackedFiles:
     pristine_git_object: 076df3d6ae03d62035a26c8ac4f1cfb3ddd1bc74
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:045c4cb11acc31122ac4913a11a93d6dbfca11a5
-    pristine_git_object: 40906ff76e7f79ec75ac69aae68e2a2a7fc3dffe
+    last_write_checksum: sha1:cf50388b46594775688d395637c7a2d1eaab6438
+    pristine_git_object: 02ec0090ef9a368ed09bfc3a84c470a184f61d1e
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:c1d6f7135eda3b166bafa5754614318f905dd5ef
@@ -5497,16 +5497,16 @@ trackedFiles:
     pristine_git_object: 1ad696152451b5965029dcf1301e9eddf7a6adbd
   src/moovio_sdk/models/components/issuingintervallimit.py:
     id: f77ecac173a4
-    last_write_checksum: sha1:978d4c322b3562e20825f9eee321ce662ef761b4
-    pristine_git_object: 80363c225d296995b66704b19af2f7d8b7e991db
+    last_write_checksum: sha1:0ac9f8b4a56e8c3cad9889c0ec5ec5ba1c3c8c4e
+    pristine_git_object: 02962ae7d430c868e903217b590ce659d2253c3f
   src/moovio_sdk/models/components/issuingmerchantdata.py:
     id: bd8a74440814
     last_write_checksum: sha1:0b351c054929b32668a2dfb99263ecf9afccb32f
     pristine_git_object: 7f8d4a7066536f712b44c5da0734a5a693ab5ce1
   src/moovio_sdk/models/components/issuingvelocitylimit.py:
     id: a636e8ff83b0
-    last_write_checksum: sha1:df00d4476a3465912b43d78ca0783edf23b32b41
-    pristine_git_object: 76cd9a51c91bff3d09e1b41458b6f0631dd3fe91
+    last_write_checksum: sha1:6b94b159a595bbfa92d641d271cffdfc57b5ffe6
+    pristine_git_object: c8131cd8f15b6c5e0f5e52545fa4d02eb0a16d79
   src/moovio_sdk/models/components/issuingvelocitylimiterror.py:
     id: 0ceaae2d9ff3
     last_write_checksum: sha1:20397fc1e9bcb18f8d195b4f8173fb686c0515b3
