@@ -5,6 +5,6 @@ from enum import Enum
 
 
 class IssuingIntervalLimit(str, Enum):
-    r"""Specifies the time frame for the velocity limit. Currently supports only per-transaction limits."""
+    r"""Specifies the time frame for a velocity limit. `per-transaction` applies to each individual authorization and never resets. Time-based intervals (where supported) reset at midnight ET."""
 
     PER_TRANSACTION = "per-transaction"

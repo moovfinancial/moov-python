@@ -10,7 +10,7 @@ class IssuingVelocityLimitTypedDict(TypedDict):
     amount: int
     r"""The maximum amount in cents that can be spent in a given interval."""
     interval: IssuingIntervalLimit
-    r"""Specifies the time frame for the velocity limit. Currently supports only per-transaction limits."""
+    r"""Specifies the time frame for a velocity limit. `per-transaction` applies to each individual authorization and never resets. Time-based intervals (where supported) reset at midnight ET."""
 
 
 class IssuingVelocityLimit(BaseModel):
@@ -18,4 +18,4 @@ class IssuingVelocityLimit(BaseModel):
     r"""The maximum amount in cents that can be spent in a given interval."""
 
     interval: IssuingIntervalLimit
-    r"""Specifies the time frame for the velocity limit. Currently supports only per-transaction limits."""
+    r"""Specifies the time frame for a velocity limit. `per-transaction` applies to each individual authorization and never resets. Time-based intervals (where supported) reset at midnight ET."""
