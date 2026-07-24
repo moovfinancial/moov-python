@@ -145,7 +145,7 @@ with Moov(
         },
     }, capabilities=[
         components.CapabilityID.ISSUING_CARDHOLDER,
-        components.CapabilityID.TRANSFERS,
+        components.CapabilityID.PRODUCTION_APP,
     ], mode=components.Mode.PRODUCTION)
 
     # Handle response
