@@ -710,6 +710,12 @@ class CardIssuing(BaseSDK):
         billing_address: OptionalNullable[
             Union[components.BillingAddress, components.BillingAddressTypedDict]
         ] = UNSET,
+        controls: Optional[
+            Union[
+                components.UpdateIssuingControls,
+                components.UpdateIssuingControlsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -727,6 +733,7 @@ class CardIssuing(BaseSDK):
         :param nickname:
         :param metadata:
         :param billing_address:
+        :param controls: Mutable spend controls for the card.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -751,6 +758,9 @@ class CardIssuing(BaseSDK):
                 metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
                 billing_address=utils.get_pydantic_model(
                     billing_address, OptionalNullable[components.BillingAddress]
+                ),
+                controls=utils.get_pydantic_model(
+                    controls, Optional[components.UpdateIssuingControls]
                 ),
             ),
         )
@@ -844,6 +854,12 @@ class CardIssuing(BaseSDK):
         billing_address: OptionalNullable[
             Union[components.BillingAddress, components.BillingAddressTypedDict]
         ] = UNSET,
+        controls: Optional[
+            Union[
+                components.UpdateIssuingControls,
+                components.UpdateIssuingControlsTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -861,6 +877,7 @@ class CardIssuing(BaseSDK):
         :param nickname:
         :param metadata:
         :param billing_address:
+        :param controls: Mutable spend controls for the card.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -885,6 +902,9 @@ class CardIssuing(BaseSDK):
                 metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
                 billing_address=utils.get_pydantic_model(
                     billing_address, OptionalNullable[components.BillingAddress]
+                ),
+                controls=utils.get_pydantic_model(
+                    controls, Optional[components.UpdateIssuingControls]
                 ),
             ),
         )

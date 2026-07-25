@@ -61,14 +61,14 @@ with Moov(
     }, expiration={
         "month": "01",
         "year": "21",
-    }, controls={
-        "velocity_limits": [
-            {
-                "amount": 10000,
-                "interval": components.IssuingIntervalLimit.PER_TRANSACTION,
-            },
+    }, controls=components.IssuingControls(
+        velocity_limits=[
+            components.IssuingVelocityLimit(
+                amount=10000,
+                interval=components.IssuingIntervalLimit.PER_TRANSACTION,
+            ),
         ],
-    })
+    ))
 
     # Handle response
     print(res)
@@ -227,7 +227,14 @@ with Moov(
         "state_or_province": "CO",
         "postal_code": "80301",
         "country": "US",
-    })
+    }, controls=components.UpdateIssuingControls(
+        velocity_limits=[
+            components.IssuingVelocityLimit(
+                amount=10000,
+                interval=components.IssuingIntervalLimit.DAILY,
+            ),
+        ],
+    ))
 
     # Handle response
     print(res)
@@ -244,6 +251,7 @@ with Moov(
 | `nickname`                                                                                                                                                                      | *OptionalNullable[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                              | N/A                                                                                                                                                                             |                                                                                                                                                                                 |
 | `metadata`                                                                                                                                                                      | Dict[str, *str*]                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                              | N/A                                                                                                                                                                             | {<br/>"optional": "metadata"<br/>}                                                                                                                                              |
 | `billing_address`                                                                                                                                                               | [OptionalNullable[components.BillingAddress]](../../models/components/billingaddress.md)                                                                                        | :heavy_minus_sign:                                                                                                                                                              | N/A                                                                                                                                                                             |                                                                                                                                                                                 |
+| `controls`                                                                                                                                                                      | [Optional[components.UpdateIssuingControls]](../../models/components/updateissuingcontrols.md)                                                                                  | :heavy_minus_sign:                                                                                                                                                              | Mutable spend controls for the card.                                                                                                                                            |                                                                                                                                                                                 |
 | `retries`                                                                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                | :heavy_minus_sign:                                                                                                                                                              | Configuration to override the default retry behavior of the client.                                                                                                             |                                                                                                                                                                                 |
 
 ### Response

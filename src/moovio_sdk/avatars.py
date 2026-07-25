@@ -6,7 +6,8 @@ from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
-from typing import Mapping, Optional
+from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
+from typing import Any, Mapping, Optional, Union
 
 
 class Avatars(BaseSDK):
@@ -203,3 +204,469 @@ class Avatars(BaseSDK):
 
         http_res_text = await utils.stream_to_text_async(http_res)
         raise errors.APIError("Unexpected response received", http_res, http_res_text)
+
+    def upload(
+        self,
+        *,
+        security: Union[
+            operations.UploadAvatarSecurity, operations.UploadAvatarSecurityTypedDict
+        ],
+        unique_id: str,
+        file: Union[
+            components.AvatarUploadRequestFile,
+            components.AvatarUploadRequestFileTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.UploadAvatarResponse:
+        r"""Upload a user avatar image for an account.
+
+        The image will be normalized to 512x512 PNG format and stored separately from
+        automatically discovered logos. User-uploaded avatars take precedence over enriched avatars at read time.
+
+        This endpoint only accepts accountID values for the uniqueID parameter.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts.write` scope.
+
+        :param security:
+        :param unique_id: The accountID to upload the avatar for. Only accountID values are accepted for writes.
+        :param file: A JPEG, PNG, or WebP image file to upload as an avatar.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.UploadAvatarRequest(
+            unique_id=unique_id,
+            avatar_upload_request=components.AvatarUploadRequest(
+                file=utils.get_pydantic_model(file, components.AvatarUploadRequestFile),
+            ),
+        )
+
+        req = self._build_request(
+            method="PUT",
+            path="/avatars/{uniqueID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, operations.UploadAvatarSecurity
+            ),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.avatar_upload_request,
+                False,
+                False,
+                "multipart",
+                components.AvatarUploadRequest,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="uploadAvatar",
+                oauth2_scopes=["/accounts.write"],
+                security_source=get_security_from_env(security, components.Security),
+                tags=["Avatars"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return operations.UploadAvatarResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(
+            http_res, ["401", "403", "404", "413", "415", "429"], "*"
+        ):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def upload_async(
+        self,
+        *,
+        security: Union[
+            operations.UploadAvatarSecurity, operations.UploadAvatarSecurityTypedDict
+        ],
+        unique_id: str,
+        file: Union[
+            components.AvatarUploadRequestFile,
+            components.AvatarUploadRequestFileTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.UploadAvatarResponse:
+        r"""Upload a user avatar image for an account.
+
+        The image will be normalized to 512x512 PNG format and stored separately from
+        automatically discovered logos. User-uploaded avatars take precedence over enriched avatars at read time.
+
+        This endpoint only accepts accountID values for the uniqueID parameter.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts.write` scope.
+
+        :param security:
+        :param unique_id: The accountID to upload the avatar for. Only accountID values are accepted for writes.
+        :param file: A JPEG, PNG, or WebP image file to upload as an avatar.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.UploadAvatarRequest(
+            unique_id=unique_id,
+            avatar_upload_request=components.AvatarUploadRequest(
+                file=utils.get_pydantic_model(file, components.AvatarUploadRequestFile),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PUT",
+            path="/avatars/{uniqueID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, operations.UploadAvatarSecurity
+            ),
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.avatar_upload_request,
+                False,
+                False,
+                "multipart",
+                components.AvatarUploadRequest,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="uploadAvatar",
+                oauth2_scopes=["/accounts.write"],
+                security_source=get_security_from_env(security, components.Security),
+                tags=["Avatars"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return operations.UploadAvatarResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(
+            http_res, ["401", "403", "404", "413", "415", "429"], "*"
+        ):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def delete(
+        self,
+        *,
+        security: Union[
+            operations.DeleteAvatarSecurity, operations.DeleteAvatarSecurityTypedDict
+        ],
+        unique_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.DeleteAvatarResponse:
+        r"""Delete a user-uploaded avatar for an account.
+
+        After deletion, the avatar endpoint will fall back to the enriched avatar
+        or an account-type-aware fallback icon.
+
+        This endpoint only accepts accountID values for the uniqueID parameter.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts.write` scope.
+
+        :param security:
+        :param unique_id: The accountID to delete the avatar for. Only accountID values are accepted for writes.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.DeleteAvatarRequest(
+            unique_id=unique_id,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/avatars/{uniqueID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, operations.DeleteAvatarSecurity
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteAvatar",
+                oauth2_scopes=["/accounts.write"],
+                security_source=get_security_from_env(security, components.Security),
+                tags=["Avatars"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return operations.DeleteAvatarResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def delete_async(
+        self,
+        *,
+        security: Union[
+            operations.DeleteAvatarSecurity, operations.DeleteAvatarSecurityTypedDict
+        ],
+        unique_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.DeleteAvatarResponse:
+        r"""Delete a user-uploaded avatar for an account.
+
+        After deletion, the avatar endpoint will fall back to the enriched avatar
+        or an account-type-aware fallback icon.
+
+        This endpoint only accepts accountID values for the uniqueID parameter.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts.write` scope.
+
+        :param security:
+        :param unique_id: The accountID to delete the avatar for. Only accountID values are accepted for writes.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.DeleteAvatarRequest(
+            unique_id=unique_id,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/avatars/{uniqueID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=utils.get_pydantic_model(
+                security, operations.DeleteAvatarSecurity
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deleteAvatar",
+                oauth2_scopes=["/accounts.write"],
+                security_source=get_security_from_env(security, components.Security),
+                tags=["Avatars"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return operations.DeleteAvatarResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)

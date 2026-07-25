@@ -6,7 +6,7 @@ from .cardbrand import CardBrand
 from .cardexpiration import CardExpiration, CardExpirationTypedDict
 from .issuedcardformfactor import IssuedCardFormFactor
 from .issuedcardstate import IssuedCardState
-from .issuingcontrols import IssuingControls, IssuingControlsTypedDict
+from .issuedcontrols import IssuedControls, IssuedControlsTypedDict
 from datetime import datetime
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
@@ -48,7 +48,8 @@ class FullIssuedCardTypedDict(TypedDict):
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
     billing_address: NotRequired[AddressTypedDict]
     r"""Billing address associated with the card."""
-    controls: NotRequired[IssuingControlsTypedDict]
+    controls: NotRequired[IssuedControlsTypedDict]
+    r"""Spend controls applied to an issued card, including velocity runtime state."""
 
 
 class FullIssuedCard(BaseModel):
@@ -103,7 +104,8 @@ class FullIssuedCard(BaseModel):
     ] = None
     r"""Billing address associated with the card."""
 
-    controls: Optional[IssuingControls] = None
+    controls: Optional[IssuedControls] = None
+    r"""Spend controls applied to an issued card, including velocity runtime state."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

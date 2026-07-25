@@ -1,0 +1,14 @@
+# ProductCategory
+
+A product category from the product taxonomy.
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `category_id`                                                                   | *str*                                                                           | :heavy_check_mark:                                                              | The unique identifier for the category.                                         |                                                                                 |
+| `name`                                                                          | *str*                                                                           | :heavy_check_mark:                                                              | The short display name of the category.                                         | Beverages                                                                       |
+| `full_name`                                                                     | *str*                                                                           | :heavy_check_mark:                                                              | The full taxonomy path name of the category.                                    | Food, Beverages & Tobacco > Beverages                                           |
+| `level`                                                                         | *int*                                                                           | :heavy_check_mark:                                                              | The depth of the category in the taxonomy tree (1 = top-level).                 | 2                                                                               |
+| `parent_id`                                                                     | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | The identifier of the parent category, if any. Absent for top-level categories. |                                                                                 |

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+from .productcategory import ProductCategory, ProductCategoryTypedDict
 from .productimagemetadata import ProductImageMetadata, ProductImageMetadataTypedDict
 from .productoptiongroup import ProductOptionGroup, ProductOptionGroupTypedDict
 from datetime import datetime
@@ -35,6 +36,8 @@ class ProductTypedDict(TypedDict):
     r"""Optional configuration options for a product, such as size or color."""
     images: NotRequired[List[ProductImageMetadataTypedDict]]
     r"""Optional images associated with the product."""
+    category: NotRequired[ProductCategoryTypedDict]
+    r"""The product taxonomy category associated with the product, if any."""
     disabled_on: NotRequired[datetime]
     r"""The date and time when the product was disabled."""
 
@@ -72,6 +75,9 @@ class Product(BaseModel):
     images: Optional[List[ProductImageMetadata]] = None
     r"""Optional images associated with the product."""
 
+    category: Optional[ProductCategory] = None
+    r"""The product taxonomy category associated with the product, if any."""
+
     disabled_on: Annotated[Optional[datetime], pydantic.Field(alias="disabledOn")] = (
         None
     )
@@ -79,7 +85,9 @@ class Product(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "optionGroups", "images", "disabledOn"])
+        optional_fields = set(
+            ["description", "optionGroups", "images", "category", "disabledOn"]
+        )
         serialized = handler(self)
         m = {}
 

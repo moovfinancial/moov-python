@@ -16,6 +16,7 @@ from .createtransferlineitems import (
 )
 from .createtransfersource import CreateTransferSource, CreateTransferSourceTypedDict
 from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
+from .transferfeepaidby import TransferFeePaidBy, TransferFeePaidByTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -42,6 +43,8 @@ class CreateTransferTypedDict(TypedDict):
     When line items are provided, their total plus tax must equal the transfer amount.
     """
     amount_details: NotRequired[CreateTransferAmountDetailsTypedDict]
+    fee_paid_by: NotRequired[TransferFeePaidByTypedDict]
+    r"""Indicates which party bears fees for the transfer, keyed by fee type."""
 
 
 class CreateTransfer(BaseModel):
@@ -78,6 +81,11 @@ class CreateTransfer(BaseModel):
         Optional[CreateTransferAmountDetails], pydantic.Field(alias="amountDetails")
     ] = None
 
+    fee_paid_by: Annotated[
+        Optional[TransferFeePaidBy], pydantic.Field(alias="feePaidBy")
+    ] = None
+    r"""Indicates which party bears fees for the transfer, keyed by fee type."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -88,6 +96,7 @@ class CreateTransfer(BaseModel):
                 "foreignID",
                 "lineItems",
                 "amountDetails",
+                "feePaidBy",
             ]
         )
         serialized = handler(self)
