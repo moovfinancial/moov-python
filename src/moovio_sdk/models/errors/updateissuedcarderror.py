@@ -3,7 +3,10 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
-from moovio_sdk.models.components import addresserror as components_addresserror
+from moovio_sdk.models.components import (
+    addresserror as components_addresserror,
+    updateissuingcontrolserror as components_updateissuingcontrolserror,
+)
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -18,6 +21,9 @@ class UpdateIssuedCardErrorData(BaseModel):
     billing_address: Annotated[
         Optional[components_addresserror.AddressError],
         pydantic.Field(alias="billingAddress"),
+    ] = None
+    controls: Optional[
+        components_updateissuingcontrolserror.UpdateIssuingControlsError
     ] = None
 
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .updateissuedcardstate import UpdateIssuedCardState
+from .updateissuingcontrols import UpdateIssuingControls, UpdateIssuingControlsTypedDict
 from moovio_sdk.types import (
     BaseModel,
     Nullable,
@@ -73,6 +74,8 @@ class UpdateIssuedCardTypedDict(TypedDict):
     nickname: NotRequired[Nullable[str]]
     metadata: NotRequired[Nullable[Dict[str, str]]]
     billing_address: NotRequired[Nullable[BillingAddressTypedDict]]
+    controls: NotRequired[UpdateIssuingControlsTypedDict]
+    r"""Mutable spend controls for the card."""
 
 
 class UpdateIssuedCard(BaseModel):
@@ -89,9 +92,14 @@ class UpdateIssuedCard(BaseModel):
         OptionalNullable[BillingAddress], pydantic.Field(alias="billingAddress")
     ] = UNSET
 
+    controls: Optional[UpdateIssuingControls] = None
+    r"""Mutable spend controls for the card."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["state", "nickname", "metadata", "billingAddress"])
+        optional_fields = set(
+            ["state", "nickname", "metadata", "billingAddress", "controls"]
+        )
         nullable_fields = set(["nickname", "metadata", "billingAddress"])
         serialized = handler(self)
         m = {}

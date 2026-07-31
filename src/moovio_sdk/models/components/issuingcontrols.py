@@ -2,11 +2,43 @@
 
 from __future__ import annotations
 from .issuingvelocitylimit import IssuingVelocityLimit, IssuingVelocityLimitTypedDict
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from .merchantcategoryrestrictions import (
+    MerchantCategoryRestrictions,
+    MerchantCategoryRestrictionsTypedDict,
+)
+from .merchantrestrictions import MerchantRestrictions, MerchantRestrictionsTypedDict
+from .schedulewindow import ScheduleWindow, ScheduleWindowTypedDict
+from datetime import datetime
+from moovio_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class AllowedScheduleTypedDict(TypedDict):
+    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
+
+    timezone: str
+    r"""IANA timezone string used to evaluate window boundaries against the authorization time."""
+    windows: List[ScheduleWindowTypedDict]
+    r"""Time windows during which the card may authorize. Any matching window allows the transaction."""
+
+
+class AllowedSchedule(BaseModel):
+    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
+
+    timezone: str
+    r"""IANA timezone string used to evaluate window boundaries against the authorization time."""
+
+    windows: List[ScheduleWindow]
+    r"""Time windows during which the card may authorize. Any matching window allows the transaction."""
 
 
 class IssuingControlsTypedDict(TypedDict):
@@ -14,6 +46,14 @@ class IssuingControlsTypedDict(TypedDict):
     r"""Indicates if the card is single-use. If true, the card closes after the first authorization."""
     velocity_limits: NotRequired[List[IssuingVelocityLimitTypedDict]]
     r"""Sets the spending limit per time interval. Only one limit per interval is supported."""
+    merchant_category_restrictions: NotRequired[MerchantCategoryRestrictionsTypedDict]
+    r"""Restricts card usage by merchant category. When not set, all categories are allowed."""
+    merchant_restrictions: NotRequired[MerchantRestrictionsTypedDict]
+    r"""Restricts card usage to specific merchants, or blocks specific merchants."""
+    allowed_schedule: NotRequired[Nullable[AllowedScheduleTypedDict]]
+    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
+    expires_on: NotRequired[Nullable[datetime]]
+    r"""A spend cutoff date and time. When set, all authorizations after this datetime are declined regardless of other controls. Set to `null` for no cutoff."""
 
 
 class IssuingControls(BaseModel):
@@ -25,18 +65,57 @@ class IssuingControls(BaseModel):
     ] = None
     r"""Sets the spending limit per time interval. Only one limit per interval is supported."""
 
+    merchant_category_restrictions: Annotated[
+        Optional[MerchantCategoryRestrictions],
+        pydantic.Field(alias="merchantCategoryRestrictions"),
+    ] = None
+    r"""Restricts card usage by merchant category. When not set, all categories are allowed."""
+
+    merchant_restrictions: Annotated[
+        Optional[MerchantRestrictions], pydantic.Field(alias="merchantRestrictions")
+    ] = None
+    r"""Restricts card usage to specific merchants, or blocks specific merchants."""
+
+    allowed_schedule: Annotated[
+        OptionalNullable[AllowedSchedule], pydantic.Field(alias="allowedSchedule")
+    ] = UNSET
+    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
+
+    expires_on: Annotated[
+        OptionalNullable[datetime], pydantic.Field(alias="expiresOn")
+    ] = UNSET
+    r"""A spend cutoff date and time. When set, all authorizations after this datetime are declined regardless of other controls. Set to `null` for no cutoff."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["singleUse", "velocityLimits"])
+        optional_fields = set(
+            [
+                "singleUse",
+                "velocityLimits",
+                "merchantCategoryRestrictions",
+                "merchantRestrictions",
+                "allowedSchedule",
+                "expiresOn",
+            ]
+        )
+        nullable_fields = set(["allowedSchedule", "expiresOn"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

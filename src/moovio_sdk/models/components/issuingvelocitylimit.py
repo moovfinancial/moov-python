@@ -2,20 +2,43 @@
 
 from __future__ import annotations
 from .issuingintervallimit import IssuingIntervalLimit
-from moovio_sdk.types import BaseModel
-from typing_extensions import TypedDict
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
+from typing import Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class IssuingVelocityLimitTypedDict(TypedDict):
-    amount: int
-    r"""The maximum amount in cents that can be spent in a given interval."""
     interval: IssuingIntervalLimit
     r"""Specifies the time frame for a velocity limit. `per-transaction` applies to each individual authorization and never resets. Time-based intervals (where supported) reset at midnight ET."""
+    amount: NotRequired[int]
+    r"""The maximum amount in cents that can be spent in a given interval."""
+    count: NotRequired[int]
+    r"""The maximum number of transactions allowed in the given interval. At least one of `amount` or `count` must be set."""
 
 
 class IssuingVelocityLimit(BaseModel):
-    amount: int
-    r"""The maximum amount in cents that can be spent in a given interval."""
-
     interval: IssuingIntervalLimit
     r"""Specifies the time frame for a velocity limit. `per-transaction` applies to each individual authorization and never resets. Time-based intervals (where supported) reset at midnight ET."""
+
+    amount: Optional[int] = None
+    r"""The maximum amount in cents that can be spent in a given interval."""
+
+    count: Optional[int] = None
+    r"""The maximum number of transactions allowed in the given interval. At least one of `amount` or `count` must be set."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["amount", "count"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

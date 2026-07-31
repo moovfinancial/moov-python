@@ -87,6 +87,10 @@ if TYPE_CHECKING:
     from .addresssuggestion import AddressSuggestion, AddressSuggestionTypedDict
     from .addressupdate import AddressUpdate, AddressUpdateTypedDict
     from .adjustment import Adjustment, AdjustmentTypedDict
+    from .allowedscheduleerror import (
+        AllowedScheduleError,
+        AllowedScheduleErrorTypedDict,
+    )
     from .amount import Amount, AmountTypedDict
     from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
     from .amountdecimalrange import AmountDecimalRange, AmountDecimalRangeTypedDict
@@ -837,14 +841,29 @@ if TYPE_CHECKING:
         IssuedCardTransaction,
         IssuedCardTransactionTypedDict,
     )
+    from .issuedcontrols import (
+        IssuedControls,
+        IssuedControlsAllowedSchedule,
+        IssuedControlsAllowedScheduleTypedDict,
+        IssuedControlsTypedDict,
+    )
+    from .issuedvelocitylimit import IssuedVelocityLimit, IssuedVelocityLimitTypedDict
     from .issuingauthorizationstatus import IssuingAuthorizationStatus
-    from .issuingcontrols import IssuingControls, IssuingControlsTypedDict
+    from .issuingcontrols import (
+        AllowedSchedule,
+        AllowedScheduleTypedDict,
+        IssuingControls,
+        IssuingControlsTypedDict,
+    )
     from .issuingcontrolserror import (
         IssuingControlsError,
         IssuingControlsErrorTypedDict,
     )
+    from .issuingcontrolsrestrictionmode import IssuingControlsRestrictionMode
     from .issuingintervallimit import IssuingIntervalLimit
+    from .issuingmerchantcategory import IssuingMerchantCategory
     from .issuingmerchantdata import IssuingMerchantData, IssuingMerchantDataTypedDict
+    from .issuingscheduleday import IssuingScheduleDay
     from .issuingvelocitylimit import (
         IssuingVelocityLimit,
         IssuingVelocityLimitTypedDict,
@@ -892,6 +911,26 @@ if TYPE_CHECKING:
     from .manualtermsofserviceupdate import (
         ManualTermsOfServiceUpdate,
         ManualTermsOfServiceUpdateTypedDict,
+    )
+    from .merchantcategories import MerchantCategories, MerchantCategoriesTypedDict
+    from .merchantcategory import MerchantCategory, MerchantCategoryTypedDict
+    from .merchantcategoryrestrictions import (
+        MerchantCategoryRestrictions,
+        MerchantCategoryRestrictionsTypedDict,
+    )
+    from .merchantcategoryrestrictionserror import (
+        MerchantCategoryRestrictionsError,
+        MerchantCategoryRestrictionsErrorTypedDict,
+    )
+    from .merchantentry import MerchantEntry, MerchantEntryTypedDict
+    from .merchantentryerror import MerchantEntryError, MerchantEntryErrorTypedDict
+    from .merchantrestrictions import (
+        MerchantRestrictions,
+        MerchantRestrictionsTypedDict,
+    )
+    from .merchantrestrictionserror import (
+        MerchantRestrictionsError,
+        MerchantRestrictionsErrorTypedDict,
     )
     from .microdepositstatus import MicroDepositStatus
     from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
@@ -1243,6 +1282,8 @@ if TYPE_CHECKING:
         SchedulePaymentMethodTypedDict,
     )
     from .scheduleresponse import ScheduleResponse, ScheduleResponseTypedDict
+    from .schedulewindow import ScheduleWindow, ScheduleWindowTypedDict
+    from .schedulewindowerror import ScheduleWindowError, ScheduleWindowErrorTypedDict
     from .seccode import SECCode
     from .security import Security, SecurityTypedDict
     from .sendfunds import SendFunds, SendFundsTypedDict
@@ -1264,6 +1305,8 @@ if TYPE_CHECKING:
     )
     from .sendfundsrtp import SendFundsRtp, SendFundsRtpTypedDict
     from .sendfundsrtperror import SendFundsRtpError, SendFundsRtpErrorTypedDict
+    from .sendfundswire import SendFundsWire, SendFundsWireTypedDict
+    from .sendfundswireerror import SendFundsWireError, SendFundsWireErrorTypedDict
     from .sentreceipt import SentReceipt, SentReceiptTypedDict
     from .settings import Settings, SettingsTypedDict
     from .sharescopes import ShareScopes, ShareScopesTypedDict
@@ -1336,6 +1379,7 @@ if TYPE_CHECKING:
         TransferAmountDetails,
         TransferAmountDetailsTypedDict,
     )
+    from .transfercapture import TransferCapture, TransferCaptureTypedDict
     from .transferconfig import TransferConfig, TransferConfigTypedDict
     from .transfercontrols import TransferControls, TransferControlsTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
@@ -1399,6 +1443,20 @@ if TYPE_CHECKING:
         UpdateIssuedCardTypedDict,
     )
     from .updateissuedcardstate import UpdateIssuedCardState
+    from .updateissuingcontrols import (
+        UpdateIssuingControls,
+        UpdateIssuingControlsAllowedSchedule,
+        UpdateIssuingControlsAllowedScheduleTypedDict,
+        UpdateIssuingControlsMerchantCategoryRestrictions,
+        UpdateIssuingControlsMerchantCategoryRestrictionsTypedDict,
+        UpdateIssuingControlsMerchantRestrictions,
+        UpdateIssuingControlsMerchantRestrictionsTypedDict,
+        UpdateIssuingControlsTypedDict,
+    )
+    from .updateissuingcontrolserror import (
+        UpdateIssuingControlsError,
+        UpdateIssuingControlsErrorTypedDict,
+    )
     from .updatepaymentlink import UpdatePaymentLink, UpdatePaymentLinkTypedDict
     from .updatepaymentlinkamountdetails import (
         Surcharge,
@@ -1710,6 +1768,10 @@ __all__ = [
     "AdjustmentFees",
     "AdjustmentFeesTypedDict",
     "AdjustmentTypedDict",
+    "AllowedSchedule",
+    "AllowedScheduleError",
+    "AllowedScheduleErrorTypedDict",
+    "AllowedScheduleTypedDict",
     "Amount",
     "AmountDecimal",
     "AmountDecimalRange",
@@ -2283,14 +2345,23 @@ __all__ = [
     "IssuedCardTransaction",
     "IssuedCardTransactionTypedDict",
     "IssuedCardTypedDict",
+    "IssuedControls",
+    "IssuedControlsAllowedSchedule",
+    "IssuedControlsAllowedScheduleTypedDict",
+    "IssuedControlsTypedDict",
+    "IssuedVelocityLimit",
+    "IssuedVelocityLimitTypedDict",
     "IssuingAuthorizationStatus",
     "IssuingControls",
     "IssuingControlsError",
     "IssuingControlsErrorTypedDict",
+    "IssuingControlsRestrictionMode",
     "IssuingControlsTypedDict",
     "IssuingIntervalLimit",
+    "IssuingMerchantCategory",
     "IssuingMerchantData",
     "IssuingMerchantDataTypedDict",
+    "IssuingScheduleDay",
     "IssuingVelocityLimit",
     "IssuingVelocityLimitError",
     "IssuingVelocityLimitErrorTypedDict",
@@ -2335,6 +2406,22 @@ __all__ = [
     "ManualTermsOfServiceUpdate",
     "ManualTermsOfServiceUpdateTypedDict",
     "ManualTypedDict",
+    "MerchantCategories",
+    "MerchantCategoriesTypedDict",
+    "MerchantCategory",
+    "MerchantCategoryRestrictions",
+    "MerchantCategoryRestrictionsError",
+    "MerchantCategoryRestrictionsErrorTypedDict",
+    "MerchantCategoryRestrictionsTypedDict",
+    "MerchantCategoryTypedDict",
+    "MerchantEntry",
+    "MerchantEntryError",
+    "MerchantEntryErrorTypedDict",
+    "MerchantEntryTypedDict",
+    "MerchantRestrictions",
+    "MerchantRestrictionsError",
+    "MerchantRestrictionsErrorTypedDict",
+    "MerchantRestrictionsTypedDict",
     "MicroDepositStatus",
     "MinimumCommitment",
     "MinimumCommitmentTypedDict",
@@ -2615,6 +2702,10 @@ __all__ = [
     "SchedulePaymentMethodTypedDict",
     "ScheduleResponse",
     "ScheduleResponseTypedDict",
+    "ScheduleWindow",
+    "ScheduleWindowError",
+    "ScheduleWindowErrorTypedDict",
+    "ScheduleWindowTypedDict",
     "ScheduledTransferImageMetadata",
     "ScheduledTransferImageMetadataTypedDict",
     "ScheduledTransferLineItem",
@@ -2645,6 +2736,10 @@ __all__ = [
     "SendFundsRtpErrorTypedDict",
     "SendFundsRtpTypedDict",
     "SendFundsTypedDict",
+    "SendFundsWire",
+    "SendFundsWireError",
+    "SendFundsWireErrorTypedDict",
+    "SendFundsWireTypedDict",
     "SentReceipt",
     "SentReceiptTypedDict",
     "Settings",
@@ -2720,6 +2815,8 @@ __all__ = [
     "TransferAccountTypedDict",
     "TransferAmountDetails",
     "TransferAmountDetailsTypedDict",
+    "TransferCapture",
+    "TransferCaptureTypedDict",
     "TransferConfig",
     "TransferConfigTypedDict",
     "TransferControls",
@@ -2776,6 +2873,16 @@ __all__ = [
     "UpdateIssuedCard",
     "UpdateIssuedCardState",
     "UpdateIssuedCardTypedDict",
+    "UpdateIssuingControls",
+    "UpdateIssuingControlsAllowedSchedule",
+    "UpdateIssuingControlsAllowedScheduleTypedDict",
+    "UpdateIssuingControlsError",
+    "UpdateIssuingControlsErrorTypedDict",
+    "UpdateIssuingControlsMerchantCategoryRestrictions",
+    "UpdateIssuingControlsMerchantCategoryRestrictionsTypedDict",
+    "UpdateIssuingControlsMerchantRestrictions",
+    "UpdateIssuingControlsMerchantRestrictionsTypedDict",
+    "UpdateIssuingControlsTypedDict",
     "UpdatePaymentLink",
     "UpdatePaymentLinkAmountDetails",
     "UpdatePaymentLinkAmountDetailsTypedDict",
@@ -3001,6 +3108,8 @@ _dynamic_imports: dict[str, str] = {
     "AddressUpdateTypedDict": ".addressupdate",
     "Adjustment": ".adjustment",
     "AdjustmentTypedDict": ".adjustment",
+    "AllowedScheduleError": ".allowedscheduleerror",
+    "AllowedScheduleErrorTypedDict": ".allowedscheduleerror",
     "Amount": ".amount",
     "AmountTypedDict": ".amount",
     "AmountDecimal": ".amountdecimal",
@@ -3579,14 +3688,25 @@ _dynamic_imports: dict[str, str] = {
     "IssuedCardState": ".issuedcardstate",
     "IssuedCardTransaction": ".issuedcardtransaction",
     "IssuedCardTransactionTypedDict": ".issuedcardtransaction",
+    "IssuedControls": ".issuedcontrols",
+    "IssuedControlsAllowedSchedule": ".issuedcontrols",
+    "IssuedControlsAllowedScheduleTypedDict": ".issuedcontrols",
+    "IssuedControlsTypedDict": ".issuedcontrols",
+    "IssuedVelocityLimit": ".issuedvelocitylimit",
+    "IssuedVelocityLimitTypedDict": ".issuedvelocitylimit",
     "IssuingAuthorizationStatus": ".issuingauthorizationstatus",
+    "AllowedSchedule": ".issuingcontrols",
+    "AllowedScheduleTypedDict": ".issuingcontrols",
     "IssuingControls": ".issuingcontrols",
     "IssuingControlsTypedDict": ".issuingcontrols",
     "IssuingControlsError": ".issuingcontrolserror",
     "IssuingControlsErrorTypedDict": ".issuingcontrolserror",
+    "IssuingControlsRestrictionMode": ".issuingcontrolsrestrictionmode",
     "IssuingIntervalLimit": ".issuingintervallimit",
+    "IssuingMerchantCategory": ".issuingmerchantcategory",
     "IssuingMerchantData": ".issuingmerchantdata",
     "IssuingMerchantDataTypedDict": ".issuingmerchantdata",
+    "IssuingScheduleDay": ".issuingscheduleday",
     "IssuingVelocityLimit": ".issuingvelocitylimit",
     "IssuingVelocityLimitTypedDict": ".issuingvelocitylimit",
     "IssuingVelocityLimitError": ".issuingvelocitylimiterror",
@@ -3623,6 +3743,22 @@ _dynamic_imports: dict[str, str] = {
     "ManualTermsOfServiceTypedDict": ".manualtermsofservice",
     "ManualTermsOfServiceUpdate": ".manualtermsofserviceupdate",
     "ManualTermsOfServiceUpdateTypedDict": ".manualtermsofserviceupdate",
+    "MerchantCategories": ".merchantcategories",
+    "MerchantCategoriesTypedDict": ".merchantcategories",
+    "MerchantCategory": ".merchantcategory",
+    "MerchantCategoryTypedDict": ".merchantcategory",
+    "MerchantCategoryRestrictions": ".merchantcategoryrestrictions",
+    "MerchantCategoryRestrictionsTypedDict": ".merchantcategoryrestrictions",
+    "MerchantCategoryRestrictionsError": ".merchantcategoryrestrictionserror",
+    "MerchantCategoryRestrictionsErrorTypedDict": ".merchantcategoryrestrictionserror",
+    "MerchantEntry": ".merchantentry",
+    "MerchantEntryTypedDict": ".merchantentry",
+    "MerchantEntryError": ".merchantentryerror",
+    "MerchantEntryErrorTypedDict": ".merchantentryerror",
+    "MerchantRestrictions": ".merchantrestrictions",
+    "MerchantRestrictionsTypedDict": ".merchantrestrictions",
+    "MerchantRestrictionsError": ".merchantrestrictionserror",
+    "MerchantRestrictionsErrorTypedDict": ".merchantrestrictionserror",
     "MicroDepositStatus": ".microdepositstatus",
     "MinimumCommitment": ".minimumcommitment",
     "MinimumCommitmentTypedDict": ".minimumcommitment",
@@ -3915,6 +4051,10 @@ _dynamic_imports: dict[str, str] = {
     "SchedulePaymentMethodTypedDict": ".schedulepaymentmethod",
     "ScheduleResponse": ".scheduleresponse",
     "ScheduleResponseTypedDict": ".scheduleresponse",
+    "ScheduleWindow": ".schedulewindow",
+    "ScheduleWindowTypedDict": ".schedulewindow",
+    "ScheduleWindowError": ".schedulewindowerror",
+    "ScheduleWindowErrorTypedDict": ".schedulewindowerror",
     "SECCode": ".seccode",
     "Security": ".security",
     "SecurityTypedDict": ".security",
@@ -3938,6 +4078,10 @@ _dynamic_imports: dict[str, str] = {
     "SendFundsRtpTypedDict": ".sendfundsrtp",
     "SendFundsRtpError": ".sendfundsrtperror",
     "SendFundsRtpErrorTypedDict": ".sendfundsrtperror",
+    "SendFundsWire": ".sendfundswire",
+    "SendFundsWireTypedDict": ".sendfundswire",
+    "SendFundsWireError": ".sendfundswireerror",
+    "SendFundsWireErrorTypedDict": ".sendfundswireerror",
     "SentReceipt": ".sentreceipt",
     "SentReceiptTypedDict": ".sentreceipt",
     "Settings": ".settings",
@@ -4010,6 +4154,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
     "TransferAmountDetails": ".transferamountdetails",
     "TransferAmountDetailsTypedDict": ".transferamountdetails",
+    "TransferCapture": ".transfercapture",
+    "TransferCaptureTypedDict": ".transfercapture",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
     "TransferControls": ".transfercontrols",
@@ -4066,6 +4212,16 @@ _dynamic_imports: dict[str, str] = {
     "UpdateIssuedCard": ".updateissuedcard",
     "UpdateIssuedCardTypedDict": ".updateissuedcard",
     "UpdateIssuedCardState": ".updateissuedcardstate",
+    "UpdateIssuingControls": ".updateissuingcontrols",
+    "UpdateIssuingControlsAllowedSchedule": ".updateissuingcontrols",
+    "UpdateIssuingControlsAllowedScheduleTypedDict": ".updateissuingcontrols",
+    "UpdateIssuingControlsMerchantCategoryRestrictions": ".updateissuingcontrols",
+    "UpdateIssuingControlsMerchantCategoryRestrictionsTypedDict": ".updateissuingcontrols",
+    "UpdateIssuingControlsMerchantRestrictions": ".updateissuingcontrols",
+    "UpdateIssuingControlsMerchantRestrictionsTypedDict": ".updateissuingcontrols",
+    "UpdateIssuingControlsTypedDict": ".updateissuingcontrols",
+    "UpdateIssuingControlsError": ".updateissuingcontrolserror",
+    "UpdateIssuingControlsErrorTypedDict": ".updateissuingcontrolserror",
     "UpdatePaymentLink": ".updatepaymentlink",
     "UpdatePaymentLinkTypedDict": ".updatepaymentlink",
     "Surcharge": ".updatepaymentlinkamountdetails",

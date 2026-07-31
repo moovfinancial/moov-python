@@ -11,6 +11,7 @@ from .sendfundspushtocarderror import (
     SendFundsPushToCardErrorTypedDict,
 )
 from .sendfundsrtperror import SendFundsRtpError, SendFundsRtpErrorTypedDict
+from .sendfundswireerror import SendFundsWireError, SendFundsWireErrorTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -23,6 +24,7 @@ class SendFundsErrorTypedDict(TypedDict):
     push_to_card: NotRequired[SendFundsPushToCardErrorTypedDict]
     rtp: NotRequired[SendFundsRtpErrorTypedDict]
     instant_bank: NotRequired[SendFundsInstantBankErrorTypedDict]
+    wire: NotRequired[SendFundsWireErrorTypedDict]
 
 
 class SendFundsError(BaseModel):
@@ -38,9 +40,11 @@ class SendFundsError(BaseModel):
         Optional[SendFundsInstantBankError], pydantic.Field(alias="instantBank")
     ] = None
 
+    wire: Optional[SendFundsWireError] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["ach", "pushToCard", "rtp", "instantBank"])
+        optional_fields = set(["ach", "pushToCard", "rtp", "instantBank", "wire"])
         serialized = handler(self)
         m = {}
 

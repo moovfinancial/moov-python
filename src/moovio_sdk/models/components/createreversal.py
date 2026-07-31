@@ -11,14 +11,14 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class CreateReversalTypedDict(TypedDict):
     amount: int
-    r"""Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation."""
+    r"""Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation."""
     amount_details: NotRequired[ReversalAmountDetailsTypedDict]
     r"""Breakdown of the reversed amount."""
 
 
 class CreateReversal(BaseModel):
     amount: int
-    r"""Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation."""
+    r"""Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation."""
 
     amount_details: Annotated[
         Optional[ReversalAmountDetails], pydantic.Field(alias="amountDetails")

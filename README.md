@@ -497,16 +497,16 @@ Allows clients to notify the authorization server that a previously obtained ref
 
 * [get](docs/sdks/avatars/README.md#get) - Get avatar image for an account using a unique ID.    
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/profile-enrichment.read` scope.
 * [upload](docs/sdks/avatars/README.md#upload) - Upload a user avatar image for an account.
 
-The image will be normalized to 512x512 PNG format and stored separately from 
+The image will be normalized to 512x512 PNG format and stored separately from
 automatically discovered logos. User-uploaded avatars take precedence over enriched avatars at read time.
 
 This endpoint only accepts accountID values for the uniqueID parameter.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts.write` scope.
 * [delete](docs/sdks/avatars/README.md#delete) - Delete a user-uploaded avatar for an account.
 
@@ -515,7 +515,7 @@ or an account-type-aware fallback icon.
 
 This endpoint only accepts accountID values for the uniqueID parameter.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts.write` scope.
 
 ### [BankAccounts](docs/sdks/bankaccounts/README.md)
@@ -646,6 +646,12 @@ you'll need to specify the `/accounts/{accountID}/capabilities.write` scope.
 
 ### [CardIssuing](docs/sdks/cardissuing/README.md)
 
+* [list_merchant_categories](docs/sdks/cardissuing/README.md#list_merchant_categories) - List the predefined merchant category groups available for issued card spend controls, along with
+the merchant category codes (MCCs) each group covers. Use these category names in an issued card's
+`merchantCategoryRestrictions`.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/),
+you'll need to specify the `/issued-cards.read` scope.
 * [request](docs/sdks/cardissuing/README.md#request) - Request a virtual card be issued.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -820,14 +826,14 @@ you'll need to specify the `/ping.read` scope.
 
 * [get](docs/sdks/enrichedaddress/README.md#get) - Fetch enriched address suggestions. Requires a partial address. 
   
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/profile-enrichment.read` scope.
 
 ### [EnrichedProfile](docs/sdks/enrichedprofile/README.md)
 
 * [get](docs/sdks/enrichedprofile/README.md#get) - Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/profile-enrichment.read` scope.
 
 ### [FeePlans](docs/sdks/feeplans/README.md)
@@ -941,7 +947,7 @@ you'll need to specify the `/institutions.read` scope.
 
 Search for institutions by either their name or routing number.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/fed.read` scope. :warning: **Deprecated**
 
 ### [Invoices](docs/sdks/invoices/README.md)
@@ -1708,65 +1714,65 @@ with Moov(
 
 
 **Inherit from [`MoovError`](./src/moovio_sdk/models/errors/mooverror.py)**:
-* [`GenericError`](./src/moovio_sdk/models/errors/genericerror.py): Applicable to 88 of 193 methods.*
-* [`BrandValidationError`](./src/moovio_sdk/models/errors/brandvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 193 methods.*
-* [`ImageRequestValidationError`](./src/moovio_sdk/models/errors/imagerequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 193 methods.*
-* [`ProductRequestValidationError`](./src/moovio_sdk/models/errors/productrequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 193 methods.*
-* [`ScheduleValidationError`](./src/moovio_sdk/models/errors/schedulevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 193 methods.*
-* [`TransferConfigValidationError`](./src/moovio_sdk/models/errors/transferconfigvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 193 methods.*
-* [`TerminalApplicationError`](./src/moovio_sdk/models/errors/terminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 193 methods.*
-* [`DuplicateCardError`](./src/moovio_sdk/models/errors/duplicatecarderror.py): Attempted to link card that already exists on the account. Status code `409`. Applicable to 1 of 193 methods.*
-* [`Transfer`](./src/moovio_sdk/models/errors/transfer.py): Details of a Transfer. Status code `409`. Applicable to 1 of 193 methods.*
-* [`CardAcquiringRefund`](./src/moovio_sdk/models/errors/cardacquiringrefund.py): Details of a card refund. Status code `409`. Applicable to 1 of 193 methods.*
-* [`CreateAccountError`](./src/moovio_sdk/models/errors/createaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`PatchAccountError`](./src/moovio_sdk/models/errors/patchaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`ConnectAccountRequestValidationError`](./src/moovio_sdk/models/errors/connectaccountrequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`AssignCountriesError`](./src/moovio_sdk/models/errors/assigncountrieserror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`LinkApplePayError`](./src/moovio_sdk/models/errors/linkapplepayerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`BankAccountValidationError`](./src/moovio_sdk/models/errors/bankaccountvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`MicroDepositValidationError`](./src/moovio_sdk/models/errors/microdepositvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`AddCapabilitiesError`](./src/moovio_sdk/models/errors/addcapabilitieserror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`LinkCardError`](./src/moovio_sdk/models/errors/linkcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`UpdateCardError`](./src/moovio_sdk/models/errors/updatecarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`CardMetadataRequestError`](./src/moovio_sdk/models/errors/cardmetadatarequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`FileUploadValidationError`](./src/moovio_sdk/models/errors/fileuploadvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`FeePlanAgreementError`](./src/moovio_sdk/models/errors/feeplanagreementerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`FileValidationError`](./src/moovio_sdk/models/errors/filevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`LinkGooglePayError`](./src/moovio_sdk/models/errors/linkgooglepayerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`ImageMetadataValidationError`](./src/moovio_sdk/models/errors/imagemetadatavalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`CreateInvoiceError`](./src/moovio_sdk/models/errors/createinvoiceerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`ListInvoicesValidationError`](./src/moovio_sdk/models/errors/listinvoicesvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`UpdateInvoiceError`](./src/moovio_sdk/models/errors/updateinvoiceerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`CreateInvoicePaymentError`](./src/moovio_sdk/models/errors/createinvoicepaymenterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`CreatePaymentLinkError`](./src/moovio_sdk/models/errors/createpaymentlinkerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`UpdatePaymentLinkError`](./src/moovio_sdk/models/errors/updatepaymentlinkerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`RepresentativeValidationError`](./src/moovio_sdk/models/errors/representativevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`CreateResolutionLinkError`](./src/moovio_sdk/models/errors/createresolutionlinkerror.py): Describes validation errors for the create resolution link request. Status code `422`. Applicable to 1 of 193 methods.*
-* [`CreateSweepConfigError`](./src/moovio_sdk/models/errors/createsweepconfigerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`PatchSweepConfigError`](./src/moovio_sdk/models/errors/patchsweepconfigerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`AccountTerminalApplicationError`](./src/moovio_sdk/models/errors/accountterminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`CreateTicketError`](./src/moovio_sdk/models/errors/createticketerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`UpdateTicketError`](./src/moovio_sdk/models/errors/updateticketerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`TransferOptionsValidationError`](./src/moovio_sdk/models/errors/transferoptionsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`TransferValidationError`](./src/moovio_sdk/models/errors/transfervalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`ListTransfersValidationError`](./src/moovio_sdk/models/errors/listtransfersvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`PatchTransferValidationError`](./src/moovio_sdk/models/errors/patchtransfervalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`RefundValidationError`](./src/moovio_sdk/models/errors/refundvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`ReversalValidationError`](./src/moovio_sdk/models/errors/reversalvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`UpsertUnderwritingError`](./src/moovio_sdk/models/errors/upsertunderwritingerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`UpdateUnderwritingError`](./src/moovio_sdk/models/errors/updateunderwritingerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`CreateWalletValidationError`](./src/moovio_sdk/models/errors/createwalletvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`ListWalletsValidationError`](./src/moovio_sdk/models/errors/listwalletsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`PatchWalletValidationError`](./src/moovio_sdk/models/errors/patchwalletvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`ListWalletTransactionsValidationError`](./src/moovio_sdk/models/errors/listwallettransactionsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`CreateWebhookValidationError`](./src/moovio_sdk/models/errors/createwebhookvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`UpdateWebhookValidationError`](./src/moovio_sdk/models/errors/updatewebhookvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`RequestCardError`](./src/moovio_sdk/models/errors/requestcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`UpdateIssuedCardError`](./src/moovio_sdk/models/errors/updateissuedcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`RevokeTokenRequestError`](./src/moovio_sdk/models/errors/revoketokenrequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`AuthTokenRequestError`](./src/moovio_sdk/models/errors/authtokenrequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`OnboardingInviteError`](./src/moovio_sdk/models/errors/onboardinginviteerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 193 methods.*
-* [`DepositAccountValidationError`](./src/moovio_sdk/models/errors/depositaccountvalidationerror.py): Descriptions of any field validations that failed while parsing the deposit account payload. Status code `422`. Applicable to 1 of 193 methods.*
+* [`GenericError`](./src/moovio_sdk/models/errors/genericerror.py): Applicable to 88 of 194 methods.*
+* [`BrandValidationError`](./src/moovio_sdk/models/errors/brandvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 194 methods.*
+* [`ImageRequestValidationError`](./src/moovio_sdk/models/errors/imagerequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 194 methods.*
+* [`ProductRequestValidationError`](./src/moovio_sdk/models/errors/productrequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 194 methods.*
+* [`ScheduleValidationError`](./src/moovio_sdk/models/errors/schedulevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 194 methods.*
+* [`TransferConfigValidationError`](./src/moovio_sdk/models/errors/transferconfigvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 194 methods.*
+* [`TerminalApplicationError`](./src/moovio_sdk/models/errors/terminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 2 of 194 methods.*
+* [`DuplicateCardError`](./src/moovio_sdk/models/errors/duplicatecarderror.py): Attempted to link card that already exists on the account. Status code `409`. Applicable to 1 of 194 methods.*
+* [`Transfer`](./src/moovio_sdk/models/errors/transfer.py): Details of a Transfer. Status code `409`. Applicable to 1 of 194 methods.*
+* [`CardAcquiringRefund`](./src/moovio_sdk/models/errors/cardacquiringrefund.py): Details of a card refund. Status code `409`. Applicable to 1 of 194 methods.*
+* [`CreateAccountError`](./src/moovio_sdk/models/errors/createaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`PatchAccountError`](./src/moovio_sdk/models/errors/patchaccounterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`ConnectAccountRequestValidationError`](./src/moovio_sdk/models/errors/connectaccountrequestvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`AssignCountriesError`](./src/moovio_sdk/models/errors/assigncountrieserror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`LinkApplePayError`](./src/moovio_sdk/models/errors/linkapplepayerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`BankAccountValidationError`](./src/moovio_sdk/models/errors/bankaccountvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`MicroDepositValidationError`](./src/moovio_sdk/models/errors/microdepositvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`AddCapabilitiesError`](./src/moovio_sdk/models/errors/addcapabilitieserror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`LinkCardError`](./src/moovio_sdk/models/errors/linkcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`UpdateCardError`](./src/moovio_sdk/models/errors/updatecarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`CardMetadataRequestError`](./src/moovio_sdk/models/errors/cardmetadatarequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`FileUploadValidationError`](./src/moovio_sdk/models/errors/fileuploadvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`FeePlanAgreementError`](./src/moovio_sdk/models/errors/feeplanagreementerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`FileValidationError`](./src/moovio_sdk/models/errors/filevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`LinkGooglePayError`](./src/moovio_sdk/models/errors/linkgooglepayerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`ImageMetadataValidationError`](./src/moovio_sdk/models/errors/imagemetadatavalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`CreateInvoiceError`](./src/moovio_sdk/models/errors/createinvoiceerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`ListInvoicesValidationError`](./src/moovio_sdk/models/errors/listinvoicesvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`UpdateInvoiceError`](./src/moovio_sdk/models/errors/updateinvoiceerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`CreateInvoicePaymentError`](./src/moovio_sdk/models/errors/createinvoicepaymenterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`CreatePaymentLinkError`](./src/moovio_sdk/models/errors/createpaymentlinkerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`UpdatePaymentLinkError`](./src/moovio_sdk/models/errors/updatepaymentlinkerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`RepresentativeValidationError`](./src/moovio_sdk/models/errors/representativevalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`CreateResolutionLinkError`](./src/moovio_sdk/models/errors/createresolutionlinkerror.py): Describes validation errors for the create resolution link request. Status code `422`. Applicable to 1 of 194 methods.*
+* [`CreateSweepConfigError`](./src/moovio_sdk/models/errors/createsweepconfigerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`PatchSweepConfigError`](./src/moovio_sdk/models/errors/patchsweepconfigerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`AccountTerminalApplicationError`](./src/moovio_sdk/models/errors/accountterminalapplicationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`CreateTicketError`](./src/moovio_sdk/models/errors/createticketerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`UpdateTicketError`](./src/moovio_sdk/models/errors/updateticketerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`TransferOptionsValidationError`](./src/moovio_sdk/models/errors/transferoptionsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`TransferValidationError`](./src/moovio_sdk/models/errors/transfervalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`ListTransfersValidationError`](./src/moovio_sdk/models/errors/listtransfersvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`PatchTransferValidationError`](./src/moovio_sdk/models/errors/patchtransfervalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`RefundValidationError`](./src/moovio_sdk/models/errors/refundvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`ReversalValidationError`](./src/moovio_sdk/models/errors/reversalvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`UpsertUnderwritingError`](./src/moovio_sdk/models/errors/upsertunderwritingerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`UpdateUnderwritingError`](./src/moovio_sdk/models/errors/updateunderwritingerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`CreateWalletValidationError`](./src/moovio_sdk/models/errors/createwalletvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`ListWalletsValidationError`](./src/moovio_sdk/models/errors/listwalletsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`PatchWalletValidationError`](./src/moovio_sdk/models/errors/patchwalletvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`ListWalletTransactionsValidationError`](./src/moovio_sdk/models/errors/listwallettransactionsvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`CreateWebhookValidationError`](./src/moovio_sdk/models/errors/createwebhookvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`UpdateWebhookValidationError`](./src/moovio_sdk/models/errors/updatewebhookvalidationerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`RequestCardError`](./src/moovio_sdk/models/errors/requestcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`UpdateIssuedCardError`](./src/moovio_sdk/models/errors/updateissuedcarderror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`RevokeTokenRequestError`](./src/moovio_sdk/models/errors/revoketokenrequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`AuthTokenRequestError`](./src/moovio_sdk/models/errors/authtokenrequesterror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`OnboardingInviteError`](./src/moovio_sdk/models/errors/onboardinginviteerror.py): The request was well-formed, but the contents failed validation. Check the request for missing or invalid fields. Status code `422`. Applicable to 1 of 194 methods.*
+* [`DepositAccountValidationError`](./src/moovio_sdk/models/errors/depositaccountvalidationerror.py): Descriptions of any field validations that failed while parsing the deposit account payload. Status code `422`. Applicable to 1 of 194 methods.*
 * [`ResponseValidationError`](./src/moovio_sdk/models/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

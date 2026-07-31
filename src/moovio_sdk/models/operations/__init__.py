@@ -782,6 +782,10 @@ if TYPE_CHECKING:
         ListIssuedCardTransactionsResponse,
         ListIssuedCardTransactionsResponseTypedDict,
     )
+    from .listissuingmerchantcategories import (
+        ListIssuingMerchantCategoriesResponse,
+        ListIssuingMerchantCategoriesResponseTypedDict,
+    )
     from .listonboardinginvites import (
         ListOnboardingInvitesResponse,
         ListOnboardingInvitesResponseTypedDict,
@@ -1656,6 +1660,8 @@ __all__ = [
     "ListIssuedCardsRequestTypedDict",
     "ListIssuedCardsResponse",
     "ListIssuedCardsResponseTypedDict",
+    "ListIssuingMerchantCategoriesResponse",
+    "ListIssuingMerchantCategoriesResponseTypedDict",
     "ListOnboardingInvitesResponse",
     "ListOnboardingInvitesResponseTypedDict",
     "ListPartnerPricingAgreementsRequest",
@@ -2415,6 +2421,8 @@ _dynamic_imports: dict[str, str] = {
     "ListIssuedCardTransactionsRequestTypedDict": ".listissuedcardtransactions",
     "ListIssuedCardTransactionsResponse": ".listissuedcardtransactions",
     "ListIssuedCardTransactionsResponseTypedDict": ".listissuedcardtransactions",
+    "ListIssuingMerchantCategoriesResponse": ".listissuingmerchantcategories",
+    "ListIssuingMerchantCategoriesResponseTypedDict": ".listissuingmerchantcategories",
     "ListOnboardingInvitesResponse": ".listonboardinginvites",
     "ListOnboardingInvitesResponseTypedDict": ".listonboardinginvites",
     "ListPartnerPricingAgreementsRequest": ".listpartnerpricingagreements",
