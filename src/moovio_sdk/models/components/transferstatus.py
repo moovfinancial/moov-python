@@ -13,4 +13,5 @@ class TransferStatus(str, Enum):
     FAILED = "failed"
     REVERSED = "reversed"
     QUEUED = "queued"
+    AWAITING_CAPTURE = "awaiting-capture"
     CANCELED = "canceled"

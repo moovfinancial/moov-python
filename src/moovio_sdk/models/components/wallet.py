@@ -32,6 +32,7 @@ class WalletTypedDict(TypedDict):
     r"""Type of a wallet.
     - `default`: The system-generated wallet automatically created when an account is granted the wallet capability.
     - `general`: An additional, user-defined wallet created via API or Dashboard.
+    - `card-issuing`: The system-generated wallet automatically created when an account is granted the card-issuing capability.
     """
     description: str
     r"""Description of the wallet"""
@@ -65,6 +66,7 @@ class Wallet(BaseModel):
     r"""Type of a wallet.
     - `default`: The system-generated wallet automatically created when an account is granted the wallet capability.
     - `general`: An additional, user-defined wallet created via API or Dashboard.
+    - `card-issuing`: The system-generated wallet automatically created when an account is granted the card-issuing capability.
     """
 
     description: str

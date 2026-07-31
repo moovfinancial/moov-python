@@ -70,6 +70,12 @@ if TYPE_CHECKING:
         CreateCancellationResponse,
         CreateCancellationResponseTypedDict,
     )
+    from .createcapture import (
+        CreateCaptureRequest,
+        CreateCaptureRequestTypedDict,
+        CreateCaptureResponse,
+        CreateCaptureResponseTypedDict,
+    )
     from .createdepositaccount import (
         CreateDepositAccountRequest,
         CreateDepositAccountRequestTypedDict,
@@ -339,6 +345,12 @@ if TYPE_CHECKING:
         GetCapabilityRequestTypedDict,
         GetCapabilityResponse,
         GetCapabilityResponseTypedDict,
+    )
+    from .getcapture import (
+        GetCaptureRequest,
+        GetCaptureRequestTypedDict,
+        GetCaptureResponse,
+        GetCaptureResponseTypedDict,
     )
     from .getcard import (
         GetCardRequest,
@@ -684,6 +696,12 @@ if TYPE_CHECKING:
         ListCapabilitiesResponse,
         ListCapabilitiesResponseTypedDict,
     )
+    from .listcaptures import (
+        ListCapturesRequest,
+        ListCapturesRequestTypedDict,
+        ListCapturesResponse,
+        ListCapturesResponseTypedDict,
+    )
     from .listcards import (
         ListCardsRequest,
         ListCardsRequestTypedDict,
@@ -787,6 +805,10 @@ if TYPE_CHECKING:
         ListIssuedCardTransactionsRequestTypedDict,
         ListIssuedCardTransactionsResponse,
         ListIssuedCardTransactionsResponseTypedDict,
+    )
+    from .listissuingmerchantcategories import (
+        ListIssuingMerchantCategoriesResponse,
+        ListIssuingMerchantCategoriesResponseTypedDict,
     )
     from .listonboardinginvites import (
         ListOnboardingInvitesResponse,
@@ -1179,6 +1201,10 @@ __all__ = [
     "CreateCancellationRequestTypedDict",
     "CreateCancellationResponse",
     "CreateCancellationResponseTypedDict",
+    "CreateCaptureRequest",
+    "CreateCaptureRequestTypedDict",
+    "CreateCaptureResponse",
+    "CreateCaptureResponseTypedDict",
     "CreateDepositAccountRequest",
     "CreateDepositAccountRequestTypedDict",
     "CreateDepositAccountResponse",
@@ -1361,6 +1387,10 @@ __all__ = [
     "GetCapabilityRequestTypedDict",
     "GetCapabilityResponse",
     "GetCapabilityResponseTypedDict",
+    "GetCaptureRequest",
+    "GetCaptureRequestTypedDict",
+    "GetCaptureResponse",
+    "GetCaptureResponseTypedDict",
     "GetCardMetadataResponse",
     "GetCardMetadataResponseTypedDict",
     "GetCardRequest",
@@ -1594,6 +1624,10 @@ __all__ = [
     "ListCapabilitiesRequestTypedDict",
     "ListCapabilitiesResponse",
     "ListCapabilitiesResponseTypedDict",
+    "ListCapturesRequest",
+    "ListCapturesRequestTypedDict",
+    "ListCapturesResponse",
+    "ListCapturesResponseTypedDict",
     "ListCardsRequest",
     "ListCardsRequestTypedDict",
     "ListCardsResponse",
@@ -1666,6 +1700,8 @@ __all__ = [
     "ListIssuedCardsRequestTypedDict",
     "ListIssuedCardsResponse",
     "ListIssuedCardsResponseTypedDict",
+    "ListIssuingMerchantCategoriesResponse",
+    "ListIssuingMerchantCategoriesResponseTypedDict",
     "ListOnboardingInvitesResponse",
     "ListOnboardingInvitesResponseTypedDict",
     "ListPartnerPricingAgreementsRequest",
@@ -1943,6 +1979,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateCancellationRequestTypedDict": ".createcancellation",
     "CreateCancellationResponse": ".createcancellation",
     "CreateCancellationResponseTypedDict": ".createcancellation",
+    "CreateCaptureRequest": ".createcapture",
+    "CreateCaptureRequestTypedDict": ".createcapture",
+    "CreateCaptureResponse": ".createcapture",
+    "CreateCaptureResponseTypedDict": ".createcapture",
     "CreateDepositAccountRequest": ".createdepositaccount",
     "CreateDepositAccountRequestTypedDict": ".createdepositaccount",
     "CreateDepositAccountResponse": ".createdepositaccount",
@@ -2125,6 +2165,10 @@ _dynamic_imports: dict[str, str] = {
     "GetCapabilityRequestTypedDict": ".getcapability",
     "GetCapabilityResponse": ".getcapability",
     "GetCapabilityResponseTypedDict": ".getcapability",
+    "GetCaptureRequest": ".getcapture",
+    "GetCaptureRequestTypedDict": ".getcapture",
+    "GetCaptureResponse": ".getcapture",
+    "GetCaptureResponseTypedDict": ".getcapture",
     "GetCardRequest": ".getcard",
     "GetCardRequestTypedDict": ".getcard",
     "GetCardResponse": ".getcard",
@@ -2357,6 +2401,10 @@ _dynamic_imports: dict[str, str] = {
     "ListCapabilitiesRequestTypedDict": ".listcapabilities",
     "ListCapabilitiesResponse": ".listcapabilities",
     "ListCapabilitiesResponseTypedDict": ".listcapabilities",
+    "ListCapturesRequest": ".listcaptures",
+    "ListCapturesRequestTypedDict": ".listcaptures",
+    "ListCapturesResponse": ".listcaptures",
+    "ListCapturesResponseTypedDict": ".listcaptures",
     "ListCardsRequest": ".listcards",
     "ListCardsRequestTypedDict": ".listcards",
     "ListCardsResponse": ".listcards",
@@ -2429,6 +2477,8 @@ _dynamic_imports: dict[str, str] = {
     "ListIssuedCardTransactionsRequestTypedDict": ".listissuedcardtransactions",
     "ListIssuedCardTransactionsResponse": ".listissuedcardtransactions",
     "ListIssuedCardTransactionsResponseTypedDict": ".listissuedcardtransactions",
+    "ListIssuingMerchantCategoriesResponse": ".listissuingmerchantcategories",
+    "ListIssuingMerchantCategoriesResponseTypedDict": ".listissuingmerchantcategories",
     "ListOnboardingInvitesResponse": ".listonboardinginvites",
     "ListOnboardingInvitesResponseTypedDict": ".listonboardinginvites",
     "ListPartnerPricingAgreementsRequest": ".listpartnerpricingagreements",

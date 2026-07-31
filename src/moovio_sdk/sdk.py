@@ -104,8 +104,8 @@ class Moov(BaseSDK):
     webhooks: "Webhooks"
     industries: "Industries"
     institutions: "Institutions"
-    issuing_transactions: "IssuingTransactions"
     card_issuing: "CardIssuing"
+    issuing_transactions: "IssuingTransactions"
     authentication: "Authentication"
     onboarding: "Onboarding"
     ping: "Ping"
@@ -154,11 +154,11 @@ class Moov(BaseSDK):
         "webhooks": ("moovio_sdk.webhooks", "Webhooks"),
         "industries": ("moovio_sdk.industries", "Industries"),
         "institutions": ("moovio_sdk.institutions", "Institutions"),
+        "card_issuing": ("moovio_sdk.card_issuing", "CardIssuing"),
         "issuing_transactions": (
             "moovio_sdk.issuing_transactions",
             "IssuingTransactions",
         ),
-        "card_issuing": ("moovio_sdk.card_issuing", "CardIssuing"),
         "authentication": ("moovio_sdk.authentication", "Authentication"),
         "onboarding": ("moovio_sdk.onboarding", "Onboarding"),
         "ping": ("moovio_sdk.ping", "Ping"),

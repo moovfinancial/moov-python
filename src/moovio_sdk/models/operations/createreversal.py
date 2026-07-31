@@ -5,7 +5,7 @@ from moovio_sdk.models.components import (
     createreversal as components_createreversal,
     reversal as components_reversal,
 )
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -13,9 +13,8 @@ from moovio_sdk.utils import (
     RequestMetadata,
 )
 import pydantic
-from pydantic import model_serializer
-from typing import Dict, List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Dict, List
+from typing_extensions import Annotated, TypedDict
 
 
 class CreateReversalRequestTypedDict(TypedDict):
@@ -25,7 +24,7 @@ class CreateReversalRequestTypedDict(TypedDict):
     r"""The Moov account ID."""
     transfer_id: str
     r"""The transfer ID to reverse."""
-    create_reversal: NotRequired[components_createreversal.CreateReversalTypedDict]
+    create_reversal: components_createreversal.CreateReversalTypedDict
 
 
 class CreateReversalRequest(BaseModel):
@@ -51,25 +50,9 @@ class CreateReversalRequest(BaseModel):
     r"""The transfer ID to reverse."""
 
     create_reversal: Annotated[
-        Optional[components_createreversal.CreateReversal],
+        components_createreversal.CreateReversal,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["CreateReversal"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
+    ]
 
 
 class CreateReversalResponseTypedDict(TypedDict):

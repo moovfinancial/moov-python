@@ -19,6 +19,10 @@ if TYPE_CHECKING:
         BankAccountValidationErrorData,
     )
     from .brandvalidationerror import BrandValidationError, BrandValidationErrorData
+    from .capturevalidationerror import (
+        CaptureValidationError,
+        CaptureValidationErrorData,
+    )
     from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundData
     from .cardmetadatarequesterror import (
         CardMetadataRequestError,
@@ -191,6 +195,8 @@ __all__ = [
     "BankAccountValidationErrorData",
     "BrandValidationError",
     "BrandValidationErrorData",
+    "CaptureValidationError",
+    "CaptureValidationErrorData",
     "CardAcquiringRefund",
     "CardAcquiringRefundData",
     "CardMetadataRequestError",
@@ -322,6 +328,8 @@ _dynamic_imports: dict[str, str] = {
     "BankAccountValidationErrorData": ".bankaccountvalidationerror",
     "BrandValidationError": ".brandvalidationerror",
     "BrandValidationErrorData": ".brandvalidationerror",
+    "CaptureValidationError": ".capturevalidationerror",
+    "CaptureValidationErrorData": ".capturevalidationerror",
     "CardAcquiringRefund": ".cardacquiringrefund",
     "CardAcquiringRefundData": ".cardacquiringrefund",
     "CardMetadataRequestError": ".cardmetadatarequesterror",

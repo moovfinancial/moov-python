@@ -5,6 +5,7 @@ from datetime import datetime
 from moovio_sdk.models.components import (
     transfer as components_transfer,
     transferstatus as components_transferstatus,
+    transfertype as components_transfertype,
 )
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
@@ -36,6 +37,12 @@ class ListTransfersRequestTypedDict(TypedDict):
     r"""Optional parameter to only return disputed transfers."""
     foreign_id: NotRequired[str]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
+    authorization_i_ds: NotRequired[List[str]]
+    r"""Optional comma-separated IDs to filter for transfers associated with specific card authorizations."""
+    capture_i_ds: NotRequired[List[str]]
+    r"""Optional comma-separated IDs to filter for transfers associated with specific card captures."""
+    transfer_types: NotRequired[List[components_transfertype.TransferType]]
+    r"""Optional, comma-separated transfer types by which the response is filtered."""
     skip: NotRequired[int]
     count: NotRequired[int]
 
@@ -114,6 +121,27 @@ class ListTransfersRequest(BaseModel):
     ] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
+    authorization_i_ds: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="authorizationIDs"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional comma-separated IDs to filter for transfers associated with specific card authorizations."""
+
+    capture_i_ds: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="captureIDs"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional comma-separated IDs to filter for transfers associated with specific card captures."""
+
+    transfer_types: Annotated[
+        Optional[List[components_transfertype.TransferType]],
+        pydantic.Field(alias="transferTypes"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional, comma-separated transfer types by which the response is filtered."""
+
     skip: Annotated[
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
@@ -138,6 +166,9 @@ class ListTransfersRequest(BaseModel):
                 "refunded",
                 "disputed",
                 "foreignID",
+                "authorizationIDs",
+                "captureIDs",
+                "transferTypes",
                 "skip",
                 "count",
             ]

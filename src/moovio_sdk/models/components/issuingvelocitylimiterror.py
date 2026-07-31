@@ -9,17 +9,20 @@ from typing_extensions import NotRequired, TypedDict
 
 class IssuingVelocityLimitErrorTypedDict(TypedDict):
     amount: NotRequired[str]
+    count: NotRequired[str]
     interval: NotRequired[str]
 
 
 class IssuingVelocityLimitError(BaseModel):
     amount: Optional[str] = None
 
+    count: Optional[str] = None
+
     interval: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["amount", "interval"])
+        optional_fields = set(["amount", "count", "interval"])
         serialized = handler(self)
         m = {}
 
