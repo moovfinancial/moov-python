@@ -36,6 +36,10 @@ class ListTransfersRequestTypedDict(TypedDict):
     r"""Optional parameter to only return disputed transfers."""
     foreign_id: NotRequired[str]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
+    authorization_i_ds: NotRequired[List[str]]
+    r"""Optional comma-separated IDs to filter for transfers associated with specific card authorizations."""
+    capture_i_ds: NotRequired[List[str]]
+    r"""Optional comma-separated IDs to filter for transfers associated with specific card captures."""
     skip: NotRequired[int]
     count: NotRequired[int]
 
@@ -114,6 +118,20 @@ class ListTransfersRequest(BaseModel):
     ] = None
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
 
+    authorization_i_ds: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="authorizationIDs"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional comma-separated IDs to filter for transfers associated with specific card authorizations."""
+
+    capture_i_ds: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="captureIDs"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional comma-separated IDs to filter for transfers associated with specific card captures."""
+
     skip: Annotated[
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
@@ -138,6 +156,8 @@ class ListTransfersRequest(BaseModel):
                 "refunded",
                 "disputed",
                 "foreignID",
+                "authorizationIDs",
+                "captureIDs",
                 "skip",
                 "count",
             ]
