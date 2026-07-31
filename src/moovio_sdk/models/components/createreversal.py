@@ -7,9 +7,9 @@ from typing_extensions import TypedDict
 
 class CreateReversalTypedDict(TypedDict):
     amount: int
-    r"""Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation."""
+    r"""Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation."""
 
 
 class CreateReversal(BaseModel):
     amount: int
-    r"""Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation."""
+    r"""Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation."""
