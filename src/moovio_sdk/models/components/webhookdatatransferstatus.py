@@ -27,5 +27,8 @@ class WebhookDataTransferStatus(str, Enum):
     DESTINATION_RETURNED = "destination.returned"
     DESTINATION_ORIGINATED = "destination.originated"
     DESTINATION_CONFIRMED = "destination.confirmed"
+    DESTINATION_SETTLED = "destination.settled"
     DESTINATION_FAILED = "destination.failed"
+    DESTINATION_CANCELED = "destination.canceled"
     DESTINATION_ACCEPTED_WITHOUT_POSTING = "destination.accepted-without-posting"
+    DESTINATION_DEFERRED = "destination.deferred"

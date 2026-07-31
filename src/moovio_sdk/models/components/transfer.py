@@ -8,6 +8,7 @@ from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundTypedDi
 from .facilitatorfee import FacilitatorFee, FacilitatorFeeTypedDict
 from .moovfee import MoovFee, MoovFeeTypedDict
 from .moovfeedetails import MoovFeeDetails, MoovFeeDetailsTypedDict
+from .transfercapture import TransferCapture, TransferCaptureTypedDict
 from .transferdestination import TransferDestination, TransferDestinationTypedDict
 from .transferfailurereason import TransferFailureReason
 from .transferlineitems import TransferLineItems, TransferLineItemsTypedDict
@@ -66,6 +67,8 @@ class TransferTypedDict(TypedDict):
     r"""An optional collection of line items for a transfer.
     When line items are provided, their total plus tax must equal the transfer amount.
     """
+    capture: NotRequired[TransferCaptureTypedDict]
+    r"""The card authorization and capture IDs associated with a transfer."""
 
 
 class Transfer(BaseModel):
@@ -163,6 +166,9 @@ class Transfer(BaseModel):
     When line items are provided, their total plus tax must equal the transfer amount.
     """
 
+    capture: Optional[TransferCapture] = None
+    r"""The card authorization and capture IDs associated with a transfer."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -189,6 +195,7 @@ class Transfer(BaseModel):
                 "salesTaxAmount",
                 "foreignID",
                 "lineItems",
+                "capture",
             ]
         )
         serialized = handler(self)
