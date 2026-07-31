@@ -10,21 +10,21 @@ from typing_extensions import NotRequired, TypedDict
 class CreateRefundTypedDict(TypedDict):
     r"""Specifies a partial amount to refund.
 
-    This request body is optional, an empty body will issue a refund for the full amount of the original transfer.
+    Before v2026.10, this request body may be omitted. In v2026.10 and later, send an empty object to refund the full amount of the original transfer.
     """
 
     amount: NotRequired[int]
-    r"""Amount to refund in cents. If null, the original transfer's full amount will be refunded."""
+    r"""Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded."""
 
 
 class CreateRefund(BaseModel):
     r"""Specifies a partial amount to refund.
 
-    This request body is optional, an empty body will issue a refund for the full amount of the original transfer.
+    Before v2026.10, this request body may be omitted. In v2026.10 and later, send an empty object to refund the full amount of the original transfer.
     """
 
     amount: Optional[int] = None
-    r"""Amount to refund in cents. If null, the original transfer's full amount will be refunded."""
+    r"""Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
