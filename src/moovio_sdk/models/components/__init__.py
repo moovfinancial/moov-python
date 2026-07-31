@@ -1278,6 +1278,7 @@ if TYPE_CHECKING:
         TransferAmountDetails,
         TransferAmountDetailsTypedDict,
     )
+    from .transfercapture import TransferCapture, TransferCaptureTypedDict
     from .transferconfig import TransferConfig, TransferConfigTypedDict
     from .transfercontrols import TransferControls, TransferControlsTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
@@ -2603,6 +2604,8 @@ __all__ = [
     "TransferAccountTypedDict",
     "TransferAmountDetails",
     "TransferAmountDetailsTypedDict",
+    "TransferCapture",
+    "TransferCaptureTypedDict",
     "TransferConfig",
     "TransferConfigTypedDict",
     "TransferControls",
@@ -3845,6 +3848,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
     "TransferAmountDetails": ".transferamountdetails",
     "TransferAmountDetailsTypedDict": ".transferamountdetails",
+    "TransferCapture": ".transfercapture",
+    "TransferCaptureTypedDict": ".transfercapture",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
     "TransferControls": ".transfercontrols",

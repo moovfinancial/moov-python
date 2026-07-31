@@ -475,7 +475,7 @@ Allows clients to notify the authorization server that a previously obtained ref
 
 * [get](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/avatars/README.md#get) - Get avatar image for an account using a unique ID.    
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/profile-enrichment.read` scope.
 
 ### [BankAccounts](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/bankaccounts/README.md)
@@ -763,14 +763,14 @@ you'll need to specify the `/ping.read` scope.
 
 * [get](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/enrichedaddress/README.md#get) - Fetch enriched address suggestions. Requires a partial address. 
   
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/profile-enrichment.read` scope.
 
 ### [EnrichedProfile](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/enrichedprofile/README.md)
 
 * [get](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/enrichedprofile/README.md#get) - Fetch enriched profile data. Requires a valid email address. This service is offered in collaboration with Clearbit. 
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/profile-enrichment.read` scope.
 
 ### [FeePlans](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/feeplans/README.md)
@@ -884,7 +884,7 @@ you'll need to specify the `/institutions.read` scope.
 
 Search for institutions by either their name or routing number.
 
-To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/fed.read` scope. :warning: **Deprecated**
 
 ### [Invoices](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/invoices/README.md)
