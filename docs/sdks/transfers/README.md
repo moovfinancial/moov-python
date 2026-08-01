@@ -63,6 +63,18 @@ you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
   
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
   to specify the `/accounts/{accountID}/transfers.read` scope.
+* [create_capture](#create_capture) - Create a capture against an authorized transfer.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+* [list_captures](#list_captures) - Get a list of captures for a transfer.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [get_capture](#get_capture) - Get details of a capture for a transfer.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 * [initiate_refund](#initiate_refund) - Initiate a refund for a card transfer.
 
 **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
@@ -120,7 +132,7 @@ with Moov(
 
     res = moov.transfers.generate_options(account_id="deafe3cf-31d4-4dcc-8176-3d6bf8bb4f04", source={}, destination={}, amount={
         "currency": "USD",
-        "value": 1204,
+        "value_decimal": "12.987654321",
     })
 
     # Handle response
@@ -135,7 +147,7 @@ with Moov(
 | `account_id`                                                                               | *str*                                                                                      | :heavy_check_mark:                                                                         | The partner's Moov account ID.                                                             |
 | `source`                                                                                   | [components.SourceDestinationOptions](../../models/components/sourcedestinationoptions.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
 | `destination`                                                                              | [components.SourceDestinationOptions](../../models/components/sourcedestinationoptions.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `amount`                                                                                   | [components.Amount](../../models/components/amount.md)                                     | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `amount`                                                                                   | [components.AmountDecimal](../../models/components/amountdecimal.md)                       | :heavy_check_mark:                                                                         | N/A                                                                                        |
 | `retries`                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                           | :heavy_minus_sign:                                                                         | Configuration to override the default retry behavior of the client.                        |
 
 ### Response
@@ -180,11 +192,17 @@ with Moov(
         "payment_method_id": "3f9969cf-a1f3-4d83-8ddc-229a506651cf",
     }, amount={
         "currency": "USD",
-        "value": 32945,
-    }, facilitator_fee={
-        "total_decimal": "12.987654321",
-        "markup_decimal": "0.987654321",
-    }, description="Transfer from card to wallet", metadata={
+        "value_decimal": "329.45",
+    }, facilitator_fee=components.CreateTransferFacilitatorFee(
+        total=components.AmountDecimal(
+            currency="USD",
+            value_decimal="12.987654321",
+        ),
+        markup=components.AmountDecimal(
+            currency="USD",
+            value_decimal="12.987654321",
+        ),
+    ), description="Transfer from card to wallet", metadata={
         "optional": "metadata",
     }, line_items={
         "items": [
@@ -243,11 +261,17 @@ with Moov(
         "payment_method_id": "3f9969cf-a1f3-4d83-8ddc-229a506651cf",
     }, amount={
         "currency": "USD",
-        "value": 32945,
-    }, facilitator_fee={
-        "total_decimal": "12.987654321",
-        "markup_decimal": "0.987654321",
-    }, description="Transfer from card to wallet", metadata={
+        "value_decimal": "329.45",
+    }, facilitator_fee=components.CreateTransferFacilitatorFee(
+        total=components.AmountDecimal(
+            currency="USD",
+            value_decimal="12.987654321",
+        ),
+        markup=components.AmountDecimal(
+            currency="USD",
+            value_decimal="12.987654321",
+        ),
+    ), description="Transfer from card to wallet", metadata={
         "optional": "metadata",
     }, line_items={
         "items": [
@@ -294,9 +318,9 @@ with Moov(
 | `account_id`                                                                                                                                                                                                                                                                                   | *str*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                             | Your Moov account ID.                                                                                                                                                                                                                                                                          |                                                                                                                                                                                                                                                                                                |
 | `source`                                                                                                                                                                                                                                                                                       | [components.CreateTransferSource](../../models/components/createtransfersource.md)                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                                                                             | Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                |
 | `destination`                                                                                                                                                                                                                                                                                  | [components.CreateTransferDestination](../../models/components/createtransferdestination.md)                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                                                                             | The final stage of a transfer and the ultimate recipient of the funds.                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                |
-| `amount`                                                                                                                                                                                                                                                                                       | [components.Amount](../../models/components/amount.md)                                                                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
+| `amount`                                                                                                                                                                                                                                                                                       | [components.AmountDecimal](../../models/components/amountdecimal.md)                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
 | `x_wait_for`                                                                                                                                                                                                                                                                                   | [Optional[components.TransferWaitFor]](../../models/components/transferwaitfor.md)                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds. |                                                                                                                                                                                                                                                                                                |
-| `facilitator_fee`                                                                                                                                                                                                                                                                              | [Optional[components.FacilitatorFee]](../../models/components/facilitatorfee.md)                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Total or markup fee.                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                |
+| `facilitator_fee`                                                                                                                                                                                                                                                                              | [Optional[components.CreateTransferFacilitatorFee]](../../models/components/createtransferfacilitatorfee.md)                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Total or markup fee to apply when creating a transfer.                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                |
 | `description`                                                                                                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | An optional description of the transfer that is used on receipts and for your own internal use.                                                                                                                                                                                                | Pay Instructor for May 15 Class                                                                                                                                                                                                                                                                |
 | `metadata`                                                                                                                                                                                                                                                                                     | Dict[str, *str*]                                                                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Free-form key-value pair list. Useful for storing information that is not captured elsewhere.                                                                                                                                                                                                  | {<br/>"optional": "metadata"<br/>}                                                                                                                                                                                                                                                             |
 | `foreign_id`                                                                                                                                                                                                                                                                                   | *Optional[str]*                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Optional alias from a foreign/external system which can be used to reference this resource.                                                                                                                                                                                                    |                                                                                                                                                                                                                                                                                                |
@@ -371,6 +395,7 @@ with Moov(
 | `foreign_id`                                                                                                                          | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Optional alias from a foreign/external system which can be used to reference this resource.                                           |                                                                                                                                       |
 | `authorization_i_ds`                                                                                                                  | List[*str*]                                                                                                                           | :heavy_minus_sign:                                                                                                                    | Optional comma-separated IDs to filter for transfers associated with specific card authorizations.                                    |                                                                                                                                       |
 | `capture_i_ds`                                                                                                                        | List[*str*]                                                                                                                           | :heavy_minus_sign:                                                                                                                    | Optional comma-separated IDs to filter for transfers associated with specific card captures.                                          |                                                                                                                                       |
+| `transfer_types`                                                                                                                      | List[[components.TransferType](../../models/components/transfertype.md)]                                                              | :heavy_minus_sign:                                                                                                                    | Optional, comma-separated transfer types by which the response is filtered.                                                           |                                                                                                                                       |
 | `skip`                                                                                                                                | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | N/A                                                                                                                                   | 60                                                                                                                                    |
 | `count`                                                                                                                               | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | N/A                                                                                                                                   | 20                                                                                                                                    |
 | `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |                                                                                                                                       |
@@ -452,7 +477,7 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getTransfer" method="get" path="/accounts/{accountID}/transfers/{transferID}" -->
+<!-- UsageSnippet language="python" operationID="getTransfer" method="get" path="/accounts/{accountID}/transfers/{transferID}" example="Awaiting capture card authorization transfer" -->
 ```python
 from moovio_sdk import Moov
 from moovio_sdk.models import components
@@ -465,7 +490,7 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.transfers.get(transfer_id="960cf5a2-50a3-4914-ad86-d54c022bf5df", account_id="31113f7b-9f68-44e9-9338-6d8e655c7c96")
+    res = moov.transfers.get(transfer_id="<id>", account_id="<id>")
 
     # Handle response
     print(res)
@@ -566,7 +591,10 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.transfers.create_cancellation(account_id="10ae862c-6658-4f87-967d-46e995737204", transfer_id="36c80a6c-ceb2-4e5d-a437-8a39afdfdc58")
+    res = moov.transfers.create_cancellation(account_id="10ae862c-6658-4f87-967d-46e995737204", transfer_id="36c80a6c-ceb2-4e5d-a437-8a39afdfdc58", amount={
+        "currency": "USD",
+        "value_decimal": "25.00",
+    })
 
     # Handle response
     print(res)
@@ -575,11 +603,12 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | The partner's Moov account ID.                                      |
-| `transfer_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The transfer ID to cancel.                                          |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `account_id`                                                                   | *str*                                                                          | :heavy_check_mark:                                                             | The partner's Moov account ID.                                                 |
+| `transfer_id`                                                                  | *str*                                                                          | :heavy_check_mark:                                                             | The transfer ID to cancel.                                                     |
+| `amount`                                                                       | [Optional[components.AmountDecimal]](../../models/components/amountdecimal.md) | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `retries`                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)               | :heavy_minus_sign:                                                             | Configuration to override the default retry behavior of the client.            |
 
 ### Response
 
@@ -708,6 +737,183 @@ with Moov(
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
+## create_capture
+
+Create a capture against an authorized transfer.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="createCapture" method="post" path="/accounts/{accountID}/transfers/{transferID}/captures" example="Created capture" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.create_capture(x_idempotency_key="<value>", account_id="<id>", transfer_id="<id>", destination_payment_method_id="<id>", amount={
+        "currency": "USD",
+        "value_decimal": "12.987654321",
+    }, description="Pay Instructor for May 15 Class", metadata={
+        "optional": "metadata",
+    }, line_items={
+        "items": [],
+    }, amount_details=components.CreateTransferAmountDetails(
+        tip=components.AmountDecimal(
+            currency="USD",
+            value_decimal="12.987654321",
+        ),
+        tax=components.AmountDecimal(
+            currency="USD",
+            value_decimal="12.987654321",
+        ),
+        surcharge=components.AmountDecimal(
+            currency="USD",
+            value_decimal="12.987654321",
+        ),
+    ), facilitator_fee_amount={
+        "currency": "USD",
+        "value_decimal": "12.987654321",
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                               | Type                                                                                                                                    | Required                                                                                                                                | Description                                                                                                                             | Example                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `x_idempotency_key`                                                                                                                     | *str*                                                                                                                                   | :heavy_check_mark:                                                                                                                      | Prevents duplicate captures from being created.                                                                                         |                                                                                                                                         |
+| `account_id`                                                                                                                            | *str*                                                                                                                                   | :heavy_check_mark:                                                                                                                      | The merchant's Moov account ID.                                                                                                         |                                                                                                                                         |
+| `transfer_id`                                                                                                                           | *str*                                                                                                                                   | :heavy_check_mark:                                                                                                                      | Identifier for the transfer.                                                                                                            |                                                                                                                                         |
+| `destination_payment_method_id`                                                                                                         | *str*                                                                                                                                   | :heavy_check_mark:                                                                                                                      | Payment method of the merchant account to capture funds into. For card-acquiring transfers, this must be a moov-wallet payment method.  |                                                                                                                                         |
+| `amount`                                                                                                                                | [Optional[components.AmountDecimal]](../../models/components/amountdecimal.md)                                                          | :heavy_minus_sign:                                                                                                                      | Amount to capture. If omitted, the remaining authorized amount is captured.                                                             |                                                                                                                                         |
+| `is_final`                                                                                                                              | *Optional[bool]*                                                                                                                        | :heavy_minus_sign:                                                                                                                      | Indicates whether this is the final capture against the authorization. When `true`, any remaining authorized amount is voided.          |                                                                                                                                         |
+| `description`                                                                                                                           | *Optional[str]*                                                                                                                         | :heavy_minus_sign:                                                                                                                      | An optional description of the capture that is used on receipts and for your own internal use.                                          | Pay Instructor for May 15 Class                                                                                                         |
+| `metadata`                                                                                                                              | Dict[str, *str*]                                                                                                                        | :heavy_minus_sign:                                                                                                                      | Free-form key-value pair list. Useful for storing information that is not captured elsewhere.                                           | {<br/>"optional": "metadata"<br/>}                                                                                                      |
+| `foreign_id`                                                                                                                            | *Optional[str]*                                                                                                                         | :heavy_minus_sign:                                                                                                                      | Optional alias from a foreign/external system which can be used to reference this resource.                                             |                                                                                                                                         |
+| `line_items`                                                                                                                            | [Optional[components.CreateTransferLineItems]](../../models/components/createtransferlineitems.md)                                      | :heavy_minus_sign:                                                                                                                      | An optional collection of line items for a transfer.<br/>When line items are provided, their total plus tax must equal the transfer amount. |                                                                                                                                         |
+| `amount_details`                                                                                                                        | [Optional[components.CreateTransferAmountDetails]](../../models/components/createtransferamountdetails.md)                              | :heavy_minus_sign:                                                                                                                      | N/A                                                                                                                                     |                                                                                                                                         |
+| `facilitator_fee_amount`                                                                                                                | [Optional[components.AmountDecimal]](../../models/components/amountdecimal.md)                                                          | :heavy_minus_sign:                                                                                                                      | The facilitator fee amount applied to the capture.                                                                                      |                                                                                                                                         |
+| `retries`                                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                        | :heavy_minus_sign:                                                                                                                      | Configuration to override the default retry behavior of the client.                                                                     |                                                                                                                                         |
+
+### Response
+
+**[operations.CreateCaptureResponse](../../models/operations/createcaptureresponse.md)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.GenericError           | 400, 409                      | application/json              |
+| errors.CaptureValidationError | 422                           | application/json              |
+| errors.APIError               | 4XX, 5XX                      | \*/\*                         |
+
+## list_captures
+
+Get a list of captures for a transfer.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="listCaptures" method="get" path="/accounts/{accountID}/transfers/{transferID}/captures" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.list_captures(account_id="<id>", transfer_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | The merchant's Moov account ID.                                     |
+| `transfer_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Identifier for the transfer.                                        |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.ListCapturesResponse](../../models/operations/listcapturesresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## get_capture
+
+Get details of a capture for a transfer.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="getCapture" method="get" path="/accounts/{accountID}/transfers/{transferID}/captures/{captureID}" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.get_capture(account_id="<id>", transfer_id="<id>", capture_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `account_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | The merchant's Moov account ID.                                     |
+| `transfer_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Identifier for the transfer.                                        |
+| `capture_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | Identifier for the capture.                                         |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[operations.GetCaptureResponse](../../models/operations/getcaptureresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
 ## initiate_refund
 
 Initiate a refund for a card transfer.
@@ -733,7 +939,10 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.transfers.initiate_refund(x_idempotency_key="8d9af6b8-67e1-4efa-8188-68039f34097d", account_id="cb6ae9f9-afab-4f06-9eb0-8abf54a3ada2", transfer_id="04022119-95be-4ef4-9dd4-b3782f6aa7b9", amount=1000, amount_details={
+    res = moov.transfers.initiate_refund(x_idempotency_key="8d9af6b8-67e1-4efa-8188-68039f34097d", account_id="cb6ae9f9-afab-4f06-9eb0-8abf54a3ada2", transfer_id="04022119-95be-4ef4-9dd4-b3782f6aa7b9", amount={
+        "currency": "USD",
+        "value_decimal": "12.987654321",
+    }, amount_details={
         "surcharge": {
             "currency": "USD",
             "value_decimal": "12.987654321",
@@ -759,7 +968,10 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.transfers.initiate_refund(x_idempotency_key="4e7a906a-e6d1-4bca-9cc5-6246295ef93c", account_id="d12ddb6e-0ed9-44e8-92a7-1716ae7cc759", transfer_id="d73be489-9da4-4be7-bc04-147d8552279d", amount=1000, amount_details={
+    res = moov.transfers.initiate_refund(x_idempotency_key="4e7a906a-e6d1-4bca-9cc5-6246295ef93c", account_id="d12ddb6e-0ed9-44e8-92a7-1716ae7cc759", transfer_id="d73be489-9da4-4be7-bc04-147d8552279d", amount={
+        "currency": "USD",
+        "value_decimal": "12.987654321",
+    }, amount_details={
         "surcharge": {
             "currency": "USD",
             "value_decimal": "12.987654321",
@@ -773,15 +985,16 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                                                                           | Required                                                                                                                                                                                                                                                                                       | Description                                                                                                                                                                                                                                                                                    | Example                                                                                                                                                                                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `x_idempotency_key`                                                                                                                                                                                                                                                                            | *str*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                             | Prevents duplicate refunds from being created.                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                |
-| `account_id`                                                                                                                                                                                                                                                                                   | *str*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                             | The merchant's Moov account ID.                                                                                                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                |
-| `transfer_id`                                                                                                                                                                                                                                                                                  | *str*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                             | Identifier for the transfer.                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                                                                                                |
-| `x_wait_for`                                                                                                                                                                                                                                                                                   | [Optional[components.TransferWaitFor]](../../models/components/transferwaitfor.md)                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds. |                                                                                                                                                                                                                                                                                                |
-| `amount`                                                                                                                                                                                                                                                                                       | *Optional[int]*                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Amount to refund in cents. If null, the original transfer's full amount will be refunded.                                                                                                                                                                                                      | 1000                                                                                                                                                                                                                                                                                           |
-| `amount_details`                                                                                                                                                                                                                                                                               | [Optional[components.RefundAmountDetails]](../../models/components/refundamountdetails.md)                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Breakdown of the refunded amount.                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                |
-| `retries`                                                                                                                                                                                                                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                            |                                                                                                                                                                                                                                                                                                |
+| Parameter                                                                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                                                                           | Required                                                                                                                                                                                                                                                                                       | Description                                                                                                                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `x_idempotency_key`                                                                                                                                                                                                                                                                            | *str*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                             | Prevents duplicate refunds from being created.                                                                                                                                                                                                                                                 |
+| `account_id`                                                                                                                                                                                                                                                                                   | *str*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                             | The merchant's Moov account ID.                                                                                                                                                                                                                                                                |
+| `transfer_id`                                                                                                                                                                                                                                                                                  | *str*                                                                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                             | Identifier for the transfer.                                                                                                                                                                                                                                                                   |
+| `x_wait_for`                                                                                                                                                                                                                                                                                   | [Optional[components.TransferWaitFor]](../../models/components/transferwaitfor.md)                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an <br/>asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds. |
+| `amount`                                                                                                                                                                                                                                                                                       | [Optional[components.AmountDecimal]](../../models/components/amountdecimal.md)                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded.                                                                                                                                                      |
+| `capture_id`                                                                                                                                                                                                                                                                                   | *Optional[str]*                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | ID of the capture to refund. Required for multi-capture card payment transfers.                                                                                                                                                                                                                |
+| `amount_details`                                                                                                                                                                                                                                                                               | [Optional[components.RefundAmountDetails]](../../models/components/refundamountdetails.md)                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Breakdown of the refunded amount.                                                                                                                                                                                                                                                              |
+| `retries`                                                                                                                                                                                                                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                             | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                            |
 
 ### Response
 
@@ -915,7 +1128,10 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.transfers.create_reversal(x_idempotency_key="93d03831-45c4-49ec-a9b2-88cbd41dfca7", account_id="c5fade57-7e5a-4380-ac7b-4abf8b3c24cf", transfer_id="82c6eae7-b7e5-4b20-b24e-5116a4d70bde", amount=1000, amount_details={
+    res = moov.transfers.create_reversal(x_idempotency_key="93d03831-45c4-49ec-a9b2-88cbd41dfca7", account_id="c5fade57-7e5a-4380-ac7b-4abf8b3c24cf", transfer_id="82c6eae7-b7e5-4b20-b24e-5116a4d70bde", amount={
+        "currency": "USD",
+        "value_decimal": "12.987654321",
+    }, amount_details={
         "surcharge": {
             "currency": "USD",
             "value_decimal": "12.987654321",
@@ -941,7 +1157,10 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.transfers.create_reversal(x_idempotency_key="b91d00b2-4ecb-4eb4-a67f-d6f76c0b7ad8", account_id="f225b49d-911b-440b-baed-6065968b69cb", transfer_id="a17b29e2-4af6-4c9d-ad3a-dd0ded2966ad", amount=1000, amount_details={
+    res = moov.transfers.create_reversal(x_idempotency_key="b91d00b2-4ecb-4eb4-a67f-d6f76c0b7ad8", account_id="f225b49d-911b-440b-baed-6065968b69cb", transfer_id="a17b29e2-4af6-4c9d-ad3a-dd0ded2966ad", amount={
+        "currency": "USD",
+        "value_decimal": "12.987654321",
+    }, amount_details={
         "surcharge": {
             "currency": "USD",
             "value_decimal": "12.987654321",
@@ -955,14 +1174,14 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                | Example                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `x_idempotency_key`                                                                                        | *str*                                                                                                      | :heavy_check_mark:                                                                                         | Prevents duplicate reversals from being created.                                                           |                                                                                                            |
-| `account_id`                                                                                               | *str*                                                                                                      | :heavy_check_mark:                                                                                         | The Moov account ID.                                                                                       |                                                                                                            |
-| `transfer_id`                                                                                              | *str*                                                                                                      | :heavy_check_mark:                                                                                         | The transfer ID to reverse.                                                                                |                                                                                                            |
-| `amount`                                                                                                   | *int*                                                                                                      | :heavy_check_mark:                                                                                         | Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation. | 1000                                                                                                       |
-| `amount_details`                                                                                           | [Optional[components.ReversalAmountDetails]](../../models/components/reversalamountdetails.md)             | :heavy_minus_sign:                                                                                         | Breakdown of the reversed amount.                                                                          |                                                                                                            |
-| `retries`                                                                                                  | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                           | :heavy_minus_sign:                                                                                         | Configuration to override the default retry behavior of the client.                                        |                                                                                                            |
+| Parameter                                                                                                                                          | Type                                                                                                                                               | Required                                                                                                                                           | Description                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `x_idempotency_key`                                                                                                                                | *str*                                                                                                                                              | :heavy_check_mark:                                                                                                                                 | Prevents duplicate reversals from being created.                                                                                                   |
+| `account_id`                                                                                                                                       | *str*                                                                                                                                              | :heavy_check_mark:                                                                                                                                 | The Moov account ID.                                                                                                                               |
+| `transfer_id`                                                                                                                                      | *str*                                                                                                                                              | :heavy_check_mark:                                                                                                                                 | The transfer ID to reverse.                                                                                                                        |
+| `amount`                                                                                                                                           | [components.AmountDecimal](../../models/components/amountdecimal.md)                                                                               | :heavy_check_mark:                                                                                                                                 | Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation. |
+| `amount_details`                                                                                                                                   | [Optional[components.ReversalAmountDetails]](../../models/components/reversalamountdetails.md)                                                     | :heavy_minus_sign:                                                                                                                                 | Breakdown of the reversed amount.                                                                                                                  |
+| `retries`                                                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                   | :heavy_minus_sign:                                                                                                                                 | Configuration to override the default retry behavior of the client.                                                                                |
 
 ### Response
 

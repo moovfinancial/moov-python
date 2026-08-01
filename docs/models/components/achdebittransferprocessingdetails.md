@@ -1,0 +1,10 @@
+# ACHDebitTransferProcessingDetails
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `trace_number`                                                               | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          | 124782618117                                                                 |
+| `return_`                                                                    | [Optional[components.ACHException]](../../models/components/achexception.md) | :heavy_minus_sign:                                                           | N/A                                                                          |                                                                              |
+| `correction`                                                                 | [Optional[components.ACHException]](../../models/components/achexception.md) | :heavy_minus_sign:                                                           | N/A                                                                          |                                                                              |

@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     )
     from .accounttype import AccountType
     from .accountverificationstatus import AccountVerificationStatus
+    from .achcreditoptions import ACHCreditOptions, ACHCreditOptionsTypedDict
     from .achcreditsamedaypaymentmethod import (
         AchCreditSameDayPaymentMethod,
         AchCreditSameDayPaymentMethodPaymentMethodType,
@@ -38,6 +39,10 @@ if TYPE_CHECKING:
         AchCreditStandardTransferPaymentMethod,
         AchCreditStandardTransferPaymentMethodPaymentMethodType,
         AchCreditStandardTransferPaymentMethodTypedDict,
+    )
+    from .achcredittransferprocessingdetails import (
+        ACHCreditTransferProcessingDetails,
+        ACHCreditTransferProcessingDetailsTypedDict,
     )
     from .achdebitcollectpaymentmethod import (
         AchDebitCollectPaymentMethod,
@@ -59,6 +64,11 @@ if TYPE_CHECKING:
         AchDebitFundTransferPaymentMethodPaymentMethodType,
         AchDebitFundTransferPaymentMethodTypedDict,
     )
+    from .achdebitoptions import ACHDebitOptions, ACHDebitOptionsTypedDict
+    from .achdebittransferprocessingdetails import (
+        ACHDebitTransferProcessingDetails,
+        ACHDebitTransferProcessingDetailsTypedDict,
+    )
     from .achexception import ACHException, ACHExceptionTypedDict
     from .achfees import ACHFees, ACHFeesTypedDict
     from .achinstitution import ACHInstitution, ACHInstitutionTypedDict
@@ -76,11 +86,6 @@ if TYPE_CHECKING:
     )
     from .achpaymentsettings import ACHPaymentSettings, ACHPaymentSettingsTypedDict
     from .achreturncode import ACHReturnCode
-    from .achtransactiondetails import (
-        ACHTransactionDetails,
-        ACHTransactionDetailsTypedDict,
-    )
-    from .achtransactionstatus import ACHTransactionStatus
     from .addcapabilities import AddCapabilities, AddCapabilitiesTypedDict
     from .address import Address, AddressTypedDict
     from .addresserror import AddressError, AddressErrorTypedDict
@@ -237,6 +242,8 @@ if TYPE_CHECKING:
         CapabilityRequirementTypedDict,
     )
     from .capabilitystatus import CapabilityStatus
+    from .capture import Capture, CaptureTypedDict
+    from .capturestatus import CaptureStatus
     from .card import Card, CardTypedDict
     from .cardacceptancemethods import (
         CardAcceptanceMethods,
@@ -247,10 +254,6 @@ if TYPE_CHECKING:
         CardAcceptanceMethodsErrorTypedDict,
     )
     from .cardaccountupdater import CardAccountUpdater, CardAccountUpdaterTypedDict
-    from .cardacquiringdispute import (
-        CardAcquiringDispute,
-        CardAcquiringDisputeTypedDict,
-    )
     from .cardacquiringfees import CardAcquiringFees, CardAcquiringFeesTypedDict
     from .cardacquiringmodel import CardAcquiringModel
     from .cardacquiringrefund import CardAcquiringRefund, CardAcquiringRefundTypedDict
@@ -267,16 +270,25 @@ if TYPE_CHECKING:
         CardPaymentDetailsError,
         CardPaymentDetailsErrorTypedDict,
     )
+    from .cardpaymentoptions import CardPaymentOptions, CardPaymentOptionsTypedDict
     from .cardpaymentpaymentmethod import (
         CardPaymentPaymentMethod,
         CardPaymentPaymentMethodPaymentMethodType,
         CardPaymentPaymentMethodTypedDict,
+    )
+    from .cardpaymentrefundprocessingdetails import (
+        CardPaymentRefundProcessingDetails,
+        CardPaymentRefundProcessingDetailsTypedDict,
     )
     from .cardpaymentsettings import CardPaymentSettings, CardPaymentSettingsTypedDict
     from .cardpaymenttransferpaymentmethod import (
         CardPaymentTransferPaymentMethod,
         CardPaymentTransferPaymentMethodPaymentMethodType,
         CardPaymentTransferPaymentMethodTypedDict,
+    )
+    from .cardpaymenttransferprocessingdetails import (
+        CardPaymentTransferProcessingDetails,
+        CardPaymentTransferProcessingDetailsTypedDict,
     )
     from .cardpayouttype import CardPayoutType
     from .cardpresentpaymentpaymentmethod import (
@@ -289,12 +301,7 @@ if TYPE_CHECKING:
         CardPresentPaymentTransferPaymentMethodPaymentMethodType,
         CardPresentPaymentTransferPaymentMethodTypedDict,
     )
-    from .cardtransactiondetails import (
-        CardTransactionDetails,
-        CardTransactionDetailsTypedDict,
-    )
     from .cardtransactionfailurecode import CardTransactionFailureCode
-    from .cardtransactionstatus import CardTransactionStatus
     from .cardtype import CardType
     from .cardupdatereason import CardUpdateReason
     from .cardverification import CardVerification, CardVerificationTypedDict
@@ -369,6 +376,8 @@ if TYPE_CHECKING:
         CreateBusinessProfile,
         CreateBusinessProfileTypedDict,
     )
+    from .createcancellation import CreateCancellation, CreateCancellationTypedDict
+    from .createcapture import CreateCapture, CreateCaptureTypedDict
     from .createdtransfer import CreatedTransfer, CreatedTransferTypedDict
     from .createevidencefilemultipart import (
         CreateEvidenceFileMultiPart,
@@ -538,6 +547,10 @@ if TYPE_CHECKING:
     from .createtransferdestinationcard import (
         CreateTransferDestinationCard,
         CreateTransferDestinationCardTypedDict,
+    )
+    from .createtransferfacilitatorfee import (
+        CreateTransferFacilitatorFee,
+        CreateTransferFacilitatorFeeTypedDict,
     )
     from .createtransferlineitem import (
         CreateTransferLineItem,
@@ -779,13 +792,12 @@ if TYPE_CHECKING:
         InstantBankCreditTransferPaymentMethodPaymentMethodType,
         InstantBankCreditTransferPaymentMethodTypedDict,
     )
+    from .instantbankcredittransferprocessingdetails import (
+        InstantBankCreditTransferProcessingDetails,
+        InstantBankCreditTransferProcessingDetailsTypedDict,
+    )
     from .instantbankfailurecode import InstantBankFailureCode
     from .instantbanknetwork import InstantBankNetwork
-    from .instantbanktransactiondetails import (
-        InstantBankTransactionDetails,
-        InstantBankTransactionDetailsTypedDict,
-    )
-    from .instantbanktransactionstatus import InstantBankTransactionStatus
     from .instantpaymentfees import InstantPaymentFees, InstantPaymentFeesTypedDict
     from .institutionssearchresponse import (
         InstitutionsSearchResponse,
@@ -913,6 +925,8 @@ if TYPE_CHECKING:
         ManualTermsOfServiceUpdate,
         ManualTermsOfServiceUpdateTypedDict,
     )
+    from .merchantcategories import MerchantCategories, MerchantCategoriesTypedDict
+    from .merchantcategory import MerchantCategory, MerchantCategoryTypedDict
     from .merchantcategoryrestrictions import (
         MerchantCategoryRestrictions,
         MerchantCategoryRestrictionsTypedDict,
@@ -1127,6 +1141,7 @@ if TYPE_CHECKING:
         PullFromApplePayTransferPaymentMethodPaymentMethodType,
         PullFromApplePayTransferPaymentMethodTypedDict,
     )
+    from .pullfromcardoptions import PullFromCardOptions, PullFromCardOptionsTypedDict
     from .pullfromcardpaymentmethod import (
         PullFromCardPaymentMethod,
         PullFromCardPaymentMethodPaymentMethodType,
@@ -1136,6 +1151,10 @@ if TYPE_CHECKING:
         PullFromCardTransferPaymentMethod,
         PullFromCardTransferPaymentMethodPaymentMethodType,
         PullFromCardTransferPaymentMethodTypedDict,
+    )
+    from .pullfromcardtransferprocessingdetails import (
+        PullFromCardTransferProcessingDetails,
+        PullFromCardTransferProcessingDetailsTypedDict,
     )
     from .pullfromgooglepaypaymentmethod import (
         PullFromGooglePayPaymentMethod,
@@ -1161,6 +1180,7 @@ if TYPE_CHECKING:
         PushToApplePayTransferPaymentMethodPaymentMethodType,
         PushToApplePayTransferPaymentMethodTypedDict,
     )
+    from .pushtocardoptions import PushToCardOptions, PushToCardOptionsTypedDict
     from .pushtocardpaymentmethod import (
         PushToCardPaymentMethod,
         PushToCardPaymentMethodPaymentMethodType,
@@ -1170,6 +1190,10 @@ if TYPE_CHECKING:
         PushToCardTransferPaymentMethod,
         PushToCardTransferPaymentMethodPaymentMethodType,
         PushToCardTransferPaymentMethodTypedDict,
+    )
+    from .pushtocardtransferprocessingdetails import (
+        PushToCardTransferProcessingDetails,
+        PushToCardTransferProcessingDetailsTypedDict,
     )
     from .pushtogooglepaypaymentmethod import (
         PushToGooglePayPaymentMethod,
@@ -1194,9 +1218,11 @@ if TYPE_CHECKING:
         RefundAmountDetailsValidationError,
         RefundAmountDetailsValidationErrorTypedDict,
     )
-    from .refundcarddetails import RefundCardDetails, RefundCardDetailsTypedDict
-    from .refundcardstatus import RefundCardStatus
     from .refundpolicy import RefundPolicy
+    from .refundprocessingdetails import (
+        RefundProcessingDetails,
+        RefundProcessingDetailsTypedDict,
+    )
     from .refundstatus import RefundStatus
     from .registerapplepaymerchantdomains import (
         RegisterApplePayMerchantDomains,
@@ -1308,6 +1334,8 @@ if TYPE_CHECKING:
     )
     from .sendfundsrtp import SendFundsRtp, SendFundsRtpTypedDict
     from .sendfundsrtperror import SendFundsRtpError, SendFundsRtpErrorTypedDict
+    from .sendfundswire import SendFundsWire, SendFundsWireTypedDict
+    from .sendfundswireerror import SendFundsWireError, SendFundsWireErrorTypedDict
     from .sentreceipt import SentReceipt, SentReceiptTypedDict
     from .settings import Settings, SettingsTypedDict
     from .sharescopes import ShareScopes, ShareScopesTypedDict
@@ -1380,7 +1408,10 @@ if TYPE_CHECKING:
         TransferAmountDetails,
         TransferAmountDetailsTypedDict,
     )
-    from .transfercapture import TransferCapture, TransferCaptureTypedDict
+    from .transferauthorization import (
+        TransferAuthorization,
+        TransferAuthorizationTypedDict,
+    )
     from .transferconfig import TransferConfig, TransferConfigTypedDict
     from .transfercontrols import TransferControls, TransferControlsTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
@@ -1416,12 +1447,18 @@ if TYPE_CHECKING:
         TransferPaymentMethodsWalletTypedDict,
     )
     from .transferpaymentmethodtype import TransferPaymentMethodType
+    from .transferprocessingdetails import (
+        TransferProcessingDetails,
+        TransferProcessingDetailsTypedDict,
+    )
+    from .transferrailoptions import TransferRailOptions, TransferRailOptionsTypedDict
     from .transfersource import TransferSource, TransferSourceTypedDict
     from .transferstatus import TransferStatus
     from .transferterminalcard import (
         TransferTerminalCard,
         TransferTerminalCardTypedDict,
     )
+    from .transfertype import TransferType
     from .transferwaitfor import TransferWaitFor
     from .underwriting import Underwriting, UnderwritingTypedDict
     from .underwritingstatus import UnderwritingStatus
@@ -1693,6 +1730,14 @@ if TYPE_CHECKING:
     from .wireservices import WireServices, WireServicesTypedDict
 
 __all__ = [
+    "ACHCreditOptions",
+    "ACHCreditOptionsTypedDict",
+    "ACHCreditTransferProcessingDetails",
+    "ACHCreditTransferProcessingDetailsTypedDict",
+    "ACHDebitOptions",
+    "ACHDebitOptionsTypedDict",
+    "ACHDebitTransferProcessingDetails",
+    "ACHDebitTransferProcessingDetailsTypedDict",
     "ACHException",
     "ACHExceptionTypedDict",
     "ACHFees",
@@ -1706,9 +1751,6 @@ __all__ = [
     "ACHPaymentSettings",
     "ACHPaymentSettingsTypedDict",
     "ACHReturnCode",
-    "ACHTransactionDetails",
-    "ACHTransactionDetailsTypedDict",
-    "ACHTransactionStatus",
     "Account",
     "AccountCapability",
     "AccountCapabilityTypedDict",
@@ -1898,6 +1940,9 @@ __all__ = [
     "CapabilityRequirementTypedDict",
     "CapabilityStatus",
     "CapabilityTypedDict",
+    "Capture",
+    "CaptureStatus",
+    "CaptureTypedDict",
     "Card",
     "CardAcceptanceMethods",
     "CardAcceptanceMethodsError",
@@ -1906,8 +1951,6 @@ __all__ = [
     "CardAccountUpdater",
     "CardAccountUpdaterTypedDict",
     "CardAcquiring",
-    "CardAcquiringDispute",
-    "CardAcquiringDisputeTypedDict",
     "CardAcquiringFees",
     "CardAcquiringFeesTypedDict",
     "CardAcquiringModel",
@@ -1937,14 +1980,20 @@ __all__ = [
     "CardPaymentDetailsError",
     "CardPaymentDetailsErrorTypedDict",
     "CardPaymentDetailsTypedDict",
+    "CardPaymentOptions",
+    "CardPaymentOptionsTypedDict",
     "CardPaymentPaymentMethod",
     "CardPaymentPaymentMethodPaymentMethodType",
     "CardPaymentPaymentMethodTypedDict",
+    "CardPaymentRefundProcessingDetails",
+    "CardPaymentRefundProcessingDetailsTypedDict",
     "CardPaymentSettings",
     "CardPaymentSettingsTypedDict",
     "CardPaymentTransferPaymentMethod",
     "CardPaymentTransferPaymentMethodPaymentMethodType",
     "CardPaymentTransferPaymentMethodTypedDict",
+    "CardPaymentTransferProcessingDetails",
+    "CardPaymentTransferProcessingDetailsTypedDict",
     "CardPaymentTypedDict",
     "CardPayoutType",
     "CardPresentPaymentPaymentMethod",
@@ -1953,10 +2002,7 @@ __all__ = [
     "CardPresentPaymentTransferPaymentMethod",
     "CardPresentPaymentTransferPaymentMethodPaymentMethodType",
     "CardPresentPaymentTransferPaymentMethodTypedDict",
-    "CardTransactionDetails",
-    "CardTransactionDetailsTypedDict",
     "CardTransactionFailureCode",
-    "CardTransactionStatus",
     "CardType",
     "CardTypedDict",
     "CardUpdateReason",
@@ -2009,6 +2055,10 @@ __all__ = [
     "CreateBusinessErrorTypedDict",
     "CreateBusinessProfile",
     "CreateBusinessProfileTypedDict",
+    "CreateCancellation",
+    "CreateCancellationTypedDict",
+    "CreateCapture",
+    "CreateCaptureTypedDict",
     "CreateEvidenceFileMultiPart",
     "CreateEvidenceFileMultiPartTypedDict",
     "CreateEvidenceText",
@@ -2114,6 +2164,8 @@ __all__ = [
     "CreateTransferDestinationCard",
     "CreateTransferDestinationCardTypedDict",
     "CreateTransferDestinationTypedDict",
+    "CreateTransferFacilitatorFee",
+    "CreateTransferFacilitatorFeeTypedDict",
     "CreateTransferLineItem",
     "CreateTransferLineItemOption",
     "CreateTransferLineItemOptionTypedDict",
@@ -2303,11 +2355,10 @@ __all__ = [
     "InstantBankCreditTransferPaymentMethod",
     "InstantBankCreditTransferPaymentMethodPaymentMethodType",
     "InstantBankCreditTransferPaymentMethodTypedDict",
+    "InstantBankCreditTransferProcessingDetails",
+    "InstantBankCreditTransferProcessingDetailsTypedDict",
     "InstantBankFailureCode",
     "InstantBankNetwork",
-    "InstantBankTransactionDetails",
-    "InstantBankTransactionDetailsTypedDict",
-    "InstantBankTransactionStatus",
     "InstantPaymentFees",
     "InstantPaymentFeesTypedDict",
     "InstitutionsSearchResponse",
@@ -2409,10 +2460,14 @@ __all__ = [
     "ManualTermsOfServiceUpdate",
     "ManualTermsOfServiceUpdateTypedDict",
     "ManualTypedDict",
+    "MerchantCategories",
+    "MerchantCategoriesTypedDict",
+    "MerchantCategory",
     "MerchantCategoryRestrictions",
     "MerchantCategoryRestrictionsError",
     "MerchantCategoryRestrictionsErrorTypedDict",
     "MerchantCategoryRestrictionsTypedDict",
+    "MerchantCategoryTypedDict",
     "MerchantEntry",
     "MerchantEntryError",
     "MerchantEntryErrorTypedDict",
@@ -2586,12 +2641,16 @@ __all__ = [
     "PullFromApplePayTransferPaymentMethod",
     "PullFromApplePayTransferPaymentMethodPaymentMethodType",
     "PullFromApplePayTransferPaymentMethodTypedDict",
+    "PullFromCardOptions",
+    "PullFromCardOptionsTypedDict",
     "PullFromCardPaymentMethod",
     "PullFromCardPaymentMethodPaymentMethodType",
     "PullFromCardPaymentMethodTypedDict",
     "PullFromCardTransferPaymentMethod",
     "PullFromCardTransferPaymentMethodPaymentMethodType",
     "PullFromCardTransferPaymentMethodTypedDict",
+    "PullFromCardTransferProcessingDetails",
+    "PullFromCardTransferProcessingDetailsTypedDict",
     "PullFromGooglePayPaymentMethod",
     "PullFromGooglePayPaymentMethodPaymentMethodType",
     "PullFromGooglePayPaymentMethodTypedDict",
@@ -2611,12 +2670,16 @@ __all__ = [
     "PushToApplePayTransferPaymentMethod",
     "PushToApplePayTransferPaymentMethodPaymentMethodType",
     "PushToApplePayTransferPaymentMethodTypedDict",
+    "PushToCardOptions",
+    "PushToCardOptionsTypedDict",
     "PushToCardPaymentMethod",
     "PushToCardPaymentMethodPaymentMethodType",
     "PushToCardPaymentMethodTypedDict",
     "PushToCardTransferPaymentMethod",
     "PushToCardTransferPaymentMethodPaymentMethodType",
     "PushToCardTransferPaymentMethodTypedDict",
+    "PushToCardTransferProcessingDetails",
+    "PushToCardTransferProcessingDetailsTypedDict",
     "PushToGooglePayPaymentMethod",
     "PushToGooglePayPaymentMethodPaymentMethodType",
     "PushToGooglePayPaymentMethodTypedDict",
@@ -2647,10 +2710,9 @@ __all__ = [
     "RefundAmountDetailsTypedDict",
     "RefundAmountDetailsValidationError",
     "RefundAmountDetailsValidationErrorTypedDict",
-    "RefundCardDetails",
-    "RefundCardDetailsTypedDict",
-    "RefundCardStatus",
     "RefundPolicy",
+    "RefundProcessingDetails",
+    "RefundProcessingDetailsTypedDict",
     "RefundStatus",
     "RegisterApplePayMerchantDomains",
     "RegisterApplePayMerchantDomainsTypedDict",
@@ -2737,6 +2799,10 @@ __all__ = [
     "SendFundsRtpErrorTypedDict",
     "SendFundsRtpTypedDict",
     "SendFundsTypedDict",
+    "SendFundsWire",
+    "SendFundsWireError",
+    "SendFundsWireErrorTypedDict",
+    "SendFundsWireTypedDict",
     "SentReceipt",
     "SentReceiptTypedDict",
     "Settings",
@@ -2812,8 +2878,8 @@ __all__ = [
     "TransferAccountTypedDict",
     "TransferAmountDetails",
     "TransferAmountDetailsTypedDict",
-    "TransferCapture",
-    "TransferCaptureTypedDict",
+    "TransferAuthorization",
+    "TransferAuthorizationTypedDict",
     "TransferConfig",
     "TransferConfigTypedDict",
     "TransferControls",
@@ -2844,11 +2910,16 @@ __all__ = [
     "TransferPaymentMethodsCardTypedDict",
     "TransferPaymentMethodsWallet",
     "TransferPaymentMethodsWalletTypedDict",
+    "TransferProcessingDetails",
+    "TransferProcessingDetailsTypedDict",
+    "TransferRailOptions",
+    "TransferRailOptionsTypedDict",
     "TransferSource",
     "TransferSourceTypedDict",
     "TransferStatus",
     "TransferTerminalCard",
     "TransferTerminalCardTypedDict",
+    "TransferType",
     "TransferTypedDict",
     "TransferWaitFor",
     "Type",
@@ -3047,6 +3118,8 @@ _dynamic_imports: dict[str, str] = {
     "AccountTerminalApplicationTypedDict": ".accountterminalapplication",
     "AccountType": ".accounttype",
     "AccountVerificationStatus": ".accountverificationstatus",
+    "ACHCreditOptions": ".achcreditoptions",
+    "ACHCreditOptionsTypedDict": ".achcreditoptions",
     "AchCreditSameDayPaymentMethod": ".achcreditsamedaypaymentmethod",
     "AchCreditSameDayPaymentMethodPaymentMethodType": ".achcreditsamedaypaymentmethod",
     "AchCreditSameDayPaymentMethodTypedDict": ".achcreditsamedaypaymentmethod",
@@ -3059,6 +3132,8 @@ _dynamic_imports: dict[str, str] = {
     "AchCreditStandardTransferPaymentMethod": ".achcreditstandardtransferpaymentmethod",
     "AchCreditStandardTransferPaymentMethodPaymentMethodType": ".achcreditstandardtransferpaymentmethod",
     "AchCreditStandardTransferPaymentMethodTypedDict": ".achcreditstandardtransferpaymentmethod",
+    "ACHCreditTransferProcessingDetails": ".achcredittransferprocessingdetails",
+    "ACHCreditTransferProcessingDetailsTypedDict": ".achcredittransferprocessingdetails",
     "AchDebitCollectPaymentMethod": ".achdebitcollectpaymentmethod",
     "AchDebitCollectPaymentMethodPaymentMethodType": ".achdebitcollectpaymentmethod",
     "AchDebitCollectPaymentMethodTypedDict": ".achdebitcollectpaymentmethod",
@@ -3071,6 +3146,10 @@ _dynamic_imports: dict[str, str] = {
     "AchDebitFundTransferPaymentMethod": ".achdebitfundtransferpaymentmethod",
     "AchDebitFundTransferPaymentMethodPaymentMethodType": ".achdebitfundtransferpaymentmethod",
     "AchDebitFundTransferPaymentMethodTypedDict": ".achdebitfundtransferpaymentmethod",
+    "ACHDebitOptions": ".achdebitoptions",
+    "ACHDebitOptionsTypedDict": ".achdebitoptions",
+    "ACHDebitTransferProcessingDetails": ".achdebittransferprocessingdetails",
+    "ACHDebitTransferProcessingDetailsTypedDict": ".achdebittransferprocessingdetails",
     "ACHException": ".achexception",
     "ACHExceptionTypedDict": ".achexception",
     "ACHFees": ".achfees",
@@ -3090,9 +3169,6 @@ _dynamic_imports: dict[str, str] = {
     "ACHPaymentSettings": ".achpaymentsettings",
     "ACHPaymentSettingsTypedDict": ".achpaymentsettings",
     "ACHReturnCode": ".achreturncode",
-    "ACHTransactionDetails": ".achtransactiondetails",
-    "ACHTransactionDetailsTypedDict": ".achtransactiondetails",
-    "ACHTransactionStatus": ".achtransactionstatus",
     "AddCapabilities": ".addcapabilities",
     "AddCapabilitiesTypedDict": ".addcapabilities",
     "Address": ".address",
@@ -3237,6 +3313,9 @@ _dynamic_imports: dict[str, str] = {
     "CapabilityRequirement": ".capabilityrequirement",
     "CapabilityRequirementTypedDict": ".capabilityrequirement",
     "CapabilityStatus": ".capabilitystatus",
+    "Capture": ".capture",
+    "CaptureTypedDict": ".capture",
+    "CaptureStatus": ".capturestatus",
     "Card": ".card",
     "CardTypedDict": ".card",
     "CardAcceptanceMethods": ".cardacceptancemethods",
@@ -3245,8 +3324,6 @@ _dynamic_imports: dict[str, str] = {
     "CardAcceptanceMethodsErrorTypedDict": ".cardacceptancemethodserror",
     "CardAccountUpdater": ".cardaccountupdater",
     "CardAccountUpdaterTypedDict": ".cardaccountupdater",
-    "CardAcquiringDispute": ".cardacquiringdispute",
-    "CardAcquiringDisputeTypedDict": ".cardacquiringdispute",
     "CardAcquiringFees": ".cardacquiringfees",
     "CardAcquiringFeesTypedDict": ".cardacquiringfees",
     "CardAcquiringModel": ".cardacquiringmodel",
@@ -3270,14 +3347,20 @@ _dynamic_imports: dict[str, str] = {
     "CardPaymentDetailsTypedDict": ".cardpaymentdetails",
     "CardPaymentDetailsError": ".cardpaymentdetailserror",
     "CardPaymentDetailsErrorTypedDict": ".cardpaymentdetailserror",
+    "CardPaymentOptions": ".cardpaymentoptions",
+    "CardPaymentOptionsTypedDict": ".cardpaymentoptions",
     "CardPaymentPaymentMethod": ".cardpaymentpaymentmethod",
     "CardPaymentPaymentMethodPaymentMethodType": ".cardpaymentpaymentmethod",
     "CardPaymentPaymentMethodTypedDict": ".cardpaymentpaymentmethod",
+    "CardPaymentRefundProcessingDetails": ".cardpaymentrefundprocessingdetails",
+    "CardPaymentRefundProcessingDetailsTypedDict": ".cardpaymentrefundprocessingdetails",
     "CardPaymentSettings": ".cardpaymentsettings",
     "CardPaymentSettingsTypedDict": ".cardpaymentsettings",
     "CardPaymentTransferPaymentMethod": ".cardpaymenttransferpaymentmethod",
     "CardPaymentTransferPaymentMethodPaymentMethodType": ".cardpaymenttransferpaymentmethod",
     "CardPaymentTransferPaymentMethodTypedDict": ".cardpaymenttransferpaymentmethod",
+    "CardPaymentTransferProcessingDetails": ".cardpaymenttransferprocessingdetails",
+    "CardPaymentTransferProcessingDetailsTypedDict": ".cardpaymenttransferprocessingdetails",
     "CardPayoutType": ".cardpayouttype",
     "CardPresentPaymentPaymentMethod": ".cardpresentpaymentpaymentmethod",
     "CardPresentPaymentPaymentMethodPaymentMethodType": ".cardpresentpaymentpaymentmethod",
@@ -3285,10 +3368,7 @@ _dynamic_imports: dict[str, str] = {
     "CardPresentPaymentTransferPaymentMethod": ".cardpresentpaymenttransferpaymentmethod",
     "CardPresentPaymentTransferPaymentMethodPaymentMethodType": ".cardpresentpaymenttransferpaymentmethod",
     "CardPresentPaymentTransferPaymentMethodTypedDict": ".cardpresentpaymenttransferpaymentmethod",
-    "CardTransactionDetails": ".cardtransactiondetails",
-    "CardTransactionDetailsTypedDict": ".cardtransactiondetails",
     "CardTransactionFailureCode": ".cardtransactionfailurecode",
-    "CardTransactionStatus": ".cardtransactionstatus",
     "CardType": ".cardtype",
     "CardUpdateReason": ".cardupdatereason",
     "CardVerification": ".cardverification",
@@ -3344,6 +3424,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateBusinessErrorTypedDict": ".createbusinesserror",
     "CreateBusinessProfile": ".createbusinessprofile",
     "CreateBusinessProfileTypedDict": ".createbusinessprofile",
+    "CreateCancellation": ".createcancellation",
+    "CreateCancellationTypedDict": ".createcancellation",
+    "CreateCapture": ".createcapture",
+    "CreateCaptureTypedDict": ".createcapture",
     "CreatedTransfer": ".createdtransfer",
     "CreatedTransferTypedDict": ".createdtransfer",
     "CreateEvidenceFileMultiPart": ".createevidencefilemultipart",
@@ -3454,6 +3538,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateTransferDestinationACHTypedDict": ".createtransferdestinationach",
     "CreateTransferDestinationCard": ".createtransferdestinationcard",
     "CreateTransferDestinationCardTypedDict": ".createtransferdestinationcard",
+    "CreateTransferFacilitatorFee": ".createtransferfacilitatorfee",
+    "CreateTransferFacilitatorFeeTypedDict": ".createtransferfacilitatorfee",
     "CreateTransferLineItem": ".createtransferlineitem",
     "CreateTransferLineItemTypedDict": ".createtransferlineitem",
     "CreateTransferLineItemOption": ".createtransferlineitemoption",
@@ -3642,11 +3728,10 @@ _dynamic_imports: dict[str, str] = {
     "InstantBankCreditTransferPaymentMethod": ".instantbankcredittransferpaymentmethod",
     "InstantBankCreditTransferPaymentMethodPaymentMethodType": ".instantbankcredittransferpaymentmethod",
     "InstantBankCreditTransferPaymentMethodTypedDict": ".instantbankcredittransferpaymentmethod",
+    "InstantBankCreditTransferProcessingDetails": ".instantbankcredittransferprocessingdetails",
+    "InstantBankCreditTransferProcessingDetailsTypedDict": ".instantbankcredittransferprocessingdetails",
     "InstantBankFailureCode": ".instantbankfailurecode",
     "InstantBankNetwork": ".instantbanknetwork",
-    "InstantBankTransactionDetails": ".instantbanktransactiondetails",
-    "InstantBankTransactionDetailsTypedDict": ".instantbanktransactiondetails",
-    "InstantBankTransactionStatus": ".instantbanktransactionstatus",
     "InstantPaymentFees": ".instantpaymentfees",
     "InstantPaymentFeesTypedDict": ".instantpaymentfees",
     "InstitutionsSearchResponse": ".institutionssearchresponse",
@@ -3742,6 +3827,10 @@ _dynamic_imports: dict[str, str] = {
     "ManualTermsOfServiceTypedDict": ".manualtermsofservice",
     "ManualTermsOfServiceUpdate": ".manualtermsofserviceupdate",
     "ManualTermsOfServiceUpdateTypedDict": ".manualtermsofserviceupdate",
+    "MerchantCategories": ".merchantcategories",
+    "MerchantCategoriesTypedDict": ".merchantcategories",
+    "MerchantCategory": ".merchantcategory",
+    "MerchantCategoryTypedDict": ".merchantcategory",
     "MerchantCategoryRestrictions": ".merchantcategoryrestrictions",
     "MerchantCategoryRestrictionsTypedDict": ".merchantcategoryrestrictions",
     "MerchantCategoryRestrictionsError": ".merchantcategoryrestrictionserror",
@@ -3920,12 +4009,16 @@ _dynamic_imports: dict[str, str] = {
     "PullFromApplePayTransferPaymentMethod": ".pullfromapplepaytransferpaymentmethod",
     "PullFromApplePayTransferPaymentMethodPaymentMethodType": ".pullfromapplepaytransferpaymentmethod",
     "PullFromApplePayTransferPaymentMethodTypedDict": ".pullfromapplepaytransferpaymentmethod",
+    "PullFromCardOptions": ".pullfromcardoptions",
+    "PullFromCardOptionsTypedDict": ".pullfromcardoptions",
     "PullFromCardPaymentMethod": ".pullfromcardpaymentmethod",
     "PullFromCardPaymentMethodPaymentMethodType": ".pullfromcardpaymentmethod",
     "PullFromCardPaymentMethodTypedDict": ".pullfromcardpaymentmethod",
     "PullFromCardTransferPaymentMethod": ".pullfromcardtransferpaymentmethod",
     "PullFromCardTransferPaymentMethodPaymentMethodType": ".pullfromcardtransferpaymentmethod",
     "PullFromCardTransferPaymentMethodTypedDict": ".pullfromcardtransferpaymentmethod",
+    "PullFromCardTransferProcessingDetails": ".pullfromcardtransferprocessingdetails",
+    "PullFromCardTransferProcessingDetailsTypedDict": ".pullfromcardtransferprocessingdetails",
     "PullFromGooglePayPaymentMethod": ".pullfromgooglepaypaymentmethod",
     "PullFromGooglePayPaymentMethodPaymentMethodType": ".pullfromgooglepaypaymentmethod",
     "PullFromGooglePayPaymentMethodTypedDict": ".pullfromgooglepaypaymentmethod",
@@ -3945,12 +4038,16 @@ _dynamic_imports: dict[str, str] = {
     "PushToApplePayTransferPaymentMethod": ".pushtoapplepaytransferpaymentmethod",
     "PushToApplePayTransferPaymentMethodPaymentMethodType": ".pushtoapplepaytransferpaymentmethod",
     "PushToApplePayTransferPaymentMethodTypedDict": ".pushtoapplepaytransferpaymentmethod",
+    "PushToCardOptions": ".pushtocardoptions",
+    "PushToCardOptionsTypedDict": ".pushtocardoptions",
     "PushToCardPaymentMethod": ".pushtocardpaymentmethod",
     "PushToCardPaymentMethodPaymentMethodType": ".pushtocardpaymentmethod",
     "PushToCardPaymentMethodTypedDict": ".pushtocardpaymentmethod",
     "PushToCardTransferPaymentMethod": ".pushtocardtransferpaymentmethod",
     "PushToCardTransferPaymentMethodPaymentMethodType": ".pushtocardtransferpaymentmethod",
     "PushToCardTransferPaymentMethodTypedDict": ".pushtocardtransferpaymentmethod",
+    "PushToCardTransferProcessingDetails": ".pushtocardtransferprocessingdetails",
+    "PushToCardTransferProcessingDetailsTypedDict": ".pushtocardtransferprocessingdetails",
     "PushToGooglePayPaymentMethod": ".pushtogooglepaypaymentmethod",
     "PushToGooglePayPaymentMethodPaymentMethodType": ".pushtogooglepaypaymentmethod",
     "PushToGooglePayPaymentMethodTypedDict": ".pushtogooglepaypaymentmethod",
@@ -3977,10 +4074,9 @@ _dynamic_imports: dict[str, str] = {
     "RefundAmountDetailsTypedDict": ".refundamountdetails",
     "RefundAmountDetailsValidationError": ".refundamountdetailsvalidationerror",
     "RefundAmountDetailsValidationErrorTypedDict": ".refundamountdetailsvalidationerror",
-    "RefundCardDetails": ".refundcarddetails",
-    "RefundCardDetailsTypedDict": ".refundcarddetails",
-    "RefundCardStatus": ".refundcardstatus",
     "RefundPolicy": ".refundpolicy",
+    "RefundProcessingDetails": ".refundprocessingdetails",
+    "RefundProcessingDetailsTypedDict": ".refundprocessingdetails",
     "RefundStatus": ".refundstatus",
     "RegisterApplePayMerchantDomains": ".registerapplepaymerchantdomains",
     "RegisterApplePayMerchantDomainsTypedDict": ".registerapplepaymerchantdomains",
@@ -4075,6 +4171,10 @@ _dynamic_imports: dict[str, str] = {
     "SendFundsRtpTypedDict": ".sendfundsrtp",
     "SendFundsRtpError": ".sendfundsrtperror",
     "SendFundsRtpErrorTypedDict": ".sendfundsrtperror",
+    "SendFundsWire": ".sendfundswire",
+    "SendFundsWireTypedDict": ".sendfundswire",
+    "SendFundsWireError": ".sendfundswireerror",
+    "SendFundsWireErrorTypedDict": ".sendfundswireerror",
     "SentReceipt": ".sentreceipt",
     "SentReceiptTypedDict": ".sentreceipt",
     "Settings": ".settings",
@@ -4147,8 +4247,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
     "TransferAmountDetails": ".transferamountdetails",
     "TransferAmountDetailsTypedDict": ".transferamountdetails",
-    "TransferCapture": ".transfercapture",
-    "TransferCaptureTypedDict": ".transfercapture",
+    "TransferAuthorization": ".transferauthorization",
+    "TransferAuthorizationTypedDict": ".transferauthorization",
     "TransferConfig": ".transferconfig",
     "TransferConfigTypedDict": ".transferconfig",
     "TransferControls": ".transfercontrols",
@@ -4179,11 +4279,16 @@ _dynamic_imports: dict[str, str] = {
     "TransferPaymentMethodsWallet": ".transferpaymentmethodswallet",
     "TransferPaymentMethodsWalletTypedDict": ".transferpaymentmethodswallet",
     "TransferPaymentMethodType": ".transferpaymentmethodtype",
+    "TransferProcessingDetails": ".transferprocessingdetails",
+    "TransferProcessingDetailsTypedDict": ".transferprocessingdetails",
+    "TransferRailOptions": ".transferrailoptions",
+    "TransferRailOptionsTypedDict": ".transferrailoptions",
     "TransferSource": ".transfersource",
     "TransferSourceTypedDict": ".transfersource",
     "TransferStatus": ".transferstatus",
     "TransferTerminalCard": ".transferterminalcard",
     "TransferTerminalCardTypedDict": ".transferterminalcard",
+    "TransferType": ".transfertype",
     "TransferWaitFor": ".transferwaitfor",
     "Underwriting": ".underwriting",
     "UnderwritingTypedDict": ".underwriting",

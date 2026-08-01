@@ -24,7 +24,7 @@ class Transfers(BaseSDK):
             components.SourceDestinationOptions,
             components.SourceDestinationOptionsTypedDict,
         ],
-        amount: Union[components.Amount, components.AmountTypedDict],
+        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -68,7 +68,7 @@ class Transfers(BaseSDK):
                 destination=utils.get_pydantic_model(
                     destination, components.SourceDestinationOptions
                 ),
-                amount=utils.get_pydantic_model(amount, components.Amount),
+                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
             ),
         )
 
@@ -162,7 +162,7 @@ class Transfers(BaseSDK):
             components.SourceDestinationOptions,
             components.SourceDestinationOptionsTypedDict,
         ],
-        amount: Union[components.Amount, components.AmountTypedDict],
+        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -206,7 +206,7 @@ class Transfers(BaseSDK):
                 destination=utils.get_pydantic_model(
                     destination, components.SourceDestinationOptions
                 ),
-                amount=utils.get_pydantic_model(amount, components.Amount),
+                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
             ),
         )
 
@@ -300,10 +300,13 @@ class Transfers(BaseSDK):
             components.CreateTransferDestination,
             components.CreateTransferDestinationTypedDict,
         ],
-        amount: Union[components.Amount, components.AmountTypedDict],
+        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         x_wait_for: Optional[components.TransferWaitFor] = None,
         facilitator_fee: Optional[
-            Union[components.FacilitatorFee, components.FacilitatorFeeTypedDict]
+            Union[
+                components.CreateTransferFacilitatorFee,
+                components.CreateTransferFacilitatorFeeTypedDict,
+            ]
         ] = None,
         description: Optional[str] = None,
         metadata: Optional[Mapping[str, str]] = None,
@@ -343,7 +346,7 @@ class Transfers(BaseSDK):
         :param amount:
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
-        :param facilitator_fee: Total or markup fee.
+        :param facilitator_fee: Total or markup fee to apply when creating a transfer.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
@@ -377,9 +380,9 @@ class Transfers(BaseSDK):
                 destination=utils.get_pydantic_model(
                     destination, components.CreateTransferDestination
                 ),
-                amount=utils.get_pydantic_model(amount, components.Amount),
+                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
                 facilitator_fee=utils.get_pydantic_model(
-                    facilitator_fee, Optional[components.FacilitatorFee]
+                    facilitator_fee, Optional[components.CreateTransferFacilitatorFee]
                 ),
                 description=description,
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
@@ -495,10 +498,13 @@ class Transfers(BaseSDK):
             components.CreateTransferDestination,
             components.CreateTransferDestinationTypedDict,
         ],
-        amount: Union[components.Amount, components.AmountTypedDict],
+        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         x_wait_for: Optional[components.TransferWaitFor] = None,
         facilitator_fee: Optional[
-            Union[components.FacilitatorFee, components.FacilitatorFeeTypedDict]
+            Union[
+                components.CreateTransferFacilitatorFee,
+                components.CreateTransferFacilitatorFeeTypedDict,
+            ]
         ] = None,
         description: Optional[str] = None,
         metadata: Optional[Mapping[str, str]] = None,
@@ -538,7 +544,7 @@ class Transfers(BaseSDK):
         :param amount:
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
-        :param facilitator_fee: Total or markup fee.
+        :param facilitator_fee: Total or markup fee to apply when creating a transfer.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
@@ -572,9 +578,9 @@ class Transfers(BaseSDK):
                 destination=utils.get_pydantic_model(
                     destination, components.CreateTransferDestination
                 ),
-                amount=utils.get_pydantic_model(amount, components.Amount),
+                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
                 facilitator_fee=utils.get_pydantic_model(
-                    facilitator_fee, Optional[components.FacilitatorFee]
+                    facilitator_fee, Optional[components.CreateTransferFacilitatorFee]
                 ),
                 description=description,
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
@@ -694,6 +700,7 @@ class Transfers(BaseSDK):
         foreign_id: Optional[str] = None,
         authorization_i_ds: Optional[Iterable[str]] = None,
         capture_i_ds: Optional[Iterable[str]] = None,
+        transfer_types: Optional[Iterable[components.TransferType]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -726,6 +733,7 @@ class Transfers(BaseSDK):
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param authorization_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
         :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
+        :param transfer_types: Optional, comma-separated transfer types by which the response is filtered.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -756,6 +764,9 @@ class Transfers(BaseSDK):
             foreign_id=foreign_id,
             authorization_i_ds=utils.unmarshal(authorization_i_ds, Optional[List[str]]),
             capture_i_ds=utils.unmarshal(capture_i_ds, Optional[List[str]]),
+            transfer_types=utils.unmarshal(
+                transfer_types, Optional[List[components.TransferType]]
+            ),
             skip=skip,
             count=count,
             account_id=account_id,
@@ -845,6 +856,7 @@ class Transfers(BaseSDK):
         foreign_id: Optional[str] = None,
         authorization_i_ds: Optional[Iterable[str]] = None,
         capture_i_ds: Optional[Iterable[str]] = None,
+        transfer_types: Optional[Iterable[components.TransferType]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -877,6 +889,7 @@ class Transfers(BaseSDK):
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param authorization_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
         :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
+        :param transfer_types: Optional, comma-separated transfer types by which the response is filtered.
         :param skip:
         :param count:
         :param retries: Override the default retry configuration for this method
@@ -907,6 +920,9 @@ class Transfers(BaseSDK):
             foreign_id=foreign_id,
             authorization_i_ds=utils.unmarshal(authorization_i_ds, Optional[List[str]]),
             capture_i_ds=utils.unmarshal(capture_i_ds, Optional[List[str]]),
+            transfer_types=utils.unmarshal(
+                transfer_types, Optional[List[components.TransferType]]
+            ),
             skip=skip,
             count=count,
             account_id=account_id,
@@ -1653,6 +1669,9 @@ class Transfers(BaseSDK):
         *,
         account_id: str,
         transfer_id: str,
+        amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1665,6 +1684,7 @@ class Transfers(BaseSDK):
 
         :param account_id: The partner's Moov account ID.
         :param transfer_id: The transfer ID to cancel.
+        :param amount:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1683,6 +1703,11 @@ class Transfers(BaseSDK):
         request = operations.CreateCancellationRequest(
             account_id=account_id,
             transfer_id=transfer_id,
+            create_cancellation=components.CreateCancellation(
+                amount=utils.get_pydantic_model(
+                    amount, Optional[components.AmountDecimal]
+                ),
+            ),
         )
 
         req = self._build_request(
@@ -1691,13 +1716,20 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.create_cancellation,
+                False,
+                False,
+                "json",
+                components.CreateCancellation,
+            ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1756,6 +1788,9 @@ class Transfers(BaseSDK):
         *,
         account_id: str,
         transfer_id: str,
+        amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1768,6 +1803,7 @@ class Transfers(BaseSDK):
 
         :param account_id: The partner's Moov account ID.
         :param transfer_id: The transfer ID to cancel.
+        :param amount:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1786,6 +1822,11 @@ class Transfers(BaseSDK):
         request = operations.CreateCancellationRequest(
             account_id=account_id,
             transfer_id=transfer_id,
+            create_cancellation=components.CreateCancellation(
+                amount=utils.get_pydantic_model(
+                    amount, Optional[components.AmountDecimal]
+                ),
+            ),
         )
 
         req = self._build_request_async(
@@ -1794,13 +1835,20 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.create_cancellation,
+                False,
+                False,
+                "json",
+                components.CreateCancellation,
+            ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -2256,6 +2304,740 @@ class Transfers(BaseSDK):
 
         raise errors.APIError("Unexpected response received", http_res)
 
+    def create_capture(
+        self,
+        *,
+        x_idempotency_key: str,
+        account_id: str,
+        transfer_id: str,
+        destination_payment_method_id: str,
+        amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
+        is_final: Optional[bool] = None,
+        description: Optional[str] = None,
+        metadata: Optional[Mapping[str, str]] = None,
+        foreign_id: Optional[str] = None,
+        line_items: Optional[
+            Union[
+                components.CreateTransferLineItems,
+                components.CreateTransferLineItemsTypedDict,
+            ]
+        ] = None,
+        amount_details: Optional[
+            Union[
+                components.CreateTransferAmountDetails,
+                components.CreateTransferAmountDetailsTypedDict,
+            ]
+        ] = None,
+        facilitator_fee_amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.CreateCaptureResponse:
+        r"""Create a capture against an authorized transfer.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
+        :param x_idempotency_key: Prevents duplicate captures from being created.
+        :param account_id: The merchant's Moov account ID.
+        :param transfer_id: Identifier for the transfer.
+        :param destination_payment_method_id: Payment method of the merchant account to capture funds into. For card-acquiring transfers, this must be a moov-wallet payment method.
+        :param amount: Amount to capture. If omitted, the remaining authorized amount is captured.
+        :param is_final: Indicates whether this is the final capture against the authorization. When `true`, any remaining authorized amount is voided.
+        :param description: An optional description of the capture that is used on receipts and for your own internal use.
+        :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
+        :param line_items: An optional collection of line items for a transfer.
+            When line items are provided, their total plus tax must equal the transfer amount.
+        :param amount_details:
+        :param facilitator_fee_amount: The facilitator fee amount applied to the capture.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.CreateCaptureRequest(
+            x_idempotency_key=x_idempotency_key,
+            account_id=account_id,
+            transfer_id=transfer_id,
+            create_capture=components.CreateCapture(
+                destination_payment_method_id=destination_payment_method_id,
+                amount=utils.get_pydantic_model(
+                    amount, Optional[components.AmountDecimal]
+                ),
+                is_final=is_final,
+                description=description,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
+                foreign_id=foreign_id,
+                line_items=utils.get_pydantic_model(
+                    line_items, Optional[components.CreateTransferLineItems]
+                ),
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.CreateTransferAmountDetails]
+                ),
+                facilitator_fee_amount=utils.get_pydantic_model(
+                    facilitator_fee_amount, Optional[components.AmountDecimal]
+                ),
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/accounts/{accountID}/transfers/{transferID}/captures",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.create_capture, False, False, "json", components.CreateCapture
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createCapture",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Transfers"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return operations.CreateCaptureResponse(
+                result=unmarshal_json_response(components.Capture, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CaptureValidationErrorData, http_res
+            )
+            raise errors.CaptureValidationError(response_data, http_res)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def create_capture_async(
+        self,
+        *,
+        x_idempotency_key: str,
+        account_id: str,
+        transfer_id: str,
+        destination_payment_method_id: str,
+        amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
+        is_final: Optional[bool] = None,
+        description: Optional[str] = None,
+        metadata: Optional[Mapping[str, str]] = None,
+        foreign_id: Optional[str] = None,
+        line_items: Optional[
+            Union[
+                components.CreateTransferLineItems,
+                components.CreateTransferLineItemsTypedDict,
+            ]
+        ] = None,
+        amount_details: Optional[
+            Union[
+                components.CreateTransferAmountDetails,
+                components.CreateTransferAmountDetailsTypedDict,
+            ]
+        ] = None,
+        facilitator_fee_amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.CreateCaptureResponse:
+        r"""Create a capture against an authorized transfer.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
+
+        :param x_idempotency_key: Prevents duplicate captures from being created.
+        :param account_id: The merchant's Moov account ID.
+        :param transfer_id: Identifier for the transfer.
+        :param destination_payment_method_id: Payment method of the merchant account to capture funds into. For card-acquiring transfers, this must be a moov-wallet payment method.
+        :param amount: Amount to capture. If omitted, the remaining authorized amount is captured.
+        :param is_final: Indicates whether this is the final capture against the authorization. When `true`, any remaining authorized amount is voided.
+        :param description: An optional description of the capture that is used on receipts and for your own internal use.
+        :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
+        :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
+        :param line_items: An optional collection of line items for a transfer.
+            When line items are provided, their total plus tax must equal the transfer amount.
+        :param amount_details:
+        :param facilitator_fee_amount: The facilitator fee amount applied to the capture.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.CreateCaptureRequest(
+            x_idempotency_key=x_idempotency_key,
+            account_id=account_id,
+            transfer_id=transfer_id,
+            create_capture=components.CreateCapture(
+                destination_payment_method_id=destination_payment_method_id,
+                amount=utils.get_pydantic_model(
+                    amount, Optional[components.AmountDecimal]
+                ),
+                is_final=is_final,
+                description=description,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
+                foreign_id=foreign_id,
+                line_items=utils.get_pydantic_model(
+                    line_items, Optional[components.CreateTransferLineItems]
+                ),
+                amount_details=utils.get_pydantic_model(
+                    amount_details, Optional[components.CreateTransferAmountDetails]
+                ),
+                facilitator_fee_amount=utils.get_pydantic_model(
+                    facilitator_fee_amount, Optional[components.AmountDecimal]
+                ),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/accounts/{accountID}/transfers/{transferID}/captures",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.create_capture, False, False, "json", components.CreateCapture
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createCapture",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Transfers"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "201", "application/json"):
+            return operations.CreateCaptureResponse(
+                result=unmarshal_json_response(components.Capture, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CaptureValidationErrorData, http_res
+            )
+            raise errors.CaptureValidationError(response_data, http_res)
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def list_captures(
+        self,
+        *,
+        account_id: str,
+        transfer_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListCapturesResponse:
+        r"""Get a list of captures for a transfer.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id: The merchant's Moov account ID.
+        :param transfer_id: Identifier for the transfer.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListCapturesRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/accounts/{accountID}/transfers/{transferID}/captures",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listCaptures",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Transfers"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListCapturesResponse(
+                result=unmarshal_json_response(List[components.Capture], http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def list_captures_async(
+        self,
+        *,
+        account_id: str,
+        transfer_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListCapturesResponse:
+        r"""Get a list of captures for a transfer.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id: The merchant's Moov account ID.
+        :param transfer_id: Identifier for the transfer.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListCapturesRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/accounts/{accountID}/transfers/{transferID}/captures",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listCaptures",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Transfers"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListCapturesResponse(
+                result=unmarshal_json_response(List[components.Capture], http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def get_capture(
+        self,
+        *,
+        account_id: str,
+        transfer_id: str,
+        capture_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.GetCaptureResponse:
+        r"""Get details of a capture for a transfer.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id: The merchant's Moov account ID.
+        :param transfer_id: Identifier for the transfer.
+        :param capture_id: Identifier for the capture.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.GetCaptureRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+            capture_id=capture_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/accounts/{accountID}/transfers/{transferID}/captures/{captureID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getCapture",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Transfers"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.GetCaptureResponse(
+                result=unmarshal_json_response(components.Capture, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def get_capture_async(
+        self,
+        *,
+        account_id: str,
+        transfer_id: str,
+        capture_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.GetCaptureResponse:
+        r"""Get details of a capture for a transfer.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id: The merchant's Moov account ID.
+        :param transfer_id: Identifier for the transfer.
+        :param capture_id: Identifier for the capture.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.GetCaptureRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+            capture_id=capture_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/accounts/{accountID}/transfers/{transferID}/captures/{captureID}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getCapture",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Transfers"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.GetCaptureResponse(
+                result=unmarshal_json_response(components.Capture, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def initiate_refund(
         self,
         *,
@@ -2263,7 +3045,10 @@ class Transfers(BaseSDK):
         account_id: str,
         transfer_id: str,
         x_wait_for: Optional[components.TransferWaitFor] = None,
-        amount: Optional[int] = None,
+        amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
+        capture_id: Optional[str] = None,
         amount_details: Optional[
             Union[
                 components.RefundAmountDetails, components.RefundAmountDetailsTypedDict
@@ -2287,7 +3072,8 @@ class Transfers(BaseSDK):
         :param transfer_id: Identifier for the transfer.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
-        :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+        :param amount: Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded.
+        :param capture_id: ID of the capture to refund. Required for multi-capture card payment transfers.
         :param amount_details: Breakdown of the refunded amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2310,7 +3096,10 @@ class Transfers(BaseSDK):
             account_id=account_id,
             transfer_id=transfer_id,
             create_refund=components.CreateRefund(
-                amount=amount,
+                amount=utils.get_pydantic_model(
+                    amount, Optional[components.AmountDecimal]
+                ),
+                capture_id=capture_id,
                 amount_details=utils.get_pydantic_model(
                     amount_details, Optional[components.RefundAmountDetails]
                 ),
@@ -2323,7 +3112,7 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2331,11 +3120,7 @@ class Transfers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_refund if request is not None else None,
-                False,
-                True,
-                "json",
-                Optional[components.CreateRefund],
+                request.create_refund, False, False, "json", components.CreateRefund
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2416,7 +3201,10 @@ class Transfers(BaseSDK):
         account_id: str,
         transfer_id: str,
         x_wait_for: Optional[components.TransferWaitFor] = None,
-        amount: Optional[int] = None,
+        amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
+        capture_id: Optional[str] = None,
         amount_details: Optional[
             Union[
                 components.RefundAmountDetails, components.RefundAmountDetailsTypedDict
@@ -2440,7 +3228,8 @@ class Transfers(BaseSDK):
         :param transfer_id: Identifier for the transfer.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
-        :param amount: Amount to refund in cents. If null, the original transfer's full amount will be refunded.
+        :param amount: Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded.
+        :param capture_id: ID of the capture to refund. Required for multi-capture card payment transfers.
         :param amount_details: Breakdown of the refunded amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2463,7 +3252,10 @@ class Transfers(BaseSDK):
             account_id=account_id,
             transfer_id=transfer_id,
             create_refund=components.CreateRefund(
-                amount=amount,
+                amount=utils.get_pydantic_model(
+                    amount, Optional[components.AmountDecimal]
+                ),
+                capture_id=capture_id,
                 amount_details=utils.get_pydantic_model(
                     amount_details, Optional[components.RefundAmountDetails]
                 ),
@@ -2476,7 +3268,7 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2484,11 +3276,7 @@ class Transfers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_refund if request is not None else None,
-                False,
-                True,
-                "json",
-                Optional[components.CreateRefund],
+                request.create_refund, False, False, "json", components.CreateRefund
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2978,7 +3766,7 @@ class Transfers(BaseSDK):
         x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
-        amount: int,
+        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         amount_details: Optional[
             Union[
                 components.ReversalAmountDetails,
@@ -3000,7 +3788,7 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate reversals from being created.
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
-        :param amount: Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
+        :param amount: Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation.
         :param amount_details: Breakdown of the reversed amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -3022,7 +3810,7 @@ class Transfers(BaseSDK):
             account_id=account_id,
             transfer_id=transfer_id,
             create_reversal=components.CreateReversal(
-                amount=amount,
+                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
                 amount_details=utils.get_pydantic_model(
                     amount_details, Optional[components.ReversalAmountDetails]
                 ),
@@ -3035,7 +3823,7 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -3043,11 +3831,7 @@ class Transfers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_reversal if request is not None else None,
-                False,
-                True,
-                "json",
-                Optional[components.CreateReversal],
+                request.create_reversal, False, False, "json", components.CreateReversal
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -3113,7 +3897,7 @@ class Transfers(BaseSDK):
         x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
-        amount: int,
+        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         amount_details: Optional[
             Union[
                 components.ReversalAmountDetails,
@@ -3135,7 +3919,7 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate reversals from being created.
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
-        :param amount: Amount to reverse in cents. Partial amounts will automatically trigger a refund instead of a cancellation.
+        :param amount: Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation.
         :param amount_details: Breakdown of the reversed amount.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -3157,7 +3941,7 @@ class Transfers(BaseSDK):
             account_id=account_id,
             transfer_id=transfer_id,
             create_reversal=components.CreateReversal(
-                amount=amount,
+                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
                 amount_details=utils.get_pydantic_model(
                     amount_details, Optional[components.ReversalAmountDetails]
                 ),
@@ -3170,7 +3954,7 @@ class Transfers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -3178,11 +3962,7 @@ class Transfers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_reversal if request is not None else None,
-                False,
-                True,
-                "json",
-                Optional[components.CreateReversal],
+                request.create_reversal, False, False, "json", components.CreateReversal
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,

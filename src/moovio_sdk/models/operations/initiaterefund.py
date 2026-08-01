@@ -27,11 +27,11 @@ class InitiateRefundRequestTypedDict(TypedDict):
     r"""The merchant's Moov account ID."""
     transfer_id: str
     r"""Identifier for the transfer."""
+    create_refund: components_createrefund.CreateRefundTypedDict
     x_wait_for: NotRequired[components_transferwaitfor.TransferWaitFor]
     r"""Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
     asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
     """
-    create_refund: NotRequired[components_createrefund.CreateRefundTypedDict]
 
 
 class InitiateRefundRequest(BaseModel):
@@ -56,6 +56,11 @@ class InitiateRefundRequest(BaseModel):
     ]
     r"""Identifier for the transfer."""
 
+    create_refund: Annotated[
+        components_createrefund.CreateRefund,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
+
     x_wait_for: Annotated[
         Optional[components_transferwaitfor.TransferWaitFor],
         pydantic.Field(alias="x-wait-for"),
@@ -65,14 +70,9 @@ class InitiateRefundRequest(BaseModel):
     asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
     """
 
-    create_refund: Annotated[
-        Optional[components_createrefund.CreateRefund],
-        FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["x-wait-for", "CreateRefund"])
+        optional_fields = set(["x-wait-for"])
         serialized = handler(self)
         m = {}
 

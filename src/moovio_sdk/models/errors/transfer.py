@@ -5,20 +5,20 @@ from dataclasses import dataclass, field
 from datetime import datetime
 import httpx
 from moovio_sdk.models.components import (
-    amount as components_amount,
-    cancellation as components_cancellation,
-    cardacquiringdispute as components_cardacquiringdispute,
-    cardacquiringrefund as components_cardacquiringrefund,
+    amountdecimal as components_amountdecimal,
     facilitatorfee as components_facilitatorfee,
     moovfee as components_moovfee,
     moovfeedetails as components_moovfeedetails,
     transferamountdetails as components_transferamountdetails,
-    transfercapture as components_transfercapture,
+    transferauthorization as components_transferauthorization,
     transferdestination as components_transferdestination,
     transferfailurereason as components_transferfailurereason,
     transferlineitems as components_transferlineitems,
+    transferprocessingdetails as components_transferprocessingdetails,
+    transferrailoptions as components_transferrailoptions,
     transfersource as components_transfersource,
     transferstatus as components_transferstatus,
+    transfertype as components_transfertype,
 )
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
@@ -29,12 +29,21 @@ from typing_extensions import Annotated
 
 class TransferData(BaseModel):
     transfer_id: Annotated[str, pydantic.Field(alias="transferID")]
+    transfer_type: Annotated[
+        components_transfertype.TransferType, pydantic.Field(alias="transferType")
+    ]
+    r"""The rail and direction used to move funds for a transfer."""
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
     source: components_transfersource.TransferSource
     destination: components_transferdestination.TransferDestination
     status: components_transferstatus.TransferStatus
     r"""Status of a transfer."""
-    amount: components_amount.Amount
+    amount: components_amountdecimal.AmountDecimal
+    options: components_transferrailoptions.TransferRailOptions
+    processing_details: Annotated[
+        components_transferprocessingdetails.TransferProcessingDetails,
+        pydantic.Field(alias="processingDetails"),
+    ]
     completed_on: Annotated[Optional[datetime], pydantic.Field(alias="completedOn")] = (
         None
     )
@@ -52,12 +61,11 @@ class TransferData(BaseModel):
         pydantic.Field(alias="facilitatorFee"),
     ] = None
     r"""Total or markup fee."""
-    moov_fee: Annotated[Optional[int], pydantic.Field(alias="moovFee")] = None
-    r"""Fees charged to your platform account for transfers."""
-    moov_fee_decimal: Annotated[
-        Optional[str], pydantic.Field(alias="moovFeeDecimal")
+    moov_fee: Annotated[
+        Optional[components_amountdecimal.AmountDecimal],
+        pydantic.Field(alias="moovFee"),
     ] = None
-    r"""Same as `moovFee`, but a decimal-formatted numerical string that represents up to 9 decimal place precision."""
+    r"""Fees charged to your platform account for transfers."""
     moov_fee_details: Annotated[
         Optional[components_moovfeedetails.MoovFeeDetails],
         pydantic.Field(alias="moovFeeDetails"),
@@ -68,17 +76,14 @@ class TransferData(BaseModel):
     ] = None
     r"""Fees charged to accounts involved in the transfer."""
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupID")] = None
-    cancellations: Optional[List[components_cancellation.Cancellation]] = None
     refunded_amount: Annotated[
-        Optional[components_amount.Amount], pydantic.Field(alias="refundedAmount")
+        Optional[components_amountdecimal.AmountDecimal],
+        pydantic.Field(alias="refundedAmount"),
     ] = None
-    refunds: Optional[List[components_cardacquiringrefund.CardAcquiringRefund]] = None
     disputed_amount: Annotated[
-        Optional[components_amount.Amount], pydantic.Field(alias="disputedAmount")
+        Optional[components_amountdecimal.AmountDecimal],
+        pydantic.Field(alias="disputedAmount"),
     ] = None
-    disputes: Optional[List[components_cardacquiringdispute.CardAcquiringDispute]] = (
-        None
-    )
     sweep_id: Annotated[Optional[str], pydantic.Field(alias="sweepID")] = None
     r"""ID of the sweep that created this transfer."""
     schedule_id: Annotated[Optional[str], pydantic.Field(alias="scheduleID")] = None
@@ -101,8 +106,9 @@ class TransferData(BaseModel):
         Optional[components_transferamountdetails.TransferAmountDetails],
         pydantic.Field(alias="amountDetails"),
     ] = None
-    capture: Optional[components_transfercapture.TransferCapture] = None
-    r"""The card authorization and capture IDs associated with a transfer."""
+    authorization: Optional[components_transferauthorization.TransferAuthorization] = (
+        None
+    )
 
 
 @dataclass(unsafe_hash=True)

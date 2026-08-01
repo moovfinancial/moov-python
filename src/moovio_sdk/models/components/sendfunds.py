@@ -5,6 +5,7 @@ from .sendfundsach import SendFundsAch, SendFundsAchTypedDict
 from .sendfundsinstantbank import SendFundsInstantBank, SendFundsInstantBankTypedDict
 from .sendfundspushtocard import SendFundsPushToCard, SendFundsPushToCardTypedDict
 from .sendfundsrtp import SendFundsRtp, SendFundsRtpTypedDict
+from .sendfundswire import SendFundsWire, SendFundsWireTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -17,6 +18,7 @@ class SendFundsTypedDict(TypedDict):
     push_to_card: NotRequired[SendFundsPushToCardTypedDict]
     rtp: NotRequired[SendFundsRtpTypedDict]
     instant_bank: NotRequired[SendFundsInstantBankTypedDict]
+    wire: NotRequired[SendFundsWireTypedDict]
 
 
 class SendFunds(BaseModel):
@@ -32,9 +34,11 @@ class SendFunds(BaseModel):
         Optional[SendFundsInstantBank], pydantic.Field(alias="instantBank")
     ] = None
 
+    wire: Optional[SendFundsWire] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["ach", "pushToCard", "rtp", "instantBank"])
+        optional_fields = set(["ach", "pushToCard", "rtp", "instantBank", "wire"])
         serialized = handler(self)
         m = {}
 
