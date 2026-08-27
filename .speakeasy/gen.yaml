@@ -63,7 +63,7 @@ python:
   flattenGlobalSecurity: true
   flattenRequests: true
   flatteningOrder: parameters-first
-  forwardCompatibleEnumsByDefault: false
+  forwardCompatibleEnumsByDefault: true
   forwardCompatibleUnionsByDefault: "false"
   homepage: https://moov.io/
   imports:
