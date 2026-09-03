@@ -11,6 +11,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PaymentLinkPayoutDetailsUpdateTypedDict(TypedDict):
+    r"""Options for payout links used to send a payout."""
+
     allowed_methods: NotRequired[List[DisbursementPaymentMethodType]]
     r"""A list of payment methods that should be supported for this payment link."""
     recipient: NotRequired[PayoutRecipientTypedDict]
@@ -24,6 +26,8 @@ class PaymentLinkPayoutDetailsUpdateTypedDict(TypedDict):
 
 
 class PaymentLinkPayoutDetailsUpdate(BaseModel):
+    r"""Options for payout links used to send a payout."""
+
     allowed_methods: Annotated[
         Optional[List[DisbursementPaymentMethodType]],
         pydantic.Field(alias="allowedMethods"),

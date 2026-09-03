@@ -3,10 +3,11 @@
 from __future__ import annotations
 from .evidencetype import EvidenceType
 import io
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import FieldMetadata, MultipartFormMetadata
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import IO, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -78,3 +79,12 @@ class CreateEvidenceFileMultiPart(BaseModel):
         pydantic.Field(alias="evidenceType"),
         FieldMetadata(multipart=True),
     ]
+
+    @field_serializer("evidence_type")
+    def serialize_evidence_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.EvidenceType(value)
+            except ValueError:
+                return value
+        return value

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CapabilityStatus(str, Enum):
+class CapabilityStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The status of the capability requested for an account."""
 
     ENABLED = "enabled"

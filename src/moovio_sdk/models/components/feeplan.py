@@ -6,9 +6,10 @@ from .cardacquiringmodel import CardAcquiringModel
 from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
 from .monthlyplatformfee import MonthlyPlatformFee, MonthlyPlatformFeeTypedDict
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -60,6 +61,15 @@ class FeePlan(BaseModel):
 
     description: Optional[str] = None
     r"""A description of the fee plan."""
+
+    @field_serializer("card_acquiring_model")
+    def serialize_card_acquiring_model(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardAcquiringModel(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

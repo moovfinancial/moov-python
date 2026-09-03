@@ -8,6 +8,8 @@ Status codes for RTP failures.
 from moovio_sdk.models.components import RTPFailureCode
 
 value = RTPFailureCode.PROCESSING_ERROR
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

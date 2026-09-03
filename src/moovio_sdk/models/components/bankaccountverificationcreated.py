@@ -3,8 +3,10 @@
 from __future__ import annotations
 from .bankaccountverificationmethod import BankAccountVerificationMethod
 from .bankaccountverificationstatus import BankAccountVerificationStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -19,6 +21,24 @@ class BankAccountVerificationCreated(BaseModel):
     ]
 
     status: BankAccountVerificationStatus
+
+    @field_serializer("verification_method")
+    def serialize_verification_method(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountVerificationMethod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountVerificationStatus(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

@@ -9,9 +9,10 @@ from .partialscheduleaccount import (
 )
 from .recurresponse import RecurResponse, RecurResponseTypedDict
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -76,6 +77,15 @@ class ScheduleListResponse(BaseModel):
     partner_account: Annotated[
         Optional[PartialScheduleAccount], pydantic.Field(alias="partnerAccount")
     ] = None
+
+    @field_serializer("mode")
+    def serialize_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.Mode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CollectionPaymentMethodType(str, Enum):
+class CollectionPaymentMethodType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Payment methods allowed for collecting a payment."""
 
     APPLE_PAY = "apple-pay"

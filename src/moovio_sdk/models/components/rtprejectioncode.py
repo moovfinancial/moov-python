@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class RTPRejectionCode(str, Enum):
+class RTPRejectionCode(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The rejection code of an RTP transaction that caused the bank account status to change.
 
     - AC03: Account Invalid

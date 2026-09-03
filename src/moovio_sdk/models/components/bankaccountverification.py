@@ -4,9 +4,10 @@ from __future__ import annotations
 from .bankaccountexception import BankAccountException, BankAccountExceptionTypedDict
 from .bankaccountverificationmethod import BankAccountVerificationMethod
 from .bankaccountverificationstatus import BankAccountVerificationStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -29,6 +30,24 @@ class BankAccountVerification(BaseModel):
         Optional[BankAccountException], pydantic.Field(alias="exceptionDetails")
     ] = None
     r"""Reason for, and details related to, an `errored` or `verificationFailed` bank account status."""
+
+    @field_serializer("verification_method")
+    def serialize_verification_method(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountVerificationMethod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountVerificationStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

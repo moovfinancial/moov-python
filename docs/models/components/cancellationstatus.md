@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import CancellationStatus
 
 value = CancellationStatus.PENDING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

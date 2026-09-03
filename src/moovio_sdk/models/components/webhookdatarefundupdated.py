@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .refundstatus import RefundStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -22,6 +24,15 @@ class WebhookDataRefundUpdated(BaseModel):
     refund_id: Annotated[str, pydantic.Field(alias="refundID")]
 
     status: RefundStatus
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.RefundStatus(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

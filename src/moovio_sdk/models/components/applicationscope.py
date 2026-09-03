@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class ApplicationScope(str, Enum):
+class ApplicationScope(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""A permission that the application requests on another account."""
 
     ACCOUNTS_READ = "accounts.read"
@@ -27,7 +28,7 @@ class ApplicationScope(str, Enum):
     FILES_WRITE = "files.write"
     ISSUED_CARDS_READ = "issued-cards.read"
     ISSUED_CARDS_WRITE = "issued-cards.write"
-    ISSUED_CARDS_READ_SECURE = "issued-cards.read-secure"
+    ISSUED_CARDS_READ_PRIVATE = "issued-cards.read-private"
     PAYMENT_METHODS_READ = "payment-methods.read"
     PING_READ = "ping.read"
     PROFILE_ENRICHMENT_READ = "profile-enrichment.read"

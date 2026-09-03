@@ -11,7 +11,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class SweepConfigPaymentMethodTypedDict(TypedDict):
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, rtp-credit, or instant-bank-credit (API v2026.01.00 and later). The pull payment method can only be ach-debit-fund.
     """
 
     payment_method_id: str
@@ -21,7 +21,7 @@ class SweepConfigPaymentMethodTypedDict(TypedDict):
 
 class SweepConfigPaymentMethod(BaseModel):
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, rtp-credit, or instant-bank-credit (API v2026.01.00 and later). The pull payment method can only be ach-debit-fund.
     """
 
     payment_method_id: Annotated[str, pydantic.Field(alias="paymentMethodID")]

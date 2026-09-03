@@ -28,7 +28,7 @@ class Products(BaseSDK):
         :param account_id:
         :param title: Allows filtering products by title. This supports partial matches and is case-insensitive
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -130,7 +130,7 @@ class Products(BaseSDK):
         :param account_id:
         :param title: Allows filtering products by title. This supports partial matches and is case-insensitive
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

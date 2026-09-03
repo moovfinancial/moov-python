@@ -8,6 +8,8 @@ Status of a transaction within the ACH lifecycle.
 from moovio_sdk.models.components import ACHTransactionStatus
 
 value = ACHTransactionStatus.UNKNOWN
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

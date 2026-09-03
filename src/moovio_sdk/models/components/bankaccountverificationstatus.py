@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class BankAccountVerificationStatus(str, Enum):
+class BankAccountVerificationStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     NEW = "new"
     SENT_CREDIT = "sent-credit"
     MAX_ATTEMPTS_EXCEEDED = "max-attempts-exceeded"

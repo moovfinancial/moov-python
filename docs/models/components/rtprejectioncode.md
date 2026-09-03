@@ -16,6 +16,8 @@ The rejection code of an RTP transaction that caused the bank account status to 
 from moovio_sdk.models.components import RTPRejectionCode
 
 value = RTPRejectionCode.AC03
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

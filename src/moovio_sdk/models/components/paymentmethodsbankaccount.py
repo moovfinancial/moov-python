@@ -5,8 +5,10 @@ from .bankaccountholdertype import BankAccountHolderType
 from .bankaccountstatus import BankAccountStatus
 from .bankaccounttype import BankAccountType
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -63,6 +65,33 @@ class PaymentMethodsBankAccount(BaseModel):
     ]
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("holder_type")
+    def serialize_holder_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountHolderType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("bank_account_type")
+    def serialize_bank_account_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountType(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

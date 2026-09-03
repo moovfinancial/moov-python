@@ -8,6 +8,8 @@ Specifies the card processing pricing model
 from moovio_sdk.models.components import CardAcquiringModel
 
 value = CardAcquiringModel.COST_PLUS
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -18,6 +18,7 @@ class ListPaymentLinksRequestTypedDict(TypedDict):
     r"""The merchant account ID."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     types: NotRequired[List[components_paymentlinktype.PaymentLinkType]]
     r"""A comma-separated list of payment link types to filter results."""
 
@@ -39,6 +40,7 @@ class ListPaymentLinksRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     types: Annotated[
         Optional[List[components_paymentlinktype.PaymentLinkType]],

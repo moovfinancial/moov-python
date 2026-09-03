@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import BusinessPresence
 
 value = BusinessPresence.COMMERCIAL_OFFICE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

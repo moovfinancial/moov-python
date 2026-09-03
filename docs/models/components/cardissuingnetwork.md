@@ -8,6 +8,8 @@ The name of the network a card transaction is routed through.
 from moovio_sdk.models.components import CardIssuingNetwork
 
 value = CardIssuingNetwork.DISCOVER
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

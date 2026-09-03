@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class RequirementErrorCode(str, Enum):
+class RequirementErrorCode(str, Enum, metaclass=utils.OpenEnumMeta):
     INVALID_VALUE = "invalid-value"
     FAILED_AUTOMATIC_VERIFICATION = "failed-automatic-verification"
     FAILED_OTHER = "failed-other"

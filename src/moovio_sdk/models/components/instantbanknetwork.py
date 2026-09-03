@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class InstantBankNetwork(str, Enum):
+class InstantBankNetwork(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The network that the transaction was processed on."""
 
     FEDNOW = "fednow"

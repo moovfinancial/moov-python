@@ -704,10 +704,10 @@ class Transfers(BaseSDK):
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
-        :param authorization_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+        :param authorization_i_ds: Optional comma-separated authorization IDs.
         :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -855,10 +855,10 @@ class Transfers(BaseSDK):
         :param refunded: Optional parameter to only return refunded transfers.
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
-        :param authorization_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card authorizations.
+        :param authorization_i_ds: Optional comma-separated authorization IDs.
         :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1640,6 +1640,9 @@ class Transfers(BaseSDK):
     ) -> operations.CreateCancellationResponse:
         r"""Initiate a cancellation for a card, ACH, or queued transfer.
 
+          In v2026.10 and later, an auth-capture `card-payment` transfer can be canceled before any captures exist.
+          For these transfers, a successful cancellation reduces `capturableAmount` without changing `authorizedAmount`.
+          For these transfers, a partial cancellation leaves the remaining `capturableAmount` available for capture.
           To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
           to specify the `/accounts/{accountID}/transfers.write` scope.
 
@@ -1713,7 +1716,7 @@ class Transfers(BaseSDK):
                 result=unmarshal_json_response(components.Cancellation, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, "400", "application/json"):
+        if utils.match_response(http_res, ["400", "409", "422"], "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1743,6 +1746,9 @@ class Transfers(BaseSDK):
     ) -> operations.CreateCancellationResponse:
         r"""Initiate a cancellation for a card, ACH, or queued transfer.
 
+          In v2026.10 and later, an auth-capture `card-payment` transfer can be canceled before any captures exist.
+          For these transfers, a successful cancellation reduces `capturableAmount` without changing `authorizedAmount`.
+          For these transfers, a partial cancellation leaves the remaining `capturableAmount` available for capture.
           To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
           to specify the `/accounts/{accountID}/transfers.write` scope.
 
@@ -1816,7 +1822,7 @@ class Transfers(BaseSDK):
                 result=unmarshal_json_response(components.Cancellation, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, "400", "application/json"):
+        if utils.match_response(http_res, ["400", "409", "422"], "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1918,7 +1924,7 @@ class Transfers(BaseSDK):
                 result=unmarshal_json_response(List[components.Cancellation], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "504"], "*"):
@@ -2017,7 +2023,7 @@ class Transfers(BaseSDK):
                 result=unmarshal_json_response(List[components.Cancellation], http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "504"], "*"):
@@ -2262,7 +2268,7 @@ class Transfers(BaseSDK):
         :param transfer_id: Identifier for the transfer.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
-        :param amount: Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded.
+        :param amount: Amount to refund. If omitted, the original transfer's full amount will be refunded.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2406,7 +2412,7 @@ class Transfers(BaseSDK):
         :param transfer_id: Identifier for the transfer.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
-        :param amount: Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded.
+        :param amount: Amount to refund. If omitted, the original transfer's full amount will be refunded.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2610,7 +2616,7 @@ class Transfers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "504"], "*"):
@@ -2711,7 +2717,7 @@ class Transfers(BaseSDK):
                 ),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, ["500", "504"], "*"):
@@ -2947,6 +2953,9 @@ class Transfers(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.CreateReversalResponse:
         r"""Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
+        In v2026.10 and later, reversing an auth-capture `card-payment` transfer with no captures cancels the entire `capturableAmount`.
+        In those API versions, an auth-capture `card-payment` transfer with one final capture is canceled or refunded depending on its processing state.
+        Auth-capture `card-payment` transfers with a non-final capture or multiple captures are not supported in those API versions.
         Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
         to learn more.
 
@@ -2956,7 +2965,10 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate reversals from being created.
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
-        :param amount: Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation.
+        :param amount: Amount to reverse.
+            Before v2026.10, specify the amount in integer cents.
+            For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no captures uses the full `capturableAmount`.
+            For those transfers with one final capture, a cancellation uses the full capture amount, while a refund may be partial.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3072,6 +3084,9 @@ class Transfers(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.CreateReversalResponse:
         r"""Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
+        In v2026.10 and later, reversing an auth-capture `card-payment` transfer with no captures cancels the entire `capturableAmount`.
+        In those API versions, an auth-capture `card-payment` transfer with one final capture is canceled or refunded depending on its processing state.
+        Auth-capture `card-payment` transfers with a non-final capture or multiple captures are not supported in those API versions.
         Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/)
         to learn more.
 
@@ -3081,7 +3096,10 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate reversals from being created.
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
-        :param amount: Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation.
+        :param amount: Amount to reverse.
+            Before v2026.10, specify the amount in integer cents.
+            For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no captures uses the full `capturableAmount`.
+            For those transfers with one final capture, a cancellation uses the full capture amount, while a refund may be partial.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

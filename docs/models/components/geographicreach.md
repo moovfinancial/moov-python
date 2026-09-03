@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import GeographicReach
 
 value = GeographicReach.INTERNATIONAL_ONLY
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

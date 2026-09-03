@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .monthlyvolumerange import MonthlyVolumeRange
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -29,6 +30,15 @@ class EstimatedActivity(BaseModel):
         Optional[MonthlyVolumeRange], pydantic.Field(alias="monthlyVolumeRange")
     ] = None
     r"""The low value in each range is included. The high value in each range is excluded."""
+
+    @field_serializer("monthly_volume_range")
+    def serialize_monthly_volume_range(self, value):
+        if isinstance(value, str):
+            try:
+                return components.MonthlyVolumeRange(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

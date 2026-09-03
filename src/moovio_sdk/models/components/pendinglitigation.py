@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class PendingLitigation(str, Enum):
+class PendingLitigation(str, Enum, metaclass=utils.OpenEnumMeta):
     BANKRUPTCY_OR_INSOLVENCY = "bankruptcy-or-insolvency"
     CONSUMER_PROTECTION_OR_CLASS_ACTION = "consumer-protection-or-class-action"
     DATA_BREACH_OR_PRIVACY = "data-breach-or-privacy"

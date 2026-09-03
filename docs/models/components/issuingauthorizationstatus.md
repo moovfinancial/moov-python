@@ -8,6 +8,8 @@ Status of a card issuing authorization.
 from moovio_sdk.models.components import IssuingAuthorizationStatus
 
 value = IssuingAuthorizationStatus.PENDING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

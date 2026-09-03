@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class BankAccountVerificationMethod(str, Enum):
+class BankAccountVerificationMethod(str, Enum, metaclass=utils.OpenEnumMeta):
     INSTANT = "instant"
     ACH = "ach"

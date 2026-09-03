@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class PaymentLinkType(str, Enum):
+class PaymentLinkType(str, Enum, metaclass=utils.OpenEnumMeta):
     PAYMENT = "payment"
     PAYOUT = "payout"
     INVOICE_PAYMENT = "invoice-payment"

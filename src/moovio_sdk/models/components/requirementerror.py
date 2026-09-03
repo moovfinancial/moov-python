@@ -3,9 +3,10 @@
 from __future__ import annotations
 from .requirementerrorcode import RequirementErrorCode
 from .requirementid import RequirementID
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -23,6 +24,24 @@ class RequirementError(BaseModel):
     error_code: Annotated[
         Optional[RequirementErrorCode], pydantic.Field(alias="errorCode")
     ] = None
+
+    @field_serializer("requirement")
+    def serialize_requirement(self, value):
+        if isinstance(value, str):
+            try:
+                return components.RequirementID(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("error_code")
+    def serialize_error_code(self, value):
+        if isinstance(value, str):
+            try:
+                return components.RequirementErrorCode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

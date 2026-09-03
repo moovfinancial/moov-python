@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class TicketStatus(str, Enum):
+class TicketStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     NEW = "new"
     IN_PROGRESS = "in-progress"
     ON_HOLD = "on-hold"

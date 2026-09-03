@@ -8,6 +8,8 @@ The result of an event.
 from moovio_sdk.models.components import IssuedCardAuthorizationEventResult
 
 value = IssuedCardAuthorizationEventResult.APPROVED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 
