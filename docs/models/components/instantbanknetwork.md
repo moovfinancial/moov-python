@@ -8,6 +8,8 @@ The network that the transaction was processed on.
 from moovio_sdk.models.components import InstantBankNetwork
 
 value = InstantBankNetwork.FEDNOW
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

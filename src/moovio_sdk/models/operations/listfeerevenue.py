@@ -15,6 +15,7 @@ class ListFeeRevenueRequestTypedDict(TypedDict):
     r"""The Partner's AccountID."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     transfer_id: NotRequired[str]
     r"""Optional transfer ID to filter the results by."""
     dispute_id: NotRequired[str]
@@ -44,6 +45,7 @@ class ListFeeRevenueRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     transfer_id: Annotated[
         Optional[str],

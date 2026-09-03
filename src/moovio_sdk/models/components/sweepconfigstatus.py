@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class SweepConfigStatus(str, Enum):
+class SweepConfigStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     ENABLED = "enabled"
     DISABLED = "disabled"

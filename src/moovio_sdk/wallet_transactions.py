@@ -44,7 +44,7 @@ class WalletTransactions(BaseSDK):
         :param account_id:
         :param wallet_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param transaction_type: Optional parameter to filter by transaction type.
         :param transaction_types: Optional, comma-separated parameter to filter by transaction types.
         :param source_type: Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).
@@ -191,7 +191,7 @@ class WalletTransactions(BaseSDK):
         :param account_id:
         :param wallet_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param transaction_type: Optional parameter to filter by transaction type.
         :param transaction_types: Optional, comma-separated parameter to filter by transaction types.
         :param source_type: Optional parameter to filter by source type (i.e. transfer, dispute, issuing-transaction).

@@ -8,6 +8,8 @@ The phase of a dispute within the dispute lifecycle.
 from moovio_sdk.models.components import DisputePhase
 
 value = DisputePhase.PRE_DISPUTE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -4,9 +4,10 @@ from __future__ import annotations
 from .cardbrand import CardBrand
 from .cardexpiration import CardExpiration, CardExpirationTypedDict
 from .cardtype import CardType
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -69,6 +70,24 @@ class ApplePayResponse(BaseModel):
         None
     )
     r"""Country where the underlying card was issued."""
+
+    @field_serializer("brand")
+    def serialize_brand(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardBrand(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("card_type")
+    def serialize_card_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

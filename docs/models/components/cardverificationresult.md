@@ -8,6 +8,8 @@ The result of a card verification check.
 from moovio_sdk.models.components import CardVerificationResult
 
 value = CardVerificationResult.NO_MATCH
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

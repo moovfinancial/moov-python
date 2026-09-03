@@ -951,7 +951,7 @@ class Sweeps(BaseSDK):
         :param account_id:
         :param wallet_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param status: Optional parameter to filter by sweep status.
         :param statement_descriptor: Optional string to filter by statement descriptor.
         :param retries: Override the default retry configuration for this method
@@ -1062,7 +1062,7 @@ class Sweeps(BaseSDK):
         :param account_id:
         :param wallet_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param status: Optional parameter to filter by sweep status.
         :param statement_descriptor: Optional string to filter by statement descriptor.
         :param retries: Override the default retry configuration for this method

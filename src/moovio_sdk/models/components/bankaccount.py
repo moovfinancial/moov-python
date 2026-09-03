@@ -8,9 +8,10 @@ from .bankaccountstatusreason import BankAccountStatusReason
 from .bankaccounttype import BankAccountType
 from .basicpaymentmethod import BasicPaymentMethod, BasicPaymentMethodTypedDict
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -97,6 +98,42 @@ class BankAccount(BaseModel):
 
     **NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
     """
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("holder_type")
+    def serialize_holder_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountHolderType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("bank_account_type")
+    def serialize_bank_account_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status_reason")
+    def serialize_status_reason(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountStatusReason(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

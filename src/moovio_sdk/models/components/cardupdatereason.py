@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CardUpdateReason(str, Enum):
+class CardUpdateReason(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The results of the card update request."""
 
     UNSPECIFIED = "unspecified"

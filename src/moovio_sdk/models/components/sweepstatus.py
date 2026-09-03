@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class SweepStatus(str, Enum):
+class SweepStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     ACCRUING = "accruing"
     ACTION_REQUIRED = "action-required"
     CANCELED = "canceled"

@@ -8,6 +8,8 @@ Payment methods allowed for disbursing funds.
 from moovio_sdk.models.components import DisbursementPaymentMethodType
 
 value = DisbursementPaymentMethodType.PUSH_TO_CARD
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

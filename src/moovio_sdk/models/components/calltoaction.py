@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CallToAction(str, Enum):
+class CallToAction(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The text to be displayed on web form's submit button.
 
     If set to \"auto\" the UI will automatically select between

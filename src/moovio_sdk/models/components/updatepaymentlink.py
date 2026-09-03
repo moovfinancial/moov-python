@@ -46,6 +46,7 @@ class UpdatePaymentLinkTypedDict(TypedDict):
     payment: NotRequired[PaymentLinkPaymentDetailsUpdateTypedDict]
     r"""Options for payment links used to collect payment."""
     payout: NotRequired[PaymentLinkPayoutDetailsUpdateTypedDict]
+    r"""Options for payout links used to send a payout."""
     line_items: NotRequired[CreatePaymentLinkLineItemsUpdateTypedDict]
     r"""An optional collection of line items for a payment link.
     When line items are provided, their total plus tax must equal the payment link amount.
@@ -72,6 +73,7 @@ class UpdatePaymentLink(BaseModel):
     r"""Options for payment links used to collect payment."""
 
     payout: Optional[PaymentLinkPayoutDetailsUpdate] = None
+    r"""Options for payout links used to send a payout."""
 
     line_items: Annotated[
         Optional[CreatePaymentLinkLineItemsUpdate], pydantic.Field(alias="lineItems")

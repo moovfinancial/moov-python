@@ -16,6 +16,7 @@ class ListProductsRequestTypedDict(TypedDict):
     r"""Allows filtering products by title. This supports partial matches and is case-insensitive"""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
 
 
 class ListProductsRequest(BaseModel):
@@ -40,6 +41,7 @@ class ListProductsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

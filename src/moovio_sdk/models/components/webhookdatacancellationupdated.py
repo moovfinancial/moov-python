@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .cancellationstatus import CancellationStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -19,6 +21,15 @@ class WebhookDataCancellationUpdated(BaseModel):
     transfer_id: Annotated[str, pydantic.Field(alias="transferID")]
 
     status: CancellationStatus
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CancellationStatus(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

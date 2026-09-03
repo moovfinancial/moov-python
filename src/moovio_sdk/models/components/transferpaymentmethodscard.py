@@ -9,9 +9,10 @@ from .cardtype import CardType
 from .cardverification import CardVerification, CardVerificationTypedDict
 from .domesticpullfromcard import DomesticPullFromCard
 from .domesticpushtocard import DomesticPushToCard
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -130,6 +131,42 @@ class TransferPaymentMethodsCard(BaseModel):
         Optional[DomesticPullFromCard], pydantic.Field(alias="domesticPullFromCard")
     ] = None
     r"""Indicates if the card supports domestic pull-from-card transfer."""
+
+    @field_serializer("brand")
+    def serialize_brand(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardBrand(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("card_type")
+    def serialize_card_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("domestic_push_to_card")
+    def serialize_domestic_push_to_card(self, value):
+        if isinstance(value, str):
+            try:
+                return components.DomesticPushToCard(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("domestic_pull_from_card")
+    def serialize_domestic_pull_from_card(self, value):
+        if isinstance(value, str):
+            try:
+                return components.DomesticPullFromCard(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -8,6 +8,8 @@ Reason for a transfer's failure.
 from moovio_sdk.models.components import TransferFailureReason
 
 value = TransferFailureReason.SOURCE_PAYMENT_ERROR
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

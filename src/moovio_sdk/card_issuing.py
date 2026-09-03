@@ -43,7 +43,7 @@ class CardIssuing(BaseSDK):
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param billing_address:
         :param expiration: The expiration date of the card or token.
-        :param controls:
+        :param controls: Mutable spend controls for the card.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -183,7 +183,7 @@ class CardIssuing(BaseSDK):
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param billing_address:
         :param expiration: The expiration date of the card or token.
-        :param controls:
+        :param controls: Mutable spend controls for the card.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -310,7 +310,7 @@ class CardIssuing(BaseSDK):
 
         :param account_id: The Moov business account for which the cards have been issued.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -415,7 +415,7 @@ class CardIssuing(BaseSDK):
 
         :param account_id: The Moov business account for which the cards have been issued.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -723,6 +723,8 @@ class CardIssuing(BaseSDK):
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
         :param state: Updates the state of a Moov issued card.
+            - `active`: Reactivates a frozen card so it can approve authorizations again.
+            - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved between `frozen` and `active` at will until it is `closed`, which is a terminal state.
             - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
         :param nickname:
         :param metadata:
@@ -857,6 +859,8 @@ class CardIssuing(BaseSDK):
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
         :param state: Updates the state of a Moov issued card.
+            - `active`: Reactivates a frozen card so it can approve authorizations again.
+            - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved between `frozen` and `active` at will until it is `closed`, which is a terminal state.
             - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
         :param nickname:
         :param metadata:
@@ -982,7 +986,7 @@ class CardIssuing(BaseSDK):
         Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read-private` scope.
 
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
@@ -1083,7 +1087,7 @@ class CardIssuing(BaseSDK):
         Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
-        you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read-private` scope.
 
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:

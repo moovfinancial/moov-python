@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .terminalapplicationstatus import TerminalApplicationStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -20,6 +22,15 @@ class WebhookDataTerminalApplicationCreated(BaseModel):
 
     status: TerminalApplicationStatus
     r"""Status of the terminal application."""
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TerminalApplicationStatus(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

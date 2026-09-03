@@ -8,6 +8,8 @@ Status of the terminal application.
 from moovio_sdk.models.components import TerminalApplicationStatus
 
 value = TerminalApplicationStatus.UNDEFINED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

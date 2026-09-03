@@ -19,6 +19,7 @@ class ListIssuedCardAuthorizationsRequestTypedDict(TypedDict):
     r"""The Moov business account for which cards have been issued."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     issued_card_id: NotRequired[str]
     r"""Optional ID of the issued card to filter results."""
     start_date_time: NotRequired[datetime]
@@ -48,6 +49,7 @@ class ListIssuedCardAuthorizationsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     issued_card_id: Annotated[
         Optional[str],

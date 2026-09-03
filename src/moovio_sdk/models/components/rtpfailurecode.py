@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class RTPFailureCode(str, Enum):
+class RTPFailureCode(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Status codes for RTP failures."""
 
     PROCESSING_ERROR = "processing-error"

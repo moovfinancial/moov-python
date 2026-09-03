@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class TerminalApplicationStatus(str, Enum):
+class TerminalApplicationStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Status of the terminal application."""
 
     UNDEFINED = "undefined"
