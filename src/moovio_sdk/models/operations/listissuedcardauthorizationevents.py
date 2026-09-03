@@ -18,6 +18,7 @@ class ListIssuedCardAuthorizationEventsRequestTypedDict(TypedDict):
     authorization_id: str
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
 
 
 class ListIssuedCardAuthorizationEventsRequest(BaseModel):
@@ -43,6 +44,7 @@ class ListIssuedCardAuthorizationEventsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

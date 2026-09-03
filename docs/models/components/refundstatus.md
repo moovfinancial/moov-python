@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import RefundStatus
 
 value = RefundStatus.CREATED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

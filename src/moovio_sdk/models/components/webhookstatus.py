@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class WebhookStatus(str, Enum):
+class WebhookStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The status of a webhook."""
 
     ENABLED = "enabled"

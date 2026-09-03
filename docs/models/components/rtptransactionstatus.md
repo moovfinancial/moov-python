@@ -8,6 +8,8 @@ Status of a transaction within the RTP lifecycle.
 from moovio_sdk.models.components import RTPTransactionStatus
 
 value = RTPTransactionStatus.INITIATED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

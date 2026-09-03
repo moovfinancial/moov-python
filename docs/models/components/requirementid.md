@@ -8,6 +8,8 @@ The unique ID of what the requirement is asking to be filled out.
 from moovio_sdk.models.components import RequirementID
 
 value = RequirementID.ACCOUNT_TOS_ACCEPTANCE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

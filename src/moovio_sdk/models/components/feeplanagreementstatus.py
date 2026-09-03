@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class FeePlanAgreementStatus(str, Enum):
+class FeePlanAgreementStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     ACTIVE = "active"
     TERMINATED = "terminated"

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class RefundStatus(str, Enum):
+class RefundStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     CREATED = "created"
     PENDING = "pending"
     COMPLETED = "completed"

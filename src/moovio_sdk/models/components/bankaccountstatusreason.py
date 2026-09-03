@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class BankAccountStatusReason(str, Enum):
+class BankAccountStatusReason(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The reason the bank account status changed to the current value."""
 
     BANK_ACCOUNT_CREATED = "bank-account-created"

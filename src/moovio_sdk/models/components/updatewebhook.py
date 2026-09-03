@@ -3,8 +3,10 @@
 from __future__ import annotations
 from .webhookeventtype import WebhookEventType
 from .webhookstatus import WebhookStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing import List
 from typing_extensions import Annotated, TypedDict
 
@@ -36,6 +38,15 @@ class UpdateWebhook(BaseModel):
 
     description: str
     r"""A description of the webhook for reference. Can be an empty string."""
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WebhookStatus(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

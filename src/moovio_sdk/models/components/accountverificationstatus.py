@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 from typing_extensions import deprecated
 
 
 @deprecated(
     "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
 )
-class AccountVerificationStatus(str, Enum):
+class AccountVerificationStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Possible states an account verification can be in."""
 
     UNVERIFIED = "unverified"

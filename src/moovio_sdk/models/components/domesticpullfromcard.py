@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class DomesticPullFromCard(str, Enum):
+class DomesticPullFromCard(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Indicates if the card supports domestic pull-from-card transfer."""
 
     NOT_SUPPORTED = "not-supported"

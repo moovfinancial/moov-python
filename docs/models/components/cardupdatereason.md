@@ -8,6 +8,8 @@ The results of the card update request.
 from moovio_sdk.models.components import CardUpdateReason
 
 value = CardUpdateReason.UNSPECIFIED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

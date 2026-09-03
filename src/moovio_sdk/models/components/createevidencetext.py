@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .evidencetype import EvidenceType
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -18,6 +20,15 @@ class CreateEvidenceText(BaseModel):
     r"""The text to associate with the dispute as evidence."""
 
     evidence_type: Annotated[EvidenceType, pydantic.Field(alias="evidenceType")]
+
+    @field_serializer("evidence_type")
+    def serialize_evidence_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.EvidenceType(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

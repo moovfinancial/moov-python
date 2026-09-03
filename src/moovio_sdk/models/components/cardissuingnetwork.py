@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CardIssuingNetwork(str, Enum):
+class CardIssuingNetwork(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The name of the network a card transaction is routed through."""
 
     DISCOVER = "discover"

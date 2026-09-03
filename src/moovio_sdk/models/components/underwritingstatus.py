@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 from typing_extensions import deprecated
 
 
 @deprecated(
     "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
 )
-class UnderwritingStatus(str, Enum):
+class UnderwritingStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     APPROVED = "approved"
     REJECTED = "rejected"
     PENDING_REVIEW = "pendingReview"

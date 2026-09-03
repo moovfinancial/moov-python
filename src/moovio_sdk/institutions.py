@@ -243,7 +243,7 @@ class Institutions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.ListInstitutionsResponse:
-        r"""This endpoint has been deprecated and will be removed in a future release. Use [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+        r"""This endpoint has been deprecated and will be removed in a future release. Use [/institutions](https://docs.moov.io/api/enrichment/institutions/get/).
 
         Search for institutions by either their name or routing number.
 
@@ -359,7 +359,7 @@ class Institutions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.ListInstitutionsResponse:
-        r"""This endpoint has been deprecated and will be removed in a future release. Use [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+        r"""This endpoint has been deprecated and will be removed in a future release. Use [/institutions](https://docs.moov.io/api/enrichment/institutions/get/).
 
         Search for institutions by either their name or routing number.
 
