@@ -8,6 +8,8 @@ The status of the capability requested for an account.
 from moovio_sdk.models.components import CapabilityStatus
 
 value = CapabilityStatus.ENABLED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

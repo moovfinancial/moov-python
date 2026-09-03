@@ -3,9 +3,10 @@
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
 from .tipcalculationbasis import TipCalculationBasis
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -44,6 +45,15 @@ class TipPresets(BaseModel):
         Optional[List[AmountDecimal]], pydantic.Field(alias="fixedAmountOptions")
     ] = None
     r"""Defines the set of suggested tip preset values presented to customers. Fixed amounts must be positive and unique. A maximum of 3 values are allowed."""
+
+    @field_serializer("calculation_basis")
+    def serialize_calculation_basis(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TipCalculationBasis(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

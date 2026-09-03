@@ -8,6 +8,8 @@
 from moovio_sdk.models.components import UnderwritingStatus
 
 value = UnderwritingStatus.APPROVED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .issuingintervallimit import IssuingIntervalLimit
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -26,6 +27,15 @@ class IssuingVelocityLimit(BaseModel):
 
     count: Optional[int] = None
     r"""The maximum number of transactions allowed in the given interval. At least one of `amount` or `count` must be set."""
+
+    @field_serializer("interval")
+    def serialize_interval(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuingIntervalLimit(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class ACHReturnCode(str, Enum):
+class ACHReturnCode(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The return code of an ACH transaction that caused the bank account status to change.
 
     - R02: Account Closed

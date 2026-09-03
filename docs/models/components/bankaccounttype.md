@@ -8,6 +8,8 @@ The bank account type.
 from moovio_sdk.models.components import BankAccountType
 
 value = BankAccountType.CHECKING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class PaymentLinkStatus(str, Enum):
+class PaymentLinkStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     ACTIVE = "active"
     USED = "used"
     DISABLED = "disabled"

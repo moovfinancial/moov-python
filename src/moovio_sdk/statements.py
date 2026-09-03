@@ -40,7 +40,7 @@ class Statements(BaseSDK):
         :param billing_period_start_date_time: Optional date-time which inclusively filters all statements where billing period is on or after this date-time.
         :param billing_period_end_date_time: Optional date-time which exclusively filters all statements where billing period is before this date-time.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -152,7 +152,7 @@ class Statements(BaseSDK):
         :param billing_period_start_date_time: Optional date-time which inclusively filters all statements where billing period is on or after this date-time.
         :param billing_period_end_date_time: Optional date-time which exclusively filters all statements where billing period is before this date-time.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

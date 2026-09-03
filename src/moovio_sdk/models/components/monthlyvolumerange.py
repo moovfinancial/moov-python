@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class MonthlyVolumeRange(str, Enum):
+class MonthlyVolumeRange(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The low value in each range is included. The high value in each range is excluded."""
 
     UNDER_10K = "under-10k"

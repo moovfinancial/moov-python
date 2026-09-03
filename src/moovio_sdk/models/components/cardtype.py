@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CardType(str, Enum):
+class CardType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The type of the card."""
 
     DEBIT = "debit"

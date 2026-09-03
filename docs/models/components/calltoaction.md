@@ -11,6 +11,8 @@ If set to "auto" the UI will automatically select between
 from moovio_sdk.models.components import CallToAction
 
 value = CallToAction.PAY
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

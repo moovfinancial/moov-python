@@ -9,9 +9,9 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class MerchantEntryTypedDict(TypedDict):
-    r"""Identifies a merchant by ID, descriptor pattern, or both. At least one of `mid` or `descriptorPattern` must be set."""
+    r"""Identifies a merchant by ID, descriptor pattern, or both. At least one of `networkID` or `descriptorPattern` must be set."""
 
-    mid: NotRequired[str]
+    network_id: NotRequired[str]
     r"""The merchant's unique identifier (ISO 8583 DE42), matched exactly."""
     descriptor_pattern: NotRequired[str]
     r"""A case-insensitive RE2 regular expression matched against the merchant descriptor (ISO 8583 DE43)."""
@@ -20,9 +20,9 @@ class MerchantEntryTypedDict(TypedDict):
 
 
 class MerchantEntry(BaseModel):
-    r"""Identifies a merchant by ID, descriptor pattern, or both. At least one of `mid` or `descriptorPattern` must be set."""
+    r"""Identifies a merchant by ID, descriptor pattern, or both. At least one of `networkID` or `descriptorPattern` must be set."""
 
-    mid: Optional[str] = None
+    network_id: Annotated[Optional[str], pydantic.Field(alias="networkID")] = None
     r"""The merchant's unique identifier (ISO 8583 DE42), matched exactly."""
 
     descriptor_pattern: Annotated[
@@ -35,7 +35,7 @@ class MerchantEntry(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["mid", "descriptorPattern", "name"])
+        optional_fields = set(["networkID", "descriptorPattern", "name"])
         serialized = handler(self)
         m = {}
 

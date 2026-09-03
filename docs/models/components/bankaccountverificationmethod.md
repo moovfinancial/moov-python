@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import BankAccountVerificationMethod
 
 value = BankAccountVerificationMethod.INSTANT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

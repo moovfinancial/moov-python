@@ -13,6 +13,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PaymentLinkPayoutDetailsTypedDict(TypedDict):
+    r"""Options for payout links used to send a payout."""
+
     allowed_methods: List[DisbursementPaymentMethodType]
     r"""A list of payment methods that should be supported for this payment link."""
     recipient: PayoutRecipientTypedDict
@@ -24,19 +26,18 @@ class PaymentLinkPayoutDetailsTypedDict(TypedDict):
     metadata: NotRequired[Dict[str, str]]
     r"""Optional free-form metadata for the transfer."""
     push_options: NotRequired[PushOptionsTypedDict]
-    r"""Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes `push-to-card`.
-
-    The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-    (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these options.
-    """
+    r"""Delivery options for `push-to-card` and `push-to-apple-pay` payouts."""
     fee_paid_by: NotRequired[Dict[str, FeePaidBy]]
-    r"""Indicates which party bears the fee, keyed by disbursement payment method (`DisbursementPaymentMethodType`).
+    r"""Indicates which party pays the fee, keyed by `PayoutFeePaidByKey`. If keys are not set,
+    the default is `source`.
 
-    Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+    Possible `PayoutFeePaidByKey` keys: `instant-push-to-card`, `deferred-push-to-card`, `instant-push-to-apple-pay`, `deferred-push-to-apple-pay`, `instant-bank-credit` (API v2026.01.00 and later), `rtp-credit`, `ach-credit-same-day`, `ach-credit-standard`, `push-to-google-pay`
     """
 
 
 class PaymentLinkPayoutDetails(BaseModel):
+    r"""Options for payout links used to send a payout."""
+
     allowed_methods: Annotated[
         List[DisbursementPaymentMethodType], pydantic.Field(alias="allowedMethods")
     ]
@@ -55,18 +56,15 @@ class PaymentLinkPayoutDetails(BaseModel):
     push_options: Annotated[
         Optional[PushOptions], pydantic.Field(alias="pushOptions")
     ] = None
-    r"""Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes `push-to-card`.
-
-    The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-    (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these options.
-    """
+    r"""Delivery options for `push-to-card` and `push-to-apple-pay` payouts."""
 
     fee_paid_by: Annotated[
         Optional[Dict[str, FeePaidBy]], pydantic.Field(alias="feePaidBy")
     ] = None
-    r"""Indicates which party bears the fee, keyed by disbursement payment method (`DisbursementPaymentMethodType`).
+    r"""Indicates which party pays the fee, keyed by `PayoutFeePaidByKey`. If keys are not set,
+    the default is `source`.
 
-    Sparse — include only the methods you want to attribute. Any method left unset defaults to `source`.
+    Possible `PayoutFeePaidByKey` keys: `instant-push-to-card`, `deferred-push-to-card`, `instant-push-to-apple-pay`, `deferred-push-to-apple-pay`, `instant-bank-credit` (API v2026.01.00 and later), `rtp-credit`, `ach-credit-same-day`, `ach-credit-standard`, `push-to-google-pay`
     """
 
     @model_serializer(mode="wrap")

@@ -16,7 +16,7 @@ class CreateRefundTypedDict(TypedDict):
     """
 
     amount: NotRequired[int]
-    r"""Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded."""
+    r"""Amount to refund. If omitted, the original transfer's full amount will be refunded."""
     amount_details: NotRequired[RefundAmountDetailsTypedDict]
     r"""Breakdown of the refunded amount."""
 
@@ -28,7 +28,7 @@ class CreateRefund(BaseModel):
     """
 
     amount: Optional[int] = None
-    r"""Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded."""
+    r"""Amount to refund. If omitted, the original transfer's full amount will be refunded."""
 
     amount_details: Annotated[
         Optional[RefundAmountDetails], pydantic.Field(alias="amountDetails")

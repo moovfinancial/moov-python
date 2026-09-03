@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class WalletType(str, Enum):
+class WalletType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Type of a wallet.
     - `default`: The system-generated wallet automatically created when an account is granted the wallet capability.
     - `general`: An additional, user-defined wallet created via API or Dashboard.

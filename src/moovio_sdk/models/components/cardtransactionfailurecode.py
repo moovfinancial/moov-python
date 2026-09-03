@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CardTransactionFailureCode(str, Enum):
+class CardTransactionFailureCode(str, Enum, metaclass=utils.OpenEnumMeta):
     CALL_ISSUER = "call-issuer"
     DO_NOT_HONOR = "do-not-honor"
     PROCESSING_ERROR = "processing-error"

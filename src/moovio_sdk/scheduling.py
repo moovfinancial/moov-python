@@ -282,7 +282,7 @@ class Scheduling(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param hydrate:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -389,7 +389,7 @@ class Scheduling(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param hydrate:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

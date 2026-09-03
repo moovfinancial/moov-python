@@ -18,6 +18,7 @@ class ListIssuedCardsRequestTypedDict(TypedDict):
     r"""The Moov business account for which the cards have been issued."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     states: NotRequired[List[components_issuedcardstate.IssuedCardState]]
     r"""Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`"""
 
@@ -39,6 +40,7 @@ class ListIssuedCardsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     states: Annotated[
         Optional[List[components_issuedcardstate.IssuedCardState]],

@@ -44,7 +44,7 @@ class CreateTransferTypedDict(TypedDict):
     """
     amount_details: NotRequired[CreateTransferAmountDetailsTypedDict]
     fee_paid_by: NotRequired[TransferFeePaidByTypedDict]
-    r"""Indicates which party bears fees for the transfer, keyed by fee type."""
+    r"""Indicates which party bears fees for a transfer, keyed by fee type."""
 
 
 class CreateTransfer(BaseModel):
@@ -84,7 +84,7 @@ class CreateTransfer(BaseModel):
     fee_paid_by: Annotated[
         Optional[TransferFeePaidBy], pydantic.Field(alias="feePaidBy")
     ] = None
-    r"""Indicates which party bears fees for the transfer, keyed by fee type."""
+    r"""Indicates which party bears fees for a transfer, keyed by fee type."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

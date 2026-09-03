@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class IssuingIntervalLimit(str, Enum):
+class IssuingIntervalLimit(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Specifies the time frame for a velocity limit. `per-transaction` applies to each individual authorization and never resets. Time-based intervals (where supported) reset at midnight ET."""
 
     PER_TRANSACTION = "per-transaction"

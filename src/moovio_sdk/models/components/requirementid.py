@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class RequirementID(str, Enum):
+class RequirementID(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The unique ID of what the requirement is asking to be filled out."""
 
     ACCOUNT_TOS_ACCEPTANCE = "account.tos-acceptance"
@@ -171,6 +172,42 @@ class RequirementID(str, Enum):
     )
     UNDERWRITING_SEND_FUNDS_PUSH_TO_CARD_REFUND_POLICY = (
         "underwriting.sendFunds.pushToCard.refundPolicy"
+    )
+    UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.sendFunds.instantBank.cardAcceptanceMethods"
+    )
+    UNDERWRITING_SEND_FUNDS_INSTANT_BANK_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.sendFunds.instantBank.currentlyAcceptsCards"
+    )
+    UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = "underwriting.sendFunds.instantBank.estimatedActivity.averageTransactionAmount"
+    UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = "underwriting.sendFunds.instantBank.estimatedActivity.maximumTransactionAmount"
+    UNDERWRITING_SEND_FUNDS_INSTANT_BANK_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
+        "underwriting.sendFunds.instantBank.estimatedActivity.monthlyVolumeRange"
+    )
+    UNDERWRITING_SEND_FUNDS_INSTANT_BANK_FULFILLMENT = (
+        "underwriting.sendFunds.instantBank.fulfillment"
+    )
+    UNDERWRITING_SEND_FUNDS_INSTANT_BANK_REFUND_POLICY = (
+        "underwriting.sendFunds.instantBank.refundPolicy"
+    )
+    UNDERWRITING_SEND_FUNDS_WIRE_CARD_ACCEPTANCE_METHODS = (
+        "underwriting.sendFunds.wire.cardAcceptanceMethods"
+    )
+    UNDERWRITING_SEND_FUNDS_WIRE_CURRENTLY_ACCEPTS_CARDS = (
+        "underwriting.sendFunds.wire.currentlyAcceptsCards"
+    )
+    UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_AVERAGE_TRANSACTION_AMOUNT = (
+        "underwriting.sendFunds.wire.estimatedActivity.averageTransactionAmount"
+    )
+    UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MAXIMUM_TRANSACTION_AMOUNT = (
+        "underwriting.sendFunds.wire.estimatedActivity.maximumTransactionAmount"
+    )
+    UNDERWRITING_SEND_FUNDS_WIRE_ESTIMATED_ACTIVITY_MONTHLY_VOLUME_RANGE = (
+        "underwriting.sendFunds.wire.estimatedActivity.monthlyVolumeRange"
+    )
+    UNDERWRITING_SEND_FUNDS_WIRE_FULFILLMENT = "underwriting.sendFunds.wire.fulfillment"
+    UNDERWRITING_SEND_FUNDS_WIRE_REFUND_POLICY = (
+        "underwriting.sendFunds.wire.refundPolicy"
     )
     UNDERWRITING_MONEY_TRANSFER_PULL_FROM_CARD_CARD_ACCEPTANCE_METHODS = (
         "underwriting.moneyTransfer.pullFromCard.cardAcceptanceMethods"

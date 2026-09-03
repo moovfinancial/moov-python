@@ -8,6 +8,8 @@ Status of the completed occurrence.
 from moovio_sdk.models.components import OccurrenceStatus
 
 value = OccurrenceStatus.PENDING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

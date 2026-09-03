@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CardTransactionStatus(str, Enum):
+class CardTransactionStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Status of a transaction within the card payment lifecycle."""
 
     INITIATED = "initiated"

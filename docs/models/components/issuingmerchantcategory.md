@@ -8,6 +8,8 @@ Predefined merchant category groups.
 from moovio_sdk.models.components import IssuingMerchantCategory
 
 value = IssuingMerchantCategory.ADVERTISING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

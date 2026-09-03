@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class TransferFailureReason(str, Enum):
+class TransferFailureReason(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Reason for a transfer's failure."""
 
     SOURCE_PAYMENT_ERROR = "source-payment-error"

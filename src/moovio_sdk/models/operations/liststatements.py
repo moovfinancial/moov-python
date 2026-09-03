@@ -19,6 +19,7 @@ class ListStatementsRequestTypedDict(TypedDict):
     r"""Optional date-time which exclusively filters all statements where billing period is before this date-time."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
 
 
 class ListStatementsRequest(BaseModel):
@@ -51,6 +52,7 @@ class ListStatementsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CardAcquiringModel(str, Enum):
+class CardAcquiringModel(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Specifies the card processing pricing model"""
 
     COST_PLUS = "cost-plus"

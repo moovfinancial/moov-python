@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class FeeModel(str, Enum):
+class FeeModel(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Specifies the pricing model used for the calculation of the final fee."""
 
     FIXED = "fixed"

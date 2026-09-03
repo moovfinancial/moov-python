@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class BusinessPresence(str, Enum):
+class BusinessPresence(str, Enum, metaclass=utils.OpenEnumMeta):
     COMMERCIAL_OFFICE = "commercial-office"
     HOME_BASED = "home-based"
     MIXED_PRESENCE = "mixed-presence"

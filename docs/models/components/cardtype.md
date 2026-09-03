@@ -8,6 +8,8 @@ The type of the card.
 from moovio_sdk.models.components import CardType
 
 value = CardType.DEBIT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class RefundPolicy(str, Enum):
+class RefundPolicy(str, Enum, metaclass=utils.OpenEnumMeta):
     CONDITIONAL_REFUND = "conditional-refund"
     CUSTOM_POLICY = "custom-policy"
     EVENT_BASED_POLICY = "event-based-policy"

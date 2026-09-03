@@ -3,8 +3,10 @@
 from __future__ import annotations
 from .bankaccountholdertype import BankAccountHolderType
 from .bankaccounttype import BankAccountType
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -32,6 +34,24 @@ class BankAccountIntegration(BaseModel):
     r"""The bank account type."""
 
     routing_number: Annotated[str, pydantic.Field(alias="routingNumber")]
+
+    @field_serializer("holder_type")
+    def serialize_holder_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountHolderType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("bank_account_type")
+    def serialize_bank_account_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountType(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

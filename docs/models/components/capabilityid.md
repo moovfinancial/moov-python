@@ -16,6 +16,8 @@ The `production-app`, `platform.production-app`, and / or `platform.wallet-trans
 from moovio_sdk.models.components import CapabilityID
 
 value = CapabilityID.TRANSFERS
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

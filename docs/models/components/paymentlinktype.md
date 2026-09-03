@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import PaymentLinkType
 
 value = PaymentLinkType.PAYMENT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 
