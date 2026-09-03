@@ -7,9 +7,10 @@ from .sweepconfigpaymentmethod import (
 )
 from .sweepconfigstatus import SweepConfigStatus
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -20,11 +21,11 @@ class SweepConfigTypedDict(TypedDict):
     status: SweepConfigStatus
     push_payment_method: SweepConfigPaymentMethodTypedDict
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, rtp-credit, or instant-bank-credit (API v2026.01.00 and later). The pull payment method can only be ach-debit-fund.
     """
     pull_payment_method: SweepConfigPaymentMethodTypedDict
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, rtp-credit, or instant-bank-credit (API v2026.01.00 and later). The pull payment method can only be ach-debit-fund.
     """
     created_on: datetime
     updated_on: datetime
@@ -47,14 +48,14 @@ class SweepConfig(BaseModel):
         SweepConfigPaymentMethod, pydantic.Field(alias="pushPaymentMethod")
     ]
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, rtp-credit, or instant-bank-credit (API v2026.01.00 and later). The pull payment method can only be ach-debit-fund.
     """
 
     pull_payment_method: Annotated[
         SweepConfigPaymentMethod, pydantic.Field(alias="pullPaymentMethod")
     ]
     r"""The payment method used to push or pull funds to a bank account.
-    The push payment method can only be ach-credit-standard, ach-credit-same-day, or rtp-credit. The pull payment method can only be ach-debit-fund.
+    The push payment method can only be ach-credit-standard, ach-credit-same-day, rtp-credit, or instant-bank-credit (API v2026.01.00 and later). The pull payment method can only be ach-debit-fund.
     """
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
@@ -75,6 +76,15 @@ class SweepConfig(BaseModel):
         Optional[List[str]], pydantic.Field(alias="lockedFields")
     ] = None
     r"""An array of fields that are locked. To request updates, please contact Moov support."""
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.SweepConfigStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

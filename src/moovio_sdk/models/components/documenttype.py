@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class DocumentType(str, Enum):
+class DocumentType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Types of documents that can be uploaded."""
 
     DRIVERS_LICENSE = "driversLicense"

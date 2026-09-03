@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class Mode(str, Enum):
+class Mode(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The operating mode for an account."""
 
     SANDBOX = "sandbox"

@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .mode import Mode
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -29,6 +31,15 @@ class OnboardingPartnerAccount(BaseModel):
 
     display_name: Annotated[str, pydantic.Field(alias="displayName")]
     r"""The name of the Moov account used to create the onboarding invite."""
+
+    @field_serializer("account_mode")
+    def serialize_account_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.Mode(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

@@ -17,6 +17,7 @@ class ListPartnerPricingAgreementsRequestTypedDict(TypedDict):
     account_id: str
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     agreement_id: NotRequired[List[str]]
     r"""A comma-separated list of agreement IDs to filter the results by."""
     status: NotRequired[List[components_feeplanagreementstatus.FeePlanAgreementStatus]]
@@ -39,6 +40,7 @@ class ListPartnerPricingAgreementsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     agreement_id: Annotated[
         Optional[List[str]],

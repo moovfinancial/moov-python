@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class DisputeStatus(str, Enum):
+class DisputeStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The status of a particular dispute.
 
     Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/disputes/#dispute-statuses) to learn what each status means.

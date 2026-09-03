@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class DomesticPushToCard(str, Enum):
+class DomesticPushToCard(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Indicates which level of domestic push-to-card transfer is supported by the card, if any."""
 
     NOT_SUPPORTED = "not-supported"

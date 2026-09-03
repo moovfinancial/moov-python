@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .calltoaction import CallToAction
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -41,6 +42,15 @@ class PaymentLinkDisplayOptionsUpdate(BaseModel):
     If set to \"auto\" the UI will automatically select between
     \"pay\" and \"confirm\" for payments and payouts respectively.
     """
+
+    @field_serializer("call_to_action")
+    def serialize_call_to_action(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CallToAction(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

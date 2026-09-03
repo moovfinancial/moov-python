@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class PaymentMethodType(str, Enum):
+class PaymentMethodType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The payment method type that represents a payment rail and directionality"""
 
     MOOV_WALLET = "moov-wallet"

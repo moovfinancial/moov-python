@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class RequirementID(str, Enum):
+class RequirementID(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The unique ID of what the requirement is asking to be filled out."""
 
     ACCOUNT_TOS_ACCEPTANCE = "account.tos-acceptance"

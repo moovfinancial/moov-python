@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class TransferParty(str, Enum):
+class TransferParty(str, Enum, metaclass=utils.OpenEnumMeta):
     SOURCE = "source"
     DESTINATION = "destination"
     PARTNER = "partner"

@@ -3,8 +3,10 @@
 from __future__ import annotations
 from .disputephase import DisputePhase
 from .disputestatus import DisputeStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -39,6 +41,24 @@ class WebhookDataDisputeCreated(BaseModel):
 
     phase: DisputePhase
     r"""The phase of a dispute within the dispute lifecycle."""
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.DisputeStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("phase")
+    def serialize_phase(self, value):
+        if isinstance(value, str):
+            try:
+                return components.DisputePhase(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

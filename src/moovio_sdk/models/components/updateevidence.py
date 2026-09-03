@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .evidencetype import EvidenceType
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -22,6 +23,15 @@ class UpdateEvidence(BaseModel):
 
     text: Optional[str] = None
     r"""If updating text evidence, the new text to associate with the dispute."""
+
+    @field_serializer("evidence_type")
+    def serialize_evidence_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.EvidenceType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

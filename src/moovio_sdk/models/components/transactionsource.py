@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class TransactionSource(str, Enum):
+class TransactionSource(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Specifies the nature and initiator of a transaction.
 
     Crucial for recurring and merchant-initiated transactions as per card scheme rules.

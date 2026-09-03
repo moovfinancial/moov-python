@@ -7,9 +7,10 @@ from .feeplanagreementstatus import FeePlanAgreementStatus
 from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
 from .monthlyplatformfee import MonthlyPlatformFee, MonthlyPlatformFeeTypedDict
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -39,6 +40,10 @@ class PartnerPricingAgreementTypedDict(TypedDict):
     r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     description: NotRequired[str]
     r"""The description of the agreement."""
+    prior_agreement_id: NotRequired[str]
+    r"""The agreement this one replaced. Only set when the agreement was created by replacing another."""
+    prior_agreement_terminated_on: NotRequired[datetime]
+    r"""The date and time the prior agreement was terminated."""
 
 
 class PartnerPricingAgreement(BaseModel):
@@ -84,9 +89,44 @@ class PartnerPricingAgreement(BaseModel):
     description: Optional[str] = None
     r"""The description of the agreement."""
 
+    prior_agreement_id: Annotated[
+        Optional[str], pydantic.Field(alias="priorAgreementID")
+    ] = None
+    r"""The agreement this one replaced. Only set when the agreement was created by replacing another."""
+
+    prior_agreement_terminated_on: Annotated[
+        Optional[datetime], pydantic.Field(alias="priorAgreementTerminatedOn")
+    ] = None
+    r"""The date and time the prior agreement was terminated."""
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.FeePlanAgreementStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("card_acquiring_model")
+    def serialize_card_acquiring_model(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardAcquiringModel(value)
+            except ValueError:
+                return value
+        return value
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["accountID", "description"])
+        optional_fields = set(
+            [
+                "accountID",
+                "description",
+                "priorAgreementID",
+                "priorAgreementTerminatedOn",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

@@ -8,6 +8,8 @@ The payment method type that represents a payment rail and directionality
 from moovio_sdk.models.components import PaymentMethodType
 
 value = PaymentMethodType.MOOV_WALLET
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 
