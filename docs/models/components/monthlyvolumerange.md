@@ -8,6 +8,8 @@ The low value in each range is included. The high value in each range is exclude
 from moovio_sdk.models.components import MonthlyVolumeRange
 
 value = MonthlyVolumeRange.UNDER_10K
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

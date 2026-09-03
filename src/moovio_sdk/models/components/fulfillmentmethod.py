@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class FulfillmentMethod(str, Enum):
+class FulfillmentMethod(str, Enum, metaclass=utils.OpenEnumMeta):
     BILL_OR_DEBT_PAYMENT = "bill-or-debt-payment"
     DIGITAL_CONTENT = "digital-content"
     DONATION = "donation"

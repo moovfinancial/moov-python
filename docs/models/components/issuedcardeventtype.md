@@ -8,6 +8,8 @@ The type of event that occurred on the card.
 from moovio_sdk.models.components import IssuedCardEventType
 
 value = IssuedCardEventType.AUTHORIZATION
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

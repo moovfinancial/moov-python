@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .cardverificationresult import CardVerificationResult
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -44,6 +45,42 @@ class AccountNameVerification(BaseModel):
         Optional[CardVerificationResult], pydantic.Field(alias="fullName")
     ] = None
     r"""Verification result of the cardholder's full name."""
+
+    @field_serializer("first_name")
+    def serialize_first_name(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardVerificationResult(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("last_name")
+    def serialize_last_name(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardVerificationResult(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("middle_name")
+    def serialize_middle_name(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardVerificationResult(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("full_name")
+    def serialize_full_name(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardVerificationResult(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

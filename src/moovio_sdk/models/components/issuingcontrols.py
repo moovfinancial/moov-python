@@ -10,6 +10,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class IssuingControlsTypedDict(TypedDict):
+    r"""Mutable spend controls for the card."""
+
     single_use: NotRequired[bool]
     r"""Indicates if the card is single-use. If true, the card closes after the first authorization."""
     velocity_limits: NotRequired[List[IssuingVelocityLimitTypedDict]]
@@ -17,6 +19,8 @@ class IssuingControlsTypedDict(TypedDict):
 
 
 class IssuingControls(BaseModel):
+    r"""Mutable spend controls for the card."""
+
     single_use: Annotated[Optional[bool], pydantic.Field(alias="singleUse")] = None
     r"""Indicates if the card is single-use. If true, the card closes after the first authorization."""
 

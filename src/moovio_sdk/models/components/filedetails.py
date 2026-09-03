@@ -4,9 +4,10 @@ from __future__ import annotations
 from .filepurpose import FilePurpose
 from .filestatus import FileStatus
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -54,6 +55,24 @@ class FileDetails(BaseModel):
     decision_reason: Annotated[
         Optional[str], pydantic.Field(alias="decisionReason")
     ] = None
+
+    @field_serializer("file_purpose")
+    def serialize_file_purpose(self, value):
+        if isinstance(value, str):
+            try:
+                return components.FilePurpose(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("file_status")
+    def serialize_file_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.FileStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

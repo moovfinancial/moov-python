@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class PushDeliverySpeed(str, Enum):
+class PushDeliverySpeed(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Delivery speed options for push-to-card payouts."""
 
     INSTANT = "instant"

@@ -8,6 +8,8 @@ An optional override of your default ACH hold period in banking days. The hold p
 from moovio_sdk.models.components import DebitHoldPeriod
 
 value = DebitHoldPeriod.NO_HOLD
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

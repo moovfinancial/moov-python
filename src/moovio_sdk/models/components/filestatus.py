@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class FileStatus(str, Enum):
+class FileStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The file's status."""
 
     PENDING = "pending"

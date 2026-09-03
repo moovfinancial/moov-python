@@ -7,9 +7,10 @@ from .industrycodes import IndustryCodes, IndustryCodesTypedDict
 from .phonenumber import PhoneNumber, PhoneNumberTypedDict
 from .primaryregulator import PrimaryRegulator
 from .taxid import TaxID, TaxIDTypedDict
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -73,6 +74,24 @@ class CreateBusinessProfile(BaseModel):
         Optional[PrimaryRegulator], pydantic.Field(alias="primaryRegulator")
     ] = None
     r"""If the business is a financial institution, this field describes its primary regulator."""
+
+    @field_serializer("business_type")
+    def serialize_business_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BusinessType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("primary_regulator")
+    def serialize_primary_regulator(self, value):
+        if isinstance(value, str):
+            try:
+                return components.PrimaryRegulator(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

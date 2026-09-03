@@ -310,7 +310,7 @@ class Invoices(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param status:
         :param customer_account_id:
         :param created_start_date_time:
@@ -436,7 +436,7 @@ class Invoices(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param status:
         :param customer_account_id:
         :param created_start_date_time:

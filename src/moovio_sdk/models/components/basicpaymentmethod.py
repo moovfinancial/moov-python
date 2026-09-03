@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .paymentmethodtype import PaymentMethodType
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -22,6 +24,15 @@ class BasicPaymentMethod(BaseModel):
         PaymentMethodType, pydantic.Field(alias="paymentMethodType")
     ]
     r"""The payment method type that represents a payment rail and directionality"""
+
+    @field_serializer("payment_method_type")
+    def serialize_payment_method_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.PaymentMethodType(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

@@ -18,9 +18,10 @@ from .volumesharebycustomertype import (
     VolumeShareByCustomerType,
     VolumeShareByCustomerTypeTypedDict,
 )
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -102,6 +103,42 @@ class Underwriting(BaseModel):
     ] = None
 
     send_funds: Annotated[Optional[SendFunds], pydantic.Field(alias="sendFunds")] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.UnderwritingStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("geographic_reach")
+    def serialize_geographic_reach(self, value):
+        if isinstance(value, str):
+            try:
+                return components.GeographicReach(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("business_presence")
+    def serialize_business_presence(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BusinessPresence(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("pending_litigation")
+    def serialize_pending_litigation(self, value):
+        if isinstance(value, str):
+            try:
+                return components.PendingLitigation(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import TicketStatus
 
 value = TicketStatus.NEW
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

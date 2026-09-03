@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class Use(str, Enum):
+class Use(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The intended use of the key. 'sig' for signature, 'enc' for encryption."""
 
     SIG = "sig"
@@ -102,6 +104,15 @@ class JSONWebKey(BaseModel):
 
     This field is required when `kty` is 'RSA'.
     """
+
+    @field_serializer("use")
+    def serialize_use(self, value):
+        if isinstance(value, str):
+            try:
+                return components.Use(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

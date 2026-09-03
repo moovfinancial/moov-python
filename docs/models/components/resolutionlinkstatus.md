@@ -8,6 +8,8 @@ The status of a resolution link.
 from moovio_sdk.models.components import ResolutionLinkStatus
 
 value = ResolutionLinkStatus.ACTIVE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

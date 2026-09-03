@@ -8,6 +8,8 @@ The card brand.
 from moovio_sdk.models.components import CardBrand
 
 value = CardBrand.AMERICAN_EXPRESS
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

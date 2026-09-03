@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import FulfillmentMethod
 
 value = FulfillmentMethod.BILL_OR_DEBT_PAYMENT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

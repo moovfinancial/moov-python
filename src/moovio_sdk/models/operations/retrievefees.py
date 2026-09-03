@@ -24,6 +24,7 @@ class RetrieveFeesRequestTypedDict(TypedDict):
     r"""Optional date-time to exclusively filter all fees created before this date-time."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
 
 
 class RetrieveFeesRequest(BaseModel):
@@ -77,6 +78,7 @@ class RetrieveFeesRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

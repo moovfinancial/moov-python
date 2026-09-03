@@ -10,6 +10,8 @@ Status of a wallet.
 from moovio_sdk.models.components import WalletStatus
 
 value = WalletStatus.ACTIVE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

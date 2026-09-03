@@ -85,7 +85,7 @@ class PaymentLinks(BaseSDK):
         :param expires_on: An optional expiration date for this payment link.
         :param customer:
         :param payment: Options for payment links used to collect payment.
-        :param payout:
+        :param payout: Options for payout links used to send a payout.
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
@@ -277,7 +277,7 @@ class PaymentLinks(BaseSDK):
         :param expires_on: An optional expiration date for this payment link.
         :param customer:
         :param payment: Options for payment links used to collect payment.
-        :param payout:
+        :param payout: Options for payout links used to send a payout.
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
@@ -421,7 +421,7 @@ class PaymentLinks(BaseSDK):
 
         :param account_id: The merchant account ID.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param types: A comma-separated list of payment link types to filter results.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -526,7 +526,7 @@ class PaymentLinks(BaseSDK):
 
         :param account_id: The merchant account ID.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param types: A comma-separated list of payment link types to filter results.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -870,7 +870,7 @@ class PaymentLinks(BaseSDK):
         :param display: Customizable display options for a payment link.
         :param customer:
         :param payment: Options for payment links used to collect payment.
-        :param payout:
+        :param payout: Options for payout links used to send a payout.
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method
@@ -1055,7 +1055,7 @@ class PaymentLinks(BaseSDK):
         :param display: Customizable display options for a payment link.
         :param customer:
         :param payment: Options for payment links used to collect payment.
-        :param payout:
+        :param payout: Options for payout links used to send a payout.
         :param line_items: An optional collection of line items for a payment link.
             When line items are provided, their total plus tax must equal the payment link amount.
         :param retries: Override the default retry configuration for this method

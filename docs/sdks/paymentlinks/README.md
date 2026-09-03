@@ -55,16 +55,14 @@ with Moov(
 
     res = moov.payment_links.create(account_id="cc1d04a8-03b1-4600-b675-e6180d574074", partner_account_id="d290f1ee-6c54-4b01-90e6-d701748f0851", merchant_payment_method_id="4c4e7f8e-81f4-4f3d-8f6f-6f6e7f8e4c4e", amount={
         "currency": "USD",
-        "value": 10000,
+        "value": 2500,
     }, display={
-        "title": "Support our cause",
-        "description": "Choose an amount to contribute.",
-        "call_to_action": components.CallToAction.DONATE,
+        "title": "Claim your payout",
+        "description": "Q3 rebate payout.",
+        "call_to_action": components.CallToAction.CONFIRM,
     }, sales_tax_amount={
         "currency": "USD",
         "value": 1204,
-    }, customer={
-        "require_phone": True,
     }, payment={
         "allowed_methods": [
             components.CollectionPaymentMethodType.GOOGLE_PAY,
@@ -77,35 +75,24 @@ with Moov(
             "originating_company_name": "Whole Body Fit",
         },
     }, payout={
-        "allowed_methods": [],
+        "allowed_methods": [
+            components.DisbursementPaymentMethodType.PUSH_TO_CARD,
+            components.DisbursementPaymentMethodType.PUSH_TO_APPLE_PAY,
+            components.DisbursementPaymentMethodType.RTP_CREDIT,
+            components.DisbursementPaymentMethodType.ACH_CREDIT_STANDARD,
+        ],
         "recipient": {
-            "email": "jordan.lee@classbooker.dev",
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
+            "email": "jordan@example.com",
+        },
+        "push_options": {
+            "allowed_speeds": [
+                components.PushDeliverySpeed.INSTANT,
+                components.PushDeliverySpeed.DEFERRED,
+            ],
+            "deferred_by": "24h",
         },
     }, line_items={
-        "items": [
-            {
-                "name": "<value>",
-                "base_price": {
-                    "currency": "USD",
-                    "value_decimal": "12.987654321",
-                },
-                "quantity": 61283,
-                "options": [
-                    {
-                        "name": "<value>",
-                        "quantity": 306874,
-                        "price_modifier": {
-                            "currency": "USD",
-                            "value_decimal": "12.987654321",
-                        },
-                    },
-                ],
-            },
-        ],
+        "items": [],
     })
 
     # Handle response
@@ -127,7 +114,7 @@ with Moov(
 | `expires_on`                                                                                                                                                                                                                                                                                     | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                                                                               | An optional expiration date for this payment link.                                                                                                                                                                                                                                               |
 | `customer`                                                                                                                                                                                                                                                                                       | [Optional[components.PaymentLinkCustomerOptions]](../../models/components/paymentlinkcustomeroptions.md)                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                               | N/A                                                                                                                                                                                                                                                                                              |
 | `payment`                                                                                                                                                                                                                                                                                        | [Optional[components.PaymentLinkPaymentDetails]](../../models/components/paymentlinkpaymentdetails.md)                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                                               | Options for payment links used to collect payment.                                                                                                                                                                                                                                               |
-| `payout`                                                                                                                                                                                                                                                                                         | [Optional[components.PaymentLinkPayoutDetails]](../../models/components/paymentlinkpayoutdetails.md)                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                                                                               | N/A                                                                                                                                                                                                                                                                                              |
+| `payout`                                                                                                                                                                                                                                                                                         | [Optional[components.PaymentLinkPayoutDetails]](../../models/components/paymentlinkpayoutdetails.md)                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                                                                               | Options for payout links used to send a payout.                                                                                                                                                                                                                                                  |
 | `line_items`                                                                                                                                                                                                                                                                                     | [Optional[components.CreatePaymentLinkLineItems]](../../models/components/createpaymentlinklineitems.md)                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                               | An optional collection of line items for a payment link.<br/>When line items are provided, their total plus tax must equal the payment link amount.                                                                                                                                              |
 | `retries`                                                                                                                                                                                                                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                               | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                              |
 
@@ -178,7 +165,7 @@ with Moov(
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | `account_id`                                                                   | *str*                                                                          | :heavy_check_mark:                                                             | The merchant account ID.                                                       |                                                                                |
 | `skip`                                                                         | *Optional[int]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            | 60                                                                             |
-| `count`                                                                        | *Optional[int]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            | 20                                                                             |
+| `count`                                                                        | *Optional[int]*                                                                | :heavy_minus_sign:                                                             | Page size. When omitted, the server defaults to `200`.                         | 20                                                                             |
 | `types`                                                                        | List[[components.PaymentLinkType](../../models/components/paymentlinktype.md)] | :heavy_minus_sign:                                                             | A comma-separated list of payment link types to filter results.                |                                                                                |
 | `retries`                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)               | :heavy_minus_sign:                                                             | Configuration to override the default retry behavior of the client.            |                                                                                |
 
@@ -267,9 +254,6 @@ with Moov(
     }, sales_tax_amount={
         "currency": "USD",
         "value": 1204,
-    }, customer={
-        "require_address": True,
-        "require_phone": True,
     }, payment={
         "card_details": {
             "dynamic_descriptor": "WhlBdy *Yoga 11-12",
@@ -279,12 +263,12 @@ with Moov(
             "originating_company_name": "Whole Body Fit",
         },
     }, payout={
+        "allowed_methods": [
+            components.DisbursementPaymentMethodType.PUSH_TO_CARD,
+            components.DisbursementPaymentMethodType.RTP_CREDIT,
+        ],
         "recipient": {
-            "email": "jordan.lee@classbooker.dev",
-            "phone": {
-                "number": "8185551212",
-                "country_code": "1",
-            },
+            "email": "jordan@example.com",
         },
     }, line_items={
         "items": [
@@ -326,7 +310,7 @@ with Moov(
 | `display`                                                                                                                                       | [Optional[components.PaymentLinkDisplayOptionsUpdate]](../../models/components/paymentlinkdisplayoptionsupdate.md)                              | :heavy_minus_sign:                                                                                                                              | Customizable display options for a payment link.                                                                                                |                                                                                                                                                 |
 | `customer`                                                                                                                                      | [Optional[components.PaymentLinkCustomerOptions]](../../models/components/paymentlinkcustomeroptions.md)                                        | :heavy_minus_sign:                                                                                                                              | N/A                                                                                                                                             |                                                                                                                                                 |
 | `payment`                                                                                                                                       | [Optional[components.PaymentLinkPaymentDetailsUpdate]](../../models/components/paymentlinkpaymentdetailsupdate.md)                              | :heavy_minus_sign:                                                                                                                              | Options for payment links used to collect payment.                                                                                              |                                                                                                                                                 |
-| `payout`                                                                                                                                        | [Optional[components.PaymentLinkPayoutDetailsUpdate]](../../models/components/paymentlinkpayoutdetailsupdate.md)                                | :heavy_minus_sign:                                                                                                                              | N/A                                                                                                                                             |                                                                                                                                                 |
+| `payout`                                                                                                                                        | [Optional[components.PaymentLinkPayoutDetailsUpdate]](../../models/components/paymentlinkpayoutdetailsupdate.md)                                | :heavy_minus_sign:                                                                                                                              | Options for payout links used to send a payout.                                                                                                 |                                                                                                                                                 |
 | `line_items`                                                                                                                                    | [Optional[components.CreatePaymentLinkLineItemsUpdate]](../../models/components/createpaymentlinklineitemsupdate.md)                            | :heavy_minus_sign:                                                                                                                              | An optional collection of line items for a payment link.<br/>When line items are provided, their total plus tax must equal the payment link amount. |                                                                                                                                                 |
 | `retries`                                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                | :heavy_minus_sign:                                                                                                                              | Configuration to override the default retry behavior of the client.                                                                             |                                                                                                                                                 |
 

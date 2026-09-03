@@ -3,8 +3,10 @@
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
 from .transferparty import TransferParty
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing import List
 from typing_extensions import Annotated, TypedDict
 
@@ -36,6 +38,15 @@ class MoovFee(BaseModel):
 
     fee_i_ds: Annotated[List[str], pydantic.Field(alias="feeIDs")]
     r"""List of fee IDs that sum to the totalAmount."""
+
+    @field_serializer("transfer_party")
+    def serialize_transfer_party(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TransferParty(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

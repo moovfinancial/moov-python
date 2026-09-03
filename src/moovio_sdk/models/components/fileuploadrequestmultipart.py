@@ -4,10 +4,11 @@ from __future__ import annotations
 from .filepurpose import FilePurpose
 from .fileuploadmetadata import FileUploadMetadata, FileUploadMetadataTypedDict
 import io
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import FieldMetadata, MultipartFormMetadata
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import IO, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -78,6 +79,15 @@ class FileUploadRequestMultiPart(BaseModel):
         FieldMetadata(multipart=MultipartFormMetadata(json=True)),
     ] = None
     r"""Additional metadata to be stored with the file."""
+
+    @field_serializer("file_purpose")
+    def serialize_file_purpose(self, value):
+        if isinstance(value, str):
+            try:
+                return components.FilePurpose(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class DebitHoldPeriod(str, Enum):
+class DebitHoldPeriod(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting."""
 
     NO_HOLD = "no-hold"

@@ -8,6 +8,8 @@ Types of documents that can be uploaded.
 from moovio_sdk.models.components import DocumentType
 
 value = DocumentType.DRIVERS_LICENSE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

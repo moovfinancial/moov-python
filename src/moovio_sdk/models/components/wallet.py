@@ -8,9 +8,10 @@ from .walletavailablebalance import (
 from .walletstatus import WalletStatus
 from .wallettype import WalletType
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -78,6 +79,24 @@ class Wallet(BaseModel):
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
 
     closed_on: Annotated[Optional[datetime], pydantic.Field(alias="closedOn")] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("wallet_type")
+    def serialize_wallet_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

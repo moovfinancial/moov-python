@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class FulfillmentTimeframe(str, Enum):
+class FulfillmentTimeframe(str, Enum, metaclass=utils.OpenEnumMeta):
     IMMEDIATE = "immediate"
     OTHER = "other"
     OVER_30_DAYS = "over-30-days"

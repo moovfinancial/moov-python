@@ -3,8 +3,10 @@
 from __future__ import annotations
 from .applepayresponse import ApplePayResponse, ApplePayResponseTypedDict
 from .paymentmethodtype import PaymentMethodType
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -28,6 +30,15 @@ class LinkedApplePayPaymentMethod(BaseModel):
 
     apple_pay: Annotated[ApplePayResponse, pydantic.Field(alias="applePay")]
     r"""Describes an Apple Pay token on a Moov account."""
+
+    @field_serializer("payment_method_type")
+    def serialize_payment_method_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.PaymentMethodType(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

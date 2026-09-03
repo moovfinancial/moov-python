@@ -12,6 +12,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PaymentLinkPayoutDetailsTypedDict(TypedDict):
+    r"""Options for payout links used to send a payout."""
+
     allowed_methods: List[DisbursementPaymentMethodType]
     r"""A list of payment methods that should be supported for this payment link."""
     recipient: PayoutRecipientTypedDict
@@ -23,14 +25,12 @@ class PaymentLinkPayoutDetailsTypedDict(TypedDict):
     metadata: NotRequired[Dict[str, str]]
     r"""Optional free-form metadata for the transfer."""
     push_options: NotRequired[PushOptionsTypedDict]
-    r"""Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes `push-to-card`.
-
-    The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-    (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these options.
-    """
+    r"""Delivery options for `push-to-card` and `push-to-apple-pay` payouts."""
 
 
 class PaymentLinkPayoutDetails(BaseModel):
+    r"""Options for payout links used to send a payout."""
+
     allowed_methods: Annotated[
         List[DisbursementPaymentMethodType], pydantic.Field(alias="allowedMethods")
     ]
@@ -49,11 +49,7 @@ class PaymentLinkPayoutDetails(BaseModel):
     push_options: Annotated[
         Optional[PushOptions], pydantic.Field(alias="pushOptions")
     ] = None
-    r"""Delivery options for push-to-card payouts. Only applies when `allowedMethods` includes `push-to-card`.
-
-    The `deferred` speed and `deferredBy` apply to `push-to-card` only. Other push methods
-    (`push-to-apple-pay`, `push-to-google-pay`) are always delivered instantly regardless of these options.
-    """
+    r"""Delivery options for `push-to-card` and `push-to-apple-pay` payouts."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
