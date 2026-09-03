@@ -8,6 +8,8 @@ Status of a transaction within the card payment lifecycle.
 from moovio_sdk.models.components import CardTransactionStatus
 
 value = CardTransactionStatus.INITIATED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

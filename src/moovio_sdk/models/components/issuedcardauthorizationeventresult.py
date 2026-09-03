@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class IssuedCardAuthorizationEventResult(str, Enum):
+class IssuedCardAuthorizationEventResult(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The result of an event."""
 
     APPROVED = "approved"

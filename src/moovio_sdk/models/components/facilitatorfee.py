@@ -12,14 +12,14 @@ class FacilitatorFeeTypedDict(TypedDict):
     r"""Total or markup fee."""
 
     total: NotRequired[int]
-    r"""Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set."""
+    r"""Total facilitator fee."""
     total_decimal: NotRequired[str]
     r"""Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
 
     Only either `total` or `totalDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
     """
     markup: NotRequired[int]
-    r"""Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set."""
+    r"""Markup facilitator fee."""
     markup_decimal: NotRequired[str]
     r"""Same as `markup`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
     Only either `markup` or `markupDecimal` can be set. Set this field if you expect the fee to be in fractions of a cent.
@@ -30,7 +30,7 @@ class FacilitatorFee(BaseModel):
     r"""Total or markup fee."""
 
     total: Optional[int] = None
-    r"""Total facilitator fee in cents. Only either `total` or `totalDecimal` can be set."""
+    r"""Total facilitator fee."""
 
     total_decimal: Annotated[Optional[str], pydantic.Field(alias="totalDecimal")] = None
     r"""Same as `total`, but a decimal-formatted numerical string that represents up to 9 decimal place precision.
@@ -39,7 +39,7 @@ class FacilitatorFee(BaseModel):
     """
 
     markup: Optional[int] = None
-    r"""Markup facilitator fee in cents. Only either `markup` or `markupDecimal` can be set."""
+    r"""Markup facilitator fee."""
 
     markup_decimal: Annotated[Optional[str], pydantic.Field(alias="markupDecimal")] = (
         None

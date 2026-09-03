@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class DisputePhase(str, Enum):
+class DisputePhase(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The phase of a dispute within the dispute lifecycle."""
 
     PRE_DISPUTE = "pre-dispute"

@@ -87,6 +87,7 @@ if TYPE_CHECKING:
     from .addresssuggestion import AddressSuggestion, AddressSuggestionTypedDict
     from .addressupdate import AddressUpdate, AddressUpdateTypedDict
     from .adjustment import Adjustment, AdjustmentTypedDict
+    from .adjustmentfees import AdjustmentFees, AdjustmentFeesTypedDict
     from .amount import Amount, AmountTypedDict
     from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
     from .amountdecimalvalidationerror import (
@@ -156,6 +157,7 @@ if TYPE_CHECKING:
         BatchGetTransfersRequestTypedDict,
     )
     from .billablefee import BillableFee, BillableFeeTypedDict
+    from .billingadjustment import BillingAdjustment, BillingAdjustmentTypedDict
     from .billingcountandamount import (
         BillingCountAndAmount,
         BillingCountAndAmountTypedDict,
@@ -165,9 +167,9 @@ if TYPE_CHECKING:
         BillingInterchangeProgramFeeTypedDict,
     )
     from .billingsummary import (
-        AdjustmentFees,
-        AdjustmentFeesTypedDict,
         BillingSummary,
+        BillingSummaryAdjustmentFees,
+        BillingSummaryAdjustmentFeesTypedDict,
         BillingSummaryPlatformFees,
         BillingSummaryPlatformFeesTypedDict,
         BillingSummaryTypedDict,
@@ -1504,11 +1506,15 @@ __all__ = [
     "BillableFeeTypedDict",
     "BillingAddress",
     "BillingAddressTypedDict",
+    "BillingAdjustment",
+    "BillingAdjustmentTypedDict",
     "BillingCountAndAmount",
     "BillingCountAndAmountTypedDict",
     "BillingInterchangeProgramFee",
     "BillingInterchangeProgramFeeTypedDict",
     "BillingSummary",
+    "BillingSummaryAdjustmentFees",
+    "BillingSummaryAdjustmentFeesTypedDict",
     "BillingSummaryDetails",
     "BillingSummaryDetailsTypedDict",
     "BillingSummaryInterchange",
@@ -2543,6 +2549,8 @@ _dynamic_imports: dict[str, str] = {
     "AddressUpdateTypedDict": ".addressupdate",
     "Adjustment": ".adjustment",
     "AdjustmentTypedDict": ".adjustment",
+    "AdjustmentFees": ".adjustmentfees",
+    "AdjustmentFeesTypedDict": ".adjustmentfees",
     "Amount": ".amount",
     "AmountTypedDict": ".amount",
     "AmountDecimal": ".amountdecimal",
@@ -2605,13 +2613,15 @@ _dynamic_imports: dict[str, str] = {
     "BatchGetTransfersRequestTypedDict": ".batchgettransfersrequest",
     "BillableFee": ".billablefee",
     "BillableFeeTypedDict": ".billablefee",
+    "BillingAdjustment": ".billingadjustment",
+    "BillingAdjustmentTypedDict": ".billingadjustment",
     "BillingCountAndAmount": ".billingcountandamount",
     "BillingCountAndAmountTypedDict": ".billingcountandamount",
     "BillingInterchangeProgramFee": ".billinginterchangeprogramfee",
     "BillingInterchangeProgramFeeTypedDict": ".billinginterchangeprogramfee",
-    "AdjustmentFees": ".billingsummary",
-    "AdjustmentFeesTypedDict": ".billingsummary",
     "BillingSummary": ".billingsummary",
+    "BillingSummaryAdjustmentFees": ".billingsummary",
+    "BillingSummaryAdjustmentFeesTypedDict": ".billingsummary",
     "BillingSummaryPlatformFees": ".billingsummary",
     "BillingSummaryPlatformFeesTypedDict": ".billingsummary",
     "BillingSummaryTypedDict": ".billingsummary",

@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import FulfillmentTimeframe
 
 value = FulfillmentTimeframe.IMMEDIATE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

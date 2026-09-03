@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class TerminalApplicationPlatform(str, Enum):
+class TerminalApplicationPlatform(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Platform of the terminal application."""
 
     UNDEFINED = "undefined"

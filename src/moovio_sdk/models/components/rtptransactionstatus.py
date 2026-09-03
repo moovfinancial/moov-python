@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class RTPTransactionStatus(str, Enum):
+class RTPTransactionStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Status of a transaction within the RTP lifecycle."""
 
     INITIATED = "initiated"

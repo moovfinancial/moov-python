@@ -8,6 +8,8 @@ Code used to identify the ACH authorization method.
 from moovio_sdk.models.components import SECCode
 
 value = SECCode.WEB
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

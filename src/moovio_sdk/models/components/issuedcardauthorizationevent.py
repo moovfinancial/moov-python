@@ -4,8 +4,10 @@ from __future__ import annotations
 from .issuedcardauthorizationeventresult import IssuedCardAuthorizationEventResult
 from .issuedcardeventtype import IssuedCardEventType
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -35,6 +37,24 @@ class IssuedCardAuthorizationEvent(BaseModel):
     r"""The result of an event."""
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+    @field_serializer("event_type")
+    def serialize_event_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuedCardEventType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("result")
+    def serialize_result(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuedCardAuthorizationEventResult(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

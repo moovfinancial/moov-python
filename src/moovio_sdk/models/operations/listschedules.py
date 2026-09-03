@@ -21,6 +21,7 @@ class ListSchedulesRequestTypedDict(TypedDict):
     account_id: str
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     hydrate: NotRequired[Hydrate]
 
 
@@ -40,6 +41,7 @@ class ListSchedulesRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     hydrate: Annotated[
         Optional[Hydrate],

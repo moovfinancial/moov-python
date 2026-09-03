@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .wallettype import WalletType
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -29,6 +31,15 @@ class TransferPaymentMethodsWallet(BaseModel):
     - `general`: An additional, user-defined wallet created via API or Dashboard.
     - `card-issuing`: The system-generated wallet automatically created when an account is granted the card-issuing capability.
     """
+
+    @field_serializer("wallet_type")
+    def serialize_wallet_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletType(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

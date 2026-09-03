@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import TransferParty
 
 value = TransferParty.SOURCE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

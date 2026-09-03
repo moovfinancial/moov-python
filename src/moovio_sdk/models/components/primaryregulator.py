@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class PrimaryRegulator(str, Enum):
+class PrimaryRegulator(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""If the business is a financial institution, this field describes its primary regulator."""
 
     OCC = "OCC"

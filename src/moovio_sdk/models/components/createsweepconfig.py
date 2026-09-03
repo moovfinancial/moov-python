@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .sweepconfigstatus import SweepConfigStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -40,6 +41,15 @@ class CreateSweepConfig(BaseModel):
     minimum_balance: Annotated[
         Optional[str], pydantic.Field(alias="minimumBalance")
     ] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.SweepConfigStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

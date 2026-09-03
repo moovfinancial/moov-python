@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import BankAccountStatus
 
 value = BankAccountStatus.NEW
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

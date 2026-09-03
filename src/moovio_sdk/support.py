@@ -290,7 +290,7 @@ class Support(BaseSDK):
 
         :param account_id:
         :param cursor:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param status:
         :param foreign_id:
         :param retries: Override the default retry configuration for this method
@@ -403,7 +403,7 @@ class Support(BaseSDK):
 
         :param account_id:
         :param cursor:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param status:
         :param foreign_id:
         :param retries: Override the default retry configuration for this method

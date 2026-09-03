@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class BankAccountType(str, Enum):
+class BankAccountType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The bank account type."""
 
     CHECKING = "checking"

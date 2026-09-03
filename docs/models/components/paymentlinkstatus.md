@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import PaymentLinkStatus
 
 value = PaymentLinkStatus.ACTIVE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

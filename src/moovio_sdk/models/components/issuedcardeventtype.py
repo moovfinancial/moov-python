@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class IssuedCardEventType(str, Enum):
+class IssuedCardEventType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The type of event that occurred on the card."""
 
     AUTHORIZATION = "authorization"

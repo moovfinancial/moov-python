@@ -3,7 +3,9 @@
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
 from .wallettransactiontype import WalletTransactionType
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
+from pydantic import field_serializer
 from typing_extensions import TypedDict
 
 
@@ -25,3 +27,12 @@ class SweepSubtotal(BaseModel):
 
     amount: AmountDecimal
     r"""The value of transactions of this type accrued in the sweep."""
+
+    @field_serializer("type")
+    def serialize_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletTransactionType(value)
+            except ValueError:
+                return value
+        return value

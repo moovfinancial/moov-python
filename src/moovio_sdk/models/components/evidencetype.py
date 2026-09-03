@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class EvidenceType(str, Enum):
+class EvidenceType(str, Enum, metaclass=utils.OpenEnumMeta):
     RECEIPT = "receipt"
     PROOF_OF_DELIVERY = "proof-of-delivery"
     CANCELATION_POLICY = "cancelation-policy"

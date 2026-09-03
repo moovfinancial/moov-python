@@ -4,8 +4,10 @@ from __future__ import annotations
 from .webhookdata import WebhookData, WebhookDataTypedDict
 from .webhookeventtype import WebhookEventType
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -34,6 +36,15 @@ class WebhookEvent(BaseModel):
     r"""The data for the webhook event. The contents are based on the event type."""
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+    @field_serializer("type")
+    def serialize_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WebhookEventType(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class SECCode(str, Enum):
+class SECCode(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Code used to identify the ACH authorization method."""
 
     WEB = "WEB"

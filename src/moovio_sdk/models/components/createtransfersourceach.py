@@ -7,9 +7,10 @@ from .createtransferachaddendarecord import (
 )
 from .debitholdperiod import DebitHoldPeriod
 from .seccode import SECCode
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -46,6 +47,24 @@ class CreateTransferSourceACH(BaseModel):
     r"""Code used to identify the ACH authorization method."""
 
     addenda: Optional[List[CreateTransferACHAddendaRecord]] = None
+
+    @field_serializer("debit_hold_period")
+    def serialize_debit_hold_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.DebitHoldPeriod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("sec_code")
+    def serialize_sec_code(self, value):
+        if isinstance(value, str):
+            try:
+                return components.SECCode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .accountfees import AccountFees, AccountFeesTypedDict
 from .achfees import ACHFees, ACHFeesTypedDict
+from .adjustmentfees import AdjustmentFees, AdjustmentFeesTypedDict
 from .billingsummary import BillingSummary, BillingSummaryTypedDict
 from .cardacquiringfees import CardAcquiringFees, CardAcquiringFeesTypedDict
 from .instantpaymentfees import InstantPaymentFees, InstantPaymentFeesTypedDict
@@ -54,6 +55,8 @@ class StatementTypedDict(TypedDict):
     r"""A detailed breakdown of other card-related fees."""
     partner_fees: NotRequired[PartnerFeesTypedDict]
     r"""Monthly partner costs that are charged separately and not included in residual subtotal (e.g. platform fees, minimums)."""
+    adjustments: NotRequired[AdjustmentFeesTypedDict]
+    r"""A detailed breakdown of adjustment (correction) fees by fee name."""
 
 
 class Statement(BaseModel):
@@ -130,6 +133,9 @@ class Statement(BaseModel):
     ] = None
     r"""Monthly partner costs that are charged separately and not included in residual subtotal (e.g. platform fees, minimums)."""
 
+    adjustments: Optional[AdjustmentFees] = None
+    r"""A detailed breakdown of adjustment (correction) fees by fee name."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -141,6 +147,7 @@ class Statement(BaseModel):
                 "accountFees",
                 "otherCardFees",
                 "partnerFees",
+                "adjustments",
             ]
         )
         serialized = handler(self)

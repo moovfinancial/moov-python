@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class IssuingAuthorizationStatus(str, Enum):
+class IssuingAuthorizationStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Status of a card issuing authorization."""
 
     PENDING = "pending"

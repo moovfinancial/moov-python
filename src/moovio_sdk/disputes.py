@@ -49,7 +49,7 @@ class Disputes(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param start_date_time: Optional date-time parameter to filter all disputes created on and after the provided date and time.
         :param end_date_time: Optional date-time parameter to filter all disputes created on and before the provided date and time.
         :param respond_start_date_time: Optional date-time which exclusively filters all disputes with respond by before this date-time.
@@ -187,7 +187,7 @@ class Disputes(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param start_date_time: Optional date-time parameter to filter all disputes created on and after the provided date and time.
         :param end_date_time: Optional date-time parameter to filter all disputes created on and before the provided date and time.
         :param respond_start_date_time: Optional date-time which exclusively filters all disputes with respond by before this date-time.
