@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CardTransactionFailureCode(str, Enum):
+class CardTransactionFailureCode(str, Enum, metaclass=utils.OpenEnumMeta):
     CALL_ISSUER = "call-issuer"
     DO_NOT_HONOR = "do-not-honor"
     PROCESSING_ERROR = "processing-error"
@@ -28,5 +29,21 @@ class CardTransactionFailureCode(str, Enum):
     ISSUER_NOT_AVAILABLE = "issuer-not-available"
     COULD_NOT_ROUTE = "could-not-route"
     CARDHOLDER_ACCOUNT_CLOSED = "cardholder-account-closed"
+    ACCOUNT_CLOSED = "account-closed"
+    ACCOUNT_NOT_ACTIVATED = "account-not-activated"
+    AUTHENTICATION_FAILED = "authentication-failed"
+    AUTHENTICATION_REQUIRED = "authentication-required"
+    CARDHOLDER_ACTION_REQUIRED = "cardholder-action-required"
+    FORMAT_ERROR = "format-error"
+    INVALID_PIN = "invalid-pin"
+    OFFLINE_APPROVED = "offline-approved"
+    OFFLINE_DECLINED = "offline-declined"
+    PARTIAL_APPROVAL = "partial-approval"
+    PAYMENT_STOPPED = "payment-stopped"
+    PIN_REQUIRED = "pin-required"
+    RECORD_NOT_FOUND = "record-not-found"
+    SURCHARGE_NOT_PERMITTED = "surcharge-not-permitted"
+    TRANSACTION_REVERSED = "transaction-reversed"
+    VERIFICATION_FAILED = "verification-failed"
     UNKNOWN_ISSUE = "unknown-issue"
     DUPLICATE_TRANSACTION = "duplicate-transaction"

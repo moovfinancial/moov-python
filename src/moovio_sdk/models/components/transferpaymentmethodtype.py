@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class TransferPaymentMethodType(str, Enum):
+class TransferPaymentMethodType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The payment method type that represents a payment rail and directionality"""
 
     MOOV_WALLET = "moov-wallet"
@@ -24,3 +25,4 @@ class TransferPaymentMethodType(str, Enum):
     GOOGLE_PAY = "google-pay"
     PUSH_TO_GOOGLE_PAY = "push-to-google-pay"
     PULL_FROM_GOOGLE_PAY = "pull-from-google-pay"
+    WIRE_CREDIT = "wire-credit"

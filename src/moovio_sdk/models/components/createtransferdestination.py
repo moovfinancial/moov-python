@@ -9,6 +9,10 @@ from .createtransferdestinationcard import (
     CreateTransferDestinationCard,
     CreateTransferDestinationCardTypedDict,
 )
+from .createtransferdestinationwire import (
+    CreateTransferDestinationWire,
+    CreateTransferDestinationWireTypedDict,
+)
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -22,6 +26,8 @@ class CreateTransferDestinationTypedDict(TypedDict):
     payment_method_id: str
     card_details: NotRequired[CreateTransferDestinationCardTypedDict]
     ach_details: NotRequired[CreateTransferDestinationACHTypedDict]
+    wire_details: NotRequired[CreateTransferDestinationWireTypedDict]
+    r"""Wire-specific options supplied when creating a transfer."""
 
 
 class CreateTransferDestination(BaseModel):
@@ -37,9 +43,14 @@ class CreateTransferDestination(BaseModel):
         Optional[CreateTransferDestinationACH], pydantic.Field(alias="achDetails")
     ] = None
 
+    wire_details: Annotated[
+        Optional[CreateTransferDestinationWire], pydantic.Field(alias="wireDetails")
+    ] = None
+    r"""Wire-specific options supplied when creating a transfer."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["cardDetails", "achDetails"])
+        optional_fields = set(["cardDetails", "achDetails", "wireDetails"])
         serialized = handler(self)
         m = {}
 

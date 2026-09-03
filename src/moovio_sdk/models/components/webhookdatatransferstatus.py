@@ -11,6 +11,7 @@ class WebhookDataTransferStatus(str, Enum):
     FAILED = "failed"
     REVERSED = "reversed"
     QUEUED = "queued"
+    AWAITING_CAPTURE = "awaiting-capture"
     CANCELED = "canceled"
     SOURCE_COMPLETED = "source.completed"
     SOURCE_CORRECTED = "source.corrected"

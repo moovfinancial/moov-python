@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class TransferType(str, Enum):
+class TransferType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The rail and direction used to move funds for a transfer."""
 
     CARD_PAYMENT = "card-payment"
@@ -15,3 +16,4 @@ class TransferType(str, Enum):
     ACH_DEBIT_TO_ACH_CREDIT = "ach-debit-to-ach-credit"
     INSTANT_BANK_CREDIT = "instant-bank-credit"
     WALLET = "wallet"
+    WIRE_CREDIT = "wire-credit"

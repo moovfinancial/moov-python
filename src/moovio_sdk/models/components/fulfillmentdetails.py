@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .returnpolicytype import ReturnPolicyType
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -22,6 +24,15 @@ class FulfillmentDetails(BaseModel):
     shipment_duration_days: Annotated[int, pydantic.Field(alias="shipmentDurationDays")]
 
     return_policy: Annotated[ReturnPolicyType, pydantic.Field(alias="returnPolicy")]
+
+    @field_serializer("return_policy")
+    def serialize_return_policy(self, value):
+        if isinstance(value, str):
+            try:
+                return components.ReturnPolicyType(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

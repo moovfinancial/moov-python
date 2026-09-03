@@ -3,8 +3,10 @@
 from __future__ import annotations
 from .sourcesystem import SourceSystem
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -35,6 +37,15 @@ class DepositAccountIngestedResponse(BaseModel):
 
     ingested_at: Annotated[datetime, pydantic.Field(alias="ingestedAt")]
     r"""The date and time the deposit account was ingested."""
+
+    @field_serializer("source_system")
+    def serialize_source_system(self, value):
+        if isinstance(value, str):
+            try:
+                return components.SourceSystem(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

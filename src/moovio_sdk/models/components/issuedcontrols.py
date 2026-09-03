@@ -51,9 +51,8 @@ class IssuedControlsTypedDict(TypedDict):
     merchant_category_restrictions: NotRequired[MerchantCategoryRestrictionsTypedDict]
     r"""Restricts card usage by merchant category. When not set, all categories are allowed."""
     merchant_restrictions: NotRequired[MerchantRestrictionsTypedDict]
-    r"""Restricts card usage to specific merchants, or blocks specific merchants."""
+    r"""Restricts card usage to specific merchants, independent of merchant category."""
     allowed_schedule: NotRequired[Nullable[IssuedControlsAllowedScheduleTypedDict]]
-    r"""Limits card usage to specific days and times."""
     expires_on: NotRequired[Nullable[datetime]]
     r"""A spend cutoff date and time. When set, all authorizations after this datetime are declined regardless of other controls."""
 
@@ -78,13 +77,12 @@ class IssuedControls(BaseModel):
     merchant_restrictions: Annotated[
         Optional[MerchantRestrictions], pydantic.Field(alias="merchantRestrictions")
     ] = None
-    r"""Restricts card usage to specific merchants, or blocks specific merchants."""
+    r"""Restricts card usage to specific merchants, independent of merchant category."""
 
     allowed_schedule: Annotated[
         OptionalNullable[IssuedControlsAllowedSchedule],
         pydantic.Field(alias="allowedSchedule"),
     ] = UNSET
-    r"""Limits card usage to specific days and times."""
 
     expires_on: Annotated[
         OptionalNullable[datetime], pydantic.Field(alias="expiresOn")

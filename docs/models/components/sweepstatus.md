@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import SweepStatus
 
 value = SweepStatus.ACCRUING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

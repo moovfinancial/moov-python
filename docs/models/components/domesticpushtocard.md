@@ -8,6 +8,8 @@ Indicates which level of domestic push-to-card transfer is supported by the card
 from moovio_sdk.models.components import DomesticPushToCard
 
 value = DomesticPushToCard.NOT_SUPPORTED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

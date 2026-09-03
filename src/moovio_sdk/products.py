@@ -32,7 +32,7 @@ class Products(BaseSDK):
             a product matches when the given category is anywhere in its category's breadcrumb
             (i.e. filtering by a top-level category returns products in any of its descendants).
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -139,7 +139,7 @@ class Products(BaseSDK):
             a product matches when the given category is anywhere in its category's breadcrumb
             (i.e. filtering by a top-level category returns products in any of its descendants).
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

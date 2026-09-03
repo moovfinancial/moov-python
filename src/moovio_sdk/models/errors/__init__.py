@@ -14,6 +14,10 @@ if TYPE_CHECKING:
     from .apierror import APIError
     from .assigncountrieserror import AssignCountriesError, AssignCountriesErrorData
     from .authtokenrequesterror import AuthTokenRequestError, AuthTokenRequestErrorData
+    from .bankaccountattestationvalidationerror import (
+        BankAccountAttestationValidationError,
+        BankAccountAttestationValidationErrorData,
+    )
     from .bankaccountvalidationerror import (
         BankAccountValidationError,
         BankAccountValidationErrorData,
@@ -73,6 +77,7 @@ if TYPE_CHECKING:
     )
     from .filevalidationerror import FileValidationError, FileValidationErrorData
     from .genericerror import GenericError, GenericErrorData
+    from .imagemetadata import ImageMetadata, ImageMetadataData
     from .imagemetadatavalidationerror import (
         ImageMetadataValidationError,
         ImageMetadataValidationErrorData,
@@ -191,6 +196,8 @@ __all__ = [
     "AssignCountriesErrorData",
     "AuthTokenRequestError",
     "AuthTokenRequestErrorData",
+    "BankAccountAttestationValidationError",
+    "BankAccountAttestationValidationErrorData",
     "BankAccountValidationError",
     "BankAccountValidationErrorData",
     "BrandValidationError",
@@ -237,6 +244,8 @@ __all__ = [
     "FileValidationErrorData",
     "GenericError",
     "GenericErrorData",
+    "ImageMetadata",
+    "ImageMetadataData",
     "ImageMetadataValidationError",
     "ImageMetadataValidationErrorData",
     "ImageRequestValidationError",
@@ -324,6 +333,8 @@ _dynamic_imports: dict[str, str] = {
     "AssignCountriesErrorData": ".assigncountrieserror",
     "AuthTokenRequestError": ".authtokenrequesterror",
     "AuthTokenRequestErrorData": ".authtokenrequesterror",
+    "BankAccountAttestationValidationError": ".bankaccountattestationvalidationerror",
+    "BankAccountAttestationValidationErrorData": ".bankaccountattestationvalidationerror",
     "BankAccountValidationError": ".bankaccountvalidationerror",
     "BankAccountValidationErrorData": ".bankaccountvalidationerror",
     "BrandValidationError": ".brandvalidationerror",
@@ -368,6 +379,8 @@ _dynamic_imports: dict[str, str] = {
     "FileValidationErrorData": ".filevalidationerror",
     "GenericError": ".genericerror",
     "GenericErrorData": ".genericerror",
+    "ImageMetadata": ".imagemetadata",
+    "ImageMetadataData": ".imagemetadata",
     "ImageMetadataValidationError": ".imagemetadatavalidationerror",
     "ImageMetadataValidationErrorData": ".imagemetadatavalidationerror",
     "ImageRequestValidationError": ".imagerequestvalidationerror",

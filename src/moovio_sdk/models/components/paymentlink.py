@@ -31,9 +31,10 @@ from .paymentlinkpayoutdetails import (
 from .paymentlinkstatus import PaymentLinkStatus
 from .paymentlinktype import PaymentLinkType
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -82,10 +83,9 @@ class PaymentLinkTypedDict(TypedDict):
     payment: NotRequired[PaymentLinkPaymentDetailsTypedDict]
     r"""Options for payment links used to collect payment."""
     payout: NotRequired[PaymentLinkPayoutDetailsTypedDict]
+    r"""Options for payout links used to send a payout."""
     custom_amount_payment: NotRequired[PaymentLinkCustomAmountPaymentDetailsTypedDict]
-    r"""Options for custom amount payment links.
-
-    A custom amount payment link shares all the options of a `payment` link, but the payor chooses how much to
+    r"""A custom amount payment link shares all the options of a `payment` link, but the payor chooses how much to
     pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
     """
     line_items: NotRequired[PaymentLinkLineItemsTypedDict]
@@ -165,14 +165,13 @@ class PaymentLink(BaseModel):
     r"""Options for payment links used to collect payment."""
 
     payout: Optional[PaymentLinkPayoutDetails] = None
+    r"""Options for payout links used to send a payout."""
 
     custom_amount_payment: Annotated[
         Optional[PaymentLinkCustomAmountPaymentDetails],
         pydantic.Field(alias="customAmountPayment"),
     ] = None
-    r"""Options for custom amount payment links.
-
-    A custom amount payment link shares all the options of a `payment` link, but the payor chooses how much to
+    r"""A custom amount payment link shares all the options of a `payment` link, but the payor chooses how much to
     pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
     """
 
@@ -190,6 +189,33 @@ class PaymentLink(BaseModel):
     amount_details: Annotated[
         Optional[PaymentLinkAmountDetails], pydantic.Field(alias="amountDetails")
     ] = None
+
+    @field_serializer("payment_link_type")
+    def serialize_payment_link_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.PaymentLinkType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("mode")
+    def serialize_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.Mode(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.PaymentLinkStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

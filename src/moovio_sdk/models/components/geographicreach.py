@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class GeographicReach(str, Enum):
+class GeographicReach(str, Enum, metaclass=utils.OpenEnumMeta):
     INTERNATIONAL_ONLY = "international-only"
     US_AND_INTERNATIONAL = "us-and-international"
     US_ONLY = "us-only"

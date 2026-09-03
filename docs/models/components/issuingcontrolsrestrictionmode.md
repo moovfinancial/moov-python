@@ -1,6 +1,6 @@
 # IssuingControlsRestrictionMode
 
-Whether the listed items are the only ones allowed (`allow`) or the ones to block (`block`).
+Whether the listed items should be allowed (`allow`) or blocked (`block`).
 
 ## Example Usage
 
@@ -8,6 +8,8 @@ Whether the listed items are the only ones allowed (`allow`) or the ones to bloc
 from moovio_sdk.models.components import IssuingControlsRestrictionMode
 
 value = IssuingControlsRestrictionMode.ALLOW
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

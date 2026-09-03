@@ -2,25 +2,41 @@
 
 from __future__ import annotations
 from .achexception import ACHException, ACHExceptionTypedDict
+from .achtransactionstatus import ACHTransactionStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ACHCreditTransferProcessingDetailsTypedDict(TypedDict):
+    status: ACHTransactionStatus
+    r"""Status of a transaction within the ACH lifecycle."""
     trace_number: str
     return_: NotRequired[ACHExceptionTypedDict]
     correction: NotRequired[ACHExceptionTypedDict]
 
 
 class ACHCreditTransferProcessingDetails(BaseModel):
+    status: ACHTransactionStatus
+    r"""Status of a transaction within the ACH lifecycle."""
+
     trace_number: Annotated[str, pydantic.Field(alias="traceNumber")]
 
     return_: Annotated[Optional[ACHException], pydantic.Field(alias="return")] = None
 
     correction: Optional[ACHException] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.ACHTransactionStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

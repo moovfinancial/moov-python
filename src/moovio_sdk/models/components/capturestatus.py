@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CaptureStatus(str, Enum):
+class CaptureStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     PENDING = "pending"
-    SUBMITTED = "submitted"
-    SETTLED = "settled"
     COMPLETED = "completed"
     FAILED = "failed"
     CANCELED = "canceled"

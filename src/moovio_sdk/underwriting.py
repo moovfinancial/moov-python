@@ -229,6 +229,9 @@ class Underwriting(BaseSDK):
         send_funds: Optional[
             Union[components.SendFunds, components.SendFundsTypedDict]
         ] = None,
+        card_issuing: Optional[
+            Union[components.CardIssuing, components.CardIssuingTypedDict]
+        ] = None,
         submission_intent: Optional[components.SubmissionIntent] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -250,6 +253,9 @@ class Underwriting(BaseSDK):
         :param collect_funds:
         :param money_transfer:
         :param send_funds:
+        :param card_issuing: Underwriting data for the `card-issuing` capability.
+
+            Issued cards are funded from the account's card-issuing wallet before they can be spent, so estimated activity is the only data collected.
         :param submission_intent:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -284,6 +290,9 @@ class Underwriting(BaseSDK):
                 ),
                 send_funds=utils.get_pydantic_model(
                     send_funds, Optional[components.SendFunds]
+                ),
+                card_issuing=utils.get_pydantic_model(
+                    card_issuing, Optional[components.CardIssuing]
                 ),
                 submission_intent=submission_intent,
             ),
@@ -389,6 +398,9 @@ class Underwriting(BaseSDK):
         send_funds: Optional[
             Union[components.SendFunds, components.SendFundsTypedDict]
         ] = None,
+        card_issuing: Optional[
+            Union[components.CardIssuing, components.CardIssuingTypedDict]
+        ] = None,
         submission_intent: Optional[components.SubmissionIntent] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -410,6 +422,9 @@ class Underwriting(BaseSDK):
         :param collect_funds:
         :param money_transfer:
         :param send_funds:
+        :param card_issuing: Underwriting data for the `card-issuing` capability.
+
+            Issued cards are funded from the account's card-issuing wallet before they can be spent, so estimated activity is the only data collected.
         :param submission_intent:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -444,6 +459,9 @@ class Underwriting(BaseSDK):
                 ),
                 send_funds=utils.get_pydantic_model(
                     send_funds, Optional[components.SendFunds]
+                ),
+                card_issuing=utils.get_pydantic_model(
+                    card_issuing, Optional[components.CardIssuing]
                 ),
                 submission_intent=submission_intent,
             ),

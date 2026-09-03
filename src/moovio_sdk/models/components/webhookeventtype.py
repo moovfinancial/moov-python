@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class WebhookEventType(str, Enum):
+class WebhookEventType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The type of event that occurred."""
 
     WILDCARD_ = "*"
@@ -15,6 +16,7 @@ class WebhookEventType(str, Enum):
     BANK_ACCOUNT_CREATED = "bankAccount.created"
     BANK_ACCOUNT_UPDATED = "bankAccount.updated"
     BANK_ACCOUNT_DELETED = "bankAccount.deleted"
+    CAPTURE_UPDATED = "capture.updated"
     CANCELLATION_CREATED = "cancellation.created"
     CANCELLATION_UPDATED = "cancellation.updated"
     CARD_AUTO_UPDATED = "card.autoUpdated"

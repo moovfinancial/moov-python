@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .transactionsource import TransactionSource
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -34,6 +35,15 @@ class CardPaymentOptions(BaseModel):
     Crucial for recurring and merchant-initiated transactions as per card scheme rules.
     Omit for customer-initiated e-commerce transactions.
     """
+
+    @field_serializer("transaction_source")
+    def serialize_transaction_source(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TransactionSource(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

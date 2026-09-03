@@ -10,6 +10,8 @@ Defines which amount should be used when calculating the final payment total. Th
 from moovio_sdk.models.components import TipCalculationBasis
 
 value = TipCalculationBasis.PRE_TAX
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

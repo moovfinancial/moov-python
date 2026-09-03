@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CreateAccountType(str, Enum):
+class CreateAccountType(str, Enum, metaclass=utils.OpenEnumMeta):
     INDIVIDUAL = "individual"
     BUSINESS = "business"

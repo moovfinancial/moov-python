@@ -29,7 +29,7 @@ class CardAcquiringRefundData(BaseModel):
         pydantic.Field(alias="processingDetails"),
     ]
     capture_id: Annotated[Optional[str], pydantic.Field(alias="captureID")] = None
-    r"""ID of the capture this refund applies to, when applicable."""
+    r"""ID of the capture refunded for an auth-capture `card-payment` transfer."""
     amount_details: Annotated[
         Optional[components_refundamountdetails.RefundAmountDetails],
         pydantic.Field(alias="amountDetails"),

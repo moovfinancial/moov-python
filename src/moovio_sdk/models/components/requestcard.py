@@ -20,6 +20,7 @@ class RequestCardTypedDict(TypedDict):
     expiration: NotRequired[CardExpirationTypedDict]
     r"""The expiration date of the card or token."""
     controls: NotRequired[IssuingControlsTypedDict]
+    r"""Mutable spend controls for the card."""
 
 
 class RequestCard(BaseModel):
@@ -40,6 +41,7 @@ class RequestCard(BaseModel):
     r"""The expiration date of the card or token."""
 
     controls: Optional[IssuingControls] = None
+    r"""Mutable spend controls for the card."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

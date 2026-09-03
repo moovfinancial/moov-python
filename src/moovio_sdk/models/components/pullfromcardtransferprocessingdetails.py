@@ -2,14 +2,18 @@
 
 from __future__ import annotations
 from .cardtransactionfailurecode import CardTransactionFailureCode
+from .pullfromcardtransactionstatus import PullFromCardTransactionStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PullFromCardTransferProcessingDetailsTypedDict(TypedDict):
+    status: PullFromCardTransactionStatus
+    r"""Status of a pull-from-card transaction."""
     authorization_code: NotRequired[str]
     network_transaction_id: NotRequired[str]
     network_response_code: NotRequired[str]
@@ -17,6 +21,9 @@ class PullFromCardTransferProcessingDetailsTypedDict(TypedDict):
 
 
 class PullFromCardTransferProcessingDetails(BaseModel):
+    status: PullFromCardTransactionStatus
+    r"""Status of a pull-from-card transaction."""
+
     authorization_code: Annotated[
         Optional[str], pydantic.Field(alias="authorizationCode")
     ] = None
@@ -32,6 +39,24 @@ class PullFromCardTransferProcessingDetails(BaseModel):
     failure_code: Annotated[
         Optional[CardTransactionFailureCode], pydantic.Field(alias="failureCode")
     ] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.PullFromCardTransactionStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("failure_code")
+    def serialize_failure_code(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardTransactionFailureCode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

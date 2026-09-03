@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import PendingLitigation
 
 value = PendingLitigation.BANKRUPTCY_OR_INSOLVENCY
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -21,6 +21,7 @@ class ListProductsRequestTypedDict(TypedDict):
     """
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
 
 
 class ListProductsRequest(BaseModel):
@@ -54,6 +55,7 @@ class ListProductsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

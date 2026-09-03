@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CapabilityID(str, Enum):
+class CapabilityID(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Moov account capabilities.
 
     **Deprecated capabilities**

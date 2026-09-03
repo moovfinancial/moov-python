@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class FeeCategory(str, Enum):
+class FeeCategory(str, Enum, metaclass=utils.OpenEnumMeta):
     ACH = "ach"
     CARD_ACQUIRING = "card-acquiring"
     CARD_OTHER = "card-other"

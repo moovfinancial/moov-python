@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import InvoiceStatus
 
 value = InvoiceStatus.DRAFT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

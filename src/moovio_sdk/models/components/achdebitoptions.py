@@ -7,9 +7,10 @@ from .transferachaddendarecord import (
     TransferACHAddendaRecord,
     TransferACHAddendaRecordTypedDict,
 )
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -46,6 +47,24 @@ class ACHDebitOptions(BaseModel):
     r"""An optional override of your default ACH hold period in banking days. The hold period must be longer than or equal to your default setting."""
 
     addenda: Optional[List[TransferACHAddendaRecord]] = None
+
+    @field_serializer("sec_code")
+    def serialize_sec_code(self, value):
+        if isinstance(value, str):
+            try:
+                return components.SECCode(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("debit_hold_period")
+    def serialize_debit_hold_period(self, value):
+        if isinstance(value, str):
+            try:
+                return components.DebitHoldPeriod(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

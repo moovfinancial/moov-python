@@ -8,6 +8,8 @@ The reason the bank account status changed to the current value.
 from moovio_sdk.models.components import BankAccountStatusReason
 
 value = BankAccountStatusReason.BANK_ACCOUNT_CREATED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

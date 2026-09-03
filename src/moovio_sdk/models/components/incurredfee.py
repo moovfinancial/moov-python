@@ -5,9 +5,10 @@ from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
 from .feepaidby import FeePaidBy
 from .generatedby import GeneratedBy, GeneratedByTypedDict
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -73,6 +74,15 @@ class IncurredFee(BaseModel):
         None
     )
     r"""Indicates which party to the money movement bore this fee."""
+
+    @field_serializer("fee_paid_by")
+    def serialize_fee_paid_by(self, value):
+        if isinstance(value, str):
+            try:
+                return components.FeePaidBy(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

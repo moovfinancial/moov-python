@@ -18,8 +18,11 @@ class ListIssuedCardTransactionsRequestTypedDict(TypedDict):
     r"""The Moov business account for which cards have been issued."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     issued_card_id: NotRequired[str]
     r"""Optional ID of the issued card to filter results."""
+    merchant_name: NotRequired[str]
+    r"""Optional case-insensitive substring match on the merchant name to filter results."""
     start_date_time: NotRequired[datetime]
     r"""Optional date-time which inclusively filters all card transactions created after this date-time."""
     end_date_time: NotRequired[datetime]
@@ -43,6 +46,7 @@ class ListIssuedCardTransactionsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     issued_card_id: Annotated[
         Optional[str],
@@ -50,6 +54,13 @@ class ListIssuedCardTransactionsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""Optional ID of the issued card to filter results."""
+
+    merchant_name: Annotated[
+        Optional[str],
+        pydantic.Field(alias="merchantName"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional case-insensitive substring match on the merchant name to filter results."""
 
     start_date_time: Annotated[
         Optional[datetime],
@@ -68,7 +79,14 @@ class ListIssuedCardTransactionsRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["skip", "count", "issuedCardID", "startDateTime", "endDateTime"]
+            [
+                "skip",
+                "count",
+                "issuedCardID",
+                "merchantName",
+                "startDateTime",
+                "endDateTime",
+            ]
         )
         serialized = handler(self)
         m = {}

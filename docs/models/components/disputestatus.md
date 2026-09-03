@@ -10,6 +10,8 @@ Read our [disputes guide](https://docs.moov.io/guides/money-movement/accept-paym
 from moovio_sdk.models.components import DisputeStatus
 
 value = DisputeStatus.RESPONSE_NEEDED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -16,6 +16,7 @@ class ListResidualFeesRequestTypedDict(TypedDict):
     r"""Unique identifier for this residual payment calculation."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     start_date_time: NotRequired[str]
     r"""Optional date-time to inclusively filter all fees created after this date-time."""
     end_date_time: NotRequired[str]
@@ -45,6 +46,7 @@ class ListResidualFeesRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     start_date_time: Annotated[
         Optional[str],

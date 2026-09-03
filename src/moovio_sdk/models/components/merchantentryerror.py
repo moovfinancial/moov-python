@@ -9,12 +9,12 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class MerchantEntryErrorTypedDict(TypedDict):
-    mid: NotRequired[str]
+    network_id: NotRequired[str]
     descriptor_pattern: NotRequired[str]
 
 
 class MerchantEntryError(BaseModel):
-    mid: Optional[str] = None
+    network_id: Annotated[Optional[str], pydantic.Field(alias="networkID")] = None
 
     descriptor_pattern: Annotated[
         Optional[str], pydantic.Field(alias="descriptorPattern")
@@ -22,7 +22,7 @@ class MerchantEntryError(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["mid", "descriptorPattern"])
+        optional_fields = set(["networkID", "descriptorPattern"])
         serialized = handler(self)
         m = {}
 

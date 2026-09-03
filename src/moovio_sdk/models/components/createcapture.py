@@ -18,14 +18,18 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CreateCaptureTypedDict(TypedDict):
-    r"""Request to capture funds against an authorized transfer."""
+    r"""Request to capture funds against an authorization."""
 
     destination_payment_method_id: str
     r"""Payment method of the merchant account to capture funds into. For card-acquiring transfers, this must be a moov-wallet payment method."""
     amount: NotRequired[AmountDecimalTypedDict]
-    r"""Amount to capture. If omitted, the remaining authorized amount is captured."""
+    r"""Amount to capture.
+    If omitted, the remaining capturable amount is captured.
+    """
     is_final: NotRequired[bool]
-    r"""Indicates whether this is the final capture against the authorization. When `true`, any remaining authorized amount is voided."""
+    r"""Indicates whether this is intended to be the final capture.
+    When `true`, any remaining capturable amount is voided.
+    """
     description: NotRequired[str]
     r"""An optional description of the capture that is used on receipts and for your own internal use."""
     metadata: NotRequired[Dict[str, str]]
@@ -38,11 +42,13 @@ class CreateCaptureTypedDict(TypedDict):
     """
     amount_details: NotRequired[CreateTransferAmountDetailsTypedDict]
     facilitator_fee_amount: NotRequired[AmountDecimalTypedDict]
-    r"""The facilitator fee amount applied to the capture."""
+    r"""The facilitator fee applied to this capture.
+    The transfer's facilitator fee is the sum of its capture fees.
+    """
 
 
 class CreateCapture(BaseModel):
-    r"""Request to capture funds against an authorized transfer."""
+    r"""Request to capture funds against an authorization."""
 
     destination_payment_method_id: Annotated[
         str, pydantic.Field(alias="destinationPaymentMethodID")
@@ -50,10 +56,14 @@ class CreateCapture(BaseModel):
     r"""Payment method of the merchant account to capture funds into. For card-acquiring transfers, this must be a moov-wallet payment method."""
 
     amount: Optional[AmountDecimal] = None
-    r"""Amount to capture. If omitted, the remaining authorized amount is captured."""
+    r"""Amount to capture.
+    If omitted, the remaining capturable amount is captured.
+    """
 
     is_final: Annotated[Optional[bool], pydantic.Field(alias="isFinal")] = None
-    r"""Indicates whether this is the final capture against the authorization. When `true`, any remaining authorized amount is voided."""
+    r"""Indicates whether this is intended to be the final capture.
+    When `true`, any remaining capturable amount is voided.
+    """
 
     description: Optional[str] = None
     r"""An optional description of the capture that is used on receipts and for your own internal use."""
@@ -78,7 +88,9 @@ class CreateCapture(BaseModel):
     facilitator_fee_amount: Annotated[
         Optional[AmountDecimal], pydantic.Field(alias="facilitatorFeeAmount")
     ] = None
-    r"""The facilitator fee amount applied to the capture."""
+    r"""The facilitator fee applied to this capture.
+    The transfer's facilitator fee is the sum of its capture fees.
+    """
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

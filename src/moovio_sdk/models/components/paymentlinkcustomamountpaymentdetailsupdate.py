@@ -17,9 +17,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict(TypedDict):
-    r"""Options for custom amount payment links.
-
-    A custom amount payment link shares all the options of a `payment` link, but the payor chooses how much to
+    r"""A custom amount payment link shares all the options of a `payment` link, but the payor chooses how much to
     pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
     """
 
@@ -44,9 +42,7 @@ class PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict(TypedDict):
 
 
 class PaymentLinkCustomAmountPaymentDetailsUpdate(BaseModel):
-    r"""Options for custom amount payment links.
-
-    A custom amount payment link shares all the options of a `payment` link, but the payor chooses how much to
+    r"""A custom amount payment link shares all the options of a `payment` link, but the payor chooses how much to
     pay rather than the merchant fixing the amount. The amount may optionally be constrained to a range.
     """
 

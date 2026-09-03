@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .fulfillmentmethod import FulfillmentMethod
 from .fulfillmenttimeframe import FulfillmentTimeframe
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -18,6 +19,24 @@ class Fulfillment(BaseModel):
     method: Optional[FulfillmentMethod] = None
 
     timeframe: Optional[FulfillmentTimeframe] = None
+
+    @field_serializer("method")
+    def serialize_method(self, value):
+        if isinstance(value, str):
+            try:
+                return components.FulfillmentMethod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("timeframe")
+    def serialize_timeframe(self, value):
+        if isinstance(value, str):
+            try:
+                return components.FulfillmentTimeframe(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

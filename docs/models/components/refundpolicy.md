@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import RefundPolicy
 
 value = RefundPolicy.CONDITIONAL_REFUND
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

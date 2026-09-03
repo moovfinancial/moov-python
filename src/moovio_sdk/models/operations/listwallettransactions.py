@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.models.components import (
     wallettransaction as components_wallettransaction,
     wallettransactionsourcetype as components_wallettransactionsourcetype,
@@ -11,7 +12,7 @@ from moovio_sdk.models.components import (
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -21,6 +22,7 @@ class ListWalletTransactionsRequestTypedDict(TypedDict):
     wallet_id: str
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     transaction_type: NotRequired[
         components_wallettransactiontype.WalletTransactionType
     ]
@@ -71,6 +73,7 @@ class ListWalletTransactionsRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     transaction_type: Annotated[
         Optional[components_wallettransactiontype.WalletTransactionType],
@@ -140,6 +143,33 @@ class ListWalletTransactionsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
     r"""Optional ID to filter for transactions accrued in a sweep."""
+
+    @field_serializer("transaction_type")
+    def serialize_transaction_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletTransactionType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("source_type")
+    def serialize_source_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletTransactionSourceType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletTransactionStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

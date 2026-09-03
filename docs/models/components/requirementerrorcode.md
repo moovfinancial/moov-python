@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import RequirementErrorCode
 
 value = RequirementErrorCode.INVALID_VALUE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

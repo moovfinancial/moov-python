@@ -7,6 +7,7 @@ from .issuingvelocitylimit import IssuingVelocityLimit, IssuingVelocityLimitType
 from .merchantentry import MerchantEntry, MerchantEntryTypedDict
 from .schedulewindow import ScheduleWindow, ScheduleWindowTypedDict
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import (
     BaseModel,
     Nullable,
@@ -15,16 +16,16 @@ from moovio_sdk.types import (
     UNSET_SENTINEL,
 )
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class UpdateIssuingControlsMerchantCategoryRestrictionsTypedDict(TypedDict):
-    r"""Replaces the merchant category restrictions. Set to `null` to remove."""
+    r"""Restricts card usage by merchant category. Set to `null` to remove all category restrictions."""
 
     mode: NotRequired[IssuingControlsRestrictionMode]
-    r"""Whether the listed categories are the only ones allowed, or the ones to block."""
+    r"""Whether the listed items should be allowed (`allow`) or blocked (`block`)."""
     categories: NotRequired[List[IssuingMerchantCategory]]
     r"""Predefined category groups to allow or block."""
     custom_mc_cs: NotRequired[List[str]]
@@ -34,10 +35,10 @@ class UpdateIssuingControlsMerchantCategoryRestrictionsTypedDict(TypedDict):
 
 
 class UpdateIssuingControlsMerchantCategoryRestrictions(BaseModel):
-    r"""Replaces the merchant category restrictions. Set to `null` to remove."""
+    r"""Restricts card usage by merchant category. Set to `null` to remove all category restrictions."""
 
     mode: Optional[IssuingControlsRestrictionMode] = None
-    r"""Whether the listed categories are the only ones allowed, or the ones to block."""
+    r"""Whether the listed items should be allowed (`allow`) or blocked (`block`)."""
 
     categories: Optional[List[IssuingMerchantCategory]] = None
     r"""Predefined category groups to allow or block."""
@@ -51,6 +52,15 @@ class UpdateIssuingControlsMerchantCategoryRestrictions(BaseModel):
         Optional[List[MerchantEntry]], pydantic.Field(alias="exemptMerchants")
     ] = None
     r"""Merchants that are exempt from category restrictions regardless of their category."""
+
+    @field_serializer("mode")
+    def serialize_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuingControlsRestrictionMode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -70,22 +80,31 @@ class UpdateIssuingControlsMerchantCategoryRestrictions(BaseModel):
 
 
 class UpdateIssuingControlsMerchantRestrictionsTypedDict(TypedDict):
-    r"""Replaces the merchant restrictions. Set to `null` to remove."""
+    r"""Restricts card usage to specific merchants, independent of merchant category. Set to `null` to remove merchant restrictions."""
 
     mode: NotRequired[IssuingControlsRestrictionMode]
-    r"""Whether the listed merchants are the only ones allowed, or the ones to block."""
+    r"""Whether the listed items should be allowed (`allow`) or blocked (`block`)."""
     merchants: NotRequired[List[MerchantEntryTypedDict]]
     r"""The merchants to allow or block."""
 
 
 class UpdateIssuingControlsMerchantRestrictions(BaseModel):
-    r"""Replaces the merchant restrictions. Set to `null` to remove."""
+    r"""Restricts card usage to specific merchants, independent of merchant category. Set to `null` to remove merchant restrictions."""
 
     mode: Optional[IssuingControlsRestrictionMode] = None
-    r"""Whether the listed merchants are the only ones allowed, or the ones to block."""
+    r"""Whether the listed items should be allowed (`allow`) or blocked (`block`)."""
 
     merchants: Optional[List[MerchantEntry]] = None
     r"""The merchants to allow or block."""
+
+    @field_serializer("mode")
+    def serialize_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuingControlsRestrictionMode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -105,7 +124,7 @@ class UpdateIssuingControlsMerchantRestrictions(BaseModel):
 
 
 class UpdateIssuingControlsAllowedScheduleTypedDict(TypedDict):
-    r"""Replaces the allowed schedule. Set to `null` to remove all schedule restrictions."""
+    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
 
     timezone: NotRequired[str]
     r"""IANA timezone string used to evaluate window boundaries against the authorization time."""
@@ -114,7 +133,7 @@ class UpdateIssuingControlsAllowedScheduleTypedDict(TypedDict):
 
 
 class UpdateIssuingControlsAllowedSchedule(BaseModel):
-    r"""Replaces the allowed schedule. Set to `null` to remove all schedule restrictions."""
+    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
 
     timezone: Optional[str] = None
     r"""IANA timezone string used to evaluate window boundaries against the authorization time."""
@@ -140,28 +159,28 @@ class UpdateIssuingControlsAllowedSchedule(BaseModel):
 
 
 class UpdateIssuingControlsTypedDict(TypedDict):
-    r"""Mutable spend controls. Each field replaces the entire corresponding value."""
+    r"""Each field replaces the entire corresponding value."""
 
     velocity_limits: NotRequired[List[IssuingVelocityLimitTypedDict]]
     r"""Replaces the entire set of velocity limits. Send an empty array to clear all limits."""
     merchant_category_restrictions: NotRequired[
         Nullable[UpdateIssuingControlsMerchantCategoryRestrictionsTypedDict]
     ]
-    r"""Replaces the merchant category restrictions. Set to `null` to remove."""
+    r"""Restricts card usage by merchant category. Set to `null` to remove all category restrictions."""
     merchant_restrictions: NotRequired[
         Nullable[UpdateIssuingControlsMerchantRestrictionsTypedDict]
     ]
-    r"""Replaces the merchant restrictions. Set to `null` to remove."""
+    r"""Restricts card usage to specific merchants, independent of merchant category. Set to `null` to remove merchant restrictions."""
     allowed_schedule: NotRequired[
         Nullable[UpdateIssuingControlsAllowedScheduleTypedDict]
     ]
-    r"""Replaces the allowed schedule. Set to `null` to remove all schedule restrictions."""
+    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
     expires_on: NotRequired[Nullable[datetime]]
-    r"""A spend cutoff date and time. Set to `null` to remove the cutoff."""
+    r"""A spend cutoff date and time. Set to `null` to remove the spend cutoff."""
 
 
 class UpdateIssuingControls(BaseModel):
-    r"""Mutable spend controls. Each field replaces the entire corresponding value."""
+    r"""Each field replaces the entire corresponding value."""
 
     velocity_limits: Annotated[
         Optional[List[IssuingVelocityLimit]], pydantic.Field(alias="velocityLimits")
@@ -172,24 +191,24 @@ class UpdateIssuingControls(BaseModel):
         OptionalNullable[UpdateIssuingControlsMerchantCategoryRestrictions],
         pydantic.Field(alias="merchantCategoryRestrictions"),
     ] = UNSET
-    r"""Replaces the merchant category restrictions. Set to `null` to remove."""
+    r"""Restricts card usage by merchant category. Set to `null` to remove all category restrictions."""
 
     merchant_restrictions: Annotated[
         OptionalNullable[UpdateIssuingControlsMerchantRestrictions],
         pydantic.Field(alias="merchantRestrictions"),
     ] = UNSET
-    r"""Replaces the merchant restrictions. Set to `null` to remove."""
+    r"""Restricts card usage to specific merchants, independent of merchant category. Set to `null` to remove merchant restrictions."""
 
     allowed_schedule: Annotated[
         OptionalNullable[UpdateIssuingControlsAllowedSchedule],
         pydantic.Field(alias="allowedSchedule"),
     ] = UNSET
-    r"""Replaces the allowed schedule. Set to `null` to remove all schedule restrictions."""
+    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
 
     expires_on: Annotated[
         OptionalNullable[datetime], pydantic.Field(alias="expiresOn")
     ] = UNSET
-    r"""A spend cutoff date and time. Set to `null` to remove the cutoff."""
+    r"""A spend cutoff date and time. Set to `null` to remove the spend cutoff."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -8,6 +8,8 @@ The type of entity represented by this account.
 from moovio_sdk.models.components import AccountType
 
 value = AccountType.INDIVIDUAL
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

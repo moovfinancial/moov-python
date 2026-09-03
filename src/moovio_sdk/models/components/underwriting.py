@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .businesspresence import BusinessPresence
+from .cardissuing import CardIssuing, CardIssuingTypedDict
 from .cardvolumedistribution import (
     CardVolumeDistribution,
     CardVolumeDistributionTypedDict,
@@ -18,9 +19,10 @@ from .volumesharebycustomertype import (
     VolumeShareByCustomerType,
     VolumeShareByCustomerTypeTypedDict,
 )
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -42,6 +44,11 @@ class UnderwritingTypedDict(TypedDict):
     collect_funds: NotRequired[CollectFundsTypedDict]
     money_transfer: NotRequired[MoneyTransferTypedDict]
     send_funds: NotRequired[SendFundsTypedDict]
+    card_issuing: NotRequired[CardIssuingTypedDict]
+    r"""Underwriting data for the `card-issuing` capability.
+
+    Issued cards are funded from the account's card-issuing wallet before they can be spent, so estimated activity is the only data collected.
+    """
 
 
 class Underwriting(BaseModel):
@@ -103,6 +110,50 @@ class Underwriting(BaseModel):
 
     send_funds: Annotated[Optional[SendFunds], pydantic.Field(alias="sendFunds")] = None
 
+    card_issuing: Annotated[
+        Optional[CardIssuing], pydantic.Field(alias="cardIssuing")
+    ] = None
+    r"""Underwriting data for the `card-issuing` capability.
+
+    Issued cards are funded from the account's card-issuing wallet before they can be spent, so estimated activity is the only data collected.
+    """
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.UnderwritingStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("geographic_reach")
+    def serialize_geographic_reach(self, value):
+        if isinstance(value, str):
+            try:
+                return components.GeographicReach(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("business_presence")
+    def serialize_business_presence(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BusinessPresence(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("pending_litigation")
+    def serialize_pending_litigation(self, value):
+        if isinstance(value, str):
+            try:
+                return components.PendingLitigation(value)
+            except ValueError:
+                return value
+        return value
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -121,6 +172,7 @@ class Underwriting(BaseModel):
                 "collectFunds",
                 "moneyTransfer",
                 "sendFunds",
+                "cardIssuing",
             ]
         )
         serialized = handler(self)

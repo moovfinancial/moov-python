@@ -12,14 +12,22 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class CreateReversalTypedDict(TypedDict):
     amount: AmountDecimalTypedDict
-    r"""Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation."""
+    r"""Amount to reverse.
+    Before v2026.10, specify the amount in integer cents.
+    For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no captures uses the full `capturableAmount`.
+    For those transfers with one final capture, a cancellation uses the full capture amount, while a refund may be partial.
+    """
     amount_details: NotRequired[ReversalAmountDetailsTypedDict]
     r"""Breakdown of the reversed amount."""
 
 
 class CreateReversal(BaseModel):
     amount: AmountDecimal
-    r"""Amount to reverse. Before v2026.10, specify the amount in integer cents. Partial amounts automatically trigger a refund instead of a cancellation."""
+    r"""Amount to reverse.
+    Before v2026.10, specify the amount in integer cents.
+    For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no captures uses the full `capturableAmount`.
+    For those transfers with one final capture, a cancellation uses the full capture amount, while a refund may be partial.
+    """
 
     amount_details: Annotated[
         Optional[ReversalAmountDetails], pydantic.Field(alias="amountDetails")

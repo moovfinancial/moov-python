@@ -1,13 +1,13 @@
 # FeePaidBy
 
-Indicates which party to a money movement bears an incurred fee.
-
 ## Example Usage
 
 ```python
 from moovio_sdk.models.components import FeePaidBy
 
 value = FeePaidBy.SOURCE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

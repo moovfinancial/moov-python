@@ -72,6 +72,7 @@ class CreatePaymentLinkTypedDict(TypedDict):
     payment: NotRequired[PaymentLinkPaymentDetailsTypedDict]
     r"""Options for payment links used to collect payment."""
     payout: NotRequired[PaymentLinkPayoutDetailsTypedDict]
+    r"""Options for payout links used to send a payout."""
     custom_amount_payment: NotRequired[PaymentLinkCustomAmountPaymentDetailsTypedDict]
     r"""Options for a custom amount payment link. Mutually exclusive with `payment` and `payout`."""
     line_items: NotRequired[CreatePaymentLinkLineItemsTypedDict]
@@ -125,6 +126,7 @@ class CreatePaymentLink(BaseModel):
     r"""Options for payment links used to collect payment."""
 
     payout: Optional[PaymentLinkPayoutDetails] = None
+    r"""Options for payout links used to send a payout."""
 
     custom_amount_payment: Annotated[
         Optional[PaymentLinkCustomAmountPaymentDetails],

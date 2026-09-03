@@ -8,6 +8,8 @@ The intended use of the key. 'sig' for signature, 'enc' for encryption.
 from moovio_sdk.models.components import Use
 
 value = Use.SIG
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

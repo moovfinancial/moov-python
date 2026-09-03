@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class ResolutionLinkStatus(str, Enum):
+class ResolutionLinkStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The status of a resolution link."""
 
     ACTIVE = "active"

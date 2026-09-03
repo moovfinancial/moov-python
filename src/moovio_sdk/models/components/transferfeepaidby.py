@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .feepaidby import FeePaidBy
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -12,14 +13,23 @@ class TransferFeePaidByTypedDict(TypedDict):
     r"""Indicates which party bears fees for a transfer, keyed by fee type."""
 
     payout: NotRequired[FeePaidBy]
-    r"""For payouts, indicates which party bears the fee. Defaults to `source`."""
+    r"""Defaults to `source`."""
 
 
 class TransferFeePaidBy(BaseModel):
     r"""Indicates which party bears fees for a transfer, keyed by fee type."""
 
     payout: Optional[FeePaidBy] = None
-    r"""For payouts, indicates which party bears the fee. Defaults to `source`."""
+    r"""Defaults to `source`."""
+
+    @field_serializer("payout")
+    def serialize_payout(self, value):
+        if isinstance(value, str):
+            try:
+                return components.FeePaidBy(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

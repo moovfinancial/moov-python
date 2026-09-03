@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class InvoicePaymentType(str, Enum):
+class InvoicePaymentType(str, Enum, metaclass=utils.OpenEnumMeta):
     TRANSFER = "transfer"
     EXTERNAL = "external"

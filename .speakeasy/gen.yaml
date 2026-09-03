@@ -30,7 +30,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 26.10.0-dev.2
+  version: 26.10.0-dev.3
   additionalDependencies:
     dev: {}
     main: {}
@@ -66,6 +66,7 @@ python:
   forwardCompatibleEnumsByDefault: true
   forwardCompatibleUnionsByDefault: "false"
   homepage: https://moov.io/
+  httpClientLibrary: httpx
   imports:
     option: openapi
     paths:

@@ -6,7 +6,7 @@
 
 * [list](#list) - List metadata for all images in the specified account.
 * [upload](#upload) -   Upload a new PNG, JPEG, or WebP image with optional metadata. 
-  Duplicate images, and requests larger than 16MB will be rejected.
+  Duplicate images return the existing image's metadata with a 409 status. Requests larger than 16MB will be rejected.
 * [get_metadata](#get_metadata) - Retrieve metadata for a specific image by its ID.
 * [update](#update) - Replace an existing image and, optionally, its metadata.
 
@@ -67,7 +67,7 @@ with Moov(
 ## upload
 
   Upload a new PNG, JPEG, or WebP image with optional metadata. 
-  Duplicate images, and requests larger than 16MB will be rejected.
+  Duplicate images return the existing image's metadata with a 409 status. Requests larger than 16MB will be rejected.
 
 ### Example Usage
 
@@ -111,7 +111,8 @@ with Moov(
 
 | Error Type                         | Status Code                        | Content Type                       |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.GenericError                | 400, 409                           | application/json                   |
+| errors.GenericError                | 400                                | application/json                   |
+| errors.ImageMetadata               | 409                                | application/json                   |
 | errors.ImageRequestValidationError | 422                                | application/json                   |
 | errors.APIError                    | 4XX, 5XX                           | \*/\*                              |
 

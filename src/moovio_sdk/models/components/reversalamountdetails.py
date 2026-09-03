@@ -10,12 +10,18 @@ from typing_extensions import NotRequired, TypedDict
 
 class ReversalAmountDetailsTypedDict(TypedDict):
     surcharge: NotRequired[AmountDecimalTypedDict]
-    r"""The amount of surcharge to refund. Should be proportionate to the surcharge on the original transfer. This does not reply if the reversal resulted in a cancellation instead of a refund"""
+    r"""The amount of surcharge to refund.
+    It should be proportional to the surcharge on the original transfer.
+    This field applies only when the reversal results in a refund.
+    """
 
 
 class ReversalAmountDetails(BaseModel):
     surcharge: Optional[AmountDecimal] = None
-    r"""The amount of surcharge to refund. Should be proportionate to the surcharge on the original transfer. This does not reply if the reversal resulted in a cancellation instead of a refund"""
+    r"""The amount of surcharge to refund.
+    It should be proportional to the surcharge on the original transfer.
+    This field applies only when the reversal results in a refund.
+    """
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
