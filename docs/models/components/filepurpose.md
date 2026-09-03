@@ -8,6 +8,8 @@ The purpose of the file being uploaded.
 from moovio_sdk.models.components import FilePurpose
 
 value = FilePurpose.BUSINESS_VERIFICATION
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

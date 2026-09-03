@@ -8,9 +8,10 @@ from .issuedcardformfactor import IssuedCardFormFactor
 from .issuedcardstate import IssuedCardState
 from .issuingcontrols import IssuingControls, IssuingControlsTypedDict
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -28,6 +29,7 @@ class IssuedCardTypedDict(TypedDict):
     r"""The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
 
     - `active`: The card is operational and can approve authorizations.
+    - `frozen`: The card is temporarily suspended and cannot approve authorizations. A frozen card can be reactivated by setting its state back to `active`.
     - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
     """
     form_factor: IssuedCardFormFactor
@@ -43,6 +45,7 @@ class IssuedCardTypedDict(TypedDict):
     billing_address: NotRequired[AddressTypedDict]
     r"""Billing address associated with the card."""
     controls: NotRequired[IssuingControlsTypedDict]
+    r"""Mutable spend controls for the card."""
 
 
 class IssuedCard(BaseModel):
@@ -63,6 +66,7 @@ class IssuedCard(BaseModel):
     r"""The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
 
     - `active`: The card is operational and can approve authorizations.
+    - `frozen`: The card is temporarily suspended and cannot approve authorizations. A frozen card can be reactivated by setting its state back to `active`.
     - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
     """
 
@@ -90,6 +94,25 @@ class IssuedCard(BaseModel):
     r"""Billing address associated with the card."""
 
     controls: Optional[IssuingControls] = None
+    r"""Mutable spend controls for the card."""
+
+    @field_serializer("brand")
+    def serialize_brand(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardBrand(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("state")
+    def serialize_state(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuedCardState(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

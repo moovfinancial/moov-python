@@ -34,7 +34,7 @@ class IssuingTransactions(BaseSDK):
 
         :param account_id: The Moov business account for which cards have been issued.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param issued_card_id: Optional ID of the issued card to filter results.
         :param start_date_time: Optional date-time which inclusively filters all authorizations created after this date-time.
         :param end_date_time: Optional date-time which exclusively filters all authorizations created before this date-time.
@@ -152,7 +152,7 @@ class IssuingTransactions(BaseSDK):
 
         :param account_id: The Moov business account for which cards have been issued.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param issued_card_id: Optional ID of the issued card to filter results.
         :param start_date_time: Optional date-time which inclusively filters all authorizations created after this date-time.
         :param end_date_time: Optional date-time which exclusively filters all authorizations created before this date-time.
@@ -470,7 +470,7 @@ class IssuingTransactions(BaseSDK):
         :param account_id: The Moov business account for which cards have been issued.
         :param authorization_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -577,7 +577,7 @@ class IssuingTransactions(BaseSDK):
         :param account_id: The Moov business account for which cards have been issued.
         :param authorization_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -671,6 +671,7 @@ class IssuingTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         issued_card_id: Optional[str] = None,
+        merchant_name: Optional[str] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -685,8 +686,9 @@ class IssuingTransactions(BaseSDK):
 
         :param account_id: The Moov business account for which cards have been issued.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param issued_card_id: Optional ID of the issued card to filter results.
+        :param merchant_name: Optional case-insensitive substring match on the merchant name to filter results.
         :param start_date_time: Optional date-time which inclusively filters all card transactions created after this date-time.
         :param end_date_time: Optional date-time which exclusively filters all card transactions created before this date-time.
         :param retries: Override the default retry configuration for this method
@@ -709,6 +711,7 @@ class IssuingTransactions(BaseSDK):
             skip=skip,
             count=count,
             issued_card_id=issued_card_id,
+            merchant_name=merchant_name,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
         )
@@ -784,6 +787,7 @@ class IssuingTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         issued_card_id: Optional[str] = None,
+        merchant_name: Optional[str] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -798,8 +802,9 @@ class IssuingTransactions(BaseSDK):
 
         :param account_id: The Moov business account for which cards have been issued.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param issued_card_id: Optional ID of the issued card to filter results.
+        :param merchant_name: Optional case-insensitive substring match on the merchant name to filter results.
         :param start_date_time: Optional date-time which inclusively filters all card transactions created after this date-time.
         :param end_date_time: Optional date-time which exclusively filters all card transactions created before this date-time.
         :param retries: Override the default retry configuration for this method
@@ -822,6 +827,7 @@ class IssuingTransactions(BaseSDK):
             skip=skip,
             count=count,
             issued_card_id=issued_card_id,
+            merchant_name=merchant_name,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
         )

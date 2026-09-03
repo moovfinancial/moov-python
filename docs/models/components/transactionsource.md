@@ -11,6 +11,8 @@ Omit for customer-initiated e-commerce transactions.
 from moovio_sdk.models.components import TransactionSource
 
 value = TransactionSource.FIRST_RECURRING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

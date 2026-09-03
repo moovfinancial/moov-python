@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class RefundCardStatus(str, Enum):
+class RefundCardStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     INITIATED = "initiated"
     CONFIRMED = "confirmed"
     SETTLED = "settled"

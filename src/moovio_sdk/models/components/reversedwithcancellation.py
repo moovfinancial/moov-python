@@ -8,7 +8,9 @@ from typing_extensions import TypedDict
 
 class ReversedWithCancellationTypedDict(TypedDict):
     cancellation: CancellationTypedDict
+    r"""Cancellation of a transfer."""
 
 
 class ReversedWithCancellation(BaseModel):
     cancellation: Cancellation
+    r"""Cancellation of a transfer."""

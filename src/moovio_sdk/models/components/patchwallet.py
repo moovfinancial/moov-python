@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from .walletstatus import WalletStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -33,6 +34,15 @@ class PatchWallet(BaseModel):
 
     metadata: Optional[Dict[str, str]] = None
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

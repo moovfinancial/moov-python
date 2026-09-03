@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class ReturnPolicyType(str, Enum):
+class ReturnPolicyType(str, Enum, metaclass=utils.OpenEnumMeta):
     NONE = "none"
     EXCHANGE_ONLY = "exchangeOnly"
     WITHIN_THIRTY_DAYS = "withinThirtyDays"

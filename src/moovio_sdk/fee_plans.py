@@ -31,7 +31,7 @@ class FeePlans(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -143,7 +143,7 @@ class FeePlans(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -240,6 +240,7 @@ class FeePlans(BaseSDK):
         *,
         account_id: str,
         plan_id: str,
+        prior_agreement_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -251,7 +252,14 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
         :param account_id:
-        :param plan_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+        :param plan_id: A unique identifier for a fee plan: the pricing terms, such as flat-rate or cost-plus, that an account
+            is charged under its fee plan agreement. Use GET /accounts/{accountID}/fee-plans to list the fee plans
+            available to assign to a given account.
+        :param prior_agreement_id: The account's active fee plan agreement to supersede. When set, that agreement is terminated and
+            the new one takes its place in a single operation, so the account is never without an active fee
+            plan agreement. This new agreement always receives a newly issued agreementID.
+
+            Omit it if the account doesn't already have an active fee plan agreement.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -271,6 +279,7 @@ class FeePlans(BaseSDK):
             account_id=account_id,
             create_fee_plan_agreement=components.CreateFeePlanAgreement(
                 plan_id=plan_id,
+                prior_agreement_id=prior_agreement_id,
             ),
         )
 
@@ -357,6 +366,7 @@ class FeePlans(BaseSDK):
         *,
         account_id: str,
         plan_id: str,
+        prior_agreement_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -368,7 +378,14 @@ class FeePlans(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/profile.write` scope.
 
         :param account_id:
-        :param plan_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
+        :param plan_id: A unique identifier for a fee plan: the pricing terms, such as flat-rate or cost-plus, that an account
+            is charged under its fee plan agreement. Use GET /accounts/{accountID}/fee-plans to list the fee plans
+            available to assign to a given account.
+        :param prior_agreement_id: The account's active fee plan agreement to supersede. When set, that agreement is terminated and
+            the new one takes its place in a single operation, so the account is never without an active fee
+            plan agreement. This new agreement always receives a newly issued agreementID.
+
+            Omit it if the account doesn't already have an active fee plan agreement.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -388,6 +405,7 @@ class FeePlans(BaseSDK):
             account_id=account_id,
             create_fee_plan_agreement=components.CreateFeePlanAgreement(
                 plan_id=plan_id,
+                prior_agreement_id=prior_agreement_id,
             ),
         )
 
@@ -692,7 +710,7 @@ class FeePlans(BaseSDK):
 
         :param account_id: The Partner's AccountID.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param transfer_id: Optional transfer ID to filter the results by.
         :param dispute_id: Optional dispute ID to filter the results by.
         :param residual_id: Optional residual ID to filter the results by.
@@ -809,7 +827,7 @@ class FeePlans(BaseSDK):
 
         :param account_id: The Partner's AccountID.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param transfer_id: Optional transfer ID to filter the results by.
         :param dispute_id: Optional dispute ID to filter the results by.
         :param residual_id: Optional residual ID to filter the results by.
@@ -931,7 +949,7 @@ class FeePlans(BaseSDK):
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1048,7 +1066,7 @@ class FeePlans(BaseSDK):
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1373,7 +1391,7 @@ class FeePlans(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -1485,7 +1503,7 @@ class FeePlans(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param agreement_id: A comma-separated list of agreement IDs to filter the results by.
         :param status: A comma-separated list of statuses to filter the results by.
         :param retries: Override the default retry configuration for this method
@@ -1597,7 +1615,7 @@ class FeePlans(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param start_date_time: Optional date-time to inclusively filter all residuals with a period start after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all residuals with a period end before this date-time.
         :param retries: Override the default retry configuration for this method
@@ -1705,7 +1723,7 @@ class FeePlans(BaseSDK):
 
         :param account_id:
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param start_date_time: Optional date-time to inclusively filter all residuals with a period start after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all residuals with a period end before this date-time.
         :param retries: Override the default retry configuration for this method
@@ -2013,7 +2031,7 @@ class FeePlans(BaseSDK):
         :param account_id:
         :param residual_id: Unique identifier for this residual payment calculation.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
         :param retries: Override the default retry configuration for this method
@@ -2124,7 +2142,7 @@ class FeePlans(BaseSDK):
         :param account_id:
         :param residual_id: Unique identifier for this residual payment calculation.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param start_date_time: Optional date-time to inclusively filter all fees created after this date-time.
         :param end_date_time: Optional date-time to exclusively filter all fees created before this date-time.
         :param retries: Override the default retry configuration for this method

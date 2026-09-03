@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class CardVerificationResult(str, Enum):
+class CardVerificationResult(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The result of a card verification check."""
 
     NO_MATCH = "noMatch"

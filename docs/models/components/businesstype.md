@@ -8,6 +8,8 @@ The type of entity represented by this business.
 from moovio_sdk.models.components import BusinessType
 
 value = BusinessType.SOLE_PROPRIETORSHIP
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

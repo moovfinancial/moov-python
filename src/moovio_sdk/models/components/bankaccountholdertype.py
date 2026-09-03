@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class BankAccountHolderType(str, Enum):
+class BankAccountHolderType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The type of holder on a funding source."""
 
     INDIVIDUAL = "individual"

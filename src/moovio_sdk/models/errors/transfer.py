@@ -34,6 +34,11 @@ class TransferData(BaseModel):
     status: components_transferstatus.TransferStatus
     r"""Status of a transfer."""
     amount: components_amount.Amount
+    r"""Amount associated with this transfer.
+    In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization amount until a final capture is created.
+    For these transfers, when a final capture is created, this is updated to the cumulative captured amount.
+    For other transfer types, this is the transfer amount.
+    """
     completed_on: Annotated[Optional[datetime], pydantic.Field(alias="completedOn")] = (
         None
     )

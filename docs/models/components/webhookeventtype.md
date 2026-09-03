@@ -8,6 +8,8 @@ The type of event that occurred.
 from moovio_sdk.models.components import WebhookEventType
 
 value = WebhookEventType.WILDCARD_
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

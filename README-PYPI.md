@@ -627,7 +627,7 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.write` scope.
 Only use this endpoint if you have provided Moov with a copy of your PCI attestation of compliance.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
-you'll need to specify the `/accounts/{accountID}/issued-cards.read-secure` scope.
+you'll need to specify the `/accounts/{accountID}/issued-cards.read-private` scope.
 
 ### [Cards](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/cards/README.md)
 
@@ -839,7 +839,7 @@ you'll need to specify the `/accounts/{accountID}/files.read` scope.
 
 * [list](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/images/README.md#list) - List metadata for all images in the specified account.
 * [upload](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/images/README.md#upload) -   Upload a new PNG, JPEG, or WebP image with optional metadata. 
-  Duplicate images, and requests larger than 16MB will be rejected.
+  Duplicate images return the existing image's metadata with a 409 status. Requests larger than 16MB will be rejected.
 * [get_metadata](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/images/README.md#get_metadata) - Retrieve metadata for a specific image by its ID.
 * [update](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/images/README.md#update) - Replace an existing image and, optionally, its metadata.
 
@@ -869,7 +869,7 @@ This can be used to validate a financial institution before initiating payment a
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/institutions.read` scope.
-* [~~search~~](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/institutions/README.md#search) - This endpoint has been deprecated and will be removed in a future release. Use [/institutions](https://docs.moov.io/api/enrichment/form-shortening/institutions/get/).
+* [~~search~~](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/institutions/README.md#search) - This endpoint has been deprecated and will be removed in a future release. Use [/institutions](https://docs.moov.io/api/enrichment/institutions/get/).
 
 Search for institutions by either their name or routing number.
 
@@ -1169,10 +1169,13 @@ To access this endpoint using an [access token](https://docs.moov.io/api/authent
 you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 * [create_cancellation](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#create_cancellation) -   Initiate a cancellation for a card, ACH, or queued transfer.
   
+  In v2026.10 and later, an auth-capture `card-payment` transfer can be canceled before any captures exist.
+  For these transfers, a successful cancellation reduces `capturableAmount` without changing `authorizedAmount`.
+  For these transfers, a partial cancellation leaves the remaining `capturableAmount` available for capture.
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
   to specify the `/accounts/{accountID}/transfers.write` scope.
 * [list_cancellations](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#list_cancellations) -   Get a list of cancellations for a transfer.
-  
+
   To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need 
   to specify the `/accounts/{accountID}/transfers.read` scope.
 * [get_cancellation](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#get_cancellation) -   Get details of a cancellation for a transfer.
@@ -1194,7 +1197,10 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
-* [create_reversal](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#create_reversal) - Reverses a card transfer by initiating a cancellation or refund depending on the transaction status. 
+* [create_reversal](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/transfers/README.md#create_reversal) - Reverses a card transfer by initiating a cancellation or refund depending on the transaction status.
+In v2026.10 and later, reversing an auth-capture `card-payment` transfer with no captures cancels the entire `capturableAmount`.
+In those API versions, an auth-capture `card-payment` transfer with one final capture is canceled or refunded depending on its processing state.
+Auth-capture `card-payment` transfers with a non-final capture or multiple captures are not supported in those API versions.
 Read our [reversals guide](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) 
 to learn more.
 
@@ -1728,6 +1734,20 @@ class CustomClient(AsyncHttpClient):
 
 s = Moov(async_client=CustomClient(httpx.AsyncClient()))
 ```
+### httpx2 (Pydantic's httpx fork)
+
+[httpx2](https://httpx2.pydantic.dev/) is Pydantic's maintained fork of `httpx`. To run this SDK on httpx2, call `alias_httpx()` at your program's entry point, before importing the SDK, so every `import httpx` — including the ones inside the SDK — resolves to `httpx2`:
+```python
+import httpx2
+
+httpx2.alias_httpx()
+
+from moovio_sdk import Moov
+
+s = Moov()
+```
+
+An SDK can also be generated against httpx2 directly, so it depends on the fork instead of `httpx`, by setting `python.httpClientLibrary: httpx2` in `gen.yaml`.
 <!-- End Custom HTTP Client [http-client] -->
 
 <!-- Start Resource Management [resource-management] -->

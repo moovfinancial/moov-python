@@ -386,7 +386,7 @@ class Accounts(BaseSDK):
         :param capability: Filter connected accounts by the capability.
         :param capability_status: Filter connected accounts by the capability.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -529,7 +529,7 @@ class Accounts(BaseSDK):
         :param capability: Filter connected accounts by the capability.
         :param capability_status: Filter connected accounts by the capability.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1394,7 +1394,7 @@ class Accounts(BaseSDK):
         :param capability: Filter connected accounts by the capability.
         :param capability_status: Filter connected accounts by the capability.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1540,7 +1540,7 @@ class Accounts(BaseSDK):
         :param capability: Filter connected accounts by the capability.
         :param capability_status: Filter connected accounts by the capability.
         :param skip:
-        :param count:
+        :param count: Page size. When omitted, the server defaults to `200`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

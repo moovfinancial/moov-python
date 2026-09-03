@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .cardupdatereason import CardUpdateReason
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -21,6 +23,15 @@ class WebhookDataCardAutoUpdated(BaseModel):
 
     update_type: Annotated[CardUpdateReason, pydantic.Field(alias="updateType")]
     r"""The results of the card update request."""
+
+    @field_serializer("update_type")
+    def serialize_update_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardUpdateReason(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

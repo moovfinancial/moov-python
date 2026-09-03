@@ -10,6 +10,8 @@ Additional detail for a verification status.
 from moovio_sdk.models.components import VerificationStatusDetail
 
 value = VerificationStatusDetail.FAILED_AUTO_VERIFY
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

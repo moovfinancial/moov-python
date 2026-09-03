@@ -8,6 +8,8 @@ Status of a transaction within the instant-bank lifecycle.
 from moovio_sdk.models.components import InstantBankTransactionStatus
 
 value = InstantBankTransactionStatus.INITIATED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

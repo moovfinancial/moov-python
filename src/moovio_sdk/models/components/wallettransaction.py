@@ -5,9 +5,10 @@ from .wallettransactionsourcetype import WalletTransactionSourceType
 from .wallettransactionstatus import WalletTransactionStatus
 from .wallettransactiontype import WalletTransactionType
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -115,6 +116,33 @@ class WalletTransaction(BaseModel):
 
     sweep_id: Annotated[Optional[str], pydantic.Field(alias="sweepID")] = None
     r"""ID of the sweep this transaction accrued in."""
+
+    @field_serializer("transaction_type")
+    def serialize_transaction_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletTransactionType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("source_type")
+    def serialize_source_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletTransactionSourceType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletTransactionStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

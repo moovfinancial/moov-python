@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import WalletTransactionSourceType
 
 value = WalletTransactionSourceType.TRANSFER
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

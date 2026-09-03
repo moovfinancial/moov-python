@@ -8,8 +8,10 @@ from .cardvolumedistribution import (
 from .fulfillmentdetails import FulfillmentDetails, FulfillmentDetailsTypedDict
 from .underwritingstatus import UnderwritingStatus
 from .volumebycustomertype import VolumeByCustomerType, VolumeByCustomerTypeTypedDict
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -54,6 +56,15 @@ class Underwriting(BaseModel):
     ]
 
     fulfillment: FulfillmentDetails
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.UnderwritingStatus(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

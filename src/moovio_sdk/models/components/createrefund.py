@@ -14,7 +14,7 @@ class CreateRefundTypedDict(TypedDict):
     """
 
     amount: NotRequired[int]
-    r"""Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded."""
+    r"""Amount to refund. If omitted, the original transfer's full amount will be refunded."""
 
 
 class CreateRefund(BaseModel):
@@ -24,7 +24,7 @@ class CreateRefund(BaseModel):
     """
 
     amount: Optional[int] = None
-    r"""Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded."""
+    r"""Amount to refund. If omitted, the original transfer's full amount will be refunded."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
