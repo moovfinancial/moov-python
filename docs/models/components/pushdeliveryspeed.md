@@ -8,6 +8,8 @@ Delivery speed options for push-to-card payouts.
 from moovio_sdk.models.components import PushDeliverySpeed
 
 value = PushDeliverySpeed.INSTANT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

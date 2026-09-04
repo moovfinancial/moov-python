@@ -8,6 +8,8 @@ The payment method type that represents a payment rail and directionality
 from moovio_sdk.models.components import TransferPaymentMethodType
 
 value = TransferPaymentMethodType.MOOV_WALLET
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 
@@ -32,3 +34,4 @@ value = TransferPaymentMethodType.MOOV_WALLET
 | `GOOGLE_PAY`           | google-pay             |
 | `PUSH_TO_GOOGLE_PAY`   | push-to-google-pay     |
 | `PULL_FROM_GOOGLE_PAY` | pull-from-google-pay   |
+| `WIRE_CREDIT`          | wire-credit            |

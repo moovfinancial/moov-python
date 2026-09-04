@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class WalletStatus(str, Enum):
+class WalletStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Status of a wallet.
     - `active`: The wallet is available for use and has an enabled payment method.
     - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.

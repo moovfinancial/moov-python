@@ -11,6 +11,8 @@ Type of a wallet.
 from moovio_sdk.models.components import WalletType
 
 value = WalletType.DEFAULT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

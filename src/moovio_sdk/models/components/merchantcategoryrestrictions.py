@@ -4,18 +4,19 @@ from __future__ import annotations
 from .issuingcontrolsrestrictionmode import IssuingControlsRestrictionMode
 from .issuingmerchantcategory import IssuingMerchantCategory
 from .merchantentry import MerchantEntry, MerchantEntryTypedDict
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class MerchantCategoryRestrictionsTypedDict(TypedDict):
-    r"""Restricts card usage by merchant category."""
+    r"""Restricts card usage by merchant category. When not set, all categories are allowed."""
 
     mode: IssuingControlsRestrictionMode
-    r"""Whether the listed categories are the only ones allowed, or the ones to block."""
+    r"""Whether the listed items should be allowed (`allow`) or blocked (`block`)."""
     categories: NotRequired[List[IssuingMerchantCategory]]
     r"""Predefined category groups to allow or block."""
     custom_mc_cs: NotRequired[List[str]]
@@ -25,10 +26,10 @@ class MerchantCategoryRestrictionsTypedDict(TypedDict):
 
 
 class MerchantCategoryRestrictions(BaseModel):
-    r"""Restricts card usage by merchant category."""
+    r"""Restricts card usage by merchant category. When not set, all categories are allowed."""
 
     mode: IssuingControlsRestrictionMode
-    r"""Whether the listed categories are the only ones allowed, or the ones to block."""
+    r"""Whether the listed items should be allowed (`allow`) or blocked (`block`)."""
 
     categories: Optional[List[IssuingMerchantCategory]] = None
     r"""Predefined category groups to allow or block."""
@@ -42,6 +43,15 @@ class MerchantCategoryRestrictions(BaseModel):
         Optional[List[MerchantEntry]], pydantic.Field(alias="exemptMerchants")
     ] = None
     r"""Merchants that are exempt from category restrictions regardless of their category."""
+
+    @field_serializer("mode")
+    def serialize_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuingControlsRestrictionMode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

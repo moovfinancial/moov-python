@@ -29,6 +29,8 @@ The return code of an ACH transaction that caused the bank account status to cha
 from moovio_sdk.models.components import ACHReturnCode
 
 value = ACHReturnCode.R02
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

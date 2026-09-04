@@ -8,6 +8,8 @@ The authentication method used for the Google Pay token.
 from moovio_sdk.models.components import AuthMethod
 
 value = AuthMethod.PAN_ONLY
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

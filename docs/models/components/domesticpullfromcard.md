@@ -8,6 +8,8 @@ Indicates if the card supports domestic pull-from-card transfer.
 from moovio_sdk.models.components import DomesticPullFromCard
 
 value = DomesticPullFromCard.NOT_SUPPORTED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

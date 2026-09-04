@@ -17,9 +17,9 @@ class CreateRefundTypedDict(TypedDict):
     """
 
     amount: NotRequired[AmountDecimalTypedDict]
-    r"""Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded."""
+    r"""Amount to refund. If omitted, the original transfer's full amount will be refunded."""
     capture_id: NotRequired[str]
-    r"""ID of the capture to refund. Required for multi-capture card payment transfers."""
+    r"""ID of the capture to refund. This field is only relevant for an auth-capture `card-payment` transfer."""
     amount_details: NotRequired[RefundAmountDetailsTypedDict]
     r"""Breakdown of the refunded amount."""
 
@@ -31,10 +31,10 @@ class CreateRefund(BaseModel):
     """
 
     amount: Optional[AmountDecimal] = None
-    r"""Amount to refund. Before v2026.10, specify the amount in integer cents. If omitted, the original transfer's full amount will be refunded."""
+    r"""Amount to refund. If omitted, the original transfer's full amount will be refunded."""
 
     capture_id: Annotated[Optional[str], pydantic.Field(alias="captureID")] = None
-    r"""ID of the capture to refund. Required for multi-capture card payment transfers."""
+    r"""ID of the capture to refund. This field is only relevant for an auth-capture `card-payment` transfer."""
 
     amount_details: Annotated[
         Optional[RefundAmountDetails], pydantic.Field(alias="amountDetails")

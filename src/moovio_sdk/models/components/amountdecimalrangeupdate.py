@@ -9,9 +9,7 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class AmountDecimalRangeUpdateTypedDict(TypedDict):
-    r"""A range of values that an AmountDecimal can take.
-
-    If either `minimum` or `maximum` is omitted, the range is \"open\" on that end:
+    r"""If either `minimum` or `maximum` is omitted, the range is \"open\" on that end:
 
     `minimum` specified: `amt >= minimum`
     `maximum` specified: `amt <= maximum`
@@ -25,9 +23,7 @@ class AmountDecimalRangeUpdateTypedDict(TypedDict):
 
 
 class AmountDecimalRangeUpdate(BaseModel):
-    r"""A range of values that an AmountDecimal can take.
-
-    If either `minimum` or `maximum` is omitted, the range is \"open\" on that end:
+    r"""If either `minimum` or `maximum` is omitted, the range is \"open\" on that end:
 
     `minimum` specified: `amt >= minimum`
     `maximum` specified: `amt <= maximum`

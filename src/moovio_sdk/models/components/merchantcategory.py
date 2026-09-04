@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 from .issuingmerchantcategory import IssuingMerchantCategory
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
+from pydantic import field_serializer
 from typing import List
 from typing_extensions import TypedDict
 
@@ -28,3 +30,12 @@ class MerchantCategory(BaseModel):
     r"""The merchant category codes (MCCs) covered by this category. Each entry is either a single
     4-digit MCC, such as `4511`, or an inclusive range of MCCs, such as `3000-3299`.
     """
+
+    @field_serializer("category")
+    def serialize_category(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuingMerchantCategory(value)
+            except ValueError:
+                return value
+        return value

@@ -58,6 +58,12 @@ if TYPE_CHECKING:
         CreateApplePaySessionResponse,
         CreateApplePaySessionResponseTypedDict,
     )
+    from .createbankaccountattestation import (
+        CreateBankAccountAttestationRequest,
+        CreateBankAccountAttestationRequestTypedDict,
+        CreateBankAccountAttestationResponse,
+        CreateBankAccountAttestationResponseTypedDict,
+    )
     from .createbrand import (
         CreateBrandRequest,
         CreateBrandRequestTypedDict,
@@ -321,6 +327,12 @@ if TYPE_CHECKING:
         GetBankAccountRequestTypedDict,
         GetBankAccountResponse,
         GetBankAccountResponseTypedDict,
+    )
+    from .getbankaccountattestationeligibility import (
+        GetBankAccountAttestationEligibilityRequest,
+        GetBankAccountAttestationEligibilityRequestTypedDict,
+        GetBankAccountAttestationEligibilityResponse,
+        GetBankAccountAttestationEligibilityResponseTypedDict,
     )
     from .getbankaccountverification import (
         GetBankAccountVerificationRequest,
@@ -677,6 +689,12 @@ if TYPE_CHECKING:
         ListAdjustmentsRequestTypedDict,
         ListAdjustmentsResponse,
         ListAdjustmentsResponseTypedDict,
+    )
+    from .listbankaccountattestations import (
+        ListBankAccountAttestationsRequest,
+        ListBankAccountAttestationsRequestTypedDict,
+        ListBankAccountAttestationsResponse,
+        ListBankAccountAttestationsResponseTypedDict,
     )
     from .listbankaccounts import (
         ListBankAccountsRequest,
@@ -1193,6 +1211,10 @@ __all__ = [
     "CreateApplePaySessionRequestTypedDict",
     "CreateApplePaySessionResponse",
     "CreateApplePaySessionResponseTypedDict",
+    "CreateBankAccountAttestationRequest",
+    "CreateBankAccountAttestationRequestTypedDict",
+    "CreateBankAccountAttestationResponse",
+    "CreateBankAccountAttestationResponseTypedDict",
     "CreateBrandRequest",
     "CreateBrandRequestTypedDict",
     "CreateBrandResponse",
@@ -1367,6 +1389,10 @@ __all__ = [
     "GetAvatarRequestTypedDict",
     "GetAvatarResponse",
     "GetAvatarResponseTypedDict",
+    "GetBankAccountAttestationEligibilityRequest",
+    "GetBankAccountAttestationEligibilityRequestTypedDict",
+    "GetBankAccountAttestationEligibilityResponse",
+    "GetBankAccountAttestationEligibilityResponseTypedDict",
     "GetBankAccountRequest",
     "GetBankAccountRequestTypedDict",
     "GetBankAccountResponse",
@@ -1612,6 +1638,10 @@ __all__ = [
     "ListAdjustmentsRequestTypedDict",
     "ListAdjustmentsResponse",
     "ListAdjustmentsResponseTypedDict",
+    "ListBankAccountAttestationsRequest",
+    "ListBankAccountAttestationsRequestTypedDict",
+    "ListBankAccountAttestationsResponse",
+    "ListBankAccountAttestationsResponseTypedDict",
     "ListBankAccountsRequest",
     "ListBankAccountsRequestTypedDict",
     "ListBankAccountsResponse",
@@ -1971,6 +2001,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateApplePaySessionRequestTypedDict": ".createapplepaysession",
     "CreateApplePaySessionResponse": ".createapplepaysession",
     "CreateApplePaySessionResponseTypedDict": ".createapplepaysession",
+    "CreateBankAccountAttestationRequest": ".createbankaccountattestation",
+    "CreateBankAccountAttestationRequestTypedDict": ".createbankaccountattestation",
+    "CreateBankAccountAttestationResponse": ".createbankaccountattestation",
+    "CreateBankAccountAttestationResponseTypedDict": ".createbankaccountattestation",
     "CreateBrandRequest": ".createbrand",
     "CreateBrandRequestTypedDict": ".createbrand",
     "CreateBrandResponse": ".createbrand",
@@ -2149,6 +2183,10 @@ _dynamic_imports: dict[str, str] = {
     "GetBankAccountRequestTypedDict": ".getbankaccount",
     "GetBankAccountResponse": ".getbankaccount",
     "GetBankAccountResponseTypedDict": ".getbankaccount",
+    "GetBankAccountAttestationEligibilityRequest": ".getbankaccountattestationeligibility",
+    "GetBankAccountAttestationEligibilityRequestTypedDict": ".getbankaccountattestationeligibility",
+    "GetBankAccountAttestationEligibilityResponse": ".getbankaccountattestationeligibility",
+    "GetBankAccountAttestationEligibilityResponseTypedDict": ".getbankaccountattestationeligibility",
     "GetBankAccountVerificationRequest": ".getbankaccountverification",
     "GetBankAccountVerificationRequestTypedDict": ".getbankaccountverification",
     "GetBankAccountVerificationResponse": ".getbankaccountverification",
@@ -2389,6 +2427,10 @@ _dynamic_imports: dict[str, str] = {
     "ListAdjustmentsRequestTypedDict": ".listadjustments",
     "ListAdjustmentsResponse": ".listadjustments",
     "ListAdjustmentsResponseTypedDict": ".listadjustments",
+    "ListBankAccountAttestationsRequest": ".listbankaccountattestations",
+    "ListBankAccountAttestationsRequestTypedDict": ".listbankaccountattestations",
+    "ListBankAccountAttestationsResponse": ".listbankaccountattestations",
+    "ListBankAccountAttestationsResponseTypedDict": ".listbankaccountattestations",
     "ListBankAccountsRequest": ".listbankaccounts",
     "ListBankAccountsRequestTypedDict": ".listbankaccounts",
     "ListBankAccountsResponse": ".listbankaccounts",

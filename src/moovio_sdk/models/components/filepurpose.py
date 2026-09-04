@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class FilePurpose(str, Enum):
+class FilePurpose(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The purpose of the file being uploaded."""
 
     BUSINESS_VERIFICATION = "business_verification"

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class InstantBankFailureCode(str, Enum):
+class InstantBankFailureCode(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Status codes for instant-bank failures."""
 
     PROCESSING_ERROR = "processing-error"

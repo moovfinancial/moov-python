@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import EvidenceType
 
 value = EvidenceType.RECEIPT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

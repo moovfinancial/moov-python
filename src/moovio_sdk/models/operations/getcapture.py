@@ -11,9 +11,9 @@ from typing_extensions import Annotated, TypedDict
 
 class GetCaptureRequestTypedDict(TypedDict):
     account_id: str
-    r"""The merchant's Moov account ID."""
+    r"""Moov account ID of an authorized partner or the transfer's source or destination."""
     transfer_id: str
-    r"""Identifier for the transfer."""
+    r"""Identifier for the auth-capture `card-payment` transfer."""
     capture_id: str
     r"""Identifier for the capture."""
 
@@ -24,14 +24,14 @@ class GetCaptureRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
-    r"""The merchant's Moov account ID."""
+    r"""Moov account ID of an authorized partner or the transfer's source or destination."""
 
     transfer_id: Annotated[
         str,
         pydantic.Field(alias="transferID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
-    r"""Identifier for the transfer."""
+    r"""Identifier for the auth-capture `card-payment` transfer."""
 
     capture_id: Annotated[
         str,

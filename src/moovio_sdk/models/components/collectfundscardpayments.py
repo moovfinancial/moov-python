@@ -5,9 +5,10 @@ from .cardacceptancemethods import CardAcceptanceMethods, CardAcceptanceMethodsT
 from .estimatedactivity import EstimatedActivity, EstimatedActivityTypedDict
 from .fulfillment import Fulfillment, FulfillmentTypedDict
 from .refundpolicy import RefundPolicy
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -40,6 +41,15 @@ class CollectFundsCardPayments(BaseModel):
     refund_policy: Annotated[
         Optional[RefundPolicy], pydantic.Field(alias="refundPolicy")
     ] = None
+
+    @field_serializer("refund_policy")
+    def serialize_refund_policy(self, value):
+        if isinstance(value, str):
+            try:
+                return components.RefundPolicy(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

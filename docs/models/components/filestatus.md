@@ -8,6 +8,8 @@ The file's status.
 from moovio_sdk.models.components import FileStatus
 
 value = FileStatus.PENDING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

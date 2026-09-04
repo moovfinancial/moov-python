@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import WalletTransactionType
 
 value = WalletTransactionType.ACCOUNT_FUNDING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 
@@ -41,3 +43,4 @@ value = WalletTransactionType.ACCOUNT_FUNDING
 | `FEE_REVENUE`                    | fee-revenue                      |
 | `RESIDUAL`                       | residual                         |
 | `INSTANT_BANK_FAILURE`           | instant-bank-failure             |
+| `WIRE_FAILURE`                   | wire-failure                     |

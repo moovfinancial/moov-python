@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.components import (
+    cardissuingerror as components_cardissuingerror,
     cardvolumedistributionerror as components_cardvolumedistributionerror,
     collectfundserror as components_collectfundserror,
     fulfillmentdetailserror as components_fulfillmentdetailserror,
@@ -46,6 +47,10 @@ class UpsertUnderwritingErrorData(BaseModel):
     send_funds: Annotated[
         Optional[components_sendfundserror.SendFundsError],
         pydantic.Field(alias="sendFunds"),
+    ] = None
+    card_issuing: Annotated[
+        Optional[components_cardissuingerror.CardIssuingError],
+        pydantic.Field(alias="cardIssuing"),
     ] = None
     average_monthly_transaction_volume: Annotated[
         Optional[str], pydantic.Field(alias="averageMonthlyTransactionVolume")

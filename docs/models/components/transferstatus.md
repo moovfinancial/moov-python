@@ -8,6 +8,8 @@ Status of a transfer.
 from moovio_sdk.models.components import TransferStatus
 
 value = TransferStatus.CREATED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .walletstatus import WalletStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -27,6 +29,15 @@ class WebhookDataWalletUpdated(BaseModel):
     - `active`: The wallet is available for use and has an enabled payment method.
     - `closed`: The wallet is no longer active and the corresponding payment method has been disabled.
     """
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.WalletStatus(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

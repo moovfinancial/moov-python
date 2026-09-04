@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .cardtransactionfailurecode import CardTransactionFailureCode
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -17,6 +18,15 @@ class CardPaymentRefundProcessingDetails(BaseModel):
     failure_code: Annotated[
         Optional[CardTransactionFailureCode], pydantic.Field(alias="failureCode")
     ] = None
+
+    @field_serializer("failure_code")
+    def serialize_failure_code(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardTransactionFailureCode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

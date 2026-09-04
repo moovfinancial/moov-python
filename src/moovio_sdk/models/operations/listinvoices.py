@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.models.components import (
     invoice as components_invoice,
     invoicestatus as components_invoicestatus,
@@ -9,7 +10,7 @@ from moovio_sdk.models.components import (
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -18,6 +19,7 @@ class ListInvoicesRequestTypedDict(TypedDict):
     account_id: str
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
     status: NotRequired[components_invoicestatus.InvoiceStatus]
     customer_account_id: NotRequired[str]
     created_start_date_time: NotRequired[datetime]
@@ -42,6 +44,7 @@ class ListInvoicesRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
 
     status: Annotated[
         Optional[components_invoicestatus.InvoiceStatus],
@@ -77,6 +80,15 @@ class ListInvoicesRequest(BaseModel):
         pydantic.Field(alias="dueEndDateTime"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.InvoiceStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

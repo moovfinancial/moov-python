@@ -7,9 +7,10 @@ from .invoicelineitems import InvoiceLineItems, InvoiceLineItemsTypedDict
 from .invoicepayment import InvoicePayment, InvoicePaymentTypedDict
 from .invoicestatus import InvoiceStatus
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -135,6 +136,15 @@ class Invoice(BaseModel):
     disabled_on: Annotated[Optional[datetime], pydantic.Field(alias="disabledOn")] = (
         None
     )
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.InvoiceStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

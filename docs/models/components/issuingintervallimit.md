@@ -8,6 +8,8 @@ Specifies the time frame for a velocity limit. `per-transaction` applies to each
 from moovio_sdk.models.components import IssuingIntervalLimit
 
 value = IssuingIntervalLimit.PER_TRANSACTION
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

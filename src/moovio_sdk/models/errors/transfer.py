@@ -39,6 +39,11 @@ class TransferData(BaseModel):
     status: components_transferstatus.TransferStatus
     r"""Status of a transfer."""
     amount: components_amountdecimal.AmountDecimal
+    r"""Amount associated with this transfer.
+    In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization amount until a final capture is created.
+    For these transfers, when a final capture is created, this is updated to the cumulative captured amount.
+    For other transfer types, this is the transfer amount.
+    """
     options: components_transferrailoptions.TransferRailOptions
     processing_details: Annotated[
         components_transferprocessingdetails.TransferProcessingDetails,
@@ -109,6 +114,9 @@ class TransferData(BaseModel):
     authorization: Optional[components_transferauthorization.TransferAuthorization] = (
         None
     )
+    r"""Authorization amounts.
+    This field is present only for an auth-capture `card-payment` transfer.
+    """
 
 
 @dataclass(unsafe_hash=True)

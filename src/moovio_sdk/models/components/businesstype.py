@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class BusinessType(str, Enum):
+class BusinessType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The type of entity represented by this business."""
 
     SOLE_PROPRIETORSHIP = "soleProprietorship"

@@ -8,6 +8,8 @@ The type of event that occurred.
 from moovio_sdk.models.components import WebhookEventType
 
 value = WebhookEventType.WILDCARD_
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 
@@ -23,6 +25,7 @@ value = WebhookEventType.WILDCARD_
 | `BANK_ACCOUNT_CREATED`         | bankAccount.created            |
 | `BANK_ACCOUNT_UPDATED`         | bankAccount.updated            |
 | `BANK_ACCOUNT_DELETED`         | bankAccount.deleted            |
+| `CAPTURE_UPDATED`              | capture.updated                |
 | `CANCELLATION_CREATED`         | cancellation.created           |
 | `CANCELLATION_UPDATED`         | cancellation.updated           |
 | `CARD_AUTO_UPDATED`            | card.autoUpdated               |

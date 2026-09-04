@@ -19,9 +19,10 @@ from .transfersource import TransferSource, TransferSourceTypedDict
 from .transferstatus import TransferStatus
 from .transfertype import TransferType
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -38,6 +39,11 @@ class TransferTypedDict(TypedDict):
     status: TransferStatus
     r"""Status of a transfer."""
     amount: AmountDecimalTypedDict
+    r"""Amount associated with this transfer.
+    In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization amount until a final capture is created.
+    For these transfers, when a final capture is created, this is updated to the cumulative captured amount.
+    For other transfer types, this is the transfer amount.
+    """
     options: TransferRailOptionsTypedDict
     processing_details: TransferProcessingDetailsTypedDict
     completed_on: NotRequired[datetime]
@@ -73,6 +79,9 @@ class TransferTypedDict(TypedDict):
     r"""ID of the invoice that the transfer is associated with."""
     amount_details: NotRequired[TransferAmountDetailsTypedDict]
     authorization: NotRequired[TransferAuthorizationTypedDict]
+    r"""Authorization amounts.
+    This field is present only for an auth-capture `card-payment` transfer.
+    """
 
 
 class Transfer(BaseModel):
@@ -93,6 +102,11 @@ class Transfer(BaseModel):
     r"""Status of a transfer."""
 
     amount: AmountDecimal
+    r"""Amount associated with this transfer.
+    In v2026.10 and later, an auth-capture `card-payment` transfer reports the approved authorization amount until a final capture is created.
+    For these transfers, when a final capture is created, this is updated to the cumulative captured amount.
+    For other transfer types, this is the transfer amount.
+    """
 
     options: TransferRailOptions
 
@@ -172,6 +186,36 @@ class Transfer(BaseModel):
     ] = None
 
     authorization: Optional[TransferAuthorization] = None
+    r"""Authorization amounts.
+    This field is present only for an auth-capture `card-payment` transfer.
+    """
+
+    @field_serializer("transfer_type")
+    def serialize_transfer_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TransferType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TransferStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("failure_reason")
+    def serialize_failure_reason(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TransferFailureReason(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

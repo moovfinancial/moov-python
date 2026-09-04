@@ -6,6 +6,8 @@
 from moovio_sdk.models.components import FeeCategory
 
 value = FeeCategory.ACH
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

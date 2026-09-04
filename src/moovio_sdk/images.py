@@ -237,7 +237,7 @@ class Images(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.UploadImageResponse:
         r"""Upload a new PNG, JPEG, or WebP image with optional metadata.
-          Duplicate images, and requests larger than 16MB will be rejected.
+          Duplicate images return the existing image's metadata with a 409 status. Requests larger than 16MB will be rejected.
 
         :param account_id:
         :param image: A PNG, JPEG, or WebP image file to upload.
@@ -322,9 +322,12 @@ class Images(BaseSDK):
                 result=unmarshal_json_response(components.ImageMetadata, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
+        if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(errors.ImageMetadataData, http_res)
+            raise errors.ImageMetadata(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ImageRequestValidationErrorData, http_res
@@ -362,7 +365,7 @@ class Images(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.UploadImageResponse:
         r"""Upload a new PNG, JPEG, or WebP image with optional metadata.
-          Duplicate images, and requests larger than 16MB will be rejected.
+          Duplicate images return the existing image's metadata with a 409 status. Requests larger than 16MB will be rejected.
 
         :param account_id:
         :param image: A PNG, JPEG, or WebP image file to upload.
@@ -447,9 +450,12 @@ class Images(BaseSDK):
                 result=unmarshal_json_response(components.ImageMetadata, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409"], "application/json"):
+        if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(errors.ImageMetadataData, http_res)
+            raise errors.ImageMetadata(response_data, http_res)
         if utils.match_response(http_res, "422", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ImageRequestValidationErrorData, http_res

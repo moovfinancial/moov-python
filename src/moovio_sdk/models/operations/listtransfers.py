@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.models.components import (
     transfer as components_transfer,
     transferstatus as components_transferstatus,
@@ -10,7 +11,7 @@ from moovio_sdk.models.components import (
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -38,13 +39,12 @@ class ListTransfersRequestTypedDict(TypedDict):
     foreign_id: NotRequired[str]
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     authorization_i_ds: NotRequired[List[str]]
-    r"""Optional comma-separated IDs to filter for transfers associated with specific card authorizations."""
-    capture_i_ds: NotRequired[List[str]]
-    r"""Optional comma-separated IDs to filter for transfers associated with specific card captures."""
+    r"""Optional comma-separated authorization IDs."""
     transfer_types: NotRequired[List[components_transfertype.TransferType]]
     r"""Optional, comma-separated transfer types by which the response is filtered."""
     skip: NotRequired[int]
     count: NotRequired[int]
+    r"""Page size. When omitted, the server defaults to `200`."""
 
 
 class ListTransfersRequest(BaseModel):
@@ -126,14 +126,7 @@ class ListTransfersRequest(BaseModel):
         pydantic.Field(alias="authorizationIDs"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
-    r"""Optional comma-separated IDs to filter for transfers associated with specific card authorizations."""
-
-    capture_i_ds: Annotated[
-        Optional[List[str]],
-        pydantic.Field(alias="captureIDs"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
-    ] = None
-    r"""Optional comma-separated IDs to filter for transfers associated with specific card captures."""
+    r"""Optional comma-separated authorization IDs."""
 
     transfer_types: Annotated[
         Optional[List[components_transfertype.TransferType]],
@@ -151,6 +144,16 @@ class ListTransfersRequest(BaseModel):
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
+    r"""Page size. When omitted, the server defaults to `200`."""
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TransferStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -167,7 +170,6 @@ class ListTransfersRequest(BaseModel):
                 "disputed",
                 "foreignID",
                 "authorizationIDs",
-                "captureIDs",
                 "transferTypes",
                 "skip",
                 "count",

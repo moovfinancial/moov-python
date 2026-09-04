@@ -8,6 +8,8 @@ Status codes for instant-bank failures.
 from moovio_sdk.models.components import InstantBankFailureCode
 
 value = InstantBankFailureCode.PROCESSING_ERROR
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -25,6 +25,10 @@ from .pushtocardtransferprocessingdetails import (
     PushToCardTransferProcessingDetails,
     PushToCardTransferProcessingDetailsTypedDict,
 )
+from .wiretransferprocessingdetails import (
+    WireTransferProcessingDetails,
+    WireTransferProcessingDetailsTypedDict,
+)
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -41,6 +45,8 @@ class TransferProcessingDetailsTypedDict(TypedDict):
     instant_bank_credit: NotRequired[
         InstantBankCreditTransferProcessingDetailsTypedDict
     ]
+    wire: NotRequired[WireTransferProcessingDetailsTypedDict]
+    r"""Wire-specific processing details returned on a transfer."""
 
 
 class TransferProcessingDetails(BaseModel):
@@ -72,6 +78,9 @@ class TransferProcessingDetails(BaseModel):
         pydantic.Field(alias="instantBankCredit"),
     ] = None
 
+    wire: Optional[WireTransferProcessingDetails] = None
+    r"""Wire-specific processing details returned on a transfer."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -82,6 +91,7 @@ class TransferProcessingDetails(BaseModel):
                 "achDebit",
                 "achCredit",
                 "instantBankCredit",
+                "wire",
             ]
         )
         serialized = handler(self)

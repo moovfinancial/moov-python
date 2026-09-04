@@ -10,6 +10,8 @@ Possible states an account verification can be in.
 from moovio_sdk.models.components import VerificationStatus
 
 value = VerificationStatus.UNVERIFIED
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

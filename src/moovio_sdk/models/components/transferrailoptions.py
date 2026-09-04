@@ -6,6 +6,7 @@ from .achdebitoptions import ACHDebitOptions, ACHDebitOptionsTypedDict
 from .cardpaymentoptions import CardPaymentOptions, CardPaymentOptionsTypedDict
 from .pullfromcardoptions import PullFromCardOptions, PullFromCardOptionsTypedDict
 from .pushtocardoptions import PushToCardOptions, PushToCardOptionsTypedDict
+from .wireoptions import WireOptions, WireOptionsTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -19,6 +20,8 @@ class TransferRailOptionsTypedDict(TypedDict):
     pull_from_card: NotRequired[PullFromCardOptionsTypedDict]
     ach_debit: NotRequired[ACHDebitOptionsTypedDict]
     ach_credit: NotRequired[ACHCreditOptionsTypedDict]
+    wire: NotRequired[WireOptionsTypedDict]
+    r"""Wire-specific options returned on a transfer."""
 
 
 class TransferRailOptions(BaseModel):
@@ -42,10 +45,20 @@ class TransferRailOptions(BaseModel):
         Optional[ACHCreditOptions], pydantic.Field(alias="achCredit")
     ] = None
 
+    wire: Optional[WireOptions] = None
+    r"""Wire-specific options returned on a transfer."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["cardPayment", "pushToCard", "pullFromCard", "achDebit", "achCredit"]
+            [
+                "cardPayment",
+                "pushToCard",
+                "pullFromCard",
+                "achDebit",
+                "achCredit",
+                "wire",
+            ]
         )
         serialized = handler(self)
         m = {}

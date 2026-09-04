@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class OccurrenceStatus(str, Enum):
+class OccurrenceStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Status of the completed occurrence."""
 
     PENDING = "pending"

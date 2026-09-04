@@ -10,30 +10,28 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PushOptionsUpdateTypedDict(TypedDict):
-    r"""Delivery options for push-to-card payouts."""
-
     allowed_speeds: NotRequired[List[PushDeliverySpeed]]
-    r"""Delivery speeds the recipient may choose from for `push-to-card`. Include `instant` to allow immediate
-    delivery, `deferred` to allow delayed delivery, or both to let the recipient choose at checkout.
+    r"""Delivery speeds the recipient may choose from for `push-to-card` and `push-to-apple-pay`.
+    Include `instant` to allow immediate delivery, `deferred` to allow delayed delivery, or both
+    to let the recipient choose at checkout.
     """
     deferred_by: NotRequired[str]
-    r"""Delay before delivering a deferred `push-to-card` payout. Required when `allowedSpeeds` includes `deferred`.
+    r"""Delay before delivering a deferred payout. Required when `allowedSpeeds` includes `deferred`.
     Accepted values are `24h` or `48h`.
     """
 
 
 class PushOptionsUpdate(BaseModel):
-    r"""Delivery options for push-to-card payouts."""
-
     allowed_speeds: Annotated[
         Optional[List[PushDeliverySpeed]], pydantic.Field(alias="allowedSpeeds")
     ] = None
-    r"""Delivery speeds the recipient may choose from for `push-to-card`. Include `instant` to allow immediate
-    delivery, `deferred` to allow delayed delivery, or both to let the recipient choose at checkout.
+    r"""Delivery speeds the recipient may choose from for `push-to-card` and `push-to-apple-pay`.
+    Include `instant` to allow immediate delivery, `deferred` to allow delayed delivery, or both
+    to let the recipient choose at checkout.
     """
 
     deferred_by: Annotated[Optional[str], pydantic.Field(alias="deferredBy")] = None
-    r"""Delay before delivering a deferred `push-to-card` payout. Required when `allowedSpeeds` includes `deferred`.
+    r"""Delay before delivering a deferred payout. Required when `allowedSpeeds` includes `deferred`.
     Accepted values are `24h` or `48h`.
     """
 

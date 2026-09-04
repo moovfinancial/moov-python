@@ -9,11 +9,23 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class CreateCancellationTypedDict(TypedDict):
+    r"""Cancellation request."""
+
     amount: NotRequired[AmountDecimalTypedDict]
+    r"""Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
+    This cannot exceed `capturableAmount`.
+    Omit this field to void the entire `capturableAmount`.
+    """
 
 
 class CreateCancellation(BaseModel):
+    r"""Cancellation request."""
+
     amount: Optional[AmountDecimal] = None
+    r"""Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
+    This cannot exceed `capturableAmount`.
+    Omit this field to void the entire `capturableAmount`.
+    """
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

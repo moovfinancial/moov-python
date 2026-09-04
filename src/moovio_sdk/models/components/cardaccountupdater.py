@@ -3,9 +3,10 @@
 from __future__ import annotations
 from .cardupdatereason import CardUpdateReason
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -29,6 +30,15 @@ class CardAccountUpdater(BaseModel):
         Optional[CardUpdateReason], pydantic.Field(alias="updateType")
     ] = None
     r"""The results of the card update request."""
+
+    @field_serializer("update_type")
+    def serialize_update_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardUpdateReason(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

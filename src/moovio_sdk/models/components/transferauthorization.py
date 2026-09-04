@@ -11,30 +11,46 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class TransferAuthorizationTypedDict(TypedDict):
+    r"""Authorization and capture amounts for an auth-capture `card-payment` transfer."""
+
     authorization_id: str
+    r"""Identifier for the authorization."""
     requested_amount: AmountDecimalTypedDict
+    r"""Amount submitted for authorization."""
     authorized_amount: AmountDecimalTypedDict
+    r"""Hold approved by the issuer."""
     captured_amount: AmountDecimalTypedDict
+    r"""Cumulative amount of captures that have not failed or been canceled."""
     capturable_amount: AmountDecimalTypedDict
+    r"""Amount of the authorization still available after captures and authorization cancellations."""
     expires_on: NotRequired[datetime]
+    r"""Expiration time for the approved authorization, when available."""
 
 
 class TransferAuthorization(BaseModel):
+    r"""Authorization and capture amounts for an auth-capture `card-payment` transfer."""
+
     authorization_id: Annotated[str, pydantic.Field(alias="authorizationID")]
+    r"""Identifier for the authorization."""
 
     requested_amount: Annotated[AmountDecimal, pydantic.Field(alias="requestedAmount")]
+    r"""Amount submitted for authorization."""
 
     authorized_amount: Annotated[
         AmountDecimal, pydantic.Field(alias="authorizedAmount")
     ]
+    r"""Hold approved by the issuer."""
 
     captured_amount: Annotated[AmountDecimal, pydantic.Field(alias="capturedAmount")]
+    r"""Cumulative amount of captures that have not failed or been canceled."""
 
     capturable_amount: Annotated[
         AmountDecimal, pydantic.Field(alias="capturableAmount")
     ]
+    r"""Amount of the authorization still available after captures and authorization cancellations."""
 
     expires_on: Annotated[Optional[datetime], pydantic.Field(alias="expiresOn")] = None
+    r"""Expiration time for the approved authorization, when available."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -8,6 +8,8 @@ The rail and direction used to move funds for a transfer.
 from moovio_sdk.models.components import TransferType
 
 value = TransferType.CARD_PAYMENT
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 
@@ -23,3 +25,4 @@ value = TransferType.CARD_PAYMENT
 | `ACH_DEBIT_TO_ACH_CREDIT` | ach-debit-to-ach-credit   |
 | `INSTANT_BANK_CREDIT`     | instant-bank-credit       |
 | `WALLET`                  | wallet                    |
+| `WIRE_CREDIT`             | wire-credit               |

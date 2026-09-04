@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class AccountType(str, Enum):
+class AccountType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The type of entity represented by this account."""
 
     INDIVIDUAL = "individual"

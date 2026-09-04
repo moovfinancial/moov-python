@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class WalletTransactionStatus(str, Enum):
+class WalletTransactionStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     PENDING = "pending"
     COMPLETED = "completed"
     CANCELED = "canceled"

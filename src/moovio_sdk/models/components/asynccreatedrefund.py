@@ -18,7 +18,7 @@ class AsyncCreatedRefundTypedDict(TypedDict):
     created_on: datetime
     amount: AmountDecimalTypedDict
     capture_id: NotRequired[str]
-    r"""ID of the capture this refund applies to, when applicable."""
+    r"""ID of the capture refunded for an auth-capture `card-payment` transfer."""
     amount_details: NotRequired[RefundAmountDetailsTypedDict]
 
 
@@ -32,7 +32,7 @@ class AsyncCreatedRefund(BaseModel):
     amount: AmountDecimal
 
     capture_id: Annotated[Optional[str], pydantic.Field(alias="captureID")] = None
-    r"""ID of the capture this refund applies to, when applicable."""
+    r"""ID of the capture refunded for an auth-capture `card-payment` transfer."""
 
     amount_details: Annotated[
         Optional[RefundAmountDetails], pydantic.Field(alias="amountDetails")

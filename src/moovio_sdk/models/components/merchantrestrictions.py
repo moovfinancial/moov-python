@@ -3,7 +3,9 @@
 from __future__ import annotations
 from .issuingcontrolsrestrictionmode import IssuingControlsRestrictionMode
 from .merchantentry import MerchantEntry, MerchantEntryTypedDict
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
+from pydantic import field_serializer
 from typing import List
 from typing_extensions import TypedDict
 
@@ -12,7 +14,7 @@ class MerchantRestrictionsTypedDict(TypedDict):
     r"""Restricts card usage to specific merchants, independent of merchant category."""
 
     mode: IssuingControlsRestrictionMode
-    r"""Whether the listed merchants are the only ones allowed, or the ones to block."""
+    r"""Whether the listed items should be allowed (`allow`) or blocked (`block`)."""
     merchants: List[MerchantEntryTypedDict]
     r"""The merchants to allow or block."""
 
@@ -21,7 +23,16 @@ class MerchantRestrictions(BaseModel):
     r"""Restricts card usage to specific merchants, independent of merchant category."""
 
     mode: IssuingControlsRestrictionMode
-    r"""Whether the listed merchants are the only ones allowed, or the ones to block."""
+    r"""Whether the listed items should be allowed (`allow`) or blocked (`block`)."""
 
     merchants: List[MerchantEntry]
     r"""The merchants to allow or block."""
+
+    @field_serializer("mode")
+    def serialize_mode(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuingControlsRestrictionMode(value)
+            except ValueError:
+                return value
+        return value

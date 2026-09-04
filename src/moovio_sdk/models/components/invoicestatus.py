@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class InvoiceStatus(str, Enum):
+class InvoiceStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     DRAFT = "draft"
     UNPAID = "unpaid"
     PAYMENT_PENDING = "payment-pending"

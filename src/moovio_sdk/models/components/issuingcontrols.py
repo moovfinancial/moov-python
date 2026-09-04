@@ -23,7 +23,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class AllowedScheduleTypedDict(TypedDict):
-    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
+    r"""Limits card usage to specific days and times."""
 
     timezone: str
     r"""IANA timezone string used to evaluate window boundaries against the authorization time."""
@@ -32,7 +32,7 @@ class AllowedScheduleTypedDict(TypedDict):
 
 
 class AllowedSchedule(BaseModel):
-    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
+    r"""Limits card usage to specific days and times."""
 
     timezone: str
     r"""IANA timezone string used to evaluate window boundaries against the authorization time."""
@@ -42,6 +42,8 @@ class AllowedSchedule(BaseModel):
 
 
 class IssuingControlsTypedDict(TypedDict):
+    r"""Mutable spend controls for the card."""
+
     single_use: NotRequired[bool]
     r"""Indicates if the card is single-use. If true, the card closes after the first authorization."""
     velocity_limits: NotRequired[List[IssuingVelocityLimitTypedDict]]
@@ -49,14 +51,15 @@ class IssuingControlsTypedDict(TypedDict):
     merchant_category_restrictions: NotRequired[MerchantCategoryRestrictionsTypedDict]
     r"""Restricts card usage by merchant category. When not set, all categories are allowed."""
     merchant_restrictions: NotRequired[MerchantRestrictionsTypedDict]
-    r"""Restricts card usage to specific merchants, or blocks specific merchants."""
+    r"""Restricts card usage to specific merchants, independent of merchant category."""
     allowed_schedule: NotRequired[Nullable[AllowedScheduleTypedDict]]
-    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
     expires_on: NotRequired[Nullable[datetime]]
     r"""A spend cutoff date and time. When set, all authorizations after this datetime are declined regardless of other controls. Set to `null` for no cutoff."""
 
 
 class IssuingControls(BaseModel):
+    r"""Mutable spend controls for the card."""
+
     single_use: Annotated[Optional[bool], pydantic.Field(alias="singleUse")] = None
     r"""Indicates if the card is single-use. If true, the card closes after the first authorization."""
 
@@ -74,12 +77,11 @@ class IssuingControls(BaseModel):
     merchant_restrictions: Annotated[
         Optional[MerchantRestrictions], pydantic.Field(alias="merchantRestrictions")
     ] = None
-    r"""Restricts card usage to specific merchants, or blocks specific merchants."""
+    r"""Restricts card usage to specific merchants, independent of merchant category."""
 
     allowed_schedule: Annotated[
         OptionalNullable[AllowedSchedule], pydantic.Field(alias="allowedSchedule")
     ] = UNSET
-    r"""Limits card usage to specific days and times. Set to `null` to remove all schedule restrictions."""
 
     expires_on: Annotated[
         OptionalNullable[datetime], pydantic.Field(alias="expiresOn")

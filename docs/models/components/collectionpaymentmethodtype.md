@@ -8,6 +8,8 @@ Payment methods allowed for collecting a payment.
 from moovio_sdk.models.components import CollectionPaymentMethodType
 
 value = CollectionPaymentMethodType.APPLE_PAY
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

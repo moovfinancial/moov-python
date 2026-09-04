@@ -11,6 +11,8 @@ in the `X-Source-System` header on every request.
 from moovio_sdk.models.components import SourceSystem
 
 value = SourceSystem.JH_SILVERLAKE
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

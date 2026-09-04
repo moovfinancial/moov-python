@@ -4,9 +4,10 @@ from __future__ import annotations
 from .ticketcontact import TicketContact, TicketContactTypedDict
 from .ticketstatus import TicketStatus
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -46,6 +47,15 @@ class Ticket(BaseModel):
     closed_on: Annotated[Optional[datetime], pydantic.Field(alias="closedOn")] = None
 
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TicketStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

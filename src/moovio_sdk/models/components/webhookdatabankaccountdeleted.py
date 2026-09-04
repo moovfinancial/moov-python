@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from .bankaccountstatus import BankAccountStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -19,6 +21,15 @@ class WebhookDataBankAccountDeleted(BaseModel):
     account_id: Annotated[str, pydantic.Field(alias="accountID")]
 
     status: BankAccountStatus
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.BankAccountStatus(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

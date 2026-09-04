@@ -53,6 +53,7 @@ class UpdatePaymentLinkTypedDict(TypedDict):
     payment: NotRequired[PaymentLinkPaymentDetailsUpdateTypedDict]
     r"""Options for payment links used to collect payment."""
     payout: NotRequired[PaymentLinkPayoutDetailsUpdateTypedDict]
+    r"""Options for payout links used to send a payout."""
     custom_amount_payment: NotRequired[
         PaymentLinkCustomAmountPaymentDetailsUpdateTypedDict
     ]
@@ -80,6 +81,7 @@ class UpdatePaymentLink(BaseModel):
     r"""Options for payment links used to collect payment."""
 
     payout: Optional[PaymentLinkPayoutDetailsUpdate] = None
+    r"""Options for payout links used to send a payout."""
 
     custom_amount_payment: Annotated[
         Optional[PaymentLinkCustomAmountPaymentDetailsUpdate],

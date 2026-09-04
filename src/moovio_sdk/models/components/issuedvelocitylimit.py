@@ -3,9 +3,10 @@
 from __future__ import annotations
 from .issuingintervallimit import IssuingIntervalLimit
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -61,6 +62,15 @@ class IssuedVelocityLimit(BaseModel):
 
     resets_on: Annotated[Optional[datetime], pydantic.Field(alias="resetsOn")] = None
     r"""When the current interval resets. Absent for per-transaction limits."""
+
+    @field_serializer("interval")
+    def serialize_interval(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuingIntervalLimit(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

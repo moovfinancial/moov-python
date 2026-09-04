@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class FeePaidBy(str, Enum):
-    r"""Indicates which party to a money movement bears an incurred fee."""
-
+class FeePaidBy(str, Enum, metaclass=utils.OpenEnumMeta):
     SOURCE = "source"
     DESTINATION = "destination"

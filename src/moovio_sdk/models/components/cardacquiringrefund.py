@@ -9,9 +9,10 @@ from .refundprocessingdetails import (
 )
 from .refundstatus import RefundStatus
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -27,7 +28,7 @@ class CardAcquiringRefundTypedDict(TypedDict):
     amount: AmountDecimalTypedDict
     processing_details: RefundProcessingDetailsTypedDict
     capture_id: NotRequired[str]
-    r"""ID of the capture this refund applies to, when applicable."""
+    r"""ID of the capture refunded for an auth-capture `card-payment` transfer."""
     amount_details: NotRequired[RefundAmountDetailsTypedDict]
 
 
@@ -50,11 +51,20 @@ class CardAcquiringRefund(BaseModel):
     ]
 
     capture_id: Annotated[Optional[str], pydantic.Field(alias="captureID")] = None
-    r"""ID of the capture this refund applies to, when applicable."""
+    r"""ID of the capture refunded for an auth-capture `card-payment` transfer."""
 
     amount_details: Annotated[
         Optional[RefundAmountDetails], pydantic.Field(alias="amountDetails")
     ] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.RefundStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

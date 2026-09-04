@@ -107,3 +107,9 @@ value: components.PushToGooglePayPaymentMethod = /* values here */
 value: components.PullFromGooglePayPaymentMethod = /* values here */
 ```
 
+### `components.WireCreditPaymentMethod`
+
+```python
+value: components.WireCreditPaymentMethod = /* values here */
+```
+

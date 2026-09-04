@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 import io
+from moovio_sdk.models import components
 from moovio_sdk.models.components import (
     depositaccountingestedresponse as components_depositaccountingestedresponse,
     sourcesystem as components_sourcesystem,
@@ -9,6 +10,7 @@ from moovio_sdk.models.components import (
 from moovio_sdk.types import BaseModel
 from moovio_sdk.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
 import pydantic
+from pydantic import field_serializer
 from typing import Dict, IO, List, Union
 from typing_extensions import Annotated, TypedDict
 
@@ -37,6 +39,15 @@ class CreateDepositAccountRequest(BaseModel):
     request_body: Annotated[
         Union[bytes, IO[bytes], io.IOBase], FieldMetadata(request=True)
     ]
+
+    @field_serializer("x_source_system")
+    def serialize_x_source_system(self, value):
+        if isinstance(value, str):
+            try:
+                return components.SourceSystem(value)
+            except ValueError:
+                return value
+        return value
 
 
 class CreateDepositAccountResponseTypedDict(TypedDict):

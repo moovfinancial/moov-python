@@ -172,8 +172,8 @@ class BillingSummaryPlatformFees(BaseModel):
 @deprecated(
     "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
 )
-class AdjustmentFeesTypedDict(TypedDict):
-    r"""The total amount of adjustment fees. This field is deprecated and will be removed in a future release."""
+class BillingSummaryAdjustmentFeesTypedDict(TypedDict):
+    r"""The total amount of adjustment fees. This field is deprecated and will be removed in a future release. Use adjustments.total."""
 
     currency: str
     r"""A 3-letter ISO 4217 currency code."""
@@ -187,8 +187,8 @@ class AdjustmentFeesTypedDict(TypedDict):
 @deprecated(
     "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
 )
-class AdjustmentFees(BaseModel):
-    r"""The total amount of adjustment fees. This field is deprecated and will be removed in a future release."""
+class BillingSummaryAdjustmentFees(BaseModel):
+    r"""The total amount of adjustment fees. This field is deprecated and will be removed in a future release. Use adjustments.total."""
 
     currency: str
     r"""A 3-letter ISO 4217 currency code."""
@@ -244,8 +244,8 @@ class BillingSummaryTypedDict(TypedDict):
     r"""The total amount of platform fees. This field is deprecated and will be removed in a future release. Use summary.accountFees."""
     account_fees: NotRequired[BillingSummaryDetailsTypedDict]
     r"""A summary of account fees."""
-    adjustment_fees: NotRequired[AdjustmentFeesTypedDict]
-    r"""The total amount of adjustment fees. This field is deprecated and will be removed in a future release."""
+    adjustment_fees: NotRequired[BillingSummaryAdjustmentFeesTypedDict]
+    r"""The total amount of adjustment fees. This field is deprecated and will be removed in a future release. Use adjustments.total."""
     other_fees: NotRequired[OtherFeesTypedDict]
     r"""The total amount of other card fees. This field is deprecated and will be removed in a future release. Use summary.otherCardFees."""
     other_card_fees: NotRequired[BillingSummaryDetailsTypedDict]
@@ -262,6 +262,8 @@ class BillingSummaryTypedDict(TypedDict):
     r"""Monthly partner costs that are charged separately and not included in residual subtotal (e.g. platform fees, minimums)."""
     net_partner_payment: NotRequired[AmountDecimalTypedDict]
     r"""Final partner payment after deducting monthlyPartnerCosts."""
+    total_net_partner_payment: NotRequired[AmountDecimalTypedDict]
+    r"""Final partner payment after deducting monthlyPartnerCosts and any adjustments."""
 
 
 class BillingSummary(BaseModel):
@@ -295,13 +297,13 @@ class BillingSummary(BaseModel):
     r"""A summary of account fees."""
 
     adjustment_fees: Annotated[
-        Optional[AdjustmentFees],
+        Optional[BillingSummaryAdjustmentFees],
         pydantic.Field(
             deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.",
             alias="adjustmentFees",
         ),
     ] = None
-    r"""The total amount of adjustment fees. This field is deprecated and will be removed in a future release."""
+    r"""The total amount of adjustment fees. This field is deprecated and will be removed in a future release. Use adjustments.total."""
 
     other_fees: Annotated[
         Optional[OtherFees],
@@ -343,6 +345,11 @@ class BillingSummary(BaseModel):
     ] = None
     r"""Final partner payment after deducting monthlyPartnerCosts."""
 
+    total_net_partner_payment: Annotated[
+        Optional[AmountDecimal], pydantic.Field(alias="totalNetPartnerPayment")
+    ] = None
+    r"""Final partner payment after deducting monthlyPartnerCosts and any adjustments."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -361,6 +368,7 @@ class BillingSummary(BaseModel):
                 "residualSubtotal",
                 "monthlyPartnerCosts",
                 "netPartnerPayment",
+                "totalNetPartnerPayment",
             ]
         )
         serialized = handler(self)
@@ -390,7 +398,7 @@ try:
 except NameError:
     pass
 try:
-    AdjustmentFees.model_rebuild()
+    BillingSummaryAdjustmentFees.model_rebuild()
 except NameError:
     pass
 try:

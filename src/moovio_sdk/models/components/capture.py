@@ -3,24 +3,26 @@
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
 from .capturestatus import CaptureStatus
+from .cardtransactionfailurecode import CardTransactionFailureCode
 from .transferamountdetails import TransferAmountDetails, TransferAmountDetailsTypedDict
 from .transferlineitems import TransferLineItems, TransferLineItemsTypedDict
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CaptureTypedDict(TypedDict):
-    r"""Details of a capture against an authorized transfer."""
+    r"""Details of a capture against an authorization."""
 
     capture_id: str
     r"""Identifier for the capture."""
     amount: AmountDecimalTypedDict
     is_final: bool
-    r"""Indicates whether this is the final capture against the authorization. When `true`, no further captures can be made."""
+    r"""Indicates whether this is intended to be the final capture."""
     status: CaptureStatus
     created_on: datetime
     destination_payment_method_id: str
@@ -37,11 +39,14 @@ class CaptureTypedDict(TypedDict):
     """
     amount_details: NotRequired[TransferAmountDetailsTypedDict]
     facilitator_fee_amount: NotRequired[AmountDecimalTypedDict]
-    r"""The facilitator fee amount applied to the capture."""
+    r"""The facilitator fee applied to this capture.
+    The transfer's facilitator fee is the sum of its capture fees.
+    """
+    failure_code: NotRequired[CardTransactionFailureCode]
 
 
 class Capture(BaseModel):
-    r"""Details of a capture against an authorized transfer."""
+    r"""Details of a capture against an authorization."""
 
     capture_id: Annotated[str, pydantic.Field(alias="captureID")]
     r"""Identifier for the capture."""
@@ -49,7 +54,7 @@ class Capture(BaseModel):
     amount: AmountDecimal
 
     is_final: Annotated[bool, pydantic.Field(alias="isFinal")]
-    r"""Indicates whether this is the final capture against the authorization. When `true`, no further captures can be made."""
+    r"""Indicates whether this is intended to be the final capture."""
 
     status: CaptureStatus
 
@@ -83,7 +88,31 @@ class Capture(BaseModel):
     facilitator_fee_amount: Annotated[
         Optional[AmountDecimal], pydantic.Field(alias="facilitatorFeeAmount")
     ] = None
-    r"""The facilitator fee amount applied to the capture."""
+    r"""The facilitator fee applied to this capture.
+    The transfer's facilitator fee is the sum of its capture fees.
+    """
+
+    failure_code: Annotated[
+        Optional[CardTransactionFailureCode], pydantic.Field(alias="failureCode")
+    ] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CaptureStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("failure_code")
+    def serialize_failure_code(self, value):
+        if isinstance(value, str):
+            try:
+                return components.CardTransactionFailureCode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -95,6 +124,7 @@ class Capture(BaseModel):
                 "lineItems",
                 "amountDetails",
                 "facilitatorFeeAmount",
+                "failureCode",
             ]
         )
         serialized = handler(self)

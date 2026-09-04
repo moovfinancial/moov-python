@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class IssuingMerchantCategory(str, Enum):
+class IssuingMerchantCategory(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Predefined merchant category groups."""
 
     ADVERTISING = "advertising"

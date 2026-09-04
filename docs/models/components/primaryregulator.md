@@ -8,6 +8,8 @@ If the business is a financial institution, this field describes its primary reg
 from moovio_sdk.models.components import PrimaryRegulator
 
 value = PrimaryRegulator.OCC
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

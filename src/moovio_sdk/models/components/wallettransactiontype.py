@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class WalletTransactionType(str, Enum):
+class WalletTransactionType(str, Enum, metaclass=utils.OpenEnumMeta):
     ACCOUNT_FUNDING = "account-funding"
     ACH_REVERSAL = "ach-reversal"
     AUTO_SWEEP = "auto-sweep"
@@ -33,3 +34,4 @@ class WalletTransactionType(str, Enum):
     FEE_REVENUE = "fee-revenue"
     RESIDUAL = "residual"
     INSTANT_BANK_FAILURE = "instant-bank-failure"
+    WIRE_FAILURE = "wire-failure"

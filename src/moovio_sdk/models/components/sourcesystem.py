@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class SourceSystem(str, Enum):
+class SourceSystem(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Identifies the core banking source system that produced the deposit account payload.
 
     The expected format of the request body depends on this value, so it must be supplied

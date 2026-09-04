@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class DisbursementPaymentMethodType(str, Enum):
+class DisbursementPaymentMethodType(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Payment methods allowed for disbursing funds."""
 
     PUSH_TO_CARD = "push-to-card"

@@ -3,8 +3,10 @@
 from __future__ import annotations
 from .evidencetype import EvidenceType
 from datetime import datetime
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel
 import pydantic
+from pydantic import field_serializer
 from typing_extensions import Annotated, TypedDict
 
 
@@ -26,6 +28,15 @@ class EvidenceTextResponse(BaseModel):
     text: str
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+    @field_serializer("evidence_type")
+    def serialize_evidence_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.EvidenceType(value)
+            except ValueError:
+                return value
+        return value
 
 
 try:

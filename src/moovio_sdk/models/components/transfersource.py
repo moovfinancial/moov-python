@@ -18,9 +18,10 @@ from .transferpaymentmethodswallet import (
 )
 from .transferpaymentmethodtype import TransferPaymentMethodType
 from .transferterminalcard import TransferTerminalCard, TransferTerminalCardTypedDict
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -84,6 +85,15 @@ class TransferSource(BaseModel):
         Optional[TransferTerminalCard], pydantic.Field(alias="terminalCard")
     ] = None
     r"""Describes payment card details captured with tap or in-person payment."""
+
+    @field_serializer("payment_method_type")
+    def serialize_payment_method_type(self, value):
+        if isinstance(value, str):
+            try:
+                return components.TransferPaymentMethodType(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

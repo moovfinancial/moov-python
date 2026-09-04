@@ -47,6 +47,12 @@ value: components.WebhookDataBankAccountUpdated = /* values here */
 value: components.WebhookDataBankAccountDeleted = /* values here */
 ```
 
+### `components.WebhookDataCaptureUpdated`
+
+```python
+value: components.WebhookDataCaptureUpdated = /* values here */
+```
+
 ### `components.WebhookDataCancellationCreated`
 
 ```python

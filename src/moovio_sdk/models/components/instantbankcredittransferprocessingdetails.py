@@ -3,14 +3,18 @@
 from __future__ import annotations
 from .instantbankfailurecode import InstantBankFailureCode
 from .instantbanknetwork import InstantBankNetwork
+from .instantbanktransactionstatus import InstantBankTransactionStatus
+from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class InstantBankCreditTransferProcessingDetailsTypedDict(TypedDict):
+    status: InstantBankTransactionStatus
+    r"""Status of a transaction within the instant-bank lifecycle."""
     network: InstantBankNetwork
     r"""The network that the transaction was processed on."""
     network_response_code: NotRequired[str]
@@ -20,6 +24,9 @@ class InstantBankCreditTransferProcessingDetailsTypedDict(TypedDict):
 
 
 class InstantBankCreditTransferProcessingDetails(BaseModel):
+    status: InstantBankTransactionStatus
+    r"""Status of a transaction within the instant-bank lifecycle."""
+
     network: InstantBankNetwork
     r"""The network that the transaction was processed on."""
 
@@ -33,6 +40,33 @@ class InstantBankCreditTransferProcessingDetails(BaseModel):
     r"""Status codes for instant-bank failures."""
 
     end_to_end_id: Annotated[Optional[str], pydantic.Field(alias="endToEndID")] = None
+
+    @field_serializer("status")
+    def serialize_status(self, value):
+        if isinstance(value, str):
+            try:
+                return components.InstantBankTransactionStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("network")
+    def serialize_network(self, value):
+        if isinstance(value, str):
+            try:
+                return components.InstantBankNetwork(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("failure_code")
+    def serialize_failure_code(self, value):
+        if isinstance(value, str):
+            try:
+                return components.InstantBankFailureCode(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

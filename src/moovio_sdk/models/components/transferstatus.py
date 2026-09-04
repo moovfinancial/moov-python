@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
+from moovio_sdk import utils
 
 
-class TransferStatus(str, Enum):
+class TransferStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""Status of a transfer."""
 
     CREATED = "created"

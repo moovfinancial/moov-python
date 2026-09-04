@@ -66,6 +66,10 @@ from .rtpcreditpaymentmethod import (
     RtpCreditPaymentMethod,
     RtpCreditPaymentMethodTypedDict,
 )
+from .wirecreditpaymentmethod import (
+    WireCreditPaymentMethod,
+    WireCreditPaymentMethodTypedDict,
+)
 from moovio_sdk.utils import get_discriminator
 from pydantic import Discriminator, Tag
 from typing import Union
@@ -92,6 +96,7 @@ PaymentMethodTypedDict = TypeAliasType(
         GooglePayPaymentMethodTypedDict,
         PushToGooglePayPaymentMethodTypedDict,
         PullFromGooglePayPaymentMethodTypedDict,
+        WireCreditPaymentMethodTypedDict,
     ],
 )
 r"""A method of moving money"""
@@ -116,6 +121,7 @@ PaymentMethod = Annotated[
         Annotated[GooglePayPaymentMethod, Tag("google-pay")],
         Annotated[PushToGooglePayPaymentMethod, Tag("push-to-google-pay")],
         Annotated[PullFromGooglePayPaymentMethod, Tag("pull-from-google-pay")],
+        Annotated[WireCreditPaymentMethod, Tag("wire-credit")],
     ],
     Discriminator(
         lambda m: get_discriminator(m, "payment_method_type", "paymentMethodType")
