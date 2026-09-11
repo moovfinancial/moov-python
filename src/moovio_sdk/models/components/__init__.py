@@ -1465,6 +1465,10 @@ if TYPE_CHECKING:
         WebhookDataDisputeUpdated,
         WebhookDataDisputeUpdatedTypedDict,
     )
+    from .webhookdataeventtest import (
+        WebhookDataEventTest,
+        WebhookDataEventTestTypedDict,
+    )
     from .webhookdatainvoicecreated import (
         WebhookDataInvoiceCreated,
         WebhookDataInvoiceCreatedTypedDict,
@@ -2753,6 +2757,8 @@ __all__ = [
     "WebhookDataDisputeCreatedTypedDict",
     "WebhookDataDisputeUpdated",
     "WebhookDataDisputeUpdatedTypedDict",
+    "WebhookDataEventTest",
+    "WebhookDataEventTestTypedDict",
     "WebhookDataInvoiceCreated",
     "WebhookDataInvoiceCreatedTypedDict",
     "WebhookDataInvoiceUpdated",
@@ -4004,6 +4010,8 @@ _dynamic_imports: dict[str, str] = {
     "WebhookDataDisputeCreatedTypedDict": ".webhookdatadisputecreated",
     "WebhookDataDisputeUpdated": ".webhookdatadisputeupdated",
     "WebhookDataDisputeUpdatedTypedDict": ".webhookdatadisputeupdated",
+    "WebhookDataEventTest": ".webhookdataeventtest",
+    "WebhookDataEventTestTypedDict": ".webhookdataeventtest",
     "WebhookDataInvoiceCreated": ".webhookdatainvoicecreated",
     "WebhookDataInvoiceCreatedTypedDict": ".webhookdatainvoicecreated",
     "WebhookDataInvoiceUpdated": ".webhookdatainvoiceupdated",
