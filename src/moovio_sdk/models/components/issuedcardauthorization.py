@@ -25,6 +25,8 @@ class IssuedCardAuthorizationTypedDict(TypedDict):
     r"""Status of a card issuing authorization."""
     merchant_data: IssuingMerchantDataTypedDict
     created_on: datetime
+    last_four_card_number: NotRequired[str]
+    r"""Last four digits of the card number. Omitted for authorizations recorded before this was captured."""
     card_transactions: NotRequired[List[str]]
     r"""List of card transaction IDs associated with this authorization."""
 
@@ -48,6 +50,11 @@ class IssuedCardAuthorization(BaseModel):
     merchant_data: Annotated[IssuingMerchantData, pydantic.Field(alias="merchantData")]
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+    last_four_card_number: Annotated[
+        Optional[str], pydantic.Field(alias="lastFourCardNumber")
+    ] = None
+    r"""Last four digits of the card number. Omitted for authorizations recorded before this was captured."""
 
     card_transactions: Annotated[
         Optional[List[str]], pydantic.Field(alias="cardTransactions")
@@ -74,7 +81,7 @@ class IssuedCardAuthorization(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["cardTransactions"])
+        optional_fields = set(["lastFourCardNumber", "cardTransactions"])
         serialized = handler(self)
         m = {}
 
