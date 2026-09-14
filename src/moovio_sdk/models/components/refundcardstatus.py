@@ -11,3 +11,4 @@ class RefundCardStatus(str, Enum, metaclass=utils.OpenEnumMeta):
     SETTLED = "settled"
     FAILED = "failed"
     COMPLETED = "completed"
+    CLEARED_EXTERNAL = "cleared-external"
