@@ -3,11 +3,11 @@
 import importlib.metadata
 
 __title__: str = "moovio_sdk"
-__version__: str = "26.10.0-dev.5"
+__version__: str = "26.10.0-dev.6"
 __openapi_doc_version__: str = "v2026.10.00"
-__gen_version__: str = "2.935.1"
+__gen_version__: str = "2.937.18"
 __user_agent__: str = (
-    "speakeasy-sdk/python 26.10.0-dev.5 2.935.1 v2026.10.00 moovio_sdk"
+    "speakeasy-sdk/python 26.10.0-dev.6 2.937.18 v2026.10.00 moovio_sdk"
 )
 
 try:
