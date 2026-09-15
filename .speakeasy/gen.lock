@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: d059afa4-1f18-44f7-bd12-4e2a2a82c9fb
 management:
-  docChecksum: 094e56aa2d7afa29e8ba30245c698c25
+  docChecksum: 91e133ed36402058ef90e2e2d91d7279
   docVersion: dev
-  speakeasyVersion: 1.796.4
-  generationVersion: 2.935.1
-  releaseVersion: 0.0.0-dev.28
-  configChecksum: ed14bdeee84fa321d73a87ad77a76389
+  speakeasyVersion: 1.797.0
+  generationVersion: 2.937.18
+  releaseVersion: 0.0.0-dev.29
+  configChecksum: 201977bf23831469c9c698c34c10651e
   repoURL: https://github.com/moovfinancial/moov-python.git
   installationURL: https://github.com/moovfinancial/moov-python.git
   published: true
 persistentEdits:
-  generation_id: b42b8d8e-b254-4fe8-9393-da2bcea5539f
-  pristine_commit_hash: aa00977db7f50d2b52d212c8197b7c659d6b5ecb
-  pristine_tree_hash: 1fc0005dd4eb4a1a4e545d5f6a150a96d39cde32
+  generation_id: 375f7d87-2fbb-47ab-8eae-51cf48226e91
+  pristine_commit_hash: 15ad614ddbdae6b95024fcaefe3c7ff0526a4d47
+  pristine_tree_hash: 14902ba6a4f2fb9490225c8ceb6b2d2c70f8cf8c
 features:
   python:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.1.0
-    constsAndDefaults: 1.0.7
+    constsAndDefaults: 1.0.8
     core: 6.1.2
     decimal: 1.0.0
     defaultEnabledRetries: 0.2.0
@@ -41,7 +41,7 @@ features:
     responseFormat: 1.1.0
     retries: 3.1.2
     sdkHooks: 1.3.0
-    unions: 3.1.9
+    unions: 3.1.10
     uploadStreams: 1.0.3
 trackedFiles:
   .gitattributes:
@@ -682,8 +682,8 @@ trackedFiles:
     pristine_git_object: 7337f55442635963b17e6603d37aab127f8840a2
   docs/models/components/cardpaymenttransactionstatus.md:
     id: 2b0d85bf8eb7
-    last_write_checksum: sha1:2a5c2d417e50d663e0400041cda435af03188580
-    pristine_git_object: 2e8b7dcf1ee9af1b1e243cd4369e6120851441ed
+    last_write_checksum: sha1:36128d55f7d58518f48ba39575fddedbc0a15f23
+    pristine_git_object: d485c22fb0f9f6b330ecc5e4ae5497af651763e8
   docs/models/components/cardpaymenttransferpaymentmethod.md:
     id: fe12b19a70d2
     last_write_checksum: sha1:cd52408e3b13271f4164446d32dfd223b379ca13
@@ -5226,8 +5226,8 @@ trackedFiles:
     pristine_git_object: 68b6361e4a22b7fd00d6f5a72e25278ebf35ba6d
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:d9c05d7874f1c0cb38485e8cbebdc9000a7a0919
-    pristine_git_object: 092d825855bf0fdb731173c991d356d6a45354f3
+    last_write_checksum: sha1:8f9d850980f24f61b9b07b931fc6b06a5c960d31
+    pristine_git_object: 9b35d9bd408614c53c109c28a54193449817fd9b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:bbaa58b6cb731743837d56d3aab4af7de8f015e2
@@ -5258,8 +5258,8 @@ trackedFiles:
     pristine_git_object: 076df3d6ae03d62035a26c8ac4f1cfb3ddd1bc74
   src/moovio_sdk/_version.py:
     id: d3cd5fbf2a6a
-    last_write_checksum: sha1:548d34f75d177b77cd8903f422d7aa3de629d88d
-    pristine_git_object: 9eef0584a85339a15a5aed742ba5648b7cde0564
+    last_write_checksum: sha1:d742730e2dccc04195db6a847f7a4553cb74638a
+    pristine_git_object: b8a7f8a6b72180b0733e7e6f927da2e0193d480c
   src/moovio_sdk/account_terminal_applications.py:
     id: dd1e96750f65
     last_write_checksum: sha1:c1d6f7135eda3b166bafa5754614318f905dd5ef
@@ -5898,8 +5898,8 @@ trackedFiles:
     pristine_git_object: 7701d6d666cf78f667565c021d6e42447eb38289
   src/moovio_sdk/models/components/cardpaymenttransactionstatus.py:
     id: f469370ab08a
-    last_write_checksum: sha1:2a9a79f2acd2cfcec9a1216ffdf893b7ce0c6599
-    pristine_git_object: 7cd48465fd0c259c966747faa03e0b3900dd8160
+    last_write_checksum: sha1:73e76f0feacc8f4de66d44d7914a89ff84075025
+    pristine_git_object: ac62949172960e2910f010559a9b6dc62093b6e1
   src/moovio_sdk/models/components/cardpaymenttransferpaymentmethod.py:
     id: 9f03ebf6e189
     last_write_checksum: sha1:d6b4d8da319052f5e06988fbad101ef60ec77dcd
@@ -9322,8 +9322,8 @@ trackedFiles:
     pristine_git_object: 8ac64995fd2a381cbbb8eaa9b333f376813bda4b
   src/moovio_sdk/utils/__init__.py:
     id: 79beca5e01d2
-    last_write_checksum: sha1:527db7a6c93948ecdec6a33f56b6551ae44f0180
-    pristine_git_object: c48a36ca3d6e47e384b133bc0bcb482c6d8589b9
+    last_write_checksum: sha1:e6fb1146e02dbccdc147eb3724b57e71568b8391
+    pristine_git_object: e115709b0c3b707de93b00ecf707f85fb1abf1d1
   src/moovio_sdk/utils/annotations.py:
     id: c5e147c445cf
     last_write_checksum: sha1:a4824ad65f730303e4e1e3ec1febf87b4eb46dbc
@@ -9378,8 +9378,8 @@ trackedFiles:
     pristine_git_object: d812599944af8417eccd798d2cafb68f72e458f4
   src/moovio_sdk/utils/serializers.py:
     id: 4e598042baed
-    last_write_checksum: sha1:7485f1425b0661fd84836186570df90207eec6af
-    pristine_git_object: 1031ed930bad5ece220cf7416a56c29f40f0588b
+    last_write_checksum: sha1:2fb543339b424a0818b126e69695df5c91cd4d7b
+    pristine_git_object: 5e57d36e8883501df8f6293e4c76ac337c4987eb
   src/moovio_sdk/utils/unmarshal_json_response.py:
     id: c7af126534e1
     last_write_checksum: sha1:9f4e58370779ba505b7633f30ae651bde3ec4fdb
@@ -12439,7 +12439,7 @@ examples:
           application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `moov.webhooks.list()`:  `response.[].event_types[].enum(event.test)` **Added**\n* `moov.webhooks.create()`: \n  *  `request.event_types[].enum(event.test)` **Added**\n  *  `response.event_types[].enum(event.test)` **Added**\n* `moov.webhooks.get()`:  `response.event_types[].enum(event.test)` **Added**\n* `moov.webhooks.update()`: \n  *  `request.event_types[].enum(event.test)` **Added**\n  *  `response.event_types[].enum(event.test)` **Added**\n* `moov.webhooks.ping()`:  `response.webhook.event_types[].enum(event.test)` **Added**\n* `moov.issuing_transactions.list_authorizations()`:  `response.[].last_four_card_number` **Added**\n* `moov.issuing_transactions.get_authorization()`:  `response.last_four_card_number` **Added**\n* `moov.issuing_transactions.list()`:  `response.[].last_four_card_number` **Added**\n* `moov.issuing_transactions.get()`:  `response.last_four_card_number` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `moov.transfers.create()`: \n  *  `response.processing_details.card_payment.status.enum(cleared_external)` **Added**\n  *  `error.processing_details.card_payment.status.enum(cleared_external)` **Added**\n* `moov.transfers.list()`:  `response.[].processing_details.card_payment.status.enum(cleared_external)` **Added**\n* `moov.transfers.batch_get_transfers()`:  `response.Map<Transfer>.processing_details.card_payment.status.enum(cleared_external)` **Added**\n* `moov.transfers.get()`:  `response.processing_details.card_payment.status.enum(cleared_external)` **Added**\n* `moov.transfers.update()`:  `response.processing_details.card_payment.status.enum(cleared_external)` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .vscode/settings.json
