@@ -3,12 +3,14 @@
 from __future__ import annotations
 from .issuedcardauthorizationeventresult import IssuedCardAuthorizationEventResult
 from .issuedcardeventtype import IssuedCardEventType
+from .issuingdeclinereason import IssuingDeclineReason
 from datetime import datetime
 from moovio_sdk.models import components
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import field_serializer
-from typing_extensions import Annotated, TypedDict
+from pydantic import field_serializer, model_serializer
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class IssuedCardAuthorizationEventTypedDict(TypedDict):
@@ -21,6 +23,10 @@ class IssuedCardAuthorizationEventTypedDict(TypedDict):
     result: IssuedCardAuthorizationEventResult
     r"""The result of an event."""
     created_on: datetime
+    decline_reason: NotRequired[IssuingDeclineReason]
+    r"""The reason an authorization or authorization event was declined. Only present if the
+    authorization or event has been declined.
+    """
 
 
 class IssuedCardAuthorizationEvent(BaseModel):
@@ -37,6 +43,13 @@ class IssuedCardAuthorizationEvent(BaseModel):
     r"""The result of an event."""
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
+
+    decline_reason: Annotated[
+        Optional[IssuingDeclineReason], pydantic.Field(alias="declineReason")
+    ] = None
+    r"""The reason an authorization or authorization event was declined. Only present if the
+    authorization or event has been declined.
+    """
 
     @field_serializer("event_type")
     def serialize_event_type(self, value):
@@ -55,6 +68,31 @@ class IssuedCardAuthorizationEvent(BaseModel):
             except ValueError:
                 return value
         return value
+
+    @field_serializer("decline_reason")
+    def serialize_decline_reason(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuingDeclineReason(value)
+            except ValueError:
+                return value
+        return value
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["declineReason"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 try:

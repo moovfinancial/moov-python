@@ -862,6 +862,7 @@ if TYPE_CHECKING:
         IssuingControlsErrorTypedDict,
     )
     from .issuingcontrolsrestrictionmode import IssuingControlsRestrictionMode
+    from .issuingdeclinereason import IssuingDeclineReason
     from .issuingintervallimit import IssuingIntervalLimit
     from .issuingmerchantcategory import IssuingMerchantCategory
     from .issuingmerchantdata import IssuingMerchantData, IssuingMerchantDataTypedDict
@@ -971,6 +972,7 @@ if TYPE_CHECKING:
     )
     from .mxauthorizationcode import MXAuthorizationCode, MXAuthorizationCodeTypedDict
     from .mxpayload import MxPayload, MxPayloadTypedDict
+    from .oauth2clienttype import OAuth2ClientType
     from .occurrence import Occurrence, OccurrenceTypedDict
     from .occurrencesresponse import (
         Error,
@@ -2367,6 +2369,7 @@ __all__ = [
     "IssuingControlsErrorTypedDict",
     "IssuingControlsRestrictionMode",
     "IssuingControlsTypedDict",
+    "IssuingDeclineReason",
     "IssuingIntervalLimit",
     "IssuingMerchantCategory",
     "IssuingMerchantData",
@@ -2463,6 +2466,7 @@ __all__ = [
     "MoovWalletTransferPaymentMethodTypedDict",
     "MxPayload",
     "MxPayloadTypedDict",
+    "OAuth2ClientType",
     "Occurrence",
     "OccurrenceStatus",
     "OccurrenceTypedDict",
@@ -3718,6 +3722,7 @@ _dynamic_imports: dict[str, str] = {
     "IssuingControlsError": ".issuingcontrolserror",
     "IssuingControlsErrorTypedDict": ".issuingcontrolserror",
     "IssuingControlsRestrictionMode": ".issuingcontrolsrestrictionmode",
+    "IssuingDeclineReason": ".issuingdeclinereason",
     "IssuingIntervalLimit": ".issuingintervallimit",
     "IssuingMerchantCategory": ".issuingmerchantcategory",
     "IssuingMerchantData": ".issuingmerchantdata",
@@ -3808,6 +3813,7 @@ _dynamic_imports: dict[str, str] = {
     "MXAuthorizationCodeTypedDict": ".mxauthorizationcode",
     "MxPayload": ".mxpayload",
     "MxPayloadTypedDict": ".mxpayload",
+    "OAuth2ClientType": ".oauth2clienttype",
     "Occurrence": ".occurrence",
     "OccurrenceTypedDict": ".occurrence",
     "Error": ".occurrencesresponse",
