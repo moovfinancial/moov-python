@@ -232,6 +232,7 @@ class Products(BaseSDK):
         title: str,
         base_price: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         description: Optional[str] = None,
+        is_taxable: Optional[bool] = None,
         images: Optional[
             Union[
                 Iterable[components.AssignProductImage],
@@ -260,6 +261,7 @@ class Products(BaseSDK):
             - Must be valid UTF-8 text
             - Supports Markdown for formatting
             - HTML is not permitted and will be rejected
+        :param is_taxable: Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update.
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param category_id: The ID of a product taxonomy category to associate with the product.
@@ -286,6 +288,7 @@ class Products(BaseSDK):
                 base_price=utils.get_pydantic_model(
                     base_price, components.AmountDecimal
                 ),
+                is_taxable=is_taxable,
                 images=utils.get_pydantic_model(
                     images, Optional[List[components.AssignProductImage]]
                 ),
@@ -377,6 +380,7 @@ class Products(BaseSDK):
         title: str,
         base_price: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         description: Optional[str] = None,
+        is_taxable: Optional[bool] = None,
         images: Optional[
             Union[
                 Iterable[components.AssignProductImage],
@@ -405,6 +409,7 @@ class Products(BaseSDK):
             - Must be valid UTF-8 text
             - Supports Markdown for formatting
             - HTML is not permitted and will be rejected
+        :param is_taxable: Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update.
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param category_id: The ID of a product taxonomy category to associate with the product.
@@ -431,6 +436,7 @@ class Products(BaseSDK):
                 base_price=utils.get_pydantic_model(
                     base_price, components.AmountDecimal
                 ),
+                is_taxable=is_taxable,
                 images=utils.get_pydantic_model(
                     images, Optional[List[components.AssignProductImage]]
                 ),
@@ -715,6 +721,7 @@ class Products(BaseSDK):
         title: str,
         base_price: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         description: Optional[str] = None,
+        is_taxable: Optional[bool] = None,
         images: Optional[
             Union[
                 Iterable[components.AssignProductImage],
@@ -744,6 +751,7 @@ class Products(BaseSDK):
             - Must be valid UTF-8 text
             - Supports Markdown for formatting
             - HTML is not permitted and will be rejected
+        :param is_taxable: Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update.
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param category_id: The ID of a product taxonomy category to associate with the product.
@@ -771,6 +779,7 @@ class Products(BaseSDK):
                 base_price=utils.get_pydantic_model(
                     base_price, components.AmountDecimal
                 ),
+                is_taxable=is_taxable,
                 images=utils.get_pydantic_model(
                     images, Optional[List[components.AssignProductImage]]
                 ),
@@ -863,6 +872,7 @@ class Products(BaseSDK):
         title: str,
         base_price: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         description: Optional[str] = None,
+        is_taxable: Optional[bool] = None,
         images: Optional[
             Union[
                 Iterable[components.AssignProductImage],
@@ -892,6 +902,7 @@ class Products(BaseSDK):
             - Must be valid UTF-8 text
             - Supports Markdown for formatting
             - HTML is not permitted and will be rejected
+        :param is_taxable: Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update.
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param category_id: The ID of a product taxonomy category to associate with the product.
@@ -919,6 +930,7 @@ class Products(BaseSDK):
                 base_price=utils.get_pydantic_model(
                     base_price, components.AmountDecimal
                 ),
+                is_taxable=is_taxable,
                 images=utils.get_pydantic_model(
                     images, Optional[List[components.AssignProductImage]]
                 ),
