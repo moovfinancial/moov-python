@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .cardissuingnetwork import CardIssuingNetwork
 from .issuingauthorizationstatus import IssuingAuthorizationStatus
+from .issuingdeclinereason import IssuingDeclineReason
 from .issuingmerchantdata import IssuingMerchantData, IssuingMerchantDataTypedDict
 from datetime import datetime
 from moovio_sdk.models import components
@@ -29,6 +30,10 @@ class IssuedCardAuthorizationTypedDict(TypedDict):
     r"""Last four digits of the card number. Omitted for authorizations recorded before this was captured."""
     card_transactions: NotRequired[List[str]]
     r"""List of card transaction IDs associated with this authorization."""
+    decline_reason: NotRequired[IssuingDeclineReason]
+    r"""The reason an authorization or authorization event was declined. Only present if the
+    authorization or event has been declined.
+    """
 
 
 class IssuedCardAuthorization(BaseModel):
@@ -61,6 +66,13 @@ class IssuedCardAuthorization(BaseModel):
     ] = None
     r"""List of card transaction IDs associated with this authorization."""
 
+    decline_reason: Annotated[
+        Optional[IssuingDeclineReason], pydantic.Field(alias="declineReason")
+    ] = None
+    r"""The reason an authorization or authorization event was declined. Only present if the
+    authorization or event has been declined.
+    """
+
     @field_serializer("network")
     def serialize_network(self, value):
         if isinstance(value, str):
@@ -79,9 +91,20 @@ class IssuedCardAuthorization(BaseModel):
                 return value
         return value
 
+    @field_serializer("decline_reason")
+    def serialize_decline_reason(self, value):
+        if isinstance(value, str):
+            try:
+                return components.IssuingDeclineReason(value)
+            except ValueError:
+                return value
+        return value
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["lastFourCardNumber", "cardTransactions"])
+        optional_fields = set(
+            ["lastFourCardNumber", "cardTransactions", "declineReason"]
+        )
         serialized = handler(self)
         m = {}
 
