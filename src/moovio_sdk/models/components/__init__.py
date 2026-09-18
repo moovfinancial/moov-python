@@ -809,6 +809,7 @@ if TYPE_CHECKING:
         IssuingControlsError,
         IssuingControlsErrorTypedDict,
     )
+    from .issuingdeclinereason import IssuingDeclineReason
     from .issuingintervallimit import IssuingIntervalLimit
     from .issuingmerchantdata import IssuingMerchantData, IssuingMerchantDataTypedDict
     from .issuingvelocitylimit import (
@@ -896,6 +897,7 @@ if TYPE_CHECKING:
     )
     from .mxauthorizationcode import MXAuthorizationCode, MXAuthorizationCodeTypedDict
     from .mxpayload import MxPayload, MxPayloadTypedDict
+    from .oauth2clienttype import OAuth2ClientType
     from .occurrence import Occurrence, OccurrenceTypedDict
     from .occurrencesresponse import (
         Error,
@@ -2201,6 +2203,7 @@ __all__ = [
     "IssuingControlsError",
     "IssuingControlsErrorTypedDict",
     "IssuingControlsTypedDict",
+    "IssuingDeclineReason",
     "IssuingIntervalLimit",
     "IssuingMerchantData",
     "IssuingMerchantDataTypedDict",
@@ -2279,6 +2282,7 @@ __all__ = [
     "MoovWalletTransferPaymentMethodTypedDict",
     "MxPayload",
     "MxPayloadTypedDict",
+    "OAuth2ClientType",
     "Occurrence",
     "OccurrenceStatus",
     "OccurrenceTypedDict",
@@ -3453,6 +3457,7 @@ _dynamic_imports: dict[str, str] = {
     "IssuingControlsTypedDict": ".issuingcontrols",
     "IssuingControlsError": ".issuingcontrolserror",
     "IssuingControlsErrorTypedDict": ".issuingcontrolserror",
+    "IssuingDeclineReason": ".issuingdeclinereason",
     "IssuingIntervalLimit": ".issuingintervallimit",
     "IssuingMerchantData": ".issuingmerchantdata",
     "IssuingMerchantDataTypedDict": ".issuingmerchantdata",
@@ -3525,6 +3530,7 @@ _dynamic_imports: dict[str, str] = {
     "MXAuthorizationCodeTypedDict": ".mxauthorizationcode",
     "MxPayload": ".mxpayload",
     "MxPayloadTypedDict": ".mxpayload",
+    "OAuth2ClientType": ".oauth2clienttype",
     "Occurrence": ".occurrence",
     "OccurrenceTypedDict": ".occurrence",
     "Error": ".occurrencesresponse",
