@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .granttype import GrantType
+from .oauth2clienttype import OAuth2ClientType
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 from moovio_sdk.utils import FieldMetadata
 from pydantic import model_serializer
@@ -24,6 +25,8 @@ class AuthTokenRequestTypedDict(TypedDict):
     r"""A space delimited list of scopes. Required when `grant_type` is `client_credentials`."""
     refresh_token: NotRequired[str]
     r"""The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`."""
+    client_type: NotRequired[OAuth2ClientType]
+    r"""The client type requesting a token. `device` and `service` clients do not require browser origin binding. Defaults to `web` when omitted. This field applies to the `client_credentials` grant; refreshed tokens keep the original client type."""
 
 
 class AuthTokenRequest(BaseModel):
@@ -46,9 +49,14 @@ class AuthTokenRequest(BaseModel):
     refresh_token: Annotated[Optional[str], FieldMetadata(form=True)] = None
     r"""The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`."""
 
+    client_type: Annotated[Optional[OAuth2ClientType], FieldMetadata(form=True)] = None
+    r"""The client type requesting a token. `device` and `service` clients do not require browser origin binding. Defaults to `web` when omitted. This field applies to the `client_credentials` grant; refreshed tokens keep the original client type."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["client_id", "client_secret", "scope", "refresh_token"])
+        optional_fields = set(
+            ["client_id", "client_secret", "scope", "refresh_token", "client_type"]
+        )
         serialized = handler(self)
         m = {}
 

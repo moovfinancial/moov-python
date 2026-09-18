@@ -249,6 +249,7 @@ class Authentication(BaseSDK):
         client_secret: Optional[str] = None,
         scope: Optional[str] = None,
         refresh_token: Optional[str] = None,
+        client_type: Optional[components.OAuth2ClientType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -264,6 +265,7 @@ class Authentication(BaseSDK):
         :param client_secret: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
         :param scope: A space delimited list of scopes. Required when `grant_type` is `client_credentials`.
         :param refresh_token: The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
+        :param client_type: The client type requesting a token. `device` and `service` clients do not require browser origin binding. Defaults to `web` when omitted. This field applies to the `client_credentials` grant; refreshed tokens keep the original client type.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -285,6 +287,7 @@ class Authentication(BaseSDK):
             client_secret=client_secret,
             scope=scope,
             refresh_token=refresh_token,
+            client_type=client_type,
         )
 
         req = self._build_request(
@@ -369,6 +372,7 @@ class Authentication(BaseSDK):
         client_secret: Optional[str] = None,
         scope: Optional[str] = None,
         refresh_token: Optional[str] = None,
+        client_type: Optional[components.OAuth2ClientType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -384,6 +388,7 @@ class Authentication(BaseSDK):
         :param client_secret: Client secret can be provided here in the body, or as the Password in HTTP Basic Auth.
         :param scope: A space delimited list of scopes. Required when `grant_type` is `client_credentials`.
         :param refresh_token: The refresh_token returned alongside the access token being refreshed. Required when `grant_type` is `refresh_token`.
+        :param client_type: The client type requesting a token. `device` and `service` clients do not require browser origin binding. Defaults to `web` when omitted. This field applies to the `client_credentials` grant; refreshed tokens keep the original client type.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -405,6 +410,7 @@ class Authentication(BaseSDK):
             client_secret=client_secret,
             scope=scope,
             refresh_token=refresh_token,
+            client_type=client_type,
         )
 
         req = self._build_request_async(
