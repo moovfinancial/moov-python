@@ -21,6 +21,8 @@ class ProductTypedDict(TypedDict):
     title: str
     base_price: AmountDecimalTypedDict
     r"""A product's starting price, before applying modifiers."""
+    is_taxable: bool
+    r"""Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. This setting does not determine jurisdiction-specific taxability."""
     created_on: datetime
     r"""The date and time when the product was added."""
     updated_on: datetime
@@ -52,6 +54,9 @@ class Product(BaseModel):
 
     base_price: Annotated[AmountDecimal, pydantic.Field(alias="basePrice")]
     r"""A product's starting price, before applying modifiers."""
+
+    is_taxable: Annotated[bool, pydantic.Field(alias="isTaxable")]
+    r"""Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. This setting does not determine jurisdiction-specific taxability."""
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
     r"""The date and time when the product was added."""
