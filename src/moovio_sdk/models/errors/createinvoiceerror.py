@@ -18,6 +18,9 @@ class CreateInvoiceErrorData(BaseModel):
     customer_account_id: Annotated[
         Optional[str], pydantic.Field(alias="customerAccountID")
     ] = None
+    customer_email: Annotated[Optional[str], pydantic.Field(alias="customerEmail")] = (
+        None
+    )
     description: Optional[str] = None
     line_items: Annotated[
         Optional[

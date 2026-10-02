@@ -19,6 +19,8 @@ class CreateInvoiceTypedDict(TypedDict):
     r"""A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer)."""
     line_items: CreateInvoiceLineItemsTypedDict
     r"""A collection of line items for an invoice."""
+    customer_email: NotRequired[str]
+    r"""Email address to use for invoice checkout OTP verification instead of the customer account email."""
     description: NotRequired[str]
     invoice_date: NotRequired[datetime]
     due_date: NotRequired[datetime]
@@ -31,6 +33,11 @@ class CreateInvoice(BaseModel):
 
     line_items: Annotated[CreateInvoiceLineItems, pydantic.Field(alias="lineItems")]
     r"""A collection of line items for an invoice."""
+
+    customer_email: Annotated[Optional[str], pydantic.Field(alias="customerEmail")] = (
+        None
+    )
+    r"""Email address to use for invoice checkout OTP verification instead of the customer account email."""
 
     description: Optional[str] = None
 
@@ -46,7 +53,9 @@ class CreateInvoice(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "invoiceDate", "dueDate", "taxAmount"])
+        optional_fields = set(
+            ["customerEmail", "description", "invoiceDate", "dueDate", "taxAmount"]
+        )
         serialized = handler(self)
         m = {}
 
