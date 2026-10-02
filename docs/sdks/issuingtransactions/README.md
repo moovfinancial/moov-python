@@ -4,6 +4,12 @@
 
 ### Available Operations
 
+* [list_activity](#list_activity) - List issued card activity associated with a Moov account.
+
+Activity includes authorizations and settlements in a single list.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 * [list_authorizations](#list_authorizations) - List issued card authorizations associated with a Moov account.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
@@ -24,6 +30,61 @@ you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+
+## list_activity
+
+List issued card activity associated with a Moov account.
+
+Activity includes authorizations and settlements in a single list.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="listIssuedCardActivity" method="get" path="/issuing/{accountID}/activity" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.issuing_transactions.list_activity(account_id="<id>", skip=60, count=20)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          | Example                                                                                              |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `account_id`                                                                                         | *str*                                                                                                | :heavy_check_mark:                                                                                   | The Moov business account for which cards have been issued.                                          |                                                                                                      |
+| `skip`                                                                                               | *Optional[int]*                                                                                      | :heavy_minus_sign:                                                                                   | N/A                                                                                                  | 60                                                                                                   |
+| `count`                                                                                              | *Optional[int]*                                                                                      | :heavy_minus_sign:                                                                                   | Page size. When omitted, the server defaults to `200`.                                               | 20                                                                                                   |
+| `issued_card_id`                                                                                     | *Optional[str]*                                                                                      | :heavy_minus_sign:                                                                                   | Optional ID of the issued card to filter results.                                                    |                                                                                                      |
+| `authorized_user_account_id`                                                                         | *Optional[str]*                                                                                      | :heavy_minus_sign:                                                                                   | Optional identifier for the account of the card's authorized user.                                   |                                                                                                      |
+| `statuses`                                                                                           | List[[components.IssuingAuthorizationStatus](../../models/components/issuingauthorizationstatus.md)] | :heavy_minus_sign:                                                                                   | Optional, comma-separated statuses of the activity to filter results.                                |                                                                                                      |
+| `start_date_time`                                                                                    | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                 | :heavy_minus_sign:                                                                                   | Optional date-time which inclusively filters all activity created after this date-time.              |                                                                                                      |
+| `end_date_time`                                                                                      | [date](https://docs.python.org/3/library/datetime.html#date-objects)                                 | :heavy_minus_sign:                                                                                   | Optional date-time which exclusively filters all activity created before this date-time.             |                                                                                                      |
+| `retries`                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                     | :heavy_minus_sign:                                                                                   | Configuration to override the default retry behavior of the client.                                  |                                                                                                      |
+
+### Response
+
+**[operations.ListIssuedCardActivityResponse](../../models/operations/listissuedcardactivityresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list_authorizations
 

@@ -32,6 +32,8 @@ class IncurredFeeTypedDict(TypedDict):
     r"""Object indicating what generated the fee (TransferID, CardID, DisputeID, AccountID, or BankAccountID)."""
     fee_group: NotRequired[str]
     r"""Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or an interchange or discount fee."""
+    fee_program: NotRequired[str]
+    r"""The program assigned by the card network that determines the interchange rate for the fee. Present only for interchange or discount fees."""
     residual_id: NotRequired[str]
     r"""Unique identifier for this residual payment calculation."""
     fee_paid_by: NotRequired[FeePaidBy]
@@ -67,6 +69,9 @@ class IncurredFee(BaseModel):
     fee_group: Annotated[Optional[str], pydantic.Field(alias="feeGroup")] = None
     r"""Describes the source of the fee, such as a Moov-set processing fee, a network pass-through fee, or an interchange or discount fee."""
 
+    fee_program: Annotated[Optional[str], pydantic.Field(alias="feeProgram")] = None
+    r"""The program assigned by the card network that determines the interchange rate for the fee. Present only for interchange or discount fees."""
+
     residual_id: Annotated[Optional[str], pydantic.Field(alias="residualID")] = None
     r"""Unique identifier for this residual payment calculation."""
 
@@ -96,6 +101,7 @@ class IncurredFee(BaseModel):
                 "amount",
                 "generatedBy",
                 "feeGroup",
+                "feeProgram",
                 "residualID",
                 "feePaidBy",
             ]

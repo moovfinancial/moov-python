@@ -25,4 +25,3 @@ value = TransferType.CARD_PAYMENT
 | `ACH_DEBIT_TO_ACH_CREDIT` | ach-debit-to-ach-credit   |
 | `INSTANT_BANK_CREDIT`     | instant-bank-credit       |
 | `WALLET`                  | wallet                    |
-| `WIRE_CREDIT`             | wire-credit               |

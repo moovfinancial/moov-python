@@ -12,15 +12,15 @@ from typing_extensions import TypeAliasType
 LinkBankAccountTypedDict = TypeAliasType(
     "LinkBankAccountTypedDict",
     Union[
-        BankAccountPayloadTypedDict,
         PlaidPayloadTypedDict,
         PlaidLinkPayloadTypedDict,
         MxPayloadTypedDict,
+        BankAccountPayloadTypedDict,
     ],
 )
 
 
 LinkBankAccount = TypeAliasType(
     "LinkBankAccount",
-    Union[BankAccountPayload, PlaidPayload, PlaidLinkPayload, MxPayload],
+    Union[PlaidPayload, PlaidLinkPayload, MxPayload, BankAccountPayload],
 )

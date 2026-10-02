@@ -699,6 +699,7 @@ class Transfers(BaseSDK):
         disputed: Optional[bool] = None,
         foreign_id: Optional[str] = None,
         authorization_i_ds: Optional[Iterable[str]] = None,
+        invoice_i_ds: Optional[Iterable[str]] = None,
         transfer_types: Optional[Iterable[components.TransferType]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
@@ -731,6 +732,7 @@ class Transfers(BaseSDK):
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param authorization_i_ds: Optional comma-separated authorization IDs.
+        :param invoice_i_ds: Optional comma-separated invoice IDs.
         :param transfer_types: Optional, comma-separated transfer types by which the response is filtered.
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
@@ -761,6 +763,7 @@ class Transfers(BaseSDK):
             disputed=disputed,
             foreign_id=foreign_id,
             authorization_i_ds=utils.unmarshal(authorization_i_ds, Optional[List[str]]),
+            invoice_i_ds=utils.unmarshal(invoice_i_ds, Optional[List[str]]),
             transfer_types=utils.unmarshal(
                 transfer_types, Optional[List[components.TransferType]]
             ),
@@ -852,6 +855,7 @@ class Transfers(BaseSDK):
         disputed: Optional[bool] = None,
         foreign_id: Optional[str] = None,
         authorization_i_ds: Optional[Iterable[str]] = None,
+        invoice_i_ds: Optional[Iterable[str]] = None,
         transfer_types: Optional[Iterable[components.TransferType]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
@@ -884,6 +888,7 @@ class Transfers(BaseSDK):
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param authorization_i_ds: Optional comma-separated authorization IDs.
+        :param invoice_i_ds: Optional comma-separated invoice IDs.
         :param transfer_types: Optional, comma-separated transfer types by which the response is filtered.
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
@@ -914,6 +919,7 @@ class Transfers(BaseSDK):
             disputed=disputed,
             foreign_id=foreign_id,
             authorization_i_ds=utils.unmarshal(authorization_i_ds, Optional[List[str]]),
+            invoice_i_ds=utils.unmarshal(invoice_i_ds, Optional[List[str]]),
             transfer_types=utils.unmarshal(
                 transfer_types, Optional[List[components.TransferType]]
             ),

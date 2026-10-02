@@ -570,10 +570,6 @@ if TYPE_CHECKING:
         CreateTransferDestinationCard,
         CreateTransferDestinationCardTypedDict,
     )
-    from .createtransferdestinationwire import (
-        CreateTransferDestinationWire,
-        CreateTransferDestinationWireTypedDict,
-    )
     from .createtransferfacilitatorfee import (
         CreateTransferFacilitatorFee,
         CreateTransferFacilitatorFeeTypedDict,
@@ -865,6 +861,7 @@ if TYPE_CHECKING:
         InvoiceTransferPaymentTypedDict,
     )
     from .issuedcard import IssuedCard, IssuedCardTypedDict
+    from .issuedcardactivity import IssuedCardActivity, IssuedCardActivityTypedDict
     from .issuedcardauthorization import (
         IssuedCardAuthorization,
         IssuedCardAuthorizationTypedDict,
@@ -1299,6 +1296,7 @@ if TYPE_CHECKING:
         RevokeTokenRequestTypedDict,
         TokenTypeHint,
     )
+    from .riskverificationoutcome import RiskVerificationOutcome
     from .rtpcreditpaymentmethod import (
         RtpCreditPaymentMethod,
         RtpCreditPaymentMethodPaymentMethodType,
@@ -1765,25 +1763,8 @@ if TYPE_CHECKING:
         WebhookTransferPaymentMethodDetails,
         WebhookTransferPaymentMethodDetailsTypedDict,
     )
-    from .wirecreditpaymentmethod import (
-        WireCreditPaymentMethod,
-        WireCreditPaymentMethodPaymentMethodType,
-        WireCreditPaymentMethodTypedDict,
-    )
-    from .wirecredittransferpaymentmethod import (
-        WireCreditTransferPaymentMethod,
-        WireCreditTransferPaymentMethodPaymentMethodType,
-        WireCreditTransferPaymentMethodTypedDict,
-    )
-    from .wirefailurecode import WireFailureCode
     from .wireinstitution import WireInstitution, WireInstitutionTypedDict
-    from .wireoptions import WireOptions, WireOptionsTypedDict
     from .wireservices import WireServices, WireServicesTypedDict
-    from .wiretransactionstatus import WireTransactionStatus
-    from .wiretransferprocessingdetails import (
-        WireTransferProcessingDetails,
-        WireTransferProcessingDetailsTypedDict,
-    )
 
 __all__ = [
     "ACHCreditOptions",
@@ -2238,8 +2219,6 @@ __all__ = [
     "CreateTransferDestinationCard",
     "CreateTransferDestinationCardTypedDict",
     "CreateTransferDestinationTypedDict",
-    "CreateTransferDestinationWire",
-    "CreateTransferDestinationWireTypedDict",
     "CreateTransferFacilitatorFee",
     "CreateTransferFacilitatorFeeTypedDict",
     "CreateTransferLineItem",
@@ -2465,6 +2444,8 @@ __all__ = [
     "InvoiceTransferPaymentTypedDict",
     "InvoiceTypedDict",
     "IssuedCard",
+    "IssuedCardActivity",
+    "IssuedCardActivityTypedDict",
     "IssuedCardAuthorization",
     "IssuedCardAuthorizationEvent",
     "IssuedCardAuthorizationEventResult",
@@ -2831,6 +2812,7 @@ __all__ = [
     "ReversedWithRefundTypedDict",
     "RevokeTokenRequest",
     "RevokeTokenRequestTypedDict",
+    "RiskVerificationOutcome",
     "RtpCreditPaymentMethod",
     "RtpCreditPaymentMethodPaymentMethodType",
     "RtpCreditPaymentMethodTypedDict",
@@ -3182,22 +3164,10 @@ __all__ = [
     "WebhookTransferPaymentMethodDetails",
     "WebhookTransferPaymentMethodDetailsTypedDict",
     "WebhookTypedDict",
-    "WireCreditPaymentMethod",
-    "WireCreditPaymentMethodPaymentMethodType",
-    "WireCreditPaymentMethodTypedDict",
-    "WireCreditTransferPaymentMethod",
-    "WireCreditTransferPaymentMethodPaymentMethodType",
-    "WireCreditTransferPaymentMethodTypedDict",
-    "WireFailureCode",
     "WireInstitution",
     "WireInstitutionTypedDict",
-    "WireOptions",
-    "WireOptionsTypedDict",
     "WireServices",
     "WireServicesTypedDict",
-    "WireTransactionStatus",
-    "WireTransferProcessingDetails",
-    "WireTransferProcessingDetailsTypedDict",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -3653,8 +3623,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateTransferDestinationACHTypedDict": ".createtransferdestinationach",
     "CreateTransferDestinationCard": ".createtransferdestinationcard",
     "CreateTransferDestinationCardTypedDict": ".createtransferdestinationcard",
-    "CreateTransferDestinationWire": ".createtransferdestinationwire",
-    "CreateTransferDestinationWireTypedDict": ".createtransferdestinationwire",
     "CreateTransferFacilitatorFee": ".createtransferfacilitatorfee",
     "CreateTransferFacilitatorFeeTypedDict": ".createtransferfacilitatorfee",
     "CreateTransferLineItem": ".createtransferlineitem",
@@ -3880,6 +3848,8 @@ _dynamic_imports: dict[str, str] = {
     "InvoiceTransferPaymentTypedDict": ".invoicetransferpayment",
     "IssuedCard": ".issuedcard",
     "IssuedCardTypedDict": ".issuedcard",
+    "IssuedCardActivity": ".issuedcardactivity",
+    "IssuedCardActivityTypedDict": ".issuedcardactivity",
     "IssuedCardAuthorization": ".issuedcardauthorization",
     "IssuedCardAuthorizationTypedDict": ".issuedcardauthorization",
     "IssuedCardAuthorizationEvent": ".issuedcardauthorizationevent",
@@ -4235,6 +4205,7 @@ _dynamic_imports: dict[str, str] = {
     "RevokeTokenRequest": ".revoketokenrequest",
     "RevokeTokenRequestTypedDict": ".revoketokenrequest",
     "TokenTypeHint": ".revoketokenrequest",
+    "RiskVerificationOutcome": ".riskverificationoutcome",
     "RtpCreditPaymentMethod": ".rtpcreditpaymentmethod",
     "RtpCreditPaymentMethodPaymentMethodType": ".rtpcreditpaymentmethod",
     "RtpCreditPaymentMethodTypedDict": ".rtpcreditpaymentmethod",
@@ -4597,22 +4568,10 @@ _dynamic_imports: dict[str, str] = {
     "WebhookStatus": ".webhookstatus",
     "WebhookTransferPaymentMethodDetails": ".webhooktransferpaymentmethoddetails",
     "WebhookTransferPaymentMethodDetailsTypedDict": ".webhooktransferpaymentmethoddetails",
-    "WireCreditPaymentMethod": ".wirecreditpaymentmethod",
-    "WireCreditPaymentMethodPaymentMethodType": ".wirecreditpaymentmethod",
-    "WireCreditPaymentMethodTypedDict": ".wirecreditpaymentmethod",
-    "WireCreditTransferPaymentMethod": ".wirecredittransferpaymentmethod",
-    "WireCreditTransferPaymentMethodPaymentMethodType": ".wirecredittransferpaymentmethod",
-    "WireCreditTransferPaymentMethodTypedDict": ".wirecredittransferpaymentmethod",
-    "WireFailureCode": ".wirefailurecode",
     "WireInstitution": ".wireinstitution",
     "WireInstitutionTypedDict": ".wireinstitution",
-    "WireOptions": ".wireoptions",
-    "WireOptionsTypedDict": ".wireoptions",
     "WireServices": ".wireservices",
     "WireServicesTypedDict": ".wireservices",
-    "WireTransactionStatus": ".wiretransactionstatus",
-    "WireTransferProcessingDetails": ".wiretransferprocessingdetails",
-    "WireTransferProcessingDetailsTypedDict": ".wiretransferprocessingdetails",
 }
 
 

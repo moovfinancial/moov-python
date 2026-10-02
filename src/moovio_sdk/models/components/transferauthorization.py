@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
+from .transferamountdetails import TransferAmountDetails, TransferAmountDetailsTypedDict
 from datetime import datetime
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
@@ -23,6 +24,12 @@ class TransferAuthorizationTypedDict(TypedDict):
     r"""Cumulative amount of captures that have not failed or been canceled."""
     capturable_amount: AmountDecimalTypedDict
     r"""Amount of the authorization still available after captures and authorization cancellations."""
+    amount_details: NotRequired[TransferAmountDetailsTypedDict]
+    r"""The tip, tax, and surcharge authorized by the card network.
+
+    These describe the authorized amount and are fixed.
+    They can differ from the transfer's `amountDetails`, which is the aggregate of all captures' `amountDetails`.
+    """
     expires_on: NotRequired[datetime]
     r"""Expiration time for the approved authorization, when available."""
 
@@ -49,12 +56,21 @@ class TransferAuthorization(BaseModel):
     ]
     r"""Amount of the authorization still available after captures and authorization cancellations."""
 
+    amount_details: Annotated[
+        Optional[TransferAmountDetails], pydantic.Field(alias="amountDetails")
+    ] = None
+    r"""The tip, tax, and surcharge authorized by the card network.
+
+    These describe the authorized amount and are fixed.
+    They can differ from the transfer's `amountDetails`, which is the aggregate of all captures' `amountDetails`.
+    """
+
     expires_on: Annotated[Optional[datetime], pydantic.Field(alias="expiresOn")] = None
     r"""Expiration time for the approved authorization, when available."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["expiresOn"])
+        optional_fields = set(["amountDetails", "expiresOn"])
         serialized = handler(self)
         m = {}
 

@@ -22,6 +22,7 @@ class WebhookDataTransferStatus(str, Enum):
     SOURCE_SETTLED = "source.settled"
     SOURCE_FAILED = "source.failed"
     SOURCE_CANCELED = "source.canceled"
+    SOURCE_CLEARED_EXTERNALLY = "source.cleared-externally"
     DESTINATION_COMPLETED = "destination.completed"
     DESTINATION_CORRECTED = "destination.corrected"
     DESTINATION_INITIATED = "destination.initiated"

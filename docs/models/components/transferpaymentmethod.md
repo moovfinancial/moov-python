@@ -107,9 +107,3 @@ value: components.PushToGooglePayTransferPaymentMethod = /* values here */
 value: components.PullFromGooglePayTransferPaymentMethod = /* values here */
 ```
 
-### `components.WireCreditTransferPaymentMethod`
-
-```python
-value: components.WireCreditTransferPaymentMethod = /* values here */
-```
-

@@ -12,6 +12,252 @@ from typing import Iterable, List, Mapping, Optional
 
 
 class IssuingTransactions(BaseSDK):
+    def list_activity(
+        self,
+        *,
+        account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
+        issued_card_id: Optional[str] = None,
+        authorized_user_account_id: Optional[str] = None,
+        statuses: Optional[Iterable[components.IssuingAuthorizationStatus]] = None,
+        start_date_time: Optional[datetime] = None,
+        end_date_time: Optional[datetime] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListIssuedCardActivityResponse:
+        r"""List issued card activity associated with a Moov account.
+
+        Activity includes authorizations and settlements in a single list.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+
+        :param account_id: The Moov business account for which cards have been issued.
+        :param skip:
+        :param count: Page size. When omitted, the server defaults to `200`.
+        :param issued_card_id: Optional ID of the issued card to filter results.
+        :param authorized_user_account_id: Optional identifier for the account of the card's authorized user.
+        :param statuses: Optional, comma-separated statuses of the activity to filter results.
+        :param start_date_time: Optional date-time which inclusively filters all activity created after this date-time.
+        :param end_date_time: Optional date-time which exclusively filters all activity created before this date-time.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListIssuedCardActivityRequest(
+            account_id=account_id,
+            skip=skip,
+            count=count,
+            issued_card_id=issued_card_id,
+            authorized_user_account_id=authorized_user_account_id,
+            statuses=utils.unmarshal(
+                statuses, Optional[List[components.IssuingAuthorizationStatus]]
+            ),
+            start_date_time=start_date_time,
+            end_date_time=end_date_time,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/issuing/{accountID}/activity",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listIssuedCardActivity",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Issuing transactions"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListIssuedCardActivityResponse(
+                result=unmarshal_json_response(
+                    List[components.IssuedCardActivity], http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def list_activity_async(
+        self,
+        *,
+        account_id: str,
+        skip: Optional[int] = None,
+        count: Optional[int] = None,
+        issued_card_id: Optional[str] = None,
+        authorized_user_account_id: Optional[str] = None,
+        statuses: Optional[Iterable[components.IssuingAuthorizationStatus]] = None,
+        start_date_time: Optional[datetime] = None,
+        end_date_time: Optional[datetime] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListIssuedCardActivityResponse:
+        r"""List issued card activity associated with a Moov account.
+
+        Activity includes authorizations and settlements in a single list.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/issued-cards.read` scope.
+
+        :param account_id: The Moov business account for which cards have been issued.
+        :param skip:
+        :param count: Page size. When omitted, the server defaults to `200`.
+        :param issued_card_id: Optional ID of the issued card to filter results.
+        :param authorized_user_account_id: Optional identifier for the account of the card's authorized user.
+        :param statuses: Optional, comma-separated statuses of the activity to filter results.
+        :param start_date_time: Optional date-time which inclusively filters all activity created after this date-time.
+        :param end_date_time: Optional date-time which exclusively filters all activity created before this date-time.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListIssuedCardActivityRequest(
+            account_id=account_id,
+            skip=skip,
+            count=count,
+            issued_card_id=issued_card_id,
+            authorized_user_account_id=authorized_user_account_id,
+            statuses=utils.unmarshal(
+                statuses, Optional[List[components.IssuingAuthorizationStatus]]
+            ),
+            start_date_time=start_date_time,
+            end_date_time=end_date_time,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/issuing/{accountID}/activity",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listIssuedCardActivity",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Issuing transactions"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListIssuedCardActivityResponse(
+                result=unmarshal_json_response(
+                    List[components.IssuedCardActivity], http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
     def list_authorizations(
         self,
         *,

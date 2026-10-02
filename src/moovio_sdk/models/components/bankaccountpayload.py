@@ -5,17 +5,53 @@ from .bankaccountintegration import (
     BankAccountIntegration,
     BankAccountIntegrationTypedDict,
 )
-from moovio_sdk.types import BaseModel
-from typing_extensions import TypedDict
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+import pydantic
+from pydantic import model_serializer
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class BankAccountPayloadTypedDict(TypedDict):
     r"""Describes the bank account to link to the Moov account."""
 
     account: BankAccountIntegrationTypedDict
+    request_risk_verification: NotRequired[bool]
+    r"""Requests a synchronous risk-verification attempt on create or re-link. Only honored for
+    allowlisted calling accounts; ignored otherwise.
+    """
 
 
 class BankAccountPayload(BaseModel):
     r"""Describes the bank account to link to the Moov account."""
 
     account: BankAccountIntegration
+
+    request_risk_verification: Annotated[
+        Optional[bool], pydantic.Field(alias="requestRiskVerification")
+    ] = None
+    r"""Requests a synchronous risk-verification attempt on create or re-link. Only honored for
+    allowlisted calling accounts; ignored otherwise.
+    """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["requestRiskVerification"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    BankAccountPayload.model_rebuild()
+except NameError:
+    pass
