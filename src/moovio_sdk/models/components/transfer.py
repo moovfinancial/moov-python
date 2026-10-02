@@ -76,6 +76,9 @@ class TransferTypedDict(TypedDict):
     invoice_id: NotRequired[str]
     r"""ID of the invoice that the transfer is associated with."""
     amount_details: NotRequired[TransferAmountDetailsTypedDict]
+    r"""The tip, tax, and surcharge portion of the transfer amount.
+    For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+    """
     capture: NotRequired[TransferCaptureTypedDict]
     r"""The card authorization and capture IDs associated with a transfer."""
 
@@ -182,6 +185,9 @@ class Transfer(BaseModel):
     amount_details: Annotated[
         Optional[TransferAmountDetails], pydantic.Field(alias="amountDetails")
     ] = None
+    r"""The tip, tax, and surcharge portion of the transfer amount.
+    For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+    """
 
     capture: Optional[TransferCapture] = None
     r"""The card authorization and capture IDs associated with a transfer."""

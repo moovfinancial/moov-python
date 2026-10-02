@@ -21,6 +21,7 @@ class Invoices(BaseSDK):
             components.CreateInvoiceLineItems,
             components.CreateInvoiceLineItemsTypedDict,
         ],
+        customer_email: Optional[str] = None,
         description: Optional[str] = None,
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
@@ -40,6 +41,7 @@ class Invoices(BaseSDK):
         :param account_id:
         :param customer_account_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
         :param line_items: A collection of line items for an invoice.
+        :param customer_email: Email address to use for invoice checkout OTP verification instead of the customer account email.
         :param description:
         :param invoice_date:
         :param due_date:
@@ -63,6 +65,7 @@ class Invoices(BaseSDK):
             account_id=account_id,
             create_invoice=components.CreateInvoice(
                 customer_account_id=customer_account_id,
+                customer_email=customer_email,
                 description=description,
                 line_items=utils.get_pydantic_model(
                     line_items, components.CreateInvoiceLineItems
@@ -158,6 +161,7 @@ class Invoices(BaseSDK):
             components.CreateInvoiceLineItems,
             components.CreateInvoiceLineItemsTypedDict,
         ],
+        customer_email: Optional[str] = None,
         description: Optional[str] = None,
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
@@ -177,6 +181,7 @@ class Invoices(BaseSDK):
         :param account_id:
         :param customer_account_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
         :param line_items: A collection of line items for an invoice.
+        :param customer_email: Email address to use for invoice checkout OTP verification instead of the customer account email.
         :param description:
         :param invoice_date:
         :param due_date:
@@ -200,6 +205,7 @@ class Invoices(BaseSDK):
             account_id=account_id,
             create_invoice=components.CreateInvoice(
                 customer_account_id=customer_account_id,
+                customer_email=customer_email,
                 description=description,
                 line_items=utils.get_pydantic_model(
                     line_items, components.CreateInvoiceLineItems
