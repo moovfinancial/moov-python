@@ -39,6 +39,8 @@ class ListTransfersRequestTypedDict(TypedDict):
     r"""Optional alias from a foreign/external system which can be used to reference this resource."""
     authorization_i_ds: NotRequired[List[str]]
     r"""Optional comma-separated authorization IDs."""
+    invoice_i_ds: NotRequired[List[str]]
+    r"""Optional comma-separated invoice IDs."""
     capture_i_ds: NotRequired[List[str]]
     r"""Optional comma-separated IDs to filter for transfers associated with specific card captures."""
     skip: NotRequired[int]
@@ -127,6 +129,13 @@ class ListTransfersRequest(BaseModel):
     ] = None
     r"""Optional comma-separated authorization IDs."""
 
+    invoice_i_ds: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="invoiceIDs"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional comma-separated invoice IDs."""
+
     capture_i_ds: Annotated[
         Optional[List[str]],
         pydantic.Field(alias="captureIDs"),
@@ -169,6 +178,7 @@ class ListTransfersRequest(BaseModel):
                 "disputed",
                 "foreignID",
                 "authorizationIDs",
+                "invoiceIDs",
                 "captureIDs",
                 "skip",
                 "count",
