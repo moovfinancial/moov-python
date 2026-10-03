@@ -146,6 +146,10 @@ if TYPE_CHECKING:
     )
     from .asynccreatedrefund import AsyncCreatedRefund, AsyncCreatedRefundTypedDict
     from .asynctransfer import AsyncTransfer, AsyncTransferTypedDict
+    from .authorizationsimulationasyncresponse import (
+        AuthorizationSimulationAsyncResponse,
+        AuthorizationSimulationAsyncResponseTypedDict,
+    )
     from .authtoken import AuthToken, AuthTokenTypedDict
     from .authtokenrequest import AuthTokenRequest, AuthTokenRequestTypedDict
     from .avataruploadrequest import (
@@ -380,6 +384,10 @@ if TYPE_CHECKING:
         CreateApplePaySession,
         CreateApplePaySessionTypedDict,
     )
+    from .createauthorizationsimulation import (
+        CreateAuthorizationSimulation,
+        CreateAuthorizationSimulationTypedDict,
+    )
     from .createbankaccountattestation import (
         CreateBankAccountAttestation,
         CreateBankAccountAttestationTypedDict,
@@ -400,6 +408,10 @@ if TYPE_CHECKING:
     )
     from .createcancellation import CreateCancellation, CreateCancellationTypedDict
     from .createcapture import CreateCapture, CreateCaptureTypedDict
+    from .createclearingsimulation import (
+        CreateClearingSimulation,
+        CreateClearingSimulationTypedDict,
+    )
     from .createdtransfer import CreatedTransfer, CreatedTransferTypedDict
     from .createevidencefilemultipart import (
         CreateEvidenceFileMultiPart,
@@ -865,6 +877,7 @@ if TYPE_CHECKING:
         InvoiceTransferPaymentTypedDict,
     )
     from .issuedcard import IssuedCard, IssuedCardTypedDict
+    from .issuedcardactivity import IssuedCardActivity, IssuedCardActivityTypedDict
     from .issuedcardauthorization import (
         IssuedCardAuthorization,
         IssuedCardAuthorizationTypedDict,
@@ -904,6 +917,10 @@ if TYPE_CHECKING:
     from .issuingintervallimit import IssuingIntervalLimit
     from .issuingmerchantcategory import IssuingMerchantCategory
     from .issuingmerchantdata import IssuingMerchantData, IssuingMerchantDataTypedDict
+    from .issuingmerchantdatavalidationerror import (
+        IssuingMerchantDataValidationError,
+        IssuingMerchantDataValidationErrorTypedDict,
+    )
     from .issuingscheduleday import IssuingScheduleDay
     from .issuingvelocitylimit import (
         IssuingVelocityLimit,
@@ -1299,6 +1316,7 @@ if TYPE_CHECKING:
         RevokeTokenRequestTypedDict,
         TokenTypeHint,
     )
+    from .riskverificationoutcome import RiskVerificationOutcome
     from .rtpcreditpaymentmethod import (
         RtpCreditPaymentMethod,
         RtpCreditPaymentMethodPaymentMethodType,
@@ -1447,6 +1465,65 @@ if TYPE_CHECKING:
     from .transfercontrols import TransferControls, TransferControlsTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
+    from .transferevent import TransferEvent, TransferEventTypedDict
+    from .transfereventachdetails import (
+        TransferEventACHDetails,
+        TransferEventACHDetailsTypedDict,
+    )
+    from .transfereventauthorizationdetails import (
+        TransferEventAuthorizationDetails,
+        TransferEventAuthorizationDetailsTypedDict,
+    )
+    from .transfereventauthorizationstatus import TransferEventAuthorizationStatus
+    from .transfereventcancellationdetails import (
+        TransferEventCancellationDetails,
+        TransferEventCancellationDetailsTypedDict,
+    )
+    from .transfereventcapturedetails import (
+        TransferEventCaptureDetails,
+        TransferEventCaptureDetailsTypedDict,
+    )
+    from .transfereventcardpaymentdetails import (
+        TransferEventCardPaymentDetails,
+        TransferEventCardPaymentDetailsTypedDict,
+    )
+    from .transfereventdetails import (
+        TransferEventDetails,
+        TransferEventDetailsTypedDict,
+    )
+    from .transfereventdisputedetails import (
+        TransferEventDisputeDetails,
+        TransferEventDisputeDetailsTypedDict,
+    )
+    from .transfereventinstantbankcreditdetails import (
+        TransferEventInstantBankCreditDetails,
+        TransferEventInstantBankCreditDetailsTypedDict,
+    )
+    from .transfereventpullfromcarddetails import (
+        TransferEventPullFromCardDetails,
+        TransferEventPullFromCardDetailsTypedDict,
+    )
+    from .transfereventpushtocarddetails import (
+        TransferEventPushToCardDetails,
+        TransferEventPushToCardDetailsTypedDict,
+    )
+    from .transfereventrefunddetails import (
+        TransferEventRefundDetails,
+        TransferEventRefundDetailsTypedDict,
+    )
+    from .transfereventtransferdetails import (
+        TransferEventTransferDetails,
+        TransferEventTransferDetailsTypedDict,
+    )
+    from .transfereventtype import TransferEventType
+    from .transfereventwallettransactiondetails import (
+        TransferEventWalletTransactionDetails,
+        TransferEventWalletTransactionDetailsTypedDict,
+    )
+    from .transfereventwirecreditdetails import (
+        TransferEventWireCreditDetails,
+        TransferEventWireCreditDetailsTypedDict,
+    )
     from .transferfailurereason import TransferFailureReason
     from .transferfeepaidby import TransferFeePaidBy, TransferFeePaidByTypedDict
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
@@ -1922,6 +1999,8 @@ __all__ = [
     "AuthTokenRequest",
     "AuthTokenRequestTypedDict",
     "AuthTokenTypedDict",
+    "AuthorizationSimulationAsyncResponse",
+    "AuthorizationSimulationAsyncResponseTypedDict",
     "AvatarUploadRequest",
     "AvatarUploadRequestFile",
     "AvatarUploadRequestFileTypedDict",
@@ -2117,6 +2196,8 @@ __all__ = [
     "CreateAccountTypedDict",
     "CreateApplePaySession",
     "CreateApplePaySessionTypedDict",
+    "CreateAuthorizationSimulation",
+    "CreateAuthorizationSimulationTypedDict",
     "CreateBankAccountAttestation",
     "CreateBankAccountAttestationTypedDict",
     "CreateBusinessError",
@@ -2133,6 +2214,8 @@ __all__ = [
     "CreateCancellationTypedDict",
     "CreateCapture",
     "CreateCaptureTypedDict",
+    "CreateClearingSimulation",
+    "CreateClearingSimulationTypedDict",
     "CreateEvidenceFileMultiPart",
     "CreateEvidenceFileMultiPartTypedDict",
     "CreateEvidenceText",
@@ -2465,6 +2548,8 @@ __all__ = [
     "InvoiceTransferPaymentTypedDict",
     "InvoiceTypedDict",
     "IssuedCard",
+    "IssuedCardActivity",
+    "IssuedCardActivityTypedDict",
     "IssuedCardAuthorization",
     "IssuedCardAuthorizationEvent",
     "IssuedCardAuthorizationEventResult",
@@ -2493,6 +2578,8 @@ __all__ = [
     "IssuingMerchantCategory",
     "IssuingMerchantData",
     "IssuingMerchantDataTypedDict",
+    "IssuingMerchantDataValidationError",
+    "IssuingMerchantDataValidationErrorTypedDict",
     "IssuingScheduleDay",
     "IssuingVelocityLimit",
     "IssuingVelocityLimitError",
@@ -2831,6 +2918,7 @@ __all__ = [
     "ReversedWithRefundTypedDict",
     "RevokeTokenRequest",
     "RevokeTokenRequestTypedDict",
+    "RiskVerificationOutcome",
     "RtpCreditPaymentMethod",
     "RtpCreditPaymentMethodPaymentMethodType",
     "RtpCreditPaymentMethodTypedDict",
@@ -2968,6 +3056,38 @@ __all__ = [
     "TransferDestination",
     "TransferDestinationTypedDict",
     "TransferEntryMode",
+    "TransferEvent",
+    "TransferEventACHDetails",
+    "TransferEventACHDetailsTypedDict",
+    "TransferEventAuthorizationDetails",
+    "TransferEventAuthorizationDetailsTypedDict",
+    "TransferEventAuthorizationStatus",
+    "TransferEventCancellationDetails",
+    "TransferEventCancellationDetailsTypedDict",
+    "TransferEventCaptureDetails",
+    "TransferEventCaptureDetailsTypedDict",
+    "TransferEventCardPaymentDetails",
+    "TransferEventCardPaymentDetailsTypedDict",
+    "TransferEventDetails",
+    "TransferEventDetailsTypedDict",
+    "TransferEventDisputeDetails",
+    "TransferEventDisputeDetailsTypedDict",
+    "TransferEventInstantBankCreditDetails",
+    "TransferEventInstantBankCreditDetailsTypedDict",
+    "TransferEventPullFromCardDetails",
+    "TransferEventPullFromCardDetailsTypedDict",
+    "TransferEventPushToCardDetails",
+    "TransferEventPushToCardDetailsTypedDict",
+    "TransferEventRefundDetails",
+    "TransferEventRefundDetailsTypedDict",
+    "TransferEventTransferDetails",
+    "TransferEventTransferDetailsTypedDict",
+    "TransferEventType",
+    "TransferEventTypedDict",
+    "TransferEventWalletTransactionDetails",
+    "TransferEventWalletTransactionDetailsTypedDict",
+    "TransferEventWireCreditDetails",
+    "TransferEventWireCreditDetailsTypedDict",
     "TransferFailureReason",
     "TransferFeePaidBy",
     "TransferFeePaidByTypedDict",
@@ -3328,6 +3448,8 @@ _dynamic_imports: dict[str, str] = {
     "AsyncCreatedRefundTypedDict": ".asynccreatedrefund",
     "AsyncTransfer": ".asynctransfer",
     "AsyncTransferTypedDict": ".asynctransfer",
+    "AuthorizationSimulationAsyncResponse": ".authorizationsimulationasyncresponse",
+    "AuthorizationSimulationAsyncResponseTypedDict": ".authorizationsimulationasyncresponse",
     "AuthToken": ".authtoken",
     "AuthTokenTypedDict": ".authtoken",
     "AuthTokenRequest": ".authtokenrequest",
@@ -3527,6 +3649,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateAccountType": ".createaccounttype",
     "CreateApplePaySession": ".createapplepaysession",
     "CreateApplePaySessionTypedDict": ".createapplepaysession",
+    "CreateAuthorizationSimulation": ".createauthorizationsimulation",
+    "CreateAuthorizationSimulationTypedDict": ".createauthorizationsimulation",
     "CreateBankAccountAttestation": ".createbankaccountattestation",
     "CreateBankAccountAttestationTypedDict": ".createbankaccountattestation",
     "CreateBusinessError": ".createbusinesserror",
@@ -3543,6 +3667,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateCancellationTypedDict": ".createcancellation",
     "CreateCapture": ".createcapture",
     "CreateCaptureTypedDict": ".createcapture",
+    "CreateClearingSimulation": ".createclearingsimulation",
+    "CreateClearingSimulationTypedDict": ".createclearingsimulation",
     "CreatedTransfer": ".createdtransfer",
     "CreatedTransferTypedDict": ".createdtransfer",
     "CreateEvidenceFileMultiPart": ".createevidencefilemultipart",
@@ -3880,6 +4006,8 @@ _dynamic_imports: dict[str, str] = {
     "InvoiceTransferPaymentTypedDict": ".invoicetransferpayment",
     "IssuedCard": ".issuedcard",
     "IssuedCardTypedDict": ".issuedcard",
+    "IssuedCardActivity": ".issuedcardactivity",
+    "IssuedCardActivityTypedDict": ".issuedcardactivity",
     "IssuedCardAuthorization": ".issuedcardauthorization",
     "IssuedCardAuthorizationTypedDict": ".issuedcardauthorization",
     "IssuedCardAuthorizationEvent": ".issuedcardauthorizationevent",
@@ -3909,6 +4037,8 @@ _dynamic_imports: dict[str, str] = {
     "IssuingMerchantCategory": ".issuingmerchantcategory",
     "IssuingMerchantData": ".issuingmerchantdata",
     "IssuingMerchantDataTypedDict": ".issuingmerchantdata",
+    "IssuingMerchantDataValidationError": ".issuingmerchantdatavalidationerror",
+    "IssuingMerchantDataValidationErrorTypedDict": ".issuingmerchantdatavalidationerror",
     "IssuingScheduleDay": ".issuingscheduleday",
     "IssuingVelocityLimit": ".issuingvelocitylimit",
     "IssuingVelocityLimitTypedDict": ".issuingvelocitylimit",
@@ -4235,6 +4365,7 @@ _dynamic_imports: dict[str, str] = {
     "RevokeTokenRequest": ".revoketokenrequest",
     "RevokeTokenRequestTypedDict": ".revoketokenrequest",
     "TokenTypeHint": ".revoketokenrequest",
+    "RiskVerificationOutcome": ".riskverificationoutcome",
     "RtpCreditPaymentMethod": ".rtpcreditpaymentmethod",
     "RtpCreditPaymentMethodPaymentMethodType": ".rtpcreditpaymentmethod",
     "RtpCreditPaymentMethodTypedDict": ".rtpcreditpaymentmethod",
@@ -4378,6 +4509,38 @@ _dynamic_imports: dict[str, str] = {
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",
+    "TransferEvent": ".transferevent",
+    "TransferEventTypedDict": ".transferevent",
+    "TransferEventACHDetails": ".transfereventachdetails",
+    "TransferEventACHDetailsTypedDict": ".transfereventachdetails",
+    "TransferEventAuthorizationDetails": ".transfereventauthorizationdetails",
+    "TransferEventAuthorizationDetailsTypedDict": ".transfereventauthorizationdetails",
+    "TransferEventAuthorizationStatus": ".transfereventauthorizationstatus",
+    "TransferEventCancellationDetails": ".transfereventcancellationdetails",
+    "TransferEventCancellationDetailsTypedDict": ".transfereventcancellationdetails",
+    "TransferEventCaptureDetails": ".transfereventcapturedetails",
+    "TransferEventCaptureDetailsTypedDict": ".transfereventcapturedetails",
+    "TransferEventCardPaymentDetails": ".transfereventcardpaymentdetails",
+    "TransferEventCardPaymentDetailsTypedDict": ".transfereventcardpaymentdetails",
+    "TransferEventDetails": ".transfereventdetails",
+    "TransferEventDetailsTypedDict": ".transfereventdetails",
+    "TransferEventDisputeDetails": ".transfereventdisputedetails",
+    "TransferEventDisputeDetailsTypedDict": ".transfereventdisputedetails",
+    "TransferEventInstantBankCreditDetails": ".transfereventinstantbankcreditdetails",
+    "TransferEventInstantBankCreditDetailsTypedDict": ".transfereventinstantbankcreditdetails",
+    "TransferEventPullFromCardDetails": ".transfereventpullfromcarddetails",
+    "TransferEventPullFromCardDetailsTypedDict": ".transfereventpullfromcarddetails",
+    "TransferEventPushToCardDetails": ".transfereventpushtocarddetails",
+    "TransferEventPushToCardDetailsTypedDict": ".transfereventpushtocarddetails",
+    "TransferEventRefundDetails": ".transfereventrefunddetails",
+    "TransferEventRefundDetailsTypedDict": ".transfereventrefunddetails",
+    "TransferEventTransferDetails": ".transfereventtransferdetails",
+    "TransferEventTransferDetailsTypedDict": ".transfereventtransferdetails",
+    "TransferEventType": ".transfereventtype",
+    "TransferEventWalletTransactionDetails": ".transfereventwallettransactiondetails",
+    "TransferEventWalletTransactionDetailsTypedDict": ".transfereventwallettransactiondetails",
+    "TransferEventWireCreditDetails": ".transfereventwirecreditdetails",
+    "TransferEventWireCreditDetailsTypedDict": ".transfereventwirecreditdetails",
     "TransferFailureReason": ".transferfailurereason",
     "TransferFeePaidBy": ".transferfeepaidby",
     "TransferFeePaidByTypedDict": ".transferfeepaidby",

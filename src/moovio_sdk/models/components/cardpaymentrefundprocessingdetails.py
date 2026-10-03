@@ -11,10 +11,15 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CardPaymentRefundProcessingDetailsTypedDict(TypedDict):
+    network_transaction_id: NotRequired[str]
     failure_code: NotRequired[CardTransactionFailureCode]
 
 
 class CardPaymentRefundProcessingDetails(BaseModel):
+    network_transaction_id: Annotated[
+        Optional[str], pydantic.Field(alias="networkTransactionID")
+    ] = None
+
     failure_code: Annotated[
         Optional[CardTransactionFailureCode], pydantic.Field(alias="failureCode")
     ] = None
@@ -30,7 +35,7 @@ class CardPaymentRefundProcessingDetails(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["failureCode"])
+        optional_fields = set(["networkTransactionID", "failureCode"])
         serialized = handler(self)
         m = {}
 

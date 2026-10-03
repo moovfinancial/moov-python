@@ -13,6 +13,10 @@ if TYPE_CHECKING:
     from .addcapabilitieserror import AddCapabilitiesError, AddCapabilitiesErrorData
     from .apierror import APIError
     from .assigncountrieserror import AssignCountriesError, AssignCountriesErrorData
+    from .authorizationsimulationvalidationerror import (
+        AuthorizationSimulationValidationError,
+        AuthorizationSimulationValidationErrorData,
+    )
     from .authtokenrequesterror import AuthTokenRequestError, AuthTokenRequestErrorData
     from .bankaccountattestationvalidationerror import (
         BankAccountAttestationValidationError,
@@ -31,6 +35,10 @@ if TYPE_CHECKING:
     from .cardmetadatarequesterror import (
         CardMetadataRequestError,
         CardMetadataRequestErrorData,
+    )
+    from .clearingsimulationvalidationerror import (
+        ClearingSimulationValidationError,
+        ClearingSimulationValidationErrorData,
     )
     from .connectaccountrequestvalidationerror import (
         ConnectAccountRequestValidationError,
@@ -196,6 +204,8 @@ __all__ = [
     "AssignCountriesErrorData",
     "AuthTokenRequestError",
     "AuthTokenRequestErrorData",
+    "AuthorizationSimulationValidationError",
+    "AuthorizationSimulationValidationErrorData",
     "BankAccountAttestationValidationError",
     "BankAccountAttestationValidationErrorData",
     "BankAccountValidationError",
@@ -208,6 +218,8 @@ __all__ = [
     "CardAcquiringRefundData",
     "CardMetadataRequestError",
     "CardMetadataRequestErrorData",
+    "ClearingSimulationValidationError",
+    "ClearingSimulationValidationErrorData",
     "ConnectAccountRequestValidationError",
     "ConnectAccountRequestValidationErrorData",
     "CreateAccountError",
@@ -331,6 +343,8 @@ _dynamic_imports: dict[str, str] = {
     "APIError": ".apierror",
     "AssignCountriesError": ".assigncountrieserror",
     "AssignCountriesErrorData": ".assigncountrieserror",
+    "AuthorizationSimulationValidationError": ".authorizationsimulationvalidationerror",
+    "AuthorizationSimulationValidationErrorData": ".authorizationsimulationvalidationerror",
     "AuthTokenRequestError": ".authtokenrequesterror",
     "AuthTokenRequestErrorData": ".authtokenrequesterror",
     "BankAccountAttestationValidationError": ".bankaccountattestationvalidationerror",
@@ -345,6 +359,8 @@ _dynamic_imports: dict[str, str] = {
     "CardAcquiringRefundData": ".cardacquiringrefund",
     "CardMetadataRequestError": ".cardmetadatarequesterror",
     "CardMetadataRequestErrorData": ".cardmetadatarequesterror",
+    "ClearingSimulationValidationError": ".clearingsimulationvalidationerror",
+    "ClearingSimulationValidationErrorData": ".clearingsimulationvalidationerror",
     "ConnectAccountRequestValidationError": ".connectaccountrequestvalidationerror",
     "ConnectAccountRequestValidationErrorData": ".connectaccountrequestvalidationerror",
     "CreateAccountError": ".createaccounterror",

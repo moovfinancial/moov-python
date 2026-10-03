@@ -7,6 +7,7 @@ from .bankaccountstatus import BankAccountStatus
 from .bankaccountstatusreason import BankAccountStatusReason
 from .bankaccounttype import BankAccountType
 from .basicpaymentmethod import BasicPaymentMethod, BasicPaymentMethodTypedDict
+from .riskverificationoutcome import RiskVerificationOutcome
 from datetime import datetime
 from moovio_sdk.models import components
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
@@ -44,6 +45,10 @@ class BankAccountTypedDict(TypedDict):
     call the List Payment Methods endpoint following a successful Create BankAccount request.
 
     **NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
+    """
+    risk_verification_outcome: NotRequired[RiskVerificationOutcome]
+    r"""The outcome of a requested risk-verification attempt. `notAttempted` when
+    `requestRiskVerification` was not set, or the calling account was not allowlisted.
     """
 
 
@@ -99,6 +104,14 @@ class BankAccount(BaseModel):
     **NOTE: This field is only populated for Create BankAccount requests made with the `X-Wait-For` header.**
     """
 
+    risk_verification_outcome: Annotated[
+        Optional[RiskVerificationOutcome],
+        pydantic.Field(alias="riskVerificationOutcome"),
+    ] = None
+    r"""The outcome of a requested risk-verification attempt. `notAttempted` when
+    `requestRiskVerification` was not set, or the calling account was not allowlisted.
+    """
+
     @field_serializer("status")
     def serialize_status(self, value):
         if isinstance(value, str):
@@ -135,9 +148,25 @@ class BankAccount(BaseModel):
                 return value
         return value
 
+    @field_serializer("risk_verification_outcome")
+    def serialize_risk_verification_outcome(self, value):
+        if isinstance(value, str):
+            try:
+                return components.RiskVerificationOutcome(value)
+            except ValueError:
+                return value
+        return value
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["statusReason", "exceptionDetails", "paymentMethods"])
+        optional_fields = set(
+            [
+                "statusReason",
+                "exceptionDetails",
+                "paymentMethods",
+                "riskVerificationOutcome",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

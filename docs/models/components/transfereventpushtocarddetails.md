@@ -1,0 +1,9 @@
+# TransferEventPushToCardDetails
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `status`                                                                                                 | [components.PushToCardTransactionStatus](../../models/components/pushtocardtransactionstatus.md)         | :heavy_check_mark:                                                                                       | Status of a push-to-card transaction.                                                                    |
+| `failure_code`                                                                                           | [Optional[components.CardTransactionFailureCode]](../../models/components/cardtransactionfailurecode.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |

@@ -79,6 +79,12 @@ you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+* [list_transfer_events](#list_transfer_events) - Retrieve the complete ordered event timeline for a Transfer.
+
+Events are returned oldest to newest by occurrence time, with deterministic ordering when multiple events have the same occurrence time. An existing Transfer with no stored events returns an empty list.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
 * [initiate_refund](#initiate_refund) - Initiate a refund for a card transfer.
 
 **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**    
@@ -401,6 +407,7 @@ with Moov(
 | `disputed`                                                                                                                            | *Optional[bool]*                                                                                                                      | :heavy_minus_sign:                                                                                                                    | Optional parameter to only return disputed transfers.                                                                                 |                                                                                                                                       |
 | `foreign_id`                                                                                                                          | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Optional alias from a foreign/external system which can be used to reference this resource.                                           |                                                                                                                                       |
 | `authorization_i_ds`                                                                                                                  | List[*str*]                                                                                                                           | :heavy_minus_sign:                                                                                                                    | Optional comma-separated authorization IDs.                                                                                           |                                                                                                                                       |
+| `invoice_i_ds`                                                                                                                        | List[*str*]                                                                                                                           | :heavy_minus_sign:                                                                                                                    | Optional comma-separated invoice IDs.                                                                                                 |                                                                                                                                       |
 | `transfer_types`                                                                                                                      | List[[components.TransferType](../../models/components/transfertype.md)]                                                              | :heavy_minus_sign:                                                                                                                    | Optional, comma-separated transfer types by which the response is filtered.                                                           |                                                                                                                                       |
 | `skip`                                                                                                                                | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | N/A                                                                                                                                   | 60                                                                                                                                    |
 | `count`                                                                                                                               | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Page size. When omitted, the server defaults to `200`.                                                                                | 20                                                                                                                                    |
@@ -938,6 +945,118 @@ with Moov(
 ### Response
 
 **[operations.GetCaptureResponse](../../models/operations/getcaptureresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## list_transfer_events
+
+Retrieve the complete ordered event timeline for a Transfer.
+
+Events are returned oldest to newest by occurrence time, with deterministic ordering when multiple events have the same occurrence time. An existing Transfer with no stored events returns an empty list.
+
+To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+### Example Usage: Auth-capture card payment
+
+<!-- UsageSnippet language="python" operationID="listTransferEvents" method="get" path="/accounts/{accountID}/transfers/{transferID}/events" example="Auth-capture card payment" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.list_transfer_events(account_id="<id>", transfer_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Bank-to-bank transfer with source-wallet reversal
+
+<!-- UsageSnippet language="python" operationID="listTransferEvents" method="get" path="/accounts/{accountID}/transfers/{transferID}/events" example="Bank-to-bank transfer with source-wallet reversal" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.list_transfer_events(account_id="<id>", transfer_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Card-to-wallet transfer with refund
+
+<!-- UsageSnippet language="python" operationID="listTransferEvents" method="get" path="/accounts/{accountID}/transfers/{transferID}/events" example="Card-to-wallet transfer with refund" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.list_transfer_events(account_id="<id>", transfer_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Wallet-to-bank RTP transfer
+
+<!-- UsageSnippet language="python" operationID="listTransferEvents" method="get" path="/accounts/{accountID}/transfers/{transferID}/events" example="Wallet-to-bank RTP transfer" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.transfers.list_transfer_events(account_id="<id>", transfer_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `account_id`                                                            | *str*                                                                   | :heavy_check_mark:                                                      | Moov account ID of the partner or the Transfer's source or destination. |
+| `transfer_id`                                                           | *str*                                                                   | :heavy_check_mark:                                                      | Identifier for the Transfer.                                            |
+| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
+
+### Response
+
+**[operations.ListTransferEventsResponse](../../models/operations/listtransfereventsresponse.md)**
 
 ### Errors
 

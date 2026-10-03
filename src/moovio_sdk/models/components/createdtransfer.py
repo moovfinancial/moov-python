@@ -70,6 +70,9 @@ class CreatedTransferTypedDict(TypedDict):
     When line items are provided, their total plus tax must equal the transfer amount.
     """
     amount_details: NotRequired[TransferAmountDetailsTypedDict]
+    r"""The tip, tax, and surcharge portion of the transfer amount.
+    For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+    """
     authorization: NotRequired[TransferAuthorizationTypedDict]
     r"""Authorization amounts.
     This field is present only for an auth-capture `card-payment` transfer.
@@ -165,6 +168,9 @@ class CreatedTransfer(BaseModel):
     amount_details: Annotated[
         Optional[TransferAmountDetails], pydantic.Field(alias="amountDetails")
     ] = None
+    r"""The tip, tax, and surcharge portion of the transfer amount.
+    For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+    """
 
     authorization: Optional[TransferAuthorization] = None
     r"""Authorization amounts.

@@ -261,7 +261,7 @@ class Products(BaseSDK):
             - Must be valid UTF-8 text
             - Supports Markdown for formatting
             - HTML is not permitted and will be rejected
-        :param is_taxable: Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update.
+        :param is_taxable: Whether applicable tax rules may be applied to this product. The value can be used to determine how to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax amount can be included; false means it should not. Omitted values default to true on creation and preserve the existing setting on update. This setting does not determine jurisdiction-specific taxability.
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param category_id: The ID of a product taxonomy category to associate with the product.
@@ -409,7 +409,7 @@ class Products(BaseSDK):
             - Must be valid UTF-8 text
             - Supports Markdown for formatting
             - HTML is not permitted and will be rejected
-        :param is_taxable: Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update.
+        :param is_taxable: Whether applicable tax rules may be applied to this product. The value can be used to determine how to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax amount can be included; false means it should not. Omitted values default to true on creation and preserve the existing setting on update. This setting does not determine jurisdiction-specific taxability.
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param category_id: The ID of a product taxonomy category to associate with the product.
@@ -751,7 +751,7 @@ class Products(BaseSDK):
             - Must be valid UTF-8 text
             - Supports Markdown for formatting
             - HTML is not permitted and will be rejected
-        :param is_taxable: Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update.
+        :param is_taxable: Whether applicable tax rules may be applied to this product. The value can be used to determine how to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax amount can be included; false means it should not. Omitted values default to true on creation and preserve the existing setting on update. This setting does not determine jurisdiction-specific taxability.
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param category_id: The ID of a product taxonomy category to associate with the product.
@@ -902,7 +902,7 @@ class Products(BaseSDK):
             - Must be valid UTF-8 text
             - Supports Markdown for formatting
             - HTML is not permitted and will be rejected
-        :param is_taxable: Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update.
+        :param is_taxable: Whether applicable tax rules may be applied to this product. The value can be used to determine how to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax amount can be included; false means it should not. Omitted values default to true on creation and preserve the existing setting on update. This setting does not determine jurisdiction-specific taxability.
         :param images: Assign previously uploaded images to a product or option.
         :param option_groups: Optional configuration options for a product, such as size or color.
         :param category_id: The ID of a product taxonomy category to associate with the product.

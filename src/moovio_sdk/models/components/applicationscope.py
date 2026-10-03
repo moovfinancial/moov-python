@@ -24,6 +24,7 @@ class ApplicationScope(str, Enum, metaclass=utils.OpenEnumMeta):
     DOCUMENTS_READ = "documents.read"
     DOCUMENTS_WRITE = "documents.write"
     FED_READ = "fed.read"
+    FILES_DOWNLOAD = "files.download"
     FILES_READ = "files.read"
     FILES_WRITE = "files.write"
     ISSUED_CARDS_READ = "issued-cards.read"

@@ -28,7 +28,7 @@ class ProductRequestTypedDict(TypedDict):
     - HTML is not permitted and will be rejected
     """
     is_taxable: NotRequired[bool]
-    r"""Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update."""
+    r"""Whether applicable tax rules may be applied to this product. The value can be used to determine how to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax amount can be included; false means it should not. Omitted values default to true on creation and preserve the existing setting on update. This setting does not determine jurisdiction-specific taxability."""
     images: NotRequired[List[AssignProductImageTypedDict]]
     r"""Assign previously uploaded images to a product or option."""
     option_groups: NotRequired[List[CreateProductOptionGroupTypedDict]]
@@ -54,7 +54,7 @@ class ProductRequest(BaseModel):
     """
 
     is_taxable: Annotated[Optional[bool], pydantic.Field(alias="isTaxable")] = None
-    r"""Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. Omitted values default to true on creation and preserve the existing setting on update."""
+    r"""Whether applicable tax rules may be applied to this product. The value can be used to determine how to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax amount can be included; false means it should not. Omitted values default to true on creation and preserve the existing setting on update. This setting does not determine jurisdiction-specific taxability."""
 
     images: Optional[List[AssignProductImage]] = None
     r"""Assign previously uploaded images to a product or option."""

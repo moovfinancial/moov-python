@@ -699,6 +699,7 @@ class Transfers(BaseSDK):
         disputed: Optional[bool] = None,
         foreign_id: Optional[str] = None,
         authorization_i_ds: Optional[Iterable[str]] = None,
+        invoice_i_ds: Optional[Iterable[str]] = None,
         transfer_types: Optional[Iterable[components.TransferType]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
@@ -731,6 +732,7 @@ class Transfers(BaseSDK):
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param authorization_i_ds: Optional comma-separated authorization IDs.
+        :param invoice_i_ds: Optional comma-separated invoice IDs.
         :param transfer_types: Optional, comma-separated transfer types by which the response is filtered.
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
@@ -761,6 +763,7 @@ class Transfers(BaseSDK):
             disputed=disputed,
             foreign_id=foreign_id,
             authorization_i_ds=utils.unmarshal(authorization_i_ds, Optional[List[str]]),
+            invoice_i_ds=utils.unmarshal(invoice_i_ds, Optional[List[str]]),
             transfer_types=utils.unmarshal(
                 transfer_types, Optional[List[components.TransferType]]
             ),
@@ -852,6 +855,7 @@ class Transfers(BaseSDK):
         disputed: Optional[bool] = None,
         foreign_id: Optional[str] = None,
         authorization_i_ds: Optional[Iterable[str]] = None,
+        invoice_i_ds: Optional[Iterable[str]] = None,
         transfer_types: Optional[Iterable[components.TransferType]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
@@ -884,6 +888,7 @@ class Transfers(BaseSDK):
         :param disputed: Optional parameter to only return disputed transfers.
         :param foreign_id: Optional alias from a foreign/external system which can be used to reference this resource.
         :param authorization_i_ds: Optional comma-separated authorization IDs.
+        :param invoice_i_ds: Optional comma-separated invoice IDs.
         :param transfer_types: Optional, comma-separated transfer types by which the response is filtered.
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
@@ -914,6 +919,7 @@ class Transfers(BaseSDK):
             disputed=disputed,
             foreign_id=foreign_id,
             authorization_i_ds=utils.unmarshal(authorization_i_ds, Optional[List[str]]),
+            invoice_i_ds=utils.unmarshal(invoice_i_ds, Optional[List[str]]),
             transfer_types=utils.unmarshal(
                 transfer_types, Optional[List[components.TransferType]]
             ),
@@ -3033,6 +3039,212 @@ class Transfers(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return operations.GetCaptureResponse(
                 result=unmarshal_json_response(components.Capture, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def list_transfer_events(
+        self,
+        *,
+        account_id: str,
+        transfer_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListTransferEventsResponse:
+        r"""Retrieve the complete ordered event timeline for a Transfer.
+
+        Events are returned oldest to newest by occurrence time, with deterministic ordering when multiple events have the same occurrence time. An existing Transfer with no stored events returns an empty list.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id: Moov account ID of the partner or the Transfer's source or destination.
+        :param transfer_id: Identifier for the Transfer.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListTransferEventsRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/accounts/{accountID}/transfers/{transferID}/events",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listTransferEvents",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Transfers"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListTransferEventsResponse(
+                result=unmarshal_json_response(
+                    List[components.TransferEvent], http_res
+                ),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def list_transfer_events_async(
+        self,
+        *,
+        account_id: str,
+        transfer_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.ListTransferEventsResponse:
+        r"""Retrieve the complete ordered event timeline for a Transfer.
+
+        Events are returned oldest to newest by occurrence time, with deterministic ordering when multiple events have the same occurrence time. An existing Transfer with no stored events returns an empty list.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
+
+        :param account_id: Moov account ID of the partner or the Transfer's source or destination.
+        :param transfer_id: Identifier for the Transfer.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListTransferEventsRequest(
+            account_id=account_id,
+            transfer_id=transfer_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/accounts/{accountID}/transfers/{transferID}/events",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listTransferEvents",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Transfers"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.ListTransferEventsResponse(
+                result=unmarshal_json_response(
+                    List[components.TransferEvent], http_res
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):

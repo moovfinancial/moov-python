@@ -4,12 +4,14 @@ from __future__ import annotations
 from .bankaccountholdertype import BankAccountHolderType
 from .bankaccountstatus import BankAccountStatus
 from .bankaccounttype import BankAccountType
+from .riskverificationoutcome import RiskVerificationOutcome
 from datetime import datetime
 from moovio_sdk.models import components
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic import field_serializer
-from typing_extensions import Annotated, TypedDict
+from pydantic import field_serializer, model_serializer
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PaymentMethodsBankAccountTypedDict(TypedDict):
@@ -31,6 +33,10 @@ class PaymentMethodsBankAccountTypedDict(TypedDict):
     routing_number: str
     last_four_account_number: str
     updated_on: datetime
+    risk_verification_outcome: NotRequired[RiskVerificationOutcome]
+    r"""The outcome of a requested risk-verification attempt. `notAttempted` when
+    `requestRiskVerification` was not set, or the calling account was not allowlisted.
+    """
 
 
 class PaymentMethodsBankAccount(BaseModel):
@@ -66,6 +72,14 @@ class PaymentMethodsBankAccount(BaseModel):
 
     updated_on: Annotated[datetime, pydantic.Field(alias="updatedOn")]
 
+    risk_verification_outcome: Annotated[
+        Optional[RiskVerificationOutcome],
+        pydantic.Field(alias="riskVerificationOutcome"),
+    ] = None
+    r"""The outcome of a requested risk-verification attempt. `notAttempted` when
+    `requestRiskVerification` was not set, or the calling account was not allowlisted.
+    """
+
     @field_serializer("status")
     def serialize_status(self, value):
         if isinstance(value, str):
@@ -92,6 +106,31 @@ class PaymentMethodsBankAccount(BaseModel):
             except ValueError:
                 return value
         return value
+
+    @field_serializer("risk_verification_outcome")
+    def serialize_risk_verification_outcome(self, value):
+        if isinstance(value, str):
+            try:
+                return components.RiskVerificationOutcome(value)
+            except ValueError:
+                return value
+        return value
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["riskVerificationOutcome"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 try:

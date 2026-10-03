@@ -111,6 +111,9 @@ class TransferData(BaseModel):
         Optional[components_transferamountdetails.TransferAmountDetails],
         pydantic.Field(alias="amountDetails"),
     ] = None
+    r"""The tip, tax, and surcharge portion of the transfer amount.
+    For an auth-capture `card-payment` transfer, this is the aggregate of all captures' `amountDetails`.
+    """
     authorization: Optional[components_transferauthorization.TransferAuthorization] = (
         None
     )

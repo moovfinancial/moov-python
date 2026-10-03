@@ -22,7 +22,7 @@ class ProductTypedDict(TypedDict):
     base_price: AmountDecimalTypedDict
     r"""A product's starting price, before applying modifiers."""
     is_taxable: bool
-    r"""Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. This setting does not determine jurisdiction-specific taxability."""
+    r"""Whether applicable tax rules may be applied to this product. The value can be used to determine how to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax amount can be included; false means it should not. Omitted values default to true on creation and preserve the existing setting on update. This setting does not determine jurisdiction-specific taxability."""
     created_on: datetime
     r"""The date and time when the product was added."""
     updated_on: datetime
@@ -56,7 +56,7 @@ class Product(BaseModel):
     r"""A product's starting price, before applying modifiers."""
 
     is_taxable: Annotated[bool, pydantic.Field(alias="isTaxable")]
-    r"""Whether applicable tax rules may be applied to this product. True does not guarantee tax is charged; false excludes the product from tax calculation. This setting does not determine jurisdiction-specific taxability."""
+    r"""Whether applicable tax rules may be applied to this product. The value can be used to determine how to populate the tax amount on a transfer (Moov does not compute or assess tax). true means a tax amount can be included; false means it should not. Omitted values default to true on creation and preserve the existing setting on update. This setting does not determine jurisdiction-specific taxability."""
 
     created_on: Annotated[datetime, pydantic.Field(alias="createdOn")]
     r"""The date and time when the product was added."""
