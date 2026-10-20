@@ -69,6 +69,14 @@ if TYPE_CHECKING:
         ImageRequestValidationError,
         ImageRequestValidationErrorData,
     )
+    from .invoicenotificationerror import (
+        InvoiceNotificationError,
+        InvoiceNotificationErrorData,
+    )
+    from .invoicenotificationratelimitederror import (
+        InvoiceNotificationRateLimitedError,
+        InvoiceNotificationRateLimitedErrorData,
+    )
     from .linkapplepayerror import LinkApplePayError, LinkApplePayErrorData
     from .linkcarderror import LinkCardError, LinkCardErrorData
     from .linkgooglepayerror import LinkGooglePayError, LinkGooglePayErrorData
@@ -223,6 +231,10 @@ __all__ = [
     "ImageMetadataValidationErrorData",
     "ImageRequestValidationError",
     "ImageRequestValidationErrorData",
+    "InvoiceNotificationError",
+    "InvoiceNotificationErrorData",
+    "InvoiceNotificationRateLimitedError",
+    "InvoiceNotificationRateLimitedErrorData",
     "LinkApplePayError",
     "LinkApplePayErrorData",
     "LinkCardError",
@@ -348,6 +360,10 @@ _dynamic_imports: dict[str, str] = {
     "ImageMetadataValidationErrorData": ".imagemetadatavalidationerror",
     "ImageRequestValidationError": ".imagerequestvalidationerror",
     "ImageRequestValidationErrorData": ".imagerequestvalidationerror",
+    "InvoiceNotificationError": ".invoicenotificationerror",
+    "InvoiceNotificationErrorData": ".invoicenotificationerror",
+    "InvoiceNotificationRateLimitedError": ".invoicenotificationratelimitederror",
+    "InvoiceNotificationRateLimitedErrorData": ".invoicenotificationratelimitederror",
     "LinkApplePayError": ".linkapplepayerror",
     "LinkApplePayErrorData": ".linkapplepayerror",
     "LinkCardError": ".linkcarderror",

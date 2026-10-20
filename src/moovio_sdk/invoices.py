@@ -8,7 +8,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Invoices(BaseSDK):
@@ -22,9 +22,16 @@ class Invoices(BaseSDK):
             components.CreateInvoiceLineItemsTypedDict,
         ],
         customer_email: Optional[str] = None,
+        invoice_number: Optional[str] = None,
         description: Optional[str] = None,
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
+        payment: Optional[
+            Union[
+                components.InvoicePaymentOptions,
+                components.InvoicePaymentOptionsTypedDict,
+            ]
+        ] = None,
         tax_amount: Optional[
             Union[components.AmountDecimal, components.AmountDecimalTypedDict]
         ] = None,
@@ -42,9 +49,11 @@ class Invoices(BaseSDK):
         :param customer_account_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
         :param line_items: A collection of line items for an invoice.
         :param customer_email: Email address to use for invoice checkout OTP verification instead of the customer account email.
+        :param invoice_number: Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If omitted, empty, or whitespace-only, the next number in the INV-<n> sequence is assigned automatically.
         :param description:
         :param invoice_date:
         :param due_date:
+        :param payment: Payment options for the invoice.
         :param tax_amount:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -66,12 +75,16 @@ class Invoices(BaseSDK):
             create_invoice=components.CreateInvoice(
                 customer_account_id=customer_account_id,
                 customer_email=customer_email,
+                invoice_number=invoice_number,
                 description=description,
                 line_items=utils.get_pydantic_model(
                     line_items, components.CreateInvoiceLineItems
                 ),
                 invoice_date=invoice_date,
                 due_date=due_date,
+                payment=utils.get_pydantic_model(
+                    payment, Optional[components.InvoicePaymentOptions]
+                ),
                 tax_amount=utils.get_pydantic_model(
                     tax_amount, Optional[components.AmountDecimal]
                 ),
@@ -162,9 +175,16 @@ class Invoices(BaseSDK):
             components.CreateInvoiceLineItemsTypedDict,
         ],
         customer_email: Optional[str] = None,
+        invoice_number: Optional[str] = None,
         description: Optional[str] = None,
         invoice_date: Optional[datetime] = None,
         due_date: Optional[datetime] = None,
+        payment: Optional[
+            Union[
+                components.InvoicePaymentOptions,
+                components.InvoicePaymentOptionsTypedDict,
+            ]
+        ] = None,
         tax_amount: Optional[
             Union[components.AmountDecimal, components.AmountDecimalTypedDict]
         ] = None,
@@ -182,9 +202,11 @@ class Invoices(BaseSDK):
         :param customer_account_id: A unique identifier for a Moov resource. Supports UUID format (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx) or typed format with base32-encoded UUID and type suffix (e.g., kuoaydiojf7uszaokc2ggnaaaa_xfer).
         :param line_items: A collection of line items for an invoice.
         :param customer_email: Email address to use for invoice checkout OTP verification instead of the customer account email.
+        :param invoice_number: Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If omitted, empty, or whitespace-only, the next number in the INV-<n> sequence is assigned automatically.
         :param description:
         :param invoice_date:
         :param due_date:
+        :param payment: Payment options for the invoice.
         :param tax_amount:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -206,12 +228,16 @@ class Invoices(BaseSDK):
             create_invoice=components.CreateInvoice(
                 customer_account_id=customer_account_id,
                 customer_email=customer_email,
+                invoice_number=invoice_number,
                 description=description,
                 line_items=utils.get_pydantic_model(
                     line_items, components.CreateInvoiceLineItems
                 ),
                 invoice_date=invoice_date,
                 due_date=due_date,
+                payment=utils.get_pydantic_model(
+                    payment, Optional[components.InvoicePaymentOptions]
+                ),
                 tax_amount=utils.get_pydantic_model(
                     tax_amount, Optional[components.AmountDecimal]
                 ),
@@ -757,6 +783,12 @@ class Invoices(BaseSDK):
         invoice_date: OptionalNullable[datetime] = UNSET,
         due_date: OptionalNullable[datetime] = UNSET,
         status: Optional[components.InvoiceStatus] = None,
+        payment: Optional[
+            Union[
+                components.InvoicePaymentOptionsUpdate,
+                components.InvoicePaymentOptionsUpdateTypedDict,
+            ]
+        ] = None,
         tax_amount: Optional[
             Union[
                 components.AmountDecimalUpdate, components.AmountDecimalUpdateTypedDict
@@ -784,6 +816,7 @@ class Invoices(BaseSDK):
             Canceled invoices still appear in list results by default and remain part of the invoice history.
             To completely discard an invoice created by mistake, use the delete endpoint instead.
             - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
+        :param payment: Payment options to update on the invoice.
         :param tax_amount:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -811,6 +844,9 @@ class Invoices(BaseSDK):
                 invoice_date=invoice_date,
                 due_date=due_date,
                 status=status,
+                payment=utils.get_pydantic_model(
+                    payment, Optional[components.InvoicePaymentOptionsUpdate]
+                ),
                 tax_amount=utils.get_pydantic_model(
                     tax_amount, Optional[components.AmountDecimalUpdate]
                 ),
@@ -906,6 +942,12 @@ class Invoices(BaseSDK):
         invoice_date: OptionalNullable[datetime] = UNSET,
         due_date: OptionalNullable[datetime] = UNSET,
         status: Optional[components.InvoiceStatus] = None,
+        payment: Optional[
+            Union[
+                components.InvoicePaymentOptionsUpdate,
+                components.InvoicePaymentOptionsUpdateTypedDict,
+            ]
+        ] = None,
         tax_amount: Optional[
             Union[
                 components.AmountDecimalUpdate, components.AmountDecimalUpdateTypedDict
@@ -933,6 +975,7 @@ class Invoices(BaseSDK):
             Canceled invoices still appear in list results by default and remain part of the invoice history.
             To completely discard an invoice created by mistake, use the delete endpoint instead.
             - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
+        :param payment: Payment options to update on the invoice.
         :param tax_amount:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -960,6 +1003,9 @@ class Invoices(BaseSDK):
                 invoice_date=invoice_date,
                 due_date=due_date,
                 status=status,
+                payment=utils.get_pydantic_model(
+                    payment, Optional[components.InvoicePaymentOptionsUpdate]
+                ),
                 tax_amount=utils.get_pydantic_model(
                     tax_amount, Optional[components.AmountDecimalUpdate]
                 ),
@@ -1244,6 +1290,274 @@ class Invoices(BaseSDK):
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    def create_invoice_notification(
+        self,
+        *,
+        account_id: str,
+        invoice_id: str,
+        channels: Iterable[components.NotificationChannel],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.CreateInvoiceNotificationResponse:
+        r"""Create a notification for an invoice, which resends the invoice email to the customer. The required
+        `channels` body lists the channels to notify on; today only `email` is supported. Returns a 409
+        if the invoice is not in `unpaid` or `overdue` status, or if the merchant or customer account has no
+        email set.
+
+        The request is all-or-nothing: if any requested channel is rate limited, nothing is sent. Each channel
+        can be sent at most once every 24 hours, and not within 24 hours of the invoice being sent. A 429
+        response lists the limited channels with `availableOn` and lists the `availableChannels` that can be
+        sent in a new request.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+
+        :param account_id:
+        :param invoice_id:
+        :param channels: The channels to send the notification on. Required, must contain at least one channel.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.CreateInvoiceNotificationRequest(
+            account_id=account_id,
+            invoice_id=invoice_id,
+            create_invoice_notification=components.CreateInvoiceNotification(
+                channels=utils.unmarshal(
+                    channels, List[components.NotificationChannel]
+                ),
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/accounts/{accountID}/invoices/{invoiceID}/notifications",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.create_invoice_notification,
+                False,
+                False,
+                "json",
+                components.CreateInvoiceNotification,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createInvoiceNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Invoices"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return operations.CreateInvoiceNotificationResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["401", "403", "404"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InvoiceNotificationErrorData, http_res
+            )
+            raise errors.InvoiceNotificationError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InvoiceNotificationRateLimitedErrorData, http_res
+            )
+            raise errors.InvoiceNotificationRateLimitedError(response_data, http_res)
+        if utils.match_response(http_res, ["500", "504"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+
+        raise errors.APIError("Unexpected response received", http_res)
+
+    async def create_invoice_notification_async(
+        self,
+        *,
+        account_id: str,
+        invoice_id: str,
+        channels: Iterable[components.NotificationChannel],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> operations.CreateInvoiceNotificationResponse:
+        r"""Create a notification for an invoice, which resends the invoice email to the customer. The required
+        `channels` body lists the channels to notify on; today only `email` is supported. Returns a 409
+        if the invoice is not in `unpaid` or `overdue` status, or if the merchant or customer account has no
+        email set.
+
+        The request is all-or-nothing: if any requested channel is rate limited, nothing is sent. Each channel
+        can be sent at most once every 24 hours, and not within 24 hours of the invoice being sent. A 429
+        response lists the limited channels with `availableOn` and lists the `availableChannels` that can be
+        sent in a new request.
+
+        To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
+        you'll need to specify the `/accounts/{accountID}/invoices.write` scope.
+
+        :param account_id:
+        :param invoice_id:
+        :param channels: The channels to send the notification on. Required, must contain at least one channel.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.CreateInvoiceNotificationRequest(
+            account_id=account_id,
+            invoice_id=invoice_id,
+            create_invoice_notification=components.CreateInvoiceNotification(
+                channels=utils.unmarshal(
+                    channels, List[components.NotificationChannel]
+                ),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/accounts/{accountID}/invoices/{invoiceID}/notifications",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.create_invoice_notification,
+                False,
+                False,
+                "json",
+                components.CreateInvoiceNotification,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createInvoiceNotification",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Invoices"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "204", "*"):
+            return operations.CreateInvoiceNotificationResponse(
+                headers=utils.get_response_headers(http_res.headers)
+            )
+        if utils.match_response(http_res, ["401", "403", "404"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, ["400", "409"], "application/json"):
+            response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
+            raise errors.GenericError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InvoiceNotificationErrorData, http_res
+            )
+            raise errors.InvoiceNotificationError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InvoiceNotificationRateLimitedErrorData, http_res
+            )
+            raise errors.InvoiceNotificationRateLimitedError(response_data, http_res)
         if utils.match_response(http_res, ["500", "504"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)

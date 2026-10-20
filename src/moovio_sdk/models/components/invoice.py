@@ -4,6 +4,7 @@ from __future__ import annotations
 from .amountdecimal import AmountDecimal, AmountDecimalTypedDict
 from .invoicelineitems import InvoiceLineItems, InvoiceLineItemsTypedDict
 from .invoicepayment import InvoicePayment, InvoicePaymentTypedDict
+from .invoicepaymentoptions import InvoicePaymentOptions, InvoicePaymentOptionsTypedDict
 from .invoicestatus import InvoiceStatus
 from datetime import datetime
 from moovio_sdk.models import components
@@ -46,6 +47,8 @@ class InvoiceTypedDict(TypedDict):
     payment_link_code: NotRequired[str]
     payment_link_url: NotRequired[str]
     r"""URL to the hosted payment link for the invoice."""
+    payment: NotRequired[InvoicePaymentOptionsTypedDict]
+    r"""Payment options for the invoice."""
     invoice_payments: NotRequired[List[InvoicePaymentTypedDict]]
     r"""Payment made towards an invoice, will be either a transfer or an external payment."""
     invoice_date: NotRequired[datetime]
@@ -111,6 +114,9 @@ class Invoice(BaseModel):
     ] = None
     r"""URL to the hosted payment link for the invoice."""
 
+    payment: Optional[InvoicePaymentOptions] = None
+    r"""Payment options for the invoice."""
+
     invoice_payments: Annotated[
         Optional[List[InvoicePayment]], pydantic.Field(alias="invoicePayments")
     ] = None
@@ -150,6 +156,7 @@ class Invoice(BaseModel):
                 "description",
                 "paymentLinkCode",
                 "paymentLinkURL",
+                "payment",
                 "invoicePayments",
                 "invoiceDate",
                 "dueDate",

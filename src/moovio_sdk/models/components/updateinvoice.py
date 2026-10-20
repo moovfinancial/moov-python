@@ -6,6 +6,10 @@ from .createinvoicelineitemsupdate import (
     CreateInvoiceLineItemsUpdate,
     CreateInvoiceLineItemsUpdateTypedDict,
 )
+from .invoicepaymentoptionsupdate import (
+    InvoicePaymentOptionsUpdate,
+    InvoicePaymentOptionsUpdateTypedDict,
+)
 from .invoicestatus import InvoiceStatus
 from datetime import datetime
 from moovio_sdk.models import components
@@ -36,6 +40,8 @@ class UpdateInvoiceTypedDict(TypedDict):
     To completely discard an invoice created by mistake, use the delete endpoint instead.
     - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
     """
+    payment: NotRequired[InvoicePaymentOptionsUpdateTypedDict]
+    r"""Payment options to update on the invoice."""
     tax_amount: NotRequired[AmountDecimalUpdateTypedDict]
 
 
@@ -64,6 +70,9 @@ class UpdateInvoice(BaseModel):
     - `unpaid`: Can only be set if the current status is `draft`. Setting the status to `unpaid` finalizes the invoice and sends an email with a payment link to the customer.
     """
 
+    payment: Optional[InvoicePaymentOptionsUpdate] = None
+    r"""Payment options to update on the invoice."""
+
     tax_amount: Annotated[
         Optional[AmountDecimalUpdate], pydantic.Field(alias="taxAmount")
     ] = None
@@ -86,6 +95,7 @@ class UpdateInvoice(BaseModel):
                 "invoiceDate",
                 "dueDate",
                 "status",
+                "payment",
                 "taxAmount",
             ]
         )
