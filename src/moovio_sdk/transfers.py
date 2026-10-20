@@ -1639,6 +1639,7 @@ class Transfers(BaseSDK):
         *,
         account_id: str,
         transfer_id: str,
+        x_idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1654,6 +1655,8 @@ class Transfers(BaseSDK):
 
         :param account_id: The partner's Moov account ID.
         :param transfer_id: The transfer ID to cancel.
+        :param x_idempotency_key: Prevents duplicate cancellations from being created.
+            In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1670,6 +1673,7 @@ class Transfers(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateCancellationRequest(
+            x_idempotency_key=x_idempotency_key,
             account_id=account_id,
             transfer_id=transfer_id,
         )
@@ -1745,6 +1749,7 @@ class Transfers(BaseSDK):
         *,
         account_id: str,
         transfer_id: str,
+        x_idempotency_key: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1760,6 +1765,8 @@ class Transfers(BaseSDK):
 
         :param account_id: The partner's Moov account ID.
         :param transfer_id: The transfer ID to cancel.
+        :param x_idempotency_key: Prevents duplicate cancellations from being created.
+            In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1776,6 +1783,7 @@ class Transfers(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateCancellationRequest(
+            x_idempotency_key=x_idempotency_key,
             account_id=account_id,
             transfer_id=transfer_id,
         )
@@ -2262,6 +2270,7 @@ class Transfers(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.InitiateRefundResponse:
         r"""Initiate a refund for a card transfer.
+        The `accountID` must identify the partner account for the transfer.
 
         **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**
         See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information.
@@ -2270,7 +2279,7 @@ class Transfers(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
         :param x_idempotency_key: Prevents duplicate refunds from being created.
-        :param account_id: The merchant's Moov account ID.
+        :param account_id: Moov account ID of the partner for the transfer.
         :param transfer_id: Identifier for the transfer.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
@@ -2406,6 +2415,7 @@ class Transfers(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.InitiateRefundResponse:
         r"""Initiate a refund for a card transfer.
+        The `accountID` must identify the partner account for the transfer.
 
         **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**
         See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information.
@@ -2414,7 +2424,7 @@ class Transfers(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
         :param x_idempotency_key: Prevents duplicate refunds from being created.
-        :param account_id: The merchant's Moov account ID.
+        :param account_id: Moov account ID of the partner for the transfer.
         :param transfer_id: Identifier for the transfer.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
