@@ -24,7 +24,7 @@ class InitiateRefundRequestTypedDict(TypedDict):
     x_idempotency_key: str
     r"""Prevents duplicate refunds from being created."""
     account_id: str
-    r"""The merchant's Moov account ID."""
+    r"""Moov account ID of the partner for the transfer."""
     transfer_id: str
     r"""Identifier for the transfer."""
     create_refund: components_createrefund.CreateRefundTypedDict
@@ -47,7 +47,7 @@ class InitiateRefundRequest(BaseModel):
         pydantic.Field(alias="accountID"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
-    r"""The merchant's Moov account ID."""
+    r"""Moov account ID of the partner for the transfer."""
 
     transfer_id: Annotated[
         str,

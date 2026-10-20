@@ -6,6 +6,7 @@ from .createinvoicelineitems import (
     CreateInvoiceLineItems,
     CreateInvoiceLineItemsTypedDict,
 )
+from .invoicepaymentoptions import InvoicePaymentOptions, InvoicePaymentOptionsTypedDict
 from datetime import datetime
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
@@ -21,9 +22,13 @@ class CreateInvoiceTypedDict(TypedDict):
     r"""A collection of line items for an invoice."""
     customer_email: NotRequired[str]
     r"""Email address to use for invoice checkout OTP verification instead of the customer account email."""
+    invoice_number: NotRequired[str]
+    r"""Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If omitted, empty, or whitespace-only, the next number in the INV-<n> sequence is assigned automatically."""
     description: NotRequired[str]
     invoice_date: NotRequired[datetime]
     due_date: NotRequired[datetime]
+    payment: NotRequired[InvoicePaymentOptionsTypedDict]
+    r"""Payment options for the invoice."""
     amount_details: NotRequired[AmountDetailsTypedDict]
 
 
@@ -39,6 +44,11 @@ class CreateInvoice(BaseModel):
     )
     r"""Email address to use for invoice checkout OTP verification instead of the customer account email."""
 
+    invoice_number: Annotated[Optional[str], pydantic.Field(alias="invoiceNumber")] = (
+        None
+    )
+    r"""Optional merchant-defined invoice number, up to 64 characters. Must be unique for the account. If omitted, empty, or whitespace-only, the next number in the INV-<n> sequence is assigned automatically."""
+
     description: Optional[str] = None
 
     invoice_date: Annotated[Optional[datetime], pydantic.Field(alias="invoiceDate")] = (
@@ -47,6 +57,9 @@ class CreateInvoice(BaseModel):
 
     due_date: Annotated[Optional[datetime], pydantic.Field(alias="dueDate")] = None
 
+    payment: Optional[InvoicePaymentOptions] = None
+    r"""Payment options for the invoice."""
+
     amount_details: Annotated[
         Optional[AmountDetails], pydantic.Field(alias="amountDetails")
     ] = None
@@ -54,7 +67,15 @@ class CreateInvoice(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["customerEmail", "description", "invoiceDate", "dueDate", "amountDetails"]
+            [
+                "customerEmail",
+                "invoiceNumber",
+                "description",
+                "invoiceDate",
+                "dueDate",
+                "payment",
+                "amountDetails",
+            ]
         )
         serialized = handler(self)
         m = {}

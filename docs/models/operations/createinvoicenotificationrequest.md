@@ -1,0 +1,10 @@
+# CreateInvoiceNotificationRequest
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `account_id`                                                                                 | *str*                                                                                        | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `invoice_id`                                                                                 | *str*                                                                                        | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `create_invoice_notification`                                                                | [components.CreateInvoiceNotification](../../models/components/createinvoicenotification.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |

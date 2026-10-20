@@ -302,6 +302,12 @@ class Transfers(BaseSDK):
         ],
         amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         x_wait_for: Optional[components.TransferWaitFor] = None,
+        options: Optional[
+            Union[
+                components.CreateTransferRailOptions,
+                components.CreateTransferRailOptionsTypedDict,
+            ]
+        ] = None,
         facilitator_fee: Optional[
             Union[
                 components.CreateTransferFacilitatorFee,
@@ -346,6 +352,7 @@ class Transfers(BaseSDK):
         :param amount:
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+        :param options: Rail-specific options for a new transfer. Set only the key that matches the transfer's rail.
         :param facilitator_fee: Total or markup fee to apply when creating a transfer.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
@@ -379,6 +386,9 @@ class Transfers(BaseSDK):
                 ),
                 destination=utils.get_pydantic_model(
                     destination, components.CreateTransferDestination
+                ),
+                options=utils.get_pydantic_model(
+                    options, Optional[components.CreateTransferRailOptions]
                 ),
                 amount=utils.get_pydantic_model(amount, components.AmountDecimal),
                 facilitator_fee=utils.get_pydantic_model(
@@ -447,7 +457,9 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferResponse(
-                result=unmarshal_json_response(components.CreatedTransfer, http_res),
+                result=unmarshal_json_response(
+                    components.CreateTransferResponse, http_res
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "201", "application/json"):
@@ -500,6 +512,12 @@ class Transfers(BaseSDK):
         ],
         amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
         x_wait_for: Optional[components.TransferWaitFor] = None,
+        options: Optional[
+            Union[
+                components.CreateTransferRailOptions,
+                components.CreateTransferRailOptionsTypedDict,
+            ]
+        ] = None,
         facilitator_fee: Optional[
             Union[
                 components.CreateTransferFacilitatorFee,
@@ -544,6 +562,7 @@ class Transfers(BaseSDK):
         :param amount:
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
+        :param options: Rail-specific options for a new transfer. Set only the key that matches the transfer's rail.
         :param facilitator_fee: Total or markup fee to apply when creating a transfer.
         :param description: An optional description of the transfer that is used on receipts and for your own internal use.
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
@@ -577,6 +596,9 @@ class Transfers(BaseSDK):
                 ),
                 destination=utils.get_pydantic_model(
                     destination, components.CreateTransferDestination
+                ),
+                options=utils.get_pydantic_model(
+                    options, Optional[components.CreateTransferRailOptions]
                 ),
                 amount=utils.get_pydantic_model(amount, components.AmountDecimal),
                 facilitator_fee=utils.get_pydantic_model(
@@ -645,7 +667,9 @@ class Transfers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return operations.CreateTransferResponse(
-                result=unmarshal_json_response(components.CreatedTransfer, http_res),
+                result=unmarshal_json_response(
+                    components.CreateTransferResponse, http_res
+                ),
                 headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "201", "application/json"):
@@ -1667,6 +1691,7 @@ class Transfers(BaseSDK):
     def create_cancellation(
         self,
         *,
+        x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
         amount: Optional[
@@ -1685,6 +1710,8 @@ class Transfers(BaseSDK):
           To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
           to specify the `/accounts/{accountID}/transfers.write` scope.
 
+        :param x_idempotency_key: Prevents duplicate cancellations from being created.
+            In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
         :param account_id: The partner's Moov account ID.
         :param transfer_id: The transfer ID to cancel.
         :param amount: Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
@@ -1706,6 +1733,7 @@ class Transfers(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateCancellationRequest(
+            x_idempotency_key=x_idempotency_key,
             account_id=account_id,
             transfer_id=transfer_id,
             create_cancellation=components.CreateCancellation(
@@ -1770,7 +1798,12 @@ class Transfers(BaseSDK):
                 result=unmarshal_json_response(components.Cancellation, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409", "422"], "application/json"):
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateCancellationResponseBodyUnion, http_res
+            )
+            raise errors.CreateCancellationResponseBody(response_data, http_res)
+        if utils.match_response(http_res, ["400", "422"], "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -1791,6 +1824,7 @@ class Transfers(BaseSDK):
     async def create_cancellation_async(
         self,
         *,
+        x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
         amount: Optional[
@@ -1809,6 +1843,8 @@ class Transfers(BaseSDK):
           To access this endpoint using a [token](https://docs.moov.io/api/authentication/access-tokens/) you'll need
           to specify the `/accounts/{accountID}/transfers.write` scope.
 
+        :param x_idempotency_key: Prevents duplicate cancellations from being created.
+            In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
         :param account_id: The partner's Moov account ID.
         :param transfer_id: The transfer ID to cancel.
         :param amount: Amount to void. This field can only be set for an auth-capture `card-payment` transfer.
@@ -1830,6 +1866,7 @@ class Transfers(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateCancellationRequest(
+            x_idempotency_key=x_idempotency_key,
             account_id=account_id,
             transfer_id=transfer_id,
             create_cancellation=components.CreateCancellation(
@@ -1894,7 +1931,12 @@ class Transfers(BaseSDK):
                 result=unmarshal_json_response(components.Cancellation, http_res),
                 headers=utils.get_response_headers(http_res.headers),
             )
-        if utils.match_response(http_res, ["400", "409", "422"], "application/json"):
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.CreateCancellationResponseBodyUnion, http_res
+            )
+            raise errors.CreateCancellationResponseBody(response_data, http_res)
+        if utils.match_response(http_res, ["400", "422"], "application/json"):
             response_data = unmarshal_json_response(errors.GenericErrorData, http_res)
             raise errors.GenericError(response_data, http_res)
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
@@ -3078,6 +3120,7 @@ class Transfers(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.InitiateRefundResponse:
         r"""Initiate a refund for a card transfer.
+        The `accountID` must identify the partner account for the transfer.
 
         **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**
         See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information.
@@ -3086,7 +3129,7 @@ class Transfers(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
         :param x_idempotency_key: Prevents duplicate refunds from being created.
-        :param account_id: The merchant's Moov account ID.
+        :param account_id: Moov account ID of the partner for the transfer.
         :param transfer_id: Identifier for the transfer.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.
@@ -3234,6 +3277,7 @@ class Transfers(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.InitiateRefundResponse:
         r"""Initiate a refund for a card transfer.
+        The `accountID` must identify the partner account for the transfer.
 
         **Use the [Cancel or refund a card transfer](https://docs.moov.io/api/money-movement/refunds/cancel/) endpoint for more comprehensive cancel and refund options.**
         See the [reversals](https://docs.moov.io/guides/money-movement/accept-payments/card-acceptance/reversals/) guide for more information.
@@ -3242,7 +3286,7 @@ class Transfers(BaseSDK):
         you'll need to specify the `/accounts/{accountID}/transfers.write` scope.
 
         :param x_idempotency_key: Prevents duplicate refunds from being created.
-        :param account_id: The merchant's Moov account ID.
+        :param account_id: Moov account ID of the partner for the transfer.
         :param transfer_id: Identifier for the transfer.
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
             asynchronous response indicating the transfer was created (this is the default response if the header is omitted). A timeout will occur after 15 seconds.

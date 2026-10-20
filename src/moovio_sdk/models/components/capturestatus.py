@@ -6,6 +6,7 @@ from moovio_sdk import utils
 
 
 class CaptureStatus(str, Enum, metaclass=utils.OpenEnumMeta):
+    CREATED = "created"
     PENDING = "pending"
     COMPLETED = "completed"
     FAILED = "failed"
