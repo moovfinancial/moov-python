@@ -88,6 +88,12 @@ if TYPE_CHECKING:
         CreateInvoiceResponse,
         CreateInvoiceResponseTypedDict,
     )
+    from .createinvoicenotification import (
+        CreateInvoiceNotificationRequest,
+        CreateInvoiceNotificationRequestTypedDict,
+        CreateInvoiceNotificationResponse,
+        CreateInvoiceNotificationResponseTypedDict,
+    )
     from .createinvoicepayment import (
         CreateInvoicePaymentRequest,
         CreateInvoicePaymentRequestTypedDict,
@@ -1185,6 +1191,10 @@ __all__ = [
     "CreateFeePlanAgreementsRequestTypedDict",
     "CreateFeePlanAgreementsResponse",
     "CreateFeePlanAgreementsResponseTypedDict",
+    "CreateInvoiceNotificationRequest",
+    "CreateInvoiceNotificationRequestTypedDict",
+    "CreateInvoiceNotificationResponse",
+    "CreateInvoiceNotificationResponseTypedDict",
     "CreateInvoicePaymentRequest",
     "CreateInvoicePaymentRequestTypedDict",
     "CreateInvoicePaymentResponse",
@@ -1951,6 +1961,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateInvoiceRequestTypedDict": ".createinvoice",
     "CreateInvoiceResponse": ".createinvoice",
     "CreateInvoiceResponseTypedDict": ".createinvoice",
+    "CreateInvoiceNotificationRequest": ".createinvoicenotification",
+    "CreateInvoiceNotificationRequestTypedDict": ".createinvoicenotification",
+    "CreateInvoiceNotificationResponse": ".createinvoicenotification",
+    "CreateInvoiceNotificationResponseTypedDict": ".createinvoicenotification",
     "CreateInvoicePaymentRequest": ".createinvoicepayment",
     "CreateInvoicePaymentRequestTypedDict": ".createinvoicepayment",
     "CreateInvoicePaymentResponse": ".createinvoicepayment",

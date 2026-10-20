@@ -425,6 +425,10 @@ if TYPE_CHECKING:
         CreateInvoiceLineItemValidationError,
         CreateInvoiceLineItemValidationErrorTypedDict,
     )
+    from .createinvoicenotification import (
+        CreateInvoiceNotification,
+        CreateInvoiceNotificationTypedDict,
+    )
     from .createinvoicepayment import (
         CreateInvoicePayment,
         CreateInvoicePaymentTypedDict,
@@ -819,7 +823,23 @@ if TYPE_CHECKING:
         InvoiceLineItemValidationError,
         InvoiceLineItemValidationErrorTypedDict,
     )
+    from .invoicenotificationlimitedchannel import (
+        InvoiceNotificationLimitedChannel,
+        InvoiceNotificationLimitedChannelTypedDict,
+    )
     from .invoicepayment import InvoicePayment, InvoicePaymentTypedDict
+    from .invoicepaymentoptions import (
+        InvoicePaymentOptions,
+        InvoicePaymentOptionsTypedDict,
+    )
+    from .invoicepaymentoptionserror import (
+        InvoicePaymentOptionsError,
+        InvoicePaymentOptionsErrorTypedDict,
+    )
+    from .invoicepaymentoptionsupdate import (
+        InvoicePaymentOptionsUpdate,
+        InvoicePaymentOptionsUpdateTypedDict,
+    )
     from .invoicepaymenttype import InvoicePaymentType
     from .invoicestatus import InvoiceStatus
     from .invoicetransferpayment import (
@@ -972,6 +992,7 @@ if TYPE_CHECKING:
     )
     from .mxauthorizationcode import MXAuthorizationCode, MXAuthorizationCodeTypedDict
     from .mxpayload import MxPayload, MxPayloadTypedDict
+    from .notificationchannel import NotificationChannel
     from .oauth2clienttype import OAuth2ClientType
     from .occurrence import Occurrence, OccurrenceTypedDict
     from .occurrencesresponse import (
@@ -2049,6 +2070,8 @@ __all__ = [
     "CreateInvoiceLineItemsUpdateTypedDict",
     "CreateInvoiceLineItemsValidationError",
     "CreateInvoiceLineItemsValidationErrorTypedDict",
+    "CreateInvoiceNotification",
+    "CreateInvoiceNotificationTypedDict",
     "CreateInvoicePayment",
     "CreateInvoicePaymentTypedDict",
     "CreateInvoiceTypedDict",
@@ -2338,7 +2361,15 @@ __all__ = [
     "InvoiceLineItemsTypedDict",
     "InvoiceLineItemsValidationError",
     "InvoiceLineItemsValidationErrorTypedDict",
+    "InvoiceNotificationLimitedChannel",
+    "InvoiceNotificationLimitedChannelTypedDict",
     "InvoicePayment",
+    "InvoicePaymentOptions",
+    "InvoicePaymentOptionsError",
+    "InvoicePaymentOptionsErrorTypedDict",
+    "InvoicePaymentOptionsTypedDict",
+    "InvoicePaymentOptionsUpdate",
+    "InvoicePaymentOptionsUpdateTypedDict",
     "InvoicePaymentType",
     "InvoicePaymentTypedDict",
     "InvoiceStatus",
@@ -2466,6 +2497,7 @@ __all__ = [
     "MoovWalletTransferPaymentMethodTypedDict",
     "MxPayload",
     "MxPayloadTypedDict",
+    "NotificationChannel",
     "OAuth2ClientType",
     "Occurrence",
     "OccurrenceStatus",
@@ -3401,6 +3433,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateInvoiceLineItemsValidationErrorTypedDict": ".createinvoicelineitemsvalidationerror",
     "CreateInvoiceLineItemValidationError": ".createinvoicelineitemvalidationerror",
     "CreateInvoiceLineItemValidationErrorTypedDict": ".createinvoicelineitemvalidationerror",
+    "CreateInvoiceNotification": ".createinvoicenotification",
+    "CreateInvoiceNotificationTypedDict": ".createinvoicenotification",
     "CreateInvoicePayment": ".createinvoicepayment",
     "CreateInvoicePaymentTypedDict": ".createinvoicepayment",
     "CreatePaymentLink": ".createpaymentlink",
@@ -3690,8 +3724,16 @@ _dynamic_imports: dict[str, str] = {
     "InvoiceLineItemsValidationErrorTypedDict": ".invoicelineitemsvalidationerror",
     "InvoiceLineItemValidationError": ".invoicelineitemvalidationerror",
     "InvoiceLineItemValidationErrorTypedDict": ".invoicelineitemvalidationerror",
+    "InvoiceNotificationLimitedChannel": ".invoicenotificationlimitedchannel",
+    "InvoiceNotificationLimitedChannelTypedDict": ".invoicenotificationlimitedchannel",
     "InvoicePayment": ".invoicepayment",
     "InvoicePaymentTypedDict": ".invoicepayment",
+    "InvoicePaymentOptions": ".invoicepaymentoptions",
+    "InvoicePaymentOptionsTypedDict": ".invoicepaymentoptions",
+    "InvoicePaymentOptionsError": ".invoicepaymentoptionserror",
+    "InvoicePaymentOptionsErrorTypedDict": ".invoicepaymentoptionserror",
+    "InvoicePaymentOptionsUpdate": ".invoicepaymentoptionsupdate",
+    "InvoicePaymentOptionsUpdateTypedDict": ".invoicepaymentoptionsupdate",
     "InvoicePaymentType": ".invoicepaymenttype",
     "InvoiceStatus": ".invoicestatus",
     "InvoiceTransferPayment": ".invoicetransferpayment",
@@ -3813,6 +3855,7 @@ _dynamic_imports: dict[str, str] = {
     "MXAuthorizationCodeTypedDict": ".mxauthorizationcode",
     "MxPayload": ".mxpayload",
     "MxPayloadTypedDict": ".mxpayload",
+    "NotificationChannel": ".notificationchannel",
     "OAuth2ClientType": ".oauth2clienttype",
     "Occurrence": ".occurrence",
     "OccurrenceTypedDict": ".occurrence",

@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 from moovio_sdk.models.components import cancellation as components_cancellation
-from moovio_sdk.types import BaseModel
-from moovio_sdk.utils import FieldMetadata, PathParamMetadata
+from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
 import pydantic
-from typing import Dict, List
-from typing_extensions import Annotated, TypedDict
+from pydantic import model_serializer
+from typing import Dict, List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CreateCancellationRequestTypedDict(TypedDict):
@@ -14,6 +15,10 @@ class CreateCancellationRequestTypedDict(TypedDict):
     r"""The partner's Moov account ID."""
     transfer_id: str
     r"""The transfer ID to cancel."""
+    x_idempotency_key: NotRequired[str]
+    r"""Prevents duplicate cancellations from being created.
+    In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
+    """
 
 
 class CreateCancellationRequest(BaseModel):
@@ -30,6 +35,31 @@ class CreateCancellationRequest(BaseModel):
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
     r"""The transfer ID to cancel."""
+
+    x_idempotency_key: Annotated[
+        Optional[str],
+        pydantic.Field(alias="x-idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Prevents duplicate cancellations from being created.
+    In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
+    """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["x-idempotency-key"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateCancellationResponseTypedDict(TypedDict):
