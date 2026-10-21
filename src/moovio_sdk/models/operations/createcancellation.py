@@ -6,13 +6,22 @@ from moovio_sdk.models.components import (
     createcancellation as components_createcancellation,
 )
 from moovio_sdk.types import BaseModel
-from moovio_sdk.utils import FieldMetadata, PathParamMetadata, RequestMetadata
+from moovio_sdk.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    RequestMetadata,
+)
 import pydantic
 from typing import Dict, List
 from typing_extensions import Annotated, TypedDict
 
 
 class CreateCancellationRequestTypedDict(TypedDict):
+    x_idempotency_key: str
+    r"""Prevents duplicate cancellations from being created.
+    In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
+    """
     account_id: str
     r"""The partner's Moov account ID."""
     transfer_id: str
@@ -21,6 +30,15 @@ class CreateCancellationRequestTypedDict(TypedDict):
 
 
 class CreateCancellationRequest(BaseModel):
+    x_idempotency_key: Annotated[
+        str,
+        pydantic.Field(alias="x-idempotency-key"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ]
+    r"""Prevents duplicate cancellations from being created.
+    In v2026.10 and later, this header is required, and reusing a key returns a `409` response with the original cancellation.
+    """
+
     account_id: Annotated[
         str,
         pydantic.Field(alias="accountID"),

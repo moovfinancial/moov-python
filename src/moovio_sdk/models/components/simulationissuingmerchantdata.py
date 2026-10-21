@@ -8,30 +8,44 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class IssuingMerchantDataValidationErrorTypedDict(TypedDict):
+class SimulationIssuingMerchantDataTypedDict(TypedDict):
     network_id: NotRequired[str]
+    r"""External identifier used to identify the merchant with the card brand."""
     name: NotRequired[str]
+    r"""Name of the merchant."""
     city: NotRequired[str]
+    r"""The merchant's location."""
     country: NotRequired[str]
+    r"""Two-letter country code."""
     postal_code: NotRequired[str]
+    r"""The merchant's five-digit postal code."""
     state: NotRequired[str]
+    r"""The merchant's two-letter state abbreviation."""
     mcc: NotRequired[str]
+    r"""The Merchant Category Code."""
 
 
-class IssuingMerchantDataValidationError(BaseModel):
+class SimulationIssuingMerchantData(BaseModel):
     network_id: Annotated[Optional[str], pydantic.Field(alias="networkID")] = None
+    r"""External identifier used to identify the merchant with the card brand."""
 
     name: Optional[str] = None
+    r"""Name of the merchant."""
 
     city: Optional[str] = None
+    r"""The merchant's location."""
 
     country: Optional[str] = None
+    r"""Two-letter country code."""
 
     postal_code: Annotated[Optional[str], pydantic.Field(alias="postalCode")] = None
+    r"""The merchant's five-digit postal code."""
 
     state: Optional[str] = None
+    r"""The merchant's two-letter state abbreviation."""
 
     mcc: Optional[str] = None
+    r"""The Merchant Category Code."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -53,6 +67,6 @@ class IssuingMerchantDataValidationError(BaseModel):
 
 
 try:
-    IssuingMerchantDataValidationError.model_rebuild()
+    SimulationIssuingMerchantData.model_rebuild()
 except NameError:
     pass

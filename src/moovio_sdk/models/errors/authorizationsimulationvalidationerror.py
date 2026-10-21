@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.components import (
-    issuingmerchantdatavalidationerror as components_issuingmerchantdatavalidationerror,
+    simulationissuingmerchantdatavalidationerror as components_simulationissuingmerchantdatavalidationerror,
 )
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
@@ -18,10 +18,9 @@ class AuthorizationSimulationValidationErrorData(BaseModel):
         None
     )
     amount: Optional[str] = None
-    r"""A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99."""
     merchant_data: Annotated[
         Optional[
-            components_issuingmerchantdatavalidationerror.IssuingMerchantDataValidationError
+            components_simulationissuingmerchantdatavalidationerror.SimulationIssuingMerchantDataValidationError
         ],
         pydantic.Field(alias="merchantData"),
     ] = None

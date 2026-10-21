@@ -280,7 +280,6 @@ if TYPE_CHECKING:
     from .cardbrand import CardBrand
     from .cardbrandfees import CardBrandFees, CardBrandFeesTypedDict
     from .cardexpiration import CardExpiration, CardExpirationTypedDict
-    from .cardexpirationerror import CardExpirationError, CardExpirationErrorTypedDict
     from .cardissuing import CardIssuing, CardIssuingTypedDict
     from .cardissuingerror import CardIssuingError, CardIssuingErrorTypedDict
     from .cardissuingnetwork import CardIssuingNetwork
@@ -467,6 +466,10 @@ if TYPE_CHECKING:
         CreateInvoiceLineItemValidationError,
         CreateInvoiceLineItemValidationErrorTypedDict,
     )
+    from .createinvoicenotification import (
+        CreateInvoiceNotification,
+        CreateInvoiceNotificationTypedDict,
+    )
     from .createinvoicepayment import (
         CreateInvoicePayment,
         CreateInvoicePaymentTypedDict,
@@ -617,6 +620,14 @@ if TYPE_CHECKING:
     from .createtransferoptions import (
         CreateTransferOptions,
         CreateTransferOptionsTypedDict,
+    )
+    from .createtransferrailoptions import (
+        CreateTransferRailOptions,
+        CreateTransferRailOptionsTypedDict,
+    )
+    from .createtransferresponse import (
+        CreateTransferResponse,
+        CreateTransferResponseTypedDict,
     )
     from .createtransfersource import (
         CreateTransferSource,
@@ -869,7 +880,23 @@ if TYPE_CHECKING:
         InvoiceLineItemValidationError,
         InvoiceLineItemValidationErrorTypedDict,
     )
+    from .invoicenotificationlimitedchannel import (
+        InvoiceNotificationLimitedChannel,
+        InvoiceNotificationLimitedChannelTypedDict,
+    )
     from .invoicepayment import InvoicePayment, InvoicePaymentTypedDict
+    from .invoicepaymentoptions import (
+        InvoicePaymentOptions,
+        InvoicePaymentOptionsTypedDict,
+    )
+    from .invoicepaymentoptionserror import (
+        InvoicePaymentOptionsError,
+        InvoicePaymentOptionsErrorTypedDict,
+    )
+    from .invoicepaymentoptionsupdate import (
+        InvoicePaymentOptionsUpdate,
+        InvoicePaymentOptionsUpdateTypedDict,
+    )
     from .invoicepaymenttype import InvoicePaymentType
     from .invoicestatus import InvoiceStatus
     from .invoicetransferpayment import (
@@ -917,10 +944,6 @@ if TYPE_CHECKING:
     from .issuingintervallimit import IssuingIntervalLimit
     from .issuingmerchantcategory import IssuingMerchantCategory
     from .issuingmerchantdata import IssuingMerchantData, IssuingMerchantDataTypedDict
-    from .issuingmerchantdatavalidationerror import (
-        IssuingMerchantDataValidationError,
-        IssuingMerchantDataValidationErrorTypedDict,
-    )
     from .issuingscheduleday import IssuingScheduleDay
     from .issuingvelocitylimit import (
         IssuingVelocityLimit,
@@ -1027,6 +1050,7 @@ if TYPE_CHECKING:
     )
     from .mxauthorizationcode import MXAuthorizationCode, MXAuthorizationCodeTypedDict
     from .mxpayload import MxPayload, MxPayloadTypedDict
+    from .notificationchannel import NotificationChannel
     from .oauth2clienttype import OAuth2ClientType
     from .occurrence import Occurrence, OccurrenceTypedDict
     from .occurrencesresponse import (
@@ -1388,6 +1412,14 @@ if TYPE_CHECKING:
     from .sentreceipt import SentReceipt, SentReceiptTypedDict
     from .settings import Settings, SettingsTypedDict
     from .sharescopes import ShareScopes, ShareScopesTypedDict
+    from .simulationissuingmerchantdata import (
+        SimulationIssuingMerchantData,
+        SimulationIssuingMerchantDataTypedDict,
+    )
+    from .simulationissuingmerchantdatavalidationerror import (
+        SimulationIssuingMerchantDataValidationError,
+        SimulationIssuingMerchantDataValidationErrorTypedDict,
+    )
     from .sourcedestinationoptions import (
         SourceDestinationOptions,
         SourceDestinationOptionsTypedDict,
@@ -2111,8 +2143,6 @@ __all__ = [
     "CardDetails",
     "CardDetailsTypedDict",
     "CardExpiration",
-    "CardExpirationError",
-    "CardExpirationErrorTypedDict",
     "CardExpirationTypedDict",
     "CardFundingSource",
     "CardIssuing",
@@ -2247,6 +2277,8 @@ __all__ = [
     "CreateInvoiceLineItemsUpdateTypedDict",
     "CreateInvoiceLineItemsValidationError",
     "CreateInvoiceLineItemsValidationErrorTypedDict",
+    "CreateInvoiceNotification",
+    "CreateInvoiceNotificationTypedDict",
     "CreateInvoicePayment",
     "CreateInvoicePaymentTypedDict",
     "CreateInvoiceTypedDict",
@@ -2339,6 +2371,10 @@ __all__ = [
     "CreateTransferLineItemsValidationErrorTypedDict",
     "CreateTransferOptions",
     "CreateTransferOptionsTypedDict",
+    "CreateTransferRailOptions",
+    "CreateTransferRailOptionsTypedDict",
+    "CreateTransferResponse",
+    "CreateTransferResponseTypedDict",
     "CreateTransferSource",
     "CreateTransferSourceACH",
     "CreateTransferSourceACHTypedDict",
@@ -2540,7 +2576,15 @@ __all__ = [
     "InvoiceLineItemsTypedDict",
     "InvoiceLineItemsValidationError",
     "InvoiceLineItemsValidationErrorTypedDict",
+    "InvoiceNotificationLimitedChannel",
+    "InvoiceNotificationLimitedChannelTypedDict",
     "InvoicePayment",
+    "InvoicePaymentOptions",
+    "InvoicePaymentOptionsError",
+    "InvoicePaymentOptionsErrorTypedDict",
+    "InvoicePaymentOptionsTypedDict",
+    "InvoicePaymentOptionsUpdate",
+    "InvoicePaymentOptionsUpdateTypedDict",
     "InvoicePaymentType",
     "InvoicePaymentTypedDict",
     "InvoiceStatus",
@@ -2578,8 +2622,6 @@ __all__ = [
     "IssuingMerchantCategory",
     "IssuingMerchantData",
     "IssuingMerchantDataTypedDict",
-    "IssuingMerchantDataValidationError",
-    "IssuingMerchantDataValidationErrorTypedDict",
     "IssuingScheduleDay",
     "IssuingVelocityLimit",
     "IssuingVelocityLimitError",
@@ -2672,6 +2714,7 @@ __all__ = [
     "MoovWalletTransferPaymentMethodTypedDict",
     "MxPayload",
     "MxPayloadTypedDict",
+    "NotificationChannel",
     "OAuth2ClientType",
     "Occurrence",
     "OccurrenceStatus",
@@ -2978,6 +3021,10 @@ __all__ = [
     "SettingsTypedDict",
     "ShareScopes",
     "ShareScopesTypedDict",
+    "SimulationIssuingMerchantData",
+    "SimulationIssuingMerchantDataTypedDict",
+    "SimulationIssuingMerchantDataValidationError",
+    "SimulationIssuingMerchantDataValidationErrorTypedDict",
     "SourceDestinationOptions",
     "SourceDestinationOptionsTypedDict",
     "SourceSystem",
@@ -3566,8 +3613,6 @@ _dynamic_imports: dict[str, str] = {
     "CardBrandFeesTypedDict": ".cardbrandfees",
     "CardExpiration": ".cardexpiration",
     "CardExpirationTypedDict": ".cardexpiration",
-    "CardExpirationError": ".cardexpirationerror",
-    "CardExpirationErrorTypedDict": ".cardexpirationerror",
     "CardIssuing": ".cardissuing",
     "CardIssuingTypedDict": ".cardissuing",
     "CardIssuingError": ".cardissuingerror",
@@ -3705,6 +3750,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateInvoiceLineItemsValidationErrorTypedDict": ".createinvoicelineitemsvalidationerror",
     "CreateInvoiceLineItemValidationError": ".createinvoicelineitemvalidationerror",
     "CreateInvoiceLineItemValidationErrorTypedDict": ".createinvoicelineitemvalidationerror",
+    "CreateInvoiceNotification": ".createinvoicenotification",
+    "CreateInvoiceNotificationTypedDict": ".createinvoicenotification",
     "CreateInvoicePayment": ".createinvoicepayment",
     "CreateInvoicePaymentTypedDict": ".createinvoicepayment",
     "CreatePaymentLink": ".createpaymentlink",
@@ -3797,6 +3844,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateTransferLineItemValidationErrorTypedDict": ".createtransferlineitemvalidationerror",
     "CreateTransferOptions": ".createtransferoptions",
     "CreateTransferOptionsTypedDict": ".createtransferoptions",
+    "CreateTransferRailOptions": ".createtransferrailoptions",
+    "CreateTransferRailOptionsTypedDict": ".createtransferrailoptions",
+    "CreateTransferResponse": ".createtransferresponse",
+    "CreateTransferResponseTypedDict": ".createtransferresponse",
     "CreateTransferSource": ".createtransfersource",
     "CreateTransferSourceTypedDict": ".createtransfersource",
     "CreateTransferSourceACH": ".createtransfersourceach",
@@ -3998,8 +4049,16 @@ _dynamic_imports: dict[str, str] = {
     "InvoiceLineItemsValidationErrorTypedDict": ".invoicelineitemsvalidationerror",
     "InvoiceLineItemValidationError": ".invoicelineitemvalidationerror",
     "InvoiceLineItemValidationErrorTypedDict": ".invoicelineitemvalidationerror",
+    "InvoiceNotificationLimitedChannel": ".invoicenotificationlimitedchannel",
+    "InvoiceNotificationLimitedChannelTypedDict": ".invoicenotificationlimitedchannel",
     "InvoicePayment": ".invoicepayment",
     "InvoicePaymentTypedDict": ".invoicepayment",
+    "InvoicePaymentOptions": ".invoicepaymentoptions",
+    "InvoicePaymentOptionsTypedDict": ".invoicepaymentoptions",
+    "InvoicePaymentOptionsError": ".invoicepaymentoptionserror",
+    "InvoicePaymentOptionsErrorTypedDict": ".invoicepaymentoptionserror",
+    "InvoicePaymentOptionsUpdate": ".invoicepaymentoptionsupdate",
+    "InvoicePaymentOptionsUpdateTypedDict": ".invoicepaymentoptionsupdate",
     "InvoicePaymentType": ".invoicepaymenttype",
     "InvoiceStatus": ".invoicestatus",
     "InvoiceTransferPayment": ".invoicetransferpayment",
@@ -4037,8 +4096,6 @@ _dynamic_imports: dict[str, str] = {
     "IssuingMerchantCategory": ".issuingmerchantcategory",
     "IssuingMerchantData": ".issuingmerchantdata",
     "IssuingMerchantDataTypedDict": ".issuingmerchantdata",
-    "IssuingMerchantDataValidationError": ".issuingmerchantdatavalidationerror",
-    "IssuingMerchantDataValidationErrorTypedDict": ".issuingmerchantdatavalidationerror",
     "IssuingScheduleDay": ".issuingscheduleday",
     "IssuingVelocityLimit": ".issuingvelocitylimit",
     "IssuingVelocityLimitTypedDict": ".issuingvelocitylimit",
@@ -4125,6 +4182,7 @@ _dynamic_imports: dict[str, str] = {
     "MXAuthorizationCodeTypedDict": ".mxauthorizationcode",
     "MxPayload": ".mxpayload",
     "MxPayloadTypedDict": ".mxpayload",
+    "NotificationChannel": ".notificationchannel",
     "OAuth2ClientType": ".oauth2clienttype",
     "Occurrence": ".occurrence",
     "OccurrenceTypedDict": ".occurrence",
@@ -4434,6 +4492,10 @@ _dynamic_imports: dict[str, str] = {
     "SettingsTypedDict": ".settings",
     "ShareScopes": ".sharescopes",
     "ShareScopesTypedDict": ".sharescopes",
+    "SimulationIssuingMerchantData": ".simulationissuingmerchantdata",
+    "SimulationIssuingMerchantDataTypedDict": ".simulationissuingmerchantdata",
+    "SimulationIssuingMerchantDataValidationError": ".simulationissuingmerchantdatavalidationerror",
+    "SimulationIssuingMerchantDataValidationErrorTypedDict": ".simulationissuingmerchantdatavalidationerror",
     "SourceDestinationOptions": ".sourcedestinationoptions",
     "SourceDestinationOptionsTypedDict": ".sourcedestinationoptions",
     "SourceSystem": ".sourcesystem",

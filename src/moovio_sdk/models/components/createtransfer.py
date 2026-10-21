@@ -18,6 +18,10 @@ from .createtransferlineitems import (
     CreateTransferLineItems,
     CreateTransferLineItemsTypedDict,
 )
+from .createtransferrailoptions import (
+    CreateTransferRailOptions,
+    CreateTransferRailOptionsTypedDict,
+)
 from .createtransfersource import CreateTransferSource, CreateTransferSourceTypedDict
 from .transferfeepaidby import TransferFeePaidBy, TransferFeePaidByTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
@@ -33,6 +37,8 @@ class CreateTransferTypedDict(TypedDict):
     destination: CreateTransferDestinationTypedDict
     r"""The final stage of a transfer and the ultimate recipient of the funds."""
     amount: AmountDecimalTypedDict
+    options: NotRequired[CreateTransferRailOptionsTypedDict]
+    r"""Rail-specific options for a new transfer. Set only the key that matches the transfer's rail."""
     facilitator_fee: NotRequired[CreateTransferFacilitatorFeeTypedDict]
     r"""Total or markup fee to apply when creating a transfer."""
     description: NotRequired[str]
@@ -58,6 +64,9 @@ class CreateTransfer(BaseModel):
     r"""The final stage of a transfer and the ultimate recipient of the funds."""
 
     amount: AmountDecimal
+
+    options: Optional[CreateTransferRailOptions] = None
+    r"""Rail-specific options for a new transfer. Set only the key that matches the transfer's rail."""
 
     facilitator_fee: Annotated[
         Optional[CreateTransferFacilitatorFee], pydantic.Field(alias="facilitatorFee")
@@ -93,6 +102,7 @@ class CreateTransfer(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "options",
                 "facilitatorFee",
                 "description",
                 "metadata",

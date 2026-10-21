@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `components.CreatedTransfer`
+### `components.CreateTransferResponse`
 
 ```python
-value: components.CreatedTransfer = /* values here */
+value: components.CreateTransferResponse = /* values here */
 ```
 
 ### `components.AsyncTransfer`

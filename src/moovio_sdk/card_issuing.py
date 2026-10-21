@@ -201,7 +201,8 @@ class CardIssuing(BaseSDK):
         amount: str,
         merchant_data: Optional[
             Union[
-                components.IssuingMerchantData, components.IssuingMerchantDataTypedDict
+                components.SimulationIssuingMerchantData,
+                components.SimulationIssuingMerchantDataTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -240,7 +241,7 @@ class CardIssuing(BaseSDK):
                 issued_card_id=issued_card_id,
                 amount=amount,
                 merchant_data=utils.get_pydantic_model(
-                    merchant_data, Optional[components.IssuingMerchantData]
+                    merchant_data, Optional[components.SimulationIssuingMerchantData]
                 ),
             ),
         )
@@ -340,7 +341,8 @@ class CardIssuing(BaseSDK):
         amount: str,
         merchant_data: Optional[
             Union[
-                components.IssuingMerchantData, components.IssuingMerchantDataTypedDict
+                components.SimulationIssuingMerchantData,
+                components.SimulationIssuingMerchantDataTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -379,7 +381,7 @@ class CardIssuing(BaseSDK):
                 issued_card_id=issued_card_id,
                 amount=amount,
                 merchant_data=utils.get_pydantic_model(
-                    merchant_data, Optional[components.IssuingMerchantData]
+                    merchant_data, Optional[components.SimulationIssuingMerchantData]
                 ),
             ),
         )
@@ -967,9 +969,6 @@ class CardIssuing(BaseSDK):
         billing_address: Optional[
             Union[components.Address, components.AddressTypedDict]
         ] = None,
-        expiration: Optional[
-            Union[components.CardExpiration, components.CardExpirationTypedDict]
-        ] = None,
         controls: Optional[
             Union[components.IssuingControls, components.IssuingControlsTypedDict]
         ] = None,
@@ -988,7 +987,6 @@ class CardIssuing(BaseSDK):
         :param nickname:
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param billing_address:
-        :param expiration: The expiration date of the card or token.
         :param controls: Mutable spend controls for the card.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1013,9 +1011,6 @@ class CardIssuing(BaseSDK):
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
                 billing_address=utils.get_pydantic_model(
                     billing_address, Optional[components.Address]
-                ),
-                expiration=utils.get_pydantic_model(
-                    expiration, Optional[components.CardExpiration]
                 ),
                 controls=utils.get_pydantic_model(
                     controls, Optional[components.IssuingControls]
@@ -1107,9 +1102,6 @@ class CardIssuing(BaseSDK):
         billing_address: Optional[
             Union[components.Address, components.AddressTypedDict]
         ] = None,
-        expiration: Optional[
-            Union[components.CardExpiration, components.CardExpirationTypedDict]
-        ] = None,
         controls: Optional[
             Union[components.IssuingControls, components.IssuingControlsTypedDict]
         ] = None,
@@ -1128,7 +1120,6 @@ class CardIssuing(BaseSDK):
         :param nickname:
         :param metadata: Free-form key-value pair list. Useful for storing information that is not captured elsewhere.
         :param billing_address:
-        :param expiration: The expiration date of the card or token.
         :param controls: Mutable spend controls for the card.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1153,9 +1144,6 @@ class CardIssuing(BaseSDK):
                 metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
                 billing_address=utils.get_pydantic_model(
                     billing_address, Optional[components.Address]
-                ),
-                expiration=utils.get_pydantic_model(
-                    expiration, Optional[components.CardExpiration]
                 ),
                 controls=utils.get_pydantic_model(
                     controls, Optional[components.IssuingControls]

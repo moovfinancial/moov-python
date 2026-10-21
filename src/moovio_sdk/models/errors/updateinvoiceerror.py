@@ -6,6 +6,7 @@ import httpx
 from moovio_sdk.models.components import (
     amountdetailsvalidationerror as components_amountdetailsvalidationerror,
     invoicelineitemsvalidationerror as components_invoicelineitemsvalidationerror,
+    invoicepaymentoptionserror as components_invoicepaymentoptionserror,
 )
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
@@ -25,6 +26,9 @@ class UpdateInvoiceErrorData(BaseModel):
     invoice_date: Annotated[Optional[str], pydantic.Field(alias="invoiceDate")] = None
     due_date: Annotated[Optional[str], pydantic.Field(alias="dueDate")] = None
     status: Optional[str] = None
+    payment: Optional[
+        components_invoicepaymentoptionserror.InvoicePaymentOptionsError
+    ] = None
     amount_details: Annotated[
         Optional[components_amountdetailsvalidationerror.AmountDetailsValidationError],
         pydantic.Field(alias="amountDetails"),

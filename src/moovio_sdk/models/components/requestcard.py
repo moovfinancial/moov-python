@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 from .address import Address, AddressTypedDict
-from .cardexpiration import CardExpiration, CardExpirationTypedDict
 from .issuingcontrols import IssuingControls, IssuingControlsTypedDict
 from moovio_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
@@ -17,8 +16,6 @@ class RequestCardTypedDict(TypedDict):
     metadata: NotRequired[Dict[str, str]]
     r"""Free-form key-value pair list. Useful for storing information that is not captured elsewhere."""
     billing_address: NotRequired[AddressTypedDict]
-    expiration: NotRequired[CardExpirationTypedDict]
-    r"""The expiration date of the card or token."""
     controls: NotRequired[IssuingControlsTypedDict]
     r"""Mutable spend controls for the card."""
 
@@ -37,9 +34,6 @@ class RequestCard(BaseModel):
         Optional[Address], pydantic.Field(alias="billingAddress")
     ] = None
 
-    expiration: Optional[CardExpiration] = None
-    r"""The expiration date of the card or token."""
-
     controls: Optional[IssuingControls] = None
     r"""Mutable spend controls for the card."""
 
@@ -51,7 +45,6 @@ class RequestCard(BaseModel):
                 "nickname",
                 "metadata",
                 "billingAddress",
-                "expiration",
                 "controls",
             ]
         )

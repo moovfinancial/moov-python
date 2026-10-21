@@ -116,6 +116,12 @@ if TYPE_CHECKING:
         CreateInvoiceResponse,
         CreateInvoiceResponseTypedDict,
     )
+    from .createinvoicenotification import (
+        CreateInvoiceNotificationRequest,
+        CreateInvoiceNotificationRequestTypedDict,
+        CreateInvoiceNotificationResponse,
+        CreateInvoiceNotificationResponseTypedDict,
+    )
     from .createinvoicepayment import (
         CreateInvoicePaymentRequest,
         CreateInvoicePaymentRequestTypedDict,
@@ -467,6 +473,12 @@ if TYPE_CHECKING:
         GetIssuedCardRequestTypedDict,
         GetIssuedCardResponse,
         GetIssuedCardResponseTypedDict,
+    )
+    from .getissuedcardactivity import (
+        GetIssuedCardActivityRequest,
+        GetIssuedCardActivityRequestTypedDict,
+        GetIssuedCardActivityResponse,
+        GetIssuedCardActivityResponseTypedDict,
     )
     from .getissuedcardauthorization import (
         GetIssuedCardAuthorizationRequest,
@@ -1291,6 +1303,10 @@ __all__ = [
     "CreateFeePlanAgreementsRequestTypedDict",
     "CreateFeePlanAgreementsResponse",
     "CreateFeePlanAgreementsResponseTypedDict",
+    "CreateInvoiceNotificationRequest",
+    "CreateInvoiceNotificationRequestTypedDict",
+    "CreateInvoiceNotificationResponse",
+    "CreateInvoiceNotificationResponseTypedDict",
     "CreateInvoicePaymentRequest",
     "CreateInvoicePaymentRequestTypedDict",
     "CreateInvoicePaymentResponse",
@@ -1529,6 +1545,10 @@ __all__ = [
     "GetInvoiceRequestTypedDict",
     "GetInvoiceResponse",
     "GetInvoiceResponseTypedDict",
+    "GetIssuedCardActivityRequest",
+    "GetIssuedCardActivityRequestTypedDict",
+    "GetIssuedCardActivityResponse",
+    "GetIssuedCardActivityResponseTypedDict",
     "GetIssuedCardAuthorizationRequest",
     "GetIssuedCardAuthorizationRequestTypedDict",
     "GetIssuedCardAuthorizationResponse",
@@ -2117,6 +2137,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateInvoiceRequestTypedDict": ".createinvoice",
     "CreateInvoiceResponse": ".createinvoice",
     "CreateInvoiceResponseTypedDict": ".createinvoice",
+    "CreateInvoiceNotificationRequest": ".createinvoicenotification",
+    "CreateInvoiceNotificationRequestTypedDict": ".createinvoicenotification",
+    "CreateInvoiceNotificationResponse": ".createinvoicenotification",
+    "CreateInvoiceNotificationResponseTypedDict": ".createinvoicenotification",
     "CreateInvoicePaymentRequest": ".createinvoicepayment",
     "CreateInvoicePaymentRequestTypedDict": ".createinvoicepayment",
     "CreateInvoicePaymentResponse": ".createinvoicepayment",
@@ -2355,6 +2379,10 @@ _dynamic_imports: dict[str, str] = {
     "GetIssuedCardRequestTypedDict": ".getissuedcard",
     "GetIssuedCardResponse": ".getissuedcard",
     "GetIssuedCardResponseTypedDict": ".getissuedcard",
+    "GetIssuedCardActivityRequest": ".getissuedcardactivity",
+    "GetIssuedCardActivityRequestTypedDict": ".getissuedcardactivity",
+    "GetIssuedCardActivityResponse": ".getissuedcardactivity",
+    "GetIssuedCardActivityResponseTypedDict": ".getissuedcardactivity",
     "GetIssuedCardAuthorizationRequest": ".getissuedcardauthorization",
     "GetIssuedCardAuthorizationRequestTypedDict": ".getissuedcardauthorization",
     "GetIssuedCardAuthorizationResponse": ".getissuedcardauthorization",

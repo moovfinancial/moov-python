@@ -5,7 +5,6 @@ from dataclasses import dataclass, field
 import httpx
 from moovio_sdk.models.components import (
     addresserror as components_addresserror,
-    cardexpirationerror as components_cardexpirationerror,
     issuingcontrolserror as components_issuingcontrolserror,
 )
 from moovio_sdk.models.errors import MoovError
@@ -25,7 +24,6 @@ class RequestCardErrorData(BaseModel):
         Optional[components_addresserror.AddressError],
         pydantic.Field(alias="billingAddress"),
     ] = None
-    expiration: Optional[components_cardexpirationerror.CardExpirationError] = None
     controls: Optional[components_issuingcontrolserror.IssuingControlsError] = None
 
 

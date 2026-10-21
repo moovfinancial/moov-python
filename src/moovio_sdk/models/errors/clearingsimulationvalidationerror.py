@@ -10,7 +10,6 @@ from typing import Optional
 
 class ClearingSimulationValidationErrorData(BaseModel):
     amount: Optional[str] = None
-    r"""A decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99."""
 
 
 @dataclass(unsafe_hash=True)

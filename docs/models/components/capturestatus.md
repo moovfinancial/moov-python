@@ -5,7 +5,7 @@
 ```python
 from moovio_sdk.models.components import CaptureStatus
 
-value = CaptureStatus.PENDING
+value = CaptureStatus.CREATED
 
 # Open enum: unrecognized values are captured as UnrecognizedStr
 ```
@@ -15,6 +15,7 @@ value = CaptureStatus.PENDING
 
 | Name        | Value       |
 | ----------- | ----------- |
+| `CREATED`   | created     |
 | `PENDING`   | pending     |
 | `COMPLETED` | completed   |
 | `FAILED`    | failed      |
