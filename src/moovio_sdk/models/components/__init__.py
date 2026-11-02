@@ -805,7 +805,13 @@ if TYPE_CHECKING:
     from .patchbusiness import PatchBusiness, PatchBusinessTypedDict
     from .patchindividual import PatchIndividual, PatchIndividualTypedDict
     from .patchprofile import PatchProfile, PatchProfileTypedDict
-    from .patchsweepconfig import PatchSweepConfig, PatchSweepConfigTypedDict, Status
+    from .patchsweepconfig import (
+        PatchSweepConfig,
+        PatchSweepConfigTypedDict,
+        Schedule,
+        ScheduleTypedDict,
+        Status,
+    )
     from .patchtransfer import PatchTransfer, PatchTransferTypedDict
     from .patchwallet import PatchWallet, PatchWalletTypedDict
     from .paymentdetailserror import PaymentDetailsError, PaymentDetailsErrorTypedDict
@@ -1045,7 +1051,13 @@ if TYPE_CHECKING:
         SweepConfigPaymentMethod,
         SweepConfigPaymentMethodTypedDict,
     )
+    from .sweepconfigschedule import SweepConfigSchedule, SweepConfigScheduleTypedDict
+    from .sweepconfigscheduleerror import (
+        SweepConfigScheduleError,
+        SweepConfigScheduleErrorTypedDict,
+    )
     from .sweepconfigstatus import SweepConfigStatus
+    from .sweepschedulefrequency import SweepScheduleFrequency
     from .sweepstatus import SweepStatus
     from .sweepsubtotal import SweepSubtotal, SweepSubtotalTypedDict
     from .taxid import Ein, EinTypedDict, TaxID, TaxIDTypedDict
@@ -2202,12 +2214,14 @@ __all__ = [
     "RunTransfer",
     "RunTransferTypedDict",
     "SECCode",
+    "Schedule",
     "ScheduleListResponse",
     "ScheduleListResponseTypedDict",
     "SchedulePaymentMethod",
     "SchedulePaymentMethodTypedDict",
     "ScheduleResponse",
     "ScheduleResponseTypedDict",
+    "ScheduleTypedDict",
     "ScheduledTransferImageMetadata",
     "ScheduledTransferImageMetadataTypedDict",
     "ScheduledTransferLineItem",
@@ -2256,8 +2270,13 @@ __all__ = [
     "SweepConfig",
     "SweepConfigPaymentMethod",
     "SweepConfigPaymentMethodTypedDict",
+    "SweepConfigSchedule",
+    "SweepConfigScheduleError",
+    "SweepConfigScheduleErrorTypedDict",
+    "SweepConfigScheduleTypedDict",
     "SweepConfigStatus",
     "SweepConfigTypedDict",
+    "SweepScheduleFrequency",
     "SweepStatus",
     "SweepSubtotal",
     "SweepSubtotalTypedDict",
@@ -3161,6 +3180,8 @@ _dynamic_imports: dict[str, str] = {
     "PatchProfileTypedDict": ".patchprofile",
     "PatchSweepConfig": ".patchsweepconfig",
     "PatchSweepConfigTypedDict": ".patchsweepconfig",
+    "Schedule": ".patchsweepconfig",
+    "ScheduleTypedDict": ".patchsweepconfig",
     "Status": ".patchsweepconfig",
     "PatchTransfer": ".patchtransfer",
     "PatchTransferTypedDict": ".patchtransfer",
@@ -3373,7 +3394,12 @@ _dynamic_imports: dict[str, str] = {
     "SweepConfigTypedDict": ".sweepconfig",
     "SweepConfigPaymentMethod": ".sweepconfigpaymentmethod",
     "SweepConfigPaymentMethodTypedDict": ".sweepconfigpaymentmethod",
+    "SweepConfigSchedule": ".sweepconfigschedule",
+    "SweepConfigScheduleTypedDict": ".sweepconfigschedule",
+    "SweepConfigScheduleError": ".sweepconfigscheduleerror",
+    "SweepConfigScheduleErrorTypedDict": ".sweepconfigscheduleerror",
     "SweepConfigStatus": ".sweepconfigstatus",
+    "SweepScheduleFrequency": ".sweepschedulefrequency",
     "SweepStatus": ".sweepstatus",
     "SweepSubtotal": ".sweepsubtotal",
     "SweepSubtotalTypedDict": ".sweepsubtotal",

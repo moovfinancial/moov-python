@@ -11,6 +11,7 @@
 | `end_date_time`     | *Optional[str]*     | :heavy_minus_sign:  | N/A                 |
 | `skip`              | *Optional[str]*     | :heavy_minus_sign:  | N/A                 |
 | `count`             | *Optional[str]*     | :heavy_minus_sign:  | N/A                 |
+| `cursor`            | *Optional[str]*     | :heavy_minus_sign:  | N/A                 |
 | `group_id`          | *Optional[str]*     | :heavy_minus_sign:  | N/A                 |
 | `foreign_id`        | *Optional[str]*     | :heavy_minus_sign:  | N/A                 |
 | `schedule_id`       | *Optional[str]*     | :heavy_minus_sign:  | N/A                 |
