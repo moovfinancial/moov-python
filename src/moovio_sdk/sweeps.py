@@ -7,7 +7,7 @@ from moovio_sdk.models import components, errors, operations
 from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional
+from typing import Any, List, Mapping, Optional, Union
 
 
 class Sweeps(BaseSDK):
@@ -21,6 +21,11 @@ class Sweeps(BaseSDK):
         pull_payment_method_id: str,
         statement_descriptor: Optional[str] = None,
         minimum_balance: Optional[str] = None,
+        schedule: Optional[
+            Union[
+                components.SweepConfigSchedule, components.SweepConfigScheduleTypedDict
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -38,6 +43,7 @@ class Sweeps(BaseSDK):
         :param pull_payment_method_id: ID of the payment method.
         :param statement_descriptor: The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
         :param minimum_balance:
+        :param schedule: Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -62,6 +68,9 @@ class Sweeps(BaseSDK):
                 pull_payment_method_id=pull_payment_method_id,
                 statement_descriptor=statement_descriptor,
                 minimum_balance=minimum_balance,
+                schedule=utils.get_pydantic_model(
+                    schedule, Optional[components.SweepConfigSchedule]
+                ),
             ),
         )
 
@@ -153,6 +162,11 @@ class Sweeps(BaseSDK):
         pull_payment_method_id: str,
         statement_descriptor: Optional[str] = None,
         minimum_balance: Optional[str] = None,
+        schedule: Optional[
+            Union[
+                components.SweepConfigSchedule, components.SweepConfigScheduleTypedDict
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -170,6 +184,7 @@ class Sweeps(BaseSDK):
         :param pull_payment_method_id: ID of the payment method.
         :param statement_descriptor: The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor.
         :param minimum_balance:
+        :param schedule: Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -194,6 +209,9 @@ class Sweeps(BaseSDK):
                 pull_payment_method_id=pull_payment_method_id,
                 statement_descriptor=statement_descriptor,
                 minimum_balance=minimum_balance,
+                schedule=utils.get_pydantic_model(
+                    schedule, Optional[components.SweepConfigSchedule]
+                ),
             ),
         )
 
@@ -675,6 +693,9 @@ class Sweeps(BaseSDK):
         pull_payment_method_id: OptionalNullable[str] = UNSET,
         statement_descriptor: OptionalNullable[str] = UNSET,
         minimum_balance: OptionalNullable[str] = UNSET,
+        schedule: OptionalNullable[
+            Union[components.Schedule, components.ScheduleTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -692,6 +713,7 @@ class Sweeps(BaseSDK):
         :param pull_payment_method_id:
         :param statement_descriptor:
         :param minimum_balance:
+        :param schedule: Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -716,6 +738,9 @@ class Sweeps(BaseSDK):
                 pull_payment_method_id=pull_payment_method_id,
                 statement_descriptor=statement_descriptor,
                 minimum_balance=minimum_balance,
+                schedule=utils.get_pydantic_model(
+                    schedule, OptionalNullable[components.Schedule]
+                ),
             ),
         )
 
@@ -807,6 +832,9 @@ class Sweeps(BaseSDK):
         pull_payment_method_id: OptionalNullable[str] = UNSET,
         statement_descriptor: OptionalNullable[str] = UNSET,
         minimum_balance: OptionalNullable[str] = UNSET,
+        schedule: OptionalNullable[
+            Union[components.Schedule, components.ScheduleTypedDict]
+        ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -824,6 +852,7 @@ class Sweeps(BaseSDK):
         :param pull_payment_method_id:
         :param statement_descriptor:
         :param minimum_balance:
+        :param schedule: Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -848,6 +877,9 @@ class Sweeps(BaseSDK):
                 pull_payment_method_id=pull_payment_method_id,
                 statement_descriptor=statement_descriptor,
                 minimum_balance=minimum_balance,
+                schedule=utils.get_pydantic_model(
+                    schedule, OptionalNullable[components.Schedule]
+                ),
             ),
         )
 

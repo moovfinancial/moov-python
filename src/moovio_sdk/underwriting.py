@@ -250,7 +250,7 @@ class Underwriting(BaseSDK):
         :param collect_funds:
         :param money_transfer:
         :param send_funds:
-        :param submission_intent:
+        :param submission_intent: For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's underwriting approval process until you send a subsequent request with `submissionIntent` set to `submit`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -410,7 +410,7 @@ class Underwriting(BaseSDK):
         :param collect_funds:
         :param money_transfer:
         :param send_funds:
-        :param submission_intent:
+        :param submission_intent: For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's underwriting approval process until you send a subsequent request with `submissionIntent` set to `submit`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

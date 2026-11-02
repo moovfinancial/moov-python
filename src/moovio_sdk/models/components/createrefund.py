@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 from .refundamountdetails import RefundAmountDetails, RefundAmountDetailsTypedDict
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -36,13 +41,19 @@ class CreateRefund(BaseModel):
     r"""Breakdown of the refunded amount."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["amount", "amountDetails"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
