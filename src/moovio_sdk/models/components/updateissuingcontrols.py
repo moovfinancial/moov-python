@@ -14,6 +14,8 @@ from moovio_sdk.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
 import pydantic
 from pydantic import field_serializer, model_serializer
@@ -63,13 +65,19 @@ class UpdateIssuingControlsMerchantCategoryRestrictions(BaseModel):
         return value
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["mode", "categories", "customMCCs", "exemptMerchants"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -107,13 +115,19 @@ class UpdateIssuingControlsMerchantRestrictions(BaseModel):
         return value
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["mode", "merchants"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -129,7 +143,7 @@ class UpdateIssuingControlsAllowedScheduleTypedDict(TypedDict):
     timezone: NotRequired[str]
     r"""IANA timezone string used to evaluate window boundaries against the authorization time."""
     windows: NotRequired[List[ScheduleWindowTypedDict]]
-    r"""Time windows during which the card may authorize. Any matching window allows the transaction."""
+    r"""Time windows during which authorizations on the card can be approved. Any matching window allows the transaction."""
 
 
 class UpdateIssuingControlsAllowedSchedule(BaseModel):
@@ -139,16 +153,22 @@ class UpdateIssuingControlsAllowedSchedule(BaseModel):
     r"""IANA timezone string used to evaluate window boundaries against the authorization time."""
 
     windows: Optional[List[ScheduleWindow]] = None
-    r"""Time windows during which the card may authorize. Any matching window allows the transaction."""
+    r"""Time windows during which authorizations on the card can be approved. Any matching window allows the transaction."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["timezone", "windows"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -211,6 +231,9 @@ class UpdateIssuingControls(BaseModel):
     r"""A spend cutoff date and time. Set to `null` to remove the spend cutoff."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -229,11 +252,14 @@ class UpdateIssuingControls(BaseModel):
                 "expiresOn",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

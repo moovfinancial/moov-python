@@ -8,7 +8,12 @@ from .minimumcommitment import MinimumCommitment, MinimumCommitmentTypedDict
 from .monthlyplatformfee import MonthlyPlatformFee, MonthlyPlatformFeeTypedDict
 from datetime import datetime
 from moovio_sdk.models import components
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import pydantic
 from pydantic import field_serializer, model_serializer
 from typing import List, Optional
@@ -118,6 +123,9 @@ class PartnerPricingAgreement(BaseModel):
         return value
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -127,11 +135,14 @@ class PartnerPricingAgreement(BaseModel):
                 "priorAgreementTerminatedOn",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
