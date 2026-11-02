@@ -51,7 +51,10 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.create_config(account_id="cd0ec32e-bd84-418c-90d3-fffbc5465f8b", wallet_id="01234567-89ab-cdef-0123-456789abcdef", status=components.SweepConfigStatus.ENABLED, push_payment_method_id="01234567-89ab-cdef-0123-456789abcdef", pull_payment_method_id="01234567-89ab-cdef-0123-456789abcdef")
+    res = moov.sweeps.create_config(account_id="cd0ec32e-bd84-418c-90d3-fffbc5465f8b", wallet_id="01234567-89ab-cdef-0123-456789abcdef", status=components.SweepConfigStatus.ENABLED, push_payment_method_id="01234567-89ab-cdef-0123-456789abcdef", pull_payment_method_id="01234567-89ab-cdef-0123-456789abcdef", schedule={
+        "cutoff_time": "<value>",
+        "timezone": "America/New_York",
+    })
 
     # Handle response
     print(res)
@@ -69,6 +72,7 @@ with Moov(
 | `pull_payment_method_id`                                                                                                                                        | *str*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                              | ID of the payment method.                                                                                                                                       |
 | `statement_descriptor`                                                                                                                                          | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor. |
 | `minimum_balance`                                                                                                                                               | *Optional[str]*                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                              | N/A                                                                                                                                                             |
+| `schedule`                                                                                                                                                      | [Optional[components.SweepConfigSchedule]](../../models/components/sweepconfigschedule.md)                                                                      | :heavy_minus_sign:                                                                                                                                              | Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days.                                                                         |
 | `retries`                                                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                | :heavy_minus_sign:                                                                                                                                              | Configuration to override the default retry behavior of the client.                                                                                             |
 
 ### Response
@@ -198,7 +202,10 @@ with Moov(
     ),
 ) as moov:
 
-    res = moov.sweeps.update_config(account_id="c16d0264-3e93-4d13-b8d8-6e8e98122631", sweep_config_id="f7943244-882b-4a3a-837a-a58418358399", status=components.Status.DISABLED)
+    res = moov.sweeps.update_config(account_id="c16d0264-3e93-4d13-b8d8-6e8e98122631", sweep_config_id="f7943244-882b-4a3a-837a-a58418358399", status=components.Status.DISABLED, schedule={
+        "cutoff_time": "<value>",
+        "timezone": "America/New_York",
+    })
 
     # Handle response
     print(res)
@@ -207,16 +214,17 @@ with Moov(
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `account_id`                                                             | *str*                                                                    | :heavy_check_mark:                                                       | N/A                                                                      |
-| `sweep_config_id`                                                        | *str*                                                                    | :heavy_check_mark:                                                       | N/A                                                                      |
-| `status`                                                                 | [OptionalNullable[components.Status]](../../models/components/status.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
-| `push_payment_method_id`                                                 | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | N/A                                                                      |
-| `pull_payment_method_id`                                                 | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | N/A                                                                      |
-| `statement_descriptor`                                                   | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | N/A                                                                      |
-| `minimum_balance`                                                        | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | N/A                                                                      |
-| `retries`                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)         | :heavy_minus_sign:                                                       | Configuration to override the default retry behavior of the client.      |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `account_id`                                                                            | *str*                                                                                   | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `sweep_config_id`                                                                       | *str*                                                                                   | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `status`                                                                                | [OptionalNullable[components.Status]](../../models/components/status.md)                | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `push_payment_method_id`                                                                | *OptionalNullable[str]*                                                                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `pull_payment_method_id`                                                                | *OptionalNullable[str]*                                                                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `statement_descriptor`                                                                  | *OptionalNullable[str]*                                                                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `minimum_balance`                                                                       | *OptionalNullable[str]*                                                                 | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `schedule`                                                                              | [OptionalNullable[components.Schedule]](../../models/components/schedule.md)            | :heavy_minus_sign:                                                                      | Overrides the time of day this wallet's sweep runs. Sweeps only run on US banking days. |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
 
 ### Response
 

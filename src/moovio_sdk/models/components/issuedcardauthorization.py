@@ -7,7 +7,12 @@ from .issuingdeclinereason import IssuingDeclineReason
 from .issuingmerchantdata import IssuingMerchantData, IssuingMerchantDataTypedDict
 from datetime import datetime
 from moovio_sdk.models import components
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import pydantic
 from pydantic import field_serializer, model_serializer
 from typing import List, Optional
@@ -28,6 +33,8 @@ class IssuedCardAuthorizationTypedDict(TypedDict):
     created_on: datetime
     last_four_card_number: NotRequired[str]
     r"""Last four digits of the card number. Omitted for authorizations recorded before this was captured."""
+    authorized_user_account_id: NotRequired[str]
+    r"""Identifier for the account of the card's authorized user."""
     card_transactions: NotRequired[List[str]]
     r"""List of card transaction IDs associated with this authorization."""
     decline_reason: NotRequired[IssuingDeclineReason]
@@ -60,6 +67,11 @@ class IssuedCardAuthorization(BaseModel):
         Optional[str], pydantic.Field(alias="lastFourCardNumber")
     ] = None
     r"""Last four digits of the card number. Omitted for authorizations recorded before this was captured."""
+
+    authorized_user_account_id: Annotated[
+        Optional[str], pydantic.Field(alias="authorizedUserAccountID")
+    ] = None
+    r"""Identifier for the account of the card's authorized user."""
 
     card_transactions: Annotated[
         Optional[List[str]], pydantic.Field(alias="cardTransactions")
@@ -101,15 +113,26 @@ class IssuedCardAuthorization(BaseModel):
         return value
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["lastFourCardNumber", "cardTransactions", "declineReason"]
+            [
+                "lastFourCardNumber",
+                "authorizedUserAccountID",
+                "cardTransactions",
+                "declineReason",
+            ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
