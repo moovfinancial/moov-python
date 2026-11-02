@@ -5,10 +5,16 @@ from .sweepconfigpaymentmethod import (
     SweepConfigPaymentMethod,
     SweepConfigPaymentMethodTypedDict,
 )
+from .sweepconfigschedule import SweepConfigSchedule, SweepConfigScheduleTypedDict
 from .sweepconfigstatus import SweepConfigStatus
 from datetime import datetime
 from moovio_sdk.models import components
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import pydantic
 from pydantic import field_serializer, model_serializer
 from typing import List, Optional
@@ -33,6 +39,8 @@ class SweepConfigTypedDict(TypedDict):
     r"""An optional field to specify an amount to maintain in the wallet. This is a decimal-formatted numerical string that represents up to 2 decimal place precision. In USD for example, 12.34 is $12.34 and 0.99 is $0.99. If not supplied, the default is 0.00."""
     statement_descriptor: NotRequired[str]
     r"""The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor."""
+    schedule: NotRequired[SweepConfigScheduleTypedDict]
+    r"""A configured wallet-level override of the time of day the sweep runs."""
     locked_fields: NotRequired[List[str]]
     r"""An array of fields that are locked. To request updates, please contact Moov support."""
 
@@ -72,6 +80,9 @@ class SweepConfig(BaseModel):
     ] = None
     r"""The text that appears on the banking statement. The default descriptor is a 10 character ID if an override is not set in the sweep configs statementDescriptor."""
 
+    schedule: Optional[SweepConfigSchedule] = None
+    r"""A configured wallet-level override of the time of day the sweep runs."""
+
     locked_fields: Annotated[
         Optional[List[str]], pydantic.Field(alias="lockedFields")
     ] = None
@@ -87,13 +98,21 @@ class SweepConfig(BaseModel):
         return value
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
-        optional_fields = set(["minimumBalance", "statementDescriptor", "lockedFields"])
+        optional_fields = set(
+            ["minimumBalance", "statementDescriptor", "schedule", "lockedFields"]
+        )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

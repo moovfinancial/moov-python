@@ -372,7 +372,7 @@ class Accounts(BaseSDK):
         :param email: Filter connected accounts by email address.
 
             Provide the full email address to filter by email.
-        :param type: Filter connected accounts by AccountType.
+        :param type_: Filter connected accounts by AccountType.
 
             If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
             be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
@@ -515,7 +515,7 @@ class Accounts(BaseSDK):
         :param email: Filter connected accounts by email address.
 
             Provide the full email address to filter by email.
-        :param type: Filter connected accounts by AccountType.
+        :param type_: Filter connected accounts by AccountType.
 
             If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
             be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
@@ -1380,7 +1380,7 @@ class Accounts(BaseSDK):
         :param email: Filter connected accounts by email address.
 
             Provide the full email address to filter by email.
-        :param type: Filter connected accounts by AccountType.
+        :param type_: Filter connected accounts by AccountType.
 
             If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
             be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against
@@ -1526,7 +1526,7 @@ class Accounts(BaseSDK):
         :param email: Filter connected accounts by email address.
 
             Provide the full email address to filter by email.
-        :param type: Filter connected accounts by AccountType.
+        :param type_: Filter connected accounts by AccountType.
 
             If the `type` parameter is used in combination with `name`, only the corresponding type's name fields will
             be searched. For example, if `type=business` and `name=moov`, the search will attempt to find matches against

@@ -3,7 +3,12 @@
 from __future__ import annotations
 from .issuingmerchantdata import IssuingMerchantData, IssuingMerchantDataTypedDict
 from datetime import datetime
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -21,6 +26,8 @@ class IssuedCardTransactionTypedDict(TypedDict):
     created_on: datetime
     last_four_card_number: NotRequired[str]
     r"""Last four digits of the card number. Omitted for transactions recorded before this was captured."""
+    authorized_user_account_id: NotRequired[str]
+    r"""Identifier for the account of the card's authorized user."""
     authorization_id: NotRequired[str]
 
 
@@ -45,18 +52,31 @@ class IssuedCardTransaction(BaseModel):
     ] = None
     r"""Last four digits of the card number. Omitted for transactions recorded before this was captured."""
 
+    authorized_user_account_id: Annotated[
+        Optional[str], pydantic.Field(alias="authorizedUserAccountID")
+    ] = None
+    r"""Identifier for the account of the card's authorized user."""
+
     authorization_id: Annotated[
         Optional[str], pydantic.Field(alias="authorizationID")
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
-        optional_fields = set(["lastFourCardNumber", "authorizationID"])
+        optional_fields = set(
+            ["lastFourCardNumber", "authorizedUserAccountID", "authorizationID"]
+        )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
