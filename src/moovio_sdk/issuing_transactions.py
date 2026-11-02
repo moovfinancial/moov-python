@@ -19,6 +19,7 @@ class IssuingTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         issued_card_id: Optional[str] = None,
+        authorized_user_account_id: Optional[str] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
         statuses: Optional[Iterable[components.IssuingAuthorizationStatus]] = None,
@@ -36,6 +37,7 @@ class IssuingTransactions(BaseSDK):
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
         :param issued_card_id: Optional ID of the issued card to filter results.
+        :param authorized_user_account_id: Optional identifier for the account of the card's authorized user.
         :param start_date_time: Optional date-time which inclusively filters all authorizations created after this date-time.
         :param end_date_time: Optional date-time which exclusively filters all authorizations created before this date-time.
         :param statuses: Optional, comma-separated statuses of the authorization to filter results.
@@ -59,6 +61,7 @@ class IssuingTransactions(BaseSDK):
             skip=skip,
             count=count,
             issued_card_id=issued_card_id,
+            authorized_user_account_id=authorized_user_account_id,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
             statuses=utils.unmarshal(
@@ -137,6 +140,7 @@ class IssuingTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         issued_card_id: Optional[str] = None,
+        authorized_user_account_id: Optional[str] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
         statuses: Optional[Iterable[components.IssuingAuthorizationStatus]] = None,
@@ -154,6 +158,7 @@ class IssuingTransactions(BaseSDK):
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
         :param issued_card_id: Optional ID of the issued card to filter results.
+        :param authorized_user_account_id: Optional identifier for the account of the card's authorized user.
         :param start_date_time: Optional date-time which inclusively filters all authorizations created after this date-time.
         :param end_date_time: Optional date-time which exclusively filters all authorizations created before this date-time.
         :param statuses: Optional, comma-separated statuses of the authorization to filter results.
@@ -177,6 +182,7 @@ class IssuingTransactions(BaseSDK):
             skip=skip,
             count=count,
             issued_card_id=issued_card_id,
+            authorized_user_account_id=authorized_user_account_id,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
             statuses=utils.unmarshal(
@@ -671,6 +677,7 @@ class IssuingTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         issued_card_id: Optional[str] = None,
+        authorized_user_account_id: Optional[str] = None,
         merchant_name: Optional[str] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
@@ -688,6 +695,7 @@ class IssuingTransactions(BaseSDK):
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
         :param issued_card_id: Optional ID of the issued card to filter results.
+        :param authorized_user_account_id: Optional identifier for the account of the card's authorized user.
         :param merchant_name: Optional case-insensitive substring match on the merchant name to filter results.
         :param start_date_time: Optional date-time which inclusively filters all card transactions created after this date-time.
         :param end_date_time: Optional date-time which exclusively filters all card transactions created before this date-time.
@@ -711,6 +719,7 @@ class IssuingTransactions(BaseSDK):
             skip=skip,
             count=count,
             issued_card_id=issued_card_id,
+            authorized_user_account_id=authorized_user_account_id,
             merchant_name=merchant_name,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
@@ -787,6 +796,7 @@ class IssuingTransactions(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         issued_card_id: Optional[str] = None,
+        authorized_user_account_id: Optional[str] = None,
         merchant_name: Optional[str] = None,
         start_date_time: Optional[datetime] = None,
         end_date_time: Optional[datetime] = None,
@@ -804,6 +814,7 @@ class IssuingTransactions(BaseSDK):
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
         :param issued_card_id: Optional ID of the issued card to filter results.
+        :param authorized_user_account_id: Optional identifier for the account of the card's authorized user.
         :param merchant_name: Optional case-insensitive substring match on the merchant name to filter results.
         :param start_date_time: Optional date-time which inclusively filters all card transactions created after this date-time.
         :param end_date_time: Optional date-time which exclusively filters all card transactions created before this date-time.
@@ -827,6 +838,7 @@ class IssuingTransactions(BaseSDK):
             skip=skip,
             count=count,
             issued_card_id=issued_card_id,
+            authorized_user_account_id=authorized_user_account_id,
             merchant_name=merchant_name,
             start_date_time=start_date_time,
             end_date_time=end_date_time,
