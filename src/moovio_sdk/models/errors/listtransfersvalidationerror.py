@@ -19,6 +19,7 @@ class ListTransfersValidationErrorData(BaseModel):
     end_date_time: Annotated[Optional[str], pydantic.Field(alias="endDateTime")] = None
     skip: Optional[str] = None
     count: Optional[str] = None
+    cursor: Optional[str] = None
     group_id: Annotated[Optional[str], pydantic.Field(alias="groupID")] = None
     foreign_id: Annotated[Optional[str], pydantic.Field(alias="foreignID")] = None
     schedule_id: Annotated[Optional[str], pydantic.Field(alias="scheduleID")] = None

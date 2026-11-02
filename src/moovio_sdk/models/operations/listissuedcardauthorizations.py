@@ -6,7 +6,12 @@ from moovio_sdk.models.components import (
     issuedcardauthorization as components_issuedcardauthorization,
     issuingauthorizationstatus as components_issuingauthorizationstatus,
 )
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 from moovio_sdk.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
@@ -22,6 +27,8 @@ class ListIssuedCardAuthorizationsRequestTypedDict(TypedDict):
     r"""Page size. When omitted, the server defaults to `200`."""
     issued_card_id: NotRequired[str]
     r"""Optional ID of the issued card to filter results."""
+    authorized_user_account_id: NotRequired[str]
+    r"""Optional identifier for the account of the card's authorized user."""
     start_date_time: NotRequired[datetime]
     r"""Optional date-time which inclusively filters all authorizations created after this date-time."""
     end_date_time: NotRequired[datetime]
@@ -58,6 +65,13 @@ class ListIssuedCardAuthorizationsRequest(BaseModel):
     ] = None
     r"""Optional ID of the issued card to filter results."""
 
+    authorized_user_account_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="authorizedUserAccountID"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
+    ] = None
+    r"""Optional identifier for the account of the card's authorized user."""
+
     start_date_time: Annotated[
         Optional[datetime],
         pydantic.Field(alias="startDateTime"),
@@ -81,22 +95,29 @@ class ListIssuedCardAuthorizationsRequest(BaseModel):
     r"""Optional, comma-separated statuses of the authorization to filter results."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
                 "skip",
                 "count",
                 "issuedCardID",
+                "authorizedUserAccountID",
                 "startDateTime",
                 "endDateTime",
                 "statuses",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

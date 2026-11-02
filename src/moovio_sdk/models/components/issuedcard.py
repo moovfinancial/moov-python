@@ -9,7 +9,12 @@ from .issuedcardstate import IssuedCardState
 from .issuingcontrols import IssuingControls, IssuingControlsTypedDict
 from datetime import datetime
 from moovio_sdk.models import components
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import pydantic
 from pydantic import field_serializer, model_serializer
 from typing import Dict, Optional
@@ -26,11 +31,13 @@ class IssuedCardTypedDict(TypedDict):
     funding_wallet_id: str
     r"""Unique identifier for the wallet funding the card."""
     state: IssuedCardState
-    r"""The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+    r"""The `state` represents the operational status of an issued card.
 
-    - `active`: The card is operational and can approve authorizations.
-    - `frozen`: The card is temporarily suspended and cannot approve authorizations. A frozen card can be reactivated by setting its state back to `active`.
-    - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
+    Authorizations can only be approved while the card is `active`:
+
+    - `active`: The card is operational and authorizations can be approved.
+    - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+    - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and cannot be reopened.
     """
     form_factor: IssuedCardFormFactor
     r"""Specifies the type of spend card to be issued. Presently supports virtual only, providing a digital number without a physical card."""
@@ -63,11 +70,13 @@ class IssuedCard(BaseModel):
     r"""Unique identifier for the wallet funding the card."""
 
     state: IssuedCardState
-    r"""The `state` represents the operational status of an issued card. A card can only approve incoming authorizations if it is in an active state.
+    r"""The `state` represents the operational status of an issued card.
 
-    - `active`: The card is operational and can approve authorizations.
-    - `frozen`: The card is temporarily suspended and cannot approve authorizations. A frozen card can be reactivated by setting its state back to `active`.
-    - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
+    Authorizations can only be approved while the card is `active`:
+
+    - `active`: The card is operational and authorizations can be approved.
+    - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+    - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and cannot be reopened.
     """
 
     form_factor: Annotated[IssuedCardFormFactor, pydantic.Field(alias="formFactor")]
@@ -115,6 +124,9 @@ class IssuedCard(BaseModel):
         return value
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -125,11 +137,14 @@ class IssuedCard(BaseModel):
                 "controls",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
