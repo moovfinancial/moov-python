@@ -3,6 +3,9 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
+from moovio_sdk.models.components import (
+    sweepconfigscheduleerror as components_sweepconfigscheduleerror,
+)
 from moovio_sdk.models.errors import MoovError
 from moovio_sdk.types import BaseModel
 import pydantic
@@ -24,6 +27,9 @@ class PatchSweepConfigErrorData(BaseModel):
     minimum_balance: Annotated[
         Optional[str], pydantic.Field(alias="minimumBalance")
     ] = None
+    schedule: Optional[components_sweepconfigscheduleerror.SweepConfigScheduleError] = (
+        None
+    )
 
 
 @dataclass(unsafe_hash=True)

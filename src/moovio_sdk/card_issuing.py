@@ -298,6 +298,7 @@ class CardIssuing(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         states: Optional[Iterable[components.IssuedCardState]] = None,
+        authorized_user_account_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -312,6 +313,7 @@ class CardIssuing(BaseSDK):
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
         :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`
+        :param authorized_user_account_id: Optional identifier for the account of the card's authorized user.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -332,6 +334,7 @@ class CardIssuing(BaseSDK):
             skip=skip,
             count=count,
             states=utils.unmarshal(states, Optional[List[components.IssuedCardState]]),
+            authorized_user_account_id=authorized_user_account_id,
         )
 
         req = self._build_request(
@@ -403,6 +406,7 @@ class CardIssuing(BaseSDK):
         skip: Optional[int] = None,
         count: Optional[int] = None,
         states: Optional[Iterable[components.IssuedCardState]] = None,
+        authorized_user_account_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -417,6 +421,7 @@ class CardIssuing(BaseSDK):
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
         :param states: Optional, comma-separated states to filter the Moov list issued cards response. For example `active,closed`
+        :param authorized_user_account_id: Optional identifier for the account of the card's authorized user.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -437,6 +442,7 @@ class CardIssuing(BaseSDK):
             skip=skip,
             count=count,
             states=utils.unmarshal(states, Optional[List[components.IssuedCardState]]),
+            authorized_user_account_id=authorized_user_account_id,
         )
 
         req = self._build_request_async(
@@ -723,9 +729,9 @@ class CardIssuing(BaseSDK):
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
         :param state: Updates the state of a Moov issued card.
-            - `active`: Reactivates a frozen card so it can approve authorizations again.
-            - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-            - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
+            - `active`: The card is operational and authorizations can be approved.
+            - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+            - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and cannot be reopened.
         :param nickname:
         :param metadata:
         :param billing_address:
@@ -859,9 +865,9 @@ class CardIssuing(BaseSDK):
         :param account_id: The Moov business account for which the card was issued.
         :param issued_card_id:
         :param state: Updates the state of a Moov issued card.
-            - `active`: Reactivates a frozen card so it can approve authorizations again.
-            - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-            - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
+            - `active`: The card is operational and authorizations can be approved.
+            - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+            - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and cannot be reopened.
         :param nickname:
         :param metadata:
         :param billing_address:

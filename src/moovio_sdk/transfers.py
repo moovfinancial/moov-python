@@ -697,6 +697,7 @@ class Transfers(BaseSDK):
         capture_i_ds: Optional[Iterable[str]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
+        cursor: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -709,7 +710,12 @@ class Transfers(BaseSDK):
         When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example,
         if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely
         process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited
-        period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
+        period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need. The maximum allowed value for
+        `skip` is `200 000`.
+
+        For large result sets, use cursor pagination instead of `skip`. When more transfers are available, the response includes an
+        `X-Next-Cursor` header. Pass its value as the `cursor` query parameter, with the same filters and `count`, to retrieve the next page.
+        `cursor` cannot be combined with a nonzero `skip`.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -730,6 +736,8 @@ class Transfers(BaseSDK):
         :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
+        :param cursor: Opaque cursor from a previous response's `X-Next-Cursor` header. Reuse the same filters and `count` between pages.
+            Cannot be combined with a nonzero `skip`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -761,6 +769,7 @@ class Transfers(BaseSDK):
             capture_i_ds=utils.unmarshal(capture_i_ds, Optional[List[str]]),
             skip=skip,
             count=count,
+            cursor=cursor,
             account_id=account_id,
         )
 
@@ -851,6 +860,7 @@ class Transfers(BaseSDK):
         capture_i_ds: Optional[Iterable[str]] = None,
         skip: Optional[int] = None,
         count: Optional[int] = None,
+        cursor: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -863,7 +873,12 @@ class Transfers(BaseSDK):
         When you run this request, you retrieve 200 transfers at a time. You can advance past a results set of 200 transfers by using the `skip` parameter (for example,
         if you set `skip`= 10, you will see a results set of 200 transfers after the first 10). If you are searching a high volume of transfers, the request will likely
         process very slowly. To achieve faster performance, restrict the data as much as you can by using the `StartDateTime` and `EndDateTime` parameters for a limited
-        period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need.
+        period of time. You can run multiple requests in smaller time window increments until you've retrieved all the transfers you need. The maximum allowed value for
+        `skip` is `200 000`.
+
+        For large result sets, use cursor pagination instead of `skip`. When more transfers are available, the response includes an
+        `X-Next-Cursor` header. Pass its value as the `cursor` query parameter, with the same filters and `count`, to retrieve the next page.
+        `cursor` cannot be combined with a nonzero `skip`.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/transfers.read` scope.
@@ -884,6 +899,8 @@ class Transfers(BaseSDK):
         :param capture_i_ds: Optional comma-separated IDs to filter for transfers associated with specific card captures.
         :param skip:
         :param count: Page size. When omitted, the server defaults to `200`.
+        :param cursor: Opaque cursor from a previous response's `X-Next-Cursor` header. Reuse the same filters and `count` between pages.
+            Cannot be combined with a nonzero `skip`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -915,6 +932,7 @@ class Transfers(BaseSDK):
             capture_i_ds=utils.unmarshal(capture_i_ds, Optional[List[str]]),
             skip=skip,
             count=count,
+            cursor=cursor,
             account_id=account_id,
         )
 
