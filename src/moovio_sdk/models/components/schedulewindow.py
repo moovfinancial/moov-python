@@ -9,7 +9,7 @@ from typing_extensions import Annotated, TypedDict
 
 
 class ScheduleWindowTypedDict(TypedDict):
-    r"""A window of time during which the card may authorize."""
+    r"""A window of time during which authorizations on the card can be approved."""
 
     days: List[IssuingScheduleDay]
     r"""The days of the week this window applies to."""
@@ -20,7 +20,7 @@ class ScheduleWindowTypedDict(TypedDict):
 
 
 class ScheduleWindow(BaseModel):
-    r"""A window of time during which the card may authorize."""
+    r"""A window of time during which authorizations on the card can be approved."""
 
     days: List[IssuingScheduleDay]
     r"""The days of the week this window applies to."""

@@ -16,9 +16,6 @@ from typing_extensions import Annotated
 
 
 class CaptureValidationErrorData(BaseModel):
-    destination_payment_method_id: Annotated[
-        Optional[str], pydantic.Field(alias="destinationPaymentMethodID")
-    ] = None
     amount: Optional[
         components_amountdecimalvalidationerror.AmountDecimalValidationError
     ] = None

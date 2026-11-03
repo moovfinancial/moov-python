@@ -9,6 +9,8 @@ from moovio_sdk.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
 import pydantic
 from pydantic import model_serializer
@@ -41,6 +43,9 @@ class BillingAddress(BaseModel):
     country: Optional[str] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -52,11 +57,14 @@ class BillingAddress(BaseModel):
                 "country",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -69,9 +77,9 @@ class BillingAddress(BaseModel):
 class UpdateIssuedCardTypedDict(TypedDict):
     state: NotRequired[UpdateIssuedCardState]
     r"""Updates the state of a Moov issued card.
-    - `active`: Reactivates a frozen card so it can approve authorizations again.
-    - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-    - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
+    - `active`: The card is operational and authorizations can be approved.
+    - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+    - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and cannot be reopened.
     """
     nickname: NotRequired[Nullable[str]]
     metadata: NotRequired[Nullable[Dict[str, str]]]
@@ -83,9 +91,9 @@ class UpdateIssuedCardTypedDict(TypedDict):
 class UpdateIssuedCard(BaseModel):
     state: Optional[UpdateIssuedCardState] = None
     r"""Updates the state of a Moov issued card.
-    - `active`: Reactivates a frozen card so it can approve authorizations again.
-    - `frozen`: Temporarily suspends the card so it cannot approve authorizations. A card can be moved between `frozen` and `active` at will until it is `closed`, which is a terminal state.
-    - `closed`: The card is permanently deactivated and cannot approve authorizations. A card can be closed by request or when it expires.
+    - `active`: The card is operational and authorizations can be approved.
+    - `frozen`: The card is temporarily suspended and authorizations cannot be approved. Set the state back to `active` to reactivate it. A card can move between `frozen` and `active` as often as needed.
+    - `closed`: The card is permanently deactivated. A card is closed by request or when it expires, and cannot be reopened.
     """
 
     nickname: OptionalNullable[str] = UNSET
@@ -100,16 +108,22 @@ class UpdateIssuedCard(BaseModel):
     r"""Mutable spend controls for the card."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             ["state", "nickname", "metadata", "billingAddress", "controls"]
         )
         nullable_fields = set(["nickname", "metadata", "billingAddress"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

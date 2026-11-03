@@ -10,7 +10,12 @@ from .createtransferlineitems import (
     CreateTransferLineItems,
     CreateTransferLineItemsTypedDict,
 )
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Dict, Optional
@@ -20,8 +25,6 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class CreateCaptureTypedDict(TypedDict):
     r"""Request to capture funds against an authorization."""
 
-    destination_payment_method_id: str
-    r"""Payment method of the merchant account to capture funds into. For card-acquiring transfers, this must be a moov-wallet payment method."""
     amount: NotRequired[AmountDecimalTypedDict]
     r"""Amount to capture.
     If omitted, the remaining capturable amount is captured.
@@ -49,11 +52,6 @@ class CreateCaptureTypedDict(TypedDict):
 
 class CreateCapture(BaseModel):
     r"""Request to capture funds against an authorization."""
-
-    destination_payment_method_id: Annotated[
-        str, pydantic.Field(alias="destinationPaymentMethodID")
-    ]
-    r"""Payment method of the merchant account to capture funds into. For card-acquiring transfers, this must be a moov-wallet payment method."""
 
     amount: Optional[AmountDecimal] = None
     r"""Amount to capture.
@@ -93,6 +91,9 @@ class CreateCapture(BaseModel):
     """
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -106,11 +107,14 @@ class CreateCapture(BaseModel):
                 "facilitatorFeeAmount",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

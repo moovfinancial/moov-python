@@ -14,7 +14,12 @@ from .volumesharebycustomertype import (
     VolumeShareByCustomerTypeTypedDict,
 )
 from moovio_sdk.models import components
-from moovio_sdk.types import BaseModel, UNSET_SENTINEL
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import pydantic
 from pydantic import field_serializer, model_serializer
 from typing import Optional
@@ -35,6 +40,7 @@ class UpsertUnderwritingTypedDict(TypedDict):
     Issued cards are funded from the account's card-issuing wallet before they can be spent, so estimated activity is the only data collected.
     """
     submission_intent: NotRequired[SubmissionIntent]
+    r"""For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's underwriting approval process until you send a subsequent request with `submissionIntent` set to `submit`."""
 
 
 class UpsertUnderwriting(BaseModel):
@@ -76,6 +82,7 @@ class UpsertUnderwriting(BaseModel):
     submission_intent: Annotated[
         Optional[SubmissionIntent], pydantic.Field(alias="submissionIntent")
     ] = None
+    r"""For most use cases, you can omit `submissionIntent`. Set it to `wait` to pause the account's underwriting approval process until you send a subsequent request with `submissionIntent` set to `submit`."""
 
     @field_serializer("geographic_reach")
     def serialize_geographic_reach(self, value):
@@ -105,6 +112,9 @@ class UpsertUnderwriting(BaseModel):
         return value
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -119,11 +129,14 @@ class UpsertUnderwriting(BaseModel):
                 "submissionIntent",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

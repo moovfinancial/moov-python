@@ -262,6 +262,7 @@ if TYPE_CHECKING:
     )
     from .capabilitystatus import CapabilityStatus
     from .capture import Capture, CaptureTypedDict
+    from .capturemethod import CaptureMethod
     from .capturestatus import CaptureStatus
     from .card import Card, CardTypedDict
     from .cardacceptancemethods import (
@@ -407,6 +408,11 @@ if TYPE_CHECKING:
     )
     from .createcancellation import CreateCancellation, CreateCancellationTypedDict
     from .createcapture import CreateCapture, CreateCaptureTypedDict
+    from .createcardpaymentoptions import (
+        CreateCardPaymentOptions,
+        CreateCardPaymentOptionsCaptureMethod,
+        CreateCardPaymentOptionsTypedDict,
+    )
     from .createclearingsimulation import (
         CreateClearingSimulation,
         CreateClearingSimulationTypedDict,
@@ -1092,7 +1098,13 @@ if TYPE_CHECKING:
     from .patchbusiness import PatchBusiness, PatchBusinessTypedDict
     from .patchindividual import PatchIndividual, PatchIndividualTypedDict
     from .patchprofile import PatchProfile, PatchProfileTypedDict
-    from .patchsweepconfig import PatchSweepConfig, PatchSweepConfigTypedDict, Status
+    from .patchsweepconfig import (
+        PatchSweepConfig,
+        PatchSweepConfigTypedDict,
+        Schedule,
+        ScheduleTypedDict,
+        Status,
+    )
     from .patchtransfer import PatchTransfer, PatchTransferTypedDict
     from .patchwallet import PatchWallet, PatchWalletTypedDict
     from .paymentdetailserror import PaymentDetailsError, PaymentDetailsErrorTypedDict
@@ -1433,7 +1445,13 @@ if TYPE_CHECKING:
         SweepConfigPaymentMethod,
         SweepConfigPaymentMethodTypedDict,
     )
+    from .sweepconfigschedule import SweepConfigSchedule, SweepConfigScheduleTypedDict
+    from .sweepconfigscheduleerror import (
+        SweepConfigScheduleError,
+        SweepConfigScheduleErrorTypedDict,
+    )
     from .sweepconfigstatus import SweepConfigStatus
+    from .sweepschedulefrequency import SweepScheduleFrequency
     from .sweepstatus import SweepStatus
     from .sweepsubtotal import SweepSubtotal, SweepSubtotalTypedDict
     from .taxid import Ein, EinTypedDict, TaxID, TaxIDTypedDict
@@ -2119,6 +2137,7 @@ __all__ = [
     "CapabilityStatus",
     "CapabilityTypedDict",
     "Capture",
+    "CaptureMethod",
     "CaptureStatus",
     "CaptureTypedDict",
     "Card",
@@ -2244,6 +2263,9 @@ __all__ = [
     "CreateCancellationTypedDict",
     "CreateCapture",
     "CreateCaptureTypedDict",
+    "CreateCardPaymentOptions",
+    "CreateCardPaymentOptionsCaptureMethod",
+    "CreateCardPaymentOptionsTypedDict",
     "CreateClearingSimulation",
     "CreateClearingSimulationTypedDict",
     "CreateEvidenceFileMultiPart",
@@ -2971,12 +2993,14 @@ __all__ = [
     "RunTransfer",
     "RunTransferTypedDict",
     "SECCode",
+    "Schedule",
     "ScheduleListResponse",
     "ScheduleListResponseTypedDict",
     "SchedulePaymentMethod",
     "SchedulePaymentMethodTypedDict",
     "ScheduleResponse",
     "ScheduleResponseTypedDict",
+    "ScheduleTypedDict",
     "ScheduleWindow",
     "ScheduleWindowError",
     "ScheduleWindowErrorTypedDict",
@@ -3040,8 +3064,13 @@ __all__ = [
     "SweepConfig",
     "SweepConfigPaymentMethod",
     "SweepConfigPaymentMethodTypedDict",
+    "SweepConfigSchedule",
+    "SweepConfigScheduleError",
+    "SweepConfigScheduleErrorTypedDict",
+    "SweepConfigScheduleTypedDict",
     "SweepConfigStatus",
     "SweepConfigTypedDict",
+    "SweepScheduleFrequency",
     "SweepStatus",
     "SweepSubtotal",
     "SweepSubtotalTypedDict",
@@ -3592,6 +3621,7 @@ _dynamic_imports: dict[str, str] = {
     "CapabilityStatus": ".capabilitystatus",
     "Capture": ".capture",
     "CaptureTypedDict": ".capture",
+    "CaptureMethod": ".capturemethod",
     "CaptureStatus": ".capturestatus",
     "Card": ".card",
     "CardTypedDict": ".card",
@@ -3712,6 +3742,9 @@ _dynamic_imports: dict[str, str] = {
     "CreateCancellationTypedDict": ".createcancellation",
     "CreateCapture": ".createcapture",
     "CreateCaptureTypedDict": ".createcapture",
+    "CreateCardPaymentOptions": ".createcardpaymentoptions",
+    "CreateCardPaymentOptionsCaptureMethod": ".createcardpaymentoptions",
+    "CreateCardPaymentOptionsTypedDict": ".createcardpaymentoptions",
     "CreateClearingSimulation": ".createclearingsimulation",
     "CreateClearingSimulationTypedDict": ".createclearingsimulation",
     "CreatedTransfer": ".createdtransfer",
@@ -4219,6 +4252,8 @@ _dynamic_imports: dict[str, str] = {
     "PatchProfileTypedDict": ".patchprofile",
     "PatchSweepConfig": ".patchsweepconfig",
     "PatchSweepConfigTypedDict": ".patchsweepconfig",
+    "Schedule": ".patchsweepconfig",
+    "ScheduleTypedDict": ".patchsweepconfig",
     "Status": ".patchsweepconfig",
     "PatchTransfer": ".patchtransfer",
     "PatchTransferTypedDict": ".patchtransfer",
@@ -4508,7 +4543,12 @@ _dynamic_imports: dict[str, str] = {
     "SweepConfigTypedDict": ".sweepconfig",
     "SweepConfigPaymentMethod": ".sweepconfigpaymentmethod",
     "SweepConfigPaymentMethodTypedDict": ".sweepconfigpaymentmethod",
+    "SweepConfigSchedule": ".sweepconfigschedule",
+    "SweepConfigScheduleTypedDict": ".sweepconfigschedule",
+    "SweepConfigScheduleError": ".sweepconfigscheduleerror",
+    "SweepConfigScheduleErrorTypedDict": ".sweepconfigscheduleerror",
     "SweepConfigStatus": ".sweepconfigstatus",
+    "SweepScheduleFrequency": ".sweepschedulefrequency",
     "SweepStatus": ".sweepstatus",
     "SweepSubtotal": ".sweepsubtotal",
     "SweepSubtotalTypedDict": ".sweepsubtotal",
