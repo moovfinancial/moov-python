@@ -2,6 +2,7 @@
 
 from .basesdk import BaseSDK
 from datetime import datetime
+from enum import Enum
 from moovio_sdk import utils
 from moovio_sdk._hooks import HookContext
 from moovio_sdk.models import components, errors, operations
@@ -9,6 +10,11 @@ from moovio_sdk.types import OptionalNullable, UNSET
 from moovio_sdk.utils import get_security_from_env
 from moovio_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Iterable, List, Mapping, Optional, Union
+
+
+class GetInvoiceAcceptEnum(str, Enum):
+    APPLICATION_JSON = "application/json"
+    APPLICATION_PDF = "application/pdf"
 
 
 class Invoices(BaseSDK):
@@ -577,10 +583,13 @@ class Invoices(BaseSDK):
         invoice_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
+        accept_header_override: Optional[GetInvoiceAcceptEnum] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetInvoiceResponse:
         r"""Retrieve an invoice by ID.
+
+        Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `application/pdf`. The PDF does not include the payment link or QR code.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
@@ -590,6 +599,7 @@ class Invoices(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -617,7 +627,9 @@ class Invoices(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, application/pdf;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -646,13 +658,21 @@ class Invoices(BaseSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            stream=True,
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
             return operations.GetInvoiceResponse(
-                result=unmarshal_json_response(components.Invoice, http_res),
+                result=unmarshal_json_response(
+                    components.Invoice, http_res, http_res_text
+                ),
                 headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "200", "application/pdf"):
+            return operations.GetInvoiceResponse(
+                result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -667,7 +687,8 @@ class Invoices(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        raise errors.APIError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.APIError("Unexpected response received", http_res, http_res_text)
 
     async def get_invoice_async(
         self,
@@ -676,10 +697,13 @@ class Invoices(BaseSDK):
         invoice_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
+        accept_header_override: Optional[GetInvoiceAcceptEnum] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetInvoiceResponse:
         r"""Retrieve an invoice by ID.
+
+        Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `application/pdf`. The PDF does not include the payment link or QR code.
 
         To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
         you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
@@ -689,6 +713,7 @@ class Invoices(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -716,7 +741,9 @@ class Invoices(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value=accept_header_override.value
+            if accept_header_override is not None
+            else "application/json;q=1, application/pdf;q=0",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -745,13 +772,21 @@ class Invoices(BaseSDK):
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            stream=True,
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
             return operations.GetInvoiceResponse(
-                result=unmarshal_json_response(components.Invoice, http_res),
+                result=unmarshal_json_response(
+                    components.Invoice, http_res, http_res_text
+                ),
                 headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "200", "application/pdf"):
+            return operations.GetInvoiceResponse(
+                result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["401", "403", "404", "429"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -766,7 +801,8 @@ class Invoices(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
 
-        raise errors.APIError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.APIError("Unexpected response received", http_res, http_res_text)
 
     def update_invoice(
         self,
