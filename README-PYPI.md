@@ -899,6 +899,8 @@ To access this endpoint using an [access token](https://docs.moov.io/api/authent
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 * [get_invoice](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/invoices/README.md#get_invoice) - Retrieve an invoice by ID.
 
+Use the `Accept` header to specify the format of the response. Supported formats are `application/json` and `application/pdf`. The PDF does not include the payment link or QR code.
+
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/)
 you'll need to specify the `/accounts/{accountID}/invoices.read` scope.
 * [update_invoice](https://github.com/moovfinancial/moov-python/blob/master/docs/sdks/invoices/README.md#update_invoice) - Updates an invoice.
@@ -1950,7 +1952,7 @@ logging.basicConfig(level=logging.DEBUG)
 s = Moov(debug_logger=logging.getLogger("moovio_sdk"))
 ```
 
-You can also enable a default debug logger by setting an environment variable `MOOV_DEBUG` to true.
+You can also enable a default debug logger by setting an environment variable `MOOV_DEBUG` to `true`, `1`, `yes` or `on` (case-insensitive). Any other value leaves it off.
 <!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->

@@ -392,6 +392,8 @@ if TYPE_CHECKING:
         GetInvoiceRequest,
         GetInvoiceRequestTypedDict,
         GetInvoiceResponse,
+        GetInvoiceResponseResult,
+        GetInvoiceResponseResultTypedDict,
         GetInvoiceResponseTypedDict,
     )
     from .getissuedcard import (
@@ -1366,6 +1368,8 @@ __all__ = [
     "GetInvoiceRequest",
     "GetInvoiceRequestTypedDict",
     "GetInvoiceResponse",
+    "GetInvoiceResponseResult",
+    "GetInvoiceResponseResultTypedDict",
     "GetInvoiceResponseTypedDict",
     "GetIssuedCardAuthorizationRequest",
     "GetIssuedCardAuthorizationRequestTypedDict",
@@ -2110,6 +2114,8 @@ _dynamic_imports: dict[str, str] = {
     "GetInvoiceRequest": ".getinvoice",
     "GetInvoiceRequestTypedDict": ".getinvoice",
     "GetInvoiceResponse": ".getinvoice",
+    "GetInvoiceResponseResult": ".getinvoice",
+    "GetInvoiceResponseResultTypedDict": ".getinvoice",
     "GetInvoiceResponseTypedDict": ".getinvoice",
     "GetIssuedCardRequest": ".getissuedcard",
     "GetIssuedCardRequestTypedDict": ".getissuedcard",
