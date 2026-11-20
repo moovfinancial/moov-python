@@ -9,6 +9,7 @@ from moovio_sdk.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from moovio_sdk.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -16,8 +17,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class CreateReversalTypedDict(TypedDict):
-    amount: AmountDecimalTypedDict
-    r"""Amount to reverse.
+    amount: NotRequired[AmountDecimalTypedDict]
+    r"""Amount to reverse. In v2026.10 and later, if omitted, the original transfer's full amount will be reversed.
     Before v2026.10, specify the amount in integer cents.
     For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no captures uses the full `capturableAmount`.
     For those transfers with one final capture, a cancellation uses the full capture amount, while a refund may be partial.
@@ -27,8 +28,8 @@ class CreateReversalTypedDict(TypedDict):
 
 
 class CreateReversal(BaseModel):
-    amount: AmountDecimal
-    r"""Amount to reverse.
+    amount: Optional[AmountDecimal] = None
+    r"""Amount to reverse. In v2026.10 and later, if omitted, the original transfer's full amount will be reversed.
     Before v2026.10, specify the amount in integer cents.
     For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no captures uses the full `capturableAmount`.
     For those transfers with one final capture, a cancellation uses the full capture amount, while a refund may be partial.
@@ -44,14 +45,15 @@ class CreateReversal(BaseModel):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["amountDetails"])
+        optional_fields = set(["amount", "amountDetails"])
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 

@@ -10,6 +10,7 @@ from moovio_sdk.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from moovio_sdk.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -37,6 +38,8 @@ class TransferAuthorizationTypedDict(TypedDict):
     """
     expires_on: NotRequired[datetime]
     r"""Expiration time for the approved authorization, when available."""
+    is_extended_authorization_granted: NotRequired[bool]
+    r"""Whether the card network granted the extended authorization hold. Returned only when `options.cardPayment.isExtendedAuthorizationRequested` is `true`."""
 
 
 class TransferAuthorization(BaseModel):
@@ -73,19 +76,27 @@ class TransferAuthorization(BaseModel):
     expires_on: Annotated[Optional[datetime], pydantic.Field(alias="expiresOn")] = None
     r"""Expiration time for the approved authorization, when available."""
 
+    is_extended_authorization_granted: Annotated[
+        Optional[bool], pydantic.Field(alias="isExtendedAuthorizationGranted")
+    ] = None
+    r"""Whether the card network granted the extended authorization hold. Returned only when `options.cardPayment.isExtendedAuthorizationRequested` is `true`."""
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["amountDetails", "expiresOn"])
+        optional_fields = set(
+            ["amountDetails", "expiresOn", "isExtendedAuthorizationGranted"]
+        )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 

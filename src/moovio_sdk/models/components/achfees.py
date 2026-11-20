@@ -2,9 +2,17 @@
 
 from __future__ import annotations
 from .billingcountandamount import BillingCountAndAmount, BillingCountAndAmountTypedDict
-from moovio_sdk.types import BaseModel
+from moovio_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from moovio_sdk.types.basemodel import current_filtered_dump
 import pydantic
-from typing_extensions import Annotated, TypedDict
+from pydantic import model_serializer
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ACHFeesTypedDict(TypedDict):
@@ -26,6 +34,8 @@ class ACHFeesTypedDict(TypedDict):
     r"""Fees for successful bank account verifications via Plaid or MX."""
     total: BillingCountAndAmountTypedDict
     r"""Total ACH fees."""
+    bank_account_risk_verification: NotRequired[BillingCountAndAmountTypedDict]
+    r"""Fees for bank account risk verifications."""
 
 
 class ACHFees(BaseModel):
@@ -64,6 +74,35 @@ class ACHFees(BaseModel):
 
     total: BillingCountAndAmount
     r"""Total ACH fees."""
+
+    bank_account_risk_verification: Annotated[
+        Optional[BillingCountAndAmount],
+        pydantic.Field(alias="bankAccountRiskVerification"),
+    ] = None
+    r"""Fees for bank account risk verifications."""
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["bankAccountRiskVerification"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 try:

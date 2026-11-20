@@ -262,6 +262,7 @@ if TYPE_CHECKING:
     )
     from .capabilitystatus import CapabilityStatus
     from .capture import Capture, CaptureTypedDict
+    from .capturemethod import CaptureMethod
     from .capturestatus import CaptureStatus
     from .card import Card, CardTypedDict
     from .cardacceptancemethods import (
@@ -408,6 +409,11 @@ if TYPE_CHECKING:
     )
     from .createcancellation import CreateCancellation, CreateCancellationTypedDict
     from .createcapture import CreateCapture, CreateCaptureTypedDict
+    from .createcardpaymentoptions import (
+        CreateCardPaymentOptions,
+        CreateCardPaymentOptionsCaptureMethod,
+        CreateCardPaymentOptionsTypedDict,
+    )
     from .createclearingsimulation import (
         CreateClearingSimulation,
         CreateClearingSimulationTypedDict,
@@ -1506,6 +1512,61 @@ if TYPE_CHECKING:
     from .transfercontrols import TransferControls, TransferControlsTypedDict
     from .transferdestination import TransferDestination, TransferDestinationTypedDict
     from .transferentrymode import TransferEntryMode
+    from .transferevent import TransferEvent, TransferEventTypedDict
+    from .transfereventachdetails import (
+        TransferEventACHDetails,
+        TransferEventACHDetailsTypedDict,
+    )
+    from .transfereventauthorizationdetails import (
+        TransferEventAuthorizationDetails,
+        TransferEventAuthorizationDetailsTypedDict,
+    )
+    from .transfereventauthorizationstatus import TransferEventAuthorizationStatus
+    from .transfereventcancellationdetails import (
+        TransferEventCancellationDetails,
+        TransferEventCancellationDetailsTypedDict,
+    )
+    from .transfereventcapturedetails import (
+        TransferEventCaptureDetails,
+        TransferEventCaptureDetailsTypedDict,
+    )
+    from .transfereventcardpaymentdetails import (
+        TransferEventCardPaymentDetails,
+        TransferEventCardPaymentDetailsTypedDict,
+    )
+    from .transfereventdetails import (
+        TransferEventDetails,
+        TransferEventDetailsTypedDict,
+    )
+    from .transfereventdisputedetails import (
+        TransferEventDisputeDetails,
+        TransferEventDisputeDetailsTypedDict,
+    )
+    from .transfereventinstantbankcreditdetails import (
+        TransferEventInstantBankCreditDetails,
+        TransferEventInstantBankCreditDetailsTypedDict,
+    )
+    from .transfereventpullfromcarddetails import (
+        TransferEventPullFromCardDetails,
+        TransferEventPullFromCardDetailsTypedDict,
+    )
+    from .transfereventpushtocarddetails import (
+        TransferEventPushToCardDetails,
+        TransferEventPushToCardDetailsTypedDict,
+    )
+    from .transfereventrefunddetails import (
+        TransferEventRefundDetails,
+        TransferEventRefundDetailsTypedDict,
+    )
+    from .transfereventtransferdetails import (
+        TransferEventTransferDetails,
+        TransferEventTransferDetailsTypedDict,
+    )
+    from .transfereventtype import TransferEventType
+    from .transfereventwallettransactiondetails import (
+        TransferEventWalletTransactionDetails,
+        TransferEventWalletTransactionDetailsTypedDict,
+    )
     from .transferfailurereason import TransferFailureReason
     from .transferfeepaidby import TransferFeePaidBy, TransferFeePaidByTypedDict
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
@@ -1564,6 +1625,7 @@ if TYPE_CHECKING:
     )
     from .updateevidence import UpdateEvidence, UpdateEvidenceTypedDict
     from .updateinvoice import UpdateInvoice, UpdateInvoiceTypedDict
+    from .updateinvoicestatus import UpdateInvoiceStatus
     from .updateissuedcard import (
         BillingAddress,
         BillingAddressTypedDict,
@@ -2052,6 +2114,7 @@ __all__ = [
     "CapabilityStatus",
     "CapabilityTypedDict",
     "Capture",
+    "CaptureMethod",
     "CaptureStatus",
     "CaptureTypedDict",
     "Card",
@@ -2179,6 +2242,9 @@ __all__ = [
     "CreateCancellationTypedDict",
     "CreateCapture",
     "CreateCaptureTypedDict",
+    "CreateCardPaymentOptions",
+    "CreateCardPaymentOptionsCaptureMethod",
+    "CreateCardPaymentOptionsTypedDict",
     "CreateClearingSimulation",
     "CreateClearingSimulationTypedDict",
     "CreateEvidenceFileMultiPart",
@@ -3043,6 +3109,36 @@ __all__ = [
     "TransferDestination",
     "TransferDestinationTypedDict",
     "TransferEntryMode",
+    "TransferEvent",
+    "TransferEventACHDetails",
+    "TransferEventACHDetailsTypedDict",
+    "TransferEventAuthorizationDetails",
+    "TransferEventAuthorizationDetailsTypedDict",
+    "TransferEventAuthorizationStatus",
+    "TransferEventCancellationDetails",
+    "TransferEventCancellationDetailsTypedDict",
+    "TransferEventCaptureDetails",
+    "TransferEventCaptureDetailsTypedDict",
+    "TransferEventCardPaymentDetails",
+    "TransferEventCardPaymentDetailsTypedDict",
+    "TransferEventDetails",
+    "TransferEventDetailsTypedDict",
+    "TransferEventDisputeDetails",
+    "TransferEventDisputeDetailsTypedDict",
+    "TransferEventInstantBankCreditDetails",
+    "TransferEventInstantBankCreditDetailsTypedDict",
+    "TransferEventPullFromCardDetails",
+    "TransferEventPullFromCardDetailsTypedDict",
+    "TransferEventPushToCardDetails",
+    "TransferEventPushToCardDetailsTypedDict",
+    "TransferEventRefundDetails",
+    "TransferEventRefundDetailsTypedDict",
+    "TransferEventTransferDetails",
+    "TransferEventTransferDetailsTypedDict",
+    "TransferEventType",
+    "TransferEventTypedDict",
+    "TransferEventWalletTransactionDetails",
+    "TransferEventWalletTransactionDetailsTypedDict",
     "TransferFailureReason",
     "TransferFeePaidBy",
     "TransferFeePaidByTypedDict",
@@ -3093,6 +3189,7 @@ __all__ = [
     "UpdateEvidence",
     "UpdateEvidenceTypedDict",
     "UpdateInvoice",
+    "UpdateInvoiceStatus",
     "UpdateInvoiceTypedDict",
     "UpdateIssuedCard",
     "UpdateIssuedCardState",
@@ -3488,6 +3585,7 @@ _dynamic_imports: dict[str, str] = {
     "CapabilityStatus": ".capabilitystatus",
     "Capture": ".capture",
     "CaptureTypedDict": ".capture",
+    "CaptureMethod": ".capturemethod",
     "CaptureStatus": ".capturestatus",
     "Card": ".card",
     "CardTypedDict": ".card",
@@ -3610,6 +3708,9 @@ _dynamic_imports: dict[str, str] = {
     "CreateCancellationTypedDict": ".createcancellation",
     "CreateCapture": ".createcapture",
     "CreateCaptureTypedDict": ".createcapture",
+    "CreateCardPaymentOptions": ".createcardpaymentoptions",
+    "CreateCardPaymentOptionsCaptureMethod": ".createcardpaymentoptions",
+    "CreateCardPaymentOptionsTypedDict": ".createcardpaymentoptions",
     "CreateClearingSimulation": ".createclearingsimulation",
     "CreateClearingSimulationTypedDict": ".createclearingsimulation",
     "CreatedTransfer": ".createdtransfer",
@@ -4474,6 +4575,36 @@ _dynamic_imports: dict[str, str] = {
     "TransferDestination": ".transferdestination",
     "TransferDestinationTypedDict": ".transferdestination",
     "TransferEntryMode": ".transferentrymode",
+    "TransferEvent": ".transferevent",
+    "TransferEventTypedDict": ".transferevent",
+    "TransferEventACHDetails": ".transfereventachdetails",
+    "TransferEventACHDetailsTypedDict": ".transfereventachdetails",
+    "TransferEventAuthorizationDetails": ".transfereventauthorizationdetails",
+    "TransferEventAuthorizationDetailsTypedDict": ".transfereventauthorizationdetails",
+    "TransferEventAuthorizationStatus": ".transfereventauthorizationstatus",
+    "TransferEventCancellationDetails": ".transfereventcancellationdetails",
+    "TransferEventCancellationDetailsTypedDict": ".transfereventcancellationdetails",
+    "TransferEventCaptureDetails": ".transfereventcapturedetails",
+    "TransferEventCaptureDetailsTypedDict": ".transfereventcapturedetails",
+    "TransferEventCardPaymentDetails": ".transfereventcardpaymentdetails",
+    "TransferEventCardPaymentDetailsTypedDict": ".transfereventcardpaymentdetails",
+    "TransferEventDetails": ".transfereventdetails",
+    "TransferEventDetailsTypedDict": ".transfereventdetails",
+    "TransferEventDisputeDetails": ".transfereventdisputedetails",
+    "TransferEventDisputeDetailsTypedDict": ".transfereventdisputedetails",
+    "TransferEventInstantBankCreditDetails": ".transfereventinstantbankcreditdetails",
+    "TransferEventInstantBankCreditDetailsTypedDict": ".transfereventinstantbankcreditdetails",
+    "TransferEventPullFromCardDetails": ".transfereventpullfromcarddetails",
+    "TransferEventPullFromCardDetailsTypedDict": ".transfereventpullfromcarddetails",
+    "TransferEventPushToCardDetails": ".transfereventpushtocarddetails",
+    "TransferEventPushToCardDetailsTypedDict": ".transfereventpushtocarddetails",
+    "TransferEventRefundDetails": ".transfereventrefunddetails",
+    "TransferEventRefundDetailsTypedDict": ".transfereventrefunddetails",
+    "TransferEventTransferDetails": ".transfereventtransferdetails",
+    "TransferEventTransferDetailsTypedDict": ".transfereventtransferdetails",
+    "TransferEventType": ".transfereventtype",
+    "TransferEventWalletTransactionDetails": ".transfereventwallettransactiondetails",
+    "TransferEventWalletTransactionDetailsTypedDict": ".transfereventwallettransactiondetails",
     "TransferFailureReason": ".transferfailurereason",
     "TransferFeePaidBy": ".transferfeepaidby",
     "TransferFeePaidByTypedDict": ".transferfeepaidby",
@@ -4523,6 +4654,7 @@ _dynamic_imports: dict[str, str] = {
     "UpdateEvidenceTypedDict": ".updateevidence",
     "UpdateInvoice": ".updateinvoice",
     "UpdateInvoiceTypedDict": ".updateinvoice",
+    "UpdateInvoiceStatus": ".updateinvoicestatus",
     "BillingAddress": ".updateissuedcard",
     "BillingAddressTypedDict": ".updateissuedcard",
     "UpdateIssuedCard": ".updateissuedcard",

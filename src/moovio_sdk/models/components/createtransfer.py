@@ -30,6 +30,7 @@ from moovio_sdk.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from moovio_sdk.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import Dict, Optional
@@ -38,7 +39,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class CreateTransferTypedDict(TypedDict):
     source: CreateTransferSourceTypedDict
-    r"""Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`."""
+    r"""Where funds for a transfer originate. For the source, you must include exactly one of `paymentMethodID`, `paymentToken`, or `transferID`."""
     destination: CreateTransferDestinationTypedDict
     r"""The final stage of a transfer and the ultimate recipient of the funds."""
     amount: AmountDecimalTypedDict
@@ -63,7 +64,7 @@ class CreateTransferTypedDict(TypedDict):
 
 class CreateTransfer(BaseModel):
     source: CreateTransferSource
-    r"""Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`."""
+    r"""Where funds for a transfer originate. For the source, you must include exactly one of `paymentMethodID`, `paymentToken`, or `transferID`."""
 
     destination: CreateTransferDestination
     r"""The final stage of a transfer and the ultimate recipient of the funds."""
@@ -121,12 +122,13 @@ class CreateTransfer(BaseModel):
             ]
         )
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 

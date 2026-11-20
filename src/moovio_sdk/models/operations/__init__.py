@@ -466,6 +466,8 @@ if TYPE_CHECKING:
         GetInvoiceRequest,
         GetInvoiceRequestTypedDict,
         GetInvoiceResponse,
+        GetInvoiceResponseResult,
+        GetInvoiceResponseResultTypedDict,
         GetInvoiceResponseTypedDict,
     )
     from .getissuedcard import (
@@ -988,6 +990,12 @@ if TYPE_CHECKING:
         ListTicketsResponseBody,
         ListTicketsResponseBodyTypedDict,
         ListTicketsResponseTypedDict,
+    )
+    from .listtransferevents import (
+        ListTransferEventsRequest,
+        ListTransferEventsRequestTypedDict,
+        ListTransferEventsResponse,
+        ListTransferEventsResponseTypedDict,
     )
     from .listtransfers import (
         ListTransfersRequest,
@@ -1538,6 +1546,8 @@ __all__ = [
     "GetInvoiceRequest",
     "GetInvoiceRequestTypedDict",
     "GetInvoiceResponse",
+    "GetInvoiceResponseResult",
+    "GetInvoiceResponseResultTypedDict",
     "GetInvoiceResponseTypedDict",
     "GetIssuedCardActivityRequest",
     "GetIssuedCardActivityRequestTypedDict",
@@ -1890,6 +1900,10 @@ __all__ = [
     "ListTicketsResponseBody",
     "ListTicketsResponseBodyTypedDict",
     "ListTicketsResponseTypedDict",
+    "ListTransferEventsRequest",
+    "ListTransferEventsRequestTypedDict",
+    "ListTransferEventsResponse",
+    "ListTransferEventsResponseTypedDict",
     "ListTransfersRequest",
     "ListTransfersRequestTypedDict",
     "ListTransfersResponse",
@@ -2364,6 +2378,8 @@ _dynamic_imports: dict[str, str] = {
     "GetInvoiceRequest": ".getinvoice",
     "GetInvoiceRequestTypedDict": ".getinvoice",
     "GetInvoiceResponse": ".getinvoice",
+    "GetInvoiceResponseResult": ".getinvoice",
+    "GetInvoiceResponseResultTypedDict": ".getinvoice",
     "GetInvoiceResponseTypedDict": ".getinvoice",
     "GetIssuedCardRequest": ".getissuedcard",
     "GetIssuedCardRequestTypedDict": ".getissuedcard",
@@ -2716,6 +2732,10 @@ _dynamic_imports: dict[str, str] = {
     "ListTicketsResponseBody": ".listtickets",
     "ListTicketsResponseBodyTypedDict": ".listtickets",
     "ListTicketsResponseTypedDict": ".listtickets",
+    "ListTransferEventsRequest": ".listtransferevents",
+    "ListTransferEventsRequestTypedDict": ".listtransferevents",
+    "ListTransferEventsResponse": ".listtransferevents",
+    "ListTransferEventsResponseTypedDict": ".listtransferevents",
     "ListTransfersRequest": ".listtransfers",
     "ListTransfersRequestTypedDict": ".listtransfers",
     "ListTransfersResponse": ".listtransfers",
