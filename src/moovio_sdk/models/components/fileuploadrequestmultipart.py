@@ -11,6 +11,7 @@ from moovio_sdk.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from moovio_sdk.types.basemodel import current_filtered_dump
 from moovio_sdk.utils import FieldMetadata, MultipartFormMetadata
 import pydantic
 from pydantic import field_serializer, model_serializer
@@ -48,12 +49,13 @@ class FileUploadRequestMultiPartFile(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(["contentType"])
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 
@@ -107,12 +109,13 @@ class FileUploadRequestMultiPart(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(["metadata"])
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
 

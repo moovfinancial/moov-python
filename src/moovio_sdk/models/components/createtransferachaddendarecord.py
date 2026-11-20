@@ -9,11 +9,11 @@ class CreateTransferACHAddendaRecordTypedDict(TypedDict):
     r"""An addenda record to be added to an ACH transfer"""
 
     record: str
-    r"""The raw ACH addenda record. Must only contain valid NACHA characters"""
+    r"""The raw ACH addenda record. Must only contain valid NACHA characters. JSON is UTF-8. Moov originates each character as one byte in the Nacha file."""
 
 
 class CreateTransferACHAddendaRecord(BaseModel):
     r"""An addenda record to be added to an ACH transfer"""
 
     record: str
-    r"""The raw ACH addenda record. Must only contain valid NACHA characters"""
+    r"""The raw ACH addenda record. Must only contain valid NACHA characters. JSON is UTF-8. Moov originates each character as one byte in the Nacha file."""
