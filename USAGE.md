@@ -49,7 +49,7 @@ with Moov(
         },
     }, capabilities=[
         components.CapabilityID.ISSUING_CARDHOLDER,
-        components.CapabilityID.TRANSFERS,
+        components.CapabilityID.PRODUCTION_APP,
     ], mode=components.Mode.PRODUCTION)
 
     # Handle response
@@ -111,8 +111,8 @@ async def main():
                 "company_name": "WholeBodyFitness",
             },
         }, capabilities=[
-            components.CapabilityID.CARD_ISSUING,
-            components.CapabilityID.SEND_FUNDS,
+            components.CapabilityID.WALLET,
+            components.CapabilityID.PRODUCTION_APP,
         ], mode=components.Mode.PRODUCTION)
 
         # Handle response
