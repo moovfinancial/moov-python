@@ -10,9 +10,8 @@ from .invoicepaymentoptionsupdate import (
     InvoicePaymentOptionsUpdate,
     InvoicePaymentOptionsUpdateTypedDict,
 )
-from .invoicestatus import InvoiceStatus
+from .updateinvoicestatus import UpdateInvoiceStatus
 from datetime import datetime
-from moovio_sdk.models import components
 from moovio_sdk.types import (
     BaseModel,
     Nullable,
@@ -22,8 +21,9 @@ from moovio_sdk.types import (
     current_exclude_none,
     serialize_with_info,
 )
+from moovio_sdk.types.basemodel import current_filtered_dump
 import pydantic
-from pydantic import field_serializer, model_serializer
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -34,7 +34,7 @@ class UpdateInvoiceTypedDict(TypedDict):
     r"""A collection of line items for an invoice."""
     invoice_date: NotRequired[Nullable[datetime]]
     due_date: NotRequired[Nullable[datetime]]
-    status: NotRequired[InvoiceStatus]
+    status: NotRequired[UpdateInvoiceStatus]
     r"""The status can be updated to one of the following values under specific conditions:
     - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`. Canceling an invoice
     indicates the invoice is no longer expected to be paid (e.g., the charge was waived or terms changed).
@@ -63,7 +63,7 @@ class UpdateInvoice(BaseModel):
         UNSET
     )
 
-    status: Optional[InvoiceStatus] = None
+    status: Optional[UpdateInvoiceStatus] = None
     r"""The status can be updated to one of the following values under specific conditions:
     - `canceled`: Can only be set if the current status is `draft`, `unpaid`, or `overdue`. Canceling an invoice
     indicates the invoice is no longer expected to be paid (e.g., the charge was waived or terms changed).
@@ -78,15 +78,6 @@ class UpdateInvoice(BaseModel):
     amount_details: Annotated[
         Optional[AmountDetailsUpdate], pydantic.Field(alias="amountDetails")
     ] = None
-
-    @field_serializer("status")
-    def serialize_status(self, value):
-        if isinstance(value, str):
-            try:
-                return components.InvoiceStatus(value)
-            except ValueError:
-                return value
-        return value
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
@@ -106,12 +97,13 @@ class UpdateInvoice(BaseModel):
         )
         nullable_fields = set(["invoiceDate", "dueDate"])
         exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias if f.alias is not None else n
-            if k not in serialized and n not in serialized and exclude_none is False:
+            if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (

@@ -138,6 +138,10 @@ if TYPE_CHECKING:
         CreatePaymentLinkResponse,
         CreatePaymentLinkResponseTypedDict,
     )
+    from .createpaymenttoken import (
+        CreatePaymentTokenResponse,
+        CreatePaymentTokenResponseTypedDict,
+    )
     from .createproduct import (
         CreateProductRequest,
         CreateProductRequestTypedDict,
@@ -466,6 +470,8 @@ if TYPE_CHECKING:
         GetInvoiceRequest,
         GetInvoiceRequestTypedDict,
         GetInvoiceResponse,
+        GetInvoiceResponseResult,
+        GetInvoiceResponseResultTypedDict,
         GetInvoiceResponseTypedDict,
     )
     from .getissuedcard import (
@@ -1321,6 +1327,8 @@ __all__ = [
     "CreatePaymentLinkRequestTypedDict",
     "CreatePaymentLinkResponse",
     "CreatePaymentLinkResponseTypedDict",
+    "CreatePaymentTokenResponse",
+    "CreatePaymentTokenResponseTypedDict",
     "CreateProductRequest",
     "CreateProductRequestTypedDict",
     "CreateProductResponse",
@@ -1544,6 +1552,8 @@ __all__ = [
     "GetInvoiceRequest",
     "GetInvoiceRequestTypedDict",
     "GetInvoiceResponse",
+    "GetInvoiceResponseResult",
+    "GetInvoiceResponseResultTypedDict",
     "GetInvoiceResponseTypedDict",
     "GetIssuedCardActivityRequest",
     "GetIssuedCardActivityRequestTypedDict",
@@ -2151,6 +2161,8 @@ _dynamic_imports: dict[str, str] = {
     "CreatePaymentLinkRequestTypedDict": ".createpaymentlink",
     "CreatePaymentLinkResponse": ".createpaymentlink",
     "CreatePaymentLinkResponseTypedDict": ".createpaymentlink",
+    "CreatePaymentTokenResponse": ".createpaymenttoken",
+    "CreatePaymentTokenResponseTypedDict": ".createpaymenttoken",
     "CreateProductRequest": ".createproduct",
     "CreateProductRequestTypedDict": ".createproduct",
     "CreateProductResponse": ".createproduct",
@@ -2374,6 +2386,8 @@ _dynamic_imports: dict[str, str] = {
     "GetInvoiceRequest": ".getinvoice",
     "GetInvoiceRequestTypedDict": ".getinvoice",
     "GetInvoiceResponse": ".getinvoice",
+    "GetInvoiceResponseResult": ".getinvoice",
+    "GetInvoiceResponseResultTypedDict": ".getinvoice",
     "GetInvoiceResponseTypedDict": ".getinvoice",
     "GetIssuedCardRequest": ".getissuedcard",
     "GetIssuedCardRequestTypedDict": ".getissuedcard",

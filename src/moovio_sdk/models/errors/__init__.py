@@ -59,6 +59,10 @@ if TYPE_CHECKING:
         CreatePaymentLinkError,
         CreatePaymentLinkErrorData,
     )
+    from .createpaymenttokenerror import (
+        CreatePaymentTokenError,
+        CreatePaymentTokenErrorData,
+    )
     from .createresolutionlinkerror import (
         CreateResolutionLinkError,
         CreateResolutionLinkErrorData,
@@ -247,6 +251,8 @@ __all__ = [
     "CreateInvoicePaymentErrorData",
     "CreatePaymentLinkError",
     "CreatePaymentLinkErrorData",
+    "CreatePaymentTokenError",
+    "CreatePaymentTokenErrorData",
     "CreateResolutionLinkError",
     "CreateResolutionLinkErrorData",
     "CreateSweepConfigError",
@@ -396,6 +402,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateInvoicePaymentErrorData": ".createinvoicepaymenterror",
     "CreatePaymentLinkError": ".createpaymentlinkerror",
     "CreatePaymentLinkErrorData": ".createpaymentlinkerror",
+    "CreatePaymentTokenError": ".createpaymenttokenerror",
+    "CreatePaymentTokenErrorData": ".createpaymenttokenerror",
     "CreateResolutionLinkError": ".createresolutionlinkerror",
     "CreateResolutionLinkErrorData": ".createresolutionlinkerror",
     "CreateSweepConfigError": ".createsweepconfigerror",

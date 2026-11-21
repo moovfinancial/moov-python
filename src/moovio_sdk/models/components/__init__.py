@@ -517,6 +517,15 @@ if TYPE_CHECKING:
         CreatePaymentLinkLineItemValidationError,
         CreatePaymentLinkLineItemValidationErrorTypedDict,
     )
+    from .createpaymenttoken import CreatePaymentToken, CreatePaymentTokenTypedDict
+    from .createpaymenttokencard import (
+        CreatePaymentTokenCard,
+        CreatePaymentTokenCardTypedDict,
+    )
+    from .createpaymenttokencarderror import (
+        CreatePaymentTokenCardError,
+        CreatePaymentTokenCardErrorTypedDict,
+    )
     from .createproductoption import CreateProductOption, CreateProductOptionTypedDict
     from .createproductoptiongroup import (
         CreateProductOptionGroup,
@@ -626,6 +635,10 @@ if TYPE_CHECKING:
     from .createtransferoptions import (
         CreateTransferOptions,
         CreateTransferOptionsTypedDict,
+    )
+    from .createtransferpaymenttoken import (
+        CreateTransferPaymentToken,
+        CreateTransferPaymentTokenTypedDict,
     )
     from .createtransferrailoptions import (
         CreateTransferRailOptions,
@@ -1175,6 +1188,8 @@ if TYPE_CHECKING:
         PaymentMethodsWalletTypedDict,
     )
     from .paymentmethodtype import PaymentMethodType
+    from .paymenttoken import PaymentToken, PaymentTokenTypedDict
+    from .paymenttokentype import PaymentTokenType
     from .payoutdetailserror import PayoutDetailsError, PayoutDetailsErrorTypedDict
     from .payoutrecipient import PayoutRecipient, PayoutRecipientTypedDict
     from .payoutrecipienterror import (
@@ -1507,6 +1522,7 @@ if TYPE_CHECKING:
         TransferAmountDetails,
         TransferAmountDetailsTypedDict,
     )
+    from .transferapplepay import TransferApplePay, TransferApplePayTypedDict
     from .transferauthorization import (
         TransferAuthorization,
         TransferAuthorizationTypedDict,
@@ -1576,6 +1592,11 @@ if TYPE_CHECKING:
     )
     from .transferfailurereason import TransferFailureReason
     from .transferfeepaidby import TransferFeePaidBy, TransferFeePaidByTypedDict
+    from .transfergooglepay import (
+        TransferGooglePay,
+        TransferGooglePayAuthMethod,
+        TransferGooglePayTypedDict,
+    )
     from .transferlineitem import TransferLineItem, TransferLineItemTypedDict
     from .transferlineitemimagemetadata import (
         TransferLineItemImageMetadata,
@@ -1632,6 +1653,7 @@ if TYPE_CHECKING:
     )
     from .updateevidence import UpdateEvidence, UpdateEvidenceTypedDict
     from .updateinvoice import UpdateInvoice, UpdateInvoiceTypedDict
+    from .updateinvoicestatus import UpdateInvoiceStatus
     from .updateissuedcard import (
         BillingAddress,
         BillingAddressTypedDict,
@@ -2324,6 +2346,12 @@ __all__ = [
     "CreatePaymentLinkLineItemsValidationError",
     "CreatePaymentLinkLineItemsValidationErrorTypedDict",
     "CreatePaymentLinkTypedDict",
+    "CreatePaymentToken",
+    "CreatePaymentTokenCard",
+    "CreatePaymentTokenCardError",
+    "CreatePaymentTokenCardErrorTypedDict",
+    "CreatePaymentTokenCardTypedDict",
+    "CreatePaymentTokenTypedDict",
     "CreateProductOption",
     "CreateProductOptionGroup",
     "CreateProductOptionGroupTypedDict",
@@ -2393,6 +2421,8 @@ __all__ = [
     "CreateTransferLineItemsValidationErrorTypedDict",
     "CreateTransferOptions",
     "CreateTransferOptionsTypedDict",
+    "CreateTransferPaymentToken",
+    "CreateTransferPaymentTokenTypedDict",
     "CreateTransferRailOptions",
     "CreateTransferRailOptionsTypedDict",
     "CreateTransferResponse",
@@ -2820,6 +2850,9 @@ __all__ = [
     "PaymentMethodsCardTypedDict",
     "PaymentMethodsWallet",
     "PaymentMethodsWalletTypedDict",
+    "PaymentToken",
+    "PaymentTokenType",
+    "PaymentTokenTypedDict",
     "PayoutDetailsError",
     "PayoutDetailsErrorTypedDict",
     "PayoutRecipient",
@@ -3123,6 +3156,8 @@ __all__ = [
     "TransferAccountTypedDict",
     "TransferAmountDetails",
     "TransferAmountDetailsTypedDict",
+    "TransferApplePay",
+    "TransferApplePayTypedDict",
     "TransferAuthorization",
     "TransferAuthorizationTypedDict",
     "TransferConfig",
@@ -3167,6 +3202,9 @@ __all__ = [
     "TransferFailureReason",
     "TransferFeePaidBy",
     "TransferFeePaidByTypedDict",
+    "TransferGooglePay",
+    "TransferGooglePayAuthMethod",
+    "TransferGooglePayTypedDict",
     "TransferLineItem",
     "TransferLineItemImageMetadata",
     "TransferLineItemImageMetadataTypedDict",
@@ -3214,6 +3252,7 @@ __all__ = [
     "UpdateEvidence",
     "UpdateEvidenceTypedDict",
     "UpdateInvoice",
+    "UpdateInvoiceStatus",
     "UpdateInvoiceTypedDict",
     "UpdateIssuedCard",
     "UpdateIssuedCardState",
@@ -3807,6 +3846,12 @@ _dynamic_imports: dict[str, str] = {
     "CreatePaymentLinkLineItemsValidationErrorTypedDict": ".createpaymentlinklineitemsvalidationerror",
     "CreatePaymentLinkLineItemValidationError": ".createpaymentlinklineitemvalidationerror",
     "CreatePaymentLinkLineItemValidationErrorTypedDict": ".createpaymentlinklineitemvalidationerror",
+    "CreatePaymentToken": ".createpaymenttoken",
+    "CreatePaymentTokenTypedDict": ".createpaymenttoken",
+    "CreatePaymentTokenCard": ".createpaymenttokencard",
+    "CreatePaymentTokenCardTypedDict": ".createpaymenttokencard",
+    "CreatePaymentTokenCardError": ".createpaymenttokencarderror",
+    "CreatePaymentTokenCardErrorTypedDict": ".createpaymenttokencarderror",
     "CreateProductOption": ".createproductoption",
     "CreateProductOptionTypedDict": ".createproductoption",
     "CreateProductOptionGroup": ".createproductoptiongroup",
@@ -3877,6 +3922,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateTransferLineItemValidationErrorTypedDict": ".createtransferlineitemvalidationerror",
     "CreateTransferOptions": ".createtransferoptions",
     "CreateTransferOptionsTypedDict": ".createtransferoptions",
+    "CreateTransferPaymentToken": ".createtransferpaymenttoken",
+    "CreateTransferPaymentTokenTypedDict": ".createtransferpaymenttoken",
     "CreateTransferRailOptions": ".createtransferrailoptions",
     "CreateTransferRailOptionsTypedDict": ".createtransferrailoptions",
     "CreateTransferResponse": ".createtransferresponse",
@@ -4302,6 +4349,9 @@ _dynamic_imports: dict[str, str] = {
     "PaymentMethodsWallet": ".paymentmethodswallet",
     "PaymentMethodsWalletTypedDict": ".paymentmethodswallet",
     "PaymentMethodType": ".paymentmethodtype",
+    "PaymentToken": ".paymenttoken",
+    "PaymentTokenTypedDict": ".paymenttoken",
+    "PaymentTokenType": ".paymenttokentype",
     "PayoutDetailsError": ".payoutdetailserror",
     "PayoutDetailsErrorTypedDict": ".payoutdetailserror",
     "PayoutRecipient": ".payoutrecipient",
@@ -4602,6 +4652,8 @@ _dynamic_imports: dict[str, str] = {
     "TransferACHAddendaRecordTypedDict": ".transferachaddendarecord",
     "TransferAmountDetails": ".transferamountdetails",
     "TransferAmountDetailsTypedDict": ".transferamountdetails",
+    "TransferApplePay": ".transferapplepay",
+    "TransferApplePayTypedDict": ".transferapplepay",
     "TransferAuthorization": ".transferauthorization",
     "TransferAuthorizationTypedDict": ".transferauthorization",
     "TransferConfig": ".transferconfig",
@@ -4646,6 +4698,9 @@ _dynamic_imports: dict[str, str] = {
     "TransferFailureReason": ".transferfailurereason",
     "TransferFeePaidBy": ".transferfeepaidby",
     "TransferFeePaidByTypedDict": ".transferfeepaidby",
+    "TransferGooglePay": ".transfergooglepay",
+    "TransferGooglePayAuthMethod": ".transfergooglepay",
+    "TransferGooglePayTypedDict": ".transfergooglepay",
     "TransferLineItem": ".transferlineitem",
     "TransferLineItemTypedDict": ".transferlineitem",
     "TransferLineItemImageMetadata": ".transferlineitemimagemetadata",
@@ -4692,6 +4747,7 @@ _dynamic_imports: dict[str, str] = {
     "UpdateEvidenceTypedDict": ".updateevidence",
     "UpdateInvoice": ".updateinvoice",
     "UpdateInvoiceTypedDict": ".updateinvoice",
+    "UpdateInvoiceStatus": ".updateinvoicestatus",
     "BillingAddress": ".updateissuedcard",
     "BillingAddressTypedDict": ".updateissuedcard",
     "UpdateIssuedCard": ".updateissuedcard",

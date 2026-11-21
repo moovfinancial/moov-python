@@ -347,7 +347,7 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Identifies a unique request to create a transfer.
             In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.
         :param account_id: Your Moov account ID.
-        :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
+        :param source: Where funds for a transfer originate. For the source, you must include exactly one of `paymentMethodID`, `paymentToken`, or `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
@@ -557,7 +557,7 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Identifies a unique request to create a transfer.
             In order to avoid creating duplicate transfers, the same idempotency key should be reused when retrying a request.
         :param account_id: Your Moov account ID.
-        :param source: Where funds for a transfer originate. For the source, you must include either a `paymentMethodID` or a `transferID`.
+        :param source: Where funds for a transfer originate. For the source, you must include exactly one of `paymentMethodID`, `paymentToken`, or `transferID`.
         :param destination: The final stage of a transfer and the ultimate recipient of the funds.
         :param amount:
         :param x_wait_for: Optional header that indicates whether to return a synchronous response that includes full transfer and rail-specific details or an
@@ -4046,7 +4046,9 @@ class Transfers(BaseSDK):
         x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
-        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
+        amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
         amount_details: Optional[
             Union[
                 components.ReversalAmountDetails,
@@ -4071,7 +4073,7 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate reversals from being created.
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
-        :param amount: Amount to reverse.
+        :param amount: Amount to reverse. In v2026.10 and later, if omitted, the original transfer's full amount will be reversed.
             Before v2026.10, specify the amount in integer cents.
             For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no captures uses the full `capturableAmount`.
             For those transfers with one final capture, a cancellation uses the full capture amount, while a refund may be partial.
@@ -4096,7 +4098,9 @@ class Transfers(BaseSDK):
             account_id=account_id,
             transfer_id=transfer_id,
             create_reversal=components.CreateReversal(
-                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
+                amount=utils.get_pydantic_model(
+                    amount, Optional[components.AmountDecimal]
+                ),
                 amount_details=utils.get_pydantic_model(
                     amount_details, Optional[components.ReversalAmountDetails]
                 ),
@@ -4183,7 +4187,9 @@ class Transfers(BaseSDK):
         x_idempotency_key: str,
         account_id: str,
         transfer_id: str,
-        amount: Union[components.AmountDecimal, components.AmountDecimalTypedDict],
+        amount: Optional[
+            Union[components.AmountDecimal, components.AmountDecimalTypedDict]
+        ] = None,
         amount_details: Optional[
             Union[
                 components.ReversalAmountDetails,
@@ -4208,7 +4214,7 @@ class Transfers(BaseSDK):
         :param x_idempotency_key: Prevents duplicate reversals from being created.
         :param account_id: The Moov account ID.
         :param transfer_id: The transfer ID to reverse.
-        :param amount: Amount to reverse.
+        :param amount: Amount to reverse. In v2026.10 and later, if omitted, the original transfer's full amount will be reversed.
             Before v2026.10, specify the amount in integer cents.
             For supported auth-capture `card-payment` reversals in v2026.10 and later, a transfer with no captures uses the full `capturableAmount`.
             For those transfers with one final capture, a cancellation uses the full capture amount, while a refund may be partial.
@@ -4233,7 +4239,9 @@ class Transfers(BaseSDK):
             account_id=account_id,
             transfer_id=transfer_id,
             create_reversal=components.CreateReversal(
-                amount=utils.get_pydantic_model(amount, components.AmountDecimal),
+                amount=utils.get_pydantic_model(
+                    amount, Optional[components.AmountDecimal]
+                ),
                 amount_details=utils.get_pydantic_model(
                     amount_details, Optional[components.ReversalAmountDetails]
                 ),

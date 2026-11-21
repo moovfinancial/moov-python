@@ -57,6 +57,13 @@ Only use this endpoint if you have provided Moov with a copy of your PCI attesta
 
 To access this endpoint using an [access token](https://docs.moov.io/api/authentication/access-tokens/) 
 you'll need to specify the `/card-metadata.read` scope.
+* [tokenize](#tokenize) - Exchange card data for a single-use payment token. Use the token as `source.paymentToken.token` when
+[creating a transfer](https://docs.moov.io/api/money-movement/transfers/create/).
+
+Tokenizing does not link the card to an account, verify the card, or contact the card networks.
+The card is authorized when the transfer is created.
+
+Call this endpoint directly from the browser using Moov's card Drop, so card data never reaches your servers.
 
 ## link
 
@@ -413,3 +420,70 @@ with Moov(
 | errors.GenericError             | 400, 409                        | application/json                |
 | errors.CardMetadataRequestError | 422                             | application/json                |
 | errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
+
+## tokenize
+
+Exchange card data for a single-use payment token. Use the token as `source.paymentToken.token` when
+[creating a transfer](https://docs.moov.io/api/money-movement/transfers/create/).
+
+Tokenizing does not link the card to an account, verify the card, or contact the card networks.
+The card is authorized when the transfer is created.
+
+Call this endpoint directly from the browser using Moov's card Drop, so card data never reaches your servers.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="createPaymentToken" method="post" path="/tokenize" -->
+```python
+from moovio_sdk import Moov
+from moovio_sdk.models import components
+
+
+with Moov(
+    security=components.Security(
+        username="",
+        password="",
+    ),
+) as moov:
+
+    res = moov.cards.tokenize(card={
+        "card_number": "4111111111111111",
+        "card_cvv": "123",
+        "expiration": {
+            "month": "01",
+            "year": "21",
+        },
+        "holder_name": "Jules Jackson",
+        "billing_address": {
+            "address_line1": "123 Main Street",
+            "address_line2": "Apt 302",
+            "city": "Boulder",
+            "state_or_province": "CO",
+            "postal_code": "80301",
+            "country": "US",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `card`                                                                                 | [components.CreatePaymentTokenCard](../../models/components/createpaymenttokencard.md) | :heavy_check_mark:                                                                     | Card data to tokenize.                                                                 |
+| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
+
+### Response
+
+**[operations.CreatePaymentTokenResponse](../../models/operations/createpaymenttokenresponse.md)**
+
+### Errors
+
+| Error Type                     | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| errors.GenericError            | 400, 409                       | application/json               |
+| errors.CreatePaymentTokenError | 422                            | application/json               |
+| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
